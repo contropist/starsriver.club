@@ -1,0 +1,111 @@
+<div class="title trans-ease-slow">
+	<h2>{lang announcement}</h2>
+    <!--{if $op == 'edit'}--><span>{lang mod_announce_edit}</span><!--{/if}-->
+</div>
+<ol class="panel-container">
+	<li class="box size-10-0 no-edge">
+        <!--{if $edit_successed}-->
+            <p class="alert hi-success">{lang mod_message_announce_edit}<script type="text/JavaScript">setTimeout("window.location.replace('{$cpscript}?mod=modcp&action=announcement')", 2000);</script></p>
+        <!--{elseif $add_successed}-->
+            <p class="alert hi-success">{lang mod_message_announce_add}</p>
+        <!--{/if}-->
+        <script type="text/javascript" src="{$_G[setting][jspath]}calendar.js?{VERHASH}"></script>
+		<form method="post" autocomplete="off" action="{$cpscript}?mod=modcp&action=announcement&op={if $op == 'edit'}edit{else}add{/if}">
+			<input type="hidden" name="formhash" value="{FORMHASH}">
+			<input type="hidden" name="id" value="$announce[id]">
+			<input type="hidden" name="displayorder" value="$announce[displayorder]">
+            <div class="input-group f px4-radius">
+                <span>{lang title}</span>
+                <input type="text" name="subject" value="$announce[subject]" />
+                <span>{lang mod_announce_type}</span>
+                <select name="type" id="type" change="changeinput($('type').value)">
+                    <option value="0" $announce[checked][0]>{lang mod_announce_type_text}</option>
+                    <option value="1" $announce[checked][1]>{lang mod_announce_type_url}</option>
+                </select>
+            </div>
+            <div class="input-group f px4-radius" id="anno_type_url" {if $announce[checked][0]} style="display:none"{/if} >
+                <span style="width:89px;">{lang mod_announce_type_url}</span>
+                <input type="text" name="message[1]" value="$announce[message]"/>
+            </div>
+            <div class="input-group editor px4-radius f" id="annomessage_editor" {if $announce[checked][1]} style="display:none"{/if}>
+                <textarea name="message[0]" id="annomessage" rows="5">$announce[message]</textarea>
+                <!--{eval $seditor = array('anno', array('bold', 'color', 'img', 'link'));}-->
+                <!--{subtemplate common/seditor}-->
+            </div>
+            <div class="input-group f px4-radius">
+                <span>{lang starttime}</span>
+                <input type="text" onclick="showcalendar(event, this, false)" id="starttime" name="starttime" autocomplete="off" value="$announce[starttime]" tabindex="1" />
+                <span>{lang endtime}</span>
+                <input type="text" onclick="showcalendar(event, this, false)" id="endtime" name="endtime" autocomplete="off" value="$announce[endtime]" tabindex="1" />
+                <!--{if $op == 'edit'}-->
+                <i class="input-group-btn"><button type="button" onclick="location.href='{$cpscript}?mod=modcp&action=announcement'">{lang return}</button></i>
+                <i class="input-group-btn"><button type="submit" name="submit" id="submit" value="true">{lang submit}</button></i>
+                <!--{else}-->
+                <i class="input-group-btn"><button type="submit" name="submit" id="submit" value="true">{lang mod_announce_add}</button></i>
+                <!--{/if}-->
+            </div>
+		</form>
+	</li>
+	<!--{if $op != 'edit'}-->
+	<li class="box size-10-0 no-edge">
+        <!--{if !empty($delids)}-->
+        <p class="alert hi-success">{lang mod_message_announce_del}</p>
+        <!--{/if}-->
+		<form method="post" autocomplete="off" action="{$cpscript}?mod=modcp&action=announcement&op=manage">
+			<input type="hidden" name="formhash" value="{FORMHASH}">
+            <div class="waterfall" id="announcements">
+                <ul hide id="announcement_source">
+                    <!--{loop $annlist $ann}-->
+                    <li id="$ann['disabled']">
+                        <div class="header">
+                            <span class="title">$ann[subject]</span>
+                            <div class="timeline r">
+                                <cite>$ann[starttime]</cite>
+                                <i class="ft-chevron-right"></i>
+                                <cite>$ann[endtime]</cite>
+                            </div>
+                        </div>
+                        <div class="content">
+                            <!--{if $ann[type] == 1}-->
+                            <i class="icon mt-link"></i>
+                            <!--{else}-->
+                            <i class="icon mt-drag_handle"></i>
+                            <!--{/if}-->
+                            $ann['message']
+                            <a class="edit-btn icon-quill" href="$cpscript?mod=modcp&action=announcement&op=edit&id=$ann[id]"></a>
+                        </div>
+                        <div class="item-footer">
+                            <!--{if !$ann['disabled']}-->
+                            <input id="ann_$ann[id]" type="checkbox" name="delete[]" value="$ann[id]" $ann['disabled'] />
+                            <label class="mt-close r" for="ann_$ann[id]"></label>
+                            <!--{/if}-->
+                            <span class="r">BY：$ann[author]</span>
+                            <span>{lang displayorder}<input type="text" name="order[{$ann[id]}]" value="$ann[displayorder]" $ann['disabled'] /></span>
+                            <div class="delcover"></div>
+                        </div>
+                    </li>
+                    <!--{/loop}-->
+                </ul>
+                <script>swaterfall('#announcements','#announcement_source','announcement',2);</script>
+            </div>
+            <div class="common-btn">
+                <input type="checkbox" name="chkall" id="chkall" />
+                <label for="chkall" onclick="checkall(this.form,null,null,true)">{lang delete_check}</label>
+                <button class="ft-trash-2" type="submit" name="submit" id="submit" value="true"></button>
+            </div>
+		</form>
+	</li>
+	<!--{/if}-->
+</ol>
+<script type="text/javascript" reload="1">
+	simulateSelect('type');
+    function changeinput(v){
+        if(v == 0) {
+            $('annomessage').style.display = $('annomessage_editor').style.display = '';
+            $('anno_type_url').style.display = 'none';
+        } else {
+            $('annomessage').style.display = $('annomessage_editor').style.display = 'none';
+            $('anno_type_url').style.display = '';
+        }
+    }
+</script>

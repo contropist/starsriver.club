@@ -1,0 +1,49 @@
+<div class="actstruct bloginfo">
+    <a class="avatar" href="home.php?mod=space&uid=$value[uid]" c="1"><!--{avatar($value[uid],small)}--></a>
+    <div class="header">
+        <a class="username" href="home.php?mod=space&uid=$value[uid]">$value[username]</a>
+        <p class="sub-line">
+            <i class="str">$value[dateline]</i>
+        </p>
+        <!--{eval $stickflag = isset($value['stickflag']) ? 0 : 1;}-->
+        <!--{if $_G[uid] == $value[uid]}-->
+        <div class="tool">
+            <b class="dots"><i class="dot"></i><i class="dot"></i><i class="dot"></i></b>
+            <span class="tooltip lt" data-ignore='1'>
+                <a href="home.php?mod=spacecp&ac=blog&blogid=$value[blogid]&op=edit">{lang edit}</a>
+                <a href="home.php?mod=spacecp&ac=blog&blogid=$value[blogid]&op=delete&handlekey=delbloghk_{$value[blogid]}" id="blog_delete_$value[blogid]" onclick="showWindow(this.id, this.href, 'get', 0);">{lang delete}</a>
+                <!--{if empty($value['status']) && $_GET[view] == me}-->
+                    <a href="home.php?mod=spacecp&ac=blog&blogid=$value[blogid]&op=stick&stickflag=$stickflag&handlekey=stickbloghk_{$value[blogid]}" id="blog_stick_$value[blogid]" onclick="showWindow(this.id, this.href, 'get', 0);"><!--{if $stickflag}-->{lang stick}<!--{else}-->{lang cancel_stick}<!--{/if}--></a>
+                <!--{/if}-->
+            </span>
+        </div>
+        <!--{/if}-->
+    </div>
+    <div class="body">
+        <div class="blog">
+            <a class="title" href="home.php?mod=space&uid=$value[uid]&do=blog&id=$value[blogid]" style="{if $value[magiccolor]}color: {$_G[colorarray][$value[magiccolor]]}{/if}" target="_blank">
+                <!--{if !$stickflag}--><span class="tag hi-cute-case">{lang stick}</span><!--{/if}-->
+                <!--{if $value[status] == 1}--><span class="tag hi-disabled-case">{lang pending}</span><!--{/if}-->
+                $value[subject]
+            </a>
+            <!--{if $classarr[$value[classid]]}--><i class="category">{lang personal_category}: <a href="home.php?mod=space&uid=$value[uid]&do=blog&classid=$value[classid]&view=me">{$classarr[$value[classid]]}</a></i><!--{/if}-->
+            <!--{if $value['friend']}-->
+            <span ><a href="$theurl&friend=$value[friend]">{$friendsname[$value[friend]]}</a></span>
+            <!--{/if}-->
+
+            <div class="content" id="blog_article_$value[blogid]">
+                <!--{if $value[pic]}--><div class="atc"><a href="home.php?mod=space&uid=$value[uid]&do=blog&id=$value[blogid]" target="_blank"><img src="$value[pic]" alt="$value[subject]" class="tn" /></a></div><!--{/if}-->
+                $value[message]
+            </div>
+            <!--{hook/space_blog_list_status $k}-->
+        </div>
+    </div>
+    <div class="footer">
+        <a class="icon mt-whatshot hot dpointer"><span>$value[hot]</span></a>
+        <a class="icon mt-import_contacts read dpointer" href="home.php?mod=space&uid=$value[uid]&do=blog&id=$value[blogid]" target="_blank"><span>$value[viewnum]</span></a>
+        <a class="icon mt-textsms reply" href="home.php?mod=space&uid=$value[uid]&do=blog&id=$value[blogid]#comment" target="_blank"><span id="replynum_$value[blogid]">$value[replynum]</span></a>
+        <!--{if helper_access::check_module('share')}-->
+        <a class="icon mt-share share" href="home.php?mod=spacecp&ac=share&type=blog&id=$value[blogid]&handlekey=lsbloghk_{$value[blogid]}" id="a_share_$value[blogid]" onclick="showWindow(this.id, this.href, 'get', 0);"></a>
+        <!--{/if}-->
+    </div>
+</div>

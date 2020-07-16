@@ -1,0 +1,255 @@
+<!--{if $op == 'edit' || $op == 'ban'}-->
+    <div class="title trans-ease">
+        <h2><!--{if $op == 'edit'}-->{lang mod_member_edit}<!--{else}-->{lang mod_member_ban}<!--{/if}--></h2>
+        <span>{lang mod_notice}</span>
+    </div>
+	<ol class="panel-container">
+        <li class="box size-10-0 no-edge">
+            <form  method="post" autocomplete="off" action="{$cpscript}?mod=modcp&action=$_GET[action]&op=$op">
+                <input type="hidden" name="formhash" value="{FORMHASH}">
+                <!--{if !empty($error)}--><p class="alert hi-info">
+                    <!--{if $error == 1}-->
+                    {lang mod_message_member_search}
+                    <!--{elseif $error == 2}-->
+                    {lang mod_message_member_nonexistence}
+                    <!--{elseif $error == 3}-->
+                    {lang mod_message_member_nopermission}
+                    <!--{if $_G['adminid'] == 1}-->
+                    , <a href="webcontroller.php?action=members&operation=search&username={$usernameenc}&submit=yes&frames=yes" target="_blank">{lang mod_message_goto_admincp}</a>
+                    <!--{/if}-->
+                    <!--{/if}-->
+                </p>
+                <!--{/if}-->
+                <div class="input-group f">
+                    <span>{lang username}</span>
+                    <input type="text" name="username" value="" />
+                    <span>UID [{lang optional}]</span>
+                    <input type="text" name="uid" value="" />
+                    <i class="input-group-btn"><button type="submit" name="submit" id="searchsubmit" value="true">{lang modcp_logs_search}</button></i>
+                </div>
+            </form>
+        </li>
+    </ol>
+<!--{/if}-->
+<!--{if $op == 'ban' && $member && !$error}-->
+<hr style="box-shadow:0 1px 1px rgba(0,0,0,.1);margin: 8px 0;">
+    <ol class="panel-container">
+        <li class="box size-10-0 no-edge">
+            <form method="post" autocomplete="off" action="{$cpscript}?mod=modcp&action=$_GET[action]&op=$op">
+                <input type="hidden" name="formhash" value="{FORMHASH}">
+                <input type="hidden" name="username" value="$_GET['username']">
+                <input type="hidden" name="uid" value="$_GET['uid']">
+                <div class="panel no-edge">
+                    <ol class="panel-container">
+                        <li class="box size-4-0 no-edge user {if $member[groupid] == 4}hi-warning{elseif $member[groupid] == 5}hi-danger{else}hi-success{/if} px4-radius">
+                            <a class="avatar pxa-radius" href="home.php?mod=space&uid=$member[uid]" target="_blank"><!--{echo avatar($member[uid], 'mid');}--></a>
+                            <!--{if $member[groupid] == 4}-->
+                            <i class="user-modstate"><span>{lang modcp_members_status_banpost}</span></i>
+                            <i class="modstate">{if $member['banexpiry']}$member['banexpiry']{lang valid_before}{/if}{lang modcp_members_status_banpost2}</i>
+                            <!--{elseif $member[groupid] == 5}-->
+                            <i class="user-modstate"><span>{lang modcp_members_status_banvisit}</span></i>
+                            <i class="modstate">{if $member['banexpiry']}$member['banexpiry']{lang valid_before}{/if}{lang modcp_members_status_banvisit2}</i>
+                            <!--{else}-->
+                            <i class="user-modstate"><span>{lang modcp_members_status_normal}</span></i>
+                            <i class="modstate">{lang modcp_members_status_normal2}</i>
+                            <!--{/if}-->
+                            <span class="user-info">
+                                <i class="l">$member[username]</i>
+                                <i class="r">ID：$member[uid]</i>
+                            </span>
+                        </li>
+                        <li class="box size-6-0 no-edge">
+                            <div class="input-group f px4-radius">
+                                <span>{lang expiry}</span>
+                                <input type="text" id="banexpirynew" name="banexpirynew" placeholder="{lang modcp_members_ban_days_comment}" autocomplete="off" value="" tabindex="1"/>
+                            </div>
+                            <div class="input-group-area px4-radius">
+                                <textarea name="reason" rows="3" placeholder="{lang reason}">$member[signature]</textarea>
+                                <div class="input-group f">
+                                    <span>{lang changeto}</span>
+                                    <ul>
+                                        <li class="csbox"><input type="radio" name="bannew" id="bannew_0" value="0"/><label for="bannew_0">{lang modcp_members_status_normal}</label></li>
+                                        <li class="csbox admin"><input type="radio" name="bannew" id="bannew_4" value="4"/><label for="bannew_4">{lang modcp_members_status_banpost}</label></li>
+                                        <li class="csbox admin"><input type="radio" name="bannew" id="bannew_5" value="5" {if !$_G[group][allowbanuser]}disabled{/if} /><label for="bannew_5">{lang modcp_members_status_banvisit}</label></li>
+                                    </ul>
+                                    <i class="input-group-btn"><button type="submit" name="bansubmit" id="submit" value="true">{lang submit}</button></i>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="box size-10-0 no-edge">
+                            <table class="{if $member[groupid] == 4}type-2{elseif $member[groupid] == 5}type-3{else}type-1{/if} wb rb dc ac dl pd">
+                                <thead>
+                                <tr>
+                                    <td width="140">{lang crime_action}</td>
+                                    <td width="560">{lang crime_reason}</td>
+                                    <td width="180">{lang crime_dateline}</td>
+                                    <td width="180">{lang crime_operator}</td>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <!--{if $clist}-->
+                                <!--{loop $clist $crime}-->
+                                <tr id="$crime[cid]">
+                                    <td>
+                                        <!--{if $crime[action] == 'crime_delpost'}-->
+                                        <em class="pag px4-radius hi-warning">{lang crime_delpost}</em>
+                                        <!--{elseif $crime[action] == 'crime_warnpost'}-->
+                                        <em class="pag px4-radius hi-warning">{lang crime_warnpost}</em>
+                                        <!--{elseif $crime[action] == 'crime_banpost'}-->
+                                        <em class="pag px4-radius hi-danger">{lang crime_banpost}</em>
+                                        <!--{elseif $crime[action] == 'crime_banspeak'}-->
+                                        <em class="pag px4-radius hi-danger">{lang crime_banspeak}</em>
+                                        <!--{elseif $crime[action] == 'crime_banvisit'}-->
+                                        <em class="pag px4-radius hi-danger">{lang crime_banvisit}</em>
+                                        <!--{elseif $crime[action] == 'crime_banstatus'}-->
+                                        <em class="pag px4-radius hi-danger">{lang crime_banstatus}</em>
+                                        <!--{elseif $crime[action] == 'crime_avatar'}-->
+                                        <em class="pag px4-radius hi-primary">{lang crime_avatar}</em>
+                                        <!--{elseif $crime[action] == 'crime_sightml'}-->
+                                        <em class="pag px4-radius hi-warning">{lang crime_sightml}</em>
+                                        <!--{elseif $crime[action] == 'crime_customstatus'}-->
+                                        <em class="pag px4-radius hi-success">{lang crime_customstatus}</em>
+                                        <!--{/if}-->
+                                    </td>
+                                    <td>$crime[reason]</td>
+                                    <td><p>{date($crime[dateline])}</p></td>
+                                    <td><a href="home.php?mod=space&uid=$crime[operatorid]">$crime[operator]</a></td>
+                                </tr>
+                                <!--{/loop}-->
+                                </tbody>
+                                <!--{else}-->
+                                <tr><td colspan="4"><p>{lang crime_nolog}</p></td></tr>
+                                <!--{/if}-->
+                            </table>
+                        </li>
+                    </ol>
+                </div>
+            </form>
+        </li>
+    </ol>
+<!--{/if}-->
+
+<!--{if $op == 'edit' && $member && !$error}-->
+<hr style="border-bottom-color:#e9e6f3; margin: 30px;">
+<ol class="panel-container">
+    <li class="box size-10-0 no-edge">
+        <form method="post" autocomplete="off" action="{$cpscript}?mod=modcp&action=$_GET[action]&op=$op">
+            <input type="hidden" name="formhash" value="{FORMHASH}">
+            <input type="hidden" name="username" value="$_GET['username']">
+            <input type="hidden" name="uid" value="$_GET['uid']">
+            <div class="panel no-gap">
+                <ol class="panel-container">
+                    <li class="box size-6-0 no-edge">
+                        <div class="input-group f px4-radius">
+                            <span style="width: 80px">{lang signature}</span>
+                            <textarea name="signaturenew" rows="2">$member[signature]</textarea>
+                        </div>
+                        <div class="input-group f px4-radius">
+                            <span style="width: 80px">{lang bio}</span>
+                            <textarea name="bionew" rows="6" >$member['bio']</textarea>
+                        </div>
+                    </li>
+                    <li class="box size-4-0 no-edge">
+                        <div class=" user-header">
+                            <a class="avatar" href="home.php?mod=space&uid=$member[uid]" target="_blank"><!--{echo avatar($member[uid], 'big');}--></a>
+                            <i class="features l">
+                            </i>
+                            <i class="features r">
+                                <input type="checkbox" name="clearavatar" value="1" id="clearavatar" />
+                                <label for="clearavatar">{lang avatar_del}</label>
+                            </i>
+                        </div>
+                    </li>
+                    <li class="box size-10-0">
+                        <button class="btn btn-round btn-warning-b " style="margin: 90px auto 0" type="submit" name="editsubmit" id="submit" value="true">{lang submit}</button>
+                    </li>
+                </ol>
+            </div>
+        </form>
+    </li>
+</ol>
+<!--{/if}-->
+
+<!--{if $op == 'ipban'}-->
+    <div class="title">
+        <h2>{lang mod_option_member_ipban}</h2>
+        <span>{lang modcp_ban_ip}</span>
+    </div>
+    <ol class="panel-container">
+        <!--{if $adderror}-->
+        <li class="box size-10-0 alert hi-warning">
+            <!--{if $adderror == 1}-->
+            {lang modcp_members_ip_error_1}
+            <!--{elseif $adderror == 2}-->
+            {lang modcp_members_ip_error_2}
+            <!--{elseif $adderror == 3}-->
+            {lang modcp_members_ip_error_3}
+            <!--{elseif $updatecheck || $deletecheck || $addcheck}-->
+            {lang modcp_members_ip_succed}
+            <!--{else}-->
+            {lang modcp_members_ip_error_4}
+            <!--{/if}-->
+        </li>
+        <!--{/if}-->
+        <li class="box size-10-0 no-edge">
+            <p class="alert hi-info">{lang modcp_ip_message}</p>
+            <form method="post" autocomplete="off" action="{$cpscript}?mod=modcp&action=$_GET[action]&op=$op">
+                <input type="hidden" name="formhash" value="{FORMHASH}">
+                <div class="panel no-edge" style="margin-bottom: 8px !important;">
+                    <ol class="panel-container">
+                        <li class="box size-6-1 no-edge">
+                            <div class="input-group f">
+                                <span>{lang add_new}IP</span>
+                                <input type="text" name="ip1new" value="$iptoban[0]" maxlength="3"/><span>.</span>
+                                <input type="text" name="ip2new" value="$iptoban[1]" maxlength="3" /><span>.</span>
+                                <input type="text" name="ip3new" value="$iptoban[2]" maxlength="3" /><span>.</span>
+                                <input type="text" name="ip4new" value="$iptoban[3]" maxlength="3" />
+                            </div>
+                        </li>
+                        <li class="box size-3-1 no-edge">
+                            <div class="input-group f">
+                                {lang modcp_ip_message}
+                                <span>{lang expiry}</span>
+                                <script type="text/javascript" src="{$_G[setting][jspath]}calendar.js?{VERHASH}"></script>
+                                <input type="text" id="validitynew" name="validitynew" autocomplete="off" value="" tabindex="1" />
+                                <i class="input-group-btn"><button type="submit" name="ipbansubmit" id="submit" value="true">{lang submit}</button></i>
+                            </div>
+                        </li>
+                    </ol>
+                </div>
+                <table class="dc wb ac rb">
+                    <thead>
+                        <tr>
+                            <td width="60">{lang delete}</td>
+                            <td width="140">{lang online_ip}</td>
+                            <td width="290">{lang ip_location}</td>
+                            <td width="160">{lang modcp_members_ip_addadmin}</td>
+                            <td width="160">{lang starttime}</td>
+                            <td width="160">{lang endtime}</td>
+                        </tr>
+                    </thead>
+                    <!--{if $iplist}-->
+                    <tbody>
+                        <!--{loop $iplist $ip}-->
+                        <tr>
+                            <td class="ccbox admin"><input type="checkbox" name="delete[]" value="$ip[id]" id="banip_$ip[id]" $ip[disabled]><label for="banip_$ip[id]"></label></td>
+                            <td>$ip[theip]</td>
+                            <td>$ip[location]</td>
+                            <td>$ip[admin]</td>
+                            <td>$ip[dateline]</td>
+                            <td>$ip[expiration]</td>
+                        </tr>
+                        <!--{/loop}-->
+                    </tbody>
+                    <!--{else}-->
+                        <tr><td colspan="6"><p>{lang no_ban_ip}</p></td></tr>
+                    <!--{/if}-->
+                </table>
+                <div class="common-btn">
+                    <input type="checkbox" name="chkall" id="chkall" /><label for="chkall" onclick="checkall(this.form,null,null,true)">{lang checkall}</label>
+                    <button class="ft-trash-2" type="submit" name="ipbansubmit" id="submit" value="true">{lang submit}</button>
+                </div>
+            </form>
+        </li>
+    </ol>
+<!--{/if}-->

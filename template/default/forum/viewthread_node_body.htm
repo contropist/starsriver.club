@@ -1,0 +1,195 @@
+<!--{if !$_G['forum']['ismoderator'] && $_G['setting']['bannedmessages'] & 1 && (($post['authorid'] && !$post['username']) || ($_G['thread']['digest'] == 0 && ($post['groupid'] == 4 || $post['groupid'] == 5 || $post['memberstatus'] == '-1')))}-->
+    <div class="locked">{lang message_banned}</div>
+<!--{elseif !$_G['forum']['ismoderator'] && $post['status'] & 1}-->
+    <div class="locked">{lang message_single_banned}</div>
+<!--{elseif $needhiddenreply}-->
+    <div class="locked">{lang message_ishidden_hiddenreplies}</div>
+<!--{elseif $post['first'] && $_G['forum_threadpay']}-->
+    <!--{template forum/viewthread_pay}-->
+<!--{elseif $_G['forum_discuzcode']['passwordlock'][$post[pid]]}-->
+    <div class="locked">{lang message_password_exists}<input type="text" id="postpw_$post[pid]" /><button type="button" onclick="submitpostpw($post[pid]{if $_GET['from'] == 'preview'},{$post[tid]}{else}{/if}); setTimeout(function(){window.location.reload();},500);">{lang submit}</button></div>
+<!--{else}-->
+    <!--{hook/viewthread_posttop $postcount}-->
+
+    <!--{if $_G['setting']['bannedmessages'] & 1 && (($post['authorid'] && !$post['username']) || ($_G['thread']['digest'] == 0 && ($post['groupid'] == 4 || $post['groupid'] == 5 || $post['memberstatus'] == '-1')))}-->
+        <div class="locked">{lang admin_message_banned}</div>
+    <!--{elseif $post['status'] & 1}-->
+        <div class="locked">{lang admin_message_single_banned}</div>
+    <!--{/if}-->
+
+    <!--{if !$post['first'] && $hiddenreplies && $_G['forum']['ismoderator']}-->
+        <div class="locked">{lang message_ishidden_hiddenreplies}</div>
+    <!--{/if}-->
+
+    <!--{if $post['first']}-->
+        <!--{if $threadsort && $threadsortshow}-->
+            <!--{if $threadsortshow['typetemplate']}-->
+                $threadsortshow[typetemplate]
+            <!--{elseif $threadsortshow['optionlist']}-->
+                <div class="typeoption">
+                    <!--{if $threadsortshow['optionlist'] == 'expire'}-->
+                        {lang has_expired}
+                    <!--{else}-->
+                        <div>$_G[forum][threadsorts][types][$_G[forum_thread][sortid]]</div>
+                        <!--{loop $threadsortshow['optionlist'] $option}-->
+                            <!--{if $option['type'] != 'info'}-->
+                                    <p>$option[title]:</p>
+                                    <p><!--{if $option['value'] !== ''}-->$option[value] $option[unit]<!--{else}-->-<!--{/if}--></p>
+                            <!--{/if}-->
+                        <!--{/loop}-->
+                    <!--{/if}-->
+                </div>
+            <!--{/if}-->
+        <!--{/if}-->
+    <!--{/if}-->
+    <!--{if $_G['forum_discuzcode']['passwordauthor'][$post[pid]]}-->
+        <div class="locked">{lang message_password_exists_author}</div>
+    <!--{/if}-->
+
+    $_G['forum_posthtml']['header'][$post[pid]]
+
+    <!--{if $post['first']}-->
+        <!--{if !$_G[forum_thread][special]}-->
+            <!--{if !$_G['inajax']}-->
+                <!--{if $ad_a_pr}-->
+                    $ad_a_pr
+                <!--{/if}-->
+            <!--{/if}-->
+            <!--{if !empty($_G['setting']['guesttipsinthread']['flag']) && empty($_G['uid']) && !$post['attachment'] && $_GET['from'] != 'preview'}-->
+            <div class="attach_nopermission attach_tips">
+                <!--{if !empty($_G['setting']['guesttipsinthread']['text'])}-->
+                    {$_G['setting']['guesttipsinthread']['text']}
+                <!--{else}-->
+                    {lang guesttipsinthread_text}
+                <!--{/if}-->
+                    {lang attach_nopermission_login}
+                <!--{hook/global_login_text}-->
+                <span class="atips_close" onclick="this.parentNode.style.display='none'">x</span>
+            </div>
+            <!--{/if}-->
+            $post[message]
+        <!--{elseif $_G[forum_thread][special] == 1}-->
+            <!--{template forum/viewthread_poll}-->
+        <!--{elseif $_G[forum_thread][special] == 2}-->
+            <!--{template forum/viewthread_trade}-->
+        <!--{elseif $_G[forum_thread][special] == 3}-->
+            <!--{template forum/viewthread_reward}-->
+        <!--{elseif $_G[forum_thread][special] == 4}-->
+            <!--{template forum/viewthread_activity}-->
+        <!--{elseif $_G[forum_thread][special] == 5}-->
+            <!--{template forum/viewthread_debate}-->
+        <!--{elseif $_G[forum_thread][special] == 127}-->
+            $threadplughtml
+            <div>$post[message]</div>
+        <!--{/if}-->
+    <!--{else}-->
+        <!--{if !$_G['inajax']}-->
+            <!--{if $ad_a_pr}-->
+                $ad_a_pr
+            <!--{/if}-->
+        <!--{/if}-->
+        <!--{if $post['invisible'] != '-2' || $_G['forum']['ismoderator']}-->
+            $post[message]
+        <!--{else}-->
+            <span>{lang moderate_need}</span>
+        <!--{/if}-->
+    <!--{/if}-->
+
+    $_G['forum_posthtml']['footer'][$post[pid]]
+
+    <!--{if $post['attachment'] && $_GET['from'] != 'preview'}-->
+        <div class="alert hi-info with-icon">
+            <a id="close" onclick="alert_hide(this)"></a>
+            <i class="icon-files-empty"></i>
+            <p class="title">{lang attach_nopermission_notice}</p>
+            <hr>
+            <p class="info">
+                <!--{if $_G['uid']}-->
+                    {lang attach_nopermission}
+                <!--{elseif $_G['connectguest']}-->
+                    {lang attach_nopermission_connect_fill_profile}
+                <!--{else}-->
+                    {lang attach_nopermission_login}
+                <!--{hook/global_login_text}-->
+                <!--{/if}-->
+            </p>
+        </div>
+    <!--{elseif $post['imagelist'] || $post['attachlist']}-->
+		<!--{if $post['imagelist'] && $_G['setting']['imagelistthumb'] && $post['imagelistcount'] >= $_G['setting']['imagelistthumb']}-->
+			<!--{if !isset($imagelistkey)}-->
+				<!--{eval $imagelistkey = rawurlencode(dsign($_G[tid].'|100|100'))}-->
+				<script type="text/javascript" reload="1">var imagelistkey = '$imagelistkey';</script>
+			<!--{/if}-->
+			<!--{eval $post['imagelistthumb'] = true;}-->
+			<div class="bbda cl mtw mbm pbm">
+				<strong>{lang more_images}</strong>
+				<a onclick="attachimglst('$post[pid]', 0)" class="xi2 attl_g">{lang image_small}</a>
+				<a onclick="attachimglst('$post[pid]', 1, {echo intval($_G['setting']['lazyload'])})" class="xi2 attl_m">{lang image_big}</a>
+			</div>
+			<div id="imagelist_$post[pid]" class="cl" style="display:none"><!--{echo showattach($post, 1)}--></div>
+			<div id="imagelistthumb_$post[pid]" class="pattl_c cl"><img src="{STATICURL}image/common/loading.gif" width="16" height="16" class="vm" /> {lang image_list_openning}</div>
+		<!--{else}-->
+			<!--{echo showattach($post, 1)}-->
+		<!--{/if}-->
+		<!--{if $post['attachlist']}-->
+			<div class="attachments-win">
+				<div class="title">文章附件</div>
+				<a class="folder pointer" onclick="folder('ul')"></a>
+				<ul class="attachment-list trans-ease">
+					<li class="attachment-dl desc">
+						<i class="item-name">{lang filename}</i>
+						<i class="item-dec">{lang description}</i>
+						<i class="item-size">{lang filesize}</i>
+						<i class="item-rp">{lang dlperm}</i>
+						<i class="item-dlc hidden">{lang downloads}</i>
+						<i class="item-crd hidden">{lang attachcredits}</i>
+						<i class="item-prc">{lang price}</i>
+						<i class="item-rec"></i>
+					</li>
+					<!--{echo showattach($post)}-->
+				</ul>
+			</div>
+		<!--{/if}-->
+    <!--{/if}-->
+
+    <!--{if $_G['setting']['allowfastreply'] && $post['first'] && $fastpost && $allowpostreply && !$_G['forum_thread']['archiveid'] && $_GET['from'] != 'preview'}-->
+        <form class="hidden" method="post" autocomplete="off" id="quickreply" action="forum.php?mod=post&action=reply&fid=$_G[fid]&tid=$_G[tid]&fromvf=1&extra=$_G[gp_extra]&replysubmit=yes{if $_G['gp_ordertype'] != 1}&infloat=yes&handlekey=vfastpost{/if}{if $_G[gp_from]}&from=$_G[gp_from]{/if}" onsubmit="this.message.value = parseurl(this.message.value);ajaxpost('vfastpostform', 'return_reply', 'return_reply', 'onerror');return false;">
+            <input type="hidden" name="formhash" value="{FORMHASH}" />
+            <input type="text" class="l" name="message"/>
+            <button type="submit" name="replysubmit" id="vreplysubmit" value="true" style="">{lang quick_post}</button>
+            <div id="vfastpostseccheck"></div>
+        </form>
+    <!--{/if}-->
+
+    <div class="comments-list" id="comment_$post[pid]" >
+        <!--{if $_GET['from'] != 'preview' && $_G['setting']['commentnumber'] && !empty($comments[$post[pid]])}-->
+            <!--{loop $comments[$post[pid]] $comment}-->
+                <div class="comment">
+                    <a class="avatar pxa-radius" c="1" href="home.php?mod=space&uid=$comment[authorid]" >$comment[avatar]</a>
+                    <!--{if $comment['authorid']}-->
+                        <a class="name" href="home.php?mod=space&uid=$comment[authorid]">$comment[author]：</a>
+                    <!--{else}-->
+                        <a class="name">{lang guest}：</a>
+                    <!--{/if}-->
+                    $comment[comment]
+                    <!--{if $comment[rpid]}-->
+                        <a class="btn" href="forum.php?mod=post&action=reply&fid=$_G[fid]&tid=$_G[tid]&repquote=$comment[rpid]&extra=$_GET[extra]&page=$page{if $_GET[from]}&from=$_GET[from]{/if}" onclick="showWindow('reply', this.href)">{lang reply}</a>
+                    <!--{/if}-->
+                    <br>
+                    <span class="info">
+                        <!--{date($comment[dateline], 'u')}-->
+                        <!--{if $comment['useip'] && $_G['group']['allowviewip']}-->&nbsp;IP:$comment[useip]{if $comment[port]}:$comment[port]{/if}<!--{/if}-->
+                        <!--{if $_G['forum']['ismoderator'] && $_G['group']['allowdelpost']}-->&nbsp;<a onclick="modaction('delcomment', $comment[id])">{lang delete}</a><!--{/if}-->
+                    </span>
+                </div>
+            <!--{/loop}-->
+            <!--{if $commentcount[$post[pid]] > $_G['setting']['commentnumber']}-->
+                <div class="" style="display: inline-block">
+                    <div class="pg">
+                        <a class="next" onclick="ajaxget('forum.php?mod=misc&action=commentmore&tid=$post[tid]&pid=$post[pid]&page=2', 'comment_$post[pid]')"></a>
+                    </div>
+                </div>
+            <!--{/if}-->
+        <!--{/if}-->
+    </div>
+<!--{/if}-->

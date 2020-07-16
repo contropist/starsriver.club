@@ -1,0 +1,36 @@
+<div class="sc-tip">
+	<p><!--{if $keyword}-->{lang search_result_keyword}<!--{else}-->{lang search_result}<!--{/if}--><p>
+</div>
+<div class="sc-body">
+	<div class="sc-result-list">
+		<!--{if empty($articlelist)}-->
+		<p class="emp xg2 xs2">{lang search_nomatch}</p>
+		<!--{else}-->
+		<ul>
+			<!--{loop $articlelist $article}-->
+			<li class="sc-result">
+				<div class="sc-title">
+					<a class="sc-title" href="{echo fetch_article_url($article);}" target="_blank">$article[title]</a>
+				</div>
+				<div class="sc_ocntent">
+					<p>$article[commentnum] {lang a_comment} - $article[viewnum] {lang a_visit}</p>
+					<p>$article[summary]</p>
+					<p>
+						<span>$article[dateline]</span>-
+						<span>
+						<a href="home.php?mod=space&uid=$article[uid]" target="_blank">$article[username]</a>
+					</span>
+					</p>
+				</div>
+			</li>
+			<!--{/loop}-->
+		</ul>
+		<!--{/if}-->
+		<!--{if !empty($multipage)}-->$multipage<!--{/if}-->
+	</div>
+	<div class="scpageadv">
+		<!--{ad/search/y mtw}-->
+	</div>
+</div>
+
+

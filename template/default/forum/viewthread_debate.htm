@@ -1,0 +1,72 @@
+<div class="debate px4-radius trans-ease">
+	<!--{if $debate[endtime]}-->
+		<div class="debate-boot header">
+			{lang endtime}: $debate[endtime]
+		</div>
+	<!--{/if}-->
+
+	<div class="point" id="rp">
+		<section>
+			<p>$debate[affirmpoint]</p>
+			<!--{if !$_G['forum_thread']['is_archived']}-->
+			<a class="btn join" href="forum.php?mod=post&action=reply&fid=$_G[fid]&tid=$_G[tid]&stand=1{if $_GET[from]}&from=$_GET[from]{/if}" onclick="showWindow('reply', this.href)"><strong>{lang debate_join}</strong></a>
+				<button class="btn sup" href="forum.php?mod=misc&action=debatevote&tid=$_G[tid]&stand=1" id="affirmbutton" onclick="{if $_G['uid']}ajaxmenu(this);{else}showWindow('login', 'member.php?mod=logging&action=login&guestmessage=yes');{/if}doane(event);" {if $post['invisible'] < 0} disabled{/if}><img src="{IMGURL}/forum/debate/support-r.svg"></button>
+			<!--{/if}-->
+			<em class="right"></em>
+			<em class="left"></em>
+		</section>
+	</div>
+
+	<div class="point" id="gp">
+		<section>
+			<p>$debate[negapoint]</p>
+			<!--{if !$_G['forum_thread']['is_archived']}-->
+			<a class="btn join" href="forum.php?mod=post&action=reply&fid=$_G[fid]&tid=$_G[tid]&stand=2{if $_GET[from]}&from=$_GET[from]{/if}" onclick="showWindow('reply', this.href)"><strong>{lang debate_join}</strong></a>
+				<button class="btn sup" href="forum.php?mod=misc&action=debatevote&tid=$_G[tid]&stand=2" id="negabutton" onclick="{if $_G['uid']}ajaxmenu(this);{else}showWindow('login', 'member.php?mod=logging&action=login&guestmessage=yes');{/if}doane(event);" {if $post['invisible'] < 0} disabled{/if}><img src="{IMGURL}/forum/debate/support-b.svg"></button>
+			<!--{/if}-->
+			<em class="right"></em>
+			<em class="left"></em>
+		</section>
+	</div>
+
+	<div class="pcent-bar">
+		<div class="bar l" id="red" style="width:$debate[affirmvoteswidth]%;">
+			<a class="pcnum ">$debate[affirmvoteswidth]% ($debate[affirmvotes])</a>
+		</div>
+		<div class="bar r" id="blue" style="width:$debate[negavoteswidth]%;">
+			<a class="pcnum ">($debate[negavotes]) $debate[negavoteswidth]%</a>
+		</div>
+	</div>
+</div>
+
+<!--{if $debate[umpire]}-->
+<!--{if $debate['umpirepoint']}-->
+<div id="umpirepoint">
+	<!--{if $debate[umpire] && $_G['username'] && $debate[umpire] == $_G['member']['username']}-->
+	<p class="dtm pns">
+		<!--{if $debate[remaintime] && !$debate[umpirepoint]}-->
+		<button type="button" onclick="showWindow('debate', 'forum.php?mod=misc&action=debateumpire&tid=$_G[tid]&pid=$post[pid]{if $_GET[from]}&from=$_GET[from]{/if}')"><span>{lang debate_umpire_end}</span></button>
+		<!--{elseif TIMESTAMP - $debate['dbendtime'] < 3600}-->
+		<button type="button" onclick="showWindow('debate', 'forum.php?mod=misc&action=debateumpire&tid=$_G[tid]&pid=$post[pid]{if $_GET[from]}&from=$_GET[from]{/if}')"><span>{lang debate_umpirepoint_edit}</span></button>
+		<!--{/if}-->
+	</p>
+	<!--{/if}-->
+	<p class="dbresult">
+		<!--{if $debate[winner]}-->
+		<!--{if $debate[winner] == 1}-->
+		<label class="winner_1"><strong>{lang debate_square}</strong>{lang debate_winner}</label>
+		<!--{elseif $debate[winner] == 2}-->
+		<label class="winner_2"><strong>{lang debate_opponent}</strong>{lang debate_winner}</label>
+		<!--{else}-->
+		<label class="winner_0"><strong>{lang debate_draw}</strong></label>
+		<!--{/if}-->
+		<!--{/if}-->
+		<em>{lang debate_comment_dateline}: $debate[endtime]</em>
+	</p>
+	<!--{if $debate[umpirepoint]}--><p class="umpirepoint"><strong>{lang debate_umpirepoint}</strong>: $debate[umpirepoint]</p><!--{/if}-->
+	<!--{if $debate[bestdebater]}--><p class="bestdebater"><strong>{lang debate_bestdebater}</strong>: $debate[bestdebater]</p><!--{/if}-->
+</div>
+<!--{/if}-->
+<!--{/if}-->
+<div id="postmessage_$post[pid]">$post[message]</div>
+

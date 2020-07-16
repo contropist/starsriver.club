@@ -1,0 +1,29 @@
+<!--{if $topgrouplist}-->
+<div class="side-box">
+    <div class="header">
+        <b>{lang group_hot}</b>
+    </div>
+    <div class="body">
+        <ol class="rank-list">
+            <!--{eval $randkey1 = 1}-->
+            <!--{loop $topgrouplist $fid $group}-->
+            <li>
+                <!--{if $randkey1 <= 3}-->
+                    <i class="top">{$randkey1}</i>
+                    <a class="item" href="forum.php?mod=group&fid=$group[fid]" title="$group[name]">
+                        <img src="{if $group[icon]}$group[icon]{else}{IMGURL}/common/no-img/no-group-avatar.svg{/if}">
+                        <i>$group[name]</i>
+                        <span>{lang credits}: $group[commoncredits]</span>
+                    </a>
+                <!--{else}-->
+                    <i>{$randkey1}</i>
+                    <a href="forum.php?mod=group&fid=$group[fid]" title="$group[name]">$group[name]</a>
+                    <span>{lang credits}: $group[commoncredits]</span>
+                <!--{/if}-->
+                <!--{eval $randkey1++}-->
+            </li>
+            <!--{/loop}-->
+        </ol>
+    </div>
+</div>
+<!--{/if}-->

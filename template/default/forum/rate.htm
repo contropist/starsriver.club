@@ -1,0 +1,155 @@
+<!--{template common/header}-->
+<!--{if empty($_GET['showratetip'])}-->
+<!--{if empty($_GET['infloat'])}-->
+<div>
+<!--{/if}-->
+
+<!--{if $_GET[action] == 'rate'}-->
+<div id="floatlayout_topicadmin">
+	<div class="header">
+		<span class="title-tip" id="return_rate">{lang rate}</span>
+		<!--{if !empty($_GET['infloat'])}--><a onclick="hideWindow('rate');" class="close" title="{lang close}">×</a><!--{/if}-->
+	</div>
+	<form id="rateform" method="post" autocomplete="off" action="forum.php?mod=misc&action=rate&ratesubmit=yes&infloat=yes" onsubmit="ajaxpost('rateform', 'return_rate', 'return_rate', 'onerror');">
+		<input type="hidden" name="formhash" value="{FORMHASH}" />
+		<input type="hidden" name="tid" value="$_G[tid]" />
+		<input type="hidden" name="pid" value="$_GET[pid]" />
+		<input type="hidden" name="referer" value="$referer" />
+		<!--{if !empty($_GET['infloat'])}--><input type="hidden" name="handlekey" value="rate"><!--{/if}-->
+		<div class="body">
+            <!--{loop $ratelist $id $options}-->
+            <!--{eval $rateselfflag = 0;}-->
+            <!--{eval $rateselfflag = $_G['group']['raterange'][$id][isself] ? 1 : $rateselfflag;}-->
+            <div class="stat">
+                <span class="info heart-pink">{lang rate_todayleft}：$maxratetoday[$id]</span><b class="bar"></b>
+                <span class="info">{lang rate_raterange}：{$_G['group']['raterange'][$id]['min']} ~ {$_G['group']['raterange'][$id]['max']}</span>
+            </div>
+            <!--{/loop}-->
+            <div class="input-box">
+                <span>{lang rate} ({$_G['setting']['extcredits'][$id][img]} {$_G['setting']['extcredits'][$id][title]})</span>
+                <input type="text" name="score$id" id="score$id" value="0" />
+            </div>
+			<!--{eval $selectreason = modreasonselect(0, 'userreasons')}-->
+			<!--{if $selectreason}-->
+                <div class="tags">
+                    <p class="common-tip"><i class="ft-comment-square"></i>{lang user_operation_explain}：</p>
+                    <ul id="reasonselect" >$selectreason</ul>
+                </div>
+				<script type="text/javascript" reload="1">
+					var reasonSelectOption = $('reasonselect').getElementsByTagName('li');
+					if (reasonSelectOption) {
+						for (i=0; i<reasonSelectOption.length; i++) {
+							reasonSelectOption[i].onmouseover = function() { this.className = 'xi2 cur1'; };
+							reasonSelectOption[i].onmouseout = function() { this.className = ''; };
+							reasonSelectOption[i].onclick = function() {
+								$('reason').value = this.innerHTML;
+							}
+						}
+					}
+				</script>
+			<!--{/if}-->
+			<textarea name="reason" id="reason" onkeyup="seditor_ctlent(event, '$(\'rateform\').ratesubmit.click()')" placeholder="{lang user_operation_tape}"></textarea>
+		</div>
+		<div class="footer ccbox">
+			<input type="checkbox" name="sendreasonpm" id="sendreasonpm" {if $_G['group']['reasonpm'] == 2 || $_G['group']['reasonpm'] == 3} checked="checked" disabled="disabled"{/if} />
+			<label for="sendreasonpm">{lang admin_pm}</label>
+			<button class="btn-square" style="width:72%" name="ratesubmit" type="submit" value="true">{lang confirms}</button>
+		</div>
+	</form>
+</div>
+
+<!--{elseif $_GET[action] == 'removerate'}-->
+
+<form id="rateform" method="post" autocomplete="off" action="forum.php?mod=misc&action=removerate&ratesubmit=yes&infloat=yes" onsubmit="ajaxpost('rateform', 'return_rate', 'return_rate', 'onerror');return false;">
+	<div>
+		<div class="header">
+			<span class="title-tip" id="return_rate">{lang thread_removerate}</span>
+			<!--{if !empty($_GET['infloat'])}--><a onclick="hideWindow('rate');" class="close" title="{lang close}">×</a><!--{/if}-->
+		</div>
+		<input type="hidden" name="formhash" value="{FORMHASH}" />
+		<input type="hidden" name="tid" value="$_G[tid]">
+		<input type="hidden" name="pid" value="$_GET[pid]">
+		<input type="hidden" name="referer" value="$referer" />
+		<!--{if !empty($_GET['infloat'])}--><input type="hidden" name="handlekey" value="rate"><!--{/if}-->
+		<div class="body">
+            <p class="common-tip l"><i class="ft-activity heart-pink"></i>{lang topicadmin_opt}：{lang thread_removerate}</p>
+            <table class="wb dc">
+				<thead>
+					<tr>
+                        <td width="32" style="text-align: center">#</td>
+                        <td width="80">{lang username}</td>
+                        <td width="80">{lang credits}</td>
+                        <td width="140">{lang time}</td>
+                        <td>{lang reason}</td>
+					</tr>
+				</thead>
+				<tbody>
+				<!--{loop $ratelogs $ratelog}-->
+					<tr>
+						<td class="csbox mager">
+							<input type="checkbox" name="logidarray[]" id="ratelog_$ratelog[uid]" value="$ratelog[uid] $ratelog[extcredits] $ratelog[dbdateline]" />
+							<label for="ratelog_$ratelog[uid]"></label>
+						</td>
+						<td><a href="home.php?mod=space&uid=$ratelog[uid]">$ratelog[username]</a></td>
+						<td>{$_G['setting']['extcredits'][$ratelog[extcredits]][title]} <span class="text-primary">$ratelog[scoreview]</span> {$_G['setting']['extcredits'][$ratelog[extcredits]][unit]}</td>
+						<td>$ratelog[dateline]</td>
+						<td style="overflow: visible">
+							<!--{if $ratelog[reason]}-->
+								<i class="ft-comment-circle text-warning">
+									<span class="tooltip lt" data-animal="popout" data-pos="lt">$ratelog[reason]</span>
+								</i>
+							<!--{else}-->
+								<i class="ft-comment-circle" style="color: #bbb !important;"></i>
+							<!--{/if}-->
+						</td>
+					</tr>
+				<!--{/loop}-->
+				</tbody>
+			</table>
+            <hr>
+            <p class="common-tip l"><i class="ft-clipboard heart-pink"></i>{lang admin_operation_explain}：</p>
+			<textarea name="reason"></textarea>
+		</div>
+	</div>
+	<div class="footer ccbox">
+		<input type="checkbox" name="chkall" id="chkall"/>
+		<label for="chkall" onclick="checkall(this.form, 'logid',null,true);">{lang checkall}</label>
+		<input type="checkbox" name="sendreasonpm" id="sendreasonpm" {if $_G['group']['reasonpm'] == 2 || $_G['group']['reasonpm'] == 3} checked="checked" disabled="disabled"{/if} />
+		<label for="sendreasonpm">{lang admin_pm}</label>
+		<button class="btn-square" type="submit" value="true" name="ratesubmit">{lang submit}</button>
+	</div>
+</form>
+<!--{/if}-->
+
+<script type="text/javascript" reload="1">
+function succeedhandle_rate(locationhref) {
+	<!--{if !empty($_GET['from'])}-->
+		location.href = locationhref;
+	<!--{else}-->
+		ajaxget('forum.php?mod=viewthread&tid=$_G[tid]&viewpid={$_GET['pid']}', 'post_{$_GET['pid']}', 'post_{$_GET['pid']}');
+		hideWindow('rate');
+	<!--{/if}-->
+}
+loadcss('forum_moderator');
+</script>
+
+<!--{if empty($_GET['infloat'])}-->
+</div>
+<!--{/if}-->
+<!--{else}-->
+	<div class="header">
+		<span class="title-tip" id="return_$_GET[handlekey]">{lang board_message}</span>
+		<!--{if $_G[inajax]}--><a onclick="hideWindow('$_GET['handlekey']');" class="close" title="{lang close}">×</a><!--{/if}-->
+	</div>
+		<!--{if $_G[inajax]}--><input type="hidden" name="handlekey" value="$_GET[handlekey]" /><!--{/if}-->
+	<div class="body">
+		{lang push_succeed}
+		<a class="heart-pink" onclick="hideWindow('$_GET[handlekey]');showWindow('rate', 'forum.php?mod=misc&action=rate&tid=$_GET[tid]&pid=$_GET[pid]', 'get', -1);return false;">{lang click_here}</a>
+		{lang rate_thread}
+	</div>
+	<div class="footer">
+		<button class="btn-square fullwidth" style="border: none;"  onclick="hideWindow('rate');" id="closebtn" type="button" fwin="rate"><strong>{lang close}</strong></button>
+	</div>
+
+<!--{/if}-->
+<!--{template common/footer}-->

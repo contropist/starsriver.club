@@ -1,0 +1,31 @@
+<!--{if helper_access::check_module('doing')}-->
+<div class="vessel withedge" id="space_status">
+	<form class="deliver" method="post" autocomplete="off" id="mood_addform" action="home.php?mod=spacecp&ac=doing&handlekey=doing">
+		<input type="hidden" name="addsubmit" value="true" />
+		<input type="hidden" name="spacenote" value="true" />
+		<input type="hidden" name="referer" value="home.php" />
+		<input type="hidden" name="formhash" value="{FORMHASH}" />
+		<textarea name="message" id="stmessage" placeholder="$defaultstr" onkeydown="if(ctrlEnter(event, 'addsubmit_btn')){if(event.keyCode == 13){ doane(event);}}" onkeyup="strLenCalc(this, 'maxlimit');"></textarea>
+		<div class="subline">
+			<i class="smilies" onclick="emoticons(this.id, 'stmessage');">≖‿≖✧</i>
+			<div class="ccbox">
+				<input type="checkbox" name="to_signhtml" id="synch" value="1"/>
+				<label for="synch">{lang doing_update_personal_signature}</label>
+			</div>
+			<button class="submit r" type="submit" name="addsubmit_btn" id="addsubmit_btn">{lang publish}</button>
+			<!--{if $_G['group']['maxsigsize']}-->
+			<span class="context-maxlength r">{lang doing_maxlimit_char}</span>
+			<!--{/if}-->
+		</div>
+	</form>
+	<script type="text/javascript">
+		function succeedhandle_doing(url, msg, values) {
+			if(values['message']) {
+				showDialog(values['message']);
+				return false;
+			}
+			reloadMood(values['doid']);
+		}
+	</script>
+</div>
+<!--{/if}-->

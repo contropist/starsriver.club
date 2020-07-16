@@ -1,0 +1,136 @@
+<!--{template common/header}-->
+
+<!--{if $op == 'bkname'}-->
+	<div class="header">
+		<span class="title-tip" id="return_$_GET[handlekey]">{lang follow_for}$followuser['fusername']{lang follow_add_bkname}</span>
+		<!--{if $_G[inajax]}--><a onclick="hideWindow('$_GET['handlekey']');" class="close" title="{lang close}">×</a><!--{/if}-->
+	</div>
+	<!--{if !submitcheck('editbkname')}-->
+	<form method="post" autocomplete="off" id="bknameform_{$_GET[handlekey]}" name="bknameform_{$_GET[handlekey]}" action="home.php?mod=spacecp&ac=follow&op=bkname&fuid=$followuser['followuid']" {if $_G[inajax]}onsubmit="ajaxpost(this.id, 'return_$_GET[handlekey]');"{/if}>
+		<div class="body">
+			<input type="hidden" name="referer" value="{echo dreferer()}" />
+			<input type="hidden" name="editbkname" value="true" />
+			<input type="hidden" name="formhash" value="{FORMHASH}" />
+			<!--{if $_G[inajax]}--><input type="hidden" name="handlekey" value="$_GET[handlekey]" /><!--{/if}-->
+			<div class="user">
+				<a class="avatar"><!--{avatar($followuser['followuid'],small)}--></a>
+				<a class="name">$followuser['username']</a>
+			</div>
+			<div class="input-box">
+				<span>{lang follow_editnote}</span>
+				<input type="text" name="bkname" value="$followuser['bkname']" size="35"  onkeydown="ctrlEnter(event, 'editsubmit_btn');" />
+			</div>
+		</div>
+		<div class="footer">
+			<button class="btn-square fullwidth" style="border: none;"  type="submit" name="editsubmit_btn" id="editsubmit_btn" value="true">{lang save}</button>
+		</div>
+	</form>
+	<!--{/if}-->
+	<script type="text/javascript" reload="1">
+		function succeedhandle_$_GET[handlekey](url, msg, values) {
+		    var bkn = $('$_GET[handlekey]');
+		    if(values['bkname']){
+		        bkn.innerHTML = values['bkname'];
+			} else {
+                bkn.innerHTML = bkn.getAttribute('data-name');
+			}
+		}
+	</script>
+<!--{elseif $op == 'relay'}-->
+	<!--{if $_GET['from'] == 'forum'}-->
+		<div class="header">
+			<span class="title-tip" id="return_$_GET[handlekey]">{lang follow_reply}</span>
+			<!--{if $_G[inajax]}--><a onclick="hideWindow('$_GET['handlekey']');" class="close" title="{lang close}">×</a><!--{/if}-->
+		</div>
+		<form method="post" autocomplete="off" id="relayform_{$tid}" name="relayform_{$tid}" action="home.php?mod=spacecp&ac=follow&op=relay&tid=$tid" {if $_G[inajax]}onsubmit="ajaxpost(this.id, 'return_$_GET[handlekey]');"{/if}>
+			<input type="hidden" name="relaysubmit" value="true">
+			<input type="hidden" name="referer" value="{echo dreferer()}">
+			<input type="hidden" name="formhash" value="{FORMHASH}" />
+			<input type="hidden" name="tid" value="$tid" />
+			<!--{if $_G[inajax]}--><input type="hidden" name="handlekey" value="$_GET[handlekey]" /><!--{/if}-->
+			<div class="c">
+				<p>{lang follow_add_note}:</p>
+				<textarea id="note_{$tid}" name="note" cols="50" rows="5" class="pt mtn" style="width: 425px;" onkeydown="ctrlEnter(event, 'relaysubmit_btn')" onkeyup="strLenCalc(this, 'checklen{$tid}', 140);"></textarea>
+				<!--{if $secqaacheck || $seccodecheck}-->
+				<div class="mtm sec"><!--{subtemplate common/seccheck}--></div>
+				<!--{/if}-->
+				<br/>{lang follow_can_enter}<span id="checklen{$tid}">140</span>{lang follow_word}
+			</div>
+			<p class="o pns">
+				<label><input type="checkbox" name="addnewreply" checked="checked" value="1" />{lang post_add_inonetime}</label>
+				<button type="submit" name="relaysubmit_btn" id="relaysubmit_btn" class="pn pnc" value="true"><strong>{lang determine}</strong></button>
+			</p>
+		</form>
+		<script type="text/javascript">
+			$('note_{$tid}').focus();
+			function succeedhandle_$_GET['handlekey'](url, message, param) {
+				<!--{if $fastpost}-->
+					succeedhandle_fastpost(url, message, param);
+				<!--{/if}-->
+				hideWindow('$_GET[handlekey]');
+				showCreditPrompt();
+			}
+		</script>
+	<!--{else}-->
+		<span class="cnr"></span>
+		<form class="sender" method="post" autocomplete="off" id="postform_{$tid}" action="home.php?mod=spacecp&ac=follow&op=relay&tid=$tid" onsubmit="{if $_G[inajax]}ajaxpost(this.id, 'return_$_GET[handlekey]'){/if}">
+			<input type="hidden" name="relaysubmit" value="true">
+			<input type="hidden" name="referer" value="{echo dreferer()}">
+			<input type="hidden" name="formhash" value="{FORMHASH}" />
+			<input type="hidden" name="tid" value="$tid" />
+			<!--{if $_G[inajax]}--><input type="hidden" name="handlekey" value="$_GET[handlekey]" /><!--{/if}-->
+
+			<textarea class="msg" id="note_{$tid}" name="note" oninput="strLenCalc(this, 'checklen{$tid}', 140)" placeholder="{lang reply_rule}"></textarea>
+
+			<div class="tipline">
+				<i class="str" id="return_$_GET[handlekey]"></i>
+			</div>
+			<div class="subline">
+				<button class="submit r" type="submit" name="relaysubmit_btn" id="relaysubmit_btn" value="true" name="{if $_GET[action] == 'newthread'}topicsubmit{elseif $_GET[action] == 'reply'}replysubmit{/if}">{lang follow_reply}</button>
+				<i class="limite r" id="checklen{$tid}">140</i>
+				<!--{if $secqaacheck || $seccodecheck}-->
+					<!--{subtemplate common/seccheck}-->
+				<!--{/if}-->
+				<span class="ccbox">
+					<input type="checkbox" name="addnewreply" id="addnewreply" value="1" checked="checked" />
+					<label for="addnewreply">{lang post_add_inonetime}</label>
+				</span>
+			</div>
+		</form>
+		<script type="text/javascript">
+			$('note_{$tid}').focus();
+			function succeedhandle_$_GET['handlekey'](url, message, values) {
+				$('relaybox_$_GET[feedid]').style.display = 'none';
+				showCreditPrompt();
+			}
+		</script>
+	<!--{/if}-->
+<!--{elseif $op == 'getfeed'}-->
+	<!--{if !empty($list)}-->
+	<!--{subtemplate home/space_trends_mod_follow_feed_li}-->
+	<!--{else}-->
+	false
+	<!--{/if}-->
+<!--{elseif $op == 'delete'}-->
+	<div class="header">
+		<span class="title-tip" id="return_$_GET[handlekey]">{lang follow_del_feed}</span>
+		<!--{if $_G[inajax]}--><a onclick="hideWindow('$_GET['handlekey']');return false;" class="close" title="{lang close}">×</a><!--{/if}-->
+	</div>
+	<form method="post" autocomplete="off" id="deletefeed_{$_GET['feedid']}" name="deletefeed_{$_GET['feedid']}" action="home.php?mod=spacecp&ac=follow&op=delete&feedid=$_GET['feedid']" {if $_G[inajax]}onsubmit="ajaxpost(this.id, 'return_$_GET[handlekey]');"{/if}>
+		<input type="hidden" name="referer" value="{echo dreferer()}" />
+		<input type="hidden" name="deletesubmit" value="true" />
+		<input type="hidden" name="formhash" value="{FORMHASH}" />
+		<!--{if $_G[inajax]}--><input type="hidden" name="handlekey" value="$_GET[handlekey]" /><!--{/if}-->
+		<div class="c altw mtm mbm">{lang follow_del_feed_confirm}</div>
+		<p class="o pns">
+			<button type="submit" name="btnsubmit" value="true" class="pn pnc"><strong>{lang determine}</strong></button>
+		</p>
+	</form>
+	<script type="text/javascript">
+		function succeedhandle_{$_GET[handlekey]}(url, msg, values) {
+			$('feed_li_'+values.feedid).style.display = 'none';
+		}
+	</script>
+<!--{/if}-->
+
+<!--{template common/footer}-->

@@ -1,0 +1,55 @@
+<!--{template common/header}-->
+<form method="post" autocomplete="off" id="form_$_GET[handlekey]" name="form_$_GET[handlekey]" action="misc.php?mod=report" onsubmit="{if $_G[inajax]}if(!$('report_message').value) return false;ajaxpost(this.id, 'form_$_GET[handlekey]');{/if}">
+    <!--{if $_GET['fid']}--><input type="hidden" name="fid" value="$_GET[fid]"/><!--{/if}-->
+    <!--{if $_GET['uid']}--><input type="hidden" name="uid" value="$_GET[uid]"/><!--{/if}-->
+    <!--{if $_G[inajax]}--><input type="hidden" name="handlekey" value="$_GET[handlekey]"/><!--{/if}-->
+    <input type="hidden" name="referer" value="{echo dreferer()}"/>
+    <input type="hidden" name="reportsubmit" value="true"/>
+    <input type="hidden" name="rtype" value="$_GET[rtype]"/>
+    <input type="hidden" name="rid" value="$_GET[rid]"/>
+    <input type="hidden" name="url" value="$_GET[url]"/>
+    <input type="hidden" name="inajax" value="$_G[inajax]"/>
+    <input type="hidden" name="formhash" value="{FORMHASH}"/>
+	<div class="header">
+		<span class="title-tip"><i class="ft-alert-triangle heart-pink icon"></i>{lang report}</span>
+		<a onclick="hideWindow('$_GET['handlekey']');" class="close" title="{lang close}">×</a>
+	</div>
+    <div class="body" id="return_$_GET[handlekey]">
+        <div class="ccbox admin l" id="report_reasons" style="width:105px;"></div>
+        <textarea style="width: 240px;" id="report_message" name="message" onkeyup="strLenCalc(this, 'checklen');" placeholder="{lang report_reason_other}" disabled></textarea>
+        <script type="text/javascript">
+            var ress = {lang report_reason_message};
+            var res_contianer = document.querySelector('#report_message');
+            var res_list = document.querySelector('#report_reasons');
+            for (i = 0; i < ress.length; i++) {
+                var inp = document.createElement('input');
+                var lab = document.createElement('label');
+                inp.value = ress[i];
+                inp.type = 'radio';
+                inp.name = 'report';
+                inp.id = 'report_' + i;
+                lab.innerText = ress[i];
+                lab.setAttribute('for', 'report_' + i);
+                ress[i] ? lab.setAttribute('data-rid',i) : '';
+                res_list.appendChild(inp);
+                res_list.appendChild(lab);
+                if (i < ress.length - 1) {
+                    addEvent(lab,'click',function () {
+                        res_contianer.disabled = 'disabled';
+                        res_contianer.innerHTML = ress[this.getAttribute('data-rid')];
+                    });
+                } else {
+                    addEvent(lab,'click',function () {
+                        res_contianer.disabled = '';
+                        res_contianer.innerHTML = '';
+                    });
+                }
+            }
+        </script>
+    </div>
+    <div class="footer">
+        <p class="gray" id="report_msg">{lang input_message1}<i class="heart-pink" style="margin:0 5px;" id="checklen">200</i>{lang input_message2}</p>
+        <button class="btn-square" id="report_submit" type="submit" value="true">{lang report}</button>
+    </div>
+</form>
+<!--{template common/footer}-->

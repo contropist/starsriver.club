@@ -1,0 +1,142 @@
+<div class="title trans-ease">
+	<h2>{lang mod_option_subject}</h2>
+	<ul class="nav wave">
+		<li><a href="{$cpscript}?mod=modcp&action=thread&op=thread{$forcefid}" hidefocus="true">{lang mod_option_subject_forum}</a></li>
+        <li><a href="{$cpscript}?mod=modcp&action=recyclebin{$forcefid}" hidefocus="true">{lang mod_option_subject_recyclebin}</a></li>
+        <li><a href="{$cpscript}?mod=modcp&action=thread&op=post{$forcefid}" hidefocus="true">{lang mod_option_subject_delete}</a></li>
+		<li class="current"><a href="{$cpscript}?mod=modcp&action=recyclebinpost{$forcefid}" hidefocus="true">{lang mod_option_subject_recyclebinpost}</a></li>
+	</ul>
+</div>
+
+<ol class="panel-container">
+	<script type="text/javascript" src="{$_G[setting][jspath]}calendar.js?{VERHASH}"></script>
+	<li class="box size-10-0 no-edge">
+		<form method="post" autocomplete="off" action="{$cpscript}?mod=modcp&action=$_GET[action]&op=search">
+			<input type="hidden" name="formhash" value="{FORMHASH}">
+            <div class="panel no-edge">
+                <ol class="panel-container">
+                    <li class="box size-5-0 no-edge">
+                        <div class="input-group f">
+                            <span>{lang mod_option_selectforum}</span>
+                            <select name="fid" id="fid">
+                                <option value="">{lang modcp_select_forum}</option>
+                                <!--{loop $modforums[list] $id $name}-->
+                                <!--{if $modforums['recyclebins'][$id]}-->
+                                <option value="$id" {if $id == $_G[fid]}selected{/if}>$name</option>
+                                <!--{/if}-->
+                                <!--{/loop}-->
+                            </select>
+                            <!--{if $posttableselect}-->
+                            <span>{lang table_branch}</span>
+                            $posttableselect
+                            <!--{/if}-->
+                        </div>
+                    </li>
+                    <li class="box size-5-0 no-edge">
+                        <div class="input-group f">
+                            <span>{lang modcp_posts_keyword}</span>
+                            <input type="text" name="keywords" value="$result[keywords]" />
+                            <span>{lang modcp_posts_author}</span>
+                            <input type="text" name="users" value="$result[users]"/>
+                        </div>
+                    </li>
+                    <li class="box size-5-0 no-edge">
+                        <div class="input-group f">
+                            <span>{lang modcp_dateline_range}</span>
+                            <input type="text" name="starttime" size="10" value="$result[starttime]" onclick="showcalendar(event, this);" />
+                            <span>{lang modcp_posts_to}</span>
+                            <input type="text" name="endtime" size="10" value="$result[endtime]" onclick="showcalendar(event, this);" />
+                        </div>
+                    </li>
+                    <li class="box size-5-0 no-edge">
+                        <div class="input-group f">
+                            <i class="input-group-btn"><button type="submit" name="searchsubmit" id="searchsubmit" value="true">{lang submit}</button></i>
+                        </div>
+                    </li>
+                </ol>
+            </div>
+		</form>
+	</li>
+
+	<!--{if $_G[fid]}-->
+		<li class="box size-10-0 no-edge" id="threadlist">
+            <p class="alert hi-info">{lang modcp_forum}: <a href="forum.php?mod=forumdisplay&fid=$_G[fid]" target="_blank">$_G['forum'][name]</a>
+                <!--{if !$total}-->
+                {lang modcp_thread_msg}
+                <!--{/if}-->
+            </p>
+            <!--{if $postlist}-->
+			<form method="post" autocomplete="off" name="moderate" id="moderate" action="$cpscript?mod=modcp&fid=$_G[fid]&action=$_GET[action]">
+				<input type="hidden" name="formhash" value="{FORMHASH}" />
+				<input type="hidden" name="op" value="" />
+				<input type="hidden" name="oldop" value="$op" />
+				<input type="hidden" name="dosubmit" value="submit" />
+				<input type="hidden" name="posttableid" value="$posttableid" />
+				<table class="wb rb dc ac">
+                    <thead>
+                        <tr>
+                            <td width="60">#</td>
+                            <td width="240">{lang post}</td>
+                            <td width="160">{lang author}</td>
+                            <!--{if $_G['forum']['ismoderator'] && $_G['group']['allowviewip']}-->
+                            <td width="200">IP</td>
+                            <!--{/if}-->
+                            <td width="90">{lang ishtmlon}</td>
+                            <td width="200">{lang dateline}</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+					<!--{loop $postlist $post}-->
+							<tr id="$post[pid]">
+								<td class="ccbox admin"><input type="checkbox" name="moderate[]" value="$post[pid]" id="moderate_$post[pid]" /><label for="moderate_$post[pid]"></label></td>
+								<td><a href="forum.php?mod=redirect&goto=findpost&pid=$post[pid]&ptid=$post[tid]&modthreadkey=$post[modthreadkey]" target="_blank">$post[message]</a>
+								    <!--{if $post['attachment'] == 2}-->
+                                        <img src="{STATICURL}image/filetype/image_s.gif" alt="{lang attach_img}" align="absmiddle" />
+								    <!--{elseif $post['attachment'] == 1}-->
+                                        <img src="{STATICURL}image/filetype/common.gif" alt="{lang attachment}" align="absmiddle" />
+								    <!--{/if}-->
+								</td>
+								<td>
+									<!--{if $post['authorid'] && $post['author']}-->
+										<a href="home.php?mod=space&uid=$post[authorid]" target="_blank">$post[author]</a>
+									<!--{else}-->
+										<a href="home.php?mod=space&uid=$post[authorid]" target="_blank">{lang anonymous}</a>
+									<!--{/if}-->
+								</td>
+								<!--{if $_G['forum']['ismoderator'] && $_G['group']['allowviewip']}-->
+									<td>$post[useip]{if $post[port]}:$post[port]{/if}</td>
+								<!--{/if}-->
+								<td><!--{if $post[htmlon]}-->{lang yes}<!--{else}-->{lang no}<!--{/if}--></td>
+								<td>$post[dateline]</td>
+							</tr>
+					<!--{/loop}-->
+                    </tbody>
+				</table>
+                <!--{if $multipage}--><div class="pg type-3">$multipage</div><!--{/if}-->
+                <div class="common-btn">
+                    <input type="checkbox" onclick="checkall(this.form, 'moderate')" name="chkall" id="chkall"/>
+                    <label for="chkall">{lang checkall}</label>
+                    <!--{if $_G['group']['allowclearrecycle']}-->
+                    <button class="del ft-trash-2" onclick="modthreads('delete')"> &nbsp;&nbsp;&nbsp;&nbsp;</button>
+                    <!--{/if}-->
+                    <button class="rec ft-rotate-ccw" onclick="modthreads('restore')"></button>
+                </div>
+			</form>
+            <!--{/if}-->
+		</li>
+		<script type="text/javascript">
+			function modthreads(operation) {
+				document.moderate.op.value = operation;
+				document.moderate.submit();
+			}
+		</script>
+	<!--{else}-->
+		<li class="box size-10-0 alert hi-info">{lang modcp_forum_select_msg}</li>
+	<!--{/if}-->
+</ol>
+<script type="text/javascript" reload="1">
+	simulateSelect('fid');
+	if($('posttableid')) {
+		simulateSelect('posttableid');
+	}
+</script>

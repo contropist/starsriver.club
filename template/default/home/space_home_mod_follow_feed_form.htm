@@ -1,0 +1,295 @@
+<!--{if in_array($do, array('feed', 'view'))}-->
+	<!--{if helper_access::check_module('follow') && ( $do == 'feed' || ( $do == 'view' && $viewself))}-->
+		<div class="vessel withedge">
+			<script type="text/javascript" src="{$_G[setting][jspath]}forum.js?{VERHASH}"></script>
+			<script type="text/javascript" src="{$_G[setting][jspath]}forum_moderate.js?{VERHASH}"></script>
+			<script type="text/javascript">
+				var postminchars = parseInt('$_G['setting']['minpostsize']');
+				var postmaxchars = parseInt('$_G['setting']['maxpostsize']');
+				var disablepostctrl = parseInt('{$_G['group']['disablepostctrl']}');
+			</script>
+			<!--{eval $dmfid = $_G['setting']['followforumid'] && !empty($defaultforum) ? $_G['setting']['followforumid'] : 0;}-->
+
+			<form class="deliver" method="post" id="fastpostform" action="home.php?mod=spacecp&ac=follow&op=newthread&topicsubmit=yes&infloat=yes&handlekey=fastnewpost&inajax=1" onsubmit="return fastpostvalidate(this);">
+				<input type="hidden" name="formhash" value="{FORMHASH}" />
+				<input type="hidden" name="usesig" value="$usesigcheck" />
+				<input type="hidden" name="adddynamic" value="1" />
+				<input type="hidden" name="addfeed" value="1" />
+				<input type="hidden" name="topicsubmit" value="true" />
+				<input type="hidden" name="referer" value="{echo dreferer()}" />
+				<div id="fastpostreturn"></div>
+
+				<div class="clear-objgap" id="subject">
+					<input class="extro" type="text" name="subject" onkeyup="strLenCalc(this, 'checklen', 80);" placeholder="{lang title} ({lang notmust})"/>
+					<span id="checklen">80</span>
+				</div>
+
+				<textarea name="message" id="fastpostmessage" onKeyDown="seditor_ctlent(event, '$(\'fastpostsubmit\').click()');"></textarea>
+
+				<div class="subline">
+					<div class="toolbar" id="flw_bar" >
+						<!--{eval $seditor = array('fastpost', array('smilies', 'at'), 0, '<span id="spanButtonPlaceholder">{lang upload}</span>');}-->
+						<!--{subtemplate common/seditor}-->
+						<script type="text/javascript">
+                            var editorid = '';
+                            var ATTACHNUM = {'imageused':0,'imageunused':0,'attachused':0,'attachunused':0}, ATTACHUNUSEDAID = [], IMGUNUSEDAID = [];
+						</script>
+					</div>
+					<button class="submit r" {if $_G['uid']}type="submit" {else}type="button" onclick="showWindow('login', 'member.php?mod=logging&action=login&guestmessage=yes'){/if}"name="topicsubmit_btn" id="fastpostsubmit" value="topicsubmitbtn" >{lang publish}</button>
+					<!--{if $secqaacheck || $seccodecheck}--><!--{subtemplate common/seccheck}--><!--{/if}-->
+				</div>
+
+				<div class="subline" style="margin-top: 0">
+					<span class="ccbox">
+						<input type="checkbox" name="syncbbs" id="syncbbs" value="1" onclick="showSyncInfo(this.checked)" />
+						<label for="syncbbs" style="margin-left: 3px">{lang follow_sync_forum}</label>
+					</span>
+					<div id="forumlistdev" style="display: none;">
+						<select name="defaultforum" id="fid" onchange="modifyformurl(this.value);">
+							<option value="0">{lang follow_other_forum}</option>
+						</select>
+						<select name="forumlist" id="forumlist" onchange="addforumlist(this);" style="display: none;">
+							<option value="0">{lang follow_select_forum}</option>
+							$forumlist
+						</select>
+						<div class="ftid">
+							<span class="ftid" id="threadclass"></span>
+						</div>
+					</div>
+				</div>
+
+				<div class="fileslist">
+					<div id="attachlist" ></div>
+					<!--{if empty($_G['setting']['pluginhooks']['follow_upload_extend'])}-->
+						<!--{subtemplate common/upload}-->
+						<script type="text/javascript">
+							var upload = new SWFUpload({
+								// Backend Settings
+								upload_url: "{$_G[siteurl]}misc.php?mod=swfupload&action=swfupload&operation=upload&fid={$dmfid}",
+								post_params: {"uid" : "$_G[uid]", "hash":"$swfconfig[hash]"},
+
+								// File Upload Settings
+								file_size_limit : "$swfconfig[max]",	// 100MB
+								file_types : "$swfconfig[attachexts][ext]",
+								file_types_description : "$swfconfig[attachexts][depict]",
+								file_upload_limit : $swfconfig['limit'],
+								file_queue_limit : 0,
+								// Event Handler Settings (all my handlers are in the Handler.js file)
+								swfupload_preload_handler : preLoad,
+								swfupload_load_failed_handler : loadFailed,
+								file_dialog_start_handler : fileDialogStart,
+								file_queued_handler : fileQueued,
+								file_queue_error_handler : fileQueueError,
+								file_dialog_complete_handler : fileDialogComplete,
+								upload_start_handler : uploadStart,
+								upload_progress_handler : uploadProgress,
+								upload_error_handler : uploadError,
+								upload_success_handler : uploadSuccess,
+								upload_complete_handler : uploadComplete,
+								// Button Settings
+								button_image_url : "{STATICURL}image/common/flw_post_attach.png",
+								button_placeholder_id : "spanButtonPlaceholder",
+								button_width: 20,
+								button_height: 22,
+								button_cursor:SWFUpload.CURSOR.HAND,
+								button_window_mode: "transparent",
+								custom_settings : {
+									progressTarget : "attachlist",
+									uploadSource: 'forum',
+									uploadType: 'attach',
+									<!--{if $swfconfig['maxsizeperday']}-->
+									maxSizePerDay: $swfconfig['maxsizeperday'],
+									<!--{/if}-->
+									<!--{if $swfconfig['maxattachnum']}-->
+									maxAttachNum: $swfconfig['maxattachnum'],
+									<!--{/if}-->
+									uploadFrom: 'fastpost'
+								},
+
+								// Debug Settings
+								debug: false
+							});
+						</script>
+					<!--{else}-->
+						<!--{hook/follow_upload_extend}-->
+					<!--{/if}-->
+				</div>
+
+			</form>
+			<script type="text/javascript">
+                var nofollowfeed = <!--{if !empty($list['feed'])}-->0<!--{else}-->1<!--{/if}-->;
+                var userdatakey = cookiepre+'fastpost{$_G[uid]}';
+                function showSyncInfo(flag) {
+                    display('forumlistdev');
+                    strLenCalc(sObj, 'checklen', 80);
+                }
+                function fastpostvalidateextra() {
+                    var sObj = $('subject').querySelector('input');
+                    !sObj.value ? sObj.value = 'empty' : '';
+                    return true;
+                }
+                function backupContent() {
+                    var obj = $('fastpostform');
+                    if(!obj) return;
+                    var data = subject = message = '';
+                    saveUserdata(userdatakey, data);
+                    for(var i = 0; i < obj.elements.length; i++) {
+                        var el = obj.elements[i];
+                        if(el.name !== '' && el.tagName === 'SELECT') {
+                            var elvalue = el.value;
+                            if(trim(elvalue)) {
+                                data += el.name + String.fromCharCode(9) + el.tagName + String.fromCharCode(9) + el.type + String.fromCharCode(9) + elvalue + String.fromCharCode(9, 9);
+                                if(el.tagName === 'SELECT' && el.name === 'defaultforum') {
+                                    var values = {};
+                                    for(var j = 0; j < el.options.length; j++) {
+                                        var option = el.options[j];
+                                        var ov = parseInt(option.value);
+                                        if(typeof values[option.value] === 'undefined' && !isNaN(ov) && option.innerText !== '' && option.innerText !== 'undefined') {
+                                            data += el.name + String.fromCharCode(9) + option.tagName + String.fromCharCode(9) + option.value + String.fromCharCode(9) + option.text + String.fromCharCode(9, 9);
+                                            values[option.value] = option.value;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    saveUserdata(userdatakey, data);
+                }
+                function addforumlist(listObj) {
+                    var fid = listObj.value;
+                    if(fid) {
+                        var dforum = $('fid');
+                        //判断是否已经在列表中
+                        var haveoption = false;
+                        for(var i = 0; i < dforum.options.length; i++) {
+                            if(dforum.options[i].value === fid) {
+                                dforum.selectedIndex = i;
+                                haveoption = true;
+                                break;
+                            }
+                        }
+                        if(!haveoption) {
+                            var option = listObj.options[listObj.selectedIndex];
+                            var oOption = document.createElement("OPTION");
+                            oOption.text = trim(option.text);
+                            oOption.value = option.value;
+                            dforum.options.add(oOption);
+                            dforum.selectedIndex = dforum.options.length-1;
+                        }
+
+                        modifyformurl(fid);
+                    }
+                    dforum.style.display = '';
+                    listObj.style.display = 'none';
+                }
+                function modifyformurl(mfid) {
+                    if(parseInt(mfid)) {
+                        backupContent();
+                        //noteX 修改表单中的两个固定地址
+                        $('fastpostform').action = 'home.php?mod=spacecp&ac=follow&op=newthread&topicsubmit=yes&infloat=yes&handlekey=fastnewpost&inajax=1&fid='+mfid;
+                        if(upload) {
+                            fid = mfid;
+                            var uploadurl = '{$_G[siteroot]}misc.php?mod=swfupload&action=swfupload&operation=upload&fid='+mfid;
+                            upload.setUploadURL(uploadurl);
+                        }
+                        getthreadclass();
+                    } else {
+                        var flist = $('forumlist');
+                        var dforum = $('fid');
+                        dforum.style.display = 'none';
+                        flist.style.display = '';
+                    }
+
+                }
+                function resumeContent() {
+                    var data = loadUserdata(userdatakey);
+                    if(in_array((data = trim(data)), ['', 'null', 'false', null, false])) {
+                        modifyformurl();
+                        return false;
+                    }
+                    var data = data.split(/\x09\x09/);
+                    var formObj = $('fastpostform');
+                    var sValue = 0;
+                    for(var i = 0; i < formObj.elements.length; i++) {
+                        var el = formObj.elements[i];
+                        if(el.name !== '' && el.tagName === 'SELECT') {
+                            for(var j = 0; j < data.length; j++) {
+                                var ele = data[j].split(/\x09/);
+                                if(ele[0] === el.name) {
+                                    elvalue = !isUndefined(ele[3]) ? ele[3] : '';
+                                    if(ele[1] === 'SELECT') {
+                                        //添加选项
+                                        var values = {0:0<!--{if $_G['setting']['followforumid']}-->,$_G['setting']['followforumid']:$_G['setting']['followforumid']<!--{/if}-->};
+                                        for(var oi = 0; oi < data.length; oi++) {
+                                            var oObj = data[oi].split(/\x09/);
+                                            if(oObj[0] === el.name && oObj[1] === 'OPTION' && typeof values[oObj[2]] === 'undefined') {
+                                                var oOption = document.createElement("OPTION");
+                                                el.options.add(oOption);
+                                                oOption.text = oObj[3];
+                                                values[oObj[2]] = oOption.value = oObj[2];
+                                                if(elvalue === oObj[2]) {
+                                                    el.selectedIndex = el.options.length-1;
+                                                    modifyformurl(elvalue);
+                                                }
+                                            }
+                                        }
+                                        if(el.options.length < 2) {
+                                            modifyformurl(0);
+                                        }
+
+                                    }
+                                    break
+                                }
+                            }
+                        }
+                    }
+                }
+                function getNewFollowFeed(tid, fid, pid, feedid) {
+                    var x = new Ajax();
+                    x.get('forum.php?mod=ajax&action=getpostfeed&inajax=1&tid='+tid+'&fid='+fid+'&pid='+pid+'&feedid='+feedid, function(s){
+                        newli = document.createElement("li");
+                        newli.innerHTML = s;
+                        var listObj = $('followlist');
+
+                        listObj.insertBefore(newli, listObj.firstChild);
+                    });
+                }
+                resumeContent();
+                function cleartitle(obj) {
+                    if($('subject').style.display === 'none') {
+                        var sObj = $('subject').querySelector('input');
+                        sObj.value = '';
+                        strLenCalc(sObj, 'checklen', 80);
+                        obj.innerHTML = '{lang follow_add_title}';
+                    } else {
+                        obj.innerHTML = '{lang follow_auto_title}';
+                    }
+                }
+                function succeedhandle_fastnewpost(url, msg, values) {
+                    if(nofollowfeed) {
+                        window.location.reload();
+                    } else {
+                        if(parseInt(values.feedid)) {
+                            getNewFollowFeed(values.tid, values.fid, values.pid, values.feedid);
+                        } else {
+                            showDialog(msg, 'notice', null, null, 0, null, null, null, null, 3);
+                        }
+                        showCreditPrompt();
+                        //清空上次的输入
+                        var sObj = $('subject').querySelector('input');
+                        $('attachlist').innerHTML = $('fastpostmessage').value = sObj.value = '';
+                        strLenCalc(sObj, 'checklen', 80);
+                        if(values.sechash) {
+                            updatesecqaa(values.sechash);
+                            updateseccode(values.sechash);
+                            $('seccodeverify_'+values.sechash).value='';
+                        }
+                        //var msg = '你的文章已发布，<a href="'+url+'">点击这里查看文章</a>'
+                        //showDialog(msg, 'notice', null, null, 0, null, null, null, null, 3);
+                    }
+
+                }
+			</script>
+		</div>
+	<!--{/if}-->
+<!--{/if}-->

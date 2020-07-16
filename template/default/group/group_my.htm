@@ -1,0 +1,256 @@
+<!--{template common/header}-->
+<!--{hook/my_header}-->
+<div class="plate layout-nest">
+	<!--[nest=nest1]--><div id="nest1" class="area"></div><!--[/nest]-->
+</div>
+<div class="plate layout-2-type2 layout-first">
+	<section class="col-1">
+		<ul class="group-tabs" id="group_my_nav">
+			<li $actives[groupthread]><a href="group.php?mod=my&view=groupthread"><i class="awe-arrow-left" style="color: #21a5ff"></i>{lang group_thread}</a></li>
+			<li $actives[mythread]><a href="group.php?mod=my&view=mythread"><i class="awe-arrow-up" style="color: #37b093"></i>{lang my_thread}</a></li>
+			<li $actives[join]><a href="group.php?mod=my&view=join"><i class="awe-arrow-right" style="color: #ea5e10"></i>{lang my_join}</a></li>
+			<li $actives[manager]><a href="group.php?mod=my&view=manager"><i class="awe-arrow-down" style="color: #bb1ed9"></i>{lang my_manage}</a></li>
+		</ul>
+	</section>
+	<section class="col-2">
+		<a class="btn-harf glass" href="group.php?mod=index" ><i class="awe-home"></i>{lang home}</a>
+		<a class="btn-harf glass" onclick="showWindow('attentiongroup', 'group.php?mod=attentiongroup', 'get', 0);"><i class="awe-map-marker"></i>{lang attention_group}</a>
+	</section>
+</div>
+<div class="plate layout-2-type2">
+	<section class="col-1">
+		<script>nav_initialize('group_my_nav')</script>
+		<!--[nest=nestcontenttop]--><div id="nestcontenttop" class="area"></div><!--[/nest]-->
+
+		<!--{if $view == 'groupthread' || $view == 'mythread'}-->
+			<div id="threadlist">
+				<!--{if $attentionthread}-->
+					<div class="groups" id="group_thread_tab">
+						<div class="title">
+							<b class="category-name">{lang attention_group}</b>
+							<div class="tab-controller">
+								<!--{loop $attentionthread $groupid $threads}-->
+								<a data-tabthumb href="forum.php?mod=group&fid=$groupid" target="_blank" class="xw1">{$usergroups['groups'][$groupid]}</a>
+								<!--{/loop}-->
+							</div>
+						</div>
+						<div class="tab-container">
+							<div class="tab-body trans-ease-quick">
+								<!--{loop $attentionthread $groupid $threads}-->
+									<section data-tabbox class="thread-list">
+										<!--{loop $threads $tid $thread}-->
+										<div class="threadline">
+											<div class="thread-stat">
+												<a href="forum.php?mod=viewthread&tid=$tid" target="_blank" class="icon px4-radius
+													<!--{if in_array($thread['displayorder'], array(1, 2, 3, 4))}-->
+													top$thread[displayorder]">{lang thread_stick}
+													<!--{elseif $thread[folder] == 'lock'}-->
+													lock">{lang timeover}
+													<!--{elseif $thread['special'] == 1}-->
+													vote">{lang thread_poll}
+													<!--{elseif $thread['special'] == 2}-->
+													trade">{lang thread_trade}
+													<!--{elseif $thread['special'] == 3}-->
+													help">{lang fhelp}
+													<!--{elseif $thread['special'] == 4}-->
+													activity">{lang thread_activity}
+													<!--{elseif $thread['special'] == 5}-->
+													debate">$thread[replies]
+													<!--{else}-->
+													$thread[folder]">$thread[replies]
+													<!--{/if}-->
+												</a>
+												<div class="sub-show">
+													<a class="thread-title" href="forum.php?mod=viewthread&tid=$tid" target="_blank">$thread[subject]</a>
+												</div>
+											</div>
+											<div class="thread-census">
+												<div class="r lastpost">
+													<!--{if $thread['lastposter']}--><a href="home.php?mod=space&username=$thread[lastposter]">$thread[lastposter]@</a>
+													<!--{else}-->
+													{lang anonymous}
+													<!--{/if}-->
+													<a href="forum.php?mod=viewthread&tid=$tid&page={echo max(1, $thread[pages]);}">$thread[lastpost]</a>
+												</div>
+												<div class="author">
+													<span>
+													<!--{if $view != 'mythread'}-->
+													<!--{if $thread['authorid'] && $thread['author']}-->
+													<a href="home.php?mod=space&uid=$thread[authorid]">$thread[author]</a>
+													<!--{/if}-->
+													<!--{/if}-->
+													</span>
+													<span>$thread[dateline]</span>
+													<span class="view" style="display: none">
+														| {lang send_posts}：$thread[replies] | {lang view}：$thread[views]
+													</span>
+												</div>
+											</div>
+										</div>
+										<!--{/loop}-->
+										<div style="display: block; text-align: center">
+											<a class="text-more" href="forum.php?mod=group&fid=$groupid">{lang more}</i></a>
+										</div>
+									</section>
+								<!--{/loop}-->
+							</div>
+						</div>
+					</div>
+					<script>tab_initialize('group_thread_tab')</script>
+				<!--{/if}-->
+					<div class="groups">
+						<div class="title">
+							<b class="category-name"><!--{if $view == 'groupthread'}-->{lang last_topic_in_group}<!--{else}-->{lang my_thread}<!--{/if}--></b>
+							<ul class="group-categorys tags">
+								<li class="{if empty($typeid)}active{/if}"><a href="group.php?mod=my&view=$view">{lang all}</a></li>
+								<!--{loop $usergroups['grouptype'] $type}-->
+								<li class="{if $typeid == $type['fid']}active{/if}"><a href="group.php?mod=my&view=$view{if $typeid != $type['fid']}&typeid=$type[fid]{/if}">$type[name]</a></li>
+								<!--{/loop}-->
+							</ul>
+						</div>
+						<div class="thread-list">
+							<!--{if $groupthreadlist}-->
+							<!--{loop $groupthreadlist $tid $thread}-->
+								<div class="threadline">
+									<div class="thread-stat">
+										<a href="forum.php?mod=viewthread&tid=$tid" target="_blank" class="icon px4-radius
+											<!--{if in_array($thread['displayorder'], array(1, 2, 3, 4))}-->
+											top$thread[displayorder]">{lang thread_stick}
+											<!--{elseif $thread[folder] == 'lock'}-->
+											lock">{lang timeover}
+											<!--{elseif $thread['special'] == 1}-->
+											vote">{lang thread_poll}
+											<!--{elseif $thread['special'] == 2}-->
+											trade">{lang thread_trade}
+											<!--{elseif $thread['special'] == 3}-->
+											help">{lang fhelp}
+											<!--{elseif $thread['special'] == 4}-->
+											activity">{lang thread_activity}
+											<!--{elseif $thread['special'] == 5}-->
+											debate">$thread[replies]
+											<!--{else}-->
+											$thread[folder]">$thread[replies]
+											<!--{/if}-->
+										</a>
+										<div class="sub-show">
+											<div class="perfix" ><a href="forum.php?mod=group&fid=$thread[fid]">$thread[groupname]</a></div>
+											<a class="thread-title" href="forum.php?mod=viewthread&tid=$tid" target="_blank">$thread[subject]</a>
+										</div>
+									</div>
+									<div class="thread-census">
+										<div class="r lastpost">
+											<!--{if $thread['lastposter']}-->
+											<a href="home.php?mod=space&username=$thread[lastposter]">$thread[lastposter]@</a>
+											<!--{else}-->
+											{lang anonymous}
+											<!--{/if}-->
+											<a href="forum.php?mod=viewthread&tid=$tid&page={echo max(1, $thread[pages]);}">$thread[lastpost]</a>
+										</div>
+										<div class="author">
+											<span>
+												<!--{if $view != 'mythread'}-->
+													<!--{if $thread['authorid'] && $thread['author']}-->
+														<a href="home.php?mod=space&uid=$thread[authorid]">$thread[author]</a>
+													<!--{/if}-->
+												<!--{/if}-->
+											</span>
+											<span>$thread[dateline]</span>
+											<span class="view" style="display: none">
+												| {lang send_posts}：$thread[replies] | {lang view}：$thread[views]
+											</span>
+										</div>
+									</div>
+								</div>
+							<!--{/loop}-->
+							<!--{else}-->
+								<div class="global_nothing">{lang global_nothing}</div>
+							<!--{/if}-->
+						</div>
+					</div>
+				</div>
+			<!--{if $multipage}--><div class="pgs">$multipage</div><!--{/if}-->
+		<!--{elseif $view == 'manager' || $view == 'join'}-->
+			<!--{if $grouplist}-->
+				<div class="panel no-gap groups">
+					<div class="title">
+						<a class="category-name">{lang my}</a>
+					</div>
+					<ol class="panel-container group-list">
+						<!--{loop $grouplist $groupid $group}-->
+						<li class="box size-3-1">
+							<a href="forum.php?mod=group&fid=$groupid" title="$group[name]">
+								<img class="group-banner" src="{if $group[banner]}$group[banner]{else}{IMGURL}/common/no-img/no-group-banner.svg{/if}"/>
+								<div class="info">
+									<img class="group-icon trans-outback {if !$group[banner]}empty{/if}" src="{if $group[icon]}$group[icon]{else}{IMGURL}/common/no-img/no-group-avatar.svg{/if}"/>
+									<p class="name">$group[name]<!--{if $group['flevel'] == '-1'}-->({lang group_wait_mod})<!--{/if}--></p>
+									<p class="descrip"><!--{if $group[description]}-->$group[description]<!--{else}-->{lang group_description_no}<!--{/if}--></p>
+								</div>
+							</a>
+						</li>
+						<!--{/loop}-->
+					</ol>
+				</div>
+				<!--{if $multipage}--><div class="pgs">$multipage</div><!--{/if}-->
+			<!--{else}-->
+				<div class="global_nothing">{lang global_nothing}</div>
+			<!--{/if}-->
+		<!--{/if}-->
+		<!--[nest=nestcontentbottom]--><div id="nestcontentbottom" class="area"></div><!--[/nest]-->
+		<!--{hook/my_bottom}-->
+	</section>
+	<section class="col-2">
+		<!--{if helper_access::check_module('group')}-->
+			<!--{template group/group_create_btn}-->
+		<!--{/if}-->
+		<!--{if $randgroup}-->
+		<div class="side-box">
+			<div class="header">
+				<b>{lang hot_group}</b>
+			</div>
+			<div class="body">
+				<ul class="avatar-list">
+					<!--{loop $randgroup $key $group}-->
+					<li>
+						<a href="forum.php?mod=group&fid=$group[fid]" title="$group[name]" target="_blank">
+							<img src="{if $group[icon]}$group[icon]{else}{IMGURL}/common/no-img/no-group-avatar.svg{/if}" alt="$group[name]" />
+							<i class="name">$group[name]</i>
+						</a>
+					</li>
+					<!--{/loop}-->
+				</ul>
+			</div>
+		</div>
+		<!--{/if}-->
+		<div class="side-box">
+			<div class="header">
+				<b>{lang friend_join_group}</b>
+			</div>
+			<div class="body">
+				<ul class="avatar-list">
+					<!--{loop $friendgrouplist $groupid $group}-->
+					<li>
+						<a href="forum.php?mod=group&fid=$groupid" title="$group[name]" target="_blank">
+							<img src="{if $group[icon]}$group[icon]{else}{IMGURL}/common/no-img/no-group-avatar.svg{/if}" alt="$group[name]" />
+							<i class="name">$group[name]</i>
+						</a>
+					</li>
+					<!--{/loop}-->
+				</ul>
+			</div>
+		</div>
+		<!--{hook/my_side_top}-->
+		<div class="side-box">
+			<!--[nest=nestsidebtntop]--><div id="nestsidebtntop" class="area"></div><!--[/nest]-->
+			<!--[nest=nestsidetop]--><div id="nestsidetop" class="area"></div><!--[/nest]-->
+			<!--[nest=nestsidemiddle]--><div id="nestsidemiddle" class="area"></div><!--[/nest]-->
+			<!--[nest=nestsidebottom]--><div id="nestsidebottom" class="area"></div><!--[/nest]-->
+		</div>
+		<!--{hook/my_side_bottom}-->
+	</section>
+</div>
+<div class="plate layout-0">
+	<section>
+		<!--[nest=nest3]--><div id="nest3" class="area"></div><!--[/nest]-->
+	</section>
+</div>
+<!--{template common/footer}-->

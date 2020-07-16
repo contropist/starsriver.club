@@ -1,0 +1,17 @@
+<!--{subtemplate search/header}-->
+<div>
+	<form class="searchform" method="post" autocomplete="off" action="search.php?mod=blog" onsubmit="if($('scform-srchtxt')) searchFocus($('scform-srchtxt'));">
+		<input type="hidden" name="formhash" value="{FORMHASH}" />
+
+		<!--{subtemplate search/pubsearch}-->
+		<!--{hook/blog_top}-->
+
+	</form>
+	<!--{if !empty($searchid) && submitcheck('searchsubmit', 1)}-->
+	<!--{subtemplate search/blog_list}-->
+	<!--{/if}-->
+
+</div>
+<!--{hook/blog_bottom}-->
+
+<!--{subtemplate search/footer}-->

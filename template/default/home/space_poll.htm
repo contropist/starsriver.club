@@ -1,0 +1,131 @@
+<!--{eval
+	$_G[home_tpl_spacemenus][] = "<a href=\"home.php?mod=space&uid=$space[uid]&do=poll&view=me\">{lang they_poll}</a>";
+}-->
+<!--{template common/header}-->
+
+<div id="pt" class="bm cl">
+	<div class="z">
+		<a href="./" class="nvhm" title="{lang homepage}">$_G[setting][bbname]</a><em class="direct"></em> 
+		<a href="home.php?mod=space&do=thread">{lang post}</a><em class="direct"></em>
+		<a href="home.php?mod=space&uid=$space[uid]&do=poll&view=me">{lang poll}</a>
+	</div>
+</div>
+
+
+<div>
+	<!--[nest=nest1]--><div id="nest1" class="area"></div><!--[/nest]-->
+</div>
+
+<div>
+	<div class="mn">
+		<!--[nest=nestcontenttop]--><div id="nestcontenttop" class="area"></div><!--[/nest]-->
+		<div class="bm bw0">
+		<!--{if (!$_G['uid'] && !$space[uid]) || $space[self]}-->
+			<h1 class="mt"><img alt="poll" src="{STATICURL}image/common/pollsmall.gif" class="vm" /> {lang poll}</h1>
+		<!--{/if}-->
+		<!--{if $space[self]}-->
+			<ul class="tb cl">
+				<li$actives[we]><a href="home.php?mod=space&do=poll&view=we">{lang friend_poll}</a></li>
+				<li$actives[me]><a href="home.php?mod=space&do=poll&view=me">{lang my_poll}</a></li>
+				<!--{if $_G[group][allowpostpoll]}-->
+					<li class="o">
+						<!--{if $_G[setting][pollforumid]}-->
+						<a href="forum.php?mod=post&action=newthread&fid=$_G[setting][pollforumid]&special=1">{lang create_new_poll}</a>
+						<!--{else}-->
+						<a href="forum.php?mod=misc&action=nav&special=1" onclick="showWindow('nav', this.href)">{lang create_new_poll}</a>
+						<!--{/if}-->
+					</li>
+				<!--{/if}-->
+			</ul>
+		<!--{else}-->
+			<!--{template home/space_menu}-->
+		<!--{/if}-->
+
+		<!--{if $_GET[view] == 'me'}-->
+			<p class="tbmu">
+				<a href="home.php?mod=space&do=poll&view=me"$filteractives[publish]>{lang my_create}</a>
+				<a href="home.php?mod=space&do=poll&view=me&filter=join"$filteractives[join]>{lang my_join} </a>
+			</p>
+		<!--{/if}-->
+
+		<!--{if $userlist}-->
+			<p class="tbmu">
+				{lang view_by_friend}
+				<select name="fuidsel" onchange="fuidgoto(this.value);">
+					<option value="">{lang all_friends}</option>
+					<!--{loop $userlist $value}-->
+					<option value="$value[fuid]"{$fuid_actives[$value[fuid]]}>$value[fusername]</option>
+					<!--{/loop}-->
+				</select>
+			</p>
+		<!--{/if}-->
+
+		<!--{if $count}-->
+			<ul class="el pll">
+			<!--{loop $list $thread}-->
+				<li class="cl">
+					<div class="u z">
+						<a href="home.php?mod=space&uid=$thread[authorid]" class="avt" c="1" target="_blank"><!--{avatar($thread[authorid],small)}--></a>
+						<p class="mtn"><a href="home.php?mod=space&uid=$thread[authorid]" target="_blank">$thread[author]</a></p>
+					</div>
+					<div class="s y">
+						<a href="forum.php?mod=viewthread&tid=$thread[tid]" class="joins" target="_blank">
+							<span>$thread[poll][voters]</span>{lang people_join}
+						</a>
+						<a href="forum.php?mod=viewthread&tid=$thread[tid]" class="go" target="_blank">{lang to_poll}</a>
+					</div>
+					<div class="c">
+						<h4 class="h"><a href="forum.php?mod=viewthread&tid=$thread[tid]" target="_blank">$thread[subject]</a></h4>
+						<ol>
+							<!--{loop $thread[poll][pollpreview] $key $value}-->
+							<li>$value</li>
+							<!--{/loop}-->
+							<li style="list-style-type: none;">
+								...
+							</li>
+						</ol>
+						<div class="mtn xg1">
+							$thread[dateline]
+							
+							{lang favorite} $thread['favtimes']
+							
+							{lang share} $thread['sharetimes']
+							
+							{lang hot} $thread['heats']
+						</div>
+					</div>
+				</li>
+			<!--{/loop}-->
+			</ul>
+			<!--{if $hiddennum}-->
+				<p class="mtm">{lang hide_poll}</p>
+			<!--{/if}-->
+			<!--{if $multi}--><div class="pgs cl mtm">$multi</div><!--{/if}-->
+		<!--{else}-->
+			<div class="emp">{lang no_poll}</div>
+		<!--{/if}-->
+		</div>
+		<!--[nest=nestcontentbottom]--><div id="nestcontentbottom" class="area"></div><!--[/nest]-->
+	</div>
+	<div class="appl">
+		<!--{subtemplate home/space_home_thread_nav}-->
+
+		<div class="drag">
+			<!--[nest=nest2]--><div id="nest2" class="area"></div><!--[/nest]-->
+		</div>
+		
+	</div>
+</div>
+
+<div class="wp mtn">
+	<!--[nest=nest3]--><div id="nest3" class="area"></div><!--[/nest]-->
+</div>
+
+<script type="text/javascript">
+function fuidgoto(fuid) {
+	var parameter = fuid != '' ? '&fuid='+fuid : '';
+	window.location.href = 'home.php?mod=space&do=poll&view=we'+parameter;
+}
+</script>
+	
+<!--{template common/footer}-->

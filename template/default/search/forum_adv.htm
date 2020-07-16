@@ -1,0 +1,107 @@
+<!--{template search/header}-->
+<div>
+<form class="searchform" method="post" autocomplete="off" action="search.php?mod=forum" onsubmit="if($('scform-srchtxt')) searchFocus($('scform-srchtxt'));">
+	<input type="hidden" name="formhash" value="{FORMHASH}" />
+	<!--{subtemplate search/pubsearch}-->
+	<!--{eval $policymsgs = $p = '';}-->
+	<!--{loop $_G['setting']['creditspolicy']['search'] $id $policy}-->
+	<!--{block policymsg}--><!--{if $_G['setting']['extcredits'][$id][img]}-->$_G['setting']['extcredits'][$id][img] <!--{/if}-->$_G['setting']['extcredits'][$id][title] $policy $_G['setting']['extcredits'][$id][unit]<!--{/block}-->
+	<!--{eval $policymsgs .= $p.$policymsg;$p = ', ';}-->
+	<!--{/loop}-->
+	<!--{if $policymsgs}--><p>{lang search_credit_msg}</p><!--{/if}-->
+</form>
+<div class="sc-tip"><p>{lang search_thread_higher}</p></div>
+<div class="sc-body">
+	<div class="sc-result-list">
+		<form method="post" autocomplete="off" action="search.php?mod=forum" onsubmit="if($('srchtxt_1')) searchFocus($('srchtxt_1'));">
+			<input type="hidden" name="formhash" value="{FORMHASH}" />
+			<div class="sc-kb">
+				<span class="k-title">{lang keywords}</span>
+				<div class="k-check">
+					<input type="text" name="srchtxt" id="srchtxt_1" value="$keyword" />
+					<!--{if ($_G['group']['allowsearch'] & 32)}-->
+						<input id="keyword" type="checkbox" name="srchtype" value="fulltext" {$fulltextchecked} onclick="if(this.checked){$('seltableid').style.display='';}else{$('seltableid').style.display='none';}"/>
+						<label for="keyword">{lang search_fulltext}</label>
+					<!--{/if}-->
+					<!--{if $posttableselect}--> $posttableselect<!--{/if}-->
+					<script type="text/javascript">initSearchmenu('srchtxt_1');$('srchtxt_1').focus();</script>
+				</div>
+			</div>
+
+			<div class="sc-kb">
+				<span class="k-title">{lang author}</span>
+				<div class="k-check">
+					<input type="text" name="srchuname" id="srchname" value="$srchuname" />
+				</div>
+			</div>
+
+			<div class="sc-kb">
+				<span class="k-title">{lang search_time}</span>
+				<div class="k-check">
+					<select id="srchfrom" name="srchfrom">
+						<option value="0">{lang search_any_date}</option>
+						<option value="86400">{lang 1_days_ago}</option>
+						<option value="172800">{lang 2_days_ago}</option>
+						<option value="604800">{lang 7_days_ago}</option>
+						<option value="2592000">{lang 30_days_ago}</option>
+						<option value="7776000">{lang 90_days_ago}</option>
+						<option value="15552000">{lang 180_days_ago}</option>
+						<option value="31536000">{lang 365_days_ago}</option>
+					</select>
+					<input id="sc_time1" type="radio" name="before" value="" checked="checked" /><label for="sc_time1">{lang search_newer}</label>
+					<input id="sc_time2" type="radio" name="before" value="1" /><label for="sc_time2">{lang search_older}</label>
+				</div>
+			</div>
+			<div class="sc-kb">
+				<span class="k-title">{lang search_thread_range}</span>
+				<div class="k-tip">
+					<input id="thread_range1" type="radio" name="srchfilter" value="all" checked="checked" /><label class="shadow-3D" for="thread_range1">{lang search_thread_range_all}</label>
+					<input id="thread_range2" type="radio" name="srchfilter" value="digest" /><label class="shadow-3D" for="thread_range2">{lang search_thread_range_digest}</label>
+					<input id="thread_range3" type="radio" name="srchfilter" value="top" /><label class="shadow-3D" for="thread_range3">{lang search_thread_range_top}</label>
+				</div>
+			</div>
+
+			<div class="sc-kb">
+				<span class="k-title">{lang special_thread}</span>
+				<div class="k-tip">
+					<input id="special1" type="checkbox" name="special[]" value="1" /><label class="shadow-3D" for="special1">{lang special_poll}</label>
+					<input id="special2" type="checkbox" name="special[]" value="2" /><label class="shadow-3D" for="special2">{lang special_trade}</label>
+					<input id="special3" type="checkbox" name="special[]" value="3" /><label class="shadow-3D" for="special3">{lang special_reward}</label>
+					<input id="special4" type="checkbox" name="special[]" value="4" /><label class="shadow-3D" for="special4">{lang special_activity}</label>
+					<input id="special5" type="checkbox" name="special[]" value="5" /><label class="shadow-3D" for="special5">{lang special_debate}</label>
+				</div>
+			</div>
+			<div class="sc-kb">
+				<span class="k-title"><label for="orderby">{lang search_orderby}</label></span>
+				<div class="k-check">
+					<select id="orderby1" name="orderby">
+						<option value="lastpost" selected="selected">{lang order_lastpost}</option>
+						<option value="dateline">{lang order_starttime}</option>
+						<option value="replies">{lang order_replies}</option>
+						<option value="views">{lang order_views}</option>
+					</select>
+					<select id="orderby2" name="orderby" style="position: absolute; display: none" disabled="disabled">
+						<option value="dateline" selected="selected">{lang dateline}</option>
+						<option value="price">{lang post_trade_price}</option>
+						<option value="expiration">{lang trade_remaindays}</option>
+					</select>
+					<input id="asc" type="radio" name="ascdesc" value="asc" /><label for="asc">{lang order_asc}</label>
+					<input id="desc" type="radio" name="ascdesc" value="desc" checked="checked" /><label for="desc">{lang order_desc}</label>
+				</div>
+			</div>
+			<div class="sc-kb">
+				<span class="k-title"valign="top">{lang search_range}</span>
+				<div class="k-check">
+					<select class="box" id="srchfid" name="srchfid[]">
+						<option value="all"{if !$srchfid} selected="selected"{/if}>{lang search_allforum}</option>
+						$forumselect
+					</select>
+				</div>
+			</div>
+			<input type="hidden" name="searchsubmit" value="yes" />
+			<button class="adv-sub shadow-3D" type="submit" >{lang search}</button>
+		</form>
+	</div>
+</div>
+</div>
+<!--{template search/footer}-->

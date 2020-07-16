@@ -1,0 +1,222 @@
+<!--{template common/header}-->
+<!--{if $op=='blockclass'}-->
+	<div class="tbmu mbm" id="contentblockclass_nav" style="margin-top: -15px">
+		<!--{eval $isfirst=1;}-->
+		<!--{loop $_G['cache']['blockclass'] $key $value}-->
+		<!--{if $isfirst}-->
+		<!--{eval $isfirst=0;}-->
+		<a id="bcnav_$key" class="active" onclick="spacenest.switchBlockclass('$key');return false;">$value[name]</a>
+		<!--{else}-->
+		
+		<a id="bcnav_$key" onclick="spacenest.switchBlockclass('$key');return false;">$value[name]</a>
+		<!--{/if}-->
+		<!--{/loop}-->
+	</div>
+	<!--{eval $isfirst=1;}-->
+	<!--{loop $_G['cache']['blockclass'] $key $value}-->
+	<!--{if $isfirst}-->
+	<!--{eval $isfirst=0;}-->
+	<ul class="blocks content" id="contentblockclass_$key">
+	<!--{else}-->
+	<ul class="blocks content" id="contentblockclass_$key" hide>
+	<!--{/if}-->
+		<li class="module-$key">
+			<ol>
+			<!--{loop $value[subs] $skey $svalue}-->
+				<li class="module-$skey"><label onmousedown="drag.createObj (event,'block','$skey');" onmouseover="className='hover';" onmouseout="this.className='';">$svalue[name]</label></li>
+			<!--{/loop}-->
+			</ol>
+		</li>
+	</ul>
+	<!--{/loop}-->
+<!--{elseif $op == 'style'}-->
+<ul class="content" style="overflow-y: auto; height: 90px;">
+<!--{loop $themes $value}-->
+  <li><a onclick="spacenest.changeStyle('$value[dir]');return false;"><img src="{STATICURL}$value['dir']/preview.jpg" />$value['name']</a></li>
+<!--{/loop}-->
+</ul>
+<!--{elseif $_GET['op'] == 'image'}-->
+	<div id="nestimg_prev" class="z">$multi</div>
+	<ul id="imagebody">
+		<!--{loop $list $key $value}-->
+		<li class="thumb"><a onclick="return false;"><img src="$value[pic]" alt="" onclick="spacenest.setBgImage(this);"/></a></li>
+		<!--{/loop}-->
+	</ul>
+	<div id="nestimg_next" class="z">$multi</div>
+<!--{elseif $_GET['op'] == 'nest'}-->
+<dl class='nest'>
+	<dt class="cl pns">
+		<div class="y">
+			<button type="button" id="uploadmsg_button" onclick="Util.toggleEle('upload');" class="pn pnc z{if empty($list)} hide{/if}"><span>{lang nest_upload_image}</span></button>
+			<div id="upload" class="z{if $list} hide{/if}"><iframe id="uploadframe" name="uploadframe" width="0" height="0" marginwidth="0" frameborder="0" src="about:blank"></iframe>
+				<form method="post" autocomplete="off" name="uploadpic" id="uploadpic" action="portal.php?mod=portalcp&ac=nest" enctype="multipart/form-data" target="uploadframe" onsubmit="return spacenest.uploadSubmit();">
+					<input type="file" class="t_input" name="attach" size="15">
+					<input type="hidden" name="formhash" value="{FORMHASH}" />
+					<input type="hidden" name="topicid" value="$_GET[topicid]" />
+					<button type="submit" name="uploadsubmit" id="btnupload" value="true"><span>{lang nest_update_start}</span></button>
+				</form>
+			</div>
+			<span id="uploadmsg" class="z"></span>
+		</div>
+		{lang nest_editing}:
+		<a id="nest_tag_body" onclick="spacenest.setCurrentnest('body');return false;">{lang background}</a>
+		<a id="nest_tag_blocktitle" onclick="spacenest.setCurrentnest('blocktitle');return false;">{lang title_bar}</a></span>
+		<a id="nest_tag_ct" onclick="spacenest.setCurrentnest('ct');return false;">{lang content_area}</a>
+
+	  	<a style="margin-left: 40px;" id="bg_button" onclick="spacenest.hideBg();return false;">{lang background_image_cancel}</a>
+		<a id="recover_button" onclick="spacenest.recoverStyle();return false;">{lang restore_skin}</a>
+	</dt>
+	<dd>
+		<div class="photo_list cl">
+			<div id="currentimgdiv" class="z" style="width:446px;">
+				<center><ul><li class="thumb" style="border:1px solid #ccc; padding:2px;"><img id="currentimg" alt="" src=""/></li></ul>
+				<div class="z cur1" onclick="spacenest.changeBgImgDiv();">{lang nest_change}</div></center>
+			</div>
+			<div id="nestimages" class="z" style="width: 446px; display: none">
+				<div id="nestimg_prev" class="z">$multi</div>
+				<ul id="imagebody">
+					<!--{loop $list $key $value}-->
+					<li class="thumb"><a onclick="return false;"><img src="$value[pic]" alt="" onclick="spacenest.setBgImage(this);"/></a></li>
+					<!--{/loop}-->
+				</ul>
+				<div id="nestimg_next" class="z">$multi</div>
+			</div>
+			<div class="z" style="padding-left: 7px; width: 160px; border: solid #CCC; border-width: 0 1px;">
+				<table cellpadding="0" cellspacing="0">
+					<tr>
+						<td><label for="repeat_mode">{lang image_repeat_mode}:</label></td>
+						<td>
+							<select id="repeat_mode" name="repeat_mode" onclick="spacenest.setBgRepeat(this.value);">
+								<option value="0" selected="selected">{lang image_repeat}</option>
+								<option value="1">{lang image_repeat_direct}</option>
+								<option value="2">{lang image_repeat_horizontal}</option>
+								<option value="3">{lang image_repeat_vertical}</option>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td>{lang image_position}:</td>
+						<td>
+							<table cellpadding="0" cellspacing="0" id="positiontable">
+								<tr>
+									<td id="bgimgposition0" onclick="spacenest.setBgPosition(this.id)">&nbsp;</td>
+									<td id="bgimgposition1" onclick="spacenest.setBgPosition(this.id)">&nbsp;</td>
+									<td id="bgimgposition2" onclick="spacenest.setBgPosition(this.id)">&nbsp;</td>
+								</tr>
+								<tr>
+									<td id="bgimgposition3" onclick="spacenest.setBgPosition(this.id)">&nbsp;</td>
+									<td id="bgimgposition4" onclick="spacenest.setBgPosition(this.id)">&nbsp;</td>
+									<td id="bgimgposition5" onclick="spacenest.setBgPosition(this.id)">&nbsp;</td>
+								</tr>
+								<tr>
+									<td id="bgimgposition6" onclick="spacenest.setBgPosition(this.id)">&nbsp;</td>
+									<td id="bgimgposition7" onclick="spacenest.setBgPosition(this.id)">&nbsp;</td>
+									<td id="bgimgposition8" onclick="spacenest.setBgPosition(this.id)">&nbsp;</td>
+								</tr>
+							</table>
+						</td>
+					</tr>
+				</table>
+			</div>
+			<div class="z nestwin" style="padding-left: 7px; width: 160px;">
+				<table cellpadding="0" cellspacing="0">
+					<tr>
+						<td>{lang background_attach_mode}:</td>
+						<td>
+							<label for="rabga0"><input type="radio" id="rabga0" name="attachment_mode" onclick="spacenest.setBgAttachment(0);" />{lang background_attach_scroll}</label>
+							<label for="rabga1"><input type="radio" id="rabga1" name="attachment_mode" onclick="spacenest.setBgAttachment(1);" />{lang background_attach_fixed}</label>
+						</td>
+					</tr>
+					<tr>
+						<td>{lang background_color}:</td>
+						<td><input type="text" id="colorValue" value="" size="6" onchange="spacenest.setBgColor(this.value);" class="px vm" style="font-size: 12px; padding: 2px;" />
+						<input id="cbpb" onclick="createPalette('bpb', 'colorValue', 'spacenest.setBgColor');" type="button" class="pn colorwd" value="" />
+						</td>
+					</tr>
+				</table>
+			</div>
+			<div class="z nestwin" style="padding-left: 7px; width: 160px;">
+				<table cellpadding="0" cellspacing="0">
+					<tr>
+						<td>{lang text_color}:</td>
+						<td><input type="text" id="textColorValue" value="" size="6" onchange="spacenest.setTextColor(this.value);" class="px vm" style="font-size: 12px; padding: 2px;" />
+						<input id="ctpb" onclick="createPalette('tpb', 'textColorValue', 'spacenest.setTextColor');" type="button" class="pn colorwd" value="" />
+						</td>
+					</tr>
+					<tr>
+						<td>{lang link_color}:</td>
+						<td><input type="text" id="linkColorValue" value="" size="6" onchange="spacenest.setLinkColor(this.value);" class="px vm" style="font-size: 12px; padding: 2px;" />
+						<input id="clpb" onclick="createPalette('lpb', 'linkColorValue', 'spacenest.setLinkColor');" type="button" class="colorwd" value="" style="background: #fff;" />
+						</td>
+					</tr>
+				</table>
+			</div>
+  </dd>
+</dl>
+<!--{elseif $op == 'import'}-->
+<div class="header">
+	<span class="title-tip">{lang import_frame}</span>
+	<!--{if $_G[inajax]}--><a onclick="hideWindow('$_GET['handlekey']');" class="close" title="{lang close}">×</a><!--{/if}-->
+</div>
+<ul class="tb cl">
+	<li{if empty($_GET['type'])} class="active"{/if} id="li_import_upload"><a onclick="showWindow('showimport', this.getAttribute('href'));" href="portal.php?mod=portalcp&ac=nest&op=import&type=0&tpl=$_GET['tpl']">{lang nest_uploadfile}</a></li>
+	<li{if $_GET['type'] == 1} class="active"{/if} id="li_import_system"><a onclick="showWindow('showimport', this.getAttribute('href'));" href="portal.php?mod=portalcp&ac=nest&op=import&type=1&tpl=$_GET['tpl']">{lang nest_systemfile}</a></li>
+</ul>
+
+<form name="frameimport" id="frameimport" enctype="multipart/form-data" method="post" autocomplete="off" action="portal.php?mod=portalcp&ac=nest&op=import" onsubmit="ajaxpost('frameimport','return_$_GET[handlekey]','','onerror',$('frameimportbutton'));">
+	<div class="c" style="width:420px;line-height:100px; overflow-y: auto; ">
+	<!--{if $_GET['type'] == 1}-->
+		<!--{if $xmlarr}-->
+		{lang import_select_file}:
+		<select id="importfilename" name="importfilename" class="">
+			<!--{loop $xmlarr $key $value}-->
+			<option value="$key">$value</option>
+			<!--{/loop}-->
+		</select>
+		<!--{else}-->
+		<center>{lang import_system_file_no_exists}</center>
+		<!--{/if}-->
+	<!--{else}-->
+		{lang import_text_file_from}: <input type="file" id="importfile" name="importfile" style="margin: 5px;">
+	<!--{/if}-->
+	</div>
+	<div class="o pns">
+		<input type="hidden" name="handlekey" value="$_GET['handlekey']" />
+		<input type="hidden" name="importsubmit" value="true" />
+		<input type="hidden" name="tpl" value="$_GET['tpl']" />
+		<input type="hidden" name="formhash" value="{FORMHASH}" />
+		<button type="submit" class="pn pnc" id="frameimportbutton"><strong>{lang import}</strong></button>
+	</div>
+</form>
+<script type="text/javascript" reload="1">
+function succeedhandle_$_GET['handlekey'] (url, message, values) {
+	if (values['status'] == '1') {
+		if (values['css']) spacenest.initnestStyle(values['css']);
+
+		var areaArr = values['html'];
+		var dom = document.createElement("div");
+		for (var i in areaArr) {
+			var html = areaArr[i].replace(/\[script/g, '<script').replace(/\[\/script\]/g, '<\/script>');
+			var area = $(i) ? $(i) : drag.moveableArea[0];
+			dom.innerHTML = html;
+			var arr = [];
+			for (var i=0, l=dom.childNodes.length; i < l; i++) {
+				arr.push(dom.childNodes[i]);
+			}
+			var one = '';
+			while(one = arr.pop()) {
+				Util.insertBefore(one,area.firstChild);
+			}
+		}
+		drag.initPosition();
+		drag.isChange = true;
+		drag.setClose();
+		var blocks = values['bids'].split(',');
+		drag.blockForceUpdateBatch(blocks);
+	}
+
+	hideWindow('$_GET['handlekey']');
+}
+</script>
+<!--{/if}-->
+<!--{template common/footer}-->

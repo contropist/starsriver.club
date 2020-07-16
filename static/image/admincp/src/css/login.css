@@ -1,0 +1,88 @@
+.loginpage{
+    display: block;
+    padding-top: 30px;
+    border-top: 3px solid rgba(0,150,210,.5);
+    position: absolute;
+    width:800px;
+    height:300px;
+    font-size: 16px !important;
+    top:calc(50% - 250px);
+    left:calc(50% - 400px);
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+.loginpage .part{
+    position: relative;
+    display: block;
+    width:400px;
+    float: left;
+    height:300px;
+    box-sizing: border-box;
+}
+.loginpage .part *{
+    font-weight: 400!important;
+    font-size: 16px !important;
+    color: #999;
+}
+.loginpage .login{
+    padding: 0 50px;
+    border-left:2px solid rgba(0,0,0,.05) ;
+}
+.loginpage input[type='text'],
+.loginpage input[type='password'],
+.loginpage select{
+    width:300px;
+    height:40px;
+    display: block;
+    box-sizing: border-box;
+    background: #fff;
+    color: rgba(0,0,0,.4);
+    transition: .5s ease;
+    margin-top: 14px;
+    padding-left: 10px;
+    border:1px solid rgba(0,0,0,.1);
+    border-left: 5px solid rgba(0,0,0,.1);
+}
+.loginpage input[type='text']:hover,
+.loginpage input[type='password']:hover,
+.loginpage select:hover{
+    color:rgba(0,142,160,.8);
+    border:1px solid rgba(0,142,160,.8);
+    border-left: 5px solid rgba(0,142,160,.8);
+}
+.loginpage input[type='text']:focus,
+.loginpage input[type='password']:focus,
+.loginpage select:focus{
+    color: rgba(0,142,160,.8);
+    border:1px solid rgba(0,142,160,.8);
+    border-left: 5px solid rgba(0,142,160,.8);
+}
+.loginpage button{
+    cursor: pointer;
+    margin-top: 14px;
+    width:300px;
+    height:40px;
+    box-sizing: border-box;
+    float: left;
+    font-size: 18px !important;
+    color: #fff !important;
+    border:1px solid rgba(0,180,205,1);
+    background: rgba(0,180,205,1);
+}
+.loginpage button:hover{
+    background: rgba(0,160,185,1);
+}
+.loginpage .administratorname{
+    width:300px;
+    height:40px;
+    display: block;
+    box-sizing: border-box;
+    background: rgba(0,0,0,.05);
+    border:1px solid rgba(0,0,0,.05);
+    border-left: 5px solid rgba(0,0,0,.1);
+    line-height: 30px;
+    transition: .5s ease;
+    margin-top: 14px;
+    text-align: left;
+    padding:5px  10px;
+}

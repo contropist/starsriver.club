@@ -1,0 +1,36 @@
+<!--{template common/header}-->
+<!--{if empty($_GET['infloat'])}-->
+<div>
+<!--{/if}-->
+	<div class="header">
+		<span class="title-tip" id="return_$_GET['handlekey']">{lang warn_view_log}</span>
+		<!--{if !empty($_GET['infloat'])}--><a onclick="hideWindow('$_GET['handlekey']');" class="close" title="{lang close}">×</a><!--{/if}-->
+	</div>
+	<div class="body">
+		<p class="alert hi-warning">{lang warn_view_prompt}</p>
+		<table class="dc wb">
+			<thead>
+				<tr>
+					<td width="160">{lang thread_moderations_username}</td>
+					<td width="240">{lang time}</td>
+					<td width="500">{lang reason}</td>
+				</tr>
+			</thead>
+			<tbody>
+			<!--{loop $warnings $warning}-->
+				<tr>
+					<td><a href="home.php?mod=space&uid=$warning[operatorid]">$warning[operator]</a></td>
+					<td>$warning[dateline]</td>
+					<td>$warning[reason]</td>
+				</tr>
+			<!--{/loop}-->
+			</tbody>
+		</table>
+	</div>
+	<div class="footer">
+		<!--{if !empty($_GET['infloat'])}--><button class="btn-square fullwidth" style="border: none;"  onclick="hideWindow('$_GET['handlekey']');">{lang close}</button><!--{/if}-->
+	</div>
+<!--{if empty($_GET['infloat'])}-->
+</div>
+<!--{/if}-->
+<!--{template common/footer}-->

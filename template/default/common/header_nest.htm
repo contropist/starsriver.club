@@ -1,0 +1,77 @@
+<div id="button_more_menu" class="p_pop" style="display: none;">
+	<ul>
+		<li><a onclick="spacenest.recover();return false;" title="{lang header_restore_backup_desc}">{lang header_restore_backup}</a></li>
+		<li><a onclick="drag.frameExport();return false;" title="{lang header_export_desc}">{lang header_export}</a></li>
+		<li><a onclick="drag.openFrameImport();$('button_more_menu').style.display='none';return false;" title="{lang header_import_desc}">{lang header_import}</a></li>
+		<li><a onclick="drag.blockForceUpdateBatch();$('button_more_menu').style.display='none';return false;" title="{lang header_update_desc}">{lang header_update}</a></li>
+		<li><a onclick="drag.clearAll();$('button_more_menu').style.display='none';return false;" title="{lang header_clearall_desc}">{lang header_clearall}</a></li>
+	</ul>
+</div>
+<div id="controlpanel">
+	<div id="controlheader">
+		<p class="r">
+			<span id="navcancel"><a id="nestcancel" onclick="spacenest.cancel();return false;">{lang close}</a></span>
+			<a title="{lang header_more_actions}" id="button_more" onmouseover="showMenu(this.id);">More</a>
+			<span id="navsave"><a onclick="javascript:spacenest.save();return false;">{lang save}</a></span>
+			<span id="button_redo" class="unusable"><a onclick="spacenest.redo();return false;" title="{lang e_redo}" onfocus="this.blur();">{lang e_redo}</a></span>
+			<span id="button_undo" class="unusable"><a onclick="spacenest.undo();return false;" title="{lang e_undo}" onfocus="this.blur();">{lang e_undo}</a></span>
+			<span id="preview" class="unusable"><a onclick="spacenest.save('preview');return false;" onfocus="this.blur();" title="{lang header_perview_desc}" id="nest_preview">{lang header_perview}</a></span>
+			<span id="savecachemsg" style="display: none;"></span>
+		</p>
+		<ul id="controlnav">
+			<li id="navstart" class="current"><a href="javascript:" onclick="spacenest.getnest('start');this.blur();return false;">{lang header_start}</a></li>
+			<li id="navframe"><a onclick="spacenest.getnest('frame');this.blur();return false;">{lang header_frame}</a></li>
+			<li id="navblockclass"><a onclick="spacenest.getnest('blockclass');this.blur();return false;" id="hd_mod">{lang header_module}</a></li>
+			<!--{if !empty($topic)}-->
+			<li id="navstyle"><a onclick="spacenest.getnest('style');this.blur();return false;">{lang style}</a></li>
+			<li id="navnest"><a onclick="spacenest.getnest('nest', 'topicid', '$topic[topicid]');this.blur();return false;">{lang header_nest}</a></li>
+			<!--{/if}-->
+		</ul>
+		<div id="nest_backup_tip" class="tip tip_2" style="display: none;">
+			<div class="tip_c">{lang header_nest_backup_tip} &nbsp; <a onclick="drag.saveViewTip('nest_backup_tip');return false;">{lang header_nest_i_know}</a></div>
+		</div>
+	</div>
+	<div id="controlcontent">
+		<ul id="contentstart" class="content">
+		  <li><a onclick="spacenest.getnest('frame');return false;"><img src="{STATICURL}image/nest/layout.png" />{lang header_add_frame}</a></li>
+		  <li><a onclick="spacenest.getnest('blockclass');return false;"><img src="{STATICURL}image/nest/module.png" />{lang header_add_module}</a></li>
+		  <!--{if !empty($topic)}-->
+		  <li><a onclick="spacenest.getnest('style');return false;"><img src="{STATICURL}image/nest/style.png" />{lang style}</a></li>
+		  <li><a onclick="spacenest.getnest('nest', 'topicid', '$topic[topicid]');return false;"><img src="{STATICURL}image/nest/nest.png" />{lang header_nest}</a></li>
+		  <!--{/if}-->
+		</ul>
+		<ul id="contentframe" class="content">
+			<li><a id="frame_1" onmousedown="drag.createObj(event,'frame','1');" onfocus="this.blur();" data="$widthstr"><img src="{STATICURL}image/nest/layout-2-type1.png" />100%{lang header_frame}</a></li>
+			<li><a id="frame_1_1" onmousedown="drag.createObj(event,'frame','1-1');" onfocus="this.blur();"><img src="{STATICURL}image/nest/layout-2-type1-1.png" />1:1</a></li>
+			<li><a id="frame_1_2" onmousedown="drag.createObj(event,'frame','1-2');" onfocus="this.blur();"><img src="{STATICURL}image/nest/layout-2-type1-2.png" />1:2</a></li>
+			<li><a id="frame_2_1" onmousedown="drag.createObj(event,'frame','2-1');" onfocus="this.blur();"><img src="{STATICURL}image/nest/layout-2-type2-1.png" />2:1</a></li>
+			<li><a id="frame_1_3" onmousedown="drag.createObj(event,'frame','1-3');" onfocus="this.blur();"><img src="{STATICURL}image/nest/layout-2-type1-3.png" />1:3</a></li>
+			<li><a id="frame_3_1" onmousedown="drag.createObj(event,'frame','3-1');" onfocus="this.blur();"><img src="{STATICURL}image/nest/layout-2-type3-1.png" />3:1</a></li>
+			<li><a id="frame_1_1_1" onmousedown="drag.createObj(event,'frame','1-1-1');" onfocus="this.blur();" data="$widthstr"><img src="{STATICURL}image/nest/layout-2-type1-1-1.png" />1:1:1</a></li>
+			<li><a id="frame_tab" onmousedown="drag.createObj(event,'tab');" onfocus="this.blur();" data="$widthstr"><img src="{STATICURL}image/nest/layout-tab.png" />tab{lang header_frame}</a></li>
+		</ul>
+		<div id="contentblockclass" class="content"></div>
+	</div>
+</div>
+<div id="samplepanel">
+	<a onclick="spacenest.cancel();return false;" class="text-primary">{lang close}</a>&nbsp;&nbsp;|&nbsp;
+	{lang header_nest_sample_mode}
+</div>
+
+<form method="post" autocomplete="off" name="nestform" id="nestform" action="$_G[siteurl]portal.php?mod=portalcp&ac=nest">
+	<input type="hidden" name="template" value="$_G['style']['tplfile']" />
+	<input type="hidden" name="tpldirectory" value="$_G['style']['tpldirectory']" />
+	<input type="hidden" name="nestsign" value="{echo dsign({$_G['style']['tpldirectory']}.{$_G['style']['tplfile']})}" />
+	<input type="hidden" name="prefile" id="prefile" value="$_G['style']['prefile']" />
+	<input type="hidden" name="savemod" value="$_G['style']['tplsavemod']" />
+	<input type="hidden" name="spacecss" value="" />
+	<input type="hidden" name="style" value="" />
+	<input type="hidden" name="rejs" value="" />
+	<input type="hidden" name="handlekey" value="" />
+	<input type="hidden" name="layoutdata" value="" />
+	<input type="hidden" name="formhash" value="{FORMHASH}" />
+	<input type="hidden" name="gobackurl" id="gobackurl" value=""/>
+	<input type="hidden" name="recover" value=""/>
+	<input type="hidden" name="optype" value=""/>
+	<input type="hidden" name="nestsubmit" value="true"/>
+</form>

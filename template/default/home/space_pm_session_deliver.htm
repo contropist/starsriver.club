@@ -1,0 +1,19 @@
+<!--{if $list}-->
+    <form class="deliver" id="pmform" name="pmform" method="post" autocomplete="off" action="home.php?mod=spacecp&ac=pm&op=send&pmid=$pmid&daterange=$daterange&handlekey=pmsend&pmsubmit=yes" onsubmit="this.message.value = parseurl(this.message.value);ajaxpost('pmform', 'pmforum_return', 'pmforum_return');return false;">
+        <input type="hidden" name="formhash" value="{FORMHASH}" />
+        <input type="hidden" name="topmuid" value="$touid" />
+        <!--{eval $seditor = array('reply', array('bold', 'img', 'link', 'smilies'));}-->
+        <!--{subtemplate common/seditor}-->
+        <!--{if $plid}--><a class="refresh awe-refresh" onclick="refreshMsg(1);"></a><!--{/if}-->
+        <textarea name="message" id="replymessage" onkeydown="ctrlEnter(event, 'pmsubmit');" placeholder="{lang reply_rule}"></textarea>
+        <button class="poster" type="submit" name="pmsubmit" id="pmsubmit" value="true">{lang send}</button>
+        <span class="return" id="pmforum_return"></span>
+    </form>
+<!--{else}-->
+    <div class="deliver disabled">
+        <!--{eval $seditor = array('reply', array('bold', 'img', 'link', 'smilies'));}-->
+        <!--{subtemplate common/seditor}-->
+        <textarea placeholder="{lang reply_rule}"></textarea>
+        <button class="poster" type="button">{lang post}</button>
+    </div>
+<!--{/if}-->

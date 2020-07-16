@@ -1,0 +1,101 @@
+/***********\
+   弹窗样式  | 管理弹窗样式
+\***********/
+  /*回复管理弹窗*/
+    #mdly {
+        z-index:60;
+        position: absolute;
+        right: 54px;
+        margin-top: -80px;
+        width: 256px;
+        background: #fff;
+        line-height: 32px;
+        overflow: hidden;
+        border:1px solid rgba(0,0,0,.08);
+        box-shadow: 0 0 10px rgba(0,0,0,.1);
+    }
+    .pg_viewthread #mdly {
+        margin: 50px 0 0 -45px !important;
+        padding: 0;
+        height: auto;
+        background: #fff;
+    }
+    #mdly .header{
+        height:36px;
+        line-height: 36px;
+        border-bottom: 1px solid #eaeaea;
+    }
+    #mdly .header .ntip{
+        float: left;
+        text-align: center;
+        width:50%;
+        line-height: 36px;
+        color: #888;
+        border-right: 1px solid #eaeaea;
+    }
+    #mdly .header label{
+        display: inline-block;
+        float: right;
+        width:calc(50% - 1px);
+        margin: 0 !important;
+        text-align: center;
+        height:36px;
+        line-height: 36px;
+    }
+    #mdly .features{ width:calc(100% + 9px);}
+    #mdly .features a{
+        color: #666;
+        float: left;
+        display: inline-block;
+        border-right: 1px solid #eaeaea;
+        border-bottom: 1px solid #eaeaea;
+        margin-bottom: -1px;
+        text-align: center;
+        height:36px;
+        line-height: 36px;
+        font-size: 12px;
+    }
+    #mdly .features a{  width:32%;  }
+    #mdly .features a.theader{  width:calc(64% + 1px);  }
+    #mdly .features a:hover{  background: #f1f1f1;  color: #000;  }
+    #mdly .features a.theader:hover{  background: #fff;  color: #666;    }
+    #mdly .cp {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        width: 35px;
+        height: 32px;
+        line-height: 100px;
+        overflow: hidden;
+    }
+
+  /* 回复管理菜单 */
+    #modmenu{
+        display: block;
+        box-sizing: border-box;
+        margin: 0 10px;
+        text-align: center;
+        overflow: hidden;
+    }
+    #modmenu li{
+        display: inline-block;
+        margin-top: 3px;
+        margin-bottom: 5px;
+    }
+    #modmenu a{
+        color: #aaa;
+        border:1px solid transparent;
+        position: relative;
+        display: block;
+        box-sizing: border-box;
+        font-size: 12px;
+        height:24px;
+        line-height: 22px;
+        padding: 0 6px;
+    }
+    #modmenu a:hover{
+        border:1px solid;
+        color: #f26;
+        border-radius: 20px;
+    }
+

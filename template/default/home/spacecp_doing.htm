@@ -1,0 +1,58 @@
+<!--{template common/header}-->
+
+<!--{if $_GET['op'] == 'delete'}-->
+	<form method="post" autocomplete="off" id="doingform_{$doid}_{$id}" name="doingform" action="home.php?mod=spacecp&ac=doing&op=delete&doid=$doid&id=$id">
+        <div class="header">
+            <span class="title-tip" id="return_$_GET[handlekey]">{lang delete_log}</span>
+            <!--{if $_G[inajax]}--><a onclick="hideWindow('$_GET['handlekey']');" class="close" title="{lang close}">×</a><!--{/if}-->
+        </div>
+        <div class="body">
+            <!--{if $_G[inajax]}--><input type="hidden" name="handlekey" value="$_GET[handlekey]" /><!--{/if}-->
+            <input type="hidden" name="referer" value="{echo dreferer()}" />
+            <input type="hidden" name="formhash" value="{FORMHASH}" />
+            <div class="c">{lang determine_delete_doing}</div>
+        </div>
+		<div class="footer">
+			<button class="btn-square fullwidth" style="border: none;"  name="deletesubmit" type="submit" value="true">{lang determine}</button>
+		</div>
+	</form>
+<!--{elseif $_GET['op'] == 'spacenote'}-->
+	<!--{if $space[spacenote]}-->$space[spacenote]<!--{/if}-->
+<!--{elseif $_GET['op'] == 'docomment' || $_GET['op'] == 'getcomment'}-->
+	<!--{if helper_access::check_module('doing')}-->
+		<section id="{$_GET[key]}_form_{$doid}_{$id}">
+			<form class="sender" id="{$_GET[key]}_docommform_{$doid}_{$id}" method="post" autocomplete="off" action="home.php?mod=spacecp&ac=doing&op=comment&doid=$doid&id=$id" onsubmit="{if $_G[inajax]}ajaxpost(this.id, 'return_$_GET[handlekey]'){/if}">
+				<!--{if $_G[inajax]}--><input type="hidden" name="handlekey" value="$_GET[handlekey]" /><!--{/if}-->
+				<input type="hidden" name="commentsubmit" value="true" />
+				<input type="hidden" name="formhash" value="{FORMHASH}" />
+				<textarea class="msg" name="message" id="{$_GET[key]}_form_{$doid}_{$id}_t" placeholder="{lang reply_rule}" onkeyup="strLenCalc(this, '{$_GET[key]}_form_{$doid}_{$id}_limit')" onkeydown="ctrlEnter(event, '{$_GET[key]}_replybtn_{$doid}_{$id}');"></textarea>
+				<div class="subline">
+					<button class="submit r" type="submit" name="do_button" id="{$_GET[key]}_replybtn_{$doid}_{$id}" value="true">{lang reply}</button>
+					<button class="cancel r" type="button" onclick="docomment_form_close($doid, $id, '$_GET[key]');">×</button>
+					<i class="limite r" id="{$_GET[key]}_form_{$doid}_{$id}_limit">200</i>
+					<i class="smilies" id="{$_GET[key]}_form_{$doid}_{$id}_face" onclick="emoticons(this.id, '{$_GET[key]}_form_{$doid}_{$id}_t');return false;">(..•˘_˘•..)</i>
+				</div>
+				<span hide id="return_$_GET[handlekey]"></span>
+			</form>
+			<script type="text/javascript">
+				function succeedhandle_$_GET[handlekey](url, msg, values) {
+					docomment_get(values['doid'], '$_GET[key]');
+				}
+			</script>
+		</section>
+	<!--{/if}-->
+	<!--{if $_GET['op'] == 'getcomment'}-->
+		<!--{template home/space_trends_mod_doing_comments}-->
+	<!--{/if}-->
+
+<!--{else}-->
+
+<div id="content">
+	<!--{if helper_access::check_module('doing')}-->
+	<!--{template home/space_trends_mod_doing_deliverer}-->
+	<!--{/if}-->
+</div>
+
+<!--{/if}-->
+
+<!--{template common/footer}-->

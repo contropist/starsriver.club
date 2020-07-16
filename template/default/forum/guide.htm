@@ -1,0 +1,104 @@
+<!--{template common/header}-->
+<div class="plate layout-2-type1">
+	<section class="col-1">
+		<!--{hook/guide_top}-->
+		<!--{if $view == 'index'}-->
+			<!--{loop $data $key $list}-->
+				<div class="bm bmw">
+					<div class="bm_h">
+						<a href="forum.php?mod=guide&view=$key" class="r">{lang more} &raquo;</a>
+						<h2>
+							<!--{if $key == 'hot'}-->
+							{lang guide_hot}
+							<!--{elseif $key == 'digest'}-->
+							{lang guide_digest}
+							<!--{elseif $key == 'newthread'}-->
+							{lang guide_newthread}
+							<!--{elseif $key == 'new'}-->
+							{lang guide_new}
+							<!--{elseif $key == 'my'}-->
+							{lang guide_my}
+							<!--{/if}-->
+						</h2>
+					</div>
+					<div class="bm_c">
+						<ul class="xl xl2 cl">
+							<!--{if $list['threadcount']}-->
+							<!--{eval $i=0;}-->
+							<!--{loop $list['threadlist'] $thread}-->
+							<!--{eval $i++;$newtd=$i%2;}-->
+							<li {if !$newtd} class="xl2_r"{/if}>
+								<!--{if $key == 'hot'}--><span>$thread['heats']{lang guide_attend}</span><!--{/if}-->
+								<!--{if $key == 'new'}-->$thread['lastpost']<!--{/if}-->
+							<a href="forum.php?mod=viewthread&tid=$thread[tid]&{if $_GET['archiveid']}archiveid={$_GET['archiveid']}&{/if}extra=$extra"$thread[highlight] target="_blank">$thread[subject]</a>
+							<a href="forum.php?mod=forumdisplay&fid=$thread[fid]" target="_blank">$list['forumnames'][$thread[fid]]['name']</a>
+							</li>
+							<!--{/loop}-->
+							<!--{else}-->
+							<p class="global_nothing">{lang global_nothing}</p>
+							<!--{/if}-->
+						</ul>
+					</div>
+				</div>
+			<!--{/loop}-->
+		<!--{else}-->
+			<!--{loop $data $key $list}-->
+				<div id="threadlist">
+					<div class="subtitle icon-list">
+						<a>{lang guide}</a>
+						<div class="lititle">
+							<a $currentview['hot'] href="forum.php?mod=guide&view=hot">{lang guide_hot}</a>
+							<a $currentview['digest'] href="forum.php?mod=guide&view=digest">{lang guide_digest}</a>
+							<a $currentview['new'] href="forum.php?mod=guide&view=new">{lang guide_new}</a>
+							<a $currentview['newthread'] href="forum.php?mod=guide&view=newthread">{lang guide_newthread}</a>
+							<a $currentview['sofa'] href="forum.php?mod=guide&view=sofa">{lang guide_sofa}</a>
+							<!--{if $_G[uid]}--><a $currentview['my'] id="filter_special" href="forum.php?mod=guide&view=my">{lang guide_my}</a><!--{/if}-->
+							<!--{hook/guide_nav_extra}-->
+						</div>
+					</div>
+					<!--{if $view == 'my'}-->
+					<div class="order-nav">
+						<div class="r sort">
+							<a href="forum.php?mod=guide&view=my&type=thread" $orderactives[thread]>{lang forum_threads}</a>
+							<a href="forum.php?mod=guide&view=my&type=reply" $orderactives[reply]>{lang reply}</a>
+							<a href="forum.php?mod=guide&view=my&type=postcomment" $orderactives[postcomment]>{lang comments}</a>
+						</div>
+						<form class="my-finder" method="get" action="forum.php">
+							<input type="hidden" name="mod" value="guide">
+							<input type="hidden" name="view" value="my">
+							<input type="hidden" name="type" value="$viewtype">
+							<!--{if $viewtype != 'postcomment'}-->
+								<span>{lang status}:</span>
+								<select name="filter" id="filter" onchange="this.form.submit();"><option value="">{lang all}</option><!--{loop $filter_array $fkey $name}--><option value="$fkey" {if $fkey == $_GET[filter]}selected{/if}>$name</option><!--{/loop}--></select>
+								<span> {lang guide_forum_select}:</span>
+								<select name="fid" id="forumlist" onchange="this.form.submit();"><option value="0">{lang all}</option>$forumlist</select>
+							<!--{/if}-->
+							<!--{if $viewtype == 'thread'}-->
+								<span> {lang keyword}:</span>
+								<input type="text" id="searchmypost" name="searchkey" size="20" value="$searchkey" placeholder="{lang press_enter}">
+							<!--{/if}-->
+						</form>
+					</div>
+					<!--{/if}-->
+					<div id="forumnew" style="display:none"></div>
+					<div class="thread-list" style="padding-top: 10px">
+						<!--{subtemplate forum/guide_list_row}-->
+					</div>
+				</div>
+			<!--{/loop}-->
+			<div class="pgs">
+				$multipage
+			</div>
+		<!--{/if}-->
+		<!--{hook/guide_bottom}-->
+	</section>
+	<section class="col-2">
+		<!--{if $view != 'index'}-->
+		<a class="glass" id="post_guide_btn" onclick="showWindow('nav', this.href, 'get', 0)" href="forum.php?mod=misc&amp;action=nav"><i class="awe-pencil"></i>{lang send_posts}</a>
+		<!--{/if}-->
+		<!--{if $view != 'index' && $view != 'my'}-->
+		<a class="glass" id="rss_guide_btn" href="forum.php?mod=guide&view=$view&rss=1" target="_blank" title="RSS"><i class="awe-rss"></i>{lang rss_subscribe_this}</a>
+		<!--{/if}-->
+	</section>
+</div>
+<!--{template common/footer}-->

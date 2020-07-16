@@ -1,0 +1,14 @@
+<!--{template common/header}-->
+<div class="header">
+	<span class="title-tip">{lang collection_comment_thread}</span>
+	<a onclick="hideWindow('$_GET['handlekey']');" class="close" title="{lang close}">×</a>
+</div>
+<form action="forum.php?mod=collection&action=comment&ctid={$ctid}" method="POST">
+	<div class="body">
+		<textarea name="message" placeholder="{lang collection_comment_specthread}"></textarea>
+	</div>
+	<div class="footer">
+		<button class="btn-square fullwidth" style="border: none;"  type="submit">{lang collection_comment_submit}</button>
+	</div>
+</form>
+<!--{template common/footer}-->

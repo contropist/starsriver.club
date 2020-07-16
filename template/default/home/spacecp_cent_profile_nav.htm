@@ -1,0 +1,28 @@
+<div class="nav">
+	<!--{if $operation != 'verify'}-->
+		<!--{loop $profilegroup $key $value}-->
+			<!--{if $value[available]}-->
+			<a data-tabthumb $opactives[$key] href="home.php?mod=spacecp&ac=profile&op=$key">$value[title]</a>
+			<!--{/if}-->
+		<!--{/loop}-->
+		<!--{if $_G['setting']['allowspacedomain'] && $_G['setting']['domain']['root']['home'] && checkperm('domainlength')}-->
+		<a data-tabthumb $opactives[domain] href="home.php?mod=spacecp&ac=domain">{lang space_domain}</a>
+		<!--{/if}-->
+	<!--{else}-->
+		<!--{if $_G[setting][verify]}-->
+			<!--{loop $_G['setting']['verify'] $vid $verify}-->
+				<!--{if $verify['available'] && (empty($verify['groupid']) || in_array($_G['groupid'], $verify['groupid']))}-->
+					<!--{if $vid != 7}-->
+						<a data-tabthumb $opactives['verify'.$vid] href="home.php?mod=spacecp&ac=profile&op=verify&vid=$vid">$verify['title']</a>
+					<!--{/if}-->
+				<!--{/if}-->
+			<!--{/loop}-->
+		<!--{/if}-->
+	<!--{/if}-->
+	<!--{if $op != 'verify' && !empty($_G['setting']['plugins']['spacecp_profile'])}-->
+		<!--{loop $_G['setting']['plugins']['spacecp_profile'] $id $module}-->
+			<!--{if !$module['adminid'] || ($module['adminid'] && $_G['adminid'] > 0 && $module['adminid'] >= $_G['adminid'])}--><a data-tabthumb class="{if $_GET[id] == $id}active{/if}" href="home.php?mod=spacecp&ac=plugin&op=profile&id=$id">$module[name]</a><!--{/if}-->
+		<!--{/loop}-->
+	<!--{/if}-->
+</div>
+<hr>

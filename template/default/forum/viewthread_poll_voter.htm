@@ -1,0 +1,35 @@
+<!--{template common/header}-->
+<!--{if empty($_GET['inajax'])}-->
+<div>
+<!--{/if}-->
+	<div class="header">
+		<span class="title-tip" id="return_$_GET['handlekey']">{lang poll_voters}</span>
+		<!--{if !empty($_GET['inajax'])}--><a onclick="hideWindow('$_GET['handlekey']');" class="close" title="{lang close}">×</a><!--{/if}-->
+	</div>
+	<div class="body">
+		<div class="input-box">
+			<span>{lang poll_selectitem}</span>
+			<select onchange="{if !empty($_GET['inajax'])}showWindow('viewvote', 'forum.php?mod=misc&action=viewvote&tid=$_G[tid]&polloptionid=' + this.value){else}location.href = 'forum.php?mod=misc&action=viewvote&tid=$_G[tid]&polloptionid=' + this.value;{/if}">
+			<!--{loop $polloptions $options}-->
+				<option value="$options[polloptionid]"{if $options[polloptionid] == $polloptionid} selected="selected"{/if}>$options[polloption]</option>
+			<!--{/loop}-->
+			</select>
+		</div>
+		<ul class="tags">
+		<!--{if !$voterlist}-->
+			<li>{lang none}</li>
+		<!--{else}-->
+			<!--{loop $voterlist $voter}-->
+				<li><a href="home.php?mod=space&uid=$voter[uid]" target="_blank">$voter[username]</a></li>
+			<!--{/loop}-->
+		<!--{/if}-->
+		</ul>
+	</div>
+	<div class="c cl mbn">$multipage</div>
+	<div class="footer">
+		<button class="btn-square fullwidth" style="border: none;"  onclick="hideWindow('$_GET['handlekey']');">{lang close}</button>
+	</div>
+<!--{if !$_GET['inajax']}-->
+</div>
+<!--{/if}-->
+<!--{template common/footer}-->

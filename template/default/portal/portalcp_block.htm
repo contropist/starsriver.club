@@ -1,0 +1,745 @@
+<!--{template common/header}-->
+<!--{if !$_G['inajax'] && in_array($op, array('block', 'data', 'itemdata'))}-->
+<div id="pt" class="bm cl">
+	<div class="z">
+		<a href="./" class="nvhm" title="{lang homepage}">$_G[setting][bbname]</a><em class="direct"></em>
+		<a href="$_G[setting][navs][1][filename]">{lang portal}</a><em class="direct"></em>
+		<a href="portal.php?mod=portalcp"><!--{if $_G['setting']['portalstatus'] }-->{lang portal_manage}<!--{else}-->{lang portal_block_manage}<!--{/if}--></a><em class="direct"></em>
+		<a href="portal.php?mod=portalcp&ac=portalblock">{lang block_management}</a>
+		<!--{if $bid}--><em class="direct"></em><a href="portal.php?mod=portalcp&ac=block&op=block&bid=$bid"><!--{if $block[name]}-->$block[name]<!--{else}--># $block[bid]<!--{/if}--></a><!--{/if}-->
+	</div>
+</div>
+
+<div>
+	<div class="mn">
+		<div class="bm bw0">
+			<div id="block_selection">
+
+				<ul class="tb cl">
+					<!--{if $allowmanage}-->
+					<li id="li_setting"{if $op=="block"} class="active"{/if}><a href="portal.php?mod=portalcp&ac=block&bid=$bid&op=block{if $_GET[from]}&from=$_GET[from]{/if}">{lang block_properties}</a></li>
+					<!--{/if}-->
+					<!--{if $bid && !$is_htmlblock}-->
+						<!--{if $allowmanage || $allowdata}-->
+						<li id="li_data"{if $op=="data"} class="active"{/if}><a href="portal.php?mod=portalcp&ac=block&bid=$bid&op=data{if $_GET[from]}&from=$_GET[from]{/if}">{lang block_data}</a></li>
+						<!--{/if}-->
+					<!--{/if}-->
+					<!--{if $is_recommendable}-->
+					<li id="li_itemdata"{if $op=="itemdata"} class="active"{/if}><a href="portal.php?mod=portalcp&ac=block&bid=$bid&op=itemdata{if $_GET[from]}&from=$_GET[from]{/if}">{lang block_itemdata}</a></li>
+					<!--{/if}-->
+					<!--{if $op == 'data' && ($allowmanage || $allowdata)}-->
+					<button class="pn pnc y" title="{lang block_adddata_comment}" onclick="showWindow('$_GET[handlekey]', 'portal.php?mod=portalcp&ac=block&bid=$bid&op=additem{if $_G[inajax]}&itemfrom=ajax{/if}{if $_GET[from]}&from=$_GET[from]{/if}')"><em>{lang block_adddata}</em></button>
+					<!--{/if}-->
+				</ul>
+<!--{/if}-->
+
+<!--{if $_G['inajax'] && in_array($op, array('block', 'data', 'style', 'moreurl'))}-->
+	<script type="text/javascript" reload="1">
+	function succeedhandle_$_GET[handlekey] (url, message, values) {
+		<!--{if $_GET[from]=='cp'}-->
+		location.reload();
+		<!--{else}-->
+		var bid = values['bid'];
+		var eleid = typeof values['eleid'] == 'undefined' ? 0 : values['eleid'];
+		var x = new Ajax();
+		var openTitle = 0;
+		drag.setClose();
+		x.get('portal.php?mod=portalcp&ac=block&op=getblock&forceupdate=1&bid='+bid+'&tpl=$_GET[tpl]&inajax=1<!--{if $_GET[from]}-->&from=$_GET[from]<!--{/if}-->', function(s) {
+			var obj = document.createElement('div');
+			bid = 'portal_block_'+bid;
+			obj.innerHTML = s;
+			if ($(bid) != null) {
+				drag.stopSlide(bid);
+				if($(bid+'_content')) $(bid+'_content').parentNode.removeChild($(bid+'_content'));
+				$(bid).innerHTML = obj.childNodes[0].innerHTML;
+				if(s.indexOf('runslideshow();') > 0) {
+					runslideshow();
+				}
+			} else {
+				$(eleid).parentNode.replaceChild(obj.childNodes[0],$(eleid));
+				openTitle = 1;
+			}
+			drag.initPosition();
+			evalscript(s);
+			if (openTitle == 1)	drag.openTitleEdit(bid);
+		});
+		<!--{/if}-->
+		hideWindow('$_GET[handlekey]');
+	}
+	</script>
+	<!--{block blocknav}-->
+		<!--{if $allowmanage}-->
+		<li id="li_setting"{if $op=="block"} class="active"{/if}><a href="portal.php?mod=portalcp&ac=block&bid=$bid&op=block{if $_GET[from]}&from=$_GET[from]{/if}" onclick="showWindow('$_GET[handlekey]', this.getAttribute('href'));">{lang block_properties}</a></li>
+		<!--{/if}-->
+		<!--{if $bid && !$is_htmlblock}-->
+			<!--{if $allowmanage || $allowdata}-->
+				<li id="li_data"{if $op=="data"} class="active"{/if}><a href="portal.php?mod=portalcp&ac=block&bid=$bid&op=data{if $_GET[from]}&from=$_GET[from]{/if}" onclick="showWindow('$_GET[handlekey]', this.getAttribute('href'));">{lang block_data}</a></li>
+			<!--{/if}-->
+			<!--{if $allowmanage}-->
+				<li id="li_style"{if $op=="style"} class="active"{/if}><a href="portal.php?mod=portalcp&ac=block&bid=$bid&op=style{if $_GET[from]}&from=$_GET[from]{/if}" onclick="showWindow('$_GET[handlekey]', this.getAttribute('href'));">{lang block_template}</a></li>
+				<!--{if $block['moreurl']}-->
+					<li id="li_moreurl"{if $op=="moreurl"} class="active"{/if}><a href="portal.php?mod=portalcp&ac=block&bid=$bid&op=moreurl{if $_GET[from]}&from=$_GET[from]{/if}" onclick="showWindow('$_GET[handlekey]', this.getAttribute('href'));">{lang block_moreurl}</a></li>
+				<!--{/if}-->
+			<!--{/if}-->
+		<!--{/if}-->
+	<!--{/block}-->
+<!--{/if}-->
+
+<!--{if $op == 'block'}-->
+	<!--{if $_G[inajax]}-->
+	<div class="header">
+		<span class="title-tip" id="return_$_GET[handlekey]">{lang block_edit}</span>
+		<a onclick="hideWindow('$_GET['handlekey']');" class="close" title="{lang close}">×</a>
+	</div>
+	<ul class="tb cl">
+		$blocknav
+	</ul>
+	<!--{/if}-->
+	<form id="blockformsetting" name="blockformsetting" method="post" enctype="multipart/form-data" autocomplete="off" action="portal.php?mod=portalcp&ac=block&op=block&classname=$_GET[classname]&bid=$block[bid]&blocktype=$blocktype&eleid=$_GET['eleid']&tpl=$_GET[tpl]"{if $_G[inajax]} onsubmit="if(checkblockname(this)){ajaxpost('blockformsetting','return_$_GET[handlekey]','return_$_GET[handlekey]','onerror');} else {return false;}"{else} onsubmit="return checkblockname(this);"{/if} class="fnest">
+		<div class="c nestwin"{if $_G[inajax]} style="width: 490px; {if $_GET[from]=='cp'}max-height:260px;{else}max-height:380px;{/if}height:auto !important; {if $_GET[from]=='cp'}height:260px;{else}height:380px;{/if} _padding-right: 17px; overflow-x: hidden; overflow-y: auto;"{/if}>
+			<div id="block_setting">
+				<table class="tfm mbm">
+					<!--{if $showhtmltip}-->
+
+						<td colspan="2" style="color: red">
+						{lang block_properties_comment}
+
+					<!--{/if}-->
+
+						<th width="80">{lang block_id}
+
+							<input type="text" id="name" name="name" value="$block[name]" />
+							<script type="text/javascript">document.forms['blockformsetting']['name'].focus();</script>
+
+
+
+						<th width="80">{lang block_type}
+
+							<!--{eval list($bigclass) = explode('_',$block['blockclass']);}-->
+							<!--{if !empty($_G['cache']['blockconvert']) && !empty($_G['cache']['blockconvert'][$bigclass][$block['blockclass']])}-->
+								<select name="toblockclass" onchange="blockconver(this, '$block[bid]');">
+									<option value="$block[blockclass]">$blockclassname</option>
+								<!--{loop $_G['cache']['blockconvert'][$bigclass][$block['blockclass']] $bblockclass $convertarr}-->
+									<option value="$bblockclass">$convertarr[name]</option>
+								<!--{/loop}-->
+							</select>
+							<img src="{IMGURL}/common/mark/faq.svg" alt="Tip" class="svgicon small" onmouseover="showTip(this)" tip="{lang block_type_convert_tips}" />
+							<!--{else}-->
+							$blockclassname
+							<!--{/if}-->
+
+
+
+						<th width="80">{lang block_data_source}
+
+							<select name="script" onchange="block_get_setting('$_GET[classname]', this.value, '$block[bid]');">
+							<!--{loop $theclass[script] $bkey $bname}-->
+							<option value="$bkey"{$scriptarr[$bkey]}>$bname</option>
+							<!--{/loop}-->
+							</select>
+							<!--{if $is_recommendable}-->
+								&nbsp;<label><input type="checkbox" name="isblank" id="isblank" value="1" {if $block[isblank]} checked{/if} onclick="switchSetting();" />{lang block_isblank}</label>
+								<img src="{IMGURL}/common/mark/faq.svg" alt="Tip" class="svgicon small" onmouseover="showTip(this)" tip="{lang block_isblank-tips}" />
+							<!--{/if}-->
+
+
+					<tr class="l">
+
+
+							<a id="a_setting_show" onclick="toggleSettingShow();"class="xi2">{lang hide_setting}</a>
+
+
+					<tbody id="tbody_setting"{if $block[isblank]} style="display:none;"{/if}>
+						<!--{subtemplate portal/portalcp_block_setting}-->
+					</tbody>
+					<!--{if !$is_htmlblock}-->
+
+						{lang block_item_display_num}
+						<input type="text" name="shownum" value="$block[shownum]" />
+
+					<!--{/if}-->
+					<!--{if !$nocachetime}-->
+
+						<th width="80">{lang block_data_update_cache}
+
+							<span><input type="text" name="cachetime" id="txt_cachetime" size="4" maxlength="6" value="$block[cachetime_min]" /> {lang minute}</span>
+							<span id="tbody_range"{if $block[punctualupdate]} style="visibility:hidden;"{/if}>
+								&nbsp; {lang cachetimerange}
+								<select name="cachetimerangestart" class="ps vm" >
+									<!--{loop $cachetimerange $value}-->
+									<option value="$value" {if $value == $block['cachetimerange'][0]} selected="selected"{/if}>{$value}{lang point}</option>
+									<!--{/loop}-->
+								</select> -
+								<select name="cachetimerangeend" class="ps vm" >
+									<!--{loop $cachetimerange $value}-->
+									<option value="$value" {if $value == $block['cachetimerange'][1]} selected="selected"{/if}>{$value}{lang point}</option>
+									<!--{/loop}-->
+								</select>
+							</span>
+							</p>
+							<p class="ptn xi2">
+								<a onclick="blockSetCacheTime(10);this.blur();">10{lang minute}</a>&nbsp;
+								<a onclick="blockSetCacheTime('60');this.blur();">1{lang hour}</a>&nbsp;
+								<a onclick="blockSetCacheTime('1440');this.blur();">1{lang day}</a>&nbsp;
+								<label for="ckpunctualupdate"><input type="checkbox" name="punctualupdate" id="ckpunctualupdate" onclick="$('tbody_range').style.visibility = (this.checked ? 'hidden' : 'visible');" value="1"{if $block[punctualupdate]} checked="checked"{/if} />{lang punctualupdate}</label>
+								<img src="{IMGURL}/common/mark/faq.svg" alt="Tip" class="svgicon small" onmouseover="showTip(this)" tip="{lang punctualupdate_tips}" />
+								
+								<a onclick="blockSetCacheTime('0');this.blur();">{lang not_auto_update}</a>&nbsp;
+								<a onclick="blockSetCacheTime('-1');this.blur();">{lang never_update}</a>
+							</p>
+
+
+					<!--{/if}-->
+					<!--{if !$is_htmlblock}-->
+
+						<th width="80">{lang block_display_style}
+
+							<select name="styleid" onchange="block_show_thumbsetting('$_GET[classname]', this.value, '$block[bid]')">
+							<!--{if $bid && $block[styleid]==0}-->
+							<option value="0" selected>{lang nest_module}</option>
+							<!--{/if}-->
+							<!--{loop $theclass[style] $key $value}-->
+							<!--{eval $thestyle = count($thestyle) > 1 ? $thestyle : $theclass['style'][$key];}-->
+							<option value="$key"{$stylearr[$key]}>$value[name]</option>
+							<!--{/loop}-->
+							</select>
+							<!--{if $blocktype}-->
+							&nbsp;&nbsp;
+							<label for="ck_hidedisplay"><input type="checkbox" name="hidedisplay" id="ck_hidedisplay" value="1"{if $block[hidedisplay]} checked="checked"{/if} />{lang hidedisplay}</label>
+							<img src="{IMGURL}/common/mark/faq.svg" alt="Tip" class="svgicon small" onmouseover="showTip(this)" tip="{lang hidedisplay_tips}" />
+							<!--{/if}-->
+
+
+
+					<!--{/if}-->
+					<tbody id="tbody_thumbsetting">
+						<!--{subtemplate portal/portalcp_block_thumbsetting}-->
+					</tbody>
+					<!--{if !$is_htmlblock}-->
+
+						<th width="80">{lang block_data_custom}
+
+							<textarea name="summary" id="block_sumamry_content" cols="40" rows="3" class="pt mbn" style="display:none">$block[summary]</textarea>
+							<p class="pns">
+								<button type="button" id="a_summary_show" onclick="showBlockSummary();"><em>{lang edit_nest_content}</em></button>
+								<button type="button" id="a_summary_hide" onclick="hideBlockSummary();" style="display:none;"><span>{lang hide}</span></a>
+							</p>
+
+
+					<!--{/if}-->
+				</table>
+			</div>
+		</div>
+		<div class="o pns">
+			<input type="hidden" name="blocksubmit" value="true" />
+			<input type="hidden" name="handlekey" value="$_GET['handlekey']" />
+			<input type="hidden" name="eleid" value="$_GET['eleid']" />
+			<input type="hidden" name="formhash" value="{FORMHASH}" />
+			<button type="submit" class="pn pnc"><strong>{lang confirms}</strong></button>
+			<!--{if $_G[inajax]}--><button type="button" onclick="hideWindow('$_GET[handlekey]');{if empty($bid) && $_GET['from']!='cp'}drag.removeBlock('$_GET[eleid]',true);{/if}return false;"><strong>{lang cancel}</strong></button><!--{/if}-->
+		</div>
+	</form>
+<!--{elseif $op == 'data'}-->
+	<!--{if $_G[inajax]}-->
+	<div class="header">
+		<span class="title-tip" id="return_$_GET[handlekey]">{lang block_data}</span>
+		<a onclick="hideWindow('$_GET['handlekey']');" class="close" title="{lang close}">×</a>
+	</div>
+	<ul class="tb cl">
+		$blocknav
+		<button class="pn pnc y" title="{lang block_adddata_comment}" onclick="showWindow('$_GET[handlekey]', 'portal.php?mod=portalcp&ac=block&bid=$bid&op=additem{if $_G[inajax]}&itemfrom=ajax{/if}{if $_GET[from]}&from=$_GET[from]{/if}')"><em>{lang block_adddata}</em></button>
+	</ul>
+	<!--{/if}-->
+	<form id="blockformdata" name="blockformdata" method="post" autocomplete="off" action="portal.php?mod=portalcp&ac=block&op=data&classname=$_GET[classname]&bid=$block[bid]&eleid=$_GET['eleid']&tpl=$_GET[tpl]"{if $_G[inajax]} onsubmit="ajaxpost('blockformdata','return_$_GET[handlekey]','return_$_GET[handlekey]','onerror');"{/if}>
+		<div class="c"{if $_G[inajax]} style="width:490px; {if $_GET[from]=='cp'}max-height:260px;{else}max-height:380px;{/if}height:auto !important;{if $_GET[from]=='cp'}height:260px;{else}height:380px;{/if} _padding-right: 17px; overflow-x: hidden; overflow-y: auto;"{/if}>
+			<div id="block_data">
+				<table class="dt mtm mbm" style="table-layout:fixed">
+
+						<th width="34">{lang locked}
+						<th width="50">{lang position}
+						{lang title}
+						<th width="80">{lang operation}
+
+					<!--{if $itemlist}-->
+						<!--{loop $itemlist $item}-->
+
+							<!--{if $item[ispreorder]}-->
+							{lang preorder}
+							$item[displayorder]
+							<!--{else}-->
+							<input type="checkbox" name="locked[{$item[itemid]}]" value="1"{if $item[itemtype]=='1'} checked="checked"{/if} />
+							<input type="text" name="displayorder[{$item[itemid]}]" size="2" maxlength="2" value="$item[displayorder]" />
+							<!--{/if}-->
+							[{$item['itemtypename']}] $item['title']
+
+							<a href="portal.php?mod=portalcp&ac=block&op=item&bid=$block[bid]&itemid=$item[itemid]{if $_G[inajax]}&itemfrom=ajax{/if}{if $_GET[from]}&from=$_GET[from]{/if}" onclick="showWindow('showblock', this.getAttribute('href'));">{lang edit}</a>
+								<!--{if $item[itemtype]=='1'}-->
+							<a onclick="block_delete_item('$block[bid]', '$item[itemid]', 1, '{if $_G[inajax]}ajax{/if}', '{if $_GET[from]}$_GET[from]{/if}'); return false;">{lang delete}</a>
+								<!--{else}-->
+							<a onclick="block_delete_item('$block[bid]', '$item[itemid]', 0, '{if $_G[inajax]}ajax{/if}', '{if $_GET[from]}$_GET[from]{/if}'); return false;">{lang block_stop}</a>
+								<!--{/if}-->
+
+
+						<!--{/loop}-->
+					<!--{else}-->
+
+							<td colspan="4"><p class="emp">{lang no_data}</p>
+
+					<!--{/if}-->
+				</table>
+				<!--{if $block[param][bannedids]}-->
+				<h4><a onclick="display('p_bannedids');return false;">{lang block_view_banned_data}</a></h4>
+				<p id="p_bannedids" style="display:none;">
+					<label>{lang block_data_block}</label>
+					<input type="text" name="bannedids" id="bannedids" value="$block[param][bannedids]" />
+					<button type="button" class="pn pnc" id="bannedidssubmit" onclick="blockbanids('$block[bid]');" ><strong>{lang save}</strong></button>
+				</p>
+				<!--{/if}-->
+			</div>
+		</div>
+		<!--{if $_G[inajax] || $itemlist}-->
+			<div class="o pns">
+				<input type="hidden" name="eleid" value="$_GET['eleid']" />
+				<input type="hidden" name="handlekey" value="$_GET['handlekey']" />
+				<input type="hidden" name="updatesubmit" value="true" />
+				<input type="hidden" name="modifiedids" value="" />
+				<input type="hidden" name="formhash" value="{FORMHASH}" />
+				<button type="submit" class="pn xg1" id="blockformdatasubmit" disabled="disabled"><strong>{lang save}</strong></button>
+				<!--{if $_G[inajax]}--><button type="button" onclick="hideWindow('$_GET[handlekey]');return false;"><strong>{lang cancel}</strong></button><!--{/if}-->
+			</div>
+		<!--{/if}-->
+	</form>
+	<script type="text/javascript" reload="1">
+	var formoldvalue = {'checkbox':[], 'text':[]};
+	var inputs = $('blockformdata').getElementsByTagName('table')[0].getElementsByTagName('input');
+	for(var i = 0; i < inputs.length; i++){
+		if(inputs[i]['type'].toLowerCase() == 'checkbox') {
+			formoldvalue['checkbox'][inputs[i]['name']] = inputs[i].checked;
+			_attachEvent(inputs[i], 'click', formcheckvalue);
+		} else if(inputs[i]['type'].toLowerCase() == 'text') {
+			formoldvalue['text'][inputs[i]['name']] = inputs[i].value;
+			_attachEvent(inputs[i], 'keyup', formcheckvalue);
+			_attachEvent(inputs[i], 'blur', formcheckvalue);
+		}
+	}
+
+	function formcheckvalue(){
+		var modifiedids = [];
+		var enabled = false;
+		for(i = 0; i < inputs.length; i++){
+			if(inputs[i]['type'].toLowerCase() == 'checkbox') {
+				if(formoldvalue['checkbox'][inputs[i]['name']] != inputs[i].checked){
+					enabled = true;
+				}
+			} else if(inputs[i]['type'].toLowerCase() == 'text') {
+				if(formoldvalue['text'][inputs[i]['name']] != inputs[i].value){
+					enabled = true;
+					var itemid = inputs[i]['name'].match(/\d+/);
+					if(itemid && itemid[0]) {
+						modifiedids.push(itemid[0]);
+					}
+				}
+			}
+		}
+		if(enabled) {
+			$('blockformdatasubmit').disabled = '';
+			$('blockformdatasubmit').className = $('blockformdatasubmit').className.replace(' xg1', ' pnc');
+		} else{
+			$('blockformdatasubmit').disabled = 'disabled';
+			$('blockformdatasubmit').className = $('blockformdatasubmit').className.replace(' pnc', ' xg1');
+		}
+		$('blockformdata')['modifiedids'].value = modifiedids+'';
+	}
+
+	function blockbanids(bid) {
+		var x = new Ajax();
+		x.get('portal.php?mod=portalcp&ac=block&op=banids&inajax=1&bid='+bid+'&bannedids='+$('bannedids').value, function(s){
+			<!--{if $_G[inajax]}-->
+			succeedhandle_$_GET[handlekey] ('', '', {'bid':bid});
+			showWindow('showblock', 'portal.php?mod=portalcp&ac=block&op=data&bid='+bid+'&tpl='+document.nestform.template.value, 'get', -1);
+			<!--{else}-->
+			location.reload();
+			<!--{/if}-->
+		});
+	}
+	</script>
+
+<!--{elseif $op == 'style'}-->
+	<!--{if $_G[inajax]}-->
+	<div class="header">
+		<span class="title-tip" id="return_$_GET[handlekey]">{lang block_template}</span>
+		<a onclick="hideWindow('$_GET['handlekey']');" class="close" title="{lang close}">×</a>
+	</div>
+	<ul class="tb cl">
+		$blocknav
+	</ul>
+	<!--{/if}-->
+	<form id="blockstyleform" name="blockformdata" method="post" autocomplete="off" action="portal.php?mod=portalcp&ac=block&op=style&classname=$_GET[classname]&bid=$block[bid]&eleid=$_GET['eleid']&tpl=$_GET[tpl]{if $_GET[from]}&from=$_GET[from]{/if}"{if $_G[inajax]} onsubmit="ajaxpost('blockstyleform','return_$_GET[handlekey]','return_$_GET[handlekey]','onerror');"{/if}>
+		<div class="c"{if $_G[inajax]} style="width:490px; {if $_GET[from]=='cp'}max-height:260px;{else}max-height:380px;{/if}height:auto !important; {if $_GET[from]=='cp'}height:260px;{else}height:380px;{/if} _padding-right: 17px; overflow-x: hidden; overflow-y: auto;"{/if}>
+			<!--{if $block[hidedisplay]}-->
+			<div>
+				<p style="color:red;">{lang portalcp_block_message1}</p>
+				<p>	<b>{lang reference_call_data}:</b></p>
+				<p>$samplecode</p>
+				<p><b>{lang reference_call_field}:</b></p>
+				<table width="100%">
+					<!--{loop $theclass[fields] $key $value}-->
+
+						 $value[name]
+						 <!--{echo '$'}-->$key
+
+					 <!--{/loop}-->
+				</table>
+			</div>
+			<!--{else}-->
+			 <div id="block_style">
+				<p class="pns mtn mbn"><button type="button" id="a_summary_show" onclick="$('stylename').style.display='';"><em>{lang mod_save_to}</em></button></p>
+				<p class="mtn mbm" id="stylename" style="display:none;">
+					{lang mod_name}: <input type="text" name="name" />
+					<br />
+					{lang portalcp_block_message2}
+				</p>
+				<textarea name="template" rows="8" style="width: 98%;">$template</textarea>
+			</div>
+			<table class="dt mtm mbm">
+
+					 {lang grammar}
+					 {lang statements}
+
+				<!--{loop $theclass[fields] $key $value}-->
+
+					$value[name]
+					{{$key}}
+
+				<!--{/loop}-->
+				<!--{if in_array($block['blockclass'], array('forum_thread', 'portal_article', 'group_thread'), true)}-->
+
+					{lang more_url}
+					{{moreurl}}
+
+				<!--{/if}-->
+
+					{lang current_data_order}
+					{{currentorder}}
+
+
+					{lang current_data_odd}
+					{{parity}}
+
+
+					{lang default_loop_content}
+					[loop]...[/loop]
+
+
+					{lang replace_loop_content}
+					[order=N]...[/order]
+
+
+					{lang special_data_content}
+					[index=N]...[/index]
+
+
+					{lang set_open_link}
+					&lt;a href="{{url}}"{{target}}&gt;{{title}}&lt;/a&gt;
+
+
+					{lang set_small_pic}
+					&lt;img src="{{pic}}" width="{{picwidth}}" height="{{picheight}}" /&gt;
+
+
+					{lang more_introduction}
+					{lang reference_message}
+
+			</table>
+			<!--{/if}-->
+		</div>
+		<div class="o pns">
+			<input type="hidden" name="eleid" value="$_GET['eleid']" />
+			<input type="hidden" name="handlekey" value="$_GET['handlekey']" />
+			<input type="hidden" name="stylesubmit" value="true" />
+			<input type="hidden" name="formhash" value="{FORMHASH}" />
+			<button type="submit" class="pn pnc"><strong>{lang update}</strong></button>
+			<!--{if $_G[inajax]}--><button type="button" onclick="hideWindow('$_GET[handlekey]');return false;"><strong>{lang cancel}</strong></button><!--{/if}-->
+		</div>
+	</form>
+<!--{elseif $op == 'itemdata'}-->
+	<!--{if $datalist}-->
+		<form id="blockformitemdata" name="blockformitemdata" method="post" autocomplete="off" action="portal.php?mod=portalcp&ac=block&op=itemdata&bid=$block[bid]{if $_GET[from]}&from=$_GET[from]{/if}">
+			<table class="dt mtm mbm">
+
+					<th width="40">{lang delete}
+					{lang display_order}
+					{lang title}
+					{lang pass_moderate_time}
+					{lang is_stick}
+					<th width="80">{lang operation}
+
+				<!--{loop $datalist $item}-->
+
+					<input type="checkbox" name="ids[]" value="$item[dataid]" />
+					<input type="hidden" name="olddisplayorder[{$item[dataid]}]" value="$item[displayorder]" />
+						<input type="input" name="displayorder[{$item[dataid]}]" value="$item[displayorder]" size="2" maxlength="4" />
+					<a href="$item[url]" target="_blank">$item['title']</a>
+					$item['verifiedtime']
+					<!--{if $item['stickgrade']}-->{lang stick} $item[stickgrade]<!--{else}-->{lang no}<!--{/if}-->
+
+						<a href="portal.php?mod=portalcp&ac=block&op=managedata&bid=$block[bid]&dataid=$item[dataid]{if $_GET[from]}&from=$_GET[from]{/if}" onclick="showWindow('showblock', this.getAttribute('href'));">{lang edit}</a>
+
+
+				<!--{/loop}-->
+
+					<td colspan="5">
+						<label for="chkall" onclick="checkall(this.form, 'ids')"><input type="checkbox" name="chkall" id="chkall" />{lang select_all}</label>
+						<input type="hidden" name="handlekey" value="$_GET['handlekey']" />
+						<input type="hidden" name="deletesubmit" value="true" />
+						<input type="hidden" name="formhash" value="{FORMHASH}" />
+						<button type="submit" class="pn pnc"><strong>{lang confirms}</strong></button>
+
+
+			</table>
+			<!--{if $multi}--><div class="">$multi</div><!--{/if}-->
+		</form>
+	<!--{else}-->
+		<p class="emp">{lang no_data_mod}</p>
+	<!--{/if}-->
+<!--{elseif $op == 'setting'}-->
+	<!--{subtemplate portal/portalcp_block_setting}-->
+
+<!--{elseif $op == 'item' || $op == 'additem'}-->
+	<script type="text/javascript" src="{$_G[setting][jspath]}calendar.js?{VERHASH}"></script>
+	<div class="header">
+		<span class="title-tip" id="return_$_GET[handlekey]">{lang block_edit}</span>
+		<!--{if $_GET[itemfrom]=='ajax'}--><a href="portal.php?mod=portalcp&ac=block&op=data&bid=$bid{if $_GET[from]}&from=$_GET[from]{/if}" onclick="showWindow('showblock', this.href);closecalendar(e);return false;"> &lt;&lt;{lang return} </a><!--{/if}-->
+		<!--{if $_G[inajax]}--><a onclick="hideWindow('$_GET['handlekey']');" class="close" title="{lang close}">×</a><!--{/if}-->
+	</div>
+	<form id="blockform" name="blockform" method="post" autocomplete="off" action="portal.php?mod=portalcp&ac=block&op=$op&bid=$block[bid]&itemid=$itemid{if $_GET[from]}&from=$_GET[from]{/if}" onsubmit="if(check_itemdata_lentgh(this)) {ajaxpost('blockform','return_$_GET[handlekey]','return_$_GET[handlekey]','onerror');} else { return false;}" enctype="multipart/form-data">
+		<div class="c" style="height:$height; width: 490px; _padding-right: 17px; overflow-x: hidden; overflow-y: auto;">
+			<table class="tfm">
+
+					{lang block_data_from_datasource}
+
+						<select id="push_idtype" class="ps vm">
+							<option value="tids" selected="selected">{lang thread}id</option>
+							<option value="blogids">{lang blog}id</option>
+							<option value="aids">{lang article}id</option>
+							<option value="picids">{lang image}id</option>
+						</select>
+						<input type="text" name="push_id" id="push_id" class="px p_fre vm" value="" />
+						<button type="button" onclick="block_pushitem('$block[bid]', '$itemid')"><span>{lang grab}</span></button>
+
+
+
+					{lang block_display_position}
+
+						<select name="displayorder" class="ps vm">
+						<!--{loop $orders $value}-->
+							<option value="$value"$orderarr[$value]>$value</option>
+						<!--{/loop}-->
+						</select>
+						&nbsp;
+						<!--{if $itemid && $item[idtype] != 'rand'}-->
+						<label for="lock_item"><input type="checkbox" name="locked" id="lock_item" onclick="$('tbody_orderitem').style.display=this.checked ? '' : 'none';" value="1"{if $item[itemtype]=='1'}checked="checked"{/if} />{lang locked}</label>
+						<!--{else}-->
+						<input type="hidden" name="locked" value="1" />
+						<label for="lock_item"><input type="checkbox" name="locked_disable" id="lock_item" value="1" checked="checked" disabled="disabled" />{lang locked}</label>
+						<!--{/if}-->
+
+
+				<tbody id="tbody_orderitem"{if $itemid && $item[itemtype]!='1'} style="display:none;"{/if}>
+
+						{lang block_start_time}
+
+							<input type="text" class="px p_fre" name="startdate"{if $item[startdate]} value="$blockitem[startdate]"{/if} onclick="showcalendar(event, this, true)" />
+							<p class="d">{lang block_start_time_comment}</p>
+
+
+
+						{lang block_expire_time}
+
+							<input type="text" class="px p_fre" name="enddate"{if $item[enddate]} value="$blockitem[enddate]"{/if} onclick="showcalendar(event, this, true)" />
+							<p class="d">{lang block_expire_time_comment}</p>
+
+
+				</tbody>
+				<tbody id="tbody_pushcontent">
+				<!--{template portal/portalcp_block_itemfields}-->
+				</tbody>
+			</table>
+		</div>
+		<div class="o pns">
+			<input type="hidden" name="itemsubmit" value="true" />
+			<input type="hidden" name="handlekey" value="$_GET['handlekey']" />
+			<input type="hidden" name="formhash" value="{FORMHASH}" />
+			<button type="submit" class="pn pnc"><strong>{lang submit}</strong></button>
+			<!--{if $_G[inajax]}--><button type="button" onclick="hideWindow('$_GET[handlekey]');return false;"><strong>{lang cancel}</strong></button><!--{/if}-->
+		</div>
+	</form>
+	<script type="text/javascript" reload="1">
+		if (typeof ctitlepb_frame == 'object' && !BROWSER.ie) {delete ctitlepb_frame;}
+		if (typeof csummarypb_frame == 'object' && !BROWSER.ie) {delete csummarypb_frame;}
+		function succeedhandle_$_GET['handlekey'] (url, message, values) {
+			<!--{if $_GET[itemfrom]=='ajax'}-->
+			showWindow('$_GET[handlekey]', 'portal.php?mod=portalcp&ac=block&op=data<!--{if $_GET[from]}-->&from=$_GET[from]<!--{/if}-->&bid='+values['bid'], 'get' ,0);
+			drag.blockForceUpdate('portal_block_'+values['bid']);
+			<!--{else}-->
+			hideWindow('$_GET[handlekey]');
+			location.reload();
+			<!--{/if}-->
+		}
+	</script>
+
+<!--{elseif $op == 'push'}-->
+	<!--{template portal/portalcp_block_itemfields}-->
+
+<!--{elseif $op == 'recommend'}-->
+	<!--{if $isrepeatrecommend}-->
+
+		<div class="alert hi-warning">{lang data_repeat_recommend}</div>
+
+	<!--{/if}-->
+	<!--{if $perm[allowmanage] || !$perm[needverify]}-->
+
+		<div class="ccbox">
+			<input type="checkbox" name="updateblock" id="ck_updateblock" value="1" checked="checked" />
+			<label for="ck_updateblock">{lang todo_updateblock}</label>
+			<input type="checkbox" name="needverify" id="ck_needverify" value="1"{if isset($item[isverified]) && !$item[isverified]} checked="checked"{/if} />
+			<label for="ck_needverify">{lang need_moderate}</label>
+        </div>
+
+	<!--{/if}-->
+	<!--{template portal/portalcp_block_itemfields}-->
+	<!--{if !$perm[allowmanage] && $perm[needverify]}-->
+    <p>{lang verify_message}</p>
+	<!--{/if}-->
+<!--{elseif $op == 'verifydata'}-->
+	<script type="text/javascript" src="{$_G[setting][jspath]}calendar.js?{VERHASH}"></script>
+	<div class="header">
+		<span class="title-tip" id="return_$_GET[handlekey]">{lang moderate_data}</span>
+		<!--{if $_G[inajax]}--><a onclick="hideWindow('$_GET['handlekey']');" class="close" title="{lang close}">×</a><!--{/if}-->
+	</div>
+	<form id="dataform" name="dataform" method="post" autocomplete="off" action="portal.php?mod=portalcp&ac=block&op=verifydata&bid=$block[bid]&dataid=$dataid{if $_GET[from]}&from=$_GET[from]{/if}" onsubmit="ajaxpost('dataform','return_$_GET[handlekey]','return_$_GET[handlekey]','onerror');" enctype="multipart/form-data">
+		<div class="ccbox">
+            <div id="tbody_pushcontent">
+            <!--{template portal/portalcp_block_itemfields}-->
+            </div>
+            <input type="checkbox" name="updateblock" id="ckupdateblock" value="1" />
+            <label for="ckupdateblock">{lang update_mod}</label>
+		</div>
+		<div class="o pns">
+			<input type="hidden" name="verifydatasubmit" value="true" />
+			<input type="hidden" name="handlekey" value="$_GET['handlekey']" />
+			<input type="hidden" name="formhash" value="{FORMHASH}" />
+			<button type="submit" class="pn pnc"><strong>{lang passed}</strong></button>
+		</div>
+	</form>
+	<script type="text/javascript" reload="1">
+		function succeedhandle_$_GET['handlekey'] (url, message, values) {
+			hideWindow('$_GET[handlekey]');
+			location.reload();
+		}
+	</script>
+<!--{elseif $op == 'managedata'}-->
+
+	<script type="text/javascript" src="{$_G[setting][jspath]}calendar.js?{VERHASH}"></script>
+	<div class="header">
+		<span class="title-tip" id="return_$_GET[handlekey]">{lang edit_data}</span>
+		<!--{if $_G[inajax]}--><a onclick="hideWindow('$_GET['handlekey']');" class="close" title="{lang close}">×</a><!--{/if}-->
+	</div>
+	<form id="dataform" name="dataform" method="post" autocomplete="off" action="portal.php?mod=portalcp&ac=block&op=managedata&bid=$block[bid]&dataid=$dataid{if $_GET[from]}&from=$_GET[from]{/if}" onsubmit="ajaxpost('dataform','return_$_GET[handlekey]','return_$_GET[handlekey]','onerror');" enctype="multipart/form-data">
+		<div class="c" style="height:$height; width: 490px; _padding-right: 17px; overflow-x: hidden; overflow-y: auto;">
+			<table class="tfm">
+
+					{lang stick_level}
+
+						<select name="stickgrade">
+							<option value="0"{if empty($item['stickgrade'])} selected{/if}>{lang not_stick}</option>
+							<!--{loop range(1,10) $k}-->
+							<option value="$k"{if $item['stickgrade']=='$k'} selected{/if}>{lang stick}$k</option>
+							<!--{/loop}-->
+						</select>
+
+
+				<tbody id="tbody_pushcontent">
+				<!--{template portal/portalcp_block_itemfields}-->
+				</tbody>
+			</table>
+		</div>
+		<div class="o pns">
+			<input type="hidden" name="managedatasubmit" value="true" />
+			<input type="hidden" name="handlekey" value="$_GET['handlekey']" />
+			<input type="hidden" name="formhash" value="{FORMHASH}" />
+			<button type="submit" class="pn pnc"><strong>{lang submit}</strong></button>
+		</div>
+	</form>
+	<script type="text/javascript" reload="1">
+		function succeedhandle_$_GET['handlekey'] (url, message, values) {
+			hideWindow('$_GET[handlekey]');
+			location.reload();
+		}
+	</script>
+<!--{elseif $op == 'thumbsetting'}-->
+	<!--{subtemplate portal/portalcp_block_thumbsetting}-->
+<!--{elseif $op == 'getblock'}-->
+	<!--{if !$_G[inajax]}-->
+	<div><div class="area"><div class="frame move-span frame-1 cl">
+	<!--{/if}-->
+	$html
+	<!--{if !$_G[inajax]}-->
+	</div></div></div>
+	<!--{/if}-->
+<!--{elseif $op == 'convert'}-->
+	<script type="text/javascript" reload="1">
+		showWindow('showblock', 'portal.php?mod=portalcp&ac=block&op=block<!--{if $_GET[from]}-->&from=$_GET[from]<!--{/if}-->&bid='+$bid+'&tpl='+document.nestform.template.value, 'get', -1);
+		drag.blockForceUpdate('portal_block_$bid');
+	</script>
+<!--{elseif $op == 'favorite'}-->
+	<script type="text/javascript">
+		$('bfav_$bid').parentNode.onmouseover = '';
+		$('bfav_$bid').parentNode.onmouseout = '';
+	</script>
+	<!--{if $favoriteop == 'add'}-->
+	<img src="{STATICURL}image/common/fav.gif" alt="fav" title="{lang block_cancel_favorite}" class="favmark" />
+	<!--{else}-->
+	<img src="{STATICURL}image/common/fav_grey.gif" alt="normal" title="{lang block_favorite}" class="favmark" />
+	<!--{/if}-->
+<!--{elseif $op == 'moreurl'}-->
+	<!--{if $_G[inajax]}-->
+	<div class="header">
+		<span class="title-tip" id="return_$_GET[handlekey]">{lang block_moreurl}</span>
+		<!--{if $_G[inajax]}--><a onclick="hideWindow('$_GET['handlekey']');" class="close" title="{lang close}">×</a><!--{/if}-->
+	</div>
+	<ul class="tb cl">
+		$blocknav
+	</ul>
+	<!--{/if}-->
+	<form id="blockmoreurlform" name="blockformdata" method="post" autocomplete="off" action="portal.php?mod=portalcp&ac=block&op=moreurl&classname=$_GET[classname]&bid=$block[bid]{if $_GET[from]}&from=$_GET[from]{/if}"{if $_G[inajax]} onsubmit="ajaxpost('blockmoreurlform','return_$_GET[handlekey]','return_$_GET[handlekey]','onerror');"{/if}>
+		<div class="body">
+            {lang perpage} <img src="{IMGURL}/common/mark/faq.svg" alt="Tip" class="svgicon small" onmouseover="showTip(this)" tip="{lang perpage_tips}" />
+            <input type="input" name="perpage" id="perpage" value="$block['param']['moreurl']['perpage']" />
+            {lang seotitle} <img src="{IMGURL}/common/mark/faq.svg" alt="Tip" class="svgicon small" onmouseover="showTip(this)" tip="{lang seotitle_tips}" />
+            <input type="input" name="seotitle" id="seotitle" value="$block['param']['moreurl']['seotitle']" />
+            {lang seokeywords} <img src="{IMGURL}/common/mark/faq.svg" alt="Tip" class="svgicon small" onmouseover="showTip(this)" tip="{lang seokeywords_tips}" />
+            <textarea name="seokeywords" id="seokeywords" >$block['param']['moreurl']['seokeywords']</textarea>
+             {lang seodescription} <img src="{IMGURL}/common/mark/faq.svg" alt="Tip" class="svgicon small" onmouseover="showTip(this)" tip="{lang seodescription_tips}" />
+            <textarea name="seodescription" rows="4" id="seodescription">$block['param']['moreurl']['seodescription']</textarea>
+		</div>
+		<div class="footer">
+			<input type="hidden" name="handlekey" value="$_GET['handlekey']" />
+			<input type="hidden" name="moreurlsubmit" value="true" />
+			<input type="hidden" name="formhash" value="{FORMHASH}" />
+			<button class="btn-square" type="submit">{lang update}</button>
+			<!--{if $_G[inajax]}--><button class="btn-square" type="button" onclick="hideWindow('$_GET[handlekey]');return false;"><strong>{lang cancel}</strong></button><!--{/if}-->
+		</div>
+	</form>
+<!--{/if}-->
+
+<!--{if !$_G['inajax'] && in_array($op, array('block', 'data', 'itemdata'))}-->
+			</div>
+		</div>
+	</div>
+	<div class="appl">
+		<!--{subtemplate portal/portalcp_nav}-->
+	</div>
+</div>
+<!--{/if}-->
+<!--{template common/footer}-->

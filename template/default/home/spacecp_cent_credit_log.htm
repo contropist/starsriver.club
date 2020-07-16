@@ -1,0 +1,135 @@
+<!--{template home/spacecp_cent_header}-->
+	<div class="plate layout-2-type3 app-profile cloud">
+		<section class="col-1"><!--{template home/spacecp_cent_vnav}--></section>
+		<section class="col-2">
+            <!--{subtemplate home/spacecp_cent_header_userinfo}-->
+			<div class="vessel" id="setting_credit_header">
+				<!--{hook/spacecp_credit_top}-->
+				<!--{subtemplate home/spacecp_cent_credit_nav}-->
+				<!--{subtemplate home/spacecp_cent_credit_info}-->
+			</div>
+			<div class="vessel" id="setting_credit_log">
+				<!--{if $_GET[suboperation] != 'creditrulelog'}-->
+				<script type="text/javascript" src="{$_G[setting][jspath]}calendar.js?{VERHASH}"></script>
+				<form method="post" action="home.php?mod=spacecp&ac=credit&op=log">
+					<input type="hidden" name="op" value="log" />
+					<input type="hidden" name="ac" value="credit" />
+					<input type="hidden" name="mod" value="spacecp" />
+					<div class="panel no-gap">
+						<ol class="panel-container">
+							<li class="box size-7-0">
+								<div class="input-group">
+									<span>{lang credits}</span>
+									<select id="exttype" name="exttype">
+										<option value="0">{lang unlimited}</option>
+										<!--{loop $_G['setting']['extcredits'] $id $credit}-->
+										<option value="$id"{if $_GET[exttype]==$id} selected="selected"{/if}>$credit[title]</option>
+										<!--{/loop}-->
+									</select>
+									<span>{lang credit_income}</span>
+									<select id="income" name="income">
+										<option value="0"$incomeactives[0]>{lang credit_income_0}</option>
+										<option value="-1"$incomeactives[-1]>{lang credit_income_2}</option>
+										<option value="1"$incomeactives[1]>{lang credit_income_1}</option>
+									</select>
+									<span>{lang starttime_endtime}</span>
+									<input type="text" name="starttime" value="$_GET[starttime]" onclick="showcalendar(event, this)" readonly="readonly" />
+									<span>{lang credit_to}</span>
+									<input type="text" name="endtime" value="$_GET[endtime]" readonly="readonly" onclick="showcalendar(event, this)" />
+								</div>
+							</li>
+							<li class="box size-3-0">
+								<div class="input-group">
+									<span>{lang operation}</span>
+									$optypehtml
+								</div>
+							</li>
+						</ol>
+					</div>
+					<button class="maintheme" type="submit" name="search" value="true" style="margin: 15px auto">{lang srch}</button>
+				</form>
+			</div>
+			<div class="vessel" id="setting_credit_syslog">
+				<div class="dropmenu" style="position: absolute; top: 10px; right: 5px; width: 93px; z-index: 2">
+					<ul>
+						<li class="{if $_GET[suboperation] != 'creditrulelog'}active{/if}"><a href="home.php?mod=spacecp&ac=credit&op=log" hidefocus="true">{lang credit_log}</a></li>
+						<li class="{if $_GET[suboperation] == 'creditrulelog'}active{/if}"><a href="home.php?mod=spacecp&ac=credit&op=log&suboperation=creditrulelog" hidefocus="true">{lang credit_log_sys}</a></li>
+					</ul>
+				</div>
+				<table summary="{lang memcp_credits_log_payment}" class="dc">
+					<thead>
+						<tr>
+							<td width="200">{lang operation}</td>
+							<td width="200">{lang credit_change}</td>
+							<td width="500">{lang detail}</td>
+							<td width="340px">{lang changedateline}</td>
+						</tr>
+					</thead>
+					<tbody>
+						<!--{if $loglist}-->
+							<!--{loop $loglist $value}-->
+							<!--{eval $value = makecreditlog($value, $otherinfo);}-->
+							<tr>
+								<td><!--{if $value['operation']}--><a href="home.php?mod=spacecp&ac=credit&op=log&optype=$value['operation']">$value['optype']</a><!--{else}-->$value['title']<!--{/if}--></td>
+								<td>$value['credit']</td>
+								<td><!--{if $value['operation']}-->$value['opinfo']<!--{else}-->$value['text']<!--{/if}--></td>
+								<td>$value['dateline']</td>
+							</tr>
+							<!--{/loop}-->
+						<!--{else}-->
+							<tr>
+								<td colspan="4" style="text-align: center">{lang global_nothing}</td>
+							</tr>
+						<!--{/if}-->
+					</tbody>
+				</table>
+				<script type="text/javascript">
+					simulateSelect('exttype','80px');
+					simulateSelect('income');
+					simulateSelect('optype');
+				</script>
+				<!--{elseif $_GET[suboperation] == 'creditrulelog'}-->
+					<!--region stystem_reward-->
+						<div class="dropmenu" style="position: absolute; top: 6px; right: 5px; width: 93px; z-index: 2">
+							<ul>
+								<li class="{if $_GET[suboperation] != 'creditrulelog'}active{/if}"><a href="home.php?mod=spacecp&ac=credit&op=log" hidefocus="true">{lang credit_log}</a></li>
+								<li class="{if $_GET[suboperation] == 'creditrulelog'}active{/if}"><a href="home.php?mod=spacecp&ac=credit&op=log&suboperation=creditrulelog" hidefocus="true">{lang credit_log_sys}</a></li>
+							</ul>
+						</div>
+						<table summary="{lang get_credit_histroy}" class="dc">
+							<thead>
+								<tr>
+									<td width="160">{lang action_name}</td>
+									<td width="120">{lang total_time}</td>
+									<td width="160">{lang cycles_num}</td>
+									<!--{loop $_G['setting']['extcredits'] $key $value}-->
+									<td width="80">$value[title]</td>
+									<!--{/loop}-->
+									<td width="240px">{lang last_award_time}</td>
+								</tr>
+							</thead>
+							<tbody>
+								<!--{eval $i = 0;}-->
+								<!--{loop $list $key $log}-->
+								<!--{eval $i++;}-->
+								<tr>
+									<td><a href="home.php?mod=spacecp&ac=credit&op=rule&rid=$log[rid]">$log[rulename]</a></td>
+									<td>$log[total]</td>
+									<td>$log[cyclenum]</td>
+									<!--{loop $_G['setting']['extcredits'] $key $value}-->
+									<!--{eval $creditkey = 'extcredits'.$key;}-->
+									<td>$log[$creditkey]</td>
+									<!--{/loop}-->
+									<td><!--{date($log[dateline], 'Y-m-d H:i')}--></td>
+								</tr>
+								<!--{/loop}-->
+							</tbody>
+						</table>
+					<!--endregion-->
+				<!--{/if}-->
+				<!--{if $multi}--><div class="pg">$multi</div><!--{/if}-->
+				<!--{hook/spacecp_credit_bottom}-->
+			</div>
+		</section>
+	</div>
+<!--{template common/footer}-->

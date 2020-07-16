@@ -1,0 +1,54 @@
+<!--{template common/header}-->
+
+<div class="header">
+	<span class="title-tip" id="return_$_GET[handlekey]"><!--{if $op == 'edit'}-->{lang collection_edit}<!--{else}-->{lang collection_create}<!--{/if}--></span>
+	<!--{if $_G[inajax]}--><a onclick="hideWindow('showMsgBox');" class="close" title="{lang close}">×</a><!--{/if}-->
+</div>
+<form action="forum.php?mod=collection&action=edit{if $op}&op={$op}{/if}{if $ctid}&ctid={$ctid}{/if}" onsubmit="return checklen();" method="post" enctype="multipart/form-data">
+	<script src="$_G[setting][jspath]/imgpreview.js"></script>
+	<input type="hidden" value="1" name="submitcollection" />
+	<input type="hidden" value="{$op}" name="op" />
+	<input type="hidden" value="{$ctid}" name="ctid" />
+	<input type="hidden" name="formhash" id="formhash" value="{FORMHASH}" />
+	<div class="body">
+		<p class="common-tip l"><i class="ft-aperture heart-pink"></i>{lang collection_key}：</p>
+		<div class="input-box">
+			<span>{lang collection_title}</span>
+			<input type="text" value="{$_G['collection']['name']}" name="title" id="formtitle" placeholder="{lang collection_title}"/>
+		</div>
+		<div class="input-box">
+			<span>{lang collection_keywords}</span>
+			<input type="text" value="{$_G['collection']['keyword']}" name="keyword" id="formkeyword" placeholder="{lang collection_keywords_desc}"/>
+		</div>
+		<textarea name="desc" id="formdesc" placeholder="{lang collection_desc}">{$_G['collection']['desc']}</textarea>
+		<p class="common-tip l"><i class="ft-image heart-pink"></i>{lang collection_cover}：{lang collection_cover_sug}</p>
+		<div class="img-upload" style="height: 180px;border: 1px solid #e6e6e6;">
+			<img id="coverpreviewer" src="{if $_G['collection']['cover']}{$_G[setting][attachurl]}/collection/{$_G['collection']['cover']}{else}{IMGURL}/common/no-img/no-img.svg{/if}" />
+			<input type="file" name="cover" id="cover" onchange="previewImage(this,'coverpreviewer')"/>
+			<label class="md ft-upload-cloud" for="cover"></label>
+		</div>
+	</div>
+	<div class="footer">
+		<!--{if $op != 'edit'}--><i class="str">{lang collection_remain_tips}</i><!--{/if}-->
+		<button class="btn-square" style="width: 50%;" type="submit" name="collectionsubmit" value="submit"><span><!--{if $op == 'edit'}-->{lang collection_edit}<!--{else}-->{lang collection_create}<!--{/if}--></span></button>
+	</div>
+</form>
+
+<script>
+	var titlelimit = '$titlelimit';
+	var desclimit = '$desclimit';
+
+	function checklen() {
+		if(mb_strlen($("formtitle").value) > titlelimit) {
+			showError({lang collection_title_exceed});
+			return false;
+		}
+		if(mb_strlen($("formdesc").value) > desclimit) {
+			showError({lang collection_desc_exceed});
+			return false;
+		}
+		return true;
+	}
+</script>
+
+<!--{template common/footer}-->

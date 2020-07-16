@@ -1,0 +1,106 @@
+<!--{template group/group_header}-->
+    <div class="plate layout-0">
+        <section>
+            <div class="group-container">
+                <!--{if $action != 'create'}-->
+                <div class="group-banner" id="groupbanner">
+                    <img class="banner-img" src="{if $_G['forum']['banner']}$_G[forum][banner]{else}{IMGURL}/common/no-img/no-group-banner.svg{/if}" alt="" />
+                    <img class="level-icon" src="$_G[current_grouplevel][icon]" title="{lang group_level}: $_G[current_grouplevel][leveltitle]">
+                </div>
+                <div class="group-header" id="group_header">
+                    <!--{if CURMODULE == 'group'}--><!--{hook/group_top}--><!--{else}--><!--{hook/forumdisplay_top}--><!--{/if}-->
+                    <div class="lie">
+                        <img class="avatar" src="{if $_G[forum][icon]}$_G[forum][icon]{else}{IMGURL}/common/no-img/no-group-avatar.svg{/if}">
+                        <span class="name">$_G[forum][name]</span>
+                        <i class="data">{lang create_on}: $_G[forum][dateline]</i>
+                        <i class="data">{lang group_perm_visit}：<!--{if $_G['forum']['gviewperm'] == 0}-->{lang group_perm_member_only}<!--{else}-->{lang group_perm_all_user}<!--{/if}--></i>
+                        <ul class="fun-btn tags">
+                            <li><a class="icon-heart" href="home.php?mod=spacecp&ac=favorite&type=group&id={$_G[forum][fid]}&handlekey=sharealbumhk_{$_G[forum][fid]}&formhash={FORMHASH}" id="a_favorite" onclick="showWindow(this.id, this.href, 'get', 0);" title="{lang favorite}">{lang favorite}</a></li>
+                            <!--{if $_G[setting][rssstatus] && !$_GET['archiveid']}--><li><a class="icon-rss" href="forum.php?mod=rss&fid=$_G[fid]&auth=$rssauth" target="_blank" title="RSS">RSS</a></li><!--{/if}-->
+                            <!--{if in_array($_G['adminid'], array(1,2))}--><li><a class="icon-share2" onclick="showWindow('grecommend$_G[fid]', 'forum.php?mod=group&action=recommend&fid=$_G[fid]');return false;">{lang group_push_to_forum}</a></li><!--{/if}-->
+                            <!--{if $status == 'isgroupuser' && helper_access::check_module('group')}--><li><a class="icon-user-plus" onclick="showWindow('invite','misc.php?mod=invite&action=group&id=$_G[fid]')">{lang my_buddylist_invite}</a></li><!--{/if}-->
+                            <!--{if $status == 'isgroupuser'}--><li><a class="icon-exit" onclick="showDialog('{lang group_exit_confirm}', 'confirm', '', function(){location.href='forum.php?mod=group&action=out&fid=$_G[fid]'})" href="javascript:;">{lang group_exit}</a></li><!--{/if}-->
+                        </ul>
+                    </div>
+                    <div class="hide-info trans-bounce">
+                        <i class="managers trans-outback">
+                            <!--{loop $groupmanagers $manage}-->
+                            <a class="avatar" href="home.php?mod=space&uid=$manage[uid]" target="_blank" title="$manage[username]">
+                                <!--{avatar($manage[uid],small)}-->
+                                <i class="tooltip" data-pos="tl">{lang group_moderator_title}：$manage[username]</i>
+                            </a>
+                            <!--{/loop}-->
+                        </i>
+                        <ul class="data-box">
+                            <li>
+                                <i class="name">{lang group_member_rank}</i>
+                                <i class="value">$groupcache[ranking][data][today]</i>
+                            </li>
+                            <li>
+                                <i class="name">{lang credits}</i>
+                                <i class="value">$_G[forum][commoncredits]</i>
+                            </li>
+                            <li>
+                                <i class="name">{lang posts}</i>
+                                <i class="value">$_G[forum][posts]</i>
+                            </li>
+                            <li>
+                                <i class="name">{lang member}</i>
+                                <i class="value">$_G[forum][membernum]</i>
+                            </li>
+                        </ul>
+                    </div>
+                    <p class="descrip"><!--{if $_G['forum']['description']}-->$_G['forum']['description']<!--{else}-->{lang group_description_no}<!--{/if}--></p>
+                </div>
+                <!--{/if}-->
+                <div class="group-body">
+                    <div class="plate layout-2-type2 fullwidth">
+                        <section class="col-1">
+                            <!--{if $action != 'create' && $status != 2 && $status != 3}-->
+                            <ul class="group-tabs" id="group_nav">
+                                <li class="{if $action == 'index'}active{/if}"><a href="forum.php?mod=group&fid=$_G[fid]#groupbanner"><i class="awe-home" style="color: #ff8c3d"></i>{lang home}</a></li>
+                                <li class="{if $action == 'list'}active{/if}"><a href="forum.php?mod=forumdisplay&action=list&fid=$_G[fid]#groupbanner"><i class="awe-comments" style="color: #2d8cff"></i>{lang group_discuss_area}</a></li>
+                                <li class="{if $action == 'memberlist' || $action == 'invite'}active{/if}"><a href="forum.php?mod=group&action=memberlist&fid=$_G[fid]#groupbanner"><i class="awe-user" style="color: #26bb88"></i>{lang group_member_list}</a></li>
+                                <!--{if $_G['forum']['ismoderator']}--><li class="{if $action == 'manage'}active{/if}"><a href="forum.php?mod=group&action=manage&fid=$_G[fid]#groupbanner"><i class="awe-cog" style="color: #934faf"></i>{lang group_admin}</a></li><!--{/if}-->
+                                <!--{if CURMODULE == 'group'}--><!--{hook/group_nav_extra}--><!--{else}--><!--{hook/forumdisplay_nav_extra}--><!--{/if}-->
+                            </ul>
+                            <script>nav_initialize('group_nav')</script>
+                            <!--{/if}-->
+                            <!--[nest=nestcontenttop]--><div id="nestcontenttop" class="area"></div><!--[/nest]-->
+                            <!--{if $action == 'index' && $status != 2 && $status != 3}-->
+                                <!--{subtemplate group/group_index}-->
+                            <!--{elseif $action == 'list'}-->
+                                <!--{subtemplate group/group_list}-->
+                            <!--{elseif $action == 'memberlist'}-->
+                                <!--{subtemplate group/group_memberlist}-->
+                            <!--{elseif $action == 'create'}-->
+                                <!--{subtemplate group/group_create}-->
+                            <!--{elseif $action == 'invite'}-->
+                                <!--{subtemplate group/group_invite}-->
+                            <!--{elseif $action == 'manage'}-->
+                                <!--{subtemplate group/group_manage}-->
+                            <!--{/if}-->
+                            <!--[nest=nestcontentmiddle]--><div id="nestcontentmiddle" class="area"></div><!--[/nest]-->
+                            <!--{if CURMODULE == 'group'}--><!--{hook/group_bottom}--><!--{else}--><!--{hook/forumdisplay_bottom}--><!--{/if}-->
+                            <!--[nest=nestcontentbottom]--><div id="nestcontentbottom" class="area"></div><!--[/nest]-->
+                        </section>
+                        <section class="col-2">
+                            <!--{subtemplate group/group_right}-->
+                            <div class="side-box">
+                                <div class="header"></div>
+                                <div class="body">
+                                    <!--[nest=nestsidetop]--><div id="nestsidetop" class="area"></div><!--[/nest]-->
+                                    <!--[nest=nest1]--><div id="nest1" class="area"></div><!--[/nest]-->
+                                    <!--[nest=nest2]--><div id="nest2" class="area"></div><!--[/nest]-->
+                                    <!--[nest=nest3]--><div id="nest3" class="area"></div><!--[/nest]-->
+                                    <!--{ad/text/wp a_t}-->
+                                </div>
+                            </div>
+                            <!--{if CURMODULE == 'group'}--><!--{hook/group_side_bottom}--><!--{else}--><!--{hook/forumdisplay_side_bottom}--><!--{/if}-->
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+<!--{template common/footer}-->

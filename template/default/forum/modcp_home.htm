@@ -1,0 +1,59 @@
+<div class="title trans-ease-slow">
+	<h2>{lang mod_notice_title}</h2>
+</div>
+<ol class="panel-container">
+    <li class="box size-10-0 no-edge">
+        <form  method="post" autocomplete="off" action="{$cpscript}?mod=modcp&action=$_GET[action]" id="list_adminnote">
+            <input type="hidden" name="formhash" value="{FORMHASH}" />
+            <input type="hidden" name="op" value="addnote" />
+            <div class="input-group-area f px4-radius">
+                <textarea name="newmessage" style="height: 120px;" placeholder="有什么要通知其他管理员的呢？"></textarea>
+                <div class="input-group f">
+                    <span>{lang modcp_home_adminnote_to}</span>
+                    <ul class="ccbox">
+                        <li><input type="checkbox" name="newaccess[1]" id="c_newaccess[1]" checked="checked" disabled="disabled" /><label for="c_newaccess[1]">{lang admin}</label></li>
+                        <li><input type="checkbox" name="newaccess[2]" id="c_newaccess[2]" value="1" checked="checked" /><label for="c_newaccess[2]">{lang supermod}</label></li>
+                        <li><input type="checkbox" name="newaccess[3]" id="c_newaccess[3]" value="1" checked="checked" /><label for="c_newaccess[3]">{lang moderator}</label></li>
+                    </ul>
+                    <span>{lang expire}</span>
+                    <input type="text" id="newexpiration" name="newexpiration" autocomplete="off" value="30{lang days}"/>
+                    <i class="input-group-btn">
+                        <button type="submit" name="submit" value="true">{lang modcp_home_adminnote_add}</button>
+                    </i>
+                </div>
+            </div>
+        </form>
+    </li>
+    <!--{if $notelist}-->
+    <li class="box size-10-0 no-edge">
+        <form class="box size-10-0" method="post" autocomplete="off" action="{$cpscript}?mod=modcp&action=$_GET[action]" name="notelist" id="notelist">
+            <input type="hidden" name="formhash" value="{FORMHASH}" />
+            <input type="hidden" name="op" value="delete" />
+            <input type="hidden" name="notlistsubmit" value="yes" />
+            <div class="waterfall" id="home-msgs">
+                <ul class="hidden" id="home-msgsource">
+                    <!--{loop $notelist $note}-->
+                    <li>
+                        <p class="message">$note[message]<span class="time">$note[expiration]{lang days}{lang later}{lang unexpire}</span></p>
+                        <div class="item-footer ccbox">
+                            $note[admin]
+                            $note[dateline]
+                            $note[checkbox]
+                            <div class="delcover"></div>
+                        </div>
+                    </li>
+                    <!--{/loop}-->
+                </ul>
+                <script>swaterfall('#home-msgs','#home-msgsource', 'msgbox');</script>
+            </div>
+            <div class="common-btn shadow-3D">
+                <input type="checkbox" name="ncheck" id="ncheck" onclick="checkall($('notelist'), 'delete', 'ncheck')" />
+                <label for="ncheck">{lang checkall}</label>
+                <button class="ft-trash-2" type="submit" name="submit" id="submit" value="true"></button>
+            </div>
+        </form>
+    </li>
+    <!--{else}-->
+    <li  class="box size-10-0 alert hi-info">{lang modcp_home_adminnote_nonexistence}</li>
+    <!--{/if}-->
+</ol>

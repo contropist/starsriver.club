@@ -1,0 +1,15 @@
+<!-- 记分板 -->
+    <!--{eval}--><!--
+        function profile_node_numbercard($post, $s, $e) {
+            echo '<div class="count-card">';
+            foreach($post['numbercard'] as $numbercardkey => $numbercard){
+                echo '<a href="'.$numbercard[link].'">
+                        <span class="num">'.dnumber($numbercard[value]).'</span>
+                        <span class="name">'.$numbercard[lang].'</span>
+                      </a>';
+            }
+            echo '</div>';
+        }
+    --><!--{/eval}-->
+
+

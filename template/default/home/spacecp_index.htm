@@ -1,0 +1,748 @@
+<!--{template common/header}-->
+
+<!--{if $_GET['op'] == 'start'}-->
+<ul class="content" id="contentstart" >
+    <li >
+        <a onclick="spacenest.getnest('layout');return false;" ><img src="{STATICURL}image/nest/layout.png" />{lang nest_layout_1}</a >
+    </li >
+    <li >
+        <a onclick="spacenest.getnest('style');return false;" ><img src="{STATICURL}image/nest/style.png" />{lang nest_style}</a >
+    </li >
+    <li >
+        <a onclick="spacenest.getnest('block');return false;" ><img src="{STATICURL}image/nest/module.png" />{lang nest_add_block}</a >
+    </li >
+    <li >
+        <a onclick="spacenest.getnest('nest', 'topicid', '$topic[topicid]');return false;" ><img src="{STATICURL}image/nest/nest.png" />{lang do_it_yourself}</a >
+    </li >
+</ul >
+<!--{elseif $_GET['op'] == 'layout'}-->
+<ul class="content selector" id="contentframe" >
+    <!--{loop $layoutarr $key $value}-->
+    <!--{eval $widthstr = implode(' ',$value);}-->
+    <li data="$widthstr" id="layout$key" >
+        <a onclick="spacenest.changeLayout('$key');this.blur();return false;" >$key</a ></li >
+    <!--{/loop}-->
+</ul >
+
+<!--{elseif $_GET['op'] == 'style'}-->
+<ul class="content" style="overflow-y: auto; height: 90px;" >
+    <!--{loop $themes $value}-->
+    <li >
+        <a onclick="spacenest.changeStyle('$value[dir]');this.blur();return false;" ><img src="{STATICURL}$value['dir']/preview.jpg" />$value['name']</a >
+    </li >
+    <!--{/loop}-->
+</ul >
+<!--{elseif $_GET['op'] == 'block'}-->
+<ul class="blocks content selector" >
+    <!--{loop $block $key $value}-->
+    <!--{if check_ban_block($key, $space)}-->
+    <li id="chk$key" ><a onclick="drag.toggleBlock('$key');this.blur();return false;" >$value</a ></li >
+    <!--{/if}-->
+    <!--{/loop}-->
+</ul >
+<!--{elseif $_GET['op'] == 'image'}-->
+<!--{eval $friendsname = array(1 => '{lang friendname_1}',2 => '{lang friendname_2}',3 => '{lang friendname_3}',4 => '{lang friendname_4}');}-->
+<div class="z" id="nestimg_prev" >$multi</div >
+<ul id="imagebody" >
+    <!--{loop $list $key $value}-->
+    <li class="thumb" >
+        <a onclick="return false;" ><img alt="" onclick="spacenest.setBgImage(this);" src="$value[pic]" /></a ></li >
+    <!--{/loop}-->
+</ul >
+<div class="z" id="nestimg_next" >$multi</div >
+<!--{if $albumlist[$albumid]['friend']}-->
+<script type="text/javascript" >showDialog('{lang the_album_pic}{$friendsname[$albumlist[$albumid][friend]]}', 'alert');</script >
+<!--{/if}-->
+<!--{elseif $_GET['op'] == 'nest'}-->
+<dl class="nest" >
+    <dt class="cl pns" >
+        <div class="y" >
+            <button class="pn pnc z {if !$list} hide{/if}" id="uploadmsg_button" onclick="Util.toggleEle('upload');" type="button" >
+                <span >{lang upload_new_pic}</span ></button >
+            <div class="z{if $list} hide{/if}" id="upload" >
+                <iframe frameborder="0" height="0" id="uploadframe" marginwidth="0" name="uploadframe" src="about:blank" width="0" ></iframe >
+                <form action="home.php?mod=spacecp&ac=index" autocomplete="off" enctype="multipart/form-data" id="uploadpic" method="post" name="uploadpic" onsubmit="return spacenest.uploadSubmit();" target="uploadframe" >
+                    <input class="t_input" name="attach" size="15" type="file" >
+                    <input name="formhash" type="hidden" value="{FORMHASH}" />
+                    <input name="albumid" type="hidden" value="$albumid" />
+                    <button id="btnupload" name="uploadsubmit" type="submit" value="true" >
+                        <span >{lang upload_start}</span ></button >
+                </form >
+            </div >
+            <span class="z" id="uploadmsg" ></span >
+        </div >
+        <span style="margin-right: 40px;" >
+			<select id="selectalbum" name="selectalbum" onchange="spacenest.getnest('image', 'albumid', this.value);" >
+				<!--{loop $albumlist $album}-->
+				<option $album[albumid]="=" $albumid ? echo value="$album[albumid]" {eval 'selected' : '';} >$album[albumname] - ($album[picnum] {lang magics_unit})</option>
+                <!--{/loop}-->
+			</select >
+		</span > <span >{lang editing}:</span >
+        <a id="nest_tag_body" onclick="spacenest.setCurrentnest('body');return false;" >{lang background}</a >
+        <a id="nest_tag_hd" onclick="spacenest.setCurrentnest('hd');return false;" >{lang header}</a >
+        <a id="nest_tag_blocktitle" onclick="spacenest.setCurrentnest('blocktitle');return false;" >{lang title_bar}</a >
+        <a id="nest_tag_ct" onclick="spacenest.setCurrentnest('ct');return false;" >{lang content_area}</a >
+
+        <a id="bg_button" onclick="spacenest.hideBg();return false;" style="margin-left: 40px;" >{lang cancel_bg_pic}</a >
+        <a id="recover_button" onclick="spacenest.recoverStyle();return false;" >{lang recover_style}</a >
+    </dt >
+    <dd >
+        <div class="photo_list cl" >
+            <div class="z" id="currentimgdiv" style="width:446px;" >
+                <center >
+                    <ul >
+                        <li class="thumb" style="border:1px solid #ccc; padding:2px;" >
+                            <img alt="" id="currentimg" src="" /></li >
+                    </ul >
+                    <div class="z cur1" onclick="spacenest.changeBgImgDiv();" >{lang replace}</div >
+                </center >
+            </div >
+            <div class="z" id="nestimages" style="width:446px;display:none;" >
+                <div class="z" id="nestimg_prev" >$multi</div >
+                <ul id="imagebody" >
+                    <!--{loop $list $key $value}-->
+                    <li class="thumb" >
+                        <a ><img alt="" onclick="spacenest.setBgImage(this);return false;" src="$value[pic]" /></a >
+                    </li >
+                    <!--{/loop}-->
+                </ul >
+                <div class="z" id="nestimg_next" >$multi</div >
+            </div >
+            <div class="z" style="padding-left: 7px; width: 160px; border: solid #CCC; border-width: 0 1px;" >
+                <table cellpadding="0" cellspacing="0" >
+                    <tr >
+                        <td ><label for="repeat_mode" >{lang pic_repeat}:</label ></td >
+                        <td >
+                            <select id="repeat_mode" name="repeat_mode" onclick="spacenest.setBgRepeat(this.value);" >
+                                <option selected="selected" value="0" >{lang repeat_mode}</option >
+                                <option value="1" >{lang directly_use}</option >
+                                <option value="2" >{lang horizontal_repeat}</option >
+                                <option value="3" >{lang vertical_repeat}</option >
+                            </select >
+                        </td >
+                    </tr >
+                    <tr >
+                        <td >{lang photo_location}:</td >
+                        <td >
+                            <table cellpadding="0" cellspacing="0" id="positiontable" >
+                                <tr >
+                                    <td id="bgimgposition0" onclick="spacenest.setBgPosition(this.id)" >&nbsp;</td >
+                                    <td id="bgimgposition1" onclick="spacenest.setBgPosition(this.id)" >&nbsp;</td >
+                                    <td id="bgimgposition2" onclick="spacenest.setBgPosition(this.id)" >&nbsp;</td >
+                                </tr >
+                                <tr >
+                                    <td id="bgimgposition3" onclick="spacenest.setBgPosition(this.id)" >&nbsp;</td >
+                                    <td id="bgimgposition4" onclick="spacenest.setBgPosition(this.id)" >&nbsp;</td >
+                                    <td id="bgimgposition5" onclick="spacenest.setBgPosition(this.id)" >&nbsp;</td >
+                                </tr >
+                                <tr >
+                                    <td id="bgimgposition6" onclick="spacenest.setBgPosition(this.id)" >&nbsp;</td >
+                                    <td id="bgimgposition7" onclick="spacenest.setBgPosition(this.id)" >&nbsp;</td >
+                                    <td id="bgimgposition8" onclick="spacenest.setBgPosition(this.id)" >&nbsp;</td >
+                                </tr >
+                            </table >
+                        </td >
+                    </tr >
+                </table >
+            </div >
+            <div class="z nestwin" style="padding-left: 7px; width: 160px;" >
+                <table cellpadding="0" cellspacing="0" >
+                    <tr >
+                        <td >{lang background_rolling}:</td >
+                        <td >
+                            <label for="rabga0" ><input id="rabga0" name="attachment_mode" onclick="spacenest.setBgAttachment(0);" type="radio" />{lang rolling}</label >
+                            <label for="rabga1" ><input id="rabga1" name="attachment_mode" onclick="spacenest.setBgAttachment(1);" type="radio" />{lang fixed}</label >
+                        </td >
+                    </tr >
+                    <tr >
+                        <td >{lang background_color}:</td >
+                        <td >
+                            <input class="px vm" id="colorValue" onchange="spacenest.setBgColor(this.value);" size="6" style="font-size: 12px; padding: 2px;" type="text" value="" />
+                            <input class="pn colorwd" id="cbpb" onclick="createPalette('bpb', 'colorValue', 'spacenest.setBgColor');" type="button" value="" />
+                        </td >
+                    </tr >
+                </table >
+            </div >
+            <div class="z nestwin" style="padding-left: 7px; width: 160px;" >
+                <table cellpadding="0" cellspacing="0" >
+                    <tr >
+                        <td >{lang text_color}:</td >
+                        <td >
+                            <input class="px vm" id="textColorValue" onchange="spacenest.setTextColor(this.value);" size="6" style="font-size: 12px; padding: 2px;" type="text" value="" />
+                            <input class="pn colorwd" id="ctpb" onclick="createPalette('tpb', 'textColorValue', 'spacenest.setTextColor');" type="button" value="" />
+                        </td >
+                    </tr >
+                    <tr >
+                        <td >{lang link_color}:</td >
+                        <td >
+                            <input class="px vm" id="linkColorValue" onchange="spacenest.setLinkColor(this.value);" size="6" style="font-size: 12px; padding: 2px;" type="text" value="" />
+                            <input class="pn colorwd" id="clpb" onclick="createPalette('lpb', 'linkColorValue', 'spacenest.setLinkColor');" type="button" value="" />
+                        </td >
+                    </tr >
+                </table >
+            </div >
+        </div >
+    </dd >
+</dl >
+<!--{elseif $_GET['op'] == 'getblock'}-->
+$blockhtml
+<!--{elseif $_GET['op'] == 'editnv'}-->
+<div class="header" >
+    <span class="title-tip" id="return_$_GET[handlekey]" >{lang editing_nv}</span >
+    <!--{if $_G[inajax]}--><a class="close" onclick="hideWindow('$_GET[handlekey]');return false;" title="{lang close}" >×</a ><!--{/if}-->
+</div >
+<form action="home.php?mod=spacecp&ac=index" autocomplete="off" class="fnest" id="nvformsetting" method="post" name="nvformsetting" onsubmit="ajaxpost('nvformsetting','return_$_GET[handlekey]','return_$_GET[handlekey]','onerror');" >
+    <div class="c nestwin" style="max-height:350px;width:420px;height:auto !important;height:320px;_margin-right:20px;overflow-y:auto;" >
+        <div id="nv_setting" >
+            <table class="tfm" >
+                <tr >
+                    <th >{lang space_nv_hidden}</th >
+                    <td >
+                        <label ><input $personalnv[nvhidden]="=" name="nvhidden" type="radio" value="1" {if '1'} checked="checked"{/if}>{lang yes}</label >
+                        <label ><input checked="checked" empty($personalnv[nvhidden])} name="nvhidden" type="radio" value="0" { {if/if}>{lang no}</label >
+                    </td >
+                </tr >
+                <tr >
+                    <th >{lang main_page}</th >
+                    <td >
+                        <input name="index" type="text" value="{if !isset($personalnv[items][index])}{lang main_page}{else}$personalnv[items][index]{/if}" />
+                        <label ><input !empty($personalnv[banitems][index])} checked="checked" name="banindex" type="radio" value="1" { {if/if}>{lang nvhidden}</label >
+                        <label ><input checked="checked" empty($personalnv[banitems][index])} name="banindex" type="radio" value="0" { {if/if}>{lang nvshow}</label >
+                    </td >
+                </tr >
+                <tr >
+                    <th >{lang feed}</th >
+                    <td >
+                        <input name="feed" type="text" value="{if !isset($personalnv[items][feed])}{lang feed}{else}$personalnv[items][feed]{/if}" />
+                        <label ><input !empty($personalnv[banitems][feed])} checked="checked" name="banfeed" type="radio" value="1" { {if/if}>{lang nvhidden}</label >
+                        <label ><input checked="checked" empty($personalnv[banitems][feed])} name="banfeed" type="radio" value="0" { {if/if}>{lang nvshow}</label >
+                    </td >
+                </tr >
+                <tr >
+                    <th >{lang doing}</th >
+                    <td >
+                        <input name="doing" type="text" value="{if !isset($personalnv[items][doing])}{lang doing}{else}$personalnv[items][doing]{/if}" />
+                        <label ><input !empty($personalnv[banitems][doing])} checked="checked" name="bandoing" type="radio" value="1" { {if/if}>{lang nvhidden}</label >
+                        <label ><input checked="checked" empty($personalnv[banitems][doing])} name="bandoing" type="radio" value="0" { {if/if}>{lang nvshow}</label >
+                    </td >
+                </tr >
+                <tr >
+                    <th >{lang blog}</th >
+                    <td >
+                        <input name="blog" type="text" value="{if !isset($personalnv[items][blog])}{lang blog}{else}$personalnv[items][blog]{/if}" />
+                        <label ><input !empty($personalnv[banitems][blog])} checked="checked" name="banblog" type="radio" value="1" { {if/if}>{lang nvhidden}</label >
+                        <label ><input checked="checked" empty($personalnv[banitems][blog])} name="banblog" type="radio" value="0" { {if/if}>{lang nvshow}</label >
+                    </td >
+                </tr >
+                <tr >
+                    <th >{lang album}</th >
+                    <td >
+                        <input name="album" type="text" value="{if !isset($personalnv[items][album])}{lang album}{else}$personalnv[items][album]{/if}" />
+                        <label ><input !empty($personalnv[banitems][album])} checked="checked" name="banalbum" type="radio" value="1" { {if/if}>{lang nvhidden}</label >
+                        <label ><input checked="checked" empty($personalnv[banitems][album])} name="banalbum" type="radio" value="0" { {if/if}>{lang nvshow}</label >
+                    </td >
+                </tr >
+                <tr >
+                    <th >广播</th >
+                    <td >
+                        <input name="follow" type="text" value="{if !isset($personalnv[items][follow])}广播{else}$personalnv[items][follow]{/if}" />
+                        <label ><input !empty($personalnv[banitems][follow])} checked="checked" name="banfollow" type="radio" value="1" { {if/if}>{lang nvhidden}</label >
+                        <label ><input checked="checked" empty($personalnv[banitems][follow])} name="banfollow" type="radio" value="0" { {if/if}>{lang nvshow}</label >
+                    </td >
+                </tr >
+                <!--{if $_G['setting']['allowviewuserthread'] !== false}-->
+                <tr >
+                    <th >{lang topic}</th >
+                    <td >
+                        <input name="topic" type="text" value="{if !isset($personalnv[items][topic])}{lang topic}{else}$personalnv[items][topic]{/if}" />
+                        <label ><input !empty($personalnv[banitems][topic])} checked="checked" name="bantopic" type="radio" value="1" { {if/if}>{lang nvhidden}</label >
+                        <label ><input checked="checked" empty($personalnv[banitems][topic])} name="bantopic" type="radio" value="0" { {if/if}>{lang nvshow}</label >
+                    </td >
+                </tr >
+                <!--{/if}-->
+                <tr >
+                    <th >{lang share}</th >
+                    <td >
+                        <input name="share" type="text" value="{if !isset($personalnv[items][share])}{lang share}{else}$personalnv[items][share]{/if}" />
+                        <label ><input !empty($personalnv[banitems][share])} checked="checked" name="banshare" type="radio" value="1" { {if/if}>{lang nvhidden}</label >
+                        <label ><input checked="checked" empty($personalnv[banitems][share])} name="banshare" type="radio" value="0" { {if/if}>{lang nvshow}</label >
+                    </td >
+                </tr >
+                <tr >
+                    <th >{lang friends}</th >
+                    <td >
+                        <input name="friends" type="text" value="{if !isset($personalnv[items][friends])}{lang friends}{else}$personalnv[items][friends]{/if}" />
+                        <label ><input !empty($personalnv[banitems][friends])} checked="checked" name="banfriends" type="radio" value="1" { {if/if}>{lang nvhidden}</label >
+                        <label ><input checked="checked" empty($personalnv[banitems][friends])} name="banfriends" type="radio" value="0" { {if/if}>{lang nvshow}</label >
+                    </td >
+                </tr >
+                <tr >
+                    <th >{lang message_board}</th >
+                    <td >
+                        <input name="wall" type="text" value="{if !isset($personalnv[items][wall])}{lang message_board}{else}$personalnv[items][wall]{/if}" />
+                        <label ><input !empty($personalnv[banitems][wall])} checked="checked" name="banwall" type="radio" value="1" { {if/if}>{lang nvhidden}</label >
+                        <label ><input checked="checked" empty($personalnv[banitems][wall])} name="banwall" type="radio" value="0" { {if/if}>{lang nvshow}</label >
+                    </td >
+                </tr >
+                <tr >
+                    <th >{lang memcp_profile}</th >
+                    <td >
+                        <input name="profile" type="text" value="{if !isset($personalnv[items][profile])}{lang memcp_profile}{else}$personalnv[items][profile]{/if}" />
+                        <label ><input !empty($personalnv[banitems][profile])} checked="checked" name="banprofile" type="radio" value="1" { {if/if}>{lang nvhidden}</label >
+                        <label ><input checked="checked" empty($personalnv[banitems][profile])} name="banprofile" type="radio" value="0" { {if/if}>{lang nvshow}</label >
+                    </td >
+                </tr >
+            </table >
+        </div >
+    </div >
+    <div class="o pns" >
+        <input name="editnvsubmit" type="hidden" value="true" />
+        <input name="handlekey" type="hidden" value="$_GET['handlekey']" />
+        <input name="formhash" type="hidden" value="{FORMHASH}" />
+        <button class="pn pnc" id="editnvsubmitbtn" type="submit" ><strong >{lang determine}</strong ></button >
+    </div >
+</form >
+<script reload="1" type="text/javascript" >
+    function succeedhandle_$_GET
+
+    ['handlekey'](url, message, values)
+    {
+        spacenest.getPersonalNv();
+        hideWindow('{$_GET['
+        handlekey
+        ']}'
+    )
+
+    }
+</script >
+<!--{elseif $_GET['op'] == 'edit'}-->
+<div class="header" >
+    <span class="title-tip" id="return_$_GET[handlekey]" >{lang editing_module}</span >
+    <!--{if $_G[inajax]}--><a class="close" onclick="spacenest.delIframe();hideWindow('$_GET[handlekey]');return false;" title="{lang close}" >×</a ><!--{/if}-->
+</div >
+<!--{if ($blockname != 'music')}-->
+<form action="home.php?mod=spacecp&ac=index&blockname=$blockname" autocomplete="off" class="fnest" id="blockformsetting" method="post" name="blockformsetting" onsubmit="ajaxpost('blockformsetting','return_$_GET[handlekey]','return_$_GET[handlekey]','onerror');" >
+    <div class="c nestwin" style="max-height:350px;width:420px;height:auto !important;height:320px;_margin-right:20px;overflow-y:auto;" >
+        <div id="block_setting" >
+            <table class="tfm" >
+                <tr >
+                    <th >{lang space_block_title}</th >
+                    <td ><input name="blocktitle" type="text" value="$para[title]" /></td >
+                </tr >
+                <!--{if ($blockname == 'profile')}-->
+                <!--{eval $para['banavatar'] = empty($para['banavatar']) ? 'middle' : $para['banavatar'];}-->
+                <tr >
+                    <th >{lang avatarsize}</th >
+                    <td >
+                        <label ><input $para[banavatar]="=" name="avatar" type="radio" value="big" {if 'big'} checked="checked"{/if}>{lang big}</label >
+                        <label ><input $para[banavatar]="=" name="avatar" type="radio" value="middle" {if 'middle'} checked="checked"{/if}>{lang middle}</label >
+                        <label ><input $para[banavatar]="=" name="avatar" type="radio" value="small" {if 'small'} checked="checked"{/if}>{lang small}</label >
+                    </td >
+                </tr >
+
+                <!--{elseif ($blockname == 'statistic')}-->
+                <tr >
+                    <th >{lang showcountcontent}</th >
+                    <td >
+                        <label ><input checked="checked" empty($para[bancredits])} name="credits" type="checkbox" value="1" { {if/if} />{lang credits}</label >
+                        <label ><input checked="checked" empty($para[banfriends])} name="friends" type="checkbox" value="1" { {if/if} />{lang friends_num}</label >
+                        <label ><input checked="checked" empty($para[banthreads])} name="threads" type="checkbox" value="1" { {if/if} />{lang threads_num}</label >
+                        <label ><input checked="checked" empty($para[banblogs])} name="blogs" type="checkbox" value="1" { {if/if} />{lang blogs_num}</label >
+                        <label ><input checked="checked" empty($para[banalbums])} name="albums" type="checkbox" value="1" { {if/if} />{lang albums_num}</label >
+                        <label ><input checked="checked" empty($para[bansharings])} name="sharings" type="checkbox" value="1" { {if/if} />{lang shares_num}</label >
+                        <label ><input checked="checked" empty($para[banviews])} name="views" type="checkbox" value="1" { {if/if} />{lang space_views}</label >
+                    </td >
+                </tr >
+                <!--{elseif in_array($blockname, array('block1', 'block2', 'block3', 'block4', 'block5'))}-->
+                <tr >
+                    <!--{eval $msg .= $_G['group']['allowspacenesthtml'] ? 'HTML ' : ''}-->
+                    <!--{eval $msg .= $_G['group']['allowspacenestbbcode'] ? 'BBCODE ' : ''}-->
+                    <!--{eval $msg .= $_G['group']['allowspacenestimgcode'] ? 'IMG ' : ''}-->
+                    <!--{eval $msg = $msg ? lang('spacecp', 'spacecp_message_prompt', array('msg' => $msg)) : ''}-->
+                    <!--{eval $para['content'] = dhtmlspecialchars($para['content']);}-->
+                    <th >{lang custom_content}<br ><span style=" font-weight: 400; " >{$msg}</span ></th >
+                    <td >
+                        <div class="tedt" >
+                            <div class="bar" >
+                                <!--{eval $editicons = array();}-->
+                                <!--{eval if($_G['group']['allowspacenestbbcode']) $editicons = array('bold', 'color', 'link', 'quote', 'code', 'smilies');}-->
+                                <!--{eval if($_G['group']['allowspacenestimgcode']) $editicons[] = 'img';}-->
+                                <!--{eval $seditor = array('content', $editicons);}-->
+                                <!--{subtemplate common/seditor}-->
+                            </div >
+                            <div class="area" >
+                                <textarea cols="40" id="contentmessage" name="content" onkeydown="ctrlEnter(event, 'blocksubmitbtn');" rows="3" style="width: 100%;" >$para[content]</textarea >
+                            </div >
+                        </div >
+                        <script src="{$_G[setting][jspath]}bbcode.js?{VERHASH}" type="text/javascript" ></script >
+                        <script type="text/javascript" >var forumallowhtml = 0,
+                            allowhtml = parseInt('{$_G[group][allowspacenesthtml]}'), allowsmilies = 0,
+                            allowbbcode = parseInt('{$_G[group][allowspacenestbbcode]}'),
+                            allowimgcode = parseInt('{$_G[group][allowspacenestimgcode]}');
+                        var DISCUZCODE = [];
+                        DISCUZCODE['num'] = '-1';
+                        DISCUZCODE['html'] = [];
+                        </script >
+                    </td >
+                </tr >
+                <!--{elseif in_array($blockname, array('personalinfo'))}-->
+
+                <!--{else}-->
+                <tr >
+                    <th >{lang show_num_of}</th >
+                    <td ><input name="shownum" type="text" value="$para[shownum]" /></td >
+                </tr >
+                <!--{/if}-->
+
+                <!--{if $blockname == 'blog'}-->
+                <tr >
+                    <th >{lang show_message}</th >
+                    <td ><input name="showmessage" type="text" value="$para[showmessage]" /> {lang show_message_tips}
+                    </td >
+                </tr >
+                <!--{/if}-->
+            </table >
+        </div >
+    </div >
+    <div class="o pns" >
+        <input name="blocksubmit" type="hidden" value="true" />
+        <input name="handlekey" type="hidden" value="$_GET['handlekey']" />
+        <input name="eleid" type="hidden" value="$_GET['eleid']" />
+        <input name="formhash" type="hidden" value="{FORMHASH}" />
+        <button class="pn pnc" id="blocksubmitbtn" type="submit" ><strong >{lang determine}</strong ></button >
+    </div >
+</form >
+<!--{else}-->
+<!--{eval $musicmsgs = $usernest['parameters']['music'];$config = $musicmsgs['config'];}-->
+<!--{if empty($musicmsgs['mp3list']) }-->
+<!--{eval $addshow = 'block';$addtabshow = 'class="active"';$listshow = 'none';$listtabshow = '';}-->
+<!--{else}-->
+<!--{eval $addshow = 'none';$addtabshow = '';$listshow = 'block';$listtabshow = 'class="active"';}-->
+<!--{/if}-->
+<ul class="tb cl" id="menutabs" >
+    <li $addtabshow id="musicadd" >
+        <a onclick="spacenest.menuChange('menutabs' ,'musicadd');this.blur();return false;" >{lang add_music}</a ></li >
+    <li $listtabshow id="musiclist" >
+        <a onclick="spacenest.menuChange('menutabs' ,'musiclist');this.blur();return false;" >{lang current_playlist}</a >
+    </li >
+    <li id="musicconfig" >
+        <a onclick="spacenest.menuChange('menutabs' ,'musicconfig');this.blur();return false;" >{lang player_profile}</a >
+    </li >
+</ul >
+<div id="musicconfig_content" style="display:none" >
+    <form action="home.php?mod=spacecp&ac=index&blockname=$blockname" autocomplete="off" id="musicconfigform" method="post" name="musicconfigform" onsubmit="spacenest.delIframe();ajaxpost('musicconfigform','return_$_GET[handlekey]','return_$_GET[handlekey]','onerror');" >
+        <div class="c nestwin" style="max-height:350px;width:480px;height:auto !important;height:320px;_margin-right:20px;overflow-y:auto;" >
+            <table class="tfm" >
+                <tr >
+                    <th >{lang space_block_title}</th >
+                    <td ><input name="blocktitle" type="text" value="$para[title]" /></td >
+                </tr >
+                <tr >
+                    <th >{lang display_mode}</th >
+                    <!--{eval $bigmod = $config['showmod'] == 'big' ? ' checked' : ''; $defaultmod = $config['showmod'] == 'default' ? ' checked' : ''; }-->
+                    <td ><input $bigmod name="showmod" type="radio" value="big" >{lang complete}
+                        <input $defaultmod name="showmod" type="radio" value="default" >{lang list}
+                    </td >
+                </tr >
+                <tr >
+                    <th >{lang start_mode}</th >
+                    <!--{eval $autorun1 = $config['autorun'] == 'true' ? ' checked' : ''; $autorun2 = $config['autorun'] == 'false' ? ' checked' : ''; }-->
+                    <td ><input $autorun1 name="autorun" type="radio" value="true" >{lang auto_run}
+                        <input $autorun2 name="autorun" type="radio" value="false" >{lang manual_run}
+                    </td >
+                </tr >
+                <tr >
+                    <th >{lang play_mode}</th >
+                    <!--{eval $shuffle1 = $config['shuffle'] == 'true' ? ' checked' : ''; $shuffle2 = $config['shuffle'] == 'false' ? ' checked' : ''; }-->
+                    <td ><input $shuffle1 name="shuffle" type="radio" value="true" >{lang shuffle_list_1}
+                        <input $shuffle2 name="shuffle" type="radio" value="false" >{lang shuffle_list_2}
+                    </td >
+                </tr >
+                <tr >
+                    <th >{lang interface_color}</th >
+                    <td >
+                        <p class="mbn" >
+                            {lang cron_tab_color}
+                            <input class="px p_fre" id="usercrontabcolor_v" name="crontabcolor" size="7" type="text" value="{$config['crontabcolor']}" />
+                            <input class="pn colorwd" id="cm_ctc" onclick="createPalette('m_ctc', 'usercrontabcolor_v');" style="background-color: {$config['crontabcolor']}" type="button" value="" >
+                        </p >
+                        <p class="mbn" >
+                            {lang button_color}
+                            <input class="px p_fre" id="userbuttoncolor_v" name="buttoncolor" size="7" type="text" value="{$config['buttoncolor']}" />
+                            <input class="pn colorwd" id="cm_bc" onclick="createPalette('m_bc', 'userbuttoncolor_v');" style="background-color: {$config['buttoncolor']}" type="button" value="" >
+                        </p >
+                        <p class="mbn" >
+                            {lang play_list_color}
+                            <input class="px p_fre" id="userfontcolor_v" name="fontcolor" size="7" type="text" value="{$config['fontcolor']}" />
+                            <input class="pn colorwd" id="cm_fc" onclick="createPalette('m_fc', 'userfontcolor_v');" style="background-color: {$config['fontcolor']}" type="button" value="" >
+                        </p >
+                    </td >
+                </tr >
+                <tr >
+                    <th >{lang cron_bg}</th >
+                    <td ><input maxlength="200" name="crontabbj" size="40" type="text" value="$config['crontabbj']" />
+                        <br />{lang com_mode_message}
+                    </td >
+                </tr >
+                <tr >
+                    <th >{lang musicbox_height}</th >
+                    <!--{eval $config['height'] = empty($config['height']) && $config['height'] !== 0 ? 200 : $config['height'];}-->
+                    <td >
+                        <input class="px p_fre" maxlength="10" name="height" size="10" type="text" value="$config['height']" />px
+                        <br />{lang musicbox_height_message}
+                    </td >
+                </tr >
+            </table >
+        </div >
+        <div class="o pns" >
+            <input name="musicsubmit" type="hidden" value="true" />
+            <input name="handlekey" type="hidden" value="$_GET['handlekey']" />
+            <input name="act" type="hidden" value="config" /> <input name="formhash" type="hidden" value="{FORMHASH}" />
+            <button class="pn pnc" type="submit" ><strong >{lang determine}</strong ></button >
+        </div >
+    </form >
+</div >
+
+<div id="musicadd_content" style="display:$addshow;" >
+    <script type="text/javascript" >
+        function addMenu() {
+            newnode = $("tb_menu_new").rows[0].cloneNode(true);
+            tags = newnode.getElementsByTagName('input');
+            for (i in tags) {
+                tags[i].value = '';
+            }
+            $("tb_menu_new").appendChild(newnode);
+        }
+
+        function exchangeNode(obj, opId) {
+            var currentlyNode = obj.parentNode.parentNode.parentNode;
+            var opIndex = parseInt(currentlyNode.id);
+            var opNode = aimNode = '';
+            var aimId = 0;
+            if (opId == 1) {
+                aimId = opIndex + 1;
+                if ($('thetable').rows[aimId] == undefined) {
+                    alert("{lang is_last_one}");
+                    return false;
+                }
+            } else {
+                aimId = opIndex - 1;
+                if (aimId == 0) {
+                    alert("{lang is_first_one}");
+                    return false;
+                }
+            }
+            opNode = currentlyNode.rows[0].cloneNode(true);
+            aimNode = $('thetable').rows[aimId].parentNode;
+            var caimNode = aimNode.rows[0].cloneNode(true);
+            aimNode.removeChild(aimNode.rows[0]);
+            aimNode.appendChild(opNode);
+            currentlyNode.removeChild(currentlyNode.rows[0]);
+            currentlyNode.appendChild(caimNode);
+        }
+
+        function delMenu(obj) {
+            if ($("tb_menu_new").rows.length > 1) {
+                $("tb_menu_new").removeChild(obj.parentNode.parentNode);
+            } else {
+                alert('{lang not_delete_last_line}');
+            }
+        }
+
+        function delList() {
+            var inputs = $('musiclistform').getElementsByTagName('input');
+            var ids = [];
+            for (var i = 0; i < inputs.length; i++) {
+                if (inputs[i].type == 'checkbox') ids.push(inputs[i]);
+            }
+            var id = '';
+            for (var i in ids) {
+                if (typeof ids[i] == 'object' && ids[i].checked) {
+                    id = parseInt(ids[i].value) + 1;
+                    var obj = $(id);
+                    if (obj) {
+                        obj.parentNode.removeChild(obj);
+                    }
+                }
+            }
+        }
+    </script >
+
+    <form action="home.php?mod=spacecp&ac=index&blockname=$blockname" autocomplete="off" id="musicaddform" method="post" name="musicaddform" onsubmit="spacenest.delIframe();ajaxpost('musicaddform','return_$_GET[handlekey]','return_$_GET[handlekey]','onerror');" >
+        <div class="c nestwin" style="max-height:260px;width:480px;height:auto !important;height:260px;_margin-right:20px;overflow-y:auto;" >
+            <table class="tfm" >
+                <tr >
+                    <td align="center" colspan="2" >{lang mp3_warning_message}</td >
+                </tr >
+                <tr >
+                    <td colspan="2" >
+                        <hr color="#EEEEEE" size="1" />
+                    </td >
+                </tr >
+                <tbody id="tb_menu_new" >
+                <tr >
+                    <td >
+                        <table align="center" border="0" cellpadding="0" cellspacing="0" width="95%" >
+                            <tr >
+                                <th >{lang mp3_address}</th >
+                                <td ><input maxlength="200" name="mp3url[]" size="40" type="text" value="" /></td >
+                            </tr >
+                            <tr >
+                                <th >{lang track_name}</th >
+                                <td >
+                                    <input maxlength="30" name="mp3name[]" size="20" style="width:150px;" type="text" /> {lang empty_name_message}
+                                </td >
+                            </tr >
+                            <tr >
+                                <th >{lang front_cover}</th >
+                                <td ><input maxlength="200" name="cdbj[]" size="40" type="text" value="" />
+                                    <br /> {lang complete_mode_message}
+                                </td >
+                            </tr >
+                        </table >
+                    </td >
+                    <td ><a onclick="delMenu(this)" > {lang delete}</a ></td >
+                </tr >
+                </tbody >
+            </table >
+        </div >
+
+        <div class="o pns" >
+            <input name="musicsubmit" type="hidden" value="true" />
+            <input name="handlekey" type="hidden" value="$_GET['handlekey']" />
+            <input name="act" type="hidden" value="addmusic" />
+            <input name="formhash" type="hidden" value="{FORMHASH}" />
+            <button name="addone" onclick="addMenu();return false;" type="button" ><em >{lang increase}</em ></button >&nbsp;
+            <button class="pn pnc" type="submit" ><strong >{lang determine}</strong ></button >
+        </div >
+    </form >
+</div >
+<div id="musiclist_content" style="display:$listshow;" >
+
+    <!--{if (!empty($musicmsgs['mp3list']))}-->
+    <form action="home.php?mod=spacecp&ac=index&blockname=$blockname" autocomplete="off" id="musiclistform" method="post" name="musiclistform" onsubmit="delList();spacenest.delIframe();ajaxpost('musiclistform','return_$_GET[handlekey]','return_$_GET[handlekey]','onerror');" >
+        <div class="c nestwin" style="max-height:350px;width:480px;height:auto !important;height:320px;_margin-right:20px;overflow-y:auto;" >
+            <table align="center" border="0" cellpadding="2" cellspacing="2" width="100%" >
+                <tr >
+                    <td colspan="2" >{lang album_cover_documents_address}<br />({lang not_play_message})</td >
+                    <td >
+                        <div align="right" >{lang delete_all}
+                            <input id="chkall" name="chkall" onclick="checkall(this.form, 'id')" type="checkbox" >
+                        </div >
+                    </td >
+                </tr >
+                <tr >
+                    <td colspan="3" >
+                        <table align="center" border="0" cellpadding="1" cellspacing="1" id="thetable" width="100%" >
+                            <tbody style="display:none;" >
+                            <tr >
+                                <td colspan="2" >
+                                    <hr size="0" />
+                                </td >
+                            </tr >
+                            </tbody >
+                            <!--{loop $musicmsgs['mp3list'] $key $list}-->
+                            <!--{eval $list['cdbj'] = empty($list['cdbj']) ? IMGDIR.'/nophotosmall.gif' : $list['cdbj'];}-->
+                            <!--{eval $list['mp3name'] = dhtmlspecialchars($list['mp3name']);$list['mp3url'] = dhtmlspecialchars($list['mp3url']);$list['cdbj'] = dhtmlspecialchars($list['cdbj']);}-->
+                            <!--{eval $index_ = $key+1;}-->
+                            <tbody id="$index_" >
+                            <tr >
+                                <td >
+                                    <table class="tfm" >
+                                        <tbody >
+                                        <tr >
+                                            <th >{lang mp3_address}</th >
+                                            <td >
+                                                <input maxlength="200" name="mp3url[]" size="40" type="text" value="{$list['mp3url']}" >
+                                            </td >
+                                        </tr >
+                                        <tr >
+                                            <th >{lang track_name}</th >
+                                            <td >
+                                                <input maxlength="30" name="mp3name[]" size="20" type="text" value="{$list['mp3name']}" >
+                                            </td >
+                                        </tr >
+                                        <tr >
+                                            <th >{lang front_cover}</th >
+                                            <td >
+                                                <input maxlength="200" name="cdbj[]" size="40" type="text" value="{$list['cdbj']}" >
+                                                <p ><img border="0" class="musicbj mtn" src="{$list['cdbj']}" ></p >
+                                            </td >
+                                        </tr >
+                                        </tbody >
+                                    </table >
+                                </td >
+                                <td width="50px" >
+                                    <input id="id_$key" name="ids" type="checkbox" value="$key" ><a href="javascript:" onclick="exchangeNode(this, -1)" ><img border="0" height="12" src="{STATICURL}image/common/icon_top.gif" width="11" ></a ><a href="javascript:;" onclick="exchangeNode(this, 1)" ><img border="0" height="12" src="{STATICURL}image/common/icon_down.gif" width="11" ></a >
+                                </td >
+                            </tr >
+                            </tbody >
+                            <!--{/loop}-->
+                        </table >
+                    </td >
+                </tr >
+            </table >
+        </div >
+        <div class="o pns" >
+            <input name="musicsubmit" type="hidden" value="true" />
+            <input name="handlekey" type="hidden" value="$_GET['handlekey']" />
+            <input name="act" type="hidden" value="editlist" />
+            <input name="formhash" type="hidden" value="{FORMHASH}" />
+            <button class="pn pnc" type="submit" ><strong >{lang update_album_list}</strong ></button >
+        </div >
+    </form >
+    <!--{else}-->
+    <div class="c nestwin" style="max-height:350px;width:420px;height:auto !important;height:320px;_margin-right:20px;overflow-y:auto;" >
+        <div style="line-height:40px;text-align:center;" >{lang no_music_play_list}
+            <button onclick="spacenest.menuChange('menutabs' ,'musicadd');" ><em >{lang add_music}</em ></button >
+        </div >
+    </div >
+    <!--{/if}-->
+</div >
+<!--{/if}-->
+<script reload="1" type="text/javascript" >
+    function succeedhandle_$_GET
+
+    ['handlekey'](url, message, values)
+    {
+        var x = new Ajax();
+        x.get('home.php?mod=spacecp&ac=index&op=getblock&blockname=' + values['blockname'] + '&inajax=1', function (s) {
+            s = s.replace(/\<script.*\<\/script\>/ig, '<font color="red"> [{lang save_js_code_view}] </font>');
+            $(values['blockname']).innerHTML = s;
+            drag.initPosition();
+        });
+        hideWindow('{$_GET['
+        handlekey
+        ']}'
+    )
+
+    }
+</script >
+<!--{elseif $_GET['op'] == 'savespaceinfo'}-->
+
+<!--{eval $space[domainurl] = space_domain($space);}-->
+<strong id="spacename" ><!--{if $space[spacename]}-->$space[spacename]<!--{else}--> $space[username]{lang somebody_space}<!--{/if}--></strong >
+<a class="xs0 xw0" href="$space[domainurl]" id="domainurl" onclick="setCopy('$space[domainurl]', '{lang copy_space_address}');return false;" >$space[domainurl]</a >
+<span class="xw0" id="spacedescription" >$space[spacedescription]</span >
+<script reload="1" type="text/javascript" >spacenest.initSpaceInfo();</script >
+
+<!--{elseif $_GET['op'] == 'getspaceinfo'}-->
+
+<!--{eval $space[domainurl] = space_domain($space);}-->
+<form action="home.php?mod=spacecp&ac=index&op=savespaceinfo" id="savespaceinfo" method="post" >
+    <input name="formhash" type="hidden" value="{FORMHASH}" />
+    <input name="savespaceinfosubmit" type="hidden" value="true" /> <strong class="pns mbm" >
+    <em class="xw0 xs1" >{lang my_space_name}: </em ><input class="px vm" name="spacename" type="text" value="{if $space['spacename']}$space['spacename']{else}$space['username']{lang somebody_space}{/if}" />&nbsp;
+    <button class="pn pnc vm" onclick="spacenest.spaceInfoSave();" type="submit" ><em >{lang save}</em ></button >
+    <button class="pn vm" onclick="spacenest.spaceInfoCancel();" type="button" ><em >{lang cancel}</em ></button >
+</strong > <a id="domainurledit" style="display: none;" >$space[domainurl]</a >
+    <span ><em class="xw0 xs1" >{lang my_space_describe}: </em ><input name="spacedescription" style="width:600px" type="text" value="{$space['spacedescription']}" /></span >
+</form >
+<!--{elseif $_GET['op'] == 'getpersonalnv'}-->
+<!--{subtemplate home/space_home_header_guide_per}-->
+<!--{else}-->
+<ul >
+    <li > NONE</li >
+</ul >
+<!--{/if}-->
+<!--{template common/footer}-->

@@ -1,0 +1,7 @@
+<!--{if empty($_G['uploadjs'])}-->
+    <script src="{STATICURL}/js/uploader/webuploader.min.js?{VERHASH}"></script>
+    <script src="{STATICURL}/js/uploader/Uploader.js?{VERHASH}"></script>
+	<link rel="stylesheet" type="text/css" href="{STATICURL}/js/uploader/Uploader.css?{VERHASH}">
+
+    {eval $_G['uploadjs'] = 1;}
+<!--{/if}-->

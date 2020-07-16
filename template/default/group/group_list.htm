@@ -1,0 +1,158 @@
+<!--{if $_G['forum']['ismoderator']}-->
+	<script type="text/javascript" src="{$_G[setting][jspath]}forum_moderate.js?{VERHASH}"></script>
+<!--{/if}-->
+
+<div id="threadlist" style="position: relative;">
+	<div class="subtitle icon-list">
+		<a>{lang all_threads}</a>
+		<!--{if $_G['forum']['threadtypes']}-->
+		<div class="lititle">
+			<a id="ttp_all"{if !$_GET['typeid']} class="checked"{/if} href="forum.php?mod=forumdisplay&action=list&fid=$_G[fid]">{lang forum_viewall}</span></a>
+			<!--{loop $_G['forum']['threadtypes']['types'] $id $name}-->
+			<a {if $_GET['typeid'] == $id} class="checked"{/if} href="forum.php?mod=forumdisplay&action=list&fid=$_G[fid]{if $_GET['typeid'] != $id}&filter=typeid&typeid=$id$forumdisplayadd[typeid]{/if}">$name</span></a>
+			<!--{/loop}-->
+			<!--{hook/forumdisplay_filter_extra}-->
+		</div>
+		<!--{/if}-->
+	</div>
+	<form class="thread-list" method="post" autocomplete="off" name="moderate" id="moderate" action="forum.php?mod=topicadmin&action=moderate&fid=$_G[fid]&infloat=yes&nopost=yes">
+		<input type="hidden" name="formhash" value="{FORMHASH}" />
+		<input type="hidden" name="listextra" value="$extra" />
+			<!--{if $_G['forum_threadcount']}-->
+				<!--{loop $_G['forum_threadlist'] $key $thread}-->
+				<div class="threadline" id="thread_$thread[tid]">
+					<!--{ad/threadlist}-->
+					<div class="thread-stat">
+						<a href="forum.php?mod=viewthread&tid=$thread[tid]&extra=$extra" target="_blank" class="icon px4-radius
+							<!--{if in_array($thread['displayorder'], array(1, 2, 3, 4))}-->
+							top$thread[displayorder]">{lang thread_stick}
+							<!--{elseif $thread[folder] == 'lock'}-->
+							lock">{lang timeover}
+							<!--{elseif $thread['special'] == 1}-->
+							vote">{lang thread_poll}
+							<!--{elseif $thread['special'] == 2}-->
+							trade">{lang thread_trade}
+							<!--{elseif $thread['special'] == 3}-->
+							help">{lang fhelp}
+							<!--{elseif $thread['special'] == 4}-->
+							activity">{lang thread_activity}
+							<!--{elseif $thread['special'] == 5}-->
+							debate">$thread[allreplies]
+							<!--{else}-->
+							$thread[folder]">$thread[allreplies]
+							<!--{/if}-->
+						</a>
+
+						<div class="sub-show">
+							<!--{hook/forumdisplay_thread $key}-->
+							<div class="perfix">$thread[typehtml]</div>
+							<a class="thread-title" href="forum.php?mod=viewthread&tid=$thread[tid]&extra=$extra"$thread[highlight]>$thread[subject]</a>
+
+							<!--{if $thread['price'] > 0}-->
+								<a class="suffix reward" href="forum.php?mod=viewthread&tid=$thread[tid]&extra=$extra">{lang rewarding}
+									<span class="tooltip" data-pos="tl">
+										<!--{if $thread['special'] == '3'}-->
+											{lang thread_reward}&nbsp;$thread[price]&nbsp;{$_G[setting][extcredits][$_G['setting']['creditstransextra'][2]][unit]}{$_G[setting][extcredits][$_G['setting']['creditstransextra'][2]][title]}
+										<!--{else}-->
+											{lang price}&nbsp;$thread[price]&nbsp;{$_G[setting][extcredits][$_G['setting']['creditstransextra'][1]][unit]}{$_G[setting][extcredits][$_G['setting']['creditstransextra'][1]][title]}
+										<!--{/if}-->
+									</span>
+								</a>
+							<!--{elseif $thread['special'] == '3' && $thread['price'] < 0}-->
+								<a class="suffix solved" href="forum.php?mod=viewthread&tid=$thread[tid]&extra=$extra">[{lang reward_solved}]</a>
+							<!--{/if}-->
+							<!--{if $thread['attachment'] == 2}-->
+								<img class="svgicon small" src="{IMGURL}/common/icon/image.svg" alt="attach_img" />
+							<!--{elseif $thread['attachment'] == 1}-->
+								<img class="svgicon small" src="{IMGURL}/common/mark/common.svg" alt="{lang attachment}" />
+							<!--{/if}-->
+
+							<!--{if $thread['digest'] > 0}-->
+								<img class="svgicon small" src="{IMGURL}/common/mark/digest_$thread[digest].svg" alt="digest" title="{lang thread_digest} $thread[digest]" />
+							<!--{/if}-->
+							<!--{if $thread['displayorder'] == 0}-->
+								<!--{if $thread[recommendicon]}-->
+									<img class="svgicon small" src="{IMGURL}/common/mark/recommend_$thread[recommendicon].svg" alt="recommend" title="{lang thread-recommend} $thread[recommends]" />
+								<!--{/if}-->
+								<!--{if $thread[heatlevel]}-->
+									<img class="svgicon small" src="{IMGURL}/common/mark/hot_$thread[heatlevel].svg" alt="heatlevel" title="{lang heats} $thread[heatlevel]" />
+								<!--{/if}-->
+								<!--{if $thread['rate'] > 0}-->
+									<img class="svgicon small" src="{IMGURL}/common/icon/agree.svg" alt="agree" title="{lang rate_credit_add}" />
+								<!--{elseif $thread['rate'] < 0}-->
+									<img class="svgicon small" src="{IMGURL}/common/icon/disagree.svg" alt="disagree" title="{lang posts_deducted}" />
+								<!--{/if}-->
+							<!--{/if}-->
+							<!--{if $thread['readperm']}-->
+								<a class="suffix read">{lang readperm}：<span>$thread[readperm]</span></a>
+							<!--{/if}-->
+							<!--{if $thread['moved'] && $_G['forum']['ismoderator']}-->
+								<a href="forum.php?mod=topicadmin&action=moderate&optgroup=3&operation=delete&tid=$thread[moved]" onclick="showWindow('mods', this.href);return false"><img class="svgicon small" src="{IMGURL}/common/icon/moved.svg" alt="disagree" title="{lang thread_moved}" /></a>
+							<!--{/if}-->
+						</div>
+
+						<!--{if $_G['forum']['ismoderator']}-->
+						<div class="r ccbox admin">
+							<!--{if $thread['fid'] == $_G[fid]}-->
+								<!--{if $thread['displayorder'] <= 3 || $_G['adminid'] == 1}-->
+									<input onclick="tmodclick(this)" type="checkbox" id="m$thread[tid]" name="moderate[]" value="$thread[tid]" />
+									<label for="m$thread[tid]"></label>
+								<!--{else}-->
+									<input type="checkbox" disabled="disabled" />
+								<!--{/if}-->
+							<!--{else}-->
+								<input type="checkbox" disabled="disabled" />
+							<!--{/if}-->
+						</div>
+						<!--{/if}-->
+					</div>
+
+					<div class="thread-census">
+						<div class="r lastpost">
+							<!--{if $thread['lastposter']}-->
+							<a href="{if $thread[digest] != -2}home.php?mod=space&username=$thread[lastposterenc]{else}forum.php?mod=viewthread&tid=$thread[tid]&page={echo max(1, $thread[pages]);}{/if}">$thread[lastposter]@</a>
+							<!--{else}-->
+							{lang anonymous}
+							<!--{/if}-->
+							<a href="{if $thread[digest] != -2}forum.php?mod=redirect&tid=$thread[tid]&goto=lastpost$highlight#lastpost{else}forum.php?mod=viewthread&tid=$thread[tid]&page={echo max(1, $thread[pages]);}{/if}">$thread[lastpost]</a>
+						</div>
+
+						<div class="author">
+							<span>
+								<!--{if $thread['authorid'] && $thread['author']}-->
+									<a href="home.php?mod=space&uid=$thread[authorid]">$thread[author]</a><!--{if !empty($verify[$thread['authorid']])}-->$verify[$thread[authorid]]<!--{/if}-->
+								<!--{else}-->
+									<!--{if $_G['forum']['ismoderator']}-->
+										<a href="home.php?mod=space&uid=$thread[authorid]">{lang anonymous}</a>
+									<!--{else}-->
+										{lang anonymous}
+									<!--{/if}-->
+								<!--{/if}-->
+							</span>
+							<span>$thread[dateline]</span>
+							<span class="view" style="display: none">
+								| {lang send_posts}：$thread[allreplies] | {lang view}：$thread[views]
+							</span>
+						</div>
+					</div>
+				</div>
+				<!--{/loop}-->
+			<!--{else}-->
+				<p class="global_nothing">{lang global_nothing}</p>
+			<!--{/if}-->
+		<!--{if $_G['forum']['ismoderator'] && $_G['forum_threadcount']}-->
+			<!--{template forum/topicadmin_modlayer}-->
+		<!--{/if}-->
+	</form>
+</div>
+<!--{if helper_access::check_module('group')}-->
+<div class="pgs">
+	$multipage
+	<!--{hook/forumdisplay_postbutton_bottom}-->
+</div>
+
+<!--{if $_G['setting']['fastpost']}-->
+	<!--{template forum/forumdisplay_fastpost}-->
+<!--{/if}-->
+
+<!--{/if}-->

@@ -1,0 +1,35 @@
+<div class="nav-vertical">
+	<a class="title">$_G[setting][navs][8][navname]</a>
+	<ul>
+		<li class="{if $_GET['type'] == 'index' || !$_GET['type']}active{/if}"><a href="misc.php?mod=ranklist"><i class="ft-at-sign"></i>{lang comprehensive}</a></li>
+		<!--{if $ranklist_setting['member']['available']}-->
+		<li class="{if $_GET['type'] == 'member'}active{/if}"><a href="misc.php?mod=ranklist&type=member"><i class="ft-user"></i>{lang user}</a></li>
+		<!--{/if}-->
+		<!--{if $ranklist_setting['thread']['available']}-->
+		<li class="{if $_GET['type'] == 'thread'}active{/if}"><a href="misc.php?mod=ranklist&type=thread&view=replies&orderby=thisweek"><i class="ft-edit"></i>{lang thread}</a></li>
+		<!--{/if}-->
+		<!--{if helper_access::check_module('blog') && $ranklist_setting['blog']['available']}-->
+		<li class="{if $_GET['type'] == 'blog'}active{/if}"><a href="misc.php?mod=ranklist&type=blog&view=heats&orderby=thisweek"><i class="ft-feather"></i>{lang blogs}</a></li>
+		<!--{/if}-->
+		<!--{if $ranklist_setting['poll']['available']}-->
+		<li class="{if $_GET['type'] == 'poll'}active{/if}"><a href="misc.php?mod=ranklist&type=poll&view=heats&orderby=thisweek"><i class="ft-flag"></i>{lang poll}</a></li>
+		<!--{/if}-->
+		<!--{if $ranklist_setting['activity']['available']}-->
+		<li class="{if $_GET['type'] == 'activity'}active{/if}"><a href="misc.php?mod=ranklist&type=activity&view=heats&orderby=thismonth"><i class="ft-map-pin"></i>{lang activity}</a></li>
+		<!--{/if}-->
+		<!--{if helper_access::check_module('album') && $ranklist_setting['picture']['available']}-->
+		<li class="{if $_GET['type'] == 'picture'}active{/if}"><a href="misc.php?mod=ranklist&type=picture&view=hot&orderby=thismonth"><i class="ft-image"></i>{lang pics}</a></li>
+		<!--{/if}-->
+		<!--{if $ranklist_setting['forum']['available']}-->
+		<li class="{if $_GET['type'] == 'forum'}active{/if}"><a href="misc.php?mod=ranklist&type=forum&view=threads"><i class="ft-layers"></i>{lang forum}</a></li>
+		<!--{/if}-->
+		<!--{if $ranklist_setting['group']['available']&&$_G[setting]['groupstatus']}-->
+		<li class="{if $_GET['type'] == 'group'}active{/if}"><a href="misc.php?mod=ranklist&type=group&view=credit"><i class="ft-target"></i>{lang group}</a></li>
+		<!--{/if}-->
+	</ul>
+	<!--{hook/ranklist_nav_extra}-->
+</div>
+<div class="nav-vertical default">
+	<!--[nest=nestsidetop]--><div id="nestsidetop" class="area"></div><!--[/nest]-->
+	<!--[nest=nestsidebottom]--><div id="nestsidebottom" class="area"></div><!--[/nest]-->
+</div>

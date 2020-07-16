@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="{CHARSET}" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="renderer" content="webkit" />
+		<meta name="theme-color" content="#fff">
+		<meta name="apple-mobile-web-app-status-bar-style" content="#fff" />
+		<meta name="apple-mobile-web-app-title" content="StarsRiver 基地" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<meta name="keywords" content="{if !empty($metakeywords)}{echo dhtmlspecialchars($metakeywords)}{else}星河 星河论坛 StarsRiver论坛 starsriver论坛 SR论坛 sr论坛 Sr论坛 sR论坛 StarsRiver starsriver SR sr Sr sR{/if} " />
+		<meta name="description" content="{if !empty($metadescription)}{echo dhtmlspecialchars($metadescription)} {/if}{if empty($nobbname)},$_G['setting']['bbname']{/if} 星河基友的休闲之地" />
+
+		<title>StarsRiver 基地 <!--{if !empty($navtitle)}--> - $navtitle<!--{/if}--></title>
+		$_G['setting']['seohead']
+
+		<link rel="stylesheet" type="text/css" href='{$_G[setting][csspath]}clearfix.css?{VERHASH}' />
+		<!--[if lt IE 10]><link rel="stylesheet" type="text/css" href='{$_G[setting][csspath]}unsupport.css?{VERHASH}' /><body class="unsupport"><div class="content"><p>{lang explorer_too_old_ie}</p><a class="icon" href="https://www.google.cn/chrome" target="_blank"><img src="{LIBURL}/img/soft_icon/chrome-64.png"></a><a class="icon" href="http://www.firefox.com.cn" target="_blank"><img src="{LIBURL}/img/soft_icon/firefox-64.png"></a></div></body><script>document.execCommand("Stop")</script><![endif]-->
+
+		<link rel="stylesheet" href='{FONTURL}/Awesome.css' />
+		<link rel="stylesheet" href='{FONTURL}/Icomoon.css' />
+		<link rel="stylesheet" href='{FONTURL}/Feather.css' />
+		<link rel="stylesheet" href='{FONTURL}/Material.css' />
+		<link rel="stylesheet" href='{FONTURL}/Discuz-Editor.css' />
+		<link rel="stylesheet" href='{$_G[setting][csspath]}constructs.css?{VERHASH}'/>
+		<!--{csstemplate}-->
+
+		<script src="{LIBURL}/js/jquery/jquery-3.3.1.min.js"></script>
+		<script src="{LIBURL}/js/jquery-ui/jquery-ui.min.js"></script>
+		<script src="{LIBURL}/js/stars/stars-fix.js"></script>
+		<script src="{LIBURL}/js/plugins/stackblur/stackblur.min.js"></script>
+		<script src="{$_G[setting][jspath]}common.js?{VERHASH}"></script>
+		<script src="{$_G[setting][jspath]}common_action.js?{VERHASH}"></script>
+		<script type="text/javascript">
+            jQuery.noConflict();
+			var STYLEID = '{STYLEID}',
+				STATICURL = '{STATICURL}',
+				IMGDIR = '{STATICURL}image/common',
+				IMGURL = '{IMGURL}',
+				VERHASH = '{VERHASH}',
+				charset = '{CHARSET}',
+				discuz_uid = '$_G[uid]',
+				cookiepre = '{$_G[config][cookie][cookiepre]}',
+				cookiedomain = '{$_G[config][cookie][cookiedomain]}',
+				cookiepath = '{$_G[config][cookie][cookiepath]}',
+				showusercard = '{$_G[setting][showusercard]}',
+				attackevasive = '{$_G[config][security][attackevasive]}',
+				disallowfloat = '{$_G[setting][disallowfloat]}',
+				creditnotice = '{if $_G['setting']['creditnotice']}$_G['setting']['creditnames']{/if}',
+				defaultstyle = '$_G[style][defaultextstyle]',
+				REPORTURL = '$_G[currenturl_encode]',
+				SITEURL = '$_G[siteurl]',
+				JSPATH = '$_G[setting][jspath]',
+				CSSPATH = '$_G[setting][csspath]',
+				DYNAMICURL = '$_G[dynamicurl]';
+		</script>
+		<!--{if empty($_GET['nest'])}--><!--{eval $_GET['nest'] = '';}--><!--{/if}-->
+		<!--{if !isset($topic)}--><!--{eval $topic = array();}--><!--{/if}-->

@@ -1,0 +1,23 @@
+<div class="title trans-ease">
+    <h2>{lang panel_login}</h2>
+</div>
+<ol class="panel-container">
+    <li class="box size-10-0 alert hi-info">{lang panel_notice_login}</li>
+    <li class="box size-10-0 no-edge">
+        <form  method="post" autocomplete="off" action="{$cpscript}?mod=modcp&action=login">
+            <input type="hidden" name="formhash" value="{FORMHASH}">
+            <input type="hidden" name="fid" value="{$_G[fid]}">
+            <input type="hidden" name="submit" value="yes">
+            <input type="hidden" name="login_panel" value="yes">
+            <div class="input-group">
+                <span>{$_G[member][username]} 登陆</span>
+                <input type="password" name="cppwd" id="cppwd" />
+                <i class="input-group-btn"><button type="submit" name="submit" id="submit" value="true">{lang login}</button></i>
+            </div>
+        </form>
+    </li>
+</ol>
+<script type="text/javascript">
+    $("cppwd").focus();
+</script>
+

@@ -1,0 +1,81 @@
+<div class="trans-ease-quick" id="bottommenu" >
+    <ul class="itemlist ctm awe-reorder pxa-radius pxa-radius-li shadow-3D" >
+        <li id="ScrollToTop"><a class="ft-arrow-up" href="#nav"></a ></li >
+        <li class="item awe-exchange switchblind" id="blindswitch_btn" >
+            <a id="switchblind" onclick="toggleBlind(this)" ></a >
+            <span class="tooltip" data-pos="lt" id="blindswitch" onclick="bind(this)" >{lang blindman}</span >
+        </li >
+        <!--{loop $_G['setting']['footernavs'] $nav}-->
+        <!--{if $nav['available'] && ($nav['type'] && (!$nav['level'] || ($nav['level'] == 1 && $_G['uid']) || ($nav['level'] == 2 && $_G['adminid'] > 0) || ($nav['level'] == 3 && $_G['adminid'] == 1)) || !$nav['type'] && ($nav['id'] == 'help'))}-->
+        <li class="help awe-question" >$nav[code]
+            <span class="tooltip" data-pos="lt" >{lang help}</span >
+        </li >
+        <!--{/if}-->
+        <!--{/loop}-->
+        <!--{loop $_G['setting']['footernavs'] $nav}-->
+        <!--{if $nav['available'] && ($nav['type'] && (!$nav['level'] || ($nav['level'] == 1 && $_G['uid']) || ($nav['level'] == 2 && $_G['adminid'] > 0) || ($nav['level'] == 3 && $_G['adminid'] == 1)) || !$nav['type'] && ($nav['id'] == 'mobile'))}-->
+        <li class="mobile awe-tablet" >$nav[code]
+            <span class="tooltip" data-pos="lt" >{lang mobile}</span >
+        </li >
+        <!--{/if}-->
+        <!--{/loop}-->
+        <!--{loop $_G['setting']['footernavs'] $nav}-->
+        <!--{if $nav['available'] && ($nav['type'] && (!$nav['level'] || ($nav['level'] == 1 && $_G['uid']) || ($nav['level'] == 2 && $_G['adminid'] > 0) || ($nav['level'] == 3 && $_G['adminid'] == 1)) || !$nav['type'] && ($nav['id'] == 'darkroom'))}-->
+        <li class="darkroom awe-user-times" >$nav[code]
+            <span class="tooltip" data-pos="lt" >{lang darkroom}</span >
+        </li >
+        <!--{/if}-->
+        <!--{/loop}-->
+        <!--{loop $_G['setting']['footernavs'] $nav}-->
+        <!--{if $nav['available'] && ($nav['type'] && (!$nav['level'] || ($nav['level'] == 1 && $_G['uid']) || ($nav['level'] == 2 && $_G['adminid'] > 0) || ($nav['level'] == 3 && $_G['adminid'] == 1)) || !$nav['type'] && ($nav['id'] == 'archiver'))}-->
+        <li class="archiver awe-home" >$nav[code]
+            <span class="tooltip" data-pos="lt" >{lang archiver}</span >
+        </li >
+        <!--{/if}-->
+        <!--{/loop}-->
+        <!--{loop $_G['setting']['footernavs'] $nav}-->
+        <!--{if $nav['available'] && ($nav['type'] && (!$nav['level'] || ($nav['level'] == 1 && $_G['uid']) || ($nav['level'] == 2 && $_G['adminid'] > 0) || ($nav['level'] == 3 && $_G['adminid'] == 1)) || !$nav['type'] && ($nav['id'] == 'stat' && $_G['group']['allowstatdata']))}-->
+        <li class="statdata awe-tachometer" >$nav[code]
+            <span class="tooltip" data-pos="lt" >{lang statdata}</span >
+        </li >
+        <!--{/if}-->
+        <!--{/loop}-->
+        <!--{if check_nest_perm($topic)}-->
+        <li class="nestnav awe-puzzle-piece" >$nestnav
+            <span class="tooltip" data-pos="lt" >{lang NESTIN}</span >
+        </li >
+        <!--{/if}-->
+    </ul >
+    <script >
+        jQuery('#ScrollToTop').click(function () {
+            jQuery('html,body').animate({scrollTop: '0px'}, 390);
+        });
+        var bottomMenu = document.querySelector('#bottommenu');
+        var bottomMenuitem = document.querySelectorAll('#bottommenu > .itemlist > li');
+        bottomMenu.addEventListener('mouseenter', showitem, false);
+        bottomMenu.addEventListener('mouseleave', hideitem, false);
+        initdelay();
+
+        function showitem() {
+            bottomMenu.style.height = 46 * (bottomMenuitem.length) + 'px';
+            for (var i = 1; i < bottomMenuitem.length; i++) {
+                bottomMenuitem[i].style.transform = 'translate3d(0, -' + (4 + 46 * i) + 'px, 0)';
+            }
+        }
+
+        function hideitem() {
+            bottomMenu.style.height = 'auto';
+            for (var i = 1; i < bottomMenuitem.length; i++) {
+                bottomMenuitem[i].style.transform = 'translate3d(0,0,0)';
+            }
+        }
+
+        function initdelay() {
+            for (var i = 1; i < bottomMenuitem.length; i++) {
+                bottomMenuitem[i].style.transitionDelay = (bottomMenuitem.length - i) * 50 - 100 + 'ms';
+                bottomMenuitem[i].style.zIndex = -i - 1;
+            }
+        }
+
+    </script >
+</div >

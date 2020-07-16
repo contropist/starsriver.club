@@ -1,0 +1,448 @@
+<div class="console">
+	<div class="panel">
+		<div class="title">
+			<h2>{lang group_setup}</h2>
+			<ul class="nav wave">
+				<li class="{if $_GET['op'] == 'group'}current{/if}"><a href="forum.php?mod=group&action=manage&op=group&fid=$_G[fid]#groupbanner">{lang group_setup}</a></li>
+				<!--{if !empty($groupmanagers[$_G[uid]]) || $_G['adminid'] == 1}-->
+				<li class="{if $_GET['op'] == 'checkuser'}current{/if}"><a href="forum.php?mod=group&action=manage&op=checkuser&fid=$_G[fid]#groupbanner">{lang group_member_moderate}</a></li>
+				<li class="{if $_GET['op'] == 'manageuser'}current{/if}"><a href="forum.php?mod=group&action=manage&op=manageuser&fid=$_G[fid]#groupbanner">{lang group_member_management}</a></li>
+				<!--{/if}-->
+				<!--{if $_G['forum']['founderuid'] == $_G['uid'] || $_G['adminid'] == 1}-->
+				<li class="{if $_GET['op'] == 'threadtype'}current{/if}"><a href="forum.php?mod=group&action=manage&op=threadtype&fid=$_G[fid]#groupbanner">{lang group_threadtype}</a></li>
+				<li class="{if $_GET['op'] == 'demise'}current{/if}"><a href="forum.php?mod=group&action=manage&op=demise&fid=$_G[fid]#groupbanner">{lang group_demise}</a></li>
+				<!--{/if}-->
+			</ul>
+		</div>
+			<!--{if $_GET['op'] == 'group'}-->
+				<form class="panel" enctype="multipart/form-data" action="forum.php?mod=group&action=manage&op=group&fid=$_G[fid]" name="manage" method="post" autocomplete="off">
+					<input type="hidden" value="{FORMHASH}" name="formhash" />
+					<ol class="panel-container">
+						<!--{if !empty($specialswitch['allowchangename']) && ($_G['uid'] == $_G['forum']['founderuid'] || $_G['adminid'] == 1)}-->
+						<li class="box size-5-0 no-edge">
+							<div class="input-group f">
+								<span style="width: 90px">{lang group_name}</span>
+								<input type="text" id="name" name="name" value="$_G[forum][name]" autocomplete="off"/>
+							</div>
+						</li>
+						<!--{/if}-->
+						<!--{if !empty($specialswitch['allowchangetype']) && ($_G['uid'] == $_G['forum']['founderuid'] || $_G['adminid'] == 1)}-->
+						<li class="box size-5-0 no-edge">
+							<div class="input-group f">
+								<span style="width: 90px;">{lang group_category}</span>
+								<i>
+									<select name="parentid" onchange="ajaxget('forum.php?mod=ajax&action=secondgroup&fupid='+ this.value, 'secondgroup');">
+										$groupselect[first]
+									</select>
+								</i>
+								<i id="secondgroup">
+									<!--{if $groupselect['second']}-->
+									<select id="fup" name="fup" >$groupselect[second]</select>
+									<!--{/if}-->
+								</i>
+							</div>
+						</li>
+						<!--{/if}-->
+						<li class="box size-10-0 no-edge">
+							<div class="input-group f">
+								<span style="width: 90px;">{lang group_perm_visit}</span>
+								<ul class="csbox">
+									<li>
+										<input type="radio" name="gviewpermnew" id="gviewpermnew1" value="1" $gviewpermselect[1] />
+										<label for="gviewpermnew1">{lang group_perm_all_user}</label>
+									</li>
+									<li>
+										<input type="radio" name="gviewpermnew" id="gviewpermnew2" value="0" $gviewpermselect[0] />
+										<label for="gviewpermnew2">{lang group_perm_member_only}</label>
+									</li>
+								</ul>
+							</div>
+						</li>
+						<li class="box size-10-0 no-edge">
+							<div class="input-group f">
+								<span style="width: 90px;">{lang group_join_type}</span>
+								<ul class="csbox">
+									<li>
+										<input type="radio" name="jointypenew" id="jointypenew1" value="0" $jointypeselect[0] />
+										<label for="jointypenew1">{lang group_join_type_free}</label>
+									</li>
+									<li>
+										<input type="radio" name="jointypenew" id="jointypenew2" value="2" $jointypeselect[2] />
+										<label for="jointypenew2">{lang group_join_type_moderate}</label>
+									</li>
+									<li>
+										<input type="radio" name="jointypenew" id="jointypenew3" value="1" $jointypeselect[1] />
+										<label for="jointypenew3">{lang group_join_type_invite}</label>
+									</li>
+									<!--{if !empty($specialswitch['allowclosegroup'])}-->
+									<li>
+										<input type="radio" name="jointypenew" id="jointypenew4" value="-1" $jointypeselect[-1] />
+										<label for="jointypenew4">{lang close}，{lang group_close_notice}</label>
+									</li>
+									<!--{/if}-->
+								</ul>
+							</div>
+						</li>
+						<li class="box size-10-0 no-edge">
+							<div class="input-group-area editor">
+								<script type="text/javascript">
+									var allowbbcode = allowimgcode = parsetype = 1;
+									var allowhtml = forumallowhtml = allowsmilies = 0;
+								</script>
+								<textarea id="descriptionmessage" name="descriptionnew">$_G[forum][descriptionnew]</textarea>
+								<div class="input-group f">
+									<span>{lang group_description}</span>
+									<!--{eval $seditor = array('description', array('bold', 'color', 'img', 'link'));}-->
+									<!--{subtemplate common/seditor}-->
+								</div>
+							</div>
+						</li>
+						<!--{if $_G['setting']['allowgroupdomain'] && !empty($_G['setting']['domain']['root']['group']) && $domainlength}-->
+						<li class="box size-10-0 no-edge">
+							<div class="input-group-area f">
+								<!--{if $_G[forum][domain] && $consume}-->
+								<span style="width: 100%;">{lang group_edit_domain_message}</span>
+								<!--{/if}-->
+								<div class="input-group f" style="border: none">
+									<span style="width: 90px">{lang subdomain}</span>
+									<i style="width: 32px">{$_G['scheme']}://</i>
+									<input type="text" name="domain" value="$_G[forum][domain]" placeholder="{lang group_domain_message}"/>
+									<i>.{$_G['setting']['domain']['root']['group']}</i>
+								</div>
+							</div>
+						</li>
+						<!--{/if}-->
+					</ol>
+					<ol class="panel-container">
+						<script src="$_G[setting][jspath]/imgpreview.js"></script>
+						<!--{if !empty($_G['group']['allowupbanner']) || $_G['adminid'] == 1}-->
+						<li class="box size-10-0 no-edge">
+							<div class="input-group-area">
+								<div class="img-upload" style="height:360px;">
+									<img id="bannerpreviewer" onload="thumbImg(this, 1)" style="width: 100%; border-radius: 0; height:auto" src="{if $_G[forum][banner]}$_G[forum][banner]?{TIMESTAMP}{else}{IMGURL}/common/no-img/no-group-banner.svg{/if}" />
+									<input type="file" name="bannernew" id="bannernew" onchange="previewImage(this,'bannerpreviewer')"/>
+									<label class="big ft-upload-cloud" for="bannernew"></label>
+								</div>
+								<div class="input-group f">
+									<span>{lang group_image}</span>
+									<i style="font-size: 13px"><!--{if $_G[setting][group_imgsizelimit]}-->{lang group_image_filesize_limit}，<!--{/if}-->{lang group_image_filesize_advise}</i>
+									<!--{if $_G['forum']['banner']}-->
+									<ul class="csbox">
+										<li>
+											<input type="checkbox" name="deletebanner" id="deletebanner" value="1" />
+											<label for="deletebanner">{lang group_no_image}</label>
+										</li>
+									</ul>
+									<!--{/if}-->
+								</div>
+							</div>
+						</li>
+						<!--{/if}-->
+						<li class="box size-7-0 no-edge">
+							<div class="input-group f">
+								<span style="width: 90px">{lang group_icon}</span>
+								<i style="font-size: 13px"><!--{if $_G[setting][group_imgsizelimit]}-->{lang group_image_filesize_limit}，<!--{/if}-->{lang group_icon_resize}</i>
+								<span class="img-upload" style="width: 48px; height: 48px; padding: 0;">
+									<img id="iconnewimg" src="{if $_G[forum][icon]}$_G[forum][icon]?{TIMESTAMP}{else}{IMGURL}/common/no-img/no-group-avatar.svg{/if}" />
+									<input type="file" id="iconnew" name="iconnew" onchange="previewImage(this,'iconnewimg')"/>
+									<label class="small ft-upload-cloud" for="iconnew"></label>
+								</span>
+							</div>
+						</li>
+						<li class="box size-3-0 no-edge">
+							<div class="input-group f">
+								<i class="input-group-btn"><button type="submit" name="groupmanage" style="height: 48px; font-size: 18px; letter-spacing: 10px; text-indent: 5px" value="1">{lang submit}</button></i>
+							</div>
+						</li>
+					</ol>
+				</form>
+			<!--{elseif $_GET['op'] == 'checkuser'}-->
+				<!--{if $checkusers}-->
+					<div class="panel">
+						<ol class="panel-container group-user">
+							<li class="box size-5-0 no-edge">
+								<div class="input-group f">
+									<i class="input-group-btn"><a href="forum.php?mod=group&action=manage&op=checkuser&fid=$_G[fid]&checkall=2">{lang ignore_all}</a></i>
+								</div>
+							</li>
+							<li class="box size-5-0 no-edge">
+								<div class="input-group f">
+									<i class="input-group-btn"><a href="forum.php?mod=group&action=manage&op=checkuser&fid=$_G[fid]&checkall=1">{lang pass_all}</a></i>
+								</div>
+							</li>
+							<!--{loop $checkusers $uid $user}-->
+							<li class="box size-3-1 no-edge">
+								<div class="u more">
+									<!--{echo avatar($user[uid], 'big')}-->
+									<a class="name" href="home.php?mod=space&uid=$user[uid]">$user[username]</a>
+									<span>$user['joindateline']</span>
+									<div class="btn-group">
+										<button class="forbiden" type="submit" name="checkuserfalse" value="true" onclick="location.href='forum.php?mod=group&action=manage&op=checkuser&fid=$_G[fid]&uid=$user[uid]&checktype=2'">{lang ignore}</button>
+										<button type="submit" name="checkusertrue" value="true" onclick="location.href='forum.php?mod=group&action=manage&op=checkuser&fid=$_G[fid]&uid=$user[uid]&checktype=1'">{lang pass}</button>
+									</div>
+								</div>
+							</li>
+							<!--{/loop}-->
+						</ol>
+					</div>
+					<!--{if $multipage}--><div class="pgs">$multipage</div><!--{/if}-->
+				<!--{else}-->
+					<p class="global_nothing">{lang global_nothing}</p>
+				<!--{/if}-->
+			<!--{elseif $_GET['op'] == 'manageuser'}-->
+				<script type="text/javascript">
+					function groupManageUser(targetlevel_val) {
+						$('targetlevel').value = targetlevel_val;
+						$('manageuser').submit();
+					}
+				</script>
+				<!--{if $_G['forum']['membernum'] > 50}-->
+				<div class="bm_c pns">
+					<form action="forum.php?mod=group&action=manage&op=manageuser&fid=$_G[fid]" method="post">
+						<input type="text" {if empty($_GET['srchuser'])}onclick="$('groupsearch').value=''"{/if} value="{if $_GET['srchuser']}$_GET[srchuser]{else}{lang enter_member_user}{/if}" size="15" class="px p_fre vm" id="groupsearch" name="srchuser">&nbsp;
+						<button class="pn vm" type="submit"><span>{lang search}</span></button>
+					</form>
+				</div>
+				<!--{/if}-->
+				<form action="forum.php?mod=group&action=manage&op=manageuser&fid=$_G[fid]&manageuser=true" name="manageuser" id="manageuser" method="post" autocomplete="off" class="ptm">
+					<input type="hidden" value="{FORMHASH}" name="formhash" />
+					<input type="hidden" value="0" name="targetlevel" id="targetlevel" />
+					<div class="panel group-user">
+						<ol class="panel-container">
+							<li class="box size-10-0 no-edge">
+								<div class="input-group f">
+									<!--{loop $mtype $key $name}-->
+									<!--{if $_G['forum']['founderuid'] == $_G['uid'] || $key > $groupuser['level'] || $_G['adminid'] == 1}-->
+									<i class="input-group-btn"><button type="button" name="manageuser" value="true" onclick="groupManageUser('{$key}')">$name</button></i>
+									<!--{/if}-->
+									<!--{/loop}-->
+								</div>
+							</li>
+						</ol>
+						<!--{if $adminuserlist}-->
+						<div class="title" style="background:none; border: none; border-top: 1px solid #e6e6e6">
+							<h2>{lang group_admin_member}</h2>
+						</div>
+						<ol class="panel-container">
+							<!--{loop $adminuserlist $user}-->
+							<li class="box size-2-1 no-edge">
+								<!--{if $_G['adminid'] == 1 || ($_G['uid'] != $user['uid'] && ($_G['uid'] == $_G['forum']['founderuid'] || $user['level'] > $groupuser['level']))}--><input type="checkbox" name="muid[{$user[uid]}]" id="muid[{$user[uid]}]" value="$user[level]" /><!--{/if}-->
+								<label class="u" for="muid[{$user[uid]}]" title="{if $user['level'] == 1}{lang group_moderator_title}{elseif $user['level'] == 2}{lang group_moderator_vice_title}{/if}{if $user['online']} {lang login_normal_mode}{/if}">
+									<!--{echo avatar($user[uid], 'big')}-->
+									<a class="name" href="home.php?mod=space&uid=$user[uid]">$user[username]</a>
+									<i class="job {if $user['level'] == 1}moderator{elseif $user['level'] == 2}moderator_vice{/if} mt-security"></i>
+								</label>
+							</li>
+							<!--{/loop}-->
+						</ol>
+						<!--{/if}-->
+						<!--{if $staruserlist || $userlist}-->
+						<div class="title" style="background:none; border: none; border-top: 1px solid #e6e6e6">
+							<h2>{lang member}</h2>
+						</div>
+						<ol class="panel-container">
+							<!--{if $staruserlist}-->
+								<!--{loop $staruserlist $user}-->
+								<li class="box size-2-1 no-edge">
+									<!--{if $_G['adminid'] == 1 || $user['level'] > $groupuser['level']}--><input type="checkbox" name="muid[{$user[uid]}]" id="muid[{$user[uid]}]" value="$user[level]" /><!--{/if}-->
+									<label class="u" for="muid[{$user[uid]}]" title="{lang group_star_member_title}">
+										<!--{echo avatar($user[uid], 'big')}-->
+										<a class="name" href="home.php?mod=space&uid=$user[uid]">$user[username]</a>
+										<i class="job star awe-star"></i>
+									</label>
+								</li>
+								<!--{/loop}-->
+							<!--{/if}-->
+							<!--{if $userlist}-->
+								<!--{loop $userlist $user}-->
+								<li class="box size-2-1 no-edge">
+									<!--{if $_G['adminid'] == 1 || $user['level'] > $groupuser['level']}--><input type="checkbox" name="muid[{$user[uid]}]" id="muid[{$user[uid]}]" value="$user[level]" /><!--{/if}-->
+									<label class="u" for="muid[{$user[uid]}]">
+										<!--{echo avatar($user[uid], 'big')}-->
+										<a class="name" href="home.php?mod=space&uid=$user[uid]">$user[username]</a>
+										<i class="job normal awe-user"></i>
+									</label>
+								</li>
+								<!--{/loop}-->
+							<!--{/if}-->
+						</ol>
+						<!--{/if}-->
+					</div>
+					<!--{if $multipage}--><div class="pgs">$multipage</div><!--{/if}-->
+				</form>
+			<!--{elseif $_GET['op'] == 'threadtype'}-->
+				<!--{if empty($specialswitch['allowthreadtype'])}-->
+					<div class="panel">
+						<ol class="panel-container">
+							<li class="box size-10-0 no-edge">
+								<p class="alert hi-danger">{lang group_level_cannot_do}</p>
+							</li>
+						</ol>
+					</div>
+				<!--{else}-->
+					<script type="text/JavaScript">
+                        var rowtypedata = [
+                            [
+                                [1,'<input type="checkbox" disabled="disabled" /><label></label>', ''],
+                                [1,'<input type="checkbox" name="newenable[]" checked="checked" value="1" /><label></label>', ''],
+                                [1,'<input type="text" size="2" name="newdisplayorder[]" value="0" />'],
+                                [1,'<input type="text" name="newname[]" />']
+                            ],
+                        ];
+						var addrowdirect = 0;
+						var typenumlimit = $typenumlimit;
+						function addrow(obj, type) {
+							var table = obj.parentNode.parentNode.parentNode.parentNode;
+							if(typenumlimit <= obj.parentNode.parentNode.parentNode.rowIndex - 1) {
+								alert('{lang group_threadtype_limit_1}'+typenumlimit+'{lang group_threadtype_limit_2}');
+								return false;
+							}
+							if(!addrowdirect) {
+								var row = table.insertRow(obj.parentNode.parentNode.parentNode.rowIndex);
+							} else {
+								var row = table.insertRow(obj.parentNode.parentNode.parentNode.rowIndex + 1);
+							}
+
+							var typedata = rowtypedata[type];
+							for(var i = 0; i <= typedata.length - 1; i++) {
+								var cell = row.insertCell(i);
+								cell.colSpan = typedata[i][0];
+								var tmp = typedata[i][1];
+								if(typedata[i][2]) {
+									cell.className = typedata[i][2];
+								}
+								tmp = tmp.replace(/\{(\d+)\}/g, function($1, $2) {return addrow.arguments[parseInt($2) + 1];});
+								cell.innerHTML = tmp;
+							}
+							addrowdirect = 0;
+						}
+					</script>
+					<div id="threadtypes">
+						<form class="panel csbox" id="threadtypeform" action="forum.php?mod=group&action=manage&op=threadtype&fid=$_G[fid]" method="post">
+							<input type="hidden" value="{FORMHASH}" name="formhash" />
+							<ol class="panel-container">
+								<li class="box size-10-0 no-edge">
+									<div class="input-group f">
+										<span style="width: 110px">{lang threadtype_turn_on}</span>
+										<ul>
+											<li>
+												<input type="radio" name="threadtypesnew[status]" id="threadtypesnew[status]1" value="1" onclick="$('threadtypes_config').style.display = '';$('threadtypes_manage').style.display = '';" $checkeds[status][1] />
+												<label for="threadtypesnew[status]1">{lang yes}</label>
+											</li>
+											<li>
+												<input type="radio" name="threadtypesnew[status]" id="threadtypesnew[status]2" value="0" onclick="$('threadtypes_config').style.display = 'none';$('threadtypes_manage').style.display = 'none';"  $checkeds[status][0] />
+												<label for="threadtypesnew[status]2">{lang no}</label>
+											</li>
+										</ul>
+									</div>
+								</li>
+								<li class="box size-10-0 no-edge" id="threadtypes_config" style="display: $display">
+									<div class="input-group f">
+										<span style="width: 110px">{lang threadtype_required}</span>
+										<ul>
+											<li>
+												<input type="radio" name="threadtypesnew[required]" id="threadtypesnew[required]1" value="1" $checkeds[required][1] />
+												<label for="threadtypesnew[required]1">{lang yes}</label>
+											</li>
+											<li>
+												<input type="radio" name="threadtypesnew[required]" id="threadtypesnew[required]2" value="0" $checkeds[required][0] />
+												<label for="threadtypesnew[required]2">{lang no}</label>
+											</li>
+										</ul>
+										<span style="width: 110px">{lang threadtype_prefix}</span>
+										<ul>
+											<li>
+												<input type="radio" name="threadtypesnew[prefix]" id="threadtypesnew[prefix]1" value="0" $checkeds[prefix][0] />
+												<label for="threadtypesnew[prefix]1">{lang threadtype_prefix_off}</label>
+											<li>
+												<input type="radio" name="threadtypesnew[prefix]" id="threadtypesnew[prefix]2" value="1" $checkeds[prefix][1] />
+												<label for="threadtypesnew[prefix]2">{lang threadtype_prefix_on}</label>
+											</li>
+										</ul>
+									</div>
+								</li>
+								<li class="box size-10-0 no-edge" id="threadtypes_manage" style="display: $display">
+									<div style="margin-bottom:40px">
+										<table class="dc wb rb">
+											<thead>
+												<tr>
+													<td width="50">{lang delete}</td>
+													<td width="50">{lang enable}</td>
+													<td width="50">{lang displayorder}</td>
+													<td width="800">{lang threadtype_name}</td>
+												</tr>
+											</thead>
+
+											<tbody>
+											<!--{if $threadtypes}-->
+											<!--{loop $threadtypes $val}-->
+											<tr>
+												<td class="csbox admin">
+													<input type="checkbox" name="threadtypesnew[options][delete][]" id="threadtypesnew[options][delete]{$val[typeid]}" value="{$val[typeid]}" />
+													<label for="threadtypesnew[options][delete]{$val[typeid]}"></label>
+												</td>
+												<td>
+													<input type="checkbox" name="threadtypesnew[options][enable][{$val[typeid]}]" id="threadtypesnew[options][enable][{$val[typeid]}]" value="1" $val[enablechecked] />
+													<label for="threadtypesnew[options][enable][{$val[typeid]}]"></label>
+												</td>
+												<td><input type="text" name="threadtypesnew[options][displayorder][{$val[typeid]}]" size="2" value="$val[displayorder]"/></td>
+												<td><input type="text" name="threadtypesnew[options][name][{$val[typeid]}]" value="$val[name]"/></td>
+											</tr>
+											<!--{/loop}-->
+											<!--{/if}-->
+											<tr style="position:absolute;display: block;top: 100%;left: calc(50% - 50px); border-radius: 0 0 19px 20px;overflow:  hidden;border: 1px solid #ddd;border-top: none;">
+												<td colspan="4" style="width: 100px"><a class="align-center sky-blue" style="width: 100%;" onclick="addrow(this, 0)"><i class="icon-plus" style="width: 16px"></i>{lang threadtype_add}</a></td>
+											</tr>
+											</tbody>
+										</table>
+									</div>
+								</li>
+								<li class="box size-10-0 no-edge">
+									<div class="input-group f">
+										<i class="input-group-btn"><button type="submit" name="groupthreadtype" value="1">{lang submit}</button></i>
+									</div>
+								</li>
+							</ol>
+						</form>
+					</div>
+				<!--{/if}-->
+			<!--{elseif $_GET['op'] == 'demise'}-->
+				<!--{if $groupmanagers}-->
+					<form class="panel" action="forum.php?mod=group&action=manage&op=demise&fid=$_G[fid]" name="groupdemise" method="post">
+						<input type="hidden" value="{FORMHASH}" name="formhash" />
+						<ol class="panel-container">
+							<li class="box size-10-0 no-edge">
+								{lang group_demise_notice}
+							</li>
+							<li class="box size-10-0 no-edge">
+								<div class="input-group-area panel">
+									<span>{lang transfer_group_to}</span>
+									<ol class="panel-container group-user">
+										<!--{loop $groupmanagers $user}-->
+										<!--{if $user['uid'] != $_G['uid']}-->
+										<li class="box size-2-1 no-edge">
+											<input type="radio" name="suid" value="$user[uid]" id="$user[uid]_dem" />
+											<label for="$user[uid]_dem" class="u">
+												<!--{echo avatar($user[uid], 'small')}-->
+												<a class="name" href="home.php?mod=space&uid=$user[uid]">$user[username]</a>
+												<i class="job {if $user['level'] == 1}moderator{elseif $user['level'] == 2}moderator_vice{/if} mt-security"></i>
+											</label>
+										</li>
+										<!--{/if}-->
+										<!--{/loop}-->
+									</ol>
+									<div class="input-group f">
+										<span>{lang group_input_password}</span>
+										<input type="password" name="grouppwd" />
+										<i class="input-group-btn"><button type="submit" name="groupdemise" value="1">{lang submit}</button></i>
+									</div>
+								</div>
+							</li>
+						</ol>
+					</form>
+				<!--{else}-->
+					<p class="global_nothing">{lang group_cannot_demise}</p>
+				<!--{/if}-->
+			<!--{/if}-->
+	</div>
+</div>

@@ -1,0 +1,9 @@
+<div class="vessel" id="setting_header_userinfo">
+    <div class="user-info withedge">
+        <a class="avatar"><!--{avatar($space[uid],middle)}--></a>
+        <p class="name">{$_G['username']}</p>
+        <p class="email"><!--{if $space[email]}-->$space[email]<!--{else}-->{lang email_no}<!--{/if}--><a class="ft-edit" href="home.php?mod=spacecp&ac=profile&op=password&from=contact#contact"></a></p>
+        <p class="uid lv-pag lv-info"><span>UID</span><i>{$_G['uid']}</i></p>
+        <p class="level lv-pag lv-info"><span>$_G[group][grouptitle]</span><i>$_G[group][groupid]</i></p>
+    </div>
+</div>

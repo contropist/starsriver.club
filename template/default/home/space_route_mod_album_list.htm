@@ -1,0 +1,76 @@
+<!--{eval $friendsname = array(1 => '{lang friendname_1}',2 => '{lang friendname_2}',3 => '{lang friendname_3}',4 => '{lang friendname_4}');}-->
+
+<!--{if empty($nestmode)}-->
+    <!--{template home/space_trends_header}-->
+	<div class="plate layout-0">
+		<!--[nest=nestcontenttop]--><div id="nestcontenttop" class="area"></div><!--[/nest]-->
+	</div>
+    <div class="plate layout-3-type2 app-dynamic soft">
+        <section>
+            <!--{subtemplate home/space_trends_side_left}-->
+        </section>
+        <section>
+            <!--{if helper_access::check_module('album')}-->
+            <div class="vessel">
+                <a class="post-new-blog ft-instagram" href="home.php?mod=spacecp&ac=upload">{lang upload_pic}</a>
+            </div>
+            <!--{/if}-->
+            <div class="vessel">
+                <div class="nav">
+                    <a class="$actives[all]" href="home.php?mod=space&do=album&view=all">{lang view_all}</a>
+                    <!--{if $_G[uid]}-->
+                    <a class="$actives[we]" href="home.php?mod=space&do=album&view=we">{lang friend_album}</a>
+                    <a class="$actives[me]" href="home.php?mod=space&do=album&view=me">{lang my_album}</a>
+                    <!--{/if}-->
+                </div>
+                <!--{if $_GET[view] == 'all' || ($_GET['view'] == 'we' && $userlist)}--><hr><!--{/if}-->
+                <!--{if $_GET[view] == 'all'}-->
+                    <ul class="tags">
+                        <li class="{if !$_GET[catid]}$orderactives[dateline]{/if}"><a href="home.php?mod=space&do=album&view=all">{lang newest_update_album}</a></li>
+                        <li class="$orderactives[hot]"><a href="home.php?mod=space&do=album&view=all&order=hot">{lang hot_pic_recommend}</a></li>
+                        <!--{if $_G['setting']['albumcategorystat'] && $category}-->
+                            <!--{loop $category $value}-->
+                                <li class="{if $_GET[catid]==$value[catid]}active{/if}"><a href="home.php?mod=space&amp;do=album&amp;catid={$value[catid]}&amp;view=all">$value[catname]</a></li>
+                            <!--{/loop}-->
+                        <!--{/if}-->
+                    </ul>
+                <!--{/if}-->
+                <!--{if $_GET['view'] == 'we' && $userlist}-->
+                    <ul class="tags hideoverflow trans-ease" id="userlist">
+                        <!--{loop $userlist $value}-->
+                            <li class="{$fuid_actives[$value[fuid]]}"><a onclick="fuidgoto($value[fuid])">$value[fusername]</a></li>
+                        <!--{/loop}-->
+                    </ul>
+                    <script type="text/javascript">
+                        fold('#userlist',94,false);
+                        function fuidgoto(fuid) {
+                            var parameter = fuid != '' ? '&fuid='+fuid : '';
+                            window.location.href = 'home.php?mod=space&do=album&view=we'+parameter;
+                        }
+                    </script>
+                <!--{/if}-->
+            </div>
+            <!--{template home/space_trends_mod_album}-->
+            <!--[nest=nest1]--><div id="nest1" class="area"></div><!--[/nest]-->
+            <!--[nest=nest2]--><div id="nest2" class="area"></div><!--[/nest]-->
+            <!--[nest=nest3]--><div id="nest3" class="area"></div><!--[/nest]-->
+            <!--[nest=nestcontentbottom]--><div id="nestcontentbottom" class="area"></div><!--[/nest]-->
+        </section>
+        <section>
+            <!--{subtemplate home/space_trends_side_right}-->
+        </section>
+    </div>
+<!--{else}-->
+    <!--{template home/space_home_header}-->
+    <div class="mas-viewer">
+        <section class="col-1">
+            <!--{template home/space_home_mod_album}-->
+        </section>
+        <section class="col-2">
+            <div class="vessel">
+                <!--{subtemplate home/space_home_userabout}-->
+            </div>
+        </section>
+    </div>
+<!--{/if}-->
+<!--{template common/footer}-->

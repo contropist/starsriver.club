@@ -1,0 +1,165 @@
+<div id="{$editorid}_body_loading">
+	<img src="{STATICURL}image/common/loading.gif" width="16" height="16" class="vm" /> {lang e_editor_loading}
+</div>
+<div class="edt" id="{$editorid}_body" style="display: none">
+	<div id="{$editorid}_controls" class="editor-toolbar">
+		<div class="fuc-progress">
+			<a id="{$editorid}_undo" title="{lang e_undo}"><i class="e-undo"></i></a>
+			<a id="{$editorid}_redo" title="{lang e_redo}"><i class="e-redo"></i></a>
+		</div>
+		<div class="fuc-pro r cblock" id="{$editorid}_button">
+			<input id="{$editorid}_switchercheck" type="checkbox" name="checkbox" value="0" {if !$editor[editormode]}checked="checked"{/if} onclick="switchEditor(this.checked?0:1)" />
+			<label for="{$editorid}_switchercheck" id="{$editorid}_switcher">{lang code}</label>
+		</div>
+		<!--{if !empty($_G[setting][pluginhooks][post_editorctrl_right])}-->
+			<div><!--{hook/post_editorctrl_right}--></div>
+		<!--{/if}-->
+		<div class="fuc-font">
+			<a class="box" style="width: 150px" id="{$editorid}_fontname" title="{lang e_fontname}" menupos="43!"><span id="{$editorid}_font">{lang e_font}</span></a>
+			<a class="box" style="width: 49px" id="{$editorid}_fontsize" title="{lang e_fontsize}" menupos="43!" menuwidth="25"><span id="{$editorid}_size">{lang e_size}</span></a>
+			<a id="{$editorid}_bold" title="{lang e_bold}"><i class="e-bold "></i></a>
+			<a id="{$editorid}_italic" title="{lang e_italic}"><i class="e-italic"></i></a>
+			<a id="{$editorid}_underline" title="{lang e_underline}"><i class="e-underline "></i></a>
+			<a id="{$editorid}_forecolor" title="{lang e_forecolor}"><i class="e-format-color-text"  style="font-size: 15px ;line-height: 23.5px"></i></a>
+			<a id="{$editorid}_backcolor" title="{lang e_fontbgcolor}"><i class="e-format-color-fill"  style="font-size: 15px ;line-height: 23.5px"></i></a>
+			<a id="{$editorid}_url" title="{lang e_url}"><i class="e-chain"></i></a>
+			<a id="{$editorid}_unlink" title="{lang e_unlink}"><i class="e-chain-broken"></i></a>
+			<a id="{$editorid}_removeformat" title="{lang e_removeformat}"><i class="e-format-clear"  style="font-size: 15px ;line-height: 23.5px"></i></a>
+		</div>
+		<div class="fuc-paragraph">
+			<a id="{$editorid}_autotypeset" title="{lang e_autotypeset}"><i class="e-align-justify"></i></a>
+			<a id="{$editorid}_justifyleft" title="{lang e_left}"><i class="e-align-left"></i></a>
+			<a id="{$editorid}_justifycenter" title="{lang e_center}"><i class="e-align-center"></i></a>
+			<a id="{$editorid}_justifyright" title="{lang e_right}"><i class="e-align-right"></i></a>
+			<a id="{$editorid}_insertorderedlist" title="{lang e_orderedlist}"><i class="e-list-ol"></i></a>
+			<a id="{$editorid}_insertunorderedlist" title="{lang e_unorderedlist}"><i class="e-list-ul"></i></a>
+			<a id="{$editorid}_tbl" title="{lang e_table}"><i class="e-table"></i></a>
+			<a id="{$editorid}_inserthorizontalrule" title="{lang e_hr_title}"><i class="e-minus"></i></a>
+		</div>
+		<div class="fuc-attach">
+			<a id="{$editorid}_image" title="{lang e_image_title}" menupos="00" menuwidth="720"><i class="e-images" ></i><i class="tip-dot" id="{$editorid}_imagen" style="display:none"></i></a>
+			<!--{if $_G['forum']['allowmediacode'] && $_G['group']['allowmediacode']}-->
+			<a id="{$editorid}_aud" title="{lang e_audio_title}"><i class="e-music" ></i></a>
+			<a id="{$editorid}_vid" title="{lang e_video_title}"><i class="e-play " ></i></a>
+			<a id="{$editorid}_fls" title="{lang e_flash_title}"><i class="e-flash " ></i></a>
+			<!--{/if}-->
+			<!--{if $_G['group']['allowpostattach']}-->
+			<a id="{$editorid}_attach" title="{lang e_attach_title}" menupos="00" menuwidth="720"><i class="e-attachment "></i><i class="tip-dot" id="{$editorid}_attachn" style="display:none"></i></a>
+			<!--{/if}-->
+			<!--{if $_G['setting']['magicstatus'] && !empty($_G['setting']['magics']['doodle'])}-->
+			<a id="a_magic_doodle" href="home.php?mod=magic&mid=doodle&showid=comment_doodle&target={$editorid}_textarea&from=forumeditor" onclick="showWindow(this.id, this.href, 'get', 0)"><i  class="e-paint-brush "></i></a>
+			<!--{/if}-->
+			<a id="{$editorid}_sml" title="{lang e_smilies_title}"><i class="e-smile"></i></a>
+			<!--{if ($_GET[action] == 'newthread' || $_GET[action] == 'reply' || $_GET[action] == 'edit') && $_G['group']['allowat']}-->
+				<a id="{$editorid}_at" title="{lang e_at_title}" menupos="43" menuwidth="720"><i class="e-at-sign"></i></a>
+			<!--{/if}-->
+			<!--{hook/post_editorctrl_left}-->
+		</div>
+		<div class="fuc-adv">
+			<!--{hook/post_editorctrl_top}-->
+			<a id="{$editorid}_quote" title="{lang e_quote_title}"><i class="e-quote-right"></i></a>
+			<a id="{$editorid}_code" title="{lang e_code_title}"><i class="e-code"></i></a>
+			<!--{if $isfirstpost}-->
+				<a id="{$editorid}_free" title="{lang e_free}"><i class="e-eye"></i></a>
+				<!--{if $_G['group']['allowhidecode']}-->
+					<a id="{$editorid}_hide" title="{lang e_hide}"><i class="e-eye-slash "></i></a>
+				<!--{/if}-->
+			<!--{/if}-->
+			<!--{if $_G['group']['allowdownremoteimg']}-->
+				<!--{if !($_G['setting']['magicstatus'] && !empty($_G['setting']['magics']['doodle']))}--><!--{/if}-->
+				<a id="{$editorid}_downremoteimg" title="{lang e_downremoteimg_title}"><i class="e-cloud-download "></i></a>
+			<!--{/if}-->
+			<!--{if $isfirstpost}-->
+				<a id="{$editorid}_page" title="{lang page_separate}"><i class="e-pagebreak "></i></a>
+				<a id="{$editorid}_index" title="{lang directory}"><i class="e-opt "></i></a>
+			<!--{/if}-->
+			<a id="{$editorid}_password" title="{lang replypassword}"><i class="e-password"></i></a>
+			<!--{if $_G['group']['allowbegincode'] && $isfirstpost}-->
+				<!--a id="{$editorid}_beginning" title="{lang e_beginning_title}" menupos="43" menuwidth="720">{lang e_beginning}</a-->
+			<!--{/if}-->
+			<!--{hook/post_editorctrl_bottom}-->
+		</div>
+	</div>
+	<div class="area">
+		<!--缓存恢复提示-->
+		<div id="rstnotice" class="fwin-lite px4-radius" style="display:none">
+			<div class="header">
+				<span class="title">{lang notice}</span>
+				<a class="close" title="{lang post_topicreset}" onclick="userdataoption(0)">×</a>
+			</div>
+			<div class="body">{lang missed_data}</div>
+			<div class="footer">
+				<a class="r btn btn-micro btn-warning px4-radius glass" onclick="userdataoption(1)">{lang post_autosave_restore}</a>
+			</div>
+		</div>
+
+		<!--附件恢复提示-->
+		<div id="attachnotice_attach" class="fwin-lite px4-radius" style="display:none">
+			<div class="header">
+				<span class="title">{lang notice}</span>
+				<a class="close" onclick="attachoption('attach', 1)">×</a>
+			</div>
+			<div class="body">
+				{lang you_have}<em id="unusednum_attach"></em>{lang attach_unused}
+			</div>
+			<div class="footer">
+				<a onclick="attachoption('attach', 2);">{lang attach_view}</a>
+				<a onclick="attachoption('attach', 1)">{lang attach_use}</a>
+				<a onclick="attachoption('attach', 0)">{lang attach_delete}</a>
+			</div>
+			<div id="unusedlist_attach" style="display:none"></div>
+		</div>
+
+		<!--图片恢复提示-->
+		<div id="attachnotice_img" class="fwin-lite px4-radius" style="display:none">
+			<div class="header">
+				<span class="title">{lang notice}</span>
+				<a class="close" onclick="attachoption('img', 1)">×</a>
+			</div>
+			<div class="body">
+				{lang you_have}<em id="unusednum_img"></em>{lang img_unused}
+			</div>
+			<div class="footer">
+				<a onclick="attachoption('img', 2);">{lang attach_view}</a>
+				<a onclick="attachoption('img', 1)">{lang attach_use}</a>
+				<a onclick="attachoption('img', 0)">{lang attach_delete}</a>
+			</div>
+			<div id="unusedlist_img" style="display:none"></div>
+		</div>
+
+		<!--草稿箱-->
+		<!--{if $savecount}-->
+		<div class="draft-box ft-edit pxa-1-radius trans-outback trans-delay-quick"><em class="tip-point">$savecount</em>
+			<div class="tooltip" data-pos="tr" style="width: 390px; right:3px;">
+                <div class="draft-nav">
+				    <a class="r ft-menu" href="forum.php?mod=guide&view=my&type=thread&filter=save&fid=0" target="_blank" title="{lang post_message3}"></a>
+                    <span >{lang draftbox}</span>
+                </div>
+                <ul class="trans-ease-quick trans-nodelay">
+					<!--{if $savethreads}-->
+                        <!--{loop $savethreads $savethread}-->
+                            <li>
+                                <a class="quote icon-pushpin " title="{lang reply_quote}" onclick="insertsave($savethread[pid])"></a>
+                                <a class="title" href="forum.php?mod=post&action=edit&fid=$savethread[fid]&tid=$savethread[tid]&pid=$savethread[pid]" target="_blank">$savethread[subject]</a>
+                                <span class="time r">$savethread[dateline]</span>
+                            </li>
+                        <!--{/loop}-->
+					<!--{/if}-->
+
+					<!--{if $savethreadothers}-->
+                        <!--{loop $savethreadothers $savethread}-->
+                            <li>
+                                <a class="quote icon-pushpin " title="{lang reply_quote}" onclick="insertsave($savethread[pid])"></a>
+                                <a class="title" href="forum.php?mod=post&action=edit&fid=$savethread[fid]&tid=$savethread[tid]&pid=$savethread[pid]" target="_blank">$savethread[subject]</a>
+                                <span class="time r">$savethread[dateline]</span>
+                            </li>
+                        <!--{/loop}-->
+					<!--{/if}-->
+				</ul>
+			</div>
+		</div>
+		<!--{/if}-->
+		<textarea name="$editor[textarea]" id="{$editorid}_textarea" rows="15" tabindex="2">$editor[value]</textarea>
+	</div>
+	<!--{subtemplate common/editor}-->
+</div>

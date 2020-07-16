@@ -1,0 +1,68 @@
+<form id="setting_repeat_add" style="font-size: 0" method="post" autocomplete="off" action="home.php?mod=spacecp&ac=plugin&id=myrepeats:memcp&pluginop=add">
+	<input type="hidden" name="formhash" value="{FORMHASH}" />
+	<div class="vessel-title">
+		{lang myrepeats:adduser}
+	</div>
+	<div class="vessel repeat" style="width: calc(66.6666667% - 25px) !important;">
+		<i class="avatar"><!--{avatar(0, 'small')}--></i>
+		<div class="arp tpl">
+			<!--{if !$singleprem}-->
+				<input name="usernamenew" id="usernamenew" type="text" value="$username" placeholder="{lang myrepeats:username}" autocomplete="0"/>
+			<!--{else}-->
+				<select name="usernamenew" id="usernamenew" autocomplete="off">
+					<option>{lang myrepeats:username}</option>
+					<!--{loop $permusers $user}-->
+					<option value="$user" {if $user == $username} selected="selected"{/if}>$user</option>
+					<!--{/loop}-->
+				</select>
+			<!--{/if}-->
+			<input type="password" name="passwordnew" placeholder="{lang myrepeats:password}"/>
+		</div>
+		<div class="que tpl">
+			<select name="questionidnew" tabindex="3" onchange="if(this.value > 0) {$('answernew').style.display='';} else {$('answernew').style.display='none';}">
+				<option value="0">{lang myrepeats:security_question}</option>
+				<option value="1">{lang myrepeats:security_question_1}</option>
+				<option value="2">{lang myrepeats:security_question_2}</option>
+				<option value="3">{lang myrepeats:security_question_3}</option>
+				<option value="4">{lang myrepeats:security_question_4}</option>
+				<option value="5">{lang myrepeats:security_question_5}</option>
+				<option value="6">{lang myrepeats:security_question_6}</option>
+				<option value="7">{lang myrepeats:security_question_7}</option>
+			</select>
+			<div id="answernew" style="display:none">
+				<input type="text" name="answernew" placeholder="{lang myrepeats:security_answer} :"/>
+			</div>
+		</div>
+		<hr>
+		<textarea class="comment" name="commentnew" placeholder="{lang myrepeats:comment}"></textarea>
+	</div>
+	<button class="vessel repeat submit trans-ease-slow" style="height: 147px" type="submit" name="adduser" value="yes" ><span>{lang myrepeats:add} / {lang myrepeats:renew}</span></button>
+</form>
+<form id="setting_repeat_user" style="font-size: 0" method="post" autocomplete="off" action="home.php?mod=spacecp&ac=plugin&id=myrepeats:memcp&pluginop=update">
+	<input type="hidden" name="formhash" value="{FORMHASH}" />
+	<p class="vessel-title">{lang myrepeats:myrepeats}<i class="num"><!--{eval echo count($repeatusers)}--></i></p>
+	<!--{if $repeatusers}-->
+		<!--{loop $repeatusers $user}-->
+		<div class="repeat vessel">
+			<i class="avatar"><!--{avatar($user['upid'],'small')}--></i>
+			<div class="arp">
+				<i class="name">$user[username]</i>
+				<!--{if !$user[locked]}-->
+					<a class="shift icon-loop2 miku-green" href="plugin.php?id=myrepeats:switch&username=$user[usernameenc]&formhash={FORMHASH}"></a>
+				<!--{else}-->
+					<a class="shift icon-blocked gray" title="{lang myrepeats:locked}"></a>
+				<!--{/if}-->
+				<i class="status">
+					LSH : <!--{if $user[lastswitch]}-->$user[lastswitch]<!--{else}-->{lang myrepeats:nouse}<!--{/if}-->
+				</i>
+			</div>
+			<hr>
+			<!--{eval $fb = date('md');}-->
+			<textarea class="comment trans-ease-slow" name="comment[{$user[username]}]" maxlength="255" placeholder="{lang myrepeats:commenttt}{if $fb == '0101'}{lang no_str_fb1}{elseif $fb == '0312'}{lang no_str_fb2}{elseif $fb == '0308'}{lang no_str_fb3}{elseif $fb == '0501'}{lang no_str14}{elseif $fb == '0601'}{lang no_str_fb6}{else}{lang no_str10}{/if}">$user[comment]</textarea>
+			<input hide class="selector" name="delete[]" type="checkbox" id="$user[username]" value="$user[username]" />
+			<label class="mt-delete_forever trans-ease" for="$user[username]"></label>
+		</div>
+		<!--{/loop}-->
+		<button class="repeat vessel submit trans-ease-slow" type="submit" name="updateuser" value="yes" ><span>{lang submit}</span></button>
+	<!--{/if}-->
+</form>

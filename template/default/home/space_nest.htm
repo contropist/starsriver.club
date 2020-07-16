@@ -1,0 +1,34 @@
+<div id="controlpanel" class="cl">
+	<div id="controlheader" class="cl">
+		<p class="y">
+			<span id="navcancel"><a onclick="spacenest.cancel();return false;">{lang close}</a></span>
+			<span id="navsave"><a onclick="javascript:spacenest.save();return false;">{lang save}</a></span>
+			<span id="button_redo" class="unusable"><a onclick="spacenest.redo();return false;" title="{lang nest_redo}" onfocus="this.blur();">{lang nest_redo}</a></span>
+			<span id="button_undo" class="unusable"><a onclick="spacenest.undo();return false;" title="{lang nest_revocation}" onfocus="this.blur();">{lang nest_revocation}</a></span>
+		</p>
+		<ul id="controlnav">
+			<li id="navstart" class="current"><a href="javascript:" onclick="spacenest.getnest('start');this.blur();return false;">{lang nest_start}</a></li>
+			<li id="navlayout"><a onclick="spacenest.getnest('layout');this.blur();return false;">{lang nest_layout}</a></li>
+			<li id="navstyle"><a onclick="spacenest.getnest('style');this.blur();return false;">{lang nest_style}</a></li>
+			<li id="navblock"><a onclick="spacenest.getnest('block');this.blur();return false;">{lang nest_block}</a></li>
+			<li id="navnest"><a onclick="spacenest.getnest('nest');this.blur();return false;">{lang nest_dress}</a></li>
+		</ul>
+	</div>
+	<div id="controlcontent" class="cl">
+		<ul id="contentstart" class="content">
+		  <li><a onclick="spacenest.getnest('layout');return false;"><img src="{STATICURL}image/nest/layout.png" />{lang nest_layout_1}</a></li>
+		  <li><a onclick="spacenest.getnest('style');return false;"><img src="{STATICURL}image/nest/style.png" />{lang nest_style}</a></li>
+		  <li><a onclick="spacenest.getnest('block');return false;"><img src="{STATICURL}image/nest/module.png" />{lang nest_add_block}</a></li>
+		  <li><a onclick="spacenest.getnest('nest', 'topicid', '$topic[topicid]');return false;"><img src="{STATICURL}image/nest/nest.png" />{lang do_it_yourself}</a></li>
+		</ul>
+	</div>
+	<div id="cpfooter"><table cellpadding="0" cellspacing="0" width="100%"><tr><td class="l">&nbsp;</td><td class="c">&nbsp;</td><td class="r">&nbsp;</td></tr></table></div>
+</div>
+<form method="post" autocomplete="off" name="nestform" action="home.php?mod=spacecp&ac=index">
+<input type="hidden" name="spacecss" value="" />
+<input type="hidden" name="style" value="$space[theme]" />
+<input type="hidden" name="layoutdata" value="" />
+<input type="hidden" name="currentlayout" value="{$usernest['currentlayout']}" />
+<input type="hidden" name="formhash" value="{FORMHASH}" />
+<input type="hidden" name="nestsubmit" value="true"/>
+</form>

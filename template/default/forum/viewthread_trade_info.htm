@@ -1,0 +1,277 @@
+<!--{template common/header}-->
+<!--{if $postlist[$post[pid]]['invisible'] != 0}-->
+	<div class="trdb">{lang post_trade_removed}</div>
+	<!--{template common/footer}-->
+	{eval exit;}
+<!--{/if}-->
+
+<!--{if $_G[inajax]}-->
+    <div class="photo pxa-1-radius-a pxa-4-radius-a">
+        <!--{if $trade['thumb']}-->
+            <img class="pointer trans-ease" src="$trade[thumb]" onclick="zoom(this, '$trade[attachurl]')" alt="$trade[subject]" />
+        <!--{else}-->
+            <img class=" trans-ease" src="{STATICURL}image/common/nophoto.gif" alt="$trade[subject]" />
+        <!--{/if}-->
+
+        <!--{if !$_G['forum_thread']['is_archived']}-->
+            <!--{if (($_G['forum']['ismoderator'] && $_G['group']['alloweditpost'] && (!in_array($post['adminid'], array(1, 2, 3)) || $_G['adminid'] < $post['adminid'])) || ($_G['forum']['alloweditpost'] && $_G['uid'] && $post['authorid'] == $_G['uid'])) && !$post['first'] || $_G['forum']['ismoderator'] && $_G['group']['allowdelpost']}-->
+                <!--{if $_G['forum']['ismoderator'] && $_G['group']['allowdelpost']}-->
+                    <a class="set" onclick="modaction('delpost', $_GET[pid])">{lang delete}</a>&nbsp;&nbsp;
+                <!--{/if}-->
+                <a class="set" onclick="showWindow('setcover_$trade[aid]',this.href)" href="forum.php?mod=ajax&action=setthreadcover&aid=$trade[aid]&fid=$_G[fid]">{lang set_cover}</a>
+                <a class="set" href="forum.php?mod=post&action=edit&fid=$_G[fid]&tid=$_G[tid]&pid=$post[pid]{if !empty($_GET[modthreadkey])}&modthreadkey=$_GET[modthreadkey]{/if}&page=$page">{lang edit_trade}</a>
+            <!--{/if}-->
+        <!--{/if}-->
+        <!--{if $post['authorid'] != $_G['uid'] && empty($thread['closed']) && $trade[expiration] > -1}-->
+            <div class="features-buy">
+                <!--{if $trade[amount]}-->
+                    <button class="l" onclick="{if $_G['uid']}window.open('forum.php?mod=trade&tid=$post[tid]&pid=$trade[pid]','','');{else}showWindow('login', 'member.php?mod=logging&action=login&guestmessage=yes');{/if}"><i class="icon-shopping-cart"></i><em>{lang attachment_buy}</em></button>
+                <!--{else}-->
+                    <button class="l" disabled><i class="awe-ban"></i><em>{lang sold_out}</em></button>
+                <!--{/if}-->
+
+                <!--{if $_G['uid']}-->
+                    <button class="l"  onclick="showWindow('sendpm', 'home.php?mod=spacecp&ac=pm&op=showmsg&handlekey=showmsg_$post[authorid]&touid=$post[authorid]&pmid=0&daterange=2&tradeid=$trade[pid]')"><i class="ft-mail "></i><em>{lang trade_bargain}</em></button>
+                <!--{/if}-->
+            </div>
+        <!--{/if}-->
+        <!--{if $trade['displayorder'] > 0}-->
+            <b class="hot">{lang post_trade_sticklist}</b>
+        <!--{/if}-->
+    </div>
+    <div class="title">
+        <a class="gname" href="forum.php?mod=viewthread&do=tradeinfo&tid=$_G[tid]&pid=$trade[pid]{if !empty($_GET[modthreadkey])}&modthreadkey=$_GET[modthreadkey]{/if}">$trade[subject]</a>
+        <!--{if $trade['quality'] == 1}--><span class="tag px4-radius hi-danger-case">{lang trade_new} </span><!--{/if}-->
+        <!--{if $trade['quality'] == 2}--><span class="tag px4-radius hi-success-case">{lang trade_old} </span><!--{/if}-->
+        <span class="tag px4-radius hi-info-case">
+            <!--{if $trade['transport'] == 0}-->{lang post_trade_transport_offline}<span class="tooltip" data-pos="tl">{lang trade_locus}：$trade[locus]</span><!--{/if}-->
+            <!--{if $trade['transport'] == 1}-->{lang post_trade_transport_seller}<!--{/if}-->
+            <!--{if $trade['transport'] == 2 || $trade['transport'] == 4}-->
+            <!--{if $trade['transport'] == 4}-->{lang post_trade_transport_physical}<!--{/if}-->
+            <!--{if $trade['transport'] == 2}-->{lang post_trade_transport_customer}<!--{/if}-->
+                    <span class="tooltip" data-pos="tl">
+                      <!--{if !empty($trade['ordinaryfee']) || !empty($trade['expressfee']) || !empty($trade['emsfee'])}-->
+                        <!--{if !empty($trade['ordinaryfee'])}-->{lang post_trade_transport_mail} ￥$trade[ordinaryfee]<br /><!--{/if}-->
+                        <!--{if !empty($trade['expressfee'])}--> {lang post_trade_transport_express} ￥$trade[expressfee]<br /><!--{/if}-->
+                        <!--{if !empty($trade['emsfee'])}--> EMS ￥$trade[emsfee]<!--{/if}-->
+                        <!--{elseif $trade['transport'] == 2}-->
+                            {lang post_trade_transport_none}
+                        <!--{/if}-->
+                    </span>
+            <!--{/if}-->
+            <!--{if $trade['transport'] == 3}-->{lang post_trade_transport_virtual}<!--{/if}-->
+        </span>
+        <div class="price r">
+            <!--{if $trade[price] > 0}-->
+                <span class="cash"><em class="num">￥$trade[price]</em></span>
+            <!--{/if}-->
+            <!--{if $_G['setting']['creditstransextra'][5] != -1 && $trade[credit]}-->
+            <span class="credit">
+                <!--{if $trade['price'] > 0}--> + <!--{/if}-->
+                $trade[credit]{$_G['setting']['extcredits'][$_G['setting']['creditstransextra'][5]][unit]}{$_G['setting']['extcredits'][$_G['setting']['creditstransextra'][5]][title]}
+            </span>
+            <!--{/if}-->
+
+            <!--{if $trade[price] && $trade['costprice'] > 0 || $_G['setting']['creditstransextra'][5] != -1 && $trade[credit] && $trade['costcredit'] > 0}-->
+                <span class="price-old">
+                    <!--{if $trade['costprice'] > 0}-->
+                        $trade[costprice] {lang payment_unit}
+                    <!--{/if}-->
+                    <!--{if $_G['setting']['creditstransextra'][5] != -1 && $trade['costcredit'] > 0}-->
+                    <!--{if $trade[costprice] > 0}--> + <!--{/if}-->$trade[costcredit] {$_G[setting][extcredits][$_G['setting']['creditstransextra'][5]][unit]}{$_G[setting][extcredits][$_G['setting']['creditstransextra'][5]][title]}
+                    <!--{/if}-->
+                </span>
+            <!--{/if}-->
+        </div>
+    </div>
+    <div class="intro">
+        <div class="box">
+            <!--{if strlen($post[message]) >= 36}-->
+            $post[message]
+            <!--{else}-->
+            {lang trade_no_intro}
+            <a class="heart-pink pointer" onclick="showWindow('sendpm', 'home.php?mod=spacecp&ac=pm&op=showmsg&handlekey=showmsg_$post[authorid]&touid=$post[authorid]&pmid=0&daterange=2&tradeid=$trade[pid]')" >{lang trade_talk}</a>
+            <!--{/if}-->
+        </div>
+    </div>
+    <div class="remain">
+        <p class="l">
+            {lang post_trade_buynumber}：$trade[totalitems] / $trade[amount]
+        </p>
+        <p class="r">
+            {lang trade_remaindays}:
+            <!--{if $trade[expiration]}-->
+            <!--{if $trade[closed]}-->
+            {lang trade_timeout}
+            <!--{elseif $trade[expiration] > 0}-->
+            {$trade[expiration]}{lang days}{$trade[expirationhour]}{lang trade_hour}
+            <!--{elseif $trade[expiration] == -1}-->
+            {lang trade_timeout}
+            <!--{else}-->
+            <!--{/if}-->
+            <!--{else}-->
+            {lang trade_forever}
+            <!--{/if}-->
+        </p>
+    </div>
+    <!--{hook/viewthread_tradeinfo_extra}-->
+<!--{else}-->
+    <div class="bale">
+        <div class="photo px4-radius">
+            <!--{if $trade['thumb']}-->
+                <img class="pointer trans-ease-slow" src="$trade[thumb]" onclick="zoom(this, '$trade[attachurl]')" alt="$trade[subject]" />
+            <!--{else}-->
+                <img class="pointer trans-ease-slow" src="{STATICURL}image/common/nophoto.gif" alt="$trade[subject]" />
+            <!--{/if}-->
+            <!--{if $trade['displayorder'] > 0}-->
+                <b class="hot px4-radius">{lang post_trade_sticklist}</b>
+            <!--{/if}-->
+            <!--{if $usertrades}-->
+                <div class="bale-switch pxa-radius"></div>
+                <div class="bale-others trans-ease-slow">
+                    <div class="bg blur trans-ease-slow">
+                        <!--{if $trade['thumb']}-->
+                        <img class="pointer" src="$trade[thumb]" onclick="zoom(this, '$trade[attachurl]')" alt="$trade[subject]" />
+                        <!--{else}-->
+                        <img src="{STATICURL}image/common/nophoto.gif" alt="$trade[subject]" />
+                        <!--{/if}-->
+                    </div>
+                    <div class="list trans-ease-slow">
+                        <div class="title">{lang trade_other_goods}</div>
+                        <!--{loop $usertrades $usertrade}-->
+                        <div class="item l">
+                            <a class="pic" href="forum.php?mod=viewthread&tid=$usertrade[tid]&do=tradeinfo&pid=$usertrade[pid]{if !empty($_GET[modthreadkey])}&modthreadkey=$_GET[modthreadkey]{/if}">
+                                <!--{if $usertrade['aid']}-->
+                                <img src="{echo getforumimg($usertrade[aid])}"/>
+                                <!--{else}-->
+                                <img src="{STATICURL}image/common/nophoto.gif"/>
+                                <!--{/if}-->
+                            </a>
+                        </div>
+                        <!--{/loop}-->
+                    </div>
+                </div>
+            <!--{/if}-->
+        </div>
+        <div class="info">
+            <div class="gname" >$trade[subject]
+                <!--{if $trade['quality'] == 1}--><span class="bubble">{lang trade_new}，{lang post_trade_buynumber}$trade[totalitems] / $trade[amount] </span><!--{/if}-->
+                <!--{if $trade['quality'] == 2}--><span class="bubble">{lang trade_old}，{lang post_trade_buynumber}$trade[totalitems] / $trade[amount] </span><!--{/if}-->
+                <a class="ico-btn btn_back ft-delete r" href="forum.php?mod=viewthread&tid=$_G[tid]{if $_GET[from]}&from=$_GET[from]{/if}"><span class="tooltip" data-pos="tr">{lang return}</span></a>
+            </div>
+            <div class="price ">
+                <!--{if $trade[price] > 0}-->
+                <span class="cash"><em class="num">￥$trade[price]</em></span>
+                <!--{/if}-->
+                <!--{if $_G['setting']['creditstransextra'][5] != -1 && $trade[credit]}-->
+                <span class="credit"><!--{if $trade['price'] > 0}--> + <!--{/if}-->
+                    $trade[credit]{$_G['setting']['extcredits'][$_G['setting']['creditstransextra'][5]][unit]}{$_G['setting']['extcredits'][$_G['setting']['creditstransextra'][5]][title]}
+                </span>
+                <!--{/if}-->
+                <br/>
+                <!--{if $trade[price] && $trade['costprice'] > 0 || $_G['setting']['creditstransextra'][5] != -1 && $trade[credit] && $trade['costcredit'] > 0}-->
+                <span class="price-old">
+                    <!--{if $trade['costprice'] > 0}-->
+                        ￥ $trade[costprice]
+                    <!--{/if}-->
+                    <!--{if $_G['setting']['creditstransextra'][5] != -1 && $trade['costcredit'] > 0}-->
+                    <!--{if $trade[costprice] > 0}--> + <!--{/if}-->$trade[costcredit] {$_G[setting][extcredits][$_G['setting']['creditstransextra'][5]][unit]}{$_G[setting][extcredits][$_G['setting']['creditstransextra'][5]][title]}
+                    <!--{/if}-->
+                    </span>
+                <!--{/if}-->
+            </div>
+            <div class="trade trans-ease">
+                <div class="title">
+                    <p class="prefix">{lang post_trade_transport}： </p>
+                    <!--{if $trade['transport'] == 0}-->{lang post_trade_transport_offline}<!--{/if}-->
+                    <!--{if $trade['transport'] == 1}-->{lang post_trade_transport_seller}<!--{/if}-->
+                    <!--{if $trade['transport'] == 2}-->{lang post_trade_transport_customer}<!--{/if}-->
+                    <!--{if $trade['transport'] == 3}-->{lang post_trade_transport_virtual}<!--{/if}-->
+                    <!--{if $trade['transport'] == 4}-->{lang post_trade_transport_physical}<!--{/if}-->
+                </div>
+
+                <div class="postage">
+                    <!--{if $trade['transport'] == 0}--><div class="ftf"><p>{lang trade_locus}：</p><span>$trade[locus]</span></div><!--{/if}-->
+
+                    <!--{if $trade['transport'] == 2 || $trade['transport'] == 4}-->
+                        <!--{if !empty($trade['ordinaryfee']) || !empty($trade['expressfee']) || !empty($trade['emsfee'])}-->
+                        <!--{if !empty($trade['ordinaryfee'])}--><em>{lang post_trade_transport_mail}： ￥$trade[ordinaryfee]</em><!--{/if}-->
+                        <!--{if !empty($trade['expressfee'])}--><em>{lang post_trade_transport_express}： ￥$trade[expressfee]</em><!--{/if}-->
+                        <!--{if !empty($trade['emsfee'])}--><em>EMS： ￥$trade[emsfee]</em><!--{/if}-->
+                        <!--{elseif $trade['transport'] == 2}-->
+                            <em>{lang post_trade_transport_none}</em>
+                        <!--{/if}-->
+                    <!--{/if}-->
+                </div>
+
+            </div>
+            <div class="features">
+                <!--{if $post['authorid'] != $_G['uid'] && empty($thread['closed']) && $trade[expiration] > -1}-->
+                    <!--{if $trade[amount]}-->
+                        <button class="buy glass px4-radius" onclick="{if $_G['uid']}window.open('forum.php?mod=trade&tid=$post[tid]&pid=$trade[pid]','','');{else}showWindow('login', 'member.php?mod=logging&action=login&guestmessage=yes');{/if}"><i class="icon-cart"></i><em>{lang attachment_buy}</em></button>
+                    <!--{else}-->
+                        <button class="sold-out glass px4-radius" disabled><i class="awe-ban"></i><em>{lang sold_out}</em></button>
+                    <!--{/if}-->
+
+                    <!--{if $_G['uid']}-->
+                        <button class="talk glass px4-radius"  onclick="showWindow('sendpm', 'home.php?mod=spacecp&ac=pm&op=showmsg&handlekey=showmsg_$post[authorid]&touid=$post[authorid]&pmid=0&daterange=2&tradeid=$trade[pid]')"><i class="ft-mail "></i><em>{lang trade_bargain}</em></button>
+                    <!--{/if}-->
+                <!--{/if}-->
+
+                <!--{if !$_G['forum_thread']['is_archived'] && (($_G['forum']['ismoderator'] && $_G['group']['alloweditpost'] && (!in_array($post['adminid'], array(1, 2, 3)) || $_G['adminid'] < $post['adminid'])) || ($_G['forum']['alloweditpost'] && $_G['uid'] && $post['authorid'] == $_G['uid'])) && !$post['first'] || $_G['forum']['ismoderator'] && $_G['group']['allowdelpost']}-->
+                    <!--{if $_G['forum']['ismoderator'] && $_G['group']['allowdelpost']}-->
+                        <a class="del glass px4-radius" onclick="modaction('delpost', $_GET[pid])"><i class="awe-trash-o "></i><em>{lang delete}</em></a>
+                    <!--{/if}-->
+                    <a class="edit glass px4-radius" href="forum.php?mod=post&action=edit&fid=$_G[fid]&tid=$_G[tid]&pid=$post[pid]{if !empty($_GET[modthreadkey])}&modthreadkey=$_GET[modthreadkey]{/if}&page=$page"><i class="awe-edit"></i><em>{lang edit_trade}</em></a>
+                <!--{/if}-->
+            </div>
+        </div>
+        <div class="devide-line">{lang trade_intro}</div>
+        <div class="intro-bigimg">
+            <!--{if strlen($post[message]) >= 36}-->
+                $post[message]
+            <!--{else}-->
+                {lang trade_no_intro}
+                <a class="heart-pink pointer" onclick="showWindow('sendpm', 'home.php?mod=spacecp&ac=pm&op=showmsg&handlekey=showmsg_$post[authorid]&touid=$post[authorid]&pmid=0&daterange=2&tradeid=$trade[pid]')" >{lang trade_talk}</a>
+            <!--{/if}-->
+        </div>
+        <!--{hook/viewthread_tradeinfo_extra}-->
+        <ul class="connect pxa-radius pxa-radius-li shadow-3D trans-ease-slow">
+            <li class="trans-ease-slow"><a class="avatar" href="home.php?mod=space&uid=$trade[sellerid]" title="$trade[seller]"><!--{avatar($trade[sellerid],mid)}--></a></li>
+            <li><a href="home.php?mod=spacecp&ac=pm&op=showmsg&handlekey=showmsg_$post[authorid]&touid=$post[authorid]&pmid=0&daterange=2" onclick="showWindow('sendpm', this.href)"><img class="no-radius" src="{IMGURL}/common/icon/mail.svg"/></a></li>
+            <li><a href="//wpa.qq.com/msgrd?V=3&Uin=$post[qq]&Site=$_G['setting']['bbname']&Menu=yes&from=starsriver" target="_blank"><img class="no-radius" src="{IMGURL}/common/icon/tm-qq.svg" alt="QQ"/></a></li>
+            <li><a href="//edit.yahoo.com/config/send_webmesg?.target=$post[yahoo]&.src=pg" target="_blank"><img class="no-radius" src="{IMGURL}/common/icon/tm-yahoo.svg" alt="Yahoo!"/></a></li>
+            <li><a onclick="window.open('//amos.im.alisoft.com/msg.aw?v=2&uid='+encodeURIComponent('$post[taobaoas]')+'&site=cntaobao&s=2&charset=utf-8')"><img class="no-radius" src="{IMGURL}/common/icon/tm-alww.svg" alt="{lang taobao}"/></a></li>
+        </ul>
+    </div>
+	<!--{if !IS_ROBOT && !empty($_G[setting][lazyload])}-->
+		<script type="text/javascript">
+		new lazyload();
+		</script>
+	<!--{/if}-->
+
+    <script type="text/javascript" src="{$_G[setting][jspath]}forum_viewthread.js?{VERHASH}"></script>
+    <!--{if $_G['forum']['ismoderator']}-->
+        <script type="text/javascript">var fid = parseInt('$_G[fid]'), tid = parseInt('$_G[tid]');</script>
+        <script type="text/javascript" src="{$_G['setting']['jspath']}forum_moderate.js?{VERHASH}"></script>
+        <form method="post" autocomplete="off" name="modactions" id="modactions">
+            <input type="hidden" name="formhash" value="{FORMHASH}" />
+            <input type="hidden" name="optgroup" />
+            <input type="hidden" name="operation" />
+            <input type="hidden" name="listextra" value="" />
+        </form>
+    <!--{/if}-->
+
+<!--{/if}-->
+
+<!--{if !empty($aimgs[$post[pid]])}-->
+    <script type="text/javascript">
+        var aimgcount = [];
+        aimgcount[{$post[pid]}] = [<!--{echo dimplode($aimgs[$post[pid]]);}-->];
+        attachimggroup($post['pid']);
+        <!--{if empty($_G['setting']['lazyload'])}-->
+        attachimgshow($post[pid]);
+        <!--{/if}-->
+    </script>
+<!--{/if}-->
+<!--{template common/footer}-->

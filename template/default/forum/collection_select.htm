@@ -1,0 +1,153 @@
+<!--{template common/header}-->
+<!--[Used in creating collections on thread page]-->
+<script>
+	var remaincreateable = $reamincreatenum;
+	var titlelimit = '$titlelimit';
+	var requirecreate = false;
+	var createnow = false;
+	var reasonlimit = '$reasonlimit';
+    var createbtn = $("createbutton");
+    var newcollection = $("newcollection");
+    var selcollection = $("selectCollection");
+    var box_colltitle = $('box_colltitle');
+    var box_collist = $("box_collist");
+    var box_reasion = $("box_reasion");
+
+    function collection_creater() {
+        if (box_colltitle.style.display === 'none') {
+        	box_collist.style.display = 'none';
+            box_reasion.style.display = 'none';
+        	box_colltitle.style.display = '';
+            newcollection.focus();
+        } else {
+            box_collist.style.display = '';
+            box_reasion.style.display = '';
+            box_colltitle.style.display = 'none';
+		}
+    }
+
+    function collection_create() {
+        if (!newcollection.value) {
+            showError('{lang collection_fill_entire}');
+            return false;
+        }
+        if (mb_strlen(newcollection.value) > titlelimit) {
+            showError({lang collection_title_exceed});
+            return false;
+        }
+        createbtn.disabled = true;
+        $("submitnewtitle").value = newcollection.value;
+        ajaxpost('fastcreateform', 'fastcreatereturn', 'fastcreatereturn', 'onerror');
+    }
+
+	function checkreasonlen() {
+		if (mb_strlen($("formreason").value) > reasonlimit) {
+			showError({lang collection_reason_exceed});
+			return false;
+		}
+		if (requirecreate === true) {
+			createnow = true;
+			collection_create();
+			return false;
+		} else {
+			$("createRemainTips").style.display = '';
+			$("createbutton").style.display = '';
+			$("newcollection").style.width = '';
+		}
+		return true;
+	}
+
+    function succeedhandle_createcollection(url, msg, collectiondata) {
+        createbtn.disabled = false;
+        if (collectiondata['ctid']) {
+            selcollection.options[selcollection.length] = new Option(newcollection.value, collectiondata['ctid'], true, true);
+            box_collist.style.display = '';
+            remaincreateable--;
+            box_colltitle.style.display = 'none';
+            box_collist.style.display = '';
+            box_reasion.style.display = '';
+            $("submitnewtitle").value = $("newcollection").value = '';
+            if (remaincreateable <= 0) {
+                $("allowcreate").style.display = 'none';
+            } else {
+                $("reamincreatenum").innerHTML = remaincreateable;
+            }
+        }
+
+        $("nocreate").innerHTML = '';
+
+        if (requirecreate === true) {
+            $("createRemainTips").style.display = '';
+            createbtn.style.display = '';
+            $("newcollection").style.width = '';
+            requirecreate = false;
+            if (createnow === true) {
+                setTimeout('$("btn_submitaddthread").click();', 101);
+            }
+            createnow = false;
+        }
+    }
+</script>
+<div class="header">
+	<span class="title-tip">{lang collection}</span>
+	<a onclick="hideWindow('$_GET['handlekey']');" class="close" title="{lang close}">×</a>
+</div>
+<div hide>
+	<form action="forum.php?mod=collection&action=edit&op=add" method="post" id="fastcreateform">
+		<input type="hidden" name="formhash" id="formhash" value="{FORMHASH}" />
+		<input type="hidden" name="collectionsubmit" value="1" />
+		<input type="hidden" name="submitcollection" value="1" />
+		<input type="hidden" name="title" id="submitnewtitle" />
+	</form>
+</div>
+<form action="forum.php?mod=collection&action=edit&op=addthread" method="post" onsubmit="update_collection();ajaxpost(this.id, 'form_addcollectionthread');" id="form_addcollectionthread" name="form_addcollectionthread">
+	<input type="hidden" name="inajax" value="1">
+	<input type="hidden" name="handlekey" value="$_GET['handlekey']">
+	<input type="hidden" name="formhash" id="formhash" value="{FORMHASH}" />
+	<input type="hidden" name="addthread" id="addthread" value="1" />
+	<div class="body">
+		<div class="alert hi-info" id="allowcreate" style="{if $reamincreatenum <= 0}display:none{/if}">
+			{if !$collections}{lang collection_select_nocollection}{/if}{lang collection_select_remain}
+			<a onclick="collection_creater();" id="createRemainTips">{lang collection_create}</a>
+		</div>
+		<div class="input-box" id="box_collist" style="{if $reamincreatenum > 0 && count($allowcollections) <= 0}display:none;{/if}">
+			<span>{lang collection_select}</span>
+			<select name="ctid" id="selectCollection">
+			<!--{loop $collections $collection}-->
+				<!--{if !in_array($collection['ctid'], $tidcollections)}-->
+					<option value="$collection['ctid']">$collection['name']</option>
+				<!--{/if}-->
+			<!--{/loop}-->
+			</select>
+		</div>
+		<div class="input-box" id="box_colltitle" style="display:none">
+			<span>{lang collection_title}</span>
+			<input type="text" id="newcollection" placeholder="{lang collection_title}"/>
+			<button class="pixel ft-plus" type="button" id="createbutton" onclick="collection_create()"></button>
+		</div>
+		<div class="input-box" id="box_reasion">
+			<span>{lang collection_addreason}</span>
+			<textarea name="reason" id="formreason" placeholder="{lang collection_addreason}"></textarea>
+		</div>
+	</div>
+	<div class="footer">
+		<button class="btn-square" type="submit" name="submitaddthread" id="btn_submitaddthread" onclick="return checkreasonlen();">{lang collection_addbtn}</button>
+		<a class="btn btn-square" href="forum.php?mod=collection&op=my" target="_blank">{lang collection_view_mine}</a>
+		<!--{if $tid}-->
+			<input type="hidden" name="tids[]" value="$tid">
+		<!--{elseif is_array($_GET['tids'])}-->
+			<!--{loop $_GET['tids'] $tid}--><input type="hidden" name="tids[]" value="$tid"><!--{/loop}-->
+		<!--{/if}-->
+	</div>
+</form>
+<span id="fastcreatereturn"></span>
+<!--{if $reamincreatenum > 0 && count($allowcollections) <= 0}-->
+	<script >
+		var random = {echo TIMESTAMP};
+		requirecreate = true;
+		$("createRemainTips").style.display = 'none';
+        createbtn.style.display = 'none';
+		display('box_colltitle');
+	</script >
+<!--{/if}-->
+<!--{template common/footer}-->

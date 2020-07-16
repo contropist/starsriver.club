@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<root>
+	<item id="Title"><![CDATA[Discuz! Plugin]]></item>
+	<item id="Version"><![CDATA[X2.5,X3,X3.1,X3.2,X3.3,X3.4]]></item>
+	<item id="Time"><![CDATA[2017-10-20 09:44]]></item>
+	<item id="From"><![CDATA[Discuz! Board (https://www.vaptcha.com)]]></item>
+    <item id="Data">
+		<item id="plugin">
+			<item id="available"><![CDATA[1]]></item>
+			<item id="adminid"><![CDATA[1]]></item>
+			<item id="name"><![CDATA[VAPTCHA手势验证码]]></item>
+			<item id="identifier"><![CDATA[vaptcha]]></item>
+			<item id="description"><![CDATA[VAPTCHA是”Variation Analysis - based Public Turing Test to Tell Computers and Humans Apart ”的简称，也叫手势验证。一种通过用户鼠标手势即可完成人机验证的图灵测试程序。VAPTCHA更加简单和安全，是目前传统验证码的最佳替代方案。VAPTCHA不仅大幅节省了用户在使用互联网服务时在人机验证上面的耗时，平均通过时间不超过1秒，同时也是目前世界上最不可能被破解的验证系统。]]></item>
+			<item id="datatables"><![CDATA[]]></item>
+			<item id="directory"><![CDATA[vaptcha/]]></item>
+			<item id="copyright"><![CDATA[VAPTCHA]]></item>
+			<item id="version"><![CDATA[2.3.2]]></item>
+			<item id="__modules">
+				<item id="0">
+					<item id="name"><![CDATA[vaptcha]]></item>
+					<item id="param"><![CDATA[]]></item>
+					<item id="menu"><![CDATA[]]></item>
+					<item id="url"><![CDATA[]]></item>
+					<item id="type"><![CDATA[11]]></item>
+					<item id="adminid"><![CDATA[0]]></item>
+					<item id="displayorder"><![CDATA[0]]></item>
+					<item id="navtitle"><![CDATA[]]></item>
+					<item id="navicon"><![CDATA[]]></item>
+					<item id="navsubname"><![CDATA[]]></item>
+					<item id="navsuburl"><![CDATA[]]></item>
+				</item>
+				<item id="1">
+					<item id="name"><![CDATA[vaptcha_mobile]]></item>
+					<item id="param"><![CDATA[]]></item>
+					<item id="menu"><![CDATA[]]></item>
+					<item id="url"><![CDATA[]]></item>
+					<item id="type"><![CDATA[28]]></item>
+					<item id="adminid"><![CDATA[0]]></item>
+					<item id="displayorder"><![CDATA[0]]></item>
+					<item id="navtitle"><![CDATA[]]></item>
+					<item id="navicon"><![CDATA[]]></item>
+					<item id="navsubname"><![CDATA[]]></item>
+					<item id="navsuburl"><![CDATA[]]></item>
+				</item>
+				<item id="2">
+					<item id="name"><![CDATA[setting]]></item>
+					<item id="param"><![CDATA[]]></item>
+					<item id="menu"><![CDATA[设置]]></item>
+					<item id="url"><![CDATA[]]></item>
+					<item id="type"><![CDATA[3]]></item>
+					<item id="adminid"><![CDATA[0]]></item>
+					<item id="displayorder"><![CDATA[0]]></item>
+					<item id="navtitle"><![CDATA[]]></item>
+					<item id="navicon"><![CDATA[]]></item>
+					<item id="navsubname"><![CDATA[]]></item>
+					<item id="navsuburl"><![CDATA[]]></item>
+				</item>
+			</item>
+		</item>
+		<item id="version"><![CDATA[X2.5,X3,X3.1,X3.2,X3.3,X3.4]]></item>
+		<item id="language">
+			<item id="scriptlang">
+				<item id="Please click the verify button below to man-machine validation"><![CDATA[请先完成人机验证]]></item>
+				<item id="The second validation fails, please try refresh"><![CDATA[验证失效，请重新验证]]></item>
+				<item id="please_finish_validation"><![CDATA[请绘制图中手势完成人机验证]]></item>
+				<item id="Provide_technical_support_by_vaptcha"><![CDATA[由vaptcha提供技术支持]]></item>
+				<item id="man_machine_validation"><![CDATA[人机验证:]]></item>
+			</item>
+			<item id="templatelang">
+				<item id="please_finish_validation"><![CDATA[请绘制图中手势完成人机验证]]></item>
+				<item id="Provide_technical_support_by_vaptcha"><![CDATA[由vaptcha提供技术支持]]></item>
+				<item id="man_machine_validation"><![CDATA[人机验证:]]></item>
+				<item id="loading_captcha"><![CDATA[CAPTCHA ]]></item>
+				<item id="loading_vaptcha"><![CDATA[is initializing...]]></item>
+			</item>
+		</item>
+	</item>
+</root>

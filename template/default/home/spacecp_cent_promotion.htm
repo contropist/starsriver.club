@@ -1,0 +1,44 @@
+<!--{template home/spacecp_cent_header}-->
+	<div class="plate layout-2-type3 app-profile cloud">
+		<section class="col-1"><!--{template home/spacecp_cent_vnav}--></section>
+		<section class="col-2">
+			<!--{subtemplate home/spacecp_cent_header_userinfo}-->
+			<div class="vessel" id="setting_promotion">
+				<div class="nav">
+					<a class="active">链接推广</a>
+				</div>
+				<hr>
+				<div class="withedge">
+					<!--{hook/spacecp_promotion_top}-->
+					<!--{if $_G['setting']['creditspolicy']['promotion_visit'] || $_G['setting']['creditspolicy']['promotion_register']}-->
+					<p class="tool-notice">
+						<!--{if $_G['setting']['creditspolicy']['promotion_visit']}-->
+						1. {lang post_promotion_url}
+						<!--{/if}-->
+					<!--{if $_G['setting']['creditspolicy']['promotion_register']}-->
+						<br>2.
+						<!--{if $_G['setting']['creditspolicy']['promotion_visit']}-->
+						{lang post_promotion_reg}
+						<!--{else}-->
+						{lang post_promotion}
+						<!--{/if}-->
+					<!--{/if}-->
+					</p>
+					<p class="tool-notice">
+						3. {lang mode_two_desc}
+					</p>
+					<div class="copyurl">
+						<span onclick="setCopy('{$copystr}'+'\n'+this.innerHTML, '{lang promotion_url_copied}');">$_G[siteurl]?fromuid=$_G[uid]</span>
+						<a class="icon-link" onclick="setCopy('{$copystr}'+'\n'+'$_G[siteurl]?fromuid=$_G[uid]', '{lang promotion_url_copied}');" type="submit"></a>
+					</div>
+					<div class="copyurl">
+						<span onclick="setCopy('{$copystr}'+'\n'+this.innerHTML, '{lang promotion_url_copied}');">$_G[siteurl]?fromuser={echo rawurlencode($_G[username])}</span>
+						<a class="icon-link" onclick="setCopy('{$copystr}'+'\n'+'$_G[siteurl]?fromuser={echo rawurlencode($_G[username])}', '{lang promotion_url_copied}');"></a>
+					</div>
+					<!--{/if}-->
+					<!--{hook/spacecp_promotion_bottom}-->
+				</div>
+			</div>
+		</section>
+	</div>
+<!--{template common/footer}-->

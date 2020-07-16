@@ -1,0 +1,81 @@
+<div class="mas-guide-upside">
+    <div class="start">
+        <a href="./" title="$_G['setting']['bbname']">
+            <img src="{IMGURL}/common/logo/starsriver.svg" alt="logo">
+            <span><i>S</i>TARSRIVER</span>
+        </a>
+    </div>
+
+    <div class="nav">
+        <ul class="nav-vertical">
+            <li><a href="./"><i class="ft-home"></i><span>{lang homepage}</span></a></li>
+        </ul>
+        <!--{subtemplate home/space_home_header_guide_per}-->
+    </div>
+</div>
+<div class="mas-guide-downside">
+    <div class="user-menu">
+        <!--{if $_G['uid']}-->
+            <a class="avatar"><!--{avatar($_G[uid],small)}--></a>
+            <a class="username" href="home.php?mod=space&uid=$_G[uid]">{$_G[member][username]}</a>
+            <i class="thumb ft-chevron-down"></i>
+            <div class="menu trans-ease">
+                <i class="peak"></i>
+                <div class="account">
+                    <a class="avatar" href="home.php?mod=space&uid=$_G[uid]"><!--{avatar($_G[uid],small)}--></a>
+                    <a class="username" href="home.php?mod=space&uid=$_G[uid]">{$_G[member][username]}</a>
+                    <i class="thumb ft-check sky-blue"></i>
+                </div>
+                <a href="home.php?mod=spacecp" >{lang setup}</a >
+                <a href="home.php?mod=space&do=pm" id="pm_ntc" target="_blank" >{lang pm_center}<!--{if $_G[member][newpm]}--><em>$_G[member][newpm]</em><!--{/if}--></a>
+                <a href="home.php?mod=space&do=notice" id="myprompt" target="_blank" >{lang remind}<!--{if $_G[member][newprompt]}--><em>$_G[member][newprompt]</em><!--{/if}--></a>
+                <!--{if $_G['group']['allowmanagearticle'] || $_G['group']['allownest']|| getstatus($_G['member']['allowadmincp'], 4) || getstatus($_G['member']['allowadmincp'], 2) || getstatus($_G['member']['allowadmincp'], 3) || in_array($_G['uid'], $_G['setting']['ext_portalmanager'])}-->
+                <a href="portal.php?mod=portalcp" >{lang portal_manage}</a >
+                <!--{/if}-->
+                <!--{if $_G['uid'] && $_G['group']['radminid'] > 1}-->
+                <a href="forum.php?mod=modcp&fid=$_G[fid]" target="_blank" >{lang forum_manager}</a >
+                <!--{/if}-->
+                <!--{if $_G['uid'] && ($_G['group']['radminid'] == 1 || getstatus($_G['member']['allowadmincp'], 1))}-->
+                <a href="webcontroller.php" target="_blank" >{lang admincp}</a >
+                <!--{/if}-->
+                <a href="member.php?mod=logging&action=logout&formhash={FORMHASH}" >{lang logout}</a >
+            </div >
+        <!--{elseif !empty($_G['cookie']['loginuser'])}-->
+            <a class="avatar"><!--{avatar(0,small)}--></a>
+            <a class="username" id="loginuser" ><!--{echo dhtmlspecialchars($_G['cookie']['loginuser'])}--></a>
+            <i class="thumb ft-chevron-down"></i>
+            <div class="menu trans-ease">
+                <i class="peak"></i>
+                <a href="member.php?mod=logging&action=login" onclick="showWindow('login', this.href)" >{lang activation}</a >
+                <a href="member.php?mod=logging&action=logout&formhash={FORMHASH}" >{lang logout}</a >
+            </div >
+        <!--{elseif $_G['connectguest']}-->
+            <a class="avatar"><!--{avatar(0,small)}--></a>
+            <a class="username">{lang guest}</a>
+            <i class="thumb ft-chevron-down"></i>
+            <div class="menu trans-ease">
+                <i class="peak"></i>
+                <a href="member.php?mod=connect" target="_blank">{lang fill_profile}</a>
+                <a href="member.php?mod=connect&ac=bind" target="_blank">{lang bind_profile}</a>
+            </div >
+        <!--{else}-->
+            <a class="avatar"><!--{avatar(0,small)}--></a>
+            <a class="username">{lang login}/$_G['setting']['reglinkname']</a>
+            <i class="thumb ft-chevron-down"></i>
+            <div class="menu trans-ease">
+                <i class="peak"></i>
+                <a href="member.php?mod={$_G[setting][regname]}" >$_G['setting']['reglinkname']</a >
+                <a href="member.php?mod=logging&action=login" onclick="showWindow('login', this.href)" >{lang login}</a >
+            </div >
+        <!--{/if}-->
+    </div>
+</div>
+
+<!--{if $space['status'] == -1 && $_G['adminid'] == 1 }-->
+<img alt="Locked" src="{IMGURL}/common/mark/locked.svg" />
+<!--{/if}-->
+
+<h2 id="spaceinfoshow" >
+    <!--{eval space_merge($space, 'field_home'); $space[domainurl] = space_domain($space);getusernestdata($space);$personalnv = isset($_G['blockposition']['nv']) ? $_G['blockposition']['nv'] : '';}-->
+    <span class="xs1 xw0 mtn" id="spacedescription" >$space[spacedescription]</span >
+</h2 >

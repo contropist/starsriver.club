@@ -1,0 +1,25 @@
+<!--{template common/header}-->
+<!--{if $comments}-->
+	<!--{loop $comments $comment}-->
+		<div class="comment">
+			<a class="avatar pxa-radius" c="1" href="home.php?mod=space&uid=$comment[authorid]" >$comment[avatar]</a>
+			<!--{if $comment['authorid']}-->
+				<a class="name" href="home.php?mod=space&uid=$comment[authorid]">$comment[author]：</a>
+			<!--{else}-->
+				<a class="name">{lang guest}：</a>
+			<!--{/if}-->
+			$comment[comment]
+			<!--{if $comment[rpid]}-->
+				<a class="btn" href="forum.php?mod=post&action=reply&fid=$_G[fid]&tid=$_G[tid]&repquote=$comment[rpid]&extra=$_GET[extra]&page=$page{if $_GET[from]}&from=$_GET[from]{/if}" onclick="showWindow('reply', this.href)">{lang reply}</a>
+			<!--{/if}-->
+			<br>
+			<span class="info">
+				<span>$comment[dateline]</span>
+				<!--{if $comment['useip'] && $_G['group']['allowviewip']}-->&nbsp;IP:$comment[useip]{if $comment[port]}:$comment[port]{/if}<!--{/if}-->
+				<!--{if $_G['forum']['ismoderator'] && $_G['group']['allowdelpost']}-->&nbsp;<a onclick="modaction('delcomment', $comment[id])">{lang delete}</a><!--{/if}-->
+			</span>
+		</div>
+	<!--{/loop}-->
+<!--{/if}-->
+<div class="pgs mbm cl" style="display: inline-block">$multi</div>
+<!--{template common/footer}-->

@@ -1,0 +1,20 @@
+<!--{template common/header}-->
+
+<div class="upfile">
+	<div class="header">
+		<span class="title-tip" id="return_upload">{lang upload}<img id="uploadwindowing" style="visibility:hidden" src="{STATICURL}image/common/uploading.gif" alt="" /></span>
+		<a onclick="hideWindow('upload', 0);" class="close" title="{lang close}">×</a>
+	</div>
+	<form id="uploadform" class="uploadform" style="overflow: hidden;" method="post" autocomplete="off" target="uploadattachframe" onsubmit="uploadWindowstart()" action="misc.php?mod=swfupload&operation=upload&type=$type&inajax=yes&infloat=yes&simple=2" enctype="multipart/form-data">
+		<input type="hidden" name="handlekey" value="upload" />
+		<input type="hidden" name="uid" value="$_G['uid']">
+		<input type="hidden" name="hash" value="{echo md5(substr(md5($_G['config']['security']['authkey']), 8).$_G['uid'])}">
+		<div class="filebtn">
+			<button type="button" class="ft-upload-cloud "></button>
+			<input class="pointer" type="file" name="Filedata" id="filedata" onchange="$('uploadform').submit()" />
+		</div>
+	</form>
+	<iframe name="uploadattachframe" id="uploadattachframe" style="display: none;" onload="uploadWindowload();"></iframe>
+</div>
+
+<!--{template common/footer}-->

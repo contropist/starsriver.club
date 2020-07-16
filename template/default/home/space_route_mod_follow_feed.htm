@@ -1,0 +1,47 @@
+<!--{if $do != 'view'}-->
+    <!--{subtemplate home/space_trends_header}-->
+	<div class="plate layout-0">
+		<!--[nest=nestcontenttop]--><div id="nestcontenttop" class="area"></div><!--[/nest]-->
+	</div>
+    <div class="plate layout-3-type2 app-dynamic soft">
+        <section>
+            <!--{subtemplate home/space_trends_side_left}-->
+        </section>
+        <section>
+            <!--{template home/space_trends_mod_follow_feed_form}-->
+            <!--{hook/follow_top}-->
+            <div class="vessel">
+                <div class="nav">
+                    <a class="$actives[other]" href="home.php?mod=follow&view=other">{lang follow_hall}</a>
+                    <a class="$actives[follow]" href="home.php?mod=follow&view=follow">{lang follow_following}</a>
+                    <a class="$actives[special]" href="home.php?mod=follow&view=special">{lang follow_special_following}</a>
+                    <!--{hook/follow_nav_extra}-->
+                </div>
+            </div>
+            <!--{template home/space_trends_mod_follow_feed_list}-->
+            <!--[nest=nest1]--><div id="nest1" class="area"></div><!--[/nest]-->
+            <!--[nest=nest2]--><div id="nest2" class="area"></div><!--[/nest]-->
+            <!--[nest=nest3]--><div id="nest3" class="area"></div><!--[/nest]-->
+            <!--[nest=nestcontentbottom]--><div id="nestcontentbottom" class="area"></div><!--[/nest]-->
+        </section>
+        <section>
+            <!--{subtemplate home/space_trends_side_right}-->
+        </section>
+    </div>
+<!--{else}-->
+    <!--{subtemplate home/space_home_header}-->
+    <div class="mas-viewer">
+        <!--{hook/follow_top}-->
+        <section class="col-1">
+            <!--{template home/space_home_mod_follow_feed_form}-->
+            <!--{template home/space_home_mod_follow_feed_list}-->
+        </section>
+        <section class="col-2">
+            <div class="vessel">
+                <!--{subtemplate home/space_home_userabout}-->
+            </div>
+        </section>
+    </div>
+<!--{/if}-->
+
+<!--{template common/footer}-->

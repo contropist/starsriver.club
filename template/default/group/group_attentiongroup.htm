@@ -1,0 +1,91 @@
+<!--{template common/header}-->
+	<div class="header">
+		<span class="title-tip" id="return_$_GET[handlekey]">{lang select_focus_group}</span>
+		<!--{if $_G[inajax]}--><a onclick="hideWindow('$_GET['handlekey']');" class="close" title="{lang close}">×</a><!--{/if}-->
+	</div>
+	<form method="post" autocomplete="off" id="attentionform" name="attentionform" action="group.php?mod=attentiongroup" onsubmit="ajaxpost('attentionform', 'return_attentiongroup', 'return_attentiongroup', 'onerror');return false;">
+		<!--{if $_G[inajax]}--><input type="hidden" name="handlekey" value="$_GET[handlekey]" /><!--{/if}-->
+		<input type="hidden" name="referer" value="{echo dreferer()}" />
+		<input type="hidden" name="formhash" value="{FORMHASH}" />
+		<input type="hidden" name="attentionsubmit" value="true" />
+		<div class="body csbox">
+			<ul class="tags" id="poster">
+				<!--{loop $usergroups['groups'] $groupid $groupname}-->
+					<!--{if in_array($groupid, $attentiongroup)}-->
+					<li>
+						<input data-groupitemchecker type="checkbox" name="attentiongroupid[]" id="attentiongroupid_$groupid" value="$groupid" checked="checked" />
+						<label for="attentiongroupid_$groupid">$groupname</label>
+					</li>
+					<!--{/if}-->
+				<!--{/loop}-->
+			</ul>
+			<hr>
+			<ul class="tags" id="rejector">
+				<!--{loop $usergroups['groups'] $groupid $groupname}-->
+					<!--{if !in_array($groupid, $attentiongroup)}-->
+					<li>
+						<input data-groupitemchecker type="checkbox" name="attentiongroupid[]" id="attentiongroupid_$groupid" value="$groupid" disabled = 'disabled'/>
+						<label for="attentiongroupid_$groupid">$groupname</label>
+					</li>
+					<!--{/if}-->
+				<!--{/loop}-->
+			</ul>
+			<script>
+                (function () {
+                    var group = {
+                        max: 5,
+                        current: $counttype,
+                        poster: document.querySelector('#poster'),
+                        rejector: document.querySelector('#rejector'),
+                        itemschecker: document.querySelectorAll('[data-groupitemchecker]'),
+                    };
+                    group.checkitem = function () {
+                        var self = getEventobj();
+                        var item = self.parentNode;
+                        if (self.checked) {
+                            group.current += 1;
+                            group.rejector.removeChild(item);
+                            group.poster.appendChild(item);
+                        } else if (!self.checked) {
+                            group.current -= 1;
+                            group.poster.removeChild(item);
+                            group.rejector.appendChild(item);
+                        }
+                    };
+                    group.checknum = function () {
+                        var i = 0;
+                        var listers = group.rejector.querySelectorAll('[data-groupitemchecker]');
+                        if (group.current < group.max) {
+                            for (i = 0; i < listers.length; i++) {
+                                listers[i].checked = false;
+                                listers[i].disabled = false;
+                            }
+                        } else {
+                            for (i = 0; i < listers.length; i++) {
+                                listers[i].checked = false;
+                                listers[i].disabled = true;
+                            }
+                        }
+                    };
+                    group.init = function () {
+                        group.checknum();
+                        for (var i = 0; i < group.itemschecker.length; i++) {
+                            addEvent(group.itemschecker[i], 'click', group.checkitem);
+                            addEvent(group.itemschecker[i], 'click', group.checknum);
+                        }
+                    };
+                    group.init();
+                })();
+			</script>
+		</div>
+		<div class="footer">
+			<button class="btn-square fullwidth" style="border: none;"  type="submit">{lang confirms}</button>
+			<script>
+                function succeedhandle_attentiongroup(locationhref) {
+                    hideWindow('attentiongroup');
+                    location.href = locationhref;
+                }
+			</script>
+		</div>
+	</form>
+<!--{template common/footer}-->

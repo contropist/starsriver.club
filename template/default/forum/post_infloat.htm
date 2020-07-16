@@ -1,0 +1,133 @@
+<!--{template common/header}-->
+<div class="header">
+	<span class="title-tip" id="return_$_GET['handlekey']">
+	<!--{if $_GET[action] == 'newthread'}-->{lang post_newthread}<!--{elseif $_GET[action] == 'reply'}-->{lang join_thread}<!--{/if}-->
+	<!--{if $_GET[action] == 'newthread' && $modnewthreads}-->{lang approve}<!--{/if}-->
+	<!--{if $_GET[action] == 'reply' && $modnewreplies}-->{lang approve}<!--{/if}-->
+	</span>
+	<a onclick="hideWindow('$_GET['handlekey']');" class="close" title="{lang close}">×</a>
+</div>
+<form method="post" autocomplete="off" id="postform" action="forum.php?mod=post&infloat=yes&action=$_GET[action]&fid=$_G[fid]&extra=$extra{if $_GET[action] == 'newthread'}&topicsubmit=yes{elseif $_GET[action] == 'reply'}&tid=$_G[tid]&replysubmit=yes{/if}" onsubmit="this.message.value = parseurl(this.message.value);{if !empty($_GET['infloat'])}ajaxpost('postform', 'return_$_GET['handlekey']', 'return_$_GET['handlekey']', 'onerror');return false;{/if}">
+	<div class="body" id="floatlayout_$_GET[action]">
+		<input type="hidden" name="formhash" id="formhash" value="{FORMHASH}" />
+		<input type="hidden" name="handlekey" value="$_GET['handlekey']" />
+		<!--{if $_GET[action] == 'reply'}-->
+			<input type="hidden" name="noticeauthor" value="$noticeauthor" />
+			<input type="hidden" name="noticetrimstr" value="$noticetrimstr" />
+			<input type="hidden" name="noticeauthormsg" value="$noticeauthormsg" />
+			<input type="hidden" name="usesig" value="{if $_G['group']['maxsigsize']}1{else}0{/if}"/>
+			<!--{if $reppid}-->
+				<input type="hidden" name="reppid" value="$reppid" />
+			<!--{/if}-->
+			<!--{if $_GET[reppost]}-->
+				<input type="hidden" name="reppost" value="$_GET[reppost]" />
+			<!--{elseif $_GET[repquote]}-->
+				<input type="hidden" name="reppost" value="$_GET[repquote]" />
+			<!--{/if}-->
+		<!--{/if}-->
+		<!--{hook/post_infloat_top}-->
+		<!--{if $_GET[action] == 'reply' && $quotemessage}-->
+			$quotemessage
+		<!--{/if}-->
+		<div class="float-reply">
+            <!--{if $_GET[action] == 'newthread' && ($threadsorts = $_G['forum'][threadsorts])}-->
+                <select name="sortid" id="sortid" width="80" change="if($('sortid').value) {switchAdvanceMode('forum.php?mod=post&action=$_GET[action]&fid=$_G[fid]{if !empty($_G[tid])}&tid=$_G[tid]{/if}{if !empty($pid)}&pid=$pid{/if}{if !empty($modelid)}&modelid=$modelid{/if}&extra=$extra&sortid=' + $('sortid').value)}">
+                    <!--{if !$sortid}--><option value="0">{lang threadtype_option}</option><!--{/if}-->
+                    <!--{loop $threadsorts[types] $tsortid $name}-->
+                    <!--{if !empty($modelid) && $threadsorts[modelid][$tsortid] == $modelid || empty($modelid)}-->
+                    <option value="$tsortid"{if $sortid == $tsortid} selected="selected"{/if}><!--{echo strip_tags($name);}--></option>
+                    <!--{/if}-->
+                    <!--{/loop}-->
+                </select>
+                <script type="text/javascript" reload="1">simulateSelect('sortid');</script>
+            <!--{/if}-->
+            <!--{if $isfirstpost && $_G['forum'][threadtypes][types]}-->
+                <select name="typeid" id="typeid_float" width="80">
+                    <option value="0">{lang select_thread_catgory}</option>
+                    <!--{loop $_G['forum'][threadtypes][types] $typeid $name}-->
+                    <!--{if empty($_G['forum']['threadtypes']['moderators'][$typeid]) || $_G['forum']['ismoderator']}-->
+                    <option value="$typeid"{if $thread['typeid'] == $typeid} selected="selected"{/if}><!--{echo strip_tags($name);}--></option>
+                    <!--{/if}-->
+                    <!--{/loop}-->
+                </select>
+                <script type="text/javascript" reload="1">simulateSelect('typeid_float');</script>
+            <!--{/if}-->
+            <!--{if !$isfirstpost && $thread[special] == 5 && empty($firststand)}-->
+                <select id="stand" name="stand">
+                    <option value="">{lang debate_viewpoint}</option>
+                    <option value="0">{lang debate_neutral}</option>
+                    <option value="1"{if $stand == 1} selected{/if}>{lang debate_square}</option>
+                    <option value="2"{if $stand == 2} selected{/if}>{lang debate_opponent}</option>
+                </select>
+                <script type="text/javascript" reload="1">simulateSelect('stand');</script>
+            <!--{/if}-->
+            <!--{if $_GET[action] != 'reply'}-->
+                <span class="hidden"><input name="subject" id="subject" value="$postinfo[subject]"/></span>
+            <!--{else}-->
+                <span id="subjectbox" class="hidden"><input name="subject" id="subject"/></span>
+            <!--{/if}-->
+            <div class="bar">
+                <!--{eval $seditor = array('post', array('bold', 'color', 'smilies', 'at'));}-->
+                <!--{subtemplate common/seditor}-->
+            </div>
+            <!--{if $secqaacheck || $seccodecheck}-->
+            <div class="r" id="seccheck" style="margin: -31px 0 0 0">
+                <!--{subtemplate forum/seccheck_post}-->
+            </div>
+            <!--{/if}-->
+            <textarea name="message" id="postmessage" onKeyDown="seditor_ctlent(event, '$(\'postsubmit\').click();')" tabindex="22" >$message</textarea>
+		</div>
+	</div>
+	<!--{hook/post_infloat_middle}-->
+	<div class="footer" id="moreconf">
+		<!--{if $_GET[action] == 'newthread' && $_G['setting']['sitemessage'][newthread] || $_GET[action] == 'reply' && $_G['setting']['sitemessage'][reply]}-->
+			<a id="custominfo" class="r" style="margin-left:5px"><img src="{STATICURL}image/common/info_small.gif" alt="{lang faq}" /></a>
+		<!--{/if}-->
+		<button class="btn-square fullwidth" style="border: none;"  type="submit" id="postsubmit" value="true"{if !$seccodecheck && !$secqaacheck} onmouseover="checkpostrule('seccheck_$_GET[action]', 'ac=$_GET[action]&infloat=yes&handlekey=$_GET[handlekey]');this.onmouseover=null"{/if} name="{if $_GET[action] == 'newthread'}topicsubmit{elseif $_GET[action] == 'reply'}replysubmit{/if}" tabindex="23"><!--{if $_GET[action] == 'newthread'}-->{lang post_newthread}<!--{elseif $_GET[action] == 'reply'}-->{lang join_thread}<!--{/if}--></button>
+		<!--{hook/post_infloat_btn_extra}-->
+	</div>
+</form>
+
+<script type="text/javascript" reload="1">
+function succeedhandle_$_GET[action](locationhref, message) {
+	<!--{if $_GET[action] == 'reply'}-->
+		try {
+			var pid = locationhref.lastIndexOf('#pid');
+			if(pid != -1) {
+				pid = locationhref.substr(pid + 4);
+				ajaxget('forum.php?mod=viewthread&tid=$_G[tid]&viewpid=' + pid<!--{if $_GET['from']}--> + '&from=$_GET[from]'<!--{/if}-->, 'post_new', 'ajaxwaitid', '', null, 'appendreply()');
+				if(replyreload) {
+					var reloadpids = replyreload.split(',');
+					for(var i = 1;i < reloadpids.length;i++) {
+						ajaxget('forum.php?mod=viewthread&tid=$_G[tid]&viewpid=' + reloadpids[i]<!--{if $_GET['from']}--> + '&from=$_GET[from]'<!--{/if}-->, 'post_' + reloadpids[i]);
+					}
+				}
+			} else {
+				showDialog(message, 'notice', '', 'location.href="' + locationhref + '"');
+			}
+		} catch(e) {
+			location.href = locationhref;
+		}
+	<!--{elseif $_GET[action] == 'newthread'}-->
+		var hastid = locationhref.lastIndexOf('tid=');
+		if(hastid == -1) {
+			showDialog(message, 'notice', '', 'location.href="' + locationhref + '"');
+		} else {
+			location.href = locationhref;
+		}
+	<!--{/if}-->
+	hideWindow('$_GET[action]');
+}
+<!--{if $_GET[action] == 'newthread' && $_G['setting']['sitemessage'][newthread] || $_GET[action] == 'reply' && $_G['setting']['sitemessage'][reply]}-->
+	showPrompt('custominfo', 'mouseover', '<!--{if $_GET[action] == 'newthread'}--><!--{echo trim($_G['setting']['sitemessage'][newthread][array_rand($_G['setting']['sitemessage'][newthread])])}--><!--{elseif $_GET[action] == 'reply'}--><!--{echo trim($_G['setting']['sitemessage'][reply][array_rand($_G['setting']['sitemessage'][reply])])}--><!--{/if}-->', $_G['setting']['sitemessage'][time], null ,'success');
+<!--{/if}-->
+
+	if($('subjectbox')) {
+		$('postmessage').focus();
+	} else if($('subject')) {
+		$('subject').select();
+		$('subject').focus();
+	}
+</script>
+
+<!--{template common/footer}-->

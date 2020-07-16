@@ -1,0 +1,74 @@
+<!--{if !$_G['inajax']}-->
+	<!--{template common/header}-->
+	<div>
+		<!--{if !$param[login]}-->
+			<div class="nfl">
+		<!--{else}-->
+			<div class="nfl" id="main_succeed" style="display: none">
+				<div class="f_c altw">
+					<div class="alert_right">
+						<p id="succeedmessage"></p>
+						<p id="succeedlocation" class="alert_btnleft"></p>
+						<p class="alert_btnleft"><a id="succeedmessage_href">{lang message_forward}</a></p>
+					</div>
+				</div>
+			</div>
+			<div class="nfl" id="main_message">
+		<!--{/if}-->
+<!--{else}-->
+	<!--{template common/header_ajax}-->
+<!--{/if}-->
+<!--{if $param[msgtype] == 1 || $param[msgtype] == 2 && !$_G[inajax]}-->
+		<div class="f_c altw">
+			<div id="messagetext" class="$alerttype">
+				<p>$show_message</p>
+				<!--{if $url_forward}-->
+					<!--{if !$param[redirectmsg]}-->
+						<p class="alert_btnleft"><a href="$url_forward">{lang message_forward}</a></p>
+					<!--{else}-->
+						<p class="alert_btnleft"><a href="$url_forward">{lang attach_forward}</a></p>
+					<!--{/if}-->
+				<!--{elseif $allowreturn}-->
+				<script type="text/javascript">
+					if(history.length > (BROWSER.ie ? 0 : 1)) {
+						document.write('<p class="alert_btnleft"><a href="javascript:history.back()">{lang message_go_back}</a></p>');
+					} else {
+						document.write('<p class="alert_btnleft"><a href="./">[ $_G['setting']['bbname'] {lang homepage} ]</a></p>');
+					}
+				</script>
+				<!--{/if}-->
+			</div>
+			<!--{if $param[login]}-->
+				<div id="messagelogin"></div>
+				<script type="text/javascript">ajaxget('member.php?mod=logging&action=login&infloat=yes&frommessage', 'messagelogin');</script>
+			<!--{/if}-->
+		</div>
+<!--{elseif $param[msgtype] == 2}-->
+		<div class="header">
+			<span class="title-tip">
+				{lang board_message}<!--{if $param['closetime']}-->&nbsp;&nbsp;($param['closetime'] {lang message_closetime})<!--{elseif $param['locationtime']}-->&nbsp;&nbsp;($param['locationtime'] {lang message_locationtime})<!--{/if}-->
+			</span>
+			<!--{if $_G[inajax]}--><a class="close" onclick="hideWindow('$_GET['handlekey']');" title="{lang close}">×</a><!--{/if}-->
+		</div>
+		<div class="body">
+			$show_message
+		</div>
+		<div class="footer">
+			<!--{if $param[login]}-->
+				<button type="button" class="btn-square r" onclick="hideWindow('$_GET['handlekey']');showWindow('login', 'member.php?mod=logging&action=login');">{lang login}</button>
+				<!--{if !$_G['setting']['bbclosed']}-->
+					<button type="button" class="btn-square r" onclick="hideWindow('$_GET['handlekey']');window.open('member.php?mod={$_G[setting][regname]}');">$_G['setting']['reglinkname']</button>
+				<!--{/if}-->
+			<!--{elseif !$param['closetime'] && !$param['locationtime']}-->
+				<button class="btn-square fullwidth" style="border: none;"  type="button" id="closebtn" onclick="hideWindow('$_GET['handlekey']');">{lang confirms}</button>
+                <script type="text/javascript" reload="1">if($('closebtn')) {$('closebtn').focus();}</script>
+			<!--{/if}-->
+		</div>
+<!--{else}-->$show_message<!--{/if}-->
+<!--{if !$_G['inajax']}-->
+		</div>
+	</div>
+	<!--{template common/footer}-->
+<!--{else}-->
+	<!--{template common/footer_ajax}-->
+<!--{/if}-->

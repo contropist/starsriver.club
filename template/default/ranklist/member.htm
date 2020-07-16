@@ -1,0 +1,169 @@
+<!--{template ranklist/ranklist_header}-->
+<!--[nest=nestranklisttop]--><div id="nestranklisttop" class="area"></div><!--[/nest]-->
+<div class="plate layout-2-type3 milk app-ranklist">
+	<section class="col-1">
+		<!--{subtemplate ranklist/side_left}-->
+	</section>
+	<section class="col-2 pd-10">
+		<div class="vessel" id="ranklist_user">
+			<div class="header">
+				<b>{lang ranklist_member}</b>
+				<!--{if $_GET[view]=='show'}-->
+					<!--{if $space[unitprice]}-->
+					<p class="mt-battery-charging-full">{lang your_current_bid} $space[unitprice] {$extcredits[$creditid][unit]},{lang current_ranking} $now_pos
+						<span class="tooltip" style="max-width: 240px; white-space: normal" data-pos="bl" data-animal="emY">
+							{lang ranking_message_1}
+							<br />
+							{lang ranking_message_2}
+						</span>
+					</p>
+					<!--{else}-->
+					<p class="mt-battery-alert">{lang ranking_message_0}</p>
+					<!--{/if}-->
+				<!--{else}-->
+					<!--{if $_GET[view]=='credit'}-->
+						<p class="mt-developer-mode">{lang self_current_credit}<!--{if $now_choose=='all'}-->{lang credits}<!--{else}-->{$extcredits[$now_choose][title]}<!--{/if}--> $mycredits ,{lang current_ranking} $now_pos</p>
+					<!--{elseif $_GET[view]=='friendnum'}-->
+						<p class="mt-developer-board">{lang self_current_friend_num} $space[friends] ,{lang current_ranking} $now_pos</p>
+					<!--{/if}-->
+				<!--{/if}-->
+				<div class="dropmenu r" style="width: 103px">
+					<ul>
+						<li {$a_actives[show]}><a href="misc.php?mod=ranklist&type=member">{lang auction_ranking}</a></li>
+						<li {$a_actives[beauty]}><a href="misc.php?mod=ranklist&type=member&view=beauty">{lang ranklist_beauty}</a></li>
+						<li {$a_actives[handsome]}><a href="misc.php?mod=ranklist&type=member&view=handsome">{lang ranklist_handsome}</a></li>
+						<li {$a_actives[credit]}><a href="misc.php?mod=ranklist&type=member&view=credit">{lang credit_ranking}</a></li>
+						<li {$a_actives[friendnum]}><a href="misc.php?mod=ranklist&type=member&view=friendnum">{lang friend_num_ranking}</a></li>
+						<li {$a_actives[invite]}><a href="misc.php?mod=ranklist&type=member&view=invite">{lang ranklist_invite}</a></li>
+						<li {$a_actives[post]}><a href="misc.php?mod=ranklist&type=member&view=post">{lang ranklist_post_num}</a></li>
+						<!--{if helper_access::check_module('blog')}-->
+						<li {$a_actives[blog]}><a href="misc.php?mod=ranklist&type=member&view=blog">{lang ranklist_blog}</a></li>
+						<!--{/if}-->
+						<li {$a_actives[onlinetime]}><a href="misc.php?mod=ranklist&type=member&view=onlinetime">{lang ranklist_onlinetime}</a></li>
+					</ul>
+				</div>
+				<!--{if $creditsrank_change}-->
+				<div class="dropmenu r" style="width: 63px">
+					<ul>
+						<li class="{if $now_choose == 'all'}active{/if}"><a href="misc.php?mod=ranklist&type=member&view=credit&orderby=all" id="all">{lang all}</a></li>
+						<!--{if $extcredits}-->
+						<!--{loop $extcredits $key $credit}-->
+						<li class="{if $now_choose == $key}active{/if}"><a href="misc.php?mod=ranklist&type=member&view=credit&orderby=$key" id="$key">{$credit[title]}</a></li>
+						<!--{/loop}-->
+						<!--{/if}-->
+					</ul>
+				</div>
+				<!--{/if}-->
+				<!--{if $postsrank_change}-->
+				<div class="dropmenu r" style="width: 150px">
+					<ul>
+						<li class="{if $now_choose == 'posts'}active{/if}"><a href="misc.php?mod=ranklist&type=member&view=post&orderby=posts" id="posts">{lang post_num}</a></li>
+						<li class="{if $now_choose == 'digestposts'}active{/if}"><a href="misc.php?mod=ranklist&type=member&view=post&orderby=digestposts" id="digestposts">{lang digest_num}</a></li>
+						<li class="{if $now_choose == 'thismonth'}active{/if}"><a href="misc.php?mod=ranklist&type=member&view=post&orderby=thismonth" id="thismonth">{lang month_post_num}</a></li>
+						<li class="{if $now_choose == 'today'}active{/if}"><a href="misc.php?mod=ranklist&type=member&view=post&orderby=today" id="today">{lang day_post_num}</a></li>
+					</ul>
+				</div>
+				<!--{/if}-->
+				<!--{if $inviterank_change}-->
+				<div class="dropmenu r" style="width: 63px">
+					<ul>
+						<li class="{if $now_choose == 'thisweek'}active{/if}"><a href="misc.php?mod=ranklist&type=member&view=invite&orderby=thisweek" id="thisweek">{lang ranklist_week}</a></li>
+						<li class="{if $now_choose == 'thismonth'}active{/if}"><a href="misc.php?mod=ranklist&type=member&view=invite&orderby=thismonth" id="thismonth">{lang ranklist_month}</a></li>
+						<li class="{if $now_choose == 'today'}active{/if}"><a href="misc.php?mod=ranklist&type=member&view=invite&orderby=today" id="today">{lang ranklist_today}</a></li>
+						<li class="{if $now_choose == 'all'}active{/if}"><a href="misc.php?mod=ranklist&type=member&view=invite&orderby=all" id="all">{lang all}</a></li>
+					</ul>
+				</div>
+				<!--{/if}-->
+				<!--{if $onlinetimerank_change}-->
+				<div class="dropmenu r" style="width: 63px">
+					<ul>
+						<li class="{if $now_choose == 'thismonth'}active{/if}"><a href="misc.php?mod=ranklist&type=member&view=onlinetime&orderby=thismonth" id="thismonth">{lang ranklist_month}</a></li>
+						<li class="{if $now_choose == 'all'}active{/if}"><a href="misc.php?mod=ranklist&type=member&view=onlinetime&orderby=all" id="all">{lang all}</a></li>
+					</ul>
+				</div>
+				<!--{/if}-->
+			</div>
+			<div class="body">
+				<!--[nest=nestcontenttop]--><div id="nestcontenttop" class="area"></div><!--[/nest]-->
+				<script type="text/javascript">
+					function checkCredit(id) {
+						var maxCredit = parseInt($space[credit]);
+						var idval = parseInt($(id).value);
+						if(/^(\d+)$/.test(idval) == false) {
+							showDialog('{lang credit_is_not_number}', 'notice', '{lang reminder}', null, 0);
+							return false;
+						} else if(idval > maxCredit) {
+							showDialog('{lang credit_title_message}', 'notice', '{lang reminder}', null, 0);
+							return false;
+						} else if(idval < 1) {
+							showDialog('{lang credit_title_error}', 'notice', '{lang reminder}', null, 0);
+							return false;
+						}
+						if(id == 'showcredit') {
+							var price = parseInt($('unitprice').value);
+							if(/^(\d+)$/.test(price) == false) {
+								showDialog('{lang unitprice_is_not_number}', 'notice', '{lang reminder}', null, 0);
+								return false;
+							} else if(price < 1) {
+								showDialog('{lang unitprice_title_error}', 'notice', '{lang reminder}', null, 0);
+								return false;
+							} else if(price > idval+parseInt($myallcredit)) {
+								showDialog('{lang price_can_not_be_higher_than_the_total}', 'notice', '{lang reminder}', null, 0);
+								return false;
+							}
+						}
+						return true;
+					}
+				</script>
+				<!--{if $now_pos >= 0 && $_GET[view]=='show' && $_G[uid]}-->
+					<!--{if $creditid}-->
+						<div class="hfold trans-ease">
+							<form method="post" autocomplete="off" action="home.php?mod=spacecp&ac=top" onsubmit="return checkCredit('showcredit');">
+								<input type="hidden" name="showsubmit" value="true"/>
+								<input type="hidden" name="formhash" value="{FORMHASH}"/>
+								<span class="title">{lang i_ranking}</span>
+								<div class="inputer area">
+									<span>{lang my_ranking_declaration}</span>
+									<textarea name="note" placeholder="{lang max_char_ranking}"></textarea>
+								</div>
+								<div class="inputer">
+									<span>{lang show_unitprice}</span>
+									<input type="text" id="unitprice" name="unitprice" value="1" placeholder=""/>
+								</div>
+								<div class="inputer">
+									<span>{lang increase_bid}{$extcredits[$creditid][title]}</span>
+									<input type="text" id="showcredit" name="showcredit" value="5" placeholder=""/>
+								</div>
+								<button class="glass" type="submit" name="show_submit">{lang increase}</button>
+							</form>
+							<form method="post" autocomplete="off" action="home.php?mod=spacecp&ac=top" onsubmit="return checkCredit('stakecredit');">
+								<input type="hidden" name="friendsubmit" value="true"/>
+								<input type="hidden" name="formhash" value="{FORMHASH}"/>
+								<span class="title">{lang friend_need_help}</span>
+								<div class="inputer">
+									<span>{lang please_input_friend_name}</span>
+									<input type="text" name="fusername" value="" placeholder=""/>
+								</div>
+								<div class="inputer">
+									<span>{lang handsel_bid}{$extcredits[$creditid][title]}</span>
+									<input type="text" name="stakecredit" id="stakecredit" value="20" placeholder=""/>
+								</div>
+								<button class="glass" type="submit" name="friend_submit">{lang handsel_bid}</button>
+								<div class="global_nothing px4-radius" style="width: calc(100% - 16px); margin: 8px; height: 93px; line-height: 45px">
+									喵喵喵~ ฅ’ω’ฅ
+								</div>
+							</form>
+							<script>fold('.hfold');</script>
+						</div>
+					<!--{else}-->
+						<div>{lang close_ranking_note}</div>
+					<!--{/if}-->
+				<!--{/if}-->
+				<!--{template ranklist/member_list}-->
+				<!--[nest=nestcontentbottom]--><div id="nestcontentbottom" class="area"></div><!--[/nest]-->
+				<!--[nest=nestranklistbottom]--><div id="nestranklistbottom" class="area"></div><!--[/nest]-->
+			</div>
+		</div>
+	</section>
+</div>
+<!--{template common/footer}-->

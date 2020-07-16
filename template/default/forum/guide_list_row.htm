@@ -1,0 +1,161 @@
+<!--{if $list['threadcount']}-->
+		<!--{loop $list['threadlist'] $key $thread}-->
+			<!--{if $thread[subject]}-->
+				<div class="threadline" id="$thread[id]">
+					<div class="thread-stat">
+						<a href="forum.php?mod=viewthread&tid=$thread[icontid]&{if $_GET['archiveid']}archiveid={$_GET['archiveid']}&{/if}extra=$extra" target="_blank" class="icon px4-radius
+							<!--{if in_array($thread['displayorder'], array(1, 2, 3, 4))}-->
+							top$thread[displayorder]">{lang thread_stick}
+							<!--{elseif $thread[folder] == 'lock'}-->
+							lock">{lang timeover}
+							<!--{elseif $thread['special'] == 1}-->
+							vote">{lang thread_poll}
+							<!--{elseif $thread['special'] == 2}-->
+							trade">{lang thread_trade}
+							<!--{elseif $thread['special'] == 3}-->
+							help">{lang fhelp}
+							<!--{elseif $thread['special'] == 4}-->
+							activity">{lang thread_activity}
+							<!--{elseif $thread['special'] == 5}-->
+							debate">$thread[replies]
+							<!--{else}-->
+							$thread[folder]">$thread[replies]
+							<!--{/if}-->
+						</a>
+						<div class="sub-show">
+							<!--{if !$thread['forumstick'] && $thread['closed'] > 1 && ($thread['isgroup'] == 1 || $thread['fid'] != $_G['fid'])}-->
+							<!--{eval $thread[tid]=$thread[closed];}-->
+							<!--{/if}-->
+							<div class="perfix"><a href="forum.php?mod=forumdisplay&fid=$thread[fid]" target="_blank">$list['forumnames'][$thread[fid]]['name']</a></div>
+							<a class="thread-title" href="forum.php?mod=viewthread&tid=$thread[tid]&{if $_GET['archiveid']}archiveid={$_GET['archiveid']}&{/if}extra=$extra" target="_blank">$thread[subject]</a>
+							<!--{if $thread['rushreply']}-->
+								<img src="{STATICURL}image/common/rushreply_s.png" alt="{lang rushreply}" align="absmiddle" />
+							<!--{/if}-->
+							<!--{if $stemplate && $sortid}-->$stemplate[$sortid][$thread[tid]]<!--{/if}-->
+							<!--{if $thread['price'] > 0}-->
+								<a class="suffix reward">{lang rewarding}
+									<span class="tooltip" data-pos="tl">
+										<!--{if $thread['special'] == '3'}-->
+										{lang thread_reward}&nbsp;$thread[price]&nbsp;{$_G[setting][extcredits][$_G['setting']['creditstransextra'][2]][unit]}{$_G[setting][extcredits][$_G['setting']['creditstransextra'][2]][title]}
+										<!--{else}-->
+										{lang price}&nbsp;$thread[price]&nbsp;{$_G[setting][extcredits][$_G['setting']['creditstransextra'][1]][unit]}{$_G[setting][extcredits][$_G['setting']['creditstransextra'][1]][title]}
+										<!--{/if}-->
+									</span>
+								</a>
+							<!--{elseif $thread['special'] == '3' && $thread['price'] < 0}-->
+								<a class="suffix solved">{lang reward_solved}</a>
+							<!--{/if}-->
+							<!--{if $thread['special'] == 5}-->
+								<a class="suffix debate" onclick="atarget(this)">{lang thread_debate}</a>
+							<!--{/if}-->
+							<!--{if $thread['attachment'] == 2}-->
+								<img class="svgicon small" src="{IMGURL}/common/icon/image.svg" alt="attach_img" />
+							<!--{elseif $thread['attachment'] == 1}-->
+								<img class="svgicon small" src="{IMGURL}/common/mark/common.svg" alt="attachment"/>
+							<!--{/if}-->
+							<!--{if $thread['displayorder'] == 0}-->
+								<!--{if $thread[recommendicon] && $filter != 'recommend'}-->
+									<img class="svgicon small" src="{IMGURL}/common/mark/recommend_$thread[recommendicon].svg" align="absmiddle" alt="recommend" title="{lang thread-recommend} $thread[recommends]" />
+								<!--{/if}-->
+								<!--{if $thread[heatlevel]}-->
+									<img class="svgicon small" src="{IMGURL}/common/mark/hot_$thread[heatlevel].svg" align="absmiddle" alt="heatlevel" title="{lang heats}: {$thread[heats]}" />
+								<!--{/if}-->
+								<!--{if $thread['rate'] > 0}-->
+									<img class="svgicon small" src="{IMGURL}/common/icon/agree.svg" align="absmiddle" alt="agree" title="{lang rate_credit_add}" />
+								<!--{elseif $thread['rate'] < 0}-->
+									<img class="svgicon small" src="{IMGURL}/common/icon/disagree.svg" align="absmiddle" alt="disagree" title="{lang posts_deducted}" />
+								<!--{/if}-->
+							<!--{/if}-->
+							<!--{if $thread['digest'] > 0 && $filter != 'digest'}-->
+								<img class="svgicon small" src="{IMGURL}/common/mark/digest_$thread[digest].svg" align="absmiddle" alt="digest" title="{lang thread_digest} $thread[digest]" />
+							<!--{/if}-->
+							<!--{if $thread['daynew']}-->
+								<a class="suffix daynew" href="forum.php?mod=redirect&tid=$thread[tid]&goto=lastpost#lastpost" onclick="atarget(this)">{lang new_thread}</a>
+							<!--{/if}-->
+							<!--{if $thread['readperm']}-->
+								<a class="suffix read">{lang readperm}：<span>$thread[readperm]</span></a>
+							<!--{/if}-->
+							<!--{if $thread['replycredit'] > 0}-->
+								<a class="suffix reward">{lang replycredit}： $thread['replycredit']</a>
+							<!--{/if}-->
+							<!--{if $thread[icon] >= 0}-->
+								<img class="svgicon" src="{STATICURL}image/stamp/{$_G[cache][stamps][$thread[icon]][url]}" alt="{$_G[cache][stamps][$thread[icon]][text]}" align="absmiddle" />
+							<!--{/if}-->
+							<!--{if $thread['moved']}-->
+								{lang thread_moved}<!--{eval $thread[tid]=$thread[closed];}-->
+							<!--{/if}-->
+							<!--{if !$thread['forumstick'] && ($thread['isgroup'] == 1 || $thread['fid'] != $_G['fid'])}-->
+								<!--{if $thread['related_group'] == 0 && $thread['closed'] > 1}-->
+									<!--{eval $thread[tid]=$thread[closed];}-->
+								<!--{/if}-->
+							<!--{/if}-->
+						</div>
+					</div>
+					<div class="thread-census">
+						<div class="r lastpost">
+							<!--{if $thread['lastposter']}-->
+							<a href="{if $thread[digest] != -2}home.php?mod=space&username=$thread[lastposterenc]{else}forum.php?mod=viewthread&tid=$thread[tid]&page={echo max(1, $thread[pages]);}{/if}" c="1">$thread[lastposter]@</a>
+							<!--{else}-->
+							<p>$_G[setting][anonymoustext]</p>
+							<!--{/if}-->
+							<a href="{if $thread[digest] != -2}forum.php?mod=redirect&tid=$thread[tid]&goto=lastpost$highlight#lastpost{else}forum.php?mod=viewthread&tid=$thread[tid]&page={echo max(1, $thread[pages]);}{/if}"> $thread[lastpost]</a>
+						</div>
+						<div class="author">
+							<span>
+								<!--{if $thread['authorid'] && $thread['author']}-->
+								<a href="home.php?mod=space&uid=$thread[authorid]" c="1">
+									$thread[author]</a>
+									<!--{if !empty($verify[$thread['authorid']])}-->
+										$verify[$thread[authorid]]
+									<!--{/if}-->
+								<!--{else}-->
+									$_G[setting][anonymoustext]
+								<!--{/if}-->
+							</span>
+							<span>
+								$thread[dateline]{lang publish}
+								<!--{if $view == 'hot'}-->
+								，$thread['heats']{lang guide_attend}
+								<!--{/if}-->
+							</span>
+						</div>
+						<a class="view" href="forum.php?mod=viewthread&tid=$thread[tid]&extra=$extra" style="display: none">
+							<!--{if $thread['isgroup'] != 1}-->
+							{lang view}：$thread[views]
+							<!--{else}-->
+							{lang view}：{$groupnames[$thread[tid]][views]}
+							<!--{/if}-->
+							<!--{if $_G['setting']['threadhidethreshold'] && $thread['hidden'] >= $_G['setting']['threadhidethreshold']}-->
+							{lang hidden}
+							<!--{/if}-->
+						</a>
+					</div>
+					<!--{if $view == 'my' && $viewtype=='postcomment'}-->
+						<div class="my-replylist">
+							<div class="ireplay"><a href="forum.php?mod=redirect&goto=findpost&ptid=$thread[tid]&pid=$pid" target="_blank"><!--{avatar($_G[uid],small)}--><i class="time">{$thread['dateline']} : </i>{$thread[comment]}</a></div>
+						</div>
+					<!--{/if}-->
+					<!--{if $view == 'my' && $viewtype=='reply' && $tids[$thread[tid]] }-->
+						<div class="my-replylist">
+							<!--{eval $num = 0}-->
+							<!--{loop $tids[$thread[tid]] $pid}-->
+							<!--{eval $post = $posts[$pid];}-->
+								<!--{if $post[message]}-->
+									<div class="ireplay"><a href="forum.php?mod=redirect&goto=findpost&ptid=$thread[tid]&pid=$pid" target="_blank"><!--{avatar($_G[uid],small)}--><i class="time"><!--{eval echo date('Y-m-d',$post['dateline'])}--> : </i>{$post[message]}</a></div>
+									<!--{eval $num++}-->
+								<!--{/if}-->
+								<!--{if $num >= 6}-->
+									<!--{eval break;}-->
+								<!--{/if}-->
+							<!--{/loop}-->
+							<!--{if $num >= 6}-->
+								<a class="more" href="forum.php?mod=redirect&goto=findpost&ptid=$thread[tid]&pid=$pid" target="_blank">{lang more}</a>
+							<!--{/if}-->
+						</div>
+					<!--{/if}-->
+				</div>
+			<!--{/if}-->
+		<!--{/loop}-->
+<!--{else}-->
+	<p class="global_nothing">{lang global_nothing}</p>
+<!--{/if}-->

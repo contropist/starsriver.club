@@ -1,0 +1,60 @@
+<!--{template common/header}-->
+
+<div id="pt" class="bm cl">
+	<div class="z">
+		<a href="./" class="nvhm" title="{lang homepage}">$_G[setting][bbname]</a><em class="direct"></em>
+		<a href="$_G[setting][navs][1][filename]">$_G[setting][navs][1][navname]</a><em class="direct"></em>
+		{lang comment_view}
+	</div>
+</div>
+
+
+<div>
+	<!--[nest=nest1]--><div id="nest1" class="area"></div><!--[/nest]-->
+</div>
+
+<div>
+	<div class="mn">
+		<div class="bm vw">
+			<div class="h hm">
+				<h1 class="ph"><a href="$url">$csubject[title]</a></h1>
+				<p>{lang comment} ($csubject[commentnum])<!--{if $csubject['allowcomment'] == 1}--><a onclick="location.href=location.href.replace(/(\#.*)/, '')+'#message';$('message').focus();return false;">{lang post_comment}</a><!--{/if}--></p>
+			</div>
+			<div class="bm_c">
+			<!--{loop $commentlist $comment}-->
+				<!--{template portal/comment_li}-->
+			<!--{/loop}-->
+			<!--{if $pricount}-->
+				<p class="mbn mtn y">{lang hide_portal_comment}</p>
+			<!--{/if}-->
+			<div class="pgs cl mtm mbm">$multi</div>
+			<!--{if $csubject['allowcomment'] == 1}-->
+				<form id="cform" name="cform" action="portal.php?mod=portalcp&ac=comment" method="post" autocomplete="off">
+					<div class="tedt">
+						<div class="area">
+							<textarea name="message" cols="60" rows="3" id="message"></textarea>
+						</div>
+					</div>
+					<!--{if $secqaacheck || $seccodecheck}-->
+						<div class="mtm"><!--{subtemplate common/seccheck}--></div>
+					<!--{/if}-->
+
+					<!--{if $idtype == 'topicid' }-->
+						<input type="hidden" name="topicid" value="$id">
+					<!--{else}-->
+						<input type="hidden" name="aid" value="$id">
+					<!--{/if}-->
+					<input type="hidden" name="formhash" value="{FORMHASH}">
+					<p class="ptn"><button type="submit" name="commentsubmit" value="true"><strong>{lang comment}</strong></button></p>
+				</form>
+			<!--{/if}-->
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="wp mtn">
+	<!--[nest=nest3]--><div id="nest3" class="area"></div><!--[/nest]-->
+</div>
+
+<!--{template common/footer}-->

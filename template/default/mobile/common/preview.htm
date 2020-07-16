@@ -1,0 +1,30 @@
+<!--{template common/header}-->
+<div class="plate layout-2-type1">
+	<section class="col-1" style="width: 390px">
+		<div class="mobile-preview">
+			<i class="speaker"></i>
+			<i class="camera"></i>
+			<i class="camera2"></i>
+			<i class="volume"></i>
+			<i class="io"></i>
+			<i class="screen"><iframe id="ifm0" src="{if $_G['setting']['mobile']['allowmnew']}m.php/{else}misc.php?mod=mobile&view=true{/if}"></iframe></i>
+			<i class="homebtn"></i>
+		</div>
+	</section>
+	<section class="col-2" style="width: calc(100% - 405px)">
+		<div class="panel no-gap">
+			<ol class="panel-container">
+				<li class="box size-10-0">
+					{lang login_mobile}
+				</li>
+				<li class="box size-10-0">
+					{lang login_mobile_join}
+				</li>
+				<li class="box size-10-0">
+					<img src="data/cache/$file" />
+				</li>
+			</ol>
+		</div>
+	</section>
+</div>
+<!--{template common/footer}-->

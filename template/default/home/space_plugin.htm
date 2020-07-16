@@ -1,0 +1,39 @@
+<!--{template common/header}-->
+
+<div id="pt" class="bm cl">
+	<div class="z">
+		<a href="./" class="nvhm" title="{lang homepage}">$_G[setting][bbname]</a><em class="direct"></em>
+		<a href="home.php?mod=space&do=thread">{lang post}</a><em class="direct"></em>
+	 	<a href="mod=space&do=plugin&op=thread&id=$_GET['id']">$navtitle</a>
+	</div>
+</div>
+
+
+<div>
+	<!--[nest=nest1]--><div id="nest1" class="area"></div><!--[/nest]-->
+</div>
+
+
+<div>
+	<div class="mn">
+		<!--[nest=nestcontenttop]--><div id="nestcontenttop" class="area"></div><!--[/nest]-->
+		<div class="bm bw0">
+			<!--{eval include(template($_GET['id']));}-->
+		</div>
+		<!--[nest=nestcontentbottom]--><div id="nestcontentbottom" class="area"></div><!--[/nest]-->
+	</div>
+	<div class="appl">
+		<!--{subtemplate home/space_home_thread_nav}-->
+
+		<div class="drag">
+			<!--[nest=nest2]--><div id="nest2" class="area"></div><!--[/nest]-->
+		</div>
+
+	</div>
+</div>
+
+<div class="wp mtn">
+	<!--[nest=nest3]--><div id="nest3" class="area"></div><!--[/nest]-->
+</div>
+
+<!--{template common/footer}-->

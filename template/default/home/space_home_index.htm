@@ -1,0 +1,63 @@
+<!--{template home/space_home_header}-->
+
+<div class="mas-viewer">
+    <div class="area" id="nestpage" >
+        <div class="frame cl" id="frame1" noedit="1" >
+            <div class="z column" id="frame1_left" style="width:{$widths[0]}px" >
+                <!--{if empty($leftlist)}-->
+                <div class="move-span temp" id="left_temp" ></div >
+                <!--{/if}-->
+                <!--{loop $leftlist $key $value}-->
+                <!--{if !empty($key)}-->
+                <div class="block move-span" id="$key" >
+                    $value
+                </div >
+                <!--{/if}-->
+                <!--{/loop}-->
+            </div >
+
+            <div class="z column" id="frame1_center" style="width:{$widths[1]}px" >
+                <!--{if empty($centerlist)}-->
+                <div class="move-span temp" id="center_temp" ></div >
+                <!--{/if}-->
+                <!--{loop $centerlist $key $value}-->
+                <!--{if !empty($key)}-->
+                <div class="block move-span" id="$key" >
+                    $value
+                </div >
+                <!--{/if}-->
+                <!--{/loop}-->
+            </div >
+
+            <!--{if (strlen($usernest['currentlayout']) > 3) }-->
+            <div class="z column" id="frame1_right" style="width:{$widths[2]}px" >
+                <!--{if empty($rightlist)}-->
+                <div class="move-span temp" id="right_temp" ></div >
+                <!--{/if}-->
+                <!--{loop $rightlist $key $value}-->
+                <!--{if !empty($key)}-->
+                <div class="block move-span" id="$key" >
+                    $value
+                </div >
+                <!--{/if}-->
+                <!--{/loop}-->
+            </div >
+            <!--{/if}-->
+        </div >
+    </div >
+</div >
+<script type="text/javascript" >
+    function succeedhandle_followmod(url, msg, values) {
+        var fObj = $('followmod');
+        if (values['type'] === 'add') {
+            fObj.innerHTML = '取消关注';
+            fObj.className = 'flw_btn_unfo';
+            fObj.href = 'home.php?mod=spacecp&ac=follow&op=del&fuid=' + values['fuid'];
+        } else if (values['type'] === 'del') {
+            fObj.innerHTML = '关注TA';
+            fObj.className = 'flw_btn_fo';
+            fObj.href = 'home.php?mod=spacecp&ac=follow&op=add&hash={FORMHASH}&fuid=' + values['fuid'];
+        }
+    }
+</script >
+<!--{template common/footer}-->

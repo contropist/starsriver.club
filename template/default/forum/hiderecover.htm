@@ -1,0 +1,25 @@
+<!--{template common/header}-->
+<div class="header">
+	<span class="title-tip" id="return_$_GET['handlekey']">{lang hiderecover}</span>
+	<a onclick="hideWindow('$_GET['handlekey']');" class="close" title="{lang close}">×</a>
+</div>
+<form method="post" autocomplete="off" id="hiderecoverform" action="forum.php?mod=misc&action=hiderecover&tid=$_GET[tid]&infloat=yes" onsubmit="ajaxpost('hiderecoverform', 'return_$_GET['handlekey']', 'return_$_GET['handlekey']', 'onerror');return false;">
+	<div class="c">
+		<input type="hidden" name="formhash" id="formhash" value="{FORMHASH}" />
+		<input type="hidden" name="handlekey" value="$_GET['handlekey']" />
+		<!--{subtemplate common/seccheck}-->
+	</div>
+	<div class="o pns" id="moreconf">		
+		<button type="submit" id="postsubmit" class="pn pnc z" value="true" name="hiderecoversubmit"><span>{lang submit}</span></button>
+	</div>
+</form>
+
+<script type="text/javascript" reload="1">
+function succeedhandle_hiderecover(locationhref, message) {
+	hideWindow('$_GET['handlekey']');
+	$('hiderecover').style.display = 'none';
+	showDialog(message, 'notice', '', '', 0, null, '', '', '', 3);
+}
+</script>
+
+<!--{template common/footer}-->

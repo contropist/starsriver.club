@@ -1,0 +1,232 @@
+@keyframes spin {
+    from {transform: rotateZ(0);}
+    to {transform: rotateZ(1turn);}
+}
+@keyframes spin2 {
+    0% {transform: rotateZ(0);}
+    12.5% {transform: rotateZ(45deg);}
+    25% {transform: rotateZ(90deg);}
+    37.5% {transform: rotateZ(135deg);}
+    50% {transform: rotateZ(180deg);}
+    62.5% {transform: rotateZ(225deg);}
+    75% {transform: rotateZ(270deg);}
+    87.5% {transform: rotateZ(315deg);}
+    100% {transform: rotateZ(360deg);}
+}
+
+.audio.green {
+    z-index: 101;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 39px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding:0 24px;
+    user-select: none;
+    -webkit-user-select: none;
+    background-color: #fff;
+    box-sizing: border-box;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.22);
+    transform: translateY(39px);
+    transition: .39s ease-in-out;
+}
+.audio.green * {
+    font-family: 'icomoon';
+}
+.audio.green .icon {
+    cursor: pointer;
+    font-size: 20px !important;
+    display: block;
+    width: 20px;
+    height: 25px;
+    color: #3aa089;
+    margin: 0 8px;
+}
+
+.audio.green .play-pause-btn,
+.audio.green .close {
+    position: relative;
+    display: block;
+    cursor: pointer;
+    height: 20px;
+    width: 15px;
+    transition: .3s ease-in-out;
+    transform: rotateZ(0);
+}
+.audio.green .play-pause-btn::before,
+.audio.green .play-pause-btn::after,
+.audio.green .close::before,
+.audio.green .close::after {
+    top: 0;
+    content: '';
+    position: absolute;
+    display: block;
+    width: 4px;
+    border-radius: 5px;
+    background: #3aa089;
+    transition: .3s ease-in-out;
+    transform: rotateZ(0);
+}
+
+.audio.green .close {
+    margin: 0 0 0 16px;
+    opacity: .5;
+}
+.audio.green .close:hover {
+    opacity: 1;
+}
+.audio.green .close::before, .audio.green .close::after {
+    height: 110%;
+    top: -1px;
+    background: #e75033;
+}
+.audio.green .close::before{
+    right: calc(100% - 10px);
+    transform: rotateZ(45deg);
+}
+.audio.green .close::after {
+    right: 5px;
+    transform: rotateZ(-45deg);
+    box-shadow: 0 0 0 2px #fff;;
+}
+
+.audio.green .play-pause-btn.pause::before {
+    height: 100%;
+    right: 0;
+}
+.audio.green .play-pause-btn.pause::after {
+    height: 100%;
+    right: calc(100% - 4px);
+}
+.audio.green .play-pause-btn.play {
+    transform: rotateZ(-90deg);
+}
+.audio.green .play-pause-btn.play::before {
+    height: 80%;
+    right: 1.5px;
+    transform: rotateZ(40deg);
+}
+.audio.green .play-pause-btn.play::after {
+    height: 50%;
+    right: calc(100% - 3.5px);
+    transform: rotateZ(-40deg);
+}
+.audio.green .play-pause-btn.loading {
+    animation: spin 1.5s linear infinite
+}
+.audio.green .play-pause-btn.loading::before {
+    height: 4px;
+    right: 0;
+    top: 0;
+}
+.audio.green .play-pause-btn.loading::after {
+    height: 4px;
+    right: calc(100% - 4px);
+    top: calc(100% - 4px);
+}
+
+.audio.green .volume {
+    position: relative;
+}
+.audio.green .volume .volume-btn.high::before {
+    content: "\e527";
+}
+.audio.green .volume .volume-btn.medium::before {
+    content: "\e528";
+}
+.audio.green .volume .volume-btn.low::before {
+    content: "\e529";
+}
+.audio.green .volume .volume-btn.mute::before {
+    content: "\e52a";
+}
+.audio.green .volume .volume-controls {
+    width: 30px;
+    height: 135px;
+    background-color: rgba(255, 255, 255, 1);;
+    border-radius: 7px;
+    position: absolute;
+    left: -3px;
+    bottom: 39px;
+    flex-direction: column;
+    align-items: center;
+    display: flex;
+    box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.15);
+}
+.audio.green .volume .volume-controls.hidden {
+    display: none;
+}
+.audio.green .volume .volume-controls .slider {
+    margin: 16px 0;
+    width: 6px;
+    border-radius: 3px;
+}
+.audio.green .volume .volume-controls .slider .progress {
+    bottom: 0;
+    height: 100%;
+    width: 6px;
+}
+.audio.green .volume .volume-controls .slider .progress .pin {
+    left: -5px;
+    top: -8px;
+}
+
+.audio.green .loop-btn.on {
+    animation: spin2 3.58s cubic-bezier(1, 0.43, 0, 1.63) infinite
+}
+.audio.green .loop-btn::before {
+    content: "\e52f";
+}
+
+.audio.green .slider {
+    flex-grow: 1;
+    background-color: #eee;
+    cursor: pointer;
+    position: relative;
+}
+.audio.green .slider .progress {
+    background-color: #44BFA3;
+    border-radius: inherit;
+    position: absolute;
+    pointer-events: none;
+}
+.audio.green .slider .progress .pin {
+    height: 16px;
+    width: 16px;
+    border-radius: 8px;
+    background-color: #44BFA3;
+    position: absolute;
+    pointer-events: all;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+}
+.audio.green .controls {
+    font-family: sans-serif;
+    line-height: 20px;
+    color: #55606E;
+    display: flex;
+    flex-grow: 1;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 20px;
+}
+.audio.green .controls .slider {
+    margin-left: 16px;
+    margin-right: 16px;
+    border-radius: 2px;
+    height: 4px;
+}
+.audio.green .controls .slider .progress {
+    width: 0;
+    height: 100%;
+}
+.audio.green .controls .slider .progress .pin {
+    right: -8px;
+    top: -6px;
+}
+.audio.green .controls span {
+    cursor: default;
+    font-size: 13px;
+}

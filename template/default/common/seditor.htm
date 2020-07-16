@@ -1,0 +1,34 @@
+<script type="text/javascript" src="{$_G[setting][jspath]}seditor.js?{VERHASH}"></script>
+<div class="menu">
+	<!--{if in_array('bold', $seditor[1])}-->
+		<a title="{lang e_bold}" class="awe-bold fbld"{if empty($seditor[2])} onclick="seditor_insertunit('$seditor[0]', '[b]', '[/b]');doane(event);"{/if}></a>
+	<!--{/if}-->
+	<!--{if in_array('color', $seditor[1])}-->
+		<a title="{lang e_forecolor}" class="awe-magic fclr" id="{$seditor[0]}forecolor"{if empty($seditor[2])} onclick="showColorBox(this.id, 2, '$seditor[0]');doane(event);"{/if}></a>
+	<!--{/if}-->
+	<!--{if in_array('img', $seditor[1])}-->
+		<a id="{$seditor[0]}img" title="{lang e_image}" class="awe-picture-o fmg"{if empty($seditor[2])} onclick="seditor_menu('$seditor[0]', 'img');doane(event);"{/if}></a>
+	<!--{/if}-->
+	<!--{if in_array('link', $seditor[1])}-->
+		<a id="{$seditor[0]}url" title="{lang e_url}" class="awe-link flnk"{if empty($seditor[2])} onclick="seditor_menu('$seditor[0]', 'url');doane(event);"{/if}></a>
+	<!--{/if}-->
+	<!--{if in_array('quote', $seditor[1])}-->
+		<a id="{$seditor[0]}quote" title="{lang e_quote}" class="awe-quote-right fqt"{if empty($seditor[2])} onclick="seditor_menu('$seditor[0]', 'quote');doane(event);"{/if}></a>
+	<!--{/if}-->
+	<!--{if in_array('code', $seditor[1])}-->
+		<a id="{$seditor[0]}code" title="{lang e_code}" class="awe-code fcd"{if empty($seditor[2])} onclick="seditor_menu('$seditor[0]', 'code');doane(event);"{/if}></a>
+	<!--{/if}-->
+	<!--{if in_array('smilies', $seditor[1])}-->
+		<a class="awe-smile-o fsml" id="{$seditor[0]}sml"{if empty($seditor[2])} onclick="showMenu({'ctrlid':this.id,'evt':'click','layer':2});return false;"{/if}></a>
+		<!--{if empty($seditor[2])}-->
+			<script class="hidden" type="text/javascript" reload="1">smilies_show('{$seditor[0]}smiliesdiv', $_G['setting']['smcols'], '$seditor[0]');</script>
+		<!--{/if}-->
+	<!--{/if}-->
+	<!--{if in_array('at', $seditor[1]) && $_G['group']['allowat']}-->
+		<script class="hidden"  type="text/javascript" src="{$_G['setting']['jspath']}at.js?{VERHASH}"></script>
+		<a id="{$seditor[0]}at" title="{lang e_at}" class="ft-at-sign fat"{if empty($seditor[2])} onclick="seditor_menu('$seditor[0]', 'at');doane(event);"{/if}></a>
+	<!--{/if}-->
+	<!--{if $seditor[3]}-->
+		<a class="icon-attachment attach">$seditor[3]</a>
+	<!--{/if}-->
+</div>

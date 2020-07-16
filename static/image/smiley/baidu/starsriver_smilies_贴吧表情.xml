@@ -1,0 +1,418 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<root>
+	<item id="Title"><![CDATA[Discuz! Smilies]]></item>
+	<item id="Version"><![CDATA[3.4]]></item>
+	<item id="Time"><![CDATA[2017-10-03 10:49]]></item>
+	<item id="From"><![CDATA[StarsRiver (http://bbs.starsriver.com/)]]></item>
+	<item id="Data">
+		<item id="typeid"><![CDATA[5]]></item>
+		<item id="available"><![CDATA[1]]></item>
+		<item id="name"><![CDATA[贴吧表情]]></item>
+		<item id="type"><![CDATA[smiley]]></item>
+		<item id="displayorder"><![CDATA[2]]></item>
+		<item id="directory"><![CDATA[baidu]]></item>
+		<item id="smilies">
+			<item id="0">
+				<item id="id"><![CDATA[521]]></item>
+				<item id="typeid"><![CDATA[5]]></item>
+				<item id="displayorder"><![CDATA[0]]></item>
+				<item id="type"><![CDATA[smiley]]></item>
+				<item id="code"><![CDATA[[bd-乖巧]]]></item>
+				<item id="url"><![CDATA[9.png]]></item>
+			</item>
+			<item id="1">
+				<item id="id"><![CDATA[519]]></item>
+				<item id="typeid"><![CDATA[5]]></item>
+				<item id="displayorder"><![CDATA[0]]></item>
+				<item id="type"><![CDATA[smiley]]></item>
+				<item id="code"><![CDATA[[bd-愤怒]]]></item>
+				<item id="url"><![CDATA[7.png]]></item>
+			</item>
+			<item id="2">
+				<item id="id"><![CDATA[517]]></item>
+				<item id="typeid"><![CDATA[5]]></item>
+				<item id="displayorder"><![CDATA[0]]></item>
+				<item id="type"><![CDATA[smiley]]></item>
+				<item id="code"><![CDATA[[bd-欢喜]]]></item>
+				<item id="url"><![CDATA[5.png]]></item>
+			</item>
+			<item id="3">
+				<item id="id"><![CDATA[515]]></item>
+				<item id="typeid"><![CDATA[5]]></item>
+				<item id="displayorder"><![CDATA[0]]></item>
+				<item id="type"><![CDATA[smiley]]></item>
+				<item id="code"><![CDATA[[bd-酷]]]></item>
+				<item id="url"><![CDATA[33.png]]></item>
+			</item>
+			<item id="4">
+				<item id="id"><![CDATA[513]]></item>
+				<item id="typeid"><![CDATA[5]]></item>
+				<item id="displayorder"><![CDATA[0]]></item>
+				<item id="type"><![CDATA[smiley]]></item>
+				<item id="code"><![CDATA[[bd-疑问]]]></item>
+				<item id="url"><![CDATA[31.png]]></item>
+			</item>
+			<item id="5">
+				<item id="id"><![CDATA[511]]></item>
+				<item id="typeid"><![CDATA[5]]></item>
+				<item id="displayorder"><![CDATA[0]]></item>
+				<item id="type"><![CDATA[smiley]]></item>
+				<item id="code"><![CDATA[[bd-大汉]]]></item>
+				<item id="url"><![CDATA[3.png]]></item>
+			</item>
+			<item id="6">
+				<item id="id"><![CDATA[504]]></item>
+				<item id="typeid"><![CDATA[5]]></item>
+				<item id="displayorder"><![CDATA[0]]></item>
+				<item id="type"><![CDATA[smiley]]></item>
+				<item id="code"><![CDATA[[bd-生气]]]></item>
+				<item id="url"><![CDATA[23.png]]></item>
+			</item>
+			<item id="7">
+				<item id="id"><![CDATA[509]]></item>
+				<item id="typeid"><![CDATA[5]]></item>
+				<item id="displayorder"><![CDATA[0]]></item>
+				<item id="type"><![CDATA[smiley]]></item>
+				<item id="code"><![CDATA[[bd-痛哭]]]></item>
+				<item id="url"><![CDATA[28.png]]></item>
+			</item>
+			<item id="8">
+				<item id="id"><![CDATA[507]]></item>
+				<item id="typeid"><![CDATA[5]]></item>
+				<item id="displayorder"><![CDATA[0]]></item>
+				<item id="type"><![CDATA[smiley]]></item>
+				<item id="code"><![CDATA[[bd-喷水]]]></item>
+				<item id="url"><![CDATA[26.png]]></item>
+			</item>
+			<item id="9">
+				<item id="id"><![CDATA[505]]></item>
+				<item id="typeid"><![CDATA[5]]></item>
+				<item id="displayorder"><![CDATA[0]]></item>
+				<item id="type"><![CDATA[smiley]]></item>
+				<item id="code"><![CDATA[[bd-睡觉]]]></item>
+				<item id="url"><![CDATA[24.png]]></item>
+			</item>
+			<item id="10">
+				<item id="id"><![CDATA[503]]></item>
+				<item id="typeid"><![CDATA[5]]></item>
+				<item id="displayorder"><![CDATA[0]]></item>
+				<item id="type"><![CDATA[smiley]]></item>
+				<item id="code"><![CDATA[[bd-亲亲]]]></item>
+				<item id="url"><![CDATA[22.png]]></item>
+			</item>
+			<item id="11">
+				<item id="id"><![CDATA[499]]></item>
+				<item id="typeid"><![CDATA[5]]></item>
+				<item id="displayorder"><![CDATA[0]]></item>
+				<item id="type"><![CDATA[smiley]]></item>
+				<item id="code"><![CDATA[[bd-蔑笑]]]></item>
+				<item id="url"><![CDATA[19.png]]></item>
+			</item>
+			<item id="12">
+				<item id="id"><![CDATA[497]]></item>
+				<item id="typeid"><![CDATA[5]]></item>
+				<item id="displayorder"><![CDATA[0]]></item>
+				<item id="type"><![CDATA[smiley]]></item>
+				<item id="code"><![CDATA[[bd-可怜]]]></item>
+				<item id="url"><![CDATA[17.png]]></item>
+			</item>
+			<item id="13">
+				<item id="id"><![CDATA[495]]></item>
+				<item id="typeid"><![CDATA[5]]></item>
+				<item id="displayorder"><![CDATA[0]]></item>
+				<item id="type"><![CDATA[smiley]]></item>
+				<item id="code"><![CDATA[[bd-赞同]]]></item>
+				<item id="url"><![CDATA[15.png]]></item>
+			</item>
+			<item id="14">
+				<item id="id"><![CDATA[493]]></item>
+				<item id="typeid"><![CDATA[5]]></item>
+				<item id="displayorder"><![CDATA[0]]></item>
+				<item id="type"><![CDATA[smiley]]></item>
+				<item id="code"><![CDATA[[bd-啊]]]></item>
+				<item id="url"><![CDATA[13.png]]></item>
+			</item>
+			<item id="15">
+				<item id="id"><![CDATA[491]]></item>
+				<item id="typeid"><![CDATA[5]]></item>
+				<item id="displayorder"><![CDATA[0]]></item>
+				<item id="type"><![CDATA[smiley]]></item>
+				<item id="code"><![CDATA[[bd-斜视]]]></item>
+				<item id="url"><![CDATA[11.png]]></item>
+			</item>
+			<item id="16">
+				<item id="id"><![CDATA[489]]></item>
+				<item id="typeid"><![CDATA[5]]></item>
+				<item id="displayorder"><![CDATA[0]]></item>
+				<item id="type"><![CDATA[smiley]]></item>
+				<item id="code"><![CDATA[[bd-鄙视]]]></item>
+				<item id="url"><![CDATA[1.png]]></item>
+			</item>
+			<item id="17">
+				<item id="id"><![CDATA[520]]></item>
+				<item id="typeid"><![CDATA[5]]></item>
+				<item id="displayorder"><![CDATA[0]]></item>
+				<item id="type"><![CDATA[smiley]]></item>
+				<item id="code"><![CDATA[[bd-尴尬]]]></item>
+				<item id="url"><![CDATA[8.png]]></item>
+			</item>
+			<item id="18">
+				<item id="id"><![CDATA[518]]></item>
+				<item id="typeid"><![CDATA[5]]></item>
+				<item id="displayorder"><![CDATA[0]]></item>
+				<item id="type"><![CDATA[smiley]]></item>
+				<item id="code"><![CDATA[[bd-对眼]]]></item>
+				<item id="url"><![CDATA[6.png]]></item>
+			</item>
+			<item id="19">
+				<item id="id"><![CDATA[516]]></item>
+				<item id="typeid"><![CDATA[5]]></item>
+				<item id="displayorder"><![CDATA[0]]></item>
+				<item id="type"><![CDATA[smiley]]></item>
+				<item id="code"><![CDATA[[bd-哭泣]]]></item>
+				<item id="url"><![CDATA[4.png]]></item>
+			</item>
+			<item id="20">
+				<item id="id"><![CDATA[514]]></item>
+				<item id="typeid"><![CDATA[5]]></item>
+				<item id="displayorder"><![CDATA[0]]></item>
+				<item id="type"><![CDATA[smiley]]></item>
+				<item id="code"><![CDATA[[bd-阴险]]]></item>
+				<item id="url"><![CDATA[32.png]]></item>
+			</item>
+			<item id="21">
+				<item id="id"><![CDATA[512]]></item>
+				<item id="typeid"><![CDATA[5]]></item>
+				<item id="displayorder"><![CDATA[0]]></item>
+				<item id="type"><![CDATA[smiley]]></item>
+				<item id="code"><![CDATA[[bd-不满]]]></item>
+				<item id="url"><![CDATA[30.png]]></item>
+			</item>
+			<item id="22">
+				<item id="id"><![CDATA[510]]></item>
+				<item id="typeid"><![CDATA[5]]></item>
+				<item id="displayorder"><![CDATA[0]]></item>
+				<item id="type"><![CDATA[smiley]]></item>
+				<item id="code"><![CDATA[[bd-羡慕]]]></item>
+				<item id="url"><![CDATA[29.png]]></item>
+			</item>
+			<item id="23">
+				<item id="id"><![CDATA[508]]></item>
+				<item id="typeid"><![CDATA[5]]></item>
+				<item id="displayorder"><![CDATA[0]]></item>
+				<item id="type"><![CDATA[smiley]]></item>
+				<item id="code"><![CDATA[[bd-笑]]]></item>
+				<item id="url"><![CDATA[27.png]]></item>
+			</item>
+			<item id="24">
+				<item id="id"><![CDATA[506]]></item>
+				<item id="typeid"><![CDATA[5]]></item>
+				<item id="displayorder"><![CDATA[0]]></item>
+				<item id="type"><![CDATA[smiley]]></item>
+				<item id="code"><![CDATA[[bd-吐舌]]]></item>
+				<item id="url"><![CDATA[25.png]]></item>
+			</item>
+			<item id="25">
+				<item id="id"><![CDATA[501]]></item>
+				<item id="typeid"><![CDATA[5]]></item>
+				<item id="displayorder"><![CDATA[0]]></item>
+				<item id="type"><![CDATA[smiley]]></item>
+				<item id="code"><![CDATA[[bd-拇指]]]></item>
+				<item id="url"><![CDATA[20.png]]></item>
+			</item>
+			<item id="26">
+				<item id="id"><![CDATA[502]]></item>
+				<item id="typeid"><![CDATA[5]]></item>
+				<item id="displayorder"><![CDATA[0]]></item>
+				<item id="type"><![CDATA[smiley]]></item>
+				<item id="code"><![CDATA[[bd-恶心]]]></item>
+				<item id="url"><![CDATA[21.png]]></item>
+			</item>
+			<item id="27">
+				<item id="id"><![CDATA[500]]></item>
+				<item id="typeid"><![CDATA[5]]></item>
+				<item id="displayorder"><![CDATA[0]]></item>
+				<item id="type"><![CDATA[smiley]]></item>
+				<item id="code"><![CDATA[[bd-眉眼]]]></item>
+				<item id="url"><![CDATA[2.png]]></item>
+			</item>
+			<item id="28">
+				<item id="id"><![CDATA[498]]></item>
+				<item id="typeid"><![CDATA[5]]></item>
+				<item id="displayorder"><![CDATA[0]]></item>
+				<item id="type"><![CDATA[smiley]]></item>
+				<item id="code"><![CDATA[[bd-大笑]]]></item>
+				<item id="url"><![CDATA[18.png]]></item>
+			</item>
+			<item id="29">
+				<item id="id"><![CDATA[496]]></item>
+				<item id="typeid"><![CDATA[5]]></item>
+				<item id="displayorder"><![CDATA[0]]></item>
+				<item id="type"><![CDATA[smiley]]></item>
+				<item id="code"><![CDATA[[bd-可爱]]]></item>
+				<item id="url"><![CDATA[16.png]]></item>
+			</item>
+			<item id="30">
+				<item id="id"><![CDATA[494]]></item>
+				<item id="typeid"><![CDATA[5]]></item>
+				<item id="displayorder"><![CDATA[0]]></item>
+				<item id="type"><![CDATA[smiley]]></item>
+				<item id="code"><![CDATA[[bd-惊讶]]]></item>
+				<item id="url"><![CDATA[14.png]]></item>
+			</item>
+			<item id="31">
+				<item id="id"><![CDATA[492]]></item>
+				<item id="typeid"><![CDATA[5]]></item>
+				<item id="displayorder"><![CDATA[0]]></item>
+				<item id="type"><![CDATA[smiley]]></item>
+				<item id="code"><![CDATA[[bd-滑稽]]]></item>
+				<item id="url"><![CDATA[12.png]]></item>
+			</item>
+			<item id="32">
+				<item id="id"><![CDATA[490]]></item>
+				<item id="typeid"><![CDATA[5]]></item>
+				<item id="displayorder"><![CDATA[0]]></item>
+				<item id="type"><![CDATA[smiley]]></item>
+				<item id="code"><![CDATA[[bd-汉]]]></item>
+				<item id="url"><![CDATA[10.png]]></item>
+			</item>
+			<item id="33">
+				<item id="id"><![CDATA[538]]></item>
+				<item id="typeid"><![CDATA[5]]></item>
+				<item id="displayorder"><![CDATA[2]]></item>
+				<item id="type"><![CDATA[smiley]]></item>
+				<item id="code"><![CDATA[[bd-玫瑰]]]></item>
+				<item id="url"><![CDATA[41.png]]></item>
+			</item>
+			<item id="34">
+				<item id="id"><![CDATA[528]]></item>
+				<item id="typeid"><![CDATA[5]]></item>
+				<item id="displayorder"><![CDATA[2]]></item>
+				<item id="type"><![CDATA[smiley]]></item>
+				<item id="code"><![CDATA[[bd-爱]]]></item>
+				<item id="url"><![CDATA[40.png]]></item>
+			</item>
+			<item id="35">
+				<item id="id"><![CDATA[527]]></item>
+				<item id="typeid"><![CDATA[5]]></item>
+				<item id="displayorder"><![CDATA[2]]></item>
+				<item id="type"><![CDATA[smiley]]></item>
+				<item id="code"><![CDATA[[bd-心碎]]]></item>
+				<item id="url"><![CDATA[39.png]]></item>
+			</item>
+			<item id="36">
+				<item id="id"><![CDATA[526]]></item>
+				<item id="typeid"><![CDATA[5]]></item>
+				<item id="displayorder"><![CDATA[3]]></item>
+				<item id="type"><![CDATA[smiley]]></item>
+				<item id="code"><![CDATA[[bd-踩]]]></item>
+				<item id="url"><![CDATA[38.png]]></item>
+			</item>
+			<item id="37">
+				<item id="id"><![CDATA[525]]></item>
+				<item id="typeid"><![CDATA[5]]></item>
+				<item id="displayorder"><![CDATA[3]]></item>
+				<item id="type"><![CDATA[smiley]]></item>
+				<item id="code"><![CDATA[[bd-剪刀手]]]></item>
+				<item id="url"><![CDATA[37.png]]></item>
+			</item>
+			<item id="38">
+				<item id="id"><![CDATA[524]]></item>
+				<item id="typeid"><![CDATA[5]]></item>
+				<item id="displayorder"><![CDATA[3]]></item>
+				<item id="type"><![CDATA[smiley]]></item>
+				<item id="code"><![CDATA[[bd-赞]]]></item>
+				<item id="url"><![CDATA[36.png]]></item>
+			</item>
+			<item id="39">
+				<item id="id"><![CDATA[523]]></item>
+				<item id="typeid"><![CDATA[5]]></item>
+				<item id="displayorder"><![CDATA[3]]></item>
+				<item id="type"><![CDATA[smiley]]></item>
+				<item id="code"><![CDATA[[bd-ok]]]></item>
+				<item id="url"><![CDATA[35.png]]></item>
+			</item>
+			<item id="40">
+				<item id="id"><![CDATA[522]]></item>
+				<item id="typeid"><![CDATA[5]]></item>
+				<item id="displayorder"><![CDATA[3]]></item>
+				<item id="type"><![CDATA[smiley]]></item>
+				<item id="code"><![CDATA[[bd-666]]]></item>
+				<item id="url"><![CDATA[34.png]]></item>
+			</item>
+			<item id="41">
+				<item id="id"><![CDATA[537]]></item>
+				<item id="typeid"><![CDATA[5]]></item>
+				<item id="displayorder"><![CDATA[4]]></item>
+				<item id="type"><![CDATA[smiley]]></item>
+				<item id="code"><![CDATA[[bd-金币]]]></item>
+				<item id="url"><![CDATA[50.png]]></item>
+			</item>
+			<item id="42">
+				<item id="id"><![CDATA[536]]></item>
+				<item id="typeid"><![CDATA[5]]></item>
+				<item id="displayorder"><![CDATA[4]]></item>
+				<item id="type"><![CDATA[smiley]]></item>
+				<item id="code"><![CDATA[[bd-晚上]]]></item>
+				<item id="url"><![CDATA[49.png]]></item>
+			</item>
+			<item id="43">
+				<item id="id"><![CDATA[534]]></item>
+				<item id="typeid"><![CDATA[5]]></item>
+				<item id="displayorder"><![CDATA[4]]></item>
+				<item id="type"><![CDATA[smiley]]></item>
+				<item id="code"><![CDATA[[bd-音乐]]]></item>
+				<item id="url"><![CDATA[47.png]]></item>
+			</item>
+			<item id="44">
+				<item id="id"><![CDATA[532]]></item>
+				<item id="typeid"><![CDATA[5]]></item>
+				<item id="displayorder"><![CDATA[4]]></item>
+				<item id="type"><![CDATA[smiley]]></item>
+				<item id="code"><![CDATA[[bd-咖啡]]]></item>
+				<item id="url"><![CDATA[45.png]]></item>
+			</item>
+			<item id="45">
+				<item id="id"><![CDATA[530]]></item>
+				<item id="typeid"><![CDATA[5]]></item>
+				<item id="displayorder"><![CDATA[4]]></item>
+				<item id="type"><![CDATA[smiley]]></item>
+				<item id="code"><![CDATA[[bd-彩虹]]]></item>
+				<item id="url"><![CDATA[43.png]]></item>
+			</item>
+			<item id="46">
+				<item id="id"><![CDATA[535]]></item>
+				<item id="typeid"><![CDATA[5]]></item>
+				<item id="displayorder"><![CDATA[4]]></item>
+				<item id="type"><![CDATA[smiley]]></item>
+				<item id="code"><![CDATA[[bd-idea]]]></item>
+				<item id="url"><![CDATA[48.png]]></item>
+			</item>
+			<item id="47">
+				<item id="id"><![CDATA[533]]></item>
+				<item id="typeid"><![CDATA[5]]></item>
+				<item id="displayorder"><![CDATA[4]]></item>
+				<item id="type"><![CDATA[smiley]]></item>
+				<item id="code"><![CDATA[[bd-礼物]]]></item>
+				<item id="url"><![CDATA[46.png]]></item>
+			</item>
+			<item id="48">
+				<item id="id"><![CDATA[531]]></item>
+				<item id="typeid"><![CDATA[5]]></item>
+				<item id="displayorder"><![CDATA[4]]></item>
+				<item id="type"><![CDATA[smiley]]></item>
+				<item id="code"><![CDATA[[bd-蛋糕]]]></item>
+				<item id="url"><![CDATA[44.png]]></item>
+			</item>
+			<item id="49">
+				<item id="id"><![CDATA[529]]></item>
+				<item id="typeid"><![CDATA[5]]></item>
+				<item id="displayorder"><![CDATA[4]]></item>
+				<item id="type"><![CDATA[smiley]]></item>
+				<item id="code"><![CDATA[[bd-太阳]]]></item>
+				<item id="url"><![CDATA[42.png]]></item>
+			</item>
+		</item>
+		<item id="version"><![CDATA[3.4]]></item>
+	</item>
+</root>

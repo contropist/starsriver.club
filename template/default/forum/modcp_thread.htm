@@ -1,0 +1,205 @@
+<script type="text/javascript" src="{$_G[setting][jspath]}forum_moderate.js?{VERHASH}"></script>
+<div class="title trans-ease">
+    <h2>{lang mod_option_subject}</h2>
+    <ul class="nav wave">
+        <li class="current"><a href="{$cpscript}?mod=modcp&action=thread&op=thread{$forcefid}" hidefocus="true">{lang mod_option_subject_forum}</a></li>
+        <li><a href="{$cpscript}?mod=modcp&action=recyclebin{$forcefid}" hidefocus="true">{lang mod_option_subject_recyclebin}</a></li>
+        <li><a href="{$cpscript}?mod=modcp&action=thread&op=post{$forcefid}" hidefocus="true">{lang mod_option_subject_delete}</a></li>
+        <li><a href="{$cpscript}?mod=modcp&action=recyclebinpost{$forcefid}" hidefocus="true">{lang mod_option_subject_recyclebinpost}</a></li>
+    </ul>
+</div>
+<ol class="panel-container">
+	<script type="text/javascript" src="{$_G[setting][jspath]}calendar.js?{VERHASH}"></script>
+    <li class="box size-10-0 no-edge">
+        <form method="post" autocomplete="off" action="{$cpscript}?mod=modcp&action=$_GET[action]&op=$op">
+            <input type="hidden" name="do" value="search">
+            <input type="hidden" name="formhash" value="{FORMHASH}">
+            <div class="panel no-edge">
+                <ol class="panel-container">
+                    <li class="box size-10-0 no-edge">
+                        <div class="input-group f">
+                            <span>{lang mod_option_selectforum}</span>
+                            <select name="fid" id="fid" change="getthreadclass();">
+                                <option value="">{lang modcp_select_forum}</option>
+                                <!--{loop $modforums[list] $id $name}-->
+                                <option value="$id" {if $id == $_G[fid]}selected{/if}>$name</option>
+                                <!--{/loop}-->
+                            </select>
+                            <span>{lang modcp_posts_type}</span>
+                            <select name="threadoption" id="threadoption">
+                                <option value="0" $threadoptionselect[0]>{lang all}</option>
+                                <option value="1" $threadoptionselect[1]>{lang thread_poll}</option>
+                                <option value="2" $threadoptionselect[2]>{lang thread_trade}</option>
+                                <option value="3" $threadoptionselect[3]>{lang thread_reward}</option>
+                                <option value="4" $threadoptionselect[4]>{lang thread_activity}</option>
+                                <option value="5" $threadoptionselect[5]>{lang thread_debate}</option>
+                                <option value="999" $threadoptionselect[999]>{lang thread_digest}</option>
+                                <option value="888" $threadoptionselect[888]>{lang thread_stick}</option>
+                            </select>
+                            <span>{lang mod_option_selectthreadclass}</span>
+                            <select class="hidden" name="typeid" id="typeid">
+                                <!--{if $threadclasslist}-->
+                                <option value="">{lang all}</option>
+                                <!--{loop $threadclasslist $threadclass}-->
+                                <option value="$threadclass[typeid]" {if $_GET['typeid'] == $threadclass[typeid]}selected{/if}>$threadclass[name]</option>
+                                <!--{/loop}-->
+                                <!--{else}-->
+                                <option value="">{lang none}</option>
+                                <!--{/if}-->
+                            </select>
+                        </div>
+                    </li>
+                    <li class="box size-5-0 no-edge">
+                        <div class="input-group f">
+                            <span>{lang modcp_views_range}</span>
+                            <input type="text" value="$result[viewsmore]" name="viewsmore"/>
+                            <span>{lang modcp_posts_to}</span>
+                            <input type="text" value="$result[viewsless]" name="viewsless"/>
+                        </div>
+                    </li>
+                    <li class="box size-5-0 no-edge">
+                        <div class="input-group f">
+                            <span>{lang modcp_subject_keyword}</span>
+                            <input type="text" value="$result[keywords]" name="keywords"/>
+                            <span>{lang modcp_posts_author}</span>
+                            <input type="text" value="$result[users]" name="users"/>
+                        </div>
+                    </li>
+                    <li class="box size-5-0 no-edge">
+                        <div class="input-group f">
+                            <span>{lang modcp_reply_range}</span>
+                            <input type="text" value="$result[repliesmore]" name="repliesmore"/>
+                            <span>{lang modcp_posts_to}</span>
+                            <input type="text" value="$result[repliesless]" name="repliesless"/>
+                        </div>
+                    </li>
+                    <li class="box size-5-0 no-edge">
+                        <div class="input-group f">
+                            <span>{lang modcp_no_reply_range}</span>
+                            <input type="text" value="$result[noreplydays]" name="noreplydays"/>
+                        </div>
+                    </li>
+                    <li class="box size-5-0 no-edge">
+                        <div class="input-group f">
+                            <span>{lang modcp_dateline_range}</span>
+                            <input type="text" value="$result[starttime]" name="starttime" onclick="showcalendar(event, this);"/>
+                            <span>{lang modcp_posts_to}</span>
+                            <input type="text" value="$result[endtime]" name="endtime" onclick="showcalendar(event, this)"/>
+                        </div>
+                    </li>
+                    <li class="box size-5-0 no-edge">
+                        <div class="input-group f">
+                            <i class="input-group-btn"><button value="true" id="searchsubmit" name="submit" type="submit">{lang submit}</button></i>
+                        </div>
+                    </li>
+                </ol>
+            </div>
+        </form>
+    </li>
+	<!--{if $_G[fid]}-->
+        <li class="box size-10-0 no-edge" id="threadlist">
+            <!--{if $postlist}-->
+            <p class="alert hi-info">{lang modcp_forum} <a href="forum.php?mod=forumdisplay&fid=$_G[fid]" target="_blank">$_G['forum'][name]</a>, {lang modcp_thread_search_msg}</p>
+            <form method="post" autocomplete="off" name="moderate" id="moderate" action="forum.php?mod=topicadmin&action=moderate&fid=$_G[fid]&infloat=yes&nopost=yes">
+				<input type="hidden" name="formhash" value="{FORMHASH}" />
+				<input type="hidden" name="frommodcp" value="{if $op == 'thread'}1{else}2{/if}" />
+				<table class="wb rb dc ac">
+					<thead>
+                        <tr>
+							<td width="300">{lang title}</td>
+							<td width="160">{lang author}</td>
+							<td width="160">{lang time}</td>
+							<td width="150">{lang replies}</td>
+							<td width="160">{lang lastpost}</td>
+                            <td width="50">#</td>
+						</tr>
+                    </thead>
+                    <tbody>
+					<!--{loop $postlist $thread}-->
+						<tr id="$thread[id]">
+							<td style="text-align: left">
+								<!--{if $thread[folder] == 'lock'}-->
+                                    <span class="pag px4-radius thread-locked">{lang modmenu_switch_off}</span>
+								<!--{elseif $thread['special'] == 1}-->
+                                    <span class="pag px4-radius thread-poll">{lang thread_poll}</span>
+								<!--{elseif $thread['special'] == 2}-->
+                                    <span class="pag px4-radius thread-trade">{lang thread_trade}</span>
+								<!--{elseif $thread['special'] == 3}-->
+                                    <span class="pag px4-radius thread-reward">{lang thread_reward}</span>
+								<!--{elseif $thread['special'] == 4}-->
+                                    <span class="pag px4-radius thread-active">{lang thread_activity}</span>
+								<!--{elseif $thread['special'] == 5}-->
+                                    <span class="pag px4-radius thread-debate">{lang thread_debate}</span>
+								<!--{elseif in_array($thread['displayorder'], array(1, 2, 3, 4))}-->
+                                    <span class="pag px4-radius thread-hot$_G[setting][threadsticky][3-$thread[displayorder]]" title="$_G[setting][threadsticky][3-$thread[displayorder]]{lang level}">{lang thread_hot}</span>
+								<!--{else}-->
+                                    <span class="pag px4-radius thread-common">{lang common}</span>
+								<!--{/if}-->
+
+								<a style="word-break: keep-all" id="thread_$thread[tid]" href="forum.php?mod=viewthread&tid=$thread[tid]" target="_blank" $thread['highlight']>$thread[subject]</a>
+								<!--{if $_G['setting']['threadhidethreshold'] && $thread['hidden'] >= $_G['setting']['threadhidethreshold']}--><span>{lang hidden}</span>&nbsp;<!--{/if}-->
+								<!--{if $thread['readperm']}--> - [{lang readperm} <span>$thread[readperm]</span>]<!--{/if}-->
+								<!--{if $thread['price'] > 0}-->
+									<!--{if $thread['special'] == '3'}-->
+										- <span>[{lang thread_reward} <span>$thread[price]</span> {$_G[setting][extcredits][$_G['setting']['creditstransextra'][2]][unit]}{$_G[setting][extcredits][$_G['setting']['creditstransextra'][2]][title]}]</span>
+									<!--{else}-->
+										- [{lang price} <span>$thread[price]</span> {$_G[setting][extcredits][$_G['setting']['creditstransextra'][1]][unit]}{$_G[setting][extcredits][$_G['setting']['creditstransextra'][1]][title]}]
+									<!--{/if}-->
+								<!--{elseif $thread['special'] == '3' && $thread['price'] < 0}-->
+										- <span>[{lang reward_solved}]</span>
+								<!--{/if}-->
+
+								<!--{if $thread['displayorder'] == 1}-->
+									- <span>{lang modcp_threadstick_1}</span>
+								<!--{elseif $thread['displayorder'] == 2}-->
+									- <span>{lang modcp_threadstick_2}</span>
+								<!--{elseif $thread['displayorder'] == 3}-->
+									- <span>{lang modcp_threadstick_3}</span>
+								<!--{/if}-->
+
+								<!--{if $thread['attachment'] == 2}-->
+									<img class="svgicon small" src="{IMGURL}/common/filetype/image.svg" alt="{lang attach_img}"/>
+								<!--{elseif $thread['attachment'] == 1}-->
+									<img class="svgicon small" src="{IMGURL}/common/mark/common.svg" alt="{lang attachment}"/>
+								<!--{/if}-->
+							</td>
+							<td>
+                                <!--{if $thread['authorid'] && $thread['author']}-->
+                                    <a href="home.php?mod=space&uid=$thread[authorid]" target="_blank">$thread[author]</a>
+                                <!--{else}-->
+                                    <a href="home.php?mod=space&uid=$thread[authorid]" target="_blank">{lang anonymous}</a>
+                                <!--{/if}-->
+							</td>
+                            <td>$thread[dateline]</td>
+							<td>$thread[replies]/$thread[views]</td>
+							<td>
+								<!--{if $thread['lastposter']}--><a target="_blank" href="home.php?mod=space&username=$thread[lastposterenc]" title="$thread[lastpost]">$thread[lastposter]</a>
+                                <!--{else}--><a title="$thread[lastpost]">{lang anonymous}</a><!--{/if}-->
+							</td>
+                            <td class="ccbox admin">
+                                <!--{if $thread['displayorder'] <= 3 || $_G['adminid'] == 1}-->
+                                <input onclick="tmodclick(this)" id="modrate_thread_$thread[tid]" type="checkbox" name="moderate[]" value="$thread[tid]" />
+                                <label for="modrate_thread_$thread[tid]"></label>
+                                <!--{else}-->
+                                <input id="modrate_thread_$thread[tid]"  type="checkbox" disabled="disabled" />
+                                <label for="modrate_thread_$thread[tid]"></label>
+                                <!--{/if}-->
+                            </td>
+						</tr>
+					<!--{/loop}-->
+                    </tbody>
+				</table>
+				<!--{if $multipage}--><div class="pg type-3">$multipage</div><!--{/if}-->
+				<!--{template forum/topicadmin_modlayer}-->
+			</form>
+            <!--{/if}-->
+		</li>
+	<!--{else}-->
+		<li class="box size-10-0 alert hi-info">{lang modcp_forum_select_msg}</li>
+	<!--{/if}-->
+</ol>
+<script type="text/javascript">
+	simulateSelect('fid');
+	simulateSelect('typeid');
+	simulateSelect('threadoption');
+</script>

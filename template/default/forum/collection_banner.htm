@@ -1,0 +1,116 @@
+<div class="banner">
+    <div class="back-banner blackcover">
+        <img class="back blur-lg" id="covimg" src="{if $_G['collection']['cover']}{$_G['setting']['attachurl']}/collection/{$_G['collection']['cover']}{else}{IMGURL}/common/no-img/no-img.svg{/if}">
+    </div>
+    <div class="container collection-info">
+        <div class="cover img-center">
+            <img src="{if $_G['collection']['cover']}{$_G['setting']['attachurl']}/collection/{$_G['collection']['cover']}{else}{IMGURL}/common/no-img/no-img.svg{/if}">
+        </div>
+        <div class="detail">
+            <script>
+                function copy(n,h) {rt = '';for(var i = 0; i < n; i++){rt += h;}return rt;}
+                function ratestars(num) {
+                    var s1 = Math.floor(num);
+                    var s2 = Math.floor(num) - num !== 0 ? 1 : 0;
+                    var s3 = 5 - s1 - s2;
+                    return copy(s1,'<i class="awe-star light"></i>') + copy(s2,'<i class="awe-star-half-full light"></i>') + copy(s3,'<i class="awe-star-o"></i>');
+                }
+            </script>
+            <div class="line name">
+                {$_G['collection']['name']}
+                <ul class="pags">
+                    <!--{if $_G['collection']['arraykeyword']}-->
+                        <!--{loop $_G['collection']['arraykeyword'] $unique_keyword}-->
+                            <li><a href="search.php?mod={if $_G['setting']['search']['collection']['status']}collection{else}forum{/if}&srchtxt={echo rawurlencode($unique_keyword)}&formhash={FORMHASH}&searchsubmit=true&source=collectionsearch" target="_blank">$unique_keyword</a></li>
+                        <!--{/loop}-->
+                    <!--{/if}-->
+                </ul>
+            </div>
+            <div class="line girds">
+                <span>{lang collection_threadnum}<i>{$_G['collection']['threadnum']}</i></span><i class="spline"></i>
+                <span>{lang collection_commentnum}<i>{$_G['collection']['commentnum']}</i></span><i class="spline"></i>
+                <span>{lang collection_follow}<i id="follownum">{$_G['collection']['follownum']}</i></span>
+                <div class="rate r">
+                    <!--{if $_G['collection']['ratenum']}-->
+                        <i class="num">$avgrate</i>
+                        <i class="star" id="rate_stars"></i>
+                        <p class="count">{lang collection_totalrates}</p>
+                        <script>$('rate_stars').innerHTML = ratestars($avgrate);</script>
+                    <!--{else}-->
+                        <i class="star">{lang collection_norate}</i>
+                        <p class="count">{lang collection_norate_toolow}</p>
+                    <!--{/if}-->
+                </div>
+            </div>
+            <div class="line date">{lang collection_lastupdate}：<!--{date($_G['collection']['lastupdate'],'u')}--></div>
+            <div class="line desc">{lang collection_desc}：{$_G['collection']['desc']}</div>
+            <div class="line func">
+                <div class="user">
+                    <!--{if $isteamworkers}-->
+                        <a href="forum.php?mod=collection&action=edit&op=removeworker&ctid={$_G['collection']['ctid']}&uid={$_G['uid']}&formhash={FORMHASH}"  onclick="showDialog('{lang collection_exit_team_confirm}','confirm','','window.location=\''+this.href+'\';');return false;"><i class="mt-power-settings-new"></i>{lang collection_exit_team}</a>
+                    <!--{/if}-->
+                    <!--{if $_G['uid']!=$_G['collection']['uid']}-->
+                        <a data-type="flex-btn" id="k_recommened" onclick="showWindow(this.id, 'forum.php?mod=collection&action=comment&op=recommend&ctid=$ctid', 'get', 0);"><i class="mt-share"></i>{lang collection_recommend}</a>
+                    <!--{/if}-->
+                    <!--{if $_G['group']['allowfollowcollection'] && $_G['collection']['uid'] != $_G['uid']}-->
+                        <!--{if !$collectionfollowdata['ctid']}-->
+                            <a data-type="flex-btn" id="followlink" onclick="ajaxget(followcollectionurl());doane(event);"><i class="mt-favorite"></i>{lang collection_follow}</a>
+                        <!--{else}-->
+                            <a class="active" data-type="flex-btn" id="followlink" onclick="ajaxget(followcollectionurl());doane(event);"><i class="mt-favorite"></i>{lang collection_unfollow}</a>
+                        <!--{/if}-->
+                    <!--{/if}-->
+                </div>
+                <!--{if $permission}-->
+                <div class="admin">
+                    <a class="invite mt-folder_shared" href="forum.php?mod=collection&action=edit&op=invite&ctid=$ctid" id="k_invite" onclick="showWindow(this.id, this.href, 'get', 0);"></a>
+                    <a class="edit mt-mode_edit" href="forum.php?mod=collection&action=edit&op=edit&ctid={$_G['collection']['ctid']}" onclick="showWindow('showMsgBox', this.href, 'get', 0)" ></a>
+                    <a class="delete mt-delete_forever" href="forum.php?mod=collection&action=edit&op=remove&ctid={$_G['collection']['ctid']}&formhash={FORMHASH}" onclick="showDialog('{lang collection_delete_confirm}','confirm','','window.location=\''+this.href+'\';');return false;"></a>
+                </div>
+                <!--{/if}-->
+            </div>
+        </div>
+    </div>
+    <!--{if $_G['group']['allowcommentcollection']}-->
+	<div class="dialog fade" id="collection_rater" data-type="modal" data-target="#collection_rater" data-action="hide">
+		<form class="dialog-modal collection-rate" action="forum.php?mod=collection&action=comment&ctid={$_G['collection']['ctid']}" method="POST" onsubmit="$('btnCommentSubmit').disabled=true;ajaxpost(this.id, 'ajaxreturn');" id="form_addComment" name="form_addComment">
+			<input type="hidden" name="inajax" value="1">
+			<input type="hidden" name="ratescore" id="ratescore"/>
+			<input type="hidden" name="handlekey" value="k_addComment">
+			<div class="dialog-header">
+				<i class="dialog-close" data-type="modal" data-target="#collection_rater" data-action="hide">×</i>
+			</div>
+			<div class="dialog-body">
+				<div class="dialog-content">
+					<img class="cover" src="{if $_G['collection']['cover']}{$_G['setting']['attachurl']}/collection/{$_G['collection']['cover']}{else}{IMGURL}/common/no-img/no-img.svg{/if}">
+					<span class="name ellipsis">$_G['collection']['name']</span>
+                    <!--{if !$memberrate}-->
+						<span class="log">{lang collection_ratecollection}</span>
+						<span class="stars" id="rater"></span>
+						<script>starrate('#rater','#ratescore');</script>
+                    <!--{else}-->
+						<span class="log">{lang collection_rated}</span>
+						<span class="stars" id="rater_rated"></span>
+						<script>$('rater_rated').innerHTML = ratestars($memberrate)</script>
+                    <!--{/if}-->
+					<textarea name="message" placeholder=""></textarea>
+				</div>
+			</div>
+			<div class="dialog-footer">
+				<button class="submit" type="submit" id="btnCommentSubmit">{lang collection_comment_submit}</button>
+				<span id='ajaxreturn' style='display:none;'></span>
+			</div>
+		</form>
+	</div>
+    <!--{/if}-->
+</div>
+<div class="collection-nav">
+    <ul class="container">
+        <li {if !$_GET['op']}class="active"{/if}><a href="forum.php?mod=collection&action=view&ctid={$_G['collection']['ctid']}">{lang collection}</a></li>
+        <li {if $_GET['op'] == 'comment'}class="active"{/if}><a href="forum.php?mod=collection&action=view&op=comment&ctid={$_G['collection']['ctid']}">{lang collection_commentlist}</a></li>
+        <li {if $_GET['op'] == 'followers'}class="active"{/if}><a href="forum.php?mod=collection&action=view&op=followers&ctid={$_G['collection']['ctid']}">{lang collection_followlist}</a></li>
+        <!--{if $_G['group']['allowcommentcollection']}-->
+        <li class="rater-triggle glass" data-type="modal" data-target="#collection_rater" data-action="show"><i class="ft-edit"></i>{lang collection_torate}</li>
+        <!--{/if}-->
+    </ul>
+
+</div>

@@ -1,0 +1,64 @@
+<!--{template forum/collection_header}-->
+<div class="plate layout-0 app-collection">
+	<section>
+		<!--{if $followers}-->
+		<div class="vessel panel">
+			<ul class="user-list panel-container">
+				<!--{loop $followers $follower}-->
+				<li class="box size-1-2">
+					<a class="avatar" href="home.php?mod=space&uid=$follower[uid]"><!--{avatar($follower[uid],small)}--></a>
+					<a class="name" href="home.php?mod=space&uid=$follower[uid]">$follower[username]</a>
+				</li>
+				<!--{/loop}-->
+			</ul>
+		</div>
+		<!--{else}-->
+		<div class="vessel">
+			<p class="global_nothing">{lang no_content}</p>
+		</div>
+		<!--{/if}-->
+		<!--{if $multipage}-->
+		<div class="vessel">
+			$multipage
+		</div>
+		<!--{/if}-->
+	</section>
+	<script type="text/javascript" src="{$_G[setting][jspath]}home_friendselector.js?{VERHASH}"></script>
+	<script type="text/javascript">
+		var fs;
+        var clearlist = 0;
+        var followstatus = {if $collectionfollowdata['ctid']}1{else}0{/if};
+            var followlink = $("followlink");
+            var follownum = $("follownum");
+
+            function succeedhandle_addComment(url, msg, commentdata) {
+                $("btnCommentSubmit").disabled='';
+                showDialog(msg, 'right', '', 'location.href="' + url + '"', null, null, null, null, null, null, 3);
+            }
+            function errorhandle_addComment(msg, commentdata) {
+                $("btnCommentSubmit").disabled='';
+                showError(msg);
+            }
+            function succeedhandle_followcollection(url, msg, collectiondata) {
+                followlink.trgClass('active');
+                if(collectiondata['status'] == 1) { //关注成功
+                    followstatus = 1;
+                    followlink.innerHTML = '<i class="mt-favorite"></i>{lang collection_unfollow}';
+                    followlink.href = followcollectionurl();
+                    follownum.innerHTML = follownum.innerHTML = parseInt(follownum.innerHTML) + 1;
+                } else if(collectiondata['status'] == 2) {
+                    followstatus = 0;
+                    followlink.innerHTML = '<i class="mt-favorite"></i>{lang collection_follow}';
+                    followlink.href = followcollectionurl();
+                    follownum.innerHTML = follownum.innerHTML = parseInt(follownum.innerHTML) - 1;
+                }
+            }
+            function errorhandle_followcollection(msg, collectiondata) {
+                showError(msg);
+            }
+            function followcollectionurl() {
+                return 'forum.php?mod=collection&action=follow&op='+(followstatus ? 'unfo': 'follow')+'&ctid={$_G['collection']['ctid']}&formhash={FORMHASH}';
+            }
+	</script>
+</div>
+<!--{template common/footer}-->

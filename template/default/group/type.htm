@@ -1,0 +1,78 @@
+<!--{template common/header}-->
+<div class="plate layout-0">
+	<section>
+		<!--[nest=nest1]--><div id="nest1" class="area"></div><!--[/nest]-->
+	</section>
+</div>
+<div class="plate layout-2-type2">
+	<section class="col-1">
+		<!--[nest=nestcontenttop]--><div id="nestcontenttop" class="area"></div><!--[/nest]-->
+		<!--{hook/index_top}-->
+		<div class="panel no-gap groups">
+			<div class="title trans-none">
+				<a class="category-name">$curtype[name]</a>
+				<!--{if $list}-->
+				<select title="{lang orderby}" onchange="location.href=this.value">
+					<option value="$url" $selectorder[default]>{lang orderby_default}</option>
+					<option value="$url&orderby=thread" $selectorder[thread]>{lang stats_main_threads_count}</option>
+					<option value="$url&orderby=membernum" $selectorder[membernum]>{lang group_member_count}</option>
+					<option value="$url&orderby=dateline" $selectorder[dateline]>{lang group_create_time}</option>
+					<option value="$url&orderby=activity" $selectorder[activity]>{lang group_activities}</option>
+				</select>
+				<!--{/if}-->
+				<!--{if $typelist}-->
+				<ul class="tags group-categorys">
+					<!--{loop $typelist $fid $type}-->
+					<li><a href="group.php?sgid=$fid">$type[name]<!--{if $type[groupnum]}--><i> ($type[groupnum])</i><!--{/if}--></a></li>
+					<!--{/loop}-->
+				</ul>
+				<!--{/if}-->
+				<a class="more" href="group.php">{lang group_total_numbers}&nbsp;<cite class="trans-none"><span>{lang return_index}<i class="ft-chevron-right"></i></span></cite></a>
+			</div>
+			<!--{if $list}-->
+				<ol class="panel-container group-list">
+					<!--{loop $list $fid $val}-->
+						<li class="box size-3-1">
+							<a href="forum.php?mod=group&fid=$fid" >
+								<img class="group-banner" src="{if $val[banner]}$val[banner]{else}{IMGURL}/common/no-img/no-group-banner.svg{/if}">
+								<div class="info">
+									<img class="group-icon trans-outback {if !$val[banner]}empty{/if}" width="48" height="48" src="{if $val[icon]}$val[icon]{else}{IMGURL}/common/no-img/no-group-avatar.svg{/if}" alt="$val[name]" />
+									<p class="name">$val[name]</p>
+									<p class="descrip">{if $val[description]}$val[description]{else}{lang group_description_no}{/if}</p>
+									<p class="date" hide>{lang group_founded_in}: $val[dateline]</p>
+									<p class="thread&member" hide>{lang group_total_members_threads}</p>
+								</div>
+							</a>
+						</li>
+					<!--{/loop}-->
+				</ol>
+				<div class="pgs">$multipage</div>
+			<!--{else}-->
+				<div class="global_nothing">{lang global_nothing}</div>
+			<!--{/if}-->
+		</div>
+		<!--{hook/index_bottom}-->
+		<!--[nest=nestcontentbottom]--><div id="nestcontentbottom" class="area"></div><!--[/nest]-->
+	</section>
+	<section class="col-2">
+		<!--{template group/group_create_btn}-->
+		<!--{template group/group_ranklist}-->
+		<div class="side-box">
+			<!--[nest=nestsidetop]--><div id="nestsidetop" class="area"></div><!--[/nest]-->
+			<!--{hook/index_side_top}-->
+		</div>
+		<div class="side-box">
+			<!--[nest=nesttopgrouptop]--><div id="nesttopgrouptop" class="area"></div><!--[/nest]-->
+			<!--{hook/index_side_bottom}-->
+		</div>
+		<div class="side-box">
+			<!--[nest=nest2]--><div id="nest2" class="area"></div><!--[/nest]-->
+		</div></section>
+</div>
+<div class="plate layout-0">
+	<section>
+		<!--[nest=nest4]--><div id="nest4" class="area"></div><!--[/nest]-->
+		<!--{ad/text/wp a_t}-->
+	</section>
+</div>
+<!--{template common/footer}-->

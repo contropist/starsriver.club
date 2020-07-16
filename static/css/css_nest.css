@@ -1,0 +1,834 @@
+/* 判断：当打开 NEST 面板时加载 */
+body {
+    display: block;
+    padding-bottom: 156px;
+}
+
+#mod_nest #controlpanel {
+    color: #000;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 101;
+    width: 100%;
+    background: #fafbfc;
+    box-shadow: inset 0 1px 5px rgba(125, 118, 118, 0.2);
+}
+
+* html #mod_nest #controlpanel {
+    position: absolute;
+}
+
+#mod_nest #controlheader {
+    margin: 0 auto;
+    line-height: 44px;
+    max-width: 1160px;
+    min-width: 980px;
+    padding:0 10px;
+}
+
+#mod_nest #controlheader p {
+    width: 440px;
+    height: 44px;
+}
+
+#mod_nest #controlheader p a {
+    float: right;
+    margin-top: 8px;
+    height: 27px;
+    line-height: 27px;
+}
+
+#mod_nest #navsave a {
+    margin-right: 2px;
+    width: 54px;
+    background: url({STATICURL}image/nest/cp-save.png) no-repeat 0 0;
+    text-indent: -9999px;
+    overflow: hidden;
+}
+
+#mod_nest #navcancel a {
+    width: 27px;
+    background: url({STATICURL}image/nest/cp-close.png) no-repeat 0 0;
+    text-indent: -9999px;
+    overflow: hidden;
+}
+
+#mod_nest #button_redo a, #button_undo a {
+    background: url({STATICURL}image/nest/cp-step.png) no-repeat 0 0;
+    text-indent: -9999px;
+    overflow: hidden;
+}
+
+#mod_nest #button_redo a {
+    margin-right: 5px;
+    width: 27px;
+    background-position: 0 -54px;
+}
+
+#mod_nest #button_redo.unusable a {
+    background-position: 0 -81px;
+    cursor: default;
+}
+
+#mod_nest #button_undo a {
+    margin-left: 10px;
+    width: 28px;
+}
+
+#mod_nest #button_undo.unusable a {
+    background-position: 0 -27px;
+    cursor: default;
+}
+
+#mod_nest #button_more {
+    margin-right: 20px;
+    width: 17px;
+    height: 27px;
+    background: url({STATICURL}image/nest/cp-more.png) no-repeat 0 0;
+    text-indent: -9999px;
+    overflow: hidden;
+}
+
+#mod_nest #preview a {
+    margin-right: 2px;
+    width: 43px;
+    background: url({STATICURL}image/nest/cp-preview.png) no-repeat 0 -27px;
+    text-indent: -9999px;
+    overflow: hidden;
+}
+
+#mod_nest #preview.unusable a {
+    background-position: 0 0;
+}
+
+#mod_nest #savecache a {
+    margin-right: 2px;
+    width: 43px;
+    background: url({STATICURL}image/nest/cp-savecache.png) no-repeat 0 -27px;
+    text-indent: -9999px;
+    overflow: hidden;
+}
+
+#mod_nest #savecache.unusable a {
+    background-position: 0 0;
+}
+
+#mod_nest #savecachemsg {
+    float: right;
+    padding-right: 5px;
+    text-align: right;
+}
+
+#mod_nest #controlnav {
+    height: 44px;
+    line-height: 35px;
+    border-bottom: 2px solid rgba(0, 0, 0, 0.04);
+    max-width: 1160px;
+    min-width: 980px;
+    margin: 0 auto;
+}
+
+#mod_nest #controlnav li {
+    float: left;
+    margin-top: 9px;
+    margin-right: 5px;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+#mod_nest #controlnav li a {
+    float: left;
+    padding: 0 15px;
+    color: #333 !important;
+}
+
+#mod_nest #controlnav li.current a {
+    background: #fff;
+    border-bottom: 2px solid rgb(35, 209, 255);
+}
+
+#mod_nest #controlnav li.current span {
+    margin-right: -8px;
+}
+
+#mod_nest #nest_backup_tip {
+    top: 32px;
+    right: 55px;
+    width: auto;
+    line-height: 1.5;
+}
+
+#mod_nest #nest_backup_tip a {
+    text-decoration: underline;
+}
+
+#mod_nest #controlcontent {
+    margin: 0 auto;
+    padding: 10px;
+    height: 90px;
+    border-width: 0 1px;
+    overflow: hidden;
+    max-width: 1160px;
+    min-width: 980px;
+}
+
+#mod_nest #controlcontent li {
+    float: left;
+    margin-right: 4px;
+}
+
+#mod_nest #controlcontent li a, 
+#mod_nest #controlcontent li label {
+    float: left;
+    width: 90px;
+    height: 90px;
+    text-align: center;
+    cursor: pointer;
+}
+
+#mod_nest #controlcontent li a {
+    color: #333 !important;
+}
+#mod_nest #controlcontent li a img{
+    -webkit-box-shadow: 2px 2px 3px rgba(0,0,0,.1);
+    -moz-box-shadow: 2px 2px 3px rgba(0,0,0,.1);
+    box-shadow: 2px 2px 3px rgba(0,0,0,.1);
+}
+
+#mod_nest #controlcontent li a:hover, 
+#mod_nest #controlcontent li label.hover {
+    text-decoration: none;
+    background: rgba(0,0,0,.1);
+}
+
+#mod_nest #controlcontent li img, 
+#mod_nest #controlcontent li label span {
+    display: block;
+    margin: 7px auto 0;
+    width: 80px;
+    height: 60px;
+    text-align: center;
+    -webkit-border-radius:0;
+    -moz-border-radius:0;
+    border-radius:0;
+}
+
+#mod_nest #controlcontent li span {
+    background: url({STATICURL}image/nest/cp-module-type.png) no-repeat 0 0;
+}
+
+#mod_nest #controlcontent li.module-html span {
+    background-position: -80px -180px;
+}
+
+#mod_nest #controlcontent li.module-thread span {
+    background-position: -80px 0;
+}
+
+#mod_nest #controlcontent li.module-forum span {
+    background-position: 0 -180px;
+}
+
+#mod_nest #controlcontent li.module-member span {
+    background-position: 0 -120px;
+}
+
+#mod_nest #controlcontent li.module-article span {
+    background-position: -80px -120px;
+}
+
+#mod_nest #controlcontent li.module-attachment span {
+    background-position: 0 -240px;
+}
+
+#mod_nest #controlcontent li.module-blog span {
+    background-position: 0 -60px;
+}
+
+#mod_nest #controlcontent li.module-doing span {
+    background-position: -80px -60px;
+}
+
+#mod_nest #contentblockclass ul li {
+    float: none;
+    margin: 0;
+}
+
+#mod_nest #contentblockclass ol {
+    float: left;
+    overflow: hidden;
+    padding-left: 45px;
+    height: 30px;
+    background: url({STATICURL}image/nest/module-html.png) no-repeat 5px 0;
+}
+
+#mod_nest #contentblockclass ol li {
+    float: left;
+    margin-right: 2px;
+}
+
+#mod_nest #contentblockclass li.module-html ol {
+    border: none;
+    background-image: url({STATICURL}image/nest/module-html.png);
+}
+
+#mod_nest #contentblockclass li.module-forum ol {
+    background-image: url({STATICURL}image/nest/module-forum.png);
+}
+
+#mod_nest #contentblockclass li.module-space ol {
+    background-image: url({STATICURL}image/nest/module-space.png);
+}
+
+#mod_nest #contentblockclass li.module-group ol {
+    background-image: url({STATICURL}image/nest/module-group.png);
+}
+
+#mod_nest #contentblockclass li.module-portal ol {
+    background-image: url({STATICURL}image/nest/module-article.png);
+}
+
+#mod_nest #contentblockclass li.module-member ol {
+    background-image: url({STATICURL}image/nest/module-member.png);
+}
+
+#mod_nest #contentblockclass ol label {
+    margin-top: 3px;
+    width: 60px;
+    height: 24px;
+    border: 1px dotted #B6C7EC;
+    line-height: 24px;
+    overflow: hidden;
+}
+
+#mod_nest #contentblockclass ol label.hover {
+    border-style: solid;
+    background: none;
+}
+
+#mod_nest #cpfooter {
+    padding: 0 10px 10px;
+    border-bottom: 1px solid #FFF;
+}
+
+#mod_nest #cpfooter td {
+    height: 6px;
+    background: #FFF;
+    line-height: 0;
+    overflow: hidden;
+}
+
+#mod_nest #cpfooter td.l {
+    width: 6px;
+    background: url({STATICURL}image/nest/cp-nav-corner-bl.png) no-repeat 0 0;
+}
+
+#mod_nest #cpfooter td.c {
+    height: 5px;
+    border-bottom: 1px solid #CCBDCC;
+}
+
+#mod_nest #cpfooter td.r {
+    width: 6px;
+    background: url({STATICURL}image/nest/cp-nav-corner-br.png) no-repeat 0 0;
+}
+
+/* NESTIN 部分 */
+#mod_nest dl.nest dt {
+    margin-top: -10px;
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #CCC;
+    line-height: 26px;
+}
+
+#mod_nest dl.nest dt a {
+    color: #06C !important;
+    text-decoration: underline;
+}
+
+#mod_nest dl.nest dt a.activity {
+    color: #333 !important;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+#mod_nest dl.nest dl {
+    clear: both;
+    padding: 0 10px;
+}
+
+#mod_nest dl.nest dl dt {
+    float: left;
+    margin: 0;
+    padding: 0;
+    width: 5em;
+    border: none;
+}
+
+#mod_nest #positiontable td {
+    width: 12px;
+    height: 12px;
+    border: 2px solid #FFF;
+    background: #EEE;
+    line-height: 0;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+#mod_nest #positiontable td.red {
+    background-color: red;
+}
+
+#mod_nest .color_nest {
+    width: 310px;
+    float: left;
+    overflow: visible;
+}
+
+#mod_nest .color_nest .span {
+    float: left;
+    display: inline;
+    line-height: 24px;
+}
+
+#mod_nest #controlcontent .nest li a {
+    width: 60px;
+    height: 60px;
+}
+
+#mod_nest #controlcontent .nest li a:hover {
+    background: none;
+}
+
+#mod_nest #controlcontent li.thumb img {
+    margin: 0;
+    width: 60px;
+    height: 60px;
+}
+
+#nestimg_prev div *, #nestimg_next div * {
+    display: none;
+}
+
+#mod_nest dl.nest .pg {
+    float: left;
+}
+
+#mod_nest #nestimg_prev .prev, #nestimg_next .next {
+    display: block;
+    padding: 0 !important;
+    width: 20px;
+    height: 60px;
+    border: 1px solid #EEE;
+    text-indent: -9999px;
+}
+
+#mod_nest #nestimg_prev .prev {
+    margin-right: 4px;
+}
+
+#mod_nest #nestimg_next .prev {
+    background: url({STATICURL}image/common/arw_l.gif) no-repeat 50% 50%;
+}
+
+#mod_nest #nestimg_next .next {
+    margin: 0;
+    background: url({STATICURL}image/common/arw_r.gif) no-repeat 50% 50%;
+}
+
+/* 原CSS */
+#mod_nest #outerbox {
+    width: 970px;
+    margin: auto;
+}
+
+#mod_nest .float_left {
+    margin: 0 0 0 34px;
+}
+
+#mod_nest .float_center {
+    margin: auto;
+}
+
+#mod_nest #header, 
+#mod_nest #wrap, 
+#mod_nest #footer, 
+#mod_nest .wrap {
+    margin: 0 auto;
+}
+
+#mod_nest #wrap {
+    min-height: 320px;
+}
+
+#mod_nest #header {
+    margin-top: 34px;
+    position: relative;
+    height: 150px;
+    text-align: center;
+    line-height: 100px;
+    z-index: 10;
+}
+
+#mod_nest #footer {
+    height: 100px;
+    line-height: 100px;
+    width: 970px;
+    border: 0;
+}
+
+#mod_nest #widgets {
+    position: relative;
+    z-index: 20;
+    overflow: visible;
+}
+
+#mod_nest .float_item {
+    position: absolute;
+    z-index: 25;
+}
+
+#mod_nest .op {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+}
+
+#mod_nest .op a {
+    display: inline;
+    margin-left: 2px;
+    line-height: 22px;
+}
+
+#mod_nest #space_page {
+    width: 100%;
+    overflow: hidden;
+}
+
+#mod_nest #left {
+    float: left;
+    margin: 0 15px 0 0;
+    width: 190px;
+    overflow: hidden;
+    border: 0 solid #09F;
+}
+
+#mod_nest #center {
+    float: left;
+    margin: 0 15px 0 0;
+    width: 560px;
+    border: 0 solid #CCC;
+}
+
+#mod_nest #right {
+    float: left;
+    width: 180px;
+    border: 0 solid #F9F;
+}
+
+.move-span {
+    margin: 1px;
+}
+
+.area {
+    min-height: 48px;
+    border: 1px solid#f0f0f0;
+    box-sizing: border-box;
+    background-color: #fff;
+    background-image: linear-gradient(45deg,#f0f0f0 25%,transparent 0,transparent 75%,#f0f0f0 0),linear-gradient(45deg,#f0f0f0 25%,transparent 0,transparent 75%,#f0f0f0 0) !important;
+    background-size: 20px 20px;
+    background-position: 0 0,10px 10px;
+	margin-bottom:10px;
+}
+
+body#space .area {
+    padding: 10px 0;
+    border: none;
+    background: transparent;
+}
+
+.frame, .frame-tab {
+    margin: 5px 0;
+    padding-top: 5px;
+    border: 1px dashed #09F;
+    background: #FFF;
+}
+
+#space .frame {
+    background-color: transparent;
+}
+
+.frame-tab {
+    border-color: #FF8500;
+}
+
+.frame-tab .title .titletext {
+    float: left;
+    margin: 0 2px;
+}
+
+body#space .frame, body#space .frame-tab {
+    padding: 0;
+}
+
+.frame-tab .title ul li {
+    cursor: pointer;
+}
+
+.frame-tab .tabcontent {
+    width: 98%;
+    border: 1px solid #09f;
+    margin: 3px;
+    float: left;
+}
+
+.tabactivity {
+    background: #FFF;
+}
+
+/*.column,.titletext { float:left;}*/
+.title .tmpbox {
+    float: left;
+}
+
+.frame-1-1, .frame-1-1-1, .frame-1-2, .frame-2-1, .frame-1-3, .frame-3-1 {
+    background-image: url({STATICURL}image/nest/vline.png);
+    background-repeat: repeat-y;
+}
+
+.frame-1-1, .frame-1-1-1 {
+    background-position: 50% 0;
+}
+
+.frame-1-1-1 {
+    background-image: url({STATICURL}image/nest/vline2.png);
+}
+
+.frame-1-2 {
+    background-position: 33.3% 0;
+}
+
+.frame-2-1 {
+    background-position: 66.6% 0;
+}
+
+.frame-1-3 {
+    background-position: 24.9% 0;
+}
+
+.frame-3-1 {
+    background-position: 74.9% 0;
+}
+
+.block {
+    margin: 0 0 5px;
+    padding: 5px;
+    border: 0 solid #CCC;
+    background: #FFF;
+}
+
+#space .block {
+    background-color: transparent;
+}
+
+.block .blocktitle {
+    height: 26px;
+    line-height: 26px;
+}
+
+.block .blockname {
+    font-weight: 700;
+    margin-left: 5px;
+    float: left;
+}
+
+.block .blockedit {
+    margin-right: 5px;
+    float: right;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.block .dxb_bc {
+    overflow: hidden;
+}
+
+body#space .block {
+    margin: 0 2px 5px;
+    border: 1px dashed #09F;
+}
+
+.tab-title {
+    background: #FFFAD2 !important;
+}
+
+.frame-tab .title .move-span .blocktitle {
+    background: #FFFAD2;
+}
+
+.moving {
+    background: #4ef;
+    position: absolute;
+}
+
+.tmpbox {
+    margin: 4px 0;
+    border: 2px dashed #aaa;
+    background: #FFF;
+}
+
+.temp {
+    height: 0;
+    border: 0;
+}
+
+.hide {
+    display: none
+}
+
+.left {
+    float: left;
+}
+
+.right {
+    float: right;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+.m_left_40 {
+    margin-left: 40px;
+}
+
+.current {
+    background: #FFF;
+}
+
+.activity {
+    background: #FFF;
+}
+
+#currentlayout {
+    color: #F04;
+}
+
+.td_right {
+    float: left;
+    display: block;
+    line-height: 22px;
+}
+
+.rb {
+    border: 2px solid red;
+}
+
+#contentframe li a, #contentblockclass li label {
+    cursor: move;
+}
+
+/***原CSS***/
+
+
+/**space**/
+#controlcontent .selector li a {
+    margin: 5px 10px 0 0;
+    padding-left: 30px;
+    width: 60px;
+    height: 30px;
+    line-height: 30px;
+    background: url({STATICURL}image/nest/cp-item-mini.png) no-repeat 0 0;
+    text-align: left;
+    cursor: pointer;
+}
+
+#controlcontent .selector li a:hover {
+    background: url({STATICURL}image/nest/cp-item-mini.png) no-repeat 0 -30px;
+}
+
+#controlcontent .selector li.activity a, #controlcontent .selector li.activity a:hover {
+    background: url({STATICURL}image/nest/cp-item-mini.png) no-repeat 0 100%;
+}
+
+#borderul label {
+    margin-right: 3px;
+}
+
+.borderul .bordera, .borderul label {
+    display: none;
+}
+
+.borderul label.y {
+    display: inline;
+}
+
+/* 弹窗 by Pony */
+.nestwin .px {
+    vertical-align: middle;
+}
+
+.nestwin td {
+    padding: 2px 0;
+}
+
+.nestwin .tfm caption, .nestwin .tfm th, .nestwin .tfm td {
+    padding: 5px 2px;
+}
+
+/* 个人导航小样式 */
+.mininv {
+    width: 450px;
+    height: 30px;
+    border: 1px dotted #09F;
+}
+
+/* 个人空间和网站nest共用的部分样式 */
+.hide {
+    display: none;
+}
+
+.frame, .tab, .block {
+    position: relative;
+    zoom: 1;
+    min-height: 20px;
+}
+
+.edit {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 69;
+    padding: 0 5px;
+    background: red;
+    line-height: 26px;
+    color: #FFF;
+    cursor: pointer;
+}
+
+.block .edit {
+    background: #369;
+}
+
+.edit-menu {
+    position: absolute;
+    z-index: 80;
+    border-style: solid;
+    border-width: 0 1px 1px;
+    border-color: #DDD #999 #999 #CCC;
+    background: #FFF;
+}
+
+.mitem {
+    padding: 4px 4px 4px 14px;
+    width: 36px;
+    border-top: 1px solid #DDD;
+    cursor: pointer;
+}
+
+.mitem:hover {
+    background: #F2F2F2;
+    color: #06C;
+}

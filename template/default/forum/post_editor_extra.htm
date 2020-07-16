@@ -1,0 +1,57 @@
+<div class="subject-menu">
+	<!--{if $sortid}-->
+		<input type="hidden" name="sortid" value="$sortid" />
+	<!--{/if}-->
+
+	<!--{if $isfirstpost && !empty($_G['forum'][threadtypes][types])}-->
+		<!--{if $_G['forum']['ismoderator'] || empty($_G['forum']['threadtypes']['moderators'][$thread[typeid]])}-->
+			<select class="hidden" name="typeid" id="typeid">
+				<option value="0">{lang select_thread_catgory}</option>
+				<!--{loop $_G['forum'][threadtypes][types] $typeid $name}-->
+					<!--{if empty($_G['forum']['threadtypes']['moderators'][$typeid]) || $_G['forum']['ismoderator']}-->
+					<option value="$typeid"{if $thread['typeid'] == $typeid || $_GET['typeid'] == $typeid} selected="selected"{/if}><!--{echo strip_tags($name);}--></option>
+					<!--{/if}-->
+				<!--{/loop}-->
+			</select>
+			<!--{else}-->
+			[<!--{echo strip_tags($_G['forum']['threadtypes']['types'][$thread[typeid]]);}-->]
+		<!--{/if}-->
+	<!--{/if}-->
+
+	<!--{if $_GET[action] == 'reply' && !empty($_GET['addtrade']) || $_GET[action] == 'edit' && $thread['special'] == 2 && !$postinfo['first']}-->
+		<input class="subject" name="subject" type="hidden" placeholder="{lang input_max}" />
+	<!--{else}-->
+		<!--{if $_GET[action] != 'reply'}-->
+			<input class="subject" name="subject" id="subject" value="$postinfo[subject]" placeholder="{lang input_max}" onkeyup="strLenCalc(this, 'checklen', 80);"/>
+		<!--{else}-->
+			<div><span>RE:</span> $thread[subject]</div>
+			<span id="subjectbox" style="display:none"><input type="text" name="subject" id="subject" value="" onkeyup="strLenCalc(this, 'checklen', 80);"/></span>
+		<!--{/if}-->
+	<!--{/if}-->
+</div>
+<!--{if !$isfirstpost && $thread[special] == 5 && empty($firststand) && $_GET[action] != 'edit'}-->
+	<select name="stand" id="stand">
+		<option value="" selected>{lang debate_viewpoint}</option>
+		<option value="0">{lang debate_neutral}</option>
+		<option value="1"{if $stand == 1} {/if}>{lang debate_square}</option>
+		<option value="2"{if $stand == 2} {/if}>{lang debate_opponent}</option>
+	</select>
+<!--{/if}-->
+    <!--{if $showthreadsorts}-->
+        <div class="subject-det">
+            <!--{template forum/post_sortoption}-->
+        </div>
+    <!--{elseif $adveditor}-->
+        <div class="subject-det">
+            <!--{if $special == 1}--><!--{template forum/post_poll}-->
+            <!--{elseif $special == 2 && ($_GET[action] != 'edit' || ($_GET[action] == 'edit' && ($thread['authorid'] == $_G['uid'] && $_G['group']['allowposttrade'] || $_G['group']['allowedittrade'])))}--><!--{template forum/post_trade}-->
+            <!--{elseif $special == 3}--><!--{template forum/post_reward}-->
+            <!--{elseif $special == 4}--><!--{template forum/post_activity}-->
+            <!--{elseif $special == 5}--><!--{template forum/post_debate}-->
+            <!--{elseif $specialextra}--><div class="specialpost s_clear">$threadplughtml</div>
+            <!--{/if}-->
+        </div>
+    <!--{/if}-->
+<!--{if $_GET[action] == 'reply' && $quotemessage}-->
+	<div class="pbt cl">$quotemessage</div>
+<!--{/if}-->

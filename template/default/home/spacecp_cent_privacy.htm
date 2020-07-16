@@ -1,0 +1,236 @@
+<!--{template home/spacecp_cent_header}-->
+	<div class="plate layout-2-type3 app-profile cloud">
+		<section class="col-1"><!--{template home/spacecp_cent_vnav}--></section>
+		<section class="col-2">
+			<!--{subtemplate home/spacecp_cent_header_userinfo}-->
+			<div class="vessel" id="setting_privacy">
+				<!--{hook/spacecp_privacy_top}-->
+				<div class="nav">
+					<a $opactives[base] href="home.php?mod=spacecp&ac=privacy&op=base">{lang personal_privacy_settings}</a>
+					<!--{if helper_access::check_module('feed')}-->
+					<a $opactives[feed] href="home.php?mod=spacecp&ac=privacy&op=feed">{lang personal_feed_settings}</a>
+					<a $opactives[filter] href="home.php?mod=spacecp&ac=privacy&op=filter">{lang feed_filter}</a>
+					<!--{/if}-->
+				</div>
+				<hr>
+				<div class="withedge">
+					<form method="post" autocomplete="off" action="home.php?mod=spacecp&ac=privacy&op=$operation">
+						<input type="hidden" name="formhash" value="{FORMHASH}" />
+						<!--{if $operation == 'base'}-->
+							<p class="tool-notice">{lang you_control_see_content}</p>
+							<div class="inputline">
+								<span>{lang friend_list}</span>
+								<div class="radiolist">
+									<input $sels[view][friend][0] name="privacy[view][friend]" id="privacy[view][friend]_0" type="radio" value="0"><label for="privacy[view][friend]_0">{lang open_privacy}</label>
+									<input $sels[view][friend][1] name="privacy[view][friend]" id="privacy[view][friend]_1" type="radio" value="1"><label for="privacy[view][friend]_1">{lang friend_privacy}</label>
+									<input $sels[view][friend][2] name="privacy[view][friend]" id="privacy[view][friend]_2" type="radio" value="2"><label for="privacy[view][friend]_2">{lang secrecy}</label>
+									<input $sels[view][friend][3] name="privacy[view][friend]" id="privacy[view][friend]_3" type="radio" value="3"><label for="privacy[view][friend]_3">{lang privacy_register}</label>
+								</div>
+							</div>
+							<!--{if helper_access::check_module('wall')}-->
+							<div class="inputline">
+								<span>{lang message_board}</span>
+								<div class="radiolist">
+									<input $sels[view][wall][0] name="privacy[view][wall]" id="privacy[view][wall]_0" type="radio" value="0"><label for="privacy[view][wall]_0">{lang open_privacy}</label>
+									<input $sels[view][wall][1] name="privacy[view][wall]" id="privacy[view][wall]_1" type="radio" value="1"><label for="privacy[view][wall]_1">{lang friend_privacy}</label>
+									<input $sels[view][wall][2] name="privacy[view][wall]" id="privacy[view][wall]_2" type="radio" value="2"><label for="privacy[view][wall]_2">{lang secrecy}</label>
+									<input $sels[view][wall][3] name="privacy[view][wall]" id="privacy[view][wall]_3" type="radio" value="3"><label for="privacy[view][wall]_3">{lang privacy_register}</label>
+								</div>
+							</div>
+							<!--{/if}-->
+							<!--{if helper_access::check_module('feed')}-->
+							<div class="inputline">
+								<span>{lang personal_feed}</span>
+								<div class="radiolist">
+									<input $sels[view][home][0] name="privacy[view][home]" id="privacy[view][home]_0" type="radio" value="0"><label for="privacy[view][home]_0">{lang open_privacy}</label>
+									<input $sels[view][home][1] name="privacy[view][home]" id="privacy[view][home]_1" type="radio" value="1"><label for="privacy[view][home]_1">{lang friend_privacy}</label>
+									<input $sels[view][home][3] name="privacy[view][home]" id="privacy[view][home]_3" type="radio" value="3"><label for="privacy[view][home]_3">{lang privacy_register}</label>
+								</div>
+							</div>
+							<!--{/if}-->
+							<!--{if helper_access::check_module('doing')}-->
+							<div class="inputline">
+								<span>{lang doing}</span>
+								<div class="radiolist">
+									<input $sels[view][doing][0] name="privacy[view][doing]" id="privacy[view][doing]_0" type="radio" value="0"><label for="privacy[view][doing]_0">{lang open_privacy}</label>
+									<input $sels[view][doing][1] name="privacy[view][doing]" id="privacy[view][doing]_1" type="radio" value="1"><label for="privacy[view][doing]_1">{lang friend_privacy}</label>
+									<input $sels[view][doing][3] name="privacy[view][doing]" id="privacy[view][doing]_3" type="radio" value="3"><label for="privacy[view][doing]_3">{lang privacy_register}</label>
+								</div>
+								<p class="message">
+
+								</p>
+							</div>
+							<!--{/if}-->
+							<!--{if helper_access::check_module('blog')}-->
+							<div class="inputline">
+								<span>{lang blog}</span>
+								<div class="radiolist">
+									<input $sels[view][blog][0] name="privacy[view][blog]" id="privacy[view][blog]_0" type="radio" value="0"><label for="privacy[view][blog]_0">{lang open_privacy}</label>
+									<input $sels[view][blog][1] name="privacy[view][blog]" id="privacy[view][blog]_1" type="radio" value="1"><label for="privacy[view][blog]_1">{lang friend_privacy}</label>
+									<input $sels[view][blog][3] name="privacy[view][blog]" id="privacy[view][blog]_3" type="radio" value="3"><label for="privacy[view][blog]_3">{lang privacy_register}</label>
+								</div>
+								<p class="message">
+									{lang privacy_setting_message}<br />{lang view_right_setting_effective}
+								</p>
+							</div>
+							<!--{/if}-->
+							<!--{if helper_access::check_module('album')}-->
+							<div class="inputline">
+								<span>{lang album}</span>
+								<div class="radiolist">
+									<input $sels[view][album][0] name="privacy[view][album]" id="privacy[view][album]_0" type="radio" value="0"><label for="privacy[view][album]_0">{lang open_privacy}</label>
+									<input $sels[view][album][1] name="privacy[view][album]" id="privacy[view][album]_1" type="radio" value="1"><label for="privacy[view][album]_1">{lang friend_privacy}</label>
+									<input $sels[view][album][3] name="privacy[view][album]" id="privacy[view][album]_3" type="radio" value="3"><label for="privacy[view][album]_3">{lang privacy_register}</label>
+								</div>
+								<p class="message">
+									{lang privacy_setting_message}<br />{lang view_right_setting_effective}
+								</p>
+							</div>
+							<!--{/if}-->
+							<!--{if helper_access::check_module('share')}-->
+							<div class="inputline">
+								<span>{lang share}</span>
+								<div class="radiolist">
+									<input $sels[view][share][0] name="privacy[view][share]" id="privacy[view][share]_0" type="radio" value="0"><label for="privacy[view][share]_0">{lang open_privacy}</label>
+									<input $sels[view][share][1] name="privacy[view][share]" id="privacy[view][share]_1" type="radio" value="1"><label for="privacy[view][share]_1">{lang friend_privacy}</label>
+									<input $sels[view][share][3] name="privacy[view][share]" id="privacy[view][share]_3" type="radio" value="3"><label for="privacy[view][share]_3">{lang privacy_register}</label>
+								</div>
+								<p class="message">
+									{lang privacy_setting_message}<br />{lang view_right_setting_effective}
+								</p>
+							</div>
+							<!--{/if}-->
+							<!--{if $_G['setting'][videophoto] && $space[videophotostatus]}-->
+							<div class="inputline">
+								<span>{lang view_my_certified_photo}</span>
+								<div class="radiolist">
+									<input $sels[view][videoviewphoto][0] name="privacy[view][videoviewphoto]" id="privacy[view][videoviewphoto]_0" type="radio" value="0"><label for="privacy[view][videoviewphoto]_0">{lang site_default_setting}</label>
+									<input $sels[view][videoviewphoto][1] name="privacy[view][videoviewphoto]" id="privacy[view][videoviewphoto]_1" type="radio" value="1"><label for="privacy[view][videoviewphoto]_1">{lang allow}</label>
+									<input $sels[view][videoviewphoto][2] name="privacy[view][videoviewphoto]" id="privacy[view][videoviewphoto]_2" type="radio" value="2"><label for="privacy[view][videoviewphoto]_2">{lang ban}</label>
+								</div>
+								<p class="message">
+									<img src="{STATICURL}image/common/videophoto.gif" alt=""/> {lang certified_video_setting_right}
+								</p>
+							</div>
+							<!--{/if}-->
+							<!--{hook/spacecp_privacy_base_extra}-->
+							<button class="maintheme" type="submit" name="privacysubmit" value="true">{lang save}</button>
+						<!--{elseif $operation == 'feed'}-->
+							<p class="tool-notice">{lang system_depend_action_message}</p><br>
+							<div class="ccbox mager checkgroup">
+								<input type="checkbox" name="privacy[feed][doing]" id="privacy[feed][doing]" value="1"$sels[feed][doing] />
+								<label for="privacy[feed][doing]" >{lang doing}</label>
+								<input type="checkbox" name="privacy[feed][blog]" id="privacy[feed][blog]" value="1"$sels[feed][blog] />
+								<label for="privacy[feed][blog]" >{lang write_blog}</label>
+								<input type="checkbox" name="privacy[feed][upload]" id="privacy[feed][upload]" value="1"$sels[feed][upload] />
+								<label for="privacy[feed][upload]" >{lang upload_pic}</label>
+								<input type="checkbox" name="privacy[feed][share]" id="privacy[feed][share]" value="1"$sels[feed][share] />
+								<label for="privacy[feed][share]" >{lang add_share}</label>
+								<input type="checkbox" name="privacy[feed][friend]" id="privacy[feed][friend]" value="1"$sels[feed][friend] />
+								<label for="privacy[feed][friend]" >{lang friend_add}</label>
+								<input type="checkbox" name="privacy[feed][comment]" id="privacy[feed][comment]" value="1"$sels[feed][comment] />
+								<label for="privacy[feed][comment]" >{lang publish_comment_reply}</label>
+								<input type="checkbox" name="privacy[feed][show]" id="privacy[feed][show]" value="1"$sels[feed][show] />
+								<label for="privacy[feed][show]" >{lang bidding_rank}</label>
+								<input type="checkbox" name="privacy[feed][credit]" id="privacy[feed][credit]" value="1"$sels[feed][credit] />
+								<label for="privacy[feed][credit]" >{lang credit_consumption}</label>
+								<input type="checkbox" name="privacy[feed][invite]" id="privacy[feed][invite]" value="1"$sels[feed][invite] />
+								<label for="privacy[feed][invite]" >{lang invite_friend}</label>
+								<input type="checkbox" name="privacy[feed][task]" id="privacy[feed][task]" value="1"$sels[feed][task] />
+								<label for="privacy[feed][task]" >{lang complete_task}</label>
+								<input type="checkbox" name="privacy[feed][profile]" id="privacy[feed][profile]" value="1"$sels[feed][profile] />
+								<label for="privacy[feed][profile]" >{lang update_presonal_profile}</label>
+								<input type="checkbox" name="privacy[feed][click]" id="privacy[feed][click]" value="1"$sels[feed][click] />
+								<label for="privacy[feed][click]" >{lang pic_blog_position}</label>
+								<input type="checkbox" name="privacy[feed][newthread]" id="privacy[feed][newthread]" value="1"$sels[feed][newthread] />
+								<label for="privacy[feed][newthread]" >{lang forum_post}</label>
+								<input type="checkbox" name="privacy[feed][newreply]" id="privacy[feed][newreply]" value="1"$sels[feed][newreply] />
+								<label for="privacy[feed][newreply]" >{lang forum_reply}</label>
+							</div>
+							<!--{hook/spacecp_privacy_feed_extra}-->
+							<button class="maintheme" type="submit" name="privacysubmit" value="true">{lang save}</button>
+						<!--{else}-->
+							{eval
+							$iconnames['wall'] = '{lang message}';
+							$iconnames['piccomment'] = '{lang pic_comment}';
+							$iconnames['blogcomment'] = '{lang blog_comment}';
+							$iconnames['sharecomment'] = '{lang share_comment}';
+							$iconnames['magic'] = '{lang magics_title}';
+							$iconnames['sharenotice'] = '{lang share_notification}';
+							$iconnames['clickblog'] = '{lang blog_position}';
+							$iconnames['clickpic'] = '{lang pic_position}';
+							$iconnames['credit'] = '{lang credits}';
+							$iconnames['doing'] = '{lang doing}';
+							$iconnames['pcomment'] = '{lang topic_comment}';
+							$iconnames['post'] = '{lang topic_reply}';
+							$iconnames['show'] = '{lang friend_top}';
+							$iconnames['task'] = '{lang task}';
+							$iconnames['goods'] = '{lang trade}';
+							$iconnames['group'] = $_G[setting][navs][3][navname];
+							$iconnames['thread'] = '{lang theme}';
+							$iconnames['system'] = '{lang system}';
+							$iconnames['friend'] = '{lang friends}';
+							$iconnames['debate'] = '{lang debate}';
+							$iconnames['album'] = '{lang album}';
+							$iconnames['blog'] = '{lang blog}';
+							$iconnames['poll'] = '{lang poll}';
+							$iconnames['activity'] = '{lang activity}';
+							$iconnames['reward'] = '{lang reward}';
+							$iconnames['share'] = '{lang share}';
+							$iconnames['profile'] = '{lang update_presonal_profile}';
+							$iconnames['pusearticle'] = '{lang article_push}';
+							}
+							<div class="filter">
+								<h2><span>{lang filtering_rules_title_1}</span></h2>
+								<p class="tool-notice">{lang filtering_rules_message_1}</p><br>
+								<div class="ccbox mager checkgroup">
+									<!--{loop $groups $key $value}-->
+									<input type="checkbox" name="privacy[filter_gid][$key]" id="privacy[filter_gid][$key]" value="$key" {if isset($space['privacy']['filter_gid'][$key])} checked="checked"{/if} />
+									<label for="privacy[filter_gid][$key]">$value</label>
+									<!--{/loop}-->
+								</div>
+							</div>
+							<div class="filter">
+								<h2><span>{lang filtering_rules_title_2}</span></h2>
+								<p class="tool-notice">{lang filtering_rules_message_2}</p>
+								<!--{if $icons}-->
+									<div class="ccbox mager checkgroup">
+									<!--{loop $icons $key $icon}-->
+										<!--{eval $uid = $uids[$key];$icon_uid="$icon|$uid";}-->
+										<!--{if is_numeric($icon)}-->
+											<img src="http://appicon.manyou.com/icons/{$icon}" alt="" class="vm" />
+										<!--{else}-->
+											<img src="{STATICURL}image/feed/{$icon}.gif" alt="" class="vm" />
+										<!--{/if}-->
+										<input type="checkbox" name="privacy[filter_icon][$icon_uid]" id="privacy[filter_icon][$icon_uid]" value="1" checked="checked" />
+										<label for="privacy[filter_icon][$icon_uid]"><!--{if isset($iconnames[$icon])}-->$iconnames[$icon]<!--{else}-->$icon<!--{/if}--> - <!--{if $users[$uid]}--><a style="color: inherit" href="home.php?mod=space&uid=$uid" target="_blank">$users[$uid]</a><!--{else}-->{lang all_friends}<!--{/if}--></label>
+									<!--{/loop}-->
+									</div>
+								<!--{else}-->
+									<p class="global_nothing" style="margin: 10px 0;">{lang no_shield_feed_cat}</p>
+								<!--{/if}-->
+							</div>
+							<div class="filter">
+								<h2><span>{lang filtering_rules_title_3}</span></h2>
+								<p class="tool-notice">{lang filtering_rules_message_3}</p>
+								<!--{if $types}-->
+									<div class="ccbox mager checkgroup">
+										<!--{loop $types $key $type}-->
+										<!--{eval $uid = $uids[$key];$type_uid="$type|$uid";}-->
+											<input type="checkbox" name="privacy[filter_note][$type_uid]" id="privacy[filter_note][$type_uid]" value="1" checked="checked" />
+											<label for="privacy[filter_note][$type_uid]"><!--{if isset($iconnames[$type])}-->$iconnames[$type]<!--{else}-->$type<!--{/if}--> (<!--{if $users[$uid]}--><a style="color: inherit" href="home.php?mod=space&uid=$uid" target="_blank">$users[$uid]</a><!--{else}-->{lang all_friends}<!--{/if}-->)</label>
+										<!--{/loop}-->
+									</div>
+								<!--{else}-->
+								<p class="global_nothing" style="margin: 10px 0;">{lang no_shield_feed_cat}</p>
+								<!--{/if}-->
+							</div>
+							<button class="maintheme" type="submit" name="privacy2submit" value="true" >{lang save}</button>
+						<!--{/if}-->
+					</form>
+					<!--{hook/spacecp_privacy_bottom}-->
+				</div>
+			</div>
+		</section>
+	</div>
+<!--{template common/footer}-->

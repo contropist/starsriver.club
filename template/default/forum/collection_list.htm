@@ -1,0 +1,49 @@
+<!--{if count($collectiondata) > 0}-->
+<div class="collist clear-objgap">
+<!--{eval $order = 0;}-->
+	<span class="list-title">TOP 3</span>
+<!--{loop $collectiondata $collectionvalues}-->
+	<!--{eval $order += 1;}-->
+	<!--{eval $collectionvalues['threadnum'] > 999 ? $collectionvalues['threadnum'] = '999+' : '';}-->
+
+	<!--{if $order == 4}--><span class="list-title">更多</span><!--{/if}-->
+	<a class="coll{if $order <= 3 } top{/if}" href="forum.php?mod=collection&action=view&ctid={$collectionvalues['ctid']}{if $op}&fromop={$op}{/if}{if $tid}&fromtid={$tid}{/if}" title="{lang collection_lastupdate} {$collectionvalues['lastupdate']}">
+		<object>
+			<div class="cover">
+				<img src="{if $collectionvalues['cover']}{$_G['setting']['attachurl']}/collection/{$collectionvalues['cover']}{else}{IMGURL}/common/no-img/no-img.svg{/if}">
+				<!--{if $collectionvalues['arraykeyword']}-->
+					<ol class="tags">
+						<!--{loop $collectionvalues['arraykeyword'] $unique_keyword}-->
+							<li><a href="search.php?mod={if $_G['setting']['search']['collection']['status']}collection{else}forum{/if}&srchtxt={echo rawurlencode($unique_keyword)}&formhash={FORMHASH}&searchsubmit=true&source=collectionsearch" target="_blank">$unique_keyword</a></li>
+						<!--{/loop}-->
+					</ol>
+				<!--{/if}-->
+				<a class="author" href="home.php?mod=space&uid=$collectionvalues['uid']"><i class="avatar"><!--{avatar($collectionvalues['uid'],'small')}--></i><i class="name">{$collectionvalues['username']}</i></a>
+			</div>
+			<div class="info">
+				<i class="line name">
+					<!--{if $op == 'my'}-->
+						<!--{if $collectionvalues['uid'] == $_G['uid']}-->
+							【{lang collection_mycreate}】
+						<!--{elseif in_array($collectionvalues['ctid'], $twctid)}-->
+							【{lang collection_myteam}】
+						<!--{else}-->
+							【{lang collection_mysubscribe}】
+						<!--{/if}-->
+					<!--{/if}-->
+					{$collectionvalues['name']}
+				</i>
+				<i class="line desc">{$collectionvalues['shortdesc']}</i>
+				<i class="line count">
+					<i class="item"><em class="icon-address-book"></em>{if $collectionvalues['follownum'] <= 999}{$collectionvalues['follownum']}{else}999+{/if}</i>
+					<i class="item"><em class="icon-folder-open"></em>{if $collectionvalues['threadnum'] <= 999}{$collectionvalues['threadnum']}{else}999+{/if}</i>
+					<i class="item"><em class="icon-bubble"></em>{if $collectionvalues['commentnum'] <= 999}{$collectionvalues['commentnum']}{else}999+{/if}</i>
+				</i>
+			</div>
+		</object>
+	</a>
+<!--{/loop}-->
+</div>
+<!--{else}-->
+	<div class="global_nothing">{lang collection_nocollection}</div>
+<!--{/if}-->

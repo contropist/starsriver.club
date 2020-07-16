@@ -1,0 +1,44 @@
+<!--{if $_G[forum][banner] && !$subforumonly}--><img src="$_G[forum][banner]" alt="$_G['forum'][name]" /><!--{/if}-->
+<div class="forum-nav shadow-3D">
+	<a class="title" href="forum.php?mod=forumdisplay&fid=$_G[fid]">$_G['forum'][name]</a>
+	<div class="r toolbar">
+		<!--{if !$_GET['archiveid']}-->
+			<a class="ico-btn btn_post ft-message-circle" id="newspecialtmp"  {if !$_G['forum']['allowspecialonly'] && empty($_G['forum']['picstyle']) && !$_G['forum']['threadsorts']['required']} onclick="showWindow('newthread', 'forum.php?mod=post&action=newthread&fid=$_G[fid]')"{else} onclick="location.href='forum.php?mod=post&action=newthread&fid=$_G[fid]';return false;"{/if} title="{lang post_newthread}"><span class="tooltip" data-pos="tl">{lang post_newthread}</span></a>
+		<!--{/if}-->
+		<a class="ico-btn btn_back ft-delete" href="forum.php"><span class="tooltip" data-pos="tl">{lang return_index}</span></a>
+		<a class="ico-btn btn-fav ft-star" href="home.php?mod=spacecp&ac=favorite&type=forum&id=$_G[fid]&handlekey=favoriteforum&formhash={FORMHASH}" id="a_favorite" onclick="showWindow(this.id, this.href, 'get', 0);"><span class="tooltip" data-pos="tl">{lang collect}<b id="number_favorite" {if !$_G[forum][favtimes]} style="display:none;"{/if}>：<b id="number_favorite_num">$_G[forum][favtimes]</b></b></span></a>
+		<!--{if rssforumperm($_G['forum']) && $_G[setting][rssstatus] && !$_GET['archiveid'] && !$subforumonly}-->
+			<a class="ico-btn btn-rss awe-rss" href="forum.php?mod=rss&fid=$_G[fid]&auth=$rssauth" target="_blank" title="RSS"><span class="tooltip" data-pos="tl">{lang rss_subscribe_this}</span></a>
+		<!--{/if}-->
+		<!--{if !empty($forumarchive)}-->
+			<a id="forumarchive" class="fa_achv" onmouseover="showMenu(this.id)"><!--{if $_GET['archiveid']}-->$forumarchive[$_GET['archiveid']]['displayname']<!--{else}-->{lang forum_archive}<!--{/if}--></a>
+		<!--{/if}-->
+		<!--{hook/forumdisplay_forumaction}-->
+		<!--{if $_G['forum']['ismoderator']}-->
+			<!--{if $_G['forum']['recyclebin']}-->
+				<a class="ico-btn btn_bin ft-trash " href="{if $_G['adminid'] == 1}webcontroller.php?mod=forum&action=recyclebin&frames=yes{elseif $_G['forum']['ismoderator']}forum.php?mod=modcp&action=recyclebin&fid=$_G[fid]{/if}" target="_blank"><span class="tooltip" data-pos="tl">{lang forum_recyclebin}</span></a>
+			<!--{/if}-->
+			<!--{if $_G['forum']['ismoderator'] && !$_GET['archiveid']}-->
+				<!--{if $_G['forum']['status'] != 3}-->
+					<a class="ico-btn btn_manage ft-activity" href="forum.php?mod=modcp&fid=$_G[fid]"><span class="tooltip" data-pos="tl">{lang modcp}</span></a>
+				<!--{else}-->
+					<a class="ico-btn btn_manage ft-activity" href="forum.php?mod=group&action=manage&fid=$_G[fid]"><span class="tooltip" data-pos="tl">{lang modcp}</span></a>
+				<!--{/if}-->
+			<!--{/if}-->
+			<!--{hook/forumdisplay_modlink}-->
+		<!--{/if}-->
+	</div>
+	<!--{if (!empty($_G[forum][description]) && !empty($_G['setting']['description']['root']['forum'])) || $moderatedby || ($_G['page'] == 1 && $_G['forum']['rules'])}-->
+	<!--{if $_G['page'] == 1 && $_G['forum']['description']}-->
+	<p class="description">$_G['forum'][description]</p>
+	<!--{/if}-->
+	<!--{/if}-->
+	<div class="stat">
+        {lang index_today}: $_G[forum][todayposts]<b class="bar"></b>{lang index_threads}: $_G[forum][threads]<b class="bar"></b>{lang rank}: $_G[forum][rank]
+		<!--{if $moderatedby}-->
+		<div class="r modedby">
+			{lang forum_modedby}: $moderatedby
+		</div>
+		<!--{/if}-->
+	</div>
+</div>

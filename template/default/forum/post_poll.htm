@@ -1,0 +1,131 @@
+<input type="hidden" name="polls" value="yes" />
+<input type="hidden" name="fid" value="$_G[fid]" />
+<div class="row">
+    <div class="input-box">
+        <span>{lang post_poll_expiration}</span>
+        <input type="text" name="expiration" id="polldatas" value="{if $_GET[action] == 'edit'}{if !$poll[expiration]}0{elseif $poll[expiration] < 0}{lang poll_close}{elseif $poll[expiration] < TIMESTAMP}{lang poll_finish}{else}{echo (round(($poll[expiration] - TIMESTAMP) / 86400))}{/if}{/if}"/> {lang days}
+    </div>
+    <div class="input-box ccbox">
+        <span>{lang post_poll_allowmultiple}</span>
+        <input type="text" name="maxchoices" id="maxchoices" value="{if $_GET[action] == 'edit' && $poll[maxchoices]}$poll[maxchoices]{else}1{/if}"/>
+    </div>
+    <div class="input-box ccbox" style="width:calc(50% + 1px)">
+        <span>投票选项</span>
+        <input type="checkbox" name="visibilitypoll" id="visibilitypoll" value="1"{if $_GET[action] == 'edit' && !$poll[visible]} checked{/if}/><label for="visibilitypoll">{lang poll_after_result}</label>
+        <input type="checkbox" name="overt" id="overt" value="1"{if $_GET[action] == 'edit' && $poll[overt]} checked{/if}/><label for="overt">{lang post_poll_overt}</label>
+    </div>
+</div>
+<div class="row">
+    <div class="input-box" style="width:calc(100% + 1px)">
+        <span class="f" style="text-align: left">{lang post_poll_comment}</span>
+    </div>
+    <!--{if $_GET[action] == 'newthread'}-->
+        <input type="hidden" name="tpolloption" value="1" />
+        <div class="input-poll">
+            <div id="polloption_new" style="display: none"></div>
+            <div id="polloption_hidden" style="display: none">
+                <a class="del ft-trash-2 l" onclick="delpolloption(this)"></a>
+                <input class="itemtitle" type="text" name="polloption[]" autocomplete="off"/>
+                <span id="newpoll"></span>
+                <i id="pollUploadProgress">
+                    <img src="{IMGURL}/common/icon/image_disabled.svg" />
+                </i>
+            </div>
+            <a class="poll-item" onclick="addpolloption()"><span>{lang post_poll_add}</span></a>
+        </div>
+    <!--{else}-->
+        <div class="input-poll">
+            <!--{loop $poll['polloption'] $key $option}-->
+            <!--{eval $ppid = $poll['polloptionid'][$key];}-->
+                <div class="poll-item">
+                    <input type="hidden" name="polloptionid[{$poll[polloptionid][$key]}]" value="$poll[polloptionid][$key]" />
+                    <input class="order" type="text" name="displayorder[{$poll[polloptionid][$key]}]" autocomplete="off"value="$poll[displayorder][$key]" />
+                    <input class="itemtitle" type="text" name="polloption[{$poll[polloptionid][$key]}]" autocomplete="off"value="$option"{if !$_G['group']['alloweditpoll']} readonly="readonly"{/if} />
+                    <!--img src="$poll[imginfo][$ppid][small]" class="cur1" /-->
+                    <span id="newpoll_{$key}"></span>
+                    <!--{if $poll[imginfo][$ppid][small]}-->
+                        <i id="pollUploadProgress_{$key}" class="vm">
+                            <!--{if $poll[isimage]}-->
+                            <img src="{IMGURL}/common/icon/image.svg" class="cur1" onmouseover="showMenu({'menuid':'poll_img_preview_{$poll[imginfo][$ppid][aid]}_menu','ctrlclass':'a','duration':2,'timeout':0,'pos':'34'});" onmouseout="hideMenu('poll_img_preview_{$poll[imginfo][$ppid][aid]}_menu');" />
+                            <!--{/if}-->
+                            <input type="hidden" name="pollimage[{$poll[polloptionid][$key]}]" id="pollUploadProgress_{$key}_aid" value="$poll[imginfo][$ppid][aid]" />
+                            <span id="poll_img_preview_{$poll[imginfo][$ppid][aid]}_menu">
+                                <img src="$poll[imginfo][$ppid][small]" />
+                            </span>
+                        </i>
+                    <!--{else}-->
+                        <i id="pollUploadProgress_{$key}">
+                            <img src="{IMGURL}/common/icon/image_disabled.svg" />
+                        </i>
+                    <!--{/if}-->
+                </div>
+            <!--{/loop}-->
+            <div id="polloption_new"></div>
+            <div id="polloption_hidden" style="display: none">
+                <a class="del ft-trash-2 l" onclick="delpolloption(this)"></a>
+                <input class="itemtitle" type="text" name="polloption[]" autocomplete="off"/>
+                <span id="newpoll"></span>
+                <i id="pollUploadProgress">
+                    <img src="{IMGURL}/common/icon/image_disabled.svg" />
+                </i>
+            </div>
+            <a class="poll-item" onclick="addpolloption()"><span>{lang post_poll_add}</span></a>
+        </div>
+    <!--{/if}-->
+</div>
+<!--{hook/post_poll_extra}-->
+<!--{subtemplate common/upload}-->
+<script type="text/javascript" reload="1">
+var maxoptions = parseInt('$_G[setting][maxpolloptions]');
+<!--{if $_GET[action] == 'newthread'}-->
+	var curoptions = 0;
+	var curnumber = 1;
+	var inital = 3;
+	for(var zero=0; zero < inital; zero++){
+        addpolloption();
+    }
+<!--{else}-->
+	var curnumber = curoptions = <!--{echo count($poll['polloption'])}-->;
+	for(var i=0; i < curnumber; i++) {
+		addUploadEvent('newpoll_'+i, 'pollUploadProgress_'+i);
+	}
+<!--{/if}-->
+function addUploadEvent(imgid, pollstr) {
+	<!--{if empty($_G['setting']['pluginhooks']['post_upload_extend']) && empty($_G['setting']['pluginhooks']['post_poll_upload_extend'])}-->
+		new SWFUpload({
+			upload_url: SITEURL + 'misc.php?mod=swfupload&action=swfupload&operation=poll&fid=$_G[fid]',
+			post_params: {"uid":"$_G[uid]", "hash":"$swfconfig[hash]"},
+			file_size_limit : "2048",
+			file_types : "*.jpg;*.jpeg;*.gif;*.png;*.bmp",
+			file_types_description : "{lang pictypefile}",
+			file_upload_limit : 0,
+			file_queue_limit : 1,
+			swfupload_preload_handler : preLoad,
+			swfupload_load_failed_handler : loadFailed,
+			file_dialog_start_handler : fileDialogStart,
+			file_queued_handler : fileQueued,
+			file_queue_error_handler : fileQueueError,
+			file_dialog_complete_handler : fileDialogComplete,
+			upload_start_handler : uploadStart,
+			upload_progress_handler : uploadProgress,
+			upload_error_handler : uploadError,
+			upload_success_handler : uploadSuccess,
+			upload_complete_handler : uploadComplete,
+			button_image_url : IMGURL+"/common/progran/uploadbutton_small_pic.png",
+			button_placeholder_id : imgid,
+			button_width: 32,
+			button_height: 32,
+			button_cursor:SWFUpload.CURSOR.HAND,
+			button_window_mode: "transparent",
+			custom_settings : {
+				progressTarget : pollstr,
+				uploadSource: 'forum',
+				uploadType: 'poll'
+			},
+			debug: false
+		});
+	<!--{else}-->
+		<!--{hook/post_poll_upload_extend}-->
+	<!--{/if}-->
+}
+</script>

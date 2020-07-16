@@ -1,0 +1,78 @@
+<!--{if empty($nestmode)}-->
+    <!--{template home/space_trends_header}-->
+	<div class="plate layout-0">
+		<!--[nest=nestcontenttop]--><div id="nestcontenttop" class="area"></div><!--[/nest]-->
+	</div>
+    <div class="plate layout-3-type2 app-dynamic soft">
+        <section>
+            <!--{subtemplate home/space_trends_side_left}-->
+        </section>
+        <section>
+            <!--{if helper_access::check_module('share') && $space[self]}-->
+                <!--{template home/space_trends_mod_share_form}-->
+            <!--{/if}-->
+            <!--{template home/space_trends_mod_share_nav}-->
+            <!--{if $list}-->
+                <ul id="share_ul">
+                    <!--{loop $list $k $value}-->
+                        <!--{template home/space_trends_mod_share_li}-->
+                    <!--{/loop}-->
+                </ul>
+                <!--{if $pricount}-->
+                    <p class="vessel alert hi-warning">{lang hide_share}</p>
+                <!--{/if}-->
+                <!--{if $multi}--><div class="pg">$multi</div><!--{/if}-->
+            <!--{else}-->
+                <ul id="share_ul"></ul>
+                <div class=" vessel withedge">
+                    <p class="global_nothing">{lang global_nothing}</p>
+                </div>
+            <!--{/if}-->
+            <!--[nest=nest1]--><div id="nest1" class="area"></div><!--[/nest]-->
+            <!--[nest=nest2]--><div id="nest2" class="area"></div><!--[/nest]-->
+            <!--[nest=nest3]--><div id="nest3" class="area"></div><!--[/nest]-->
+            <!--[nest=nestcontentbottom]--><div id="nestcontentbottom" class="area"></div><!--[/nest]-->
+        </section>
+        <section>
+            <!--{subtemplate home/space_trends_side_right}-->
+        </section>
+    </div>
+<!--{else}-->
+    <!--{template home/space_home_header}-->
+    <div class="mas-viewer">
+        <section class="col-1">
+            <!--{if helper_access::check_module('share') && $space[self]}-->
+                <!--{template home/space_home_mod_share_form}-->
+            <!--{/if}-->
+            <!--{template home/space_home_mod_share_nav}-->
+            <!--{if $list}-->
+                <ul id="share_ul">
+                    <!--{loop $list $k $value}-->
+                        <!--{template home/space_home_mod_share_li}-->
+                    <!--{/loop}-->
+                </ul>
+
+                <!--{if $pricount}-->
+                    <p class="vessel alert hi-warning">{lang hide_share}</p>
+                <!--{/if}-->
+                <!--{if $multi}--><div class="pg">$multi</div><!--{/if}-->
+            <!--{else}-->
+                <ul id="share_ul"></ul>
+                <div class=" vessel withedge">
+                    <p class="global_nothing">{lang global_nothing}</p>
+                </div>
+            <!--{/if}-->
+        </section>
+        <section class="col-2">
+            <div class="vessel">
+                <!--{subtemplate home/space_home_userabout}-->
+            </div>
+        </section>
+    </div>
+<!--{/if}-->
+<script type="text/javascript">
+    function succeedhandle_shareadd(url, msg, values) {
+        share_add(values['sid']);
+    }
+</script>
+<!--{template common/footer}-->

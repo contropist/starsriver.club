@@ -1,0 +1,6 @@
+<!--{loop $settings $key $value}-->
+	<div>
+		$value[title]<!--{if $value[comment]}--> <img src="{IMGURL}/common/mark/faq.svg" alt="Tip" class="svgicon small" onmouseover="showTip(this)" tip="$value[comment]" /><!--{/if}-->
+		$value[html]
+	</div>
+<!--{/loop}-->

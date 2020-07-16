@@ -1,0 +1,107 @@
+<form class="panel no-gap" method="post" autocomplete="off" name="groupform" id="groupform" onsubmit="checkCategory();ajaxpost('groupform', 'returnmessage4', 'returnmessage4', 'onerror');return false;" action="forum.php?mod=group&action=create">
+    <div class="title" style="background: none; border: none;"><span style="font-size: 23px; color:#393939;">{lang group_create_new}</span></div>
+    <ol class="panel-container">
+        <li class="box size-10-0 hide">
+            <p id="returnmessage4"></p>
+            <input type="hidden" name="formhash" value="{FORMHASH}" />
+            <input type="hidden" name="referer" value="{echo dreferer()}" />
+            <input type="hidden" name="handlekey" value="creategroup" />
+            <input type="hidden" name="createsubmit" value="true">
+        </li>
+        <li class="box size-10-0">
+            <div class="input-group f">
+                <span style="width: 80px">{lang group_name}</span>
+                <input type="text" name="name" id="name" value="" autocomplete="off" onBlur="checkgroupname()"/>
+                <span class="hi-warning" id="groupnamecheck"><a class="animal line-scale"><p></p><p></p><p></p><p></p><p></p></a></span>
+                <span style="width: 80px">{lang group_category}</span>
+                <i class="input-selector" style="width: 80px">
+                    <select name="parentid" onchange="ajaxget('forum.php?mod=ajax&action=secondgroup&fupid='+ this.value, 'secondgroup');">
+                        <option value="0">{lang choose_please}</option>
+                        $groupselect[first]
+                    </select>
+                    <i class="arrow ft-chevron-right"></i>
+                </i>
+                <i class="input-selector" style="width: 140px;" id="secondgroup"></i>
+            </div>
+        </li>
+
+        <li class="box size-10-0">
+            <div class="input-group f csbox">
+                <span style="width: 80px">{lang group_perm_visit}</span>
+                <ul>
+                    <li>
+                        <input type="radio" name="gviewperm" id="gviewperm1" value="1" checked="checked" />
+                        <label for="gviewperm1">{lang group_perm_all_user}</label>
+                    </li>
+                    <li>
+                        <input type="radio" name="gviewperm" id="gviewperm2" value="0" />
+                        <label for="gviewperm2">{lang group_perm_member_only}</label>
+                    </li>
+                </ul>
+                <span style="width: 80px">{lang group_join_type}</span>
+                <ul>
+                    <li>
+                        <input type="radio" name="jointype" id="jointype1" value="0" checked="checked" />
+                        <label for="jointype1">{lang group_join_type_free}</label>
+                    </li>
+                    <li>
+                        <input type="radio" name="jointype" id="jointype2" value="2" />
+                        <label for="jointype2">{lang group_join_type_moderate}</label>
+                    </li>
+                    <li>
+                        <input type="radio" name="jointype" id="jointype3" value="1" />
+                        <label for="jointype3">{lang group_join_type_invite}</label>
+                    </li>
+                </ul>
+            </div>
+        </li>
+        <li class="box size-10-0">
+            <div class="input-group-area preview">
+                <script type="text/javascript">
+                    var allowbbcode = allowimgcode = parsetype = 1;
+                    var allowhtml = forumallowhtml = allowsmilies = 0;
+                </script>
+                <script type="text/javascript" src="{$_G[setting][jspath]}bbcode.js?{VERHASH}"></script>
+                <span>{lang group_description}{lang preview}</span>
+                <div id="descriptionpreview" ></div>
+            </div>
+        </li>
+        <li class="box size-10-0">
+            <div class="input-group-area editor f">
+                <textarea id="descriptionmessage" name="descriptionnew" ></textarea>
+                <div class="input-group f">
+                    <span>{lang group_description}</span>
+                    <!--{eval $seditor = array('description', array('bold', 'color', 'img', 'link'));}-->
+                    <!--{subtemplate common/seditor}-->
+                    <i class="input-group-btn"><a onclick="$('descriptionpreview').innerHTML = bbcode2html($('descriptionmessage').value)">{lang group_description_preview}</a></i>
+                </div>
+            </div>
+        </li>
+        <li class="box size-10-0">
+            <div class="input-group f">
+                <i class="input-group-btn"><button type="submit">{lang create}</button></i>
+            </div>
+        </li>
+    </ol>
+    <script type="text/javascript">
+        function checkgroupname() {
+            var groupname = trim($('name').value);
+            ajaxget('forum.php?mod=ajax&forumcheck=1&infloat=creategroup&handlekey=creategroup&action=checkgroupname&groupname=' + (BROWSER.ie && document.charset == 'utf-8' ? encodeURIComponent(groupname) : groupname), 'groupnamecheck');
+        }
+        function checkCategory(){
+            var groupcategory = trim($('fup').value);
+            if(groupcategory == ''){
+                $('groupcategorycheck').innerHTML = '{lang group_create_selete_categroy}';
+                return false;
+            } else {
+                $('groupcategorycheck').innerHTML = '';
+            }
+        }
+        <!--{if $_GET['fupid']}-->
+        ajaxget('forum.php?mod=ajax&action=secondgroup&fupid=$_GET[fupid]<!--{if $_GET[groupid]}-->&groupid=$_GET[groupid]<!--{/if}-->', 'secondgroup');
+        <!--{/if}-->
+        if($('name')) {
+            $('name').focus();
+        }
+    </script>
+</form>

@@ -1,0 +1,41 @@
+<!--{template home/spacecp_cent_header}-->
+	<div class="plate layout-2-type3 app-profile cloud">
+		<section class="col-1"><!--{template home/spacecp_cent_vnav}--></section>
+		<section class="col-2">
+			<!--{subtemplate home/spacecp_cent_header_userinfo}-->
+			<div class="vessel" id="setting_avatar">
+				<div class="nav tab-controller">
+					<a data-tabthumb>{lang current_my_space}</a>
+					<a data-tabthumb>{lang memcp_avatar}</a>
+				</div>
+				<hr>
+				<div class="body withedge">
+					<!--{hook/spacecp_avatar_top}-->
+					<div class="tab-body trans-ease">
+						<section data-tabbox>
+							<div class="avatar-preview">
+								<i class="avt" id="am"><!--{avatar($space[uid],middle)}--></i>
+								<i class="avt" id="ab"><!--{avatar($space[uid],big)}--></i>
+								<i class="avt" id="as"><!--{avatar($space[uid],small)}--></i>
+							</div>
+						</section>
+						<section  data-tabbox>
+							<div class="avatar-upload">
+								<p class="tool-notice">{lang setting_my_new_avatar_message}</p>
+								<!--{template home/spacecp_cent_avatar_body}-->
+								<script type="text/javascript">
+                                    function updateavatar() {window.location.href = document.location.href.replace('&reload=1', '') + '&reload=1';}
+                                    <!--{if !$reload}-->
+                                    saveUserdata('avatar_redirect', document.referrer);
+                                    <!--{/if}-->
+								</script>
+							</div>
+						</section>
+					</div>
+					<!--{hook/spacecp_avatar_bottom}-->
+				</div>
+				<script>tab_initialize('setting_avatar','click')</script>
+			</div>
+		</section>
+	</div>
+<!--{template common/footer}-->

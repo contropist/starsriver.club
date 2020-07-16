@@ -1,0 +1,38 @@
+<div class="session-list">
+	<!--{loop $session_list $key $value}-->
+		<!--{if $value['pmtype'] == 1}-->
+			<a class="session-item{if $value[isnew]} new{/if}{if $value[touid] == $touid} active{/if}" href="home.php?mod=space&do=pm&subop=view&touid=$value[touid]" id="pmlist_$value[plid]">
+				<object class="inner">
+					<a class="avatar" href="home.php?mod=space&uid=$value[touid]" target="_blank"><!--{avatar($value[touid],small)}--><i class="overlay" hide>{lang pm_num}</i></a>
+					<div class="brevity">
+						<i class="name">$value[tousername]</i>
+						<i class="time"><!--{date($value[lastdateline], 'u')}--></i>
+						<i class="msg"><!--{if $value['lastauthorid'] == $_G['uid']}--><span class="post awe-paper-plane"></span><!--{/if}-->$value[lastsummary]</i>
+					</div>
+					<div class="fucs">
+						<a class="del" onclick="ajaxget('home.php?mod=spacecp&ac=pm&op=delete&deletesubmit=1&deletepm_deluid[]=$value[touid]', '', 'ajaxwaitid', '', 'none', $('pmlist_$value[plid]').style.display='none')">{lang delete}</a>
+						<a class="out" href="home.php?mod=spacecp&ac=pm&op=pm_ignore&username=$value[tousername]&plid=$value[plid]&handlekey=pmignorehk_{$value[plid]}" id="a_feed_menu_$value[plid]" onclick="showWindow(this.id, this.href, 'get', 0);doane(event);" title="{lang pmignore}">{lang pmignore}</a>
+					</div>
+				</object>
+			</a>
+		<!--{else}-->
+			<a class="session-item{if $value[isnew]} new{/if}{if $value[plid] == $plid} active{/if}" href="home.php?mod=space&do=pm&subop=view&plid=$value[plid]" id="pmlist_$value[plid]">
+				<object class="inner">
+					<a class="avatar" href="home.php?mod=space&do=pm&subop=view&plid=$value[plid]&type=1"><img src="{IMGURL}/group/group_icon.png" alt="" /><i class="overlay" hide>{lang pm_num}</i></a>
+					<div class="brevity">
+						<i class="name">$value[subject]($value[members])</i>
+						<i class="time"><!--{date($value[lastdateline], 'u')}--></i>
+						<i class="msg"><!--{if $value['lastauthorid'] == $_G['uid']}--><span class="post awe-paper-plane"></span><!--{/if}--><!--{if $value['lastauthorid'] != $_G['uid']}--><a class="name" href="home.php?mod=space&uid=$value[lastauthorid]" target="_blank">$value[lastauthor]</a>: <!--{/if}-->$value[lastsummary]</i>
+					</div>
+					<div class="fucs">
+						<!--{if $value['authorid'] == $_G['uid']}-->
+							<a class="del" onclick="ajaxget('home.php?mod=spacecp&ac=pm&op=delete&deletesubmit=1&deletepm_delplid[]=$value[plid]', '', 'ajaxwaitid', '', 'none', $('pmlist_$value[plid]').style.display='none')">{lang delete}</a>
+						<!--{else}-->
+							<a class="out" onclick="ajaxget('home.php?mod=spacecp&ac=pm&op=delete&deletesubmit=1&deletepm_quitplid[]=$value[plid]', '', 'ajaxwaitid', '', 'none', $('pmlist_$value[plid]').style.display='none')">{lang quite}</a>
+						<!--{/if}-->
+					</div>
+				</object>
+			</a>
+		<!--{/if}-->
+	<!--{/loop}-->
+</div>

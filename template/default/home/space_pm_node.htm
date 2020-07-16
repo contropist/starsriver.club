@@ -1,0 +1,30 @@
+<div class="reply{if $value[authorid] && $value[authorid] == $_G[uid]} self{/if}" id="pmlist_$value[pmid]">
+	<!--{if $value[authorid]}-->
+		<a class="avatar" href="home.php?mod=space&uid=$value[authorid]" target="_blank"><!--{avatar($value[authorid],small)}--></a>
+	<!--{else}-->
+		<a class="avatar"><img src="static/image/common/systempm.png"></a>
+	<!--{/if}-->
+
+	<!--{if $value[authorid]}-->
+		<!--{if $value[authorid] != $_G[uid]}-->
+			<a class="name" href="home.php?mod=space&uid=$value[authorid]" target="_blank">$value[author]</a><br />
+		<!--{/if}-->
+	<!--{else}-->
+		<a class="name">{lang system_notice}</a><br />
+	<!--{/if}-->
+
+	<div class="msg">
+		$value[message]
+		<i class="time"><!--{date($value[dateline], 'u')}--></i>
+		<!--{if $value['pmtype'] == 1 || $value['authorid'] && $value['authorid'] != $_G['uid'] && $_G['setting']['pmreportuser']}-->
+		<i class="fucs">
+			<!--{if $value['pmtype'] == 1}-->
+				<a class="del awe-trash-o" id="a_pmdelete_$value[pmid]" onclick="ajaxget('home.php?mod=spacecp&ac=pm&op=delete&deletepm_pmid[]=$value[pmid]&touid=$touid&deletesubmit=1&handlekey=pmdeletehk_{$value[pmid]}&formhash={FORMHASH}', '', 'ajaxwaitid', '', 'none', 'changedeletedpm($value[pmid])');" title="{lang delete}"></a>
+			<!--{/if}-->
+			<!--{if $value['authorid'] && $value['authorid'] != $_G['uid'] && $_G['setting']['pmreportuser']}-->
+				<a class="rep awe-bell-o" href="home.php?mod=spacecp&ac=pm&op=pm_report&pmid=$value[pmid]&handlekey=pmreporthk_{$value[pmid]}" id="a_pmreport_$value[pmid]" onclick="showWindow(this.id, this.href, 'get', 0);" title="{lang pmreport}"></a>
+			<!--{/if}-->
+		</i>
+		<!--{/if}-->
+	</div>
+</div>

@@ -1,0 +1,101 @@
+<div id="postmessage_$post[pid]">$post[message]</div>
+
+<script type="text/javascript">
+	<!--{if $optiontype=='checkbox'}-->
+		var max_obj = $maxchoices;
+		var p = 0;
+	<!--{/if}-->
+</script>
+
+<form class="poll-pool" id="poll" name="poll" method="post" autocomplete="off" action="forum.php?mod=misc&action=votepoll&fid=$_G[fid]&tid=$_G[tid]&pollsubmit=yes{if $_GET[from]}&from=$_GET[from]{/if}&quickforward=yes" onsubmit="if($('post_$post[pid]')) {ajaxpost('poll', 'post_$post[pid]', 'post_$post[pid]');return false}">
+	<input type="hidden" name="formhash" value="{FORMHASH}" />
+    <div class="header shadow-3D">
+        <!--{if $multiple}-->
+        	{lang poll_multiple}{lang thread_poll}: {lang poll_more_than}
+        <!--{else}-->
+        	{lang poll_single}{lang thread_poll}
+        <!--{/if}-->
+        <!--{if $visiblepoll}-->
+        	<a class="info r" href="forum.php?mod=misc&action=viewvote&tid=$_G[tid]" onclick="showWindow('viewvote', this.href)">{lang poll_view_voters}[{lang poll_voterscount}]</a><span class="bar r"></span>
+        <!--{else}-->
+        	<a class="info r">{lang poll_after_result}</a><span class="bar r"></span>
+        <!--{/if}-->
+        <!--{if $_G[forum_thread][remaintime]}-->
+        	<p class="info r">{lang poll_count_down}:<!--{if $_G[forum_thread][remaintime][0]}-->$_G[forum_thread][remaintime][0]{lang days}<!--{/if}--><!--{if $_G[forum_thread][remaintime][1]}-->$_G[forum_thread][remaintime][1]{lang poll_hour}<!--{/if}-->$_G[forum_thread][remaintime][2]{lang poll_minute}</p><span class="bar r"></span>
+        <!--{elseif $expiration && $expirations < TIMESTAMP}-->
+        	<p class="info r">{lang poll_end}</p><span class="bar r"></span>
+        <!--{/if}-->
+    </div>
+	<!--{hook/viewthread_poll_top}-->
+	<!--{if $isimagepoll}-->
+		<!--{eval $i = 0;}-->
+			<!--{loop $polloptions $key $option}-->
+			<!--{eval $i++;}-->
+			<!--{eval $imginfo=$option['imginfo'];}-->
+			<div class="poll-item pic trans-ease-quick shadow-3D" id="polloption_$option[polloptionid]">
+                <a class="imgsolt" href="javascript:;">
+                    <!--{if $imginfo}--><img class="no-radius" id="aimg_$imginfo[aid]" aid="$imginfo[aid]" src="$imginfo[small]" onclick="zoom(this, this.getAttribute('zoomfile'), 0, 0, '{$_G[setting][showexif]}')" zoomfile="$imginfo[big]" alt="$imginfo[filename]" title="$imginfo[filename]" w="$imginfo[width]" />
+                    <!--{else}--><img class="no-radius"  src="{STATICURL}image/common/nophoto.gif" /><!--{/if}-->
+                </a>
+                <div class="info r">
+                    <p class="produce"><em>{lang description}：</em>$option[polloption]</p>
+                    <!--{if $visiblepoll}-->
+                        <span class="l count">{lang poll_rate}:$option[percent]%</span>
+                    <!--{/if}-->
+                </div>
+                <!--{if $_G['group']['allowvote']}-->
+                    <input type="$optiontype" id="option_$key" name="pollanswers[]" value="$option[polloptionid]" {if $_G['forum_thread']['is_archived']}disabled="disabled"{/if} {if $optiontype=='checkbox'}onclick="poll_checkbox(this)"{else}onclick="$('pollsubmit').disabled = false"{/if} />
+                    <label for="option_$key" class="poll-btn"></label>
+                <!--{/if}-->
+			</div>
+			<!--{/loop}-->
+		<!--{if ($imgpad = $key % 4) > 0}--><!--{echo str_repeat('', 4 - $imgpad);}--><!--{/if}-->
+
+	<!--{else}-->
+		<!--{loop $polloptions $key $option}-->
+			<div class="poll-item nopic shadow-2D">
+				<!--{if $_G['group']['allowvote']}-->
+					<input type="$optiontype" id="option_$key" name="pollanswers[]" value="$option[polloptionid]" {if $_G['forum_thread']['is_archived']}disabled="disabled"{/if} {if $optiontype=='checkbox'}onclick="poll_checkbox(this)"{else}onclick="$('pollsubmit').disabled = false"{/if} />
+					<label  for="option_$key" >
+						<em class="l" style="width:100%; background-color:#$option[color]; opacity: 0"></em>
+						<span class="status">
+							<a class="l">$option[polloption]</a>
+							<!--{if $visiblepoll}-->
+								<a class="r">$option[percent]% ($option[votes]{lang ballot})</a>
+							<!--{/if}-->
+						</span>
+					</label>
+				<!--{else}-->
+					<!--{if $visiblepoll}-->
+						<input type="checkbox" id="i_$key"/>
+						<label  for="i_$key" >
+							<em class="l trans-ease" style="width:$option[width]; background:#$option[color]"></em>
+							<span class="status">
+								<a class="l">$option[polloption]</a>
+								<a class="r">$option[percent]% ($option[votes]{lang ballot})</a>
+							</span>
+						</label>
+					<!--{else}-->
+						<input type="checkbox"/>
+						<label  for="i_$key" >
+							<em class="l trans-ease" style="width:100%; background:#$option[color]"></em>
+							<span class="status">
+								<a class="l">$option[polloption]</a>
+							</span>
+						</label>
+					<!--{/if}-->
+				<!--{/if}-->
+			</div>
+		<!--{/loop}-->
+	<!--{/if}-->
+	<!--{hook/viewthread_poll_bottom}-->
+	<!--{if $_G['group']['allowvote'] && !$_G['forum_thread']['is_archived']}-->
+		<button class="btn btn-mid btn-success-b shadow-3D trans-ease-quick" type="submit" disabled="disabled" name="pollsubmit" id="pollsubmit" value="true"{if $post['invisible'] < 0} disabled="disabled"{/if}>{lang vote}<!--{if $overt}--> ({lang poll_msg_overt})<!--{/if}--></button>
+	<!--{elseif !$allwvoteusergroup}-->
+		<div class="alert hi-warning">{lang poll_msg_allwvoteusergroup}</div>
+	<!--{elseif !$allowvotepolled}-->
+		<div class="alert hi-info">{lang poll_msg_allowvotepolled}</div>
+	<!--{elseif !$allowvotethread}-->
+		<div class="alert hi-warning">{lang poll_msg_allowvotethread}</div>
+	<!--{/if}-->
+</form>

@@ -1,0 +1,55 @@
+{eval
+    function tpl_input_nodes($id, $style_key) {
+        global $_G;
+        $width = $_G['cache']['plugin']['vaptcha']['btn_width'];
+        $height = $_G['cache']['plugin']['vaptcha']['btn_height'];
+        $color = $_G['cache']['plugin']['vaptcha']['bg_color'];
+        $style =  Helper::getStyle();
+}
+<!--{block return}-->
+	<!--{if trim($style['label']) || $style['required']}-->
+	<label for="vaptcha_container_$id">
+		<!--{if $style['required']}-->
+			<span class="rq">*</span>
+		<!--{/if}-->
+			$style['label']
+	</label>
+	<!--{/if}-->
+	<div id="vaptcha_container_$id" >
+		<div class="vaptcha-init-main">
+			<div class="vaptcha-init-loading">
+				<a><img src="https://cdn.vaptcha.com/vaptcha-loading.gif"/></a>
+				<span class="vaptcha-text">{lang vaptcha:loading_vaptcha}</span>
+			</div>
+		</div>
+	</div>
+<!--{/block}-->
+{eval return $return;}
+{eval }
+
+    function tpl_input_script($id, $isLogin = false) {
+
+}
+<!--{block return}-->
+var vaptcha = document.getElementById('vaptcha_container_$id');
+_vaptcha = initVaptcha(vaptcha, form);
+
+<!--{if $isLogin}-->
+var loginbtn = form.parentElement.getElementsByTagName('button')['loginsubmit'];
+addEvent(loginbtn, 'click',function(){
+    _vaptcha.refresh();
+})
+
+<!--{else}-->
+
+var registerbtn = document.getElementById('registerformsubmit');
+addEvent(registerbtn, 'click',function(){
+    _vaptcha = _vaptcha.refresh();
+})
+<!--{/if}-->
+
+<!--{/block}-->
+{eval return $return;}
+{eval }
+
+}

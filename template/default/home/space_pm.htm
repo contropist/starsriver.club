@@ -1,0 +1,119 @@
+<!--{eval $_G['home_tpl_titles'] = array('{lang pm}');}-->
+<!--{template home/space_trends_header}-->
+<div class="plate layout-2-type3 app-notice glass-box">
+	<section class="col-1">
+		<!--{subtemplate home/space_prompt_nav}-->
+		<div class="drag">
+			<!--[nest=nest2]--><div id="nest2" class="area"></div><!--[/nest]-->
+		</div>
+	</section>
+	<section class="col-2">
+		<div class="nav">
+			<a $actives[privatepm] $actives[newpm] href="home.php?mod=space&do=pm&filter=privatepm">
+				{lang private_pm}<!--{if $newpm}--><i class="point">$newpm</i><!--{/if}-->
+			</a>
+			<a $actives[announcepm] href="home.php?mod=space&do=pm&filter=announcepm">
+				{lang announce_pm}<!--{if $announcepm}--><i class="point">$announcepm</i><!--{/if}-->
+			</a>
+			<a $actives[setting] style="float: right;" href="home.php?mod=space&do=pm&subop=setting">{lang pm_setting}</a>
+		</div>
+
+		<div class="content">
+			<!--{if $subpage == 'first'}-->
+				<div class="session">
+					<input type="hidden" name='deletesubmit' value="true" />
+					<input type="hidden" name="formhash" value="{FORMHASH}" />
+                    <!--{subtemplate home/space_pm_session_list}-->
+					<div class="session-content">
+						<!--{subtemplate home/space_pm_session_content}-->
+						<!--{subtemplate home/space_pm_session_deliver}-->
+					</div>
+				</div>
+				<a class="btn-thumb mt-assistant hi-danger-dark" style="position: absolute; bottom: 8px; left: 8px;" href="home.php?mod=spacecp&ac=pm&op=createsession" onclick="showWindow('showMsgBox', this.href, 'get', 0)" title="{lang new_upm}"></a>
+    			<a class="btn-thumb mt-message hi-primary-dark" style="position: absolute; bottom: 8px; left: 50px;" href="home.php?mod=spacecp&ac=pm&op=createsession&type=1" onclick="showWindow('showMsgBox', this.href, 'get', 0)" title="{lang new_ugpm}"></a>
+				<script type="text/javascript" src="{$_G[setting][jspath]}home_friendselector.js?{VERHASH}"></script>
+			<!--{elseif  $subpage == 'grouppm'}-->
+				<!--{if $grouppms}-->
+					<!--{loop $grouppms $grouppm}-->
+						<div class="vessel{if !$gpmstatus[$grouppm[id]]} new{/if}" href="home.php?mod=space&do=pm&subop=viewg&pmid=$grouppm[id]" id="gpmlist_$grouppm[id]">
+							<a class="active-notice block-element" href="home.php?mod=space&do=pm&subop=viewg&pmid=$grouppm[id]">
+								<object class="block-element">
+									<div class="header">
+										<!--{if $grouppm[author]}-->
+											<a class="avatar" href="home.php?mod=space&uid=$grouppm[authorid]"><!--{avatar($grouppm[authorid],'small')}--></a>
+											<a class="name"  href="home.php?mod=space&uid=$grouppm[authorid]">$grouppm[author]</a>
+										<!--{else}-->
+											<a class="avatar"><img src="{STATICURL}image/common/systempm.png"/></a>
+											<a class="name">{lang system_notice}</a>
+										<!--{/if}-->
+										<i class="time str"><!--{date($grouppm[dateline], 'u')}--></i>
+										<a class="r ft-x str ignore" onclick="ajaxget('home.php?mod=spacecp&ac=pm&op=delete&deletesubmit=1&deletepm_gpmid[]=$grouppm[id]', '', 'ajaxwaitid', '', 'none', $('gpmlist_$grouppm[id]').style.display='none');"></a>
+									</div>
+									<div class="body">
+										<div class="note">
+											$grouppm[message]
+										</div>
+									</div>
+								</object>
+							</a>
+						</div>
+					<!--{/loop}-->
+				<!--{else}-->
+					<div class="vessel none">
+						{lang no_corresponding_pm}
+					</div>
+				<!--{/if}-->
+			<!--{elseif  $subpage == 'global_msg'}-->
+				<!--{if $grouppm}-->
+					<div class="vessel">
+						<div class="active-notice">
+							<div class="header">
+								<!--{if $grouppm[author]}-->
+									<a class="avatar" href="home.php?mod=space&uid=$grouppm[authorid]"><!--{avatar($grouppm[authorid],'small')}--></a>
+									<a class="name"  href="home.php?mod=space&uid=$grouppm[authorid]">$grouppm[author]</a>
+								<!--{else}-->
+									<a class="avatar"><img src="{STATICURL}image/common/systempm.png"/></a>
+									<a class="name">{lang system_notice}</a>
+								<!--{/if}-->
+								<i class="time str"><!--{date($grouppm[dateline], 'u')}--></i>
+							</div>
+							<div class="body">
+								<div class="note">
+									$grouppm[message]
+								</div>
+							</div>
+						</div>
+					</div>
+				<!--{else}-->
+					<div class="vessel none">
+						{lang no_corresponding_pm}
+					</div>
+				<!--{/if}-->
+			<!--{elseif  $subpage == 'setting'}-->
+				<div class="vessel">
+					<form class="setting" id="pmsettingform" name="pmsettingform" method="post" autocomplete="off" action="home.php?mod=spacecp&ac=pm&op=setting">
+						<input type="hidden" name="formhash" value="{FORMHASH}" />
+						<div class="input-tip alert hi-info">
+							{lang ignore_member_pm_message}
+						</div>
+						<div class="input-line">
+							<span>{lang ignore_list}：</span>
+							<textarea id="ignorelist" name="ignorelist" onkeydown="ctrlEnter(event, 'ignoresubmit');" placeholder="">{echo htmlspecialchars($ignorelist)}</textarea>
+						</div>
+						<div class="input-line">
+							<span>{lang pm_onlyacceptfriendpm}：</span>
+							<div class="csbox mager">
+								<input type="radio" id="onlyacceptfriendpm_y" name="onlyacceptfriendpm" value="1" {if $acceptfriendpmstatus == 1}checked="checked"{/if} />
+								<label for="onlyacceptfriendpm_y">{lang yes}</label>
+								<input type="radio" id="onlyacceptfriendpm_n" name="onlyacceptfriendpm" value="2" {if $acceptfriendpmstatus == 2}checked="checked"{/if} />
+								<label for="onlyacceptfriendpm_n">{lang no}</label>
+							</div>
+						</div>
+						<button class="submit" type="submit" name="settingsubmit" value="true">{lang save}</button>
+					</form>
+				</div>
+			<!--{/if}-->
+		</div>
+	</section>
+</div>
+<!--{template common/footer}-->

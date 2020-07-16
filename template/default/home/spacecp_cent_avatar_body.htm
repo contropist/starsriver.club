@@ -1,0 +1,32 @@
+<link rel="stylesheet" href="{$_G[setting][csspath]}avatar.css?{VERHASH}" />
+<form id="avatarform" class="horizon" enctype="multipart/form-data" method="post" autocomplete="off" >
+    <img id="avatarimage" onload="forceSelectorInsideAvatar();" src="" />
+	<input type="hidden" id="avatar1" name="avatar1" />
+	<input type="hidden" id="avatar2" name="avatar2" />
+	<input type="hidden" id="avatar3" name="avatar3" />
+	<input type="hidden" name="formhash" value="{FORMHASH}" />
+	<input hide type="file" name="Filedata" id="avatarfile" accept="image/*" onchange="this.form.submit();" />
+	<div id="avatarcreator">
+		<div id="avataradjuster" data-avatartype="round" style="display: none">
+			<canvas id="avatarcanvas"></canvas>
+			<div id="selector">
+				<div class="area"><img id="selectedarea" onload="forceSelectorInsideAvatar();" src="" /></div>
+			</div>
+		</div>
+		<label id="fileselector" for="avatarfile">
+		<span>
+			<img src="{IMGURL}/common/icon/add-img.png">
+			<i>选择图片</i>
+		</span>
+		</label>
+		<label id="filereselector" class="ft-upload" for="avatarfile" style="display: none">重选</label>
+		<button id="saver" disabled onclick="saveAvatar();">{lang confirms}</button>
+		<div id="slider"></div>
+	</div>
+</form>
+<script type="text/javascript">
+    avatarUploadData = "{echo implode(',', $uc_avatarflash);}".split(',');
+</script>
+<script src="{$_G[setting][jspath]}avatar.js?{VERHASH}"></script>
+<iframe hide name="uploadframe" id="uploadframe"></iframe>
+<iframe hide name="rectframe" id="rectframe"></iframe>

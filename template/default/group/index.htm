@@ -1,0 +1,124 @@
+<!--{template common/header}-->
+    <div class="plate layout-nest">
+        <section>
+            <!--[nest=nest1]--><div id="nest1" class="area"></div><!--[/nest]-->
+        </section>
+    </div>
+    <div class="plate layout-0 layout-first">
+        <section class="col-1">
+            <div class="panel no-gap groups" id="group_news">
+                <div class="title">
+                    <a class="category-name">{lang group_focus}</a>
+                    <a class="more " href="group.php?mod=my"><cite class="trans-none"><span>{lang my_group}<i class="ft-chevron-right"></i></span></cite></a>
+                </div>
+                <!--{if $group_news}-->
+                <ol>
+                    <!--{loop $group_news $news}-->
+                    <li></li>
+                    <!--{/loop}-->
+                </ol>
+                <!--{else}-->
+                <div class="global_nothing">{lang global_nothing}</div>
+                <!--{/if}-->
+            </div>
+            <!--[nest=nestcontenttop]--><div id="nestcontenttop" class="area"></div><!--[/nest]-->
+            <!--[nest=nest5]--><div id="nest5" class="area"></div><!--[/nest]-->
+            <!--[nest=nestcommendtop]--><div id="nestcommendtop" class="area"></div><!--[/nest]-->
+            <!--{hook/index_header}-->
+            <!--{if $group_recommend}-->
+            <div class="panel no-gap groups" id="group_recommend">
+                <div class="title">
+                    <a class="category-name">
+                        {lang recommend_group}
+                    </a>
+                </div>
+                <ol class="panel-container group-list relax">
+                    <!--{loop $group_recommend $val}-->
+                    <li class="box size-2-1">
+                        <a href="forum.php?mod=group&fid=$val[fid]">
+                            <img class="group-banner" src="{if $val[banner]}$val[banner]{else}{IMGURL}/common/no-img/no-group-banner.svg{/if}">
+                            <div class="info">
+                                <img class="group-icon trans-outback {if !$val[banner]}empty{/if}" src="{if $val[icon]}$val[icon]{else}{IMGURL}/common/no-img/no-group-avatar.svg{/if}" alt="$val[name]"/>
+                                <p class="name">$val[name]</p>
+                                <p class="descrip">
+                                    <!--{if $val[description]}-->
+                                    $val[description]
+                                    <!--{else}-->
+                                    {lang group_description_no}
+                                    <!--{/if}-->
+                                </p>
+                            </div>
+                        </a>
+                    </li>
+                    <!--{/loop}-->
+                </ol>
+            </div>
+            <!--{/if}-->
+        </section>
+    </div>
+    <div class="plate layout-2-type2">
+        <section class="col-1">
+            <!--[nest=nestcategorytop]--><div id="nestcategorytop" class="area"></div><!--[/nest]-->
+            <!--{hook/index_top}-->
+            <!--{loop $first $groupid $group}-->
+            <div class="panel no-gap groups" id="group_all">
+                <div class="title">
+                    <a class="category-name" href="group.php?gid=$groupid">$group[name]</a>
+                    <ul class="group-categorys tags">
+                        <!--{loop $group['secondlist'] $fid}-->
+                        <li><a href="group.php?sgid=$fid">$second[$fid][name]</a></li>
+                        <!--{/loop}-->
+                    </ul>
+                    <a class="more" href="group.php?gid=$groupid"><!--{if $group[groupnum]}-->{lang have}<span>$group[groupnum]</span>{lang groups}<!--{/if}-->&nbsp;<cite class="trans-none"><span>{lang more}</span></cite></a>
+                </div>
+                <ol class="panel-container group-list">
+                    <!--{eval $list_num = 0}-->
+                    <!--{loop $lastupdategroup[$groupid] $val}-->
+                    <!--{if $list_num < 9}-->
+                        <!--{eval $list_num++}-->
+                        <li class="box size-3-1">
+                            <a href="forum.php?mod=group&fid=$val[fid]">
+                                <img class="group-banner" src="{if $val[banner]}$val[banner]{else}{IMGURL}/common/no-img/no-group-banner.svg{/if}">
+                                <div class="info">
+                                    <img class="group-icon trans-outback {if !$val[banner]}empty{/if}" src="{if $val[icon]}$val[icon]{else}{IMGURL}/common/no-img/no-group-avatar.svg{/if}">
+                                    <p class="name trans-outback">$val[name]</p>
+                                    <p class="descrip  trans-outback">
+                                        <!--{if $val[description]}-->
+                                            $val[description]
+                                        <!--{else}-->
+                                            {lang group_description_no}
+                                        <!--{/if}-->
+                                    </p>
+                                </div>
+                            </a>
+                        </li>
+                    <!--{else}--><!--{eval break;}--><!--{/if}-->
+                    <!--{/loop}-->
+                </ol>
+            </div>
+            <!--{/loop}-->
+            <!--[nest=nestcontentbottom]--><div id="nestcontentbottom" class="area"></div><!--[/nest]-->
+            <!--{hook/index_bottom}-->
+        </section>
+        <section class="col-2">
+            <!--{template group/group_create_btn}-->
+            <!--{template group/group_ranklist}-->
+            <div class="side-box">
+                <!--[nest=nestsidetop]--><div id="nestsidetop" class="area"></div><!--[/nest]-->
+                <!--{hook/index_side_top}-->
+            </div>
+            <div class="side-box">
+                <!--[nest=nestsidemiddle]--><div id="nestsidemiddle" class="area"></div><!--[/nest]-->
+            </div>
+            <div class="side-box">
+                <!--[nest=nestsidebottom]--><div id="nestsidebottom" class="area"></div><!--[/nest]-->
+                <!--{hook/index_side_bottom}-->
+            </div>
+        </section>
+    </div>
+    <div class="plate layout-0">
+        <section>
+            <!--[nest=nest4]--><div id="nest4" class="area"></div><!--[/nest]-->
+        </section>
+    </div>
+<!--{template common/footer}-->

@@ -1,0 +1,33 @@
+<?php
+$_CACHE['settings'] = array (
+  'accessemail' => '',
+  'censoremail' => '',
+  'censorusername' => '',
+  'dateformat' => 'y-n-j',
+  'doublee' => '0',
+  'nextnotetime' => '0',
+  'timeoffset' => '28800',
+  'privatepmthreadlimit' => '25',
+  'chatpmthreadlimit' => '30',
+  'chatpmmemberlimit' => '35',
+  'pmfloodctrl' => '15',
+  'pmcenter' => '1',
+  'sendpmseccode' => '1',
+  'pmsendregdays' => '0',
+  'addappbyurl' => '0',
+  'maildefault' => '',
+  'mailsend' => '1',
+  'mailserver' => '',
+  'mailport' => '25',
+  'mailauth' => '1',
+  'mailfrom' => '',
+  'mailauth_username' => '',
+  'mailauth_password' => '',
+  'maildelimiter' => '0',
+  'mailusername' => '1',
+  'mailsilent' => '1',
+  'login_failedtime' => '5',
+  'version' => '1.6.0',
+);
+
+?>

@@ -1,0 +1,138 @@
+<div id="fastpost">
+<!--{if !$allowfastpost}-->
+	<div class="logincheck">
+		<!--{if !$_G['uid']}-->
+			<!--{if !$_G['connectguest']}-->
+				{lang login_to_post}
+			    <a href="member.php?mod=logging&action=login" onclick="showWindow('login', this.href)" >{lang login}</a> | <a href="member.php?mod={$_G[setting][regname]}">$_G['setting']['reglinkname']</a><br />
+			<!--{else}-->
+				{lang connect_fill_profile_to_post}
+			<!--{/if}-->
+		<!--{else}-->
+			{lang no_permission_to_post}
+		<!--{/if}-->
+		<!--{hook/global_login_text}-->
+	</div>
+	<div class="blur">
+		<div id="fastposteditor">
+			<div class="editbar dpointer">
+				<a class="l shift">{lang post_advancemode}</a>
+				<!--{eval $seditor = array('fastpost', array('at', 'bold', 'color', 'quote', 'code', 'smilies'), !$allowfastpost ? 1 : 0, $allowpostattach && $allowfastpost ? '<span id="spanButtonPlaceholder">'.lang('template', 'upload').'</span>' : '');}-->
+				<!--{subtemplate common/seditor}-->
+			</div>
+            <textarea></textarea>
+            <div class="postbar"><button class="r submit trans-jumpout" >{lang post_newthread}</button></div>
+        </div>
+	</div>
+<!--{else}-->
+	<form method="post" autocomplete="off" id="fastpostform" action="forum.php?mod=post&action=reply&fid=$_G[fid]&tid=$_G[tid]&extra=$_GET[extra]&replysubmit=yes{if $_GET['ordertype'] != 1}&infloat=yes&handlekey=fastpost{/if}{if $_GET[from]}&from=$_GET[from]{/if}"{if $_GET['ordertype'] != 1} onSubmit="return fastpostvalidate(this)"{/if}>
+        <!--{hook/viewthread_fastpost_content}-->
+		<span id="fastpostreturn"></span>
+        <div {if empty($_GET[from]) && $_G[setting][fastsmilies]} {/if} id="fastposteditor">
+            <div class="editbar dpointer">
+                <a class="r shift" onclick="return switchAdvanceMode('forum.php?mod=post&action=reply&fid=$_G[fid]&tid=$_G[tid]{if $_GET[from]}&from=$_GET[from]{/if}')">{lang post_advancemode}</a>
+                <!--{if $_G[forum_thread][special] == 5 && empty($firststand)}-->
+                <select id="stand" name="stand">
+                    <option value="">{lang debate_viewpoint}</option>
+                    <option value="0">{lang debate_neutral}</option>
+                    <option value="1">{lang debate_square}</option>
+                    <option value="2">{lang debate_opponent}</option>
+                </select>
+                <!--{/if}-->
+                <!--{hook/viewthread_fastpost_func_extra}-->
+                <!--{eval $seditor = array('fastpost', array('at', 'bold', 'color', 'img', 'quote', 'smilies'), !$allowfastpost ? 1 : 0, $allowpostattach && $_GET['from'] != 'preview' && $allowfastpost ? '<span id="spanButtonPlaceholder">'.lang('template', 'upload').'</span>' : '');}-->
+                <!--{hook/viewthread_fastpost_ctrl_extra}-->
+                <!--{subtemplate common/seditor}-->
+                <div hide>
+                    <input name="formhash" value="{FORMHASH}" />
+                    <input name="usesig" value="$usesigcheck" />
+                    <input name="subject" value="" />
+                    <script type="text/javascript">simulateSelect('stand');</script>
+                </div>
+            </div>
+            <textarea name="message" placeholder="{lang reply_rule}" id="fastpostmessage"></textarea>
+        </div>
+        <div class="postbar ccbox">
+            <button class="r submit trans-jumpout" {if $allowpostreply}type="submit" {elseif !$_G['uid']}type="button" onclick="showWindow('login', 'member.php?mod=logging&action=login&guestmessage=yes')" {/if}{if !$seccodecheck}onmouseover="checkpostrule('seccheck_fastpost', 'ac=reply');this.onmouseover=null" {/if}name="replysubmit" id="fastpostsubmit" value="replysubmit">{lang post_reply}</button>
+            <!--{if $secqaacheck || $seccodecheck}--><div id="seccheck"><!--{subtemplate forum/seccheck_post}--></div><!--{/if}-->
+            <!--{hook/viewthread_fastpost_btn_extra}-->
+            <!--{if $_GET['ordertype'] != 1 && empty($_GET[from])}-->
+            <input id="fastpostrefresh" type="checkbox"/>
+            <label for="fastpostrefresh">{lang post_fastreply_gotolast}</label>
+            <script type="text/javascript">if(getcookie('fastpostrefresh') == 1) {$('fastpostrefresh').checked=true;}</script>
+            <!--{/if}-->
+        </div>
+		<!--{if $_GET['from'] != 'preview'}-->
+            <script type="text/javascript">
+                var editorid = '', ATTACHNUM = {'imageused':0,'imageunused':0,'attachused':0,'attachunused':0}, ATTACHUNUSEDAID = [], IMGUNUSEDAID = [];
+            </script>
+            <input type="hidden" name="posttime" id="posttime" value="{TIMESTAMP}" />
+            <div class="fileslist">
+                <div id="fl_header" style="display: none">
+                    <p class="tipbar">上传的文件会全部以上传时间排序并显示在内容里，你可以通过将文件添加到内容里来调整顺序</p>
+                    <div class="item" >
+                        <a class="l file">{lang filename}<span class="tooltip" data-pos="tl">{lang e_attach_insert}</span></a>
+                        <a class="r delete" style="background: none !important;"></a>
+                        <!--{if $_G['group']['maxprice']}-->
+                            <a class="r price">{$_G['setting']['extcredits'][$_G['setting']['creditstransextra'][1]][title]}</a>
+                        <!--{/if}-->
+                        <!--{if $_G['group']['allowsetattachperm']}-->
+                            <a class="r permis">{lang readperm}<img class="svgicon small" src="{IMGURL}/common/mark/faq.svg" alt="Tip" class="vm" onmouseover="showTip(this)" tip="{lang post_select_usergroup_readacces}" /></a>
+                        <!--{/if}-->
+                        <a class="r descrip">{lang description}</a>
+                    </div>
+                </div>
+                <div id="attachlist"></div>
+                <div hide>
+                    <!--{if empty($_G['setting']['pluginhooks']['viewthread_fastpost_upload_extend'])}-->
+                        <!--{subtemplate common/upload}-->
+                        <script type="text/javascript">
+                            var upload = new SWFUpload({
+                                upload_url: "{$_G[siteurl]}misc.php?mod=swfupload&action=swfupload&operation=upload&fid=$_G[fid]",
+                                post_params: {"uid" : "$_G[uid]", "hash":"$swfconfig[hash]"},
+                                file_size_limit : "$swfconfig[max]",
+                                file_types : "$swfconfig[attachexts][ext]",
+                                file_types_description : "$swfconfig[attachexts][depict]",
+                                file_upload_limit : $swfconfig['limit'],
+                                file_queue_limit : 0,
+                                swfupload_preload_handler : preLoad,
+                                swfupload_load_failed_handler : loadFailed,
+                                file_dialog_start_handler : fileDialogStart,
+                                file_queued_handler : fileQueued,
+                                file_queue_error_handler : fileQueueError,
+                                file_dialog_complete_handler : fileDialogComplete,
+                                upload_start_handler : uploadStart,
+                                upload_progress_handler : uploadProgress,
+                                upload_error_handler : uploadError,
+                                upload_success_handler : uploadSuccess,
+                                upload_complete_handler : uploadComplete,
+                                button_image_url : "{STATICURL}image/common/uploadbutton_small.png",
+                                button_placeholder_id : "spanButtonPlaceholder",
+                                button_width: 19,
+                                button_height: 30,
+                                button_cursor:SWFUpload.CURSOR.HAND,
+                                button_window_mode: "transparent",
+                                custom_settings : {
+                                    progressTarget : "attachlist",
+                                    uploadSource: 'forum',
+                                    uploadType: 'attach',
+                                    <!--{if $swfconfig['maxsizeperday']}-->
+                                    maxSizePerDay: $swfconfig['maxsizeperday'],
+                                    <!--{/if}-->
+                                    <!--{if $swfconfig['maxattachnum']}-->
+                                    maxAttachNum: $swfconfig['maxattachnum'],
+                                    <!--{/if}-->
+                                    uploadFrom: 'fastpost'
+                                },
+                                debug: false
+                            });
+                        </script>
+                    <!--{else}-->
+                        <!--{hook/viewthread_fastpost_upload_extend}-->
+                    <!--{/if}-->
+                </div>
+            </div>
+		<!--{/if}-->
+	</form>
+<!--{/if}-->
+</div>

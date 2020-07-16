@@ -1,0 +1,99 @@
+/*
+wysiwyg CSS file for StarsRiver! X
+(C) Comsenz Inc.
+http://www.comsenz.com
+*/
+* { margin: 0; padding: 0; word-wrap: break-word; }
+html, body { border: 0 !important; }
+body {
+    box-sizing: border-box;
+    padding: 6px;
+    font-size: 14px;
+}
+.litype_1 li, ol li { list-style-type: decimal; }
+.litype_2 li { list-style-type: lower-alpha; }
+.litype_3 li { list-style-type: upper-alpha; }
+hr.l { height: 1px; border: none; background: {COMMONBORDER}; color: {COMMONBORDER}; }
+table { empty-cells: show; border-collapse: collapse; }
+table td { padding: 4px; border: 1px solid {COMMONBORDER}; }
+th { font-weight: 400; }
+.float td { border: 0; padding: 0; }
+img { max-width:400px; }
+
+blockquote{
+    width:calc(100% - 20px);
+	position: relative;
+	background: #f9f9f9;
+	border:1px solid #f2f2f2;
+    padding: 10px 0 10px 10px;
+    margin: 5px 10px;
+	box-sizing: border-box;
+	color:#666;
+}
+.code {position: relative;}
+.prettyprint {
+	position: relative;
+	display: block;
+	box-sizing: border-box;
+	width:calc(100% - 20px);
+	max-height:144px;
+	padding: 10px 0 10px 10px;
+    margin: 5px 10px;
+    font-family: 'sans-serif';
+    font-size: 12px;
+    line-height: 20px;
+    color: #333;
+    word-break: break-all;
+    word-wrap: break-word;
+	background: #f6f6f6;
+	border: 1px solid #eee;
+	border-radius: 4px;
+	margin-bottom: 10px;
+	overflow-x: hidden;
+	overflow-y: auto;
+}
+.prettyprint *{ font-size: 12px; }
+.prettyprint *::selection{ background: #f0f0f0 }
+.prettyprint code {
+	padding: 0;
+	margin: 0;
+	font-size: inherit;
+	color: inherit;
+	white-space: pre-wrap;
+	background-color: transparent;
+	border: 0;
+}
+.prettyprint li {
+	color: #bbbbbb;
+	list-style-type: decimal;
+	padding-left:8px;
+	margin-left: 2px;
+}
+.prettyprint li:hover {
+	background: #eee;
+}
+pre kbd {
+	padding: 1px 4px;
+	font-size: 90%;
+	font-weight: bold;
+	color: #666;
+	background-color: #f1f1f1;
+	border: 1px solid #d7d7d7;
+	border-bottom-width: 2px;
+	border-radius: 4px;
+}
+pre .com { color: rgba(179, 179, 179, 1); }
+pre .lit { color: rgba(255, 126, 87, 1); }
+pre .fun { color: #dc322f; }
+pre .pln { color: rgba(6, 83, 111, 1); }
+pre .str { color: #DD1144; }
+pre .atv { color: #DD1144; }
+pre .pun { color: rgba(25, 0, 46, 1);  margin:0 3px;}
+pre .opn { color: #93a1a1; }
+pre .clo { color: #93a1a1; }
+pre .typ { color: rgba(102, 102, 102, 1); }
+pre .atn { color: #008080; }
+pre .dec { color: #008080; }
+pre .var { color: #008080; }
+pre .kwd { color: rgba(173, 0, 3, 1); }
+pre .tag { color: #1e347b; }

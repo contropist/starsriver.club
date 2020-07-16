@@ -1,0 +1,119 @@
+<input type="hidden" name="trade" value="yes" />
+<input type="hidden" name="item_type" value="1" />
+	<!--p>{lang post_message1}</p-->
+	<div class="basic">
+        <div class="row">
+            <div class="input-box" style="width: calc(100% - 499px)">
+                <span>{lang post_trade_name}<a class="tip-dot"></a></span>
+                <input type="text" name="item_name" id="item_name" value="$trade[subject]" tabindex="1"/>
+            </div>
+            <div class="input-box"  style="width: 141px">
+                <span>{lang post_trade_number}<a class="tip-dot"></a></span>
+                <input type="text" name="item_number" id="item_number" value="$trade[amount]" tabindex="1"/>
+            </div>
+            <select name="item_quality" id="item_quality" tabindex="1" >
+                <option value="" selected>{lang trade_quality}</option>
+                <option value="1">{lang trade_new}</option>
+                <option value="2">{lang trade_old}</option>
+            </select>
+            <select name="transport" id="transport" change="$('logisticssetting').style.display = $('transport').value == 'virtual' ? 'none' : ''">
+                <option value="" selected> {lang post_trade_transport}</option>
+                <option value="virtual" >{lang post_trade_transport_virtual}</option>
+                <option value="seller">{lang post_trade_transport_seller}</option>
+                <option value="buyer">{lang post_trade_transport_buyer}</option>
+                <option value="logistics">{lang trade_type_transport_physical}</option>
+                <option value="offline">{lang post_trade_transport_offline}</option>
+            </select>
+            <select name="paymethod" id="paymethod" change="display('tenpayseller')" tabindex="1">
+                <option value="" selected>{lang post_trade_paymethod}</option>
+                <!--{if $_G[setting][ec_tenpay_opentrans_chnid]}--><option value="0" >{lang post_trade_paymethod_online}</option><!--{/if}-->
+                <option value="1" >{lang post_trade_paymethod_offline}</option>
+            </select>
+        </div>
+        <div class="row">
+            <div class="input-box l" >
+                <span>{lang valid_before}</span>
+                <input type="text" name="item_expiration" id="item_expiration" onclick="showcalendar(event, this, false)" autocomplete="off" value="$trade[expiration]" tabindex="1" />
+            </div>
+            <div class="input-box l"  style="width:calc(75% + 1px)">
+                <span>{lang post_trade_locus}</span>
+                <input type="text" name="item_locus" id="item_locus" value="$trade[locus]" tabindex="1" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-box">
+                <span>{lang post_trade_price}<a class="tip-dot"></a></span>
+                <input type="text" name="item_price" id="item_price" value="$trade[price]" tabindex="1"/>
+            </div>
+            <div class="input-box">
+                <span>{lang post_original_price}</span>
+                <input type="text" name="item_costprice" id="item_costprice" value="$trade[costprice]" tabindex="1"/>
+            </div>
+            <!--{if $_G['setting']['creditstransextra'][5] != -1}-->
+            <div class="input-box">
+                <span>{$_G['setting']['extcredits'][$_G['setting']['creditstransextra'][5]][title]}<a class="tip-dot"></a></span>
+                <input type="text" name="item_credit" id="item_credit" value="$trade[credit]" tabindex="1" />
+            </div>
+            <div class="input-box">
+                <span>{lang post_original}{$_G['setting']['extcredits'][$_G['setting']['creditstransextra'][5]][title]}</span>
+                <input type="text" name="item_costcredit" id="item_costcredit" value="$trade[costcredit]" tabindex="1" />
+            </div>
+            <!--{/if}-->
+        </div>
+        <div class="row">
+            <div id="logisticssetting" style="width:75%; font-size:0; display:{if !$trade['transport'] || $trade['transport'] == 3}none{/if}">
+                <div class="input-box" style="width:calc(33.33% + 1px);">
+                    <span>{lang post_trade_transport_mail}</span>
+                    <input type="text" name="postage_mail" id="postage_mail" value="$trade[ordinaryfee]" tabindex="1" />
+                </div>
+                <div class="input-box" style="width:calc(33.33% + 1px);">
+                    <span>EMS</span>
+                    <input type="text" name="postage_ems" id="postage_ems" value="$trade[emsfee]" tabindex="1" />
+                </div>
+                <div class="input-box" style="width:calc(33.33% + 1px);">
+                    <span>{lang post_trade_transport_express}</span>
+                    <input type="text" name="postage_express" id="postage_express" value="$trade[expressfee]" tabindex="1" />
+                </div>
+            </div>
+            <div class="input-box" id="tenpayseller" style="{if !$trade[tenpayaccount]}display:none{/if}">
+                <span>{lang post_trade_tenpay_seller}</span>
+                <input type="text" name="tenpay_account" id="tenpay_account" value="$trade[tenpayaccount]" tabindex="2" />
+            </div>
+        </div>
+    </div>
+    <!--{eval echo getimgthumbname($tradeattach['attachment']);}-->
+    <div class="photo">
+        <input type="hidden" name="tradeaid" id="tradeaid" {if $tradeattach[attachment]}value="$tradeattach[aid]" {/if}/>
+        <input type="hidden" name="tradeaid_url" id="tradeaid_url" />
+        <div id="tradeattach_image">
+            <a href="$tradeattach[url]/$tradeattach[attachment]" target="_blank"><img src="{if $tradeattach[attachment]}$tradeattach[url]/$tradeattach[attachment]{else}{IMGURL}/forum/trade/photo.png{/if}" alt="" /></a>
+        </div>
+        <button type="button" onclick="uploadWindow(function (aid, url){tradeaid_upload(aid, url)})"></button>
+    </div>
+    <!--{hook/post_trade_extra}-->
+<script type="text/javascript" reload="1">
+simulateSelect('item_quality');
+simulateSelect('paymethod');
+simulateSelect('transport');
+
+EXTRAFUNC['validator']['special'] = 'validateextra';
+function validateextra() {
+	if($('postform').item_name.value == '') {
+		showDialog('{lang post_goods_error_message_1}', 'alert', '', function () { $('postform').item_name.focus() });
+		return false;
+	}
+	if($('postform').item_number.value == '') {
+		showDialog('{lang post_goods_error_message_2}', 'alert', '', function () { $('postform').item_number.focus() });
+		return false;
+	}
+	if($('postform').item_price.value == '' && $('postform').item_credit.value == '') {
+		showDialog('{lang post_goods_error_message_3}', 'alert', '', function () { $('postform').item_price.focus() });
+		return false;
+	}
+	return true;
+}
+function tradeaid_upload(aid, url) {
+	$('tradeaid_url').value = url;
+	updatetradeattach(aid, url, '{$_G['setting']['attachurl']}forum');
+}
+</script>

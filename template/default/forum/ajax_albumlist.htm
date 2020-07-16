@@ -1,0 +1,12 @@
+<!--{template common/header_ajax}-->
+<!--{eval $i = 0;}-->
+<table cellspacing="2" cellpadding="2" ><tr>
+<!--{loop $photolist $photo}-->
+	<!--{eval $i++;}-->
+	<td class="imgblock">
+		<a href="javascript:;"><img src="$photo[thumburl]" title="$photo[filename]" onclick="wysiwyg ? insertText('<img src=\'$photo[url]\' border=0 style=\'max-width:400px\'/>', false) : insertText('[img]$photo[url][/img]', <!--{echo strlen($photo[url]) + 11}-->, 0);doane(event);" onload="thumbImg(this, 1)"></a>
+	</td>
+<!--{/loop}-->
+</tr></table>
+<div class="pgs cl">$multi</div>
+<!--{template common/footer_ajax}-->

@@ -1,0 +1,84 @@
+<!--{template common/header}-->
+<div class="header">
+	<span class="title-tip">{lang collection_invite}</span>
+	<a onclick="hideWindow('$_GET['handlekey']');" class="close" title="{lang close}">×</a>
+</div>
+<form action="forum.php?mod=collection&action=edit&op=invite&ctid={$ctid}" method="post">
+	<div class="body">
+		<p class="common-tip"><i class="ft-user-plus heart-pink"></i><a id="showSelectBox" onclick="showMenu({'showid':this.id, 'duration':3, 'pos':'34'});fs.showPMFriend('showSelectBox_menu','selectorBox', this);" title="{lang collection_selectfriend}">{lang collection_selectfriend}</a></p>
+		<div class="tags"><ul id="selectedlist"></ul></div>
+		<div class="input-box" onclick="$('username').focus();">
+			<span>{lang collection_username}</span>
+			<input type="text" name="username" id="username" autocomplete="off" placeholder="{lang username}" />
+		</div>
+		<div class="drop-menu free cblock mager" id="username_menu" style="display: none;"><ul id="friends"></ul></div>
+		<div class="drop-menu free cblock mager" id="showSelectBox_menu" style="display:none;">
+			<select class="dropmenu" style="padding: 0 10px" onchange="clearlist=1;getUser(1, this.value)">
+				<option value="-1">{lang collection_inviteallfriend}</option>
+				<!--{loop $friendgrouplist $groupid $group}-->
+					<option value="$groupid">$group</option>
+				<!--{/loop}-->
+			</select>
+			<a class="close" onclick="showMenu({'showid':'showSelectBox', 'duration':3, 'pos':'34'});fs.showPMFriend('showSelectBox_menu','selectorBox', $('showSelectBox'));doane(event)">×</a>
+			<hr>
+			<div id="selBox"><ul id="selectorBox"></ul></div>
+		</div>
+		<script type="text/javascript">
+			var random='{TIMESTAMP}';
+			var page = 1;
+			var gid = -1;
+			var showNum = 0;
+			var haveFriend = true;
+			function getUser(pageId, gid) {
+				page = parseInt(pageId);
+				gid = isUndefined(gid) ? -1 : parseInt(gid);
+				var x = new Ajax();
+				x.get('home.php?mod=spacecp&ac=friend&op=getinviteuser&inajax=1&page='+ page + '&gid=' + gid + '&' + Math.random(), function(s) {
+					var data = eval('('+s+')');
+					var singlenum = parseInt(data['singlenum']);
+					var maxfriendnum = parseInt(data['maxfriendnum']);
+					fs.addDataSource(data, clearlist);
+					haveFriend = singlenum && singlenum == 20 ? true : false;
+					if(singlenum && fs.allNumber < 20 && fs.allNumber < maxfriendnum && maxfriendnum > 20 && haveFriend) {
+						page++;
+						getUser(page);
+					}
+				});
+			}
+			function selector() {
+				var parameter = {
+                    searchId:'username',
+                        showId:'friends',
+                        formId:'',
+                        showType:3,
+                        handleKey:'fs',
+                        selBox:'selectorBox',
+                        selBoxMenu:'showSelectBox_menu',
+                        maxSelectNumber:'20',
+                        selectTabId:'selectNum',
+                        unSelectTabId:'unSelectTab',
+                        maxSelectTabId:'remainNum'
+                };
+				fs = new friendSelector(parameter);
+				var listObj = $('selBox');
+				listObj.onscroll = function() {
+					clearlist = 0;
+					if(this.scrollTop >= this.scrollHeight/5) {
+						page++;
+						gid = isUndefined(gid) ? -1 : parseInt(gid);
+						if(haveFriend) {
+							getUser(page, gid);
+						}
+					}
+				};
+				getUser(page);
+			}
+			selector();
+		</script>
+	</div>
+	<div class="footer">
+		<i class="str">{lang collection_max_invite}</i>
+		<button class="btn-square" style="width: 39%" type="submit" value="submit" name="submitaddthread"><span>{lang invite}</span></button>
+	</div>
+</form>
+<!--{template common/footer}-->

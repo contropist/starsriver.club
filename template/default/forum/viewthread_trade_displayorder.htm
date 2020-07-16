@@ -1,0 +1,92 @@
+<!--{template common/header}-->
+<!--{if empty($_GET['infloat'])}-->
+<div>
+<!--{/if}-->
+
+<script type="text/javascript" reload="1">
+	var max_obj = {$_G['group']['tradestick']};
+	var p = $stickcount;
+	function checkbox(obj) {
+		if(obj.checked) {
+			p++;
+			for (var i = 0; i < $('tradeform').elements.length; i++) {
+				var e = tradeform.elements[i];
+				if(p == max_obj) {
+					if(e.name.match('stick') && !e.checked) {
+						e.disabled = true;
+					}
+				}
+			}
+		} else {
+			p--;
+			for (var i = 0; i < $('tradeform').elements.length; i++) {
+				var e = tradeform.elements[i];
+				if(e.name.match('stick') && e.disabled) {
+					e.disabled = false;
+				}
+			}
+		}
+	}
+</script>
+
+<form id="tradeform" method="post" autocomplete="off" action="forum.php?mod=misc&action=tradeorder&tid=$_G[tid]&tradesubmit=yes&infloat=yes{if !empty($_GET['from'])}&from=$_GET['from']{/if}"{if !empty($_GET['infloat'])} onsubmit="ajaxpost('tradeform', 'return_$_GET['handlekey']', 'return_$_GET['handlekey']', 'onerror');return false;"{/if}>
+	<div class="header">
+		<span class="title-tip" id="return_$_GET['handlekey']">{lang trade_displayorder}</span>
+		<!--{if !empty($_GET['infloat'])}--><a onclick="hideWindow('$_GET['handlekey']');" class="close" title="{lang close}">×</a><!--{/if}-->
+	</div>
+	<input type="hidden" name="formhash" value="{FORMHASH}" />
+	<!--{if !empty($_GET['infloat'])}-->
+		<input type="hidden" name="handlekey" value="$_GET['handlekey']" />
+	<!--{/if}-->
+	<div class="body">
+		<table class="dc wb">
+			<thead>
+				<tr>
+					<td width="50">{lang trade_update_stick}</td>
+					<td width="100">{lang trade_show_order}</td>
+					<td width="200">{lang post_trade_name}</td>
+					<td width="200">{lang trade_remaindays}</td>
+					<td width="40">#</td>
+				</tr>
+			</thead>
+			<tbody class="ccbox">
+			<!--{loop $trades $trade}-->
+				<tr>
+					<td>
+						<input id="id_stick[{$trade[pid]}]" type="checkbox" onclick="checkbox(this)" name="stick[{$trade[pid]}]" value="yes" {if $trade[displayorder] > 0}checked="checked"{elseif $_G['group']['tradestick'] <= $stickcount}disabled="disabled"{/if} />
+						<label for="id_stick[{$trade[pid]}]"></label>
+					</td>
+					<td style="line-height: 32px"><input style="margin: 5px; padding: 0 5px; border: 1px solid rgb(230, 230, 230); border-image: none; width: 42px; height: 20px; line-height: 20px;" name="displayorder[{$trade[pid]}]" value="$trade[displayorderview]" class="px4-radius" /></td>
+					<td>$trade[subject]</td>
+					<td>
+					<!--{if $trade[closed]}-->
+						{lang trade_timeout}
+					<!--{elseif $trade[expiration] > 0}-->
+						{$trade[expiration]}{lang days}{$trade[expirationhour]}{lang trade_hour}
+					<!--{elseif $trade[expiration] == -1}-->
+						{lang trade_timeout}
+					<!--{/if}-->
+					</td>
+					<td><a href="forum.php?mod=post&action=edit&fid=$thread[fid]&tid=$_G[tid]&pid=$trade[pid]" target="_blank" class="ft-clipboard text-success"></a></td>
+				</tr>
+			<!--{/loop}-->
+			</tbody>
+		</table>
+		<span class="text-warning">{lang trade_update_stickmax} {$_G['group']['tradestick']} </span>
+	</div>
+	<div class="footer">
+		<button class="btn-square fullwidth" style="border: none;"  type="submit" name="tradesubmit" value="true">{lang save}</button>
+	</div><!--{if empty($_GET['infloat'])}--></div><!--{/if}-->
+</form>
+
+<script type="text/javascript" reload="1">
+function succeedhandle_$_GET['handlekey'](locationhref) {
+	location.href = locationhref;
+}
+</script>
+
+<!--{if empty($_GET['infloat'])}-->
+
+</div>
+<!--{/if}-->
+<!--{template common/footer}-->

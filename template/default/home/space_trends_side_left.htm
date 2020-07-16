@@ -1,0 +1,94 @@
+<div class="nav-vertical">
+	<i class="title">{lang feed}</i>
+	<!--{if $_G[setting][homestyle]}-->
+		<!--{template common/userabout}-->
+	<!--{else}-->
+	<ul>
+		<li $actives[we]><a href="home.php?mod=space&do=home&view=we">{lang friend_feed}</a></li>
+		<li $actives[me]><a href="home.php?mod=space&do=home&view=me">{lang my_feed}</a></li>
+		<li $actives[all]><a href="home.php?mod=space&do=home&view=all">{lang view_all}</a></li>
+		<!--{hook/space_trends_navlink}-->
+	</ul>
+	<!--{/if}-->
+</div>
+<!--{if $_G[uid]}-->
+	<!--{if $_G['setting']['taskon'] && !empty($task) && is_array($task)}-->
+		<div class="vessel">
+			<div class="side-box">
+				<div class="header">
+					<b>{lang rand}{lang task}</b>
+					<a class="more trans-light" href="home.php?mod=task">{lang more}</a>
+				</div>
+				<div class="body">
+					<a class="task" href="home.php?mod=task&do=view&id=$task[taskid]">
+						<i class="icon"><img src="$task[icon]"/></i>
+						<i class="name">$task[name]</i>
+						<!--{if in_array($task['reward'], array('credit', 'magic', 'medal', 'invite', 'group'))}-->
+						<span class="get charry-pink r">
+							<!--{if $task['reward'] == 'credit'}-->
+								+<strong>$task[bonus]</strong>$_G['setting']['extcredits'][$task[prize]][title]  $_G['setting']['extcredits'][$task[prize]][unit]
+							<!--{elseif $task['reward'] == 'magic'}-->
+								+<strong>$task[bonus]</strong>{lang magics_title} $listdata[$task[prize]]
+							<!--{elseif $task['reward'] == 'medal'}-->
+								+<strong>1</strong>{lang medals}
+							<!--{elseif $task['reward'] == 'invite'}-->
+								+<strong>$task[prize]</strong>{lang invite_code}
+							<!--{elseif $task['reward'] == 'group'}-->
+								<strong>{lang step_up}</strong>
+							<!--{/if}-->
+						</span>
+						<!--{/if}-->
+					</a>
+				</div>
+			</div>
+		</div>
+	<!--{/if}-->
+	<!--{if !empty($magic) && is_array($magic)}-->
+		<div class="vessel">
+			<div class="side-box">
+				<div class="header">
+					<b>{lang rand}{lang magic}</b>
+					<a class="more trans-light" href="home.php?mod=magic">{lang more}</a>
+				</div>
+				<div class="body">
+					<div class="magic-card">
+						<i class="icon"><img src="{STATICURL}/image/magic/$magic[pic]" alt="$magic[name]" title="$magic[description]" /></i>
+						<i class="name">$magic[name]</i>
+						<div class="descrip">
+							$magic[description]
+							<div class="on-sell align-center">
+								<i class="price-plate">
+									{lang magics_price}：
+									<!--{if {$_G['setting']['extcredits'][$magic[credit]][unit]}}-->
+									{$_G['setting']['extcredits'][$magic[credit]][title]} <strong>$magic[price]</strong> {$_G['setting']['extcredits'][$magic[credit]][unit]}
+									<!--{else}-->
+									<strong>$magic[price]</strong> {$_G['setting']['extcredits'][$magic[credit]][title]}
+									<!--{/if}-->
+								</i>
+								<!--{if $magic[num] > 0}-->
+								<a class="pay-btn" style="background:#3e93ea" href="home.php?mod=magic&action=shop&operation=buy&mid=$magic[identifier]" onclick="showWindow('magics', this.href);return false;">{lang magics_operation_buy}</a>
+								<!--{if $_G['group']['allowmagics'] > 1}-->
+								<a class="pay-btn" style="background:var(--color-main-theme);" href="home.php?mod=magic&action=shop&operation=give&mid=$magic[identifier]" onclick="showWindow('magics', this.href);return false;">{lang magics_operation_present}</a>
+								<!--{/if}-->
+								<!--{else}-->
+								<a class="stockout">{lang magic_empty}</a>
+								<!--{/if}-->
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	<!--{/if}-->
+<!--{/if}-->
+
+
+<div class="drag">
+	<!--[nest=nestmagictop]--><div id="nestmagictop" class="area"></div><!--[/nest]-->
+</div>
+<div class="drag">
+	<!--[nest=nestsidetop]--><div id="nestsidetop" class="area"></div><!--[/nest]-->
+</div>
+<div class="drag">
+	<!--[nest=nestsidebottom]--><div id="nestsidebottom" class="area"></div><!--[/nest]-->
+</div>

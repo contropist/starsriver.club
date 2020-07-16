@@ -1,0 +1,113 @@
+<div class="basic">
+    <div class="row">
+        <div class="input-box" style="width:calc(100% - 469px)">
+            <span>{lang activiy_sort}<a class="tip-dot"></a></span>
+            <input type="text" id="activityclass" name="activityclass" value="$activity[class]" tabindex="1" />
+        </div>
+        <div class="input-box" style="width: 131px">
+            <span>{lang activity_need_member}<a class="tip-dot"></a></span>
+            <input type="text" name="activitynumber" id="activitynumber" onkeyup="checkvalue(this.value, 'activitynumbermessage')" value="$activity[number]" tabindex="1" />
+        </div>
+        <select name="gender" id="gender">
+            <option value="0" {if !$activity['gender']}selected="selected"{/if}>{lang unlimited}</option>
+            <option value="1" {if $activity['gender'] == 1}selected="selected"{/if}>{lang male}</option>
+            <option value="2" {if $activity['gender'] == 2}selected="selected"{/if}>{lang female}</option>
+        </select>
+        <div class="input-box"  style="width: 131px">
+            <span>{lang activity_payment}</span>
+            <input type="text" name="cost" id="cost" onkeyup="checkvalue(this.value, 'costmessage')" value="$activity[cost]" tabindex="1" />{lang payment_unit}
+        </div>
+        <!--{if $_G['setting']['activitycredit']}-->
+        <div class="input-box" style="width: 131px">
+            <span>{lang user_consumption_credit}{$_G['setting']['extcredits'][$_G['setting']['activitycredit']][title]}</span>
+            <input type="text" name="activitycredit" id="activitycredit" value="$activity[credit]" />
+        </div>
+        <!--{/if}-->
+    </div>
+    <div class="row">
+        <div class="input-box" style="width:calc(100% + 1px); white-space: nowrap">
+            <span>{lang optional_data}</span>
+            <ul class="ccbox">
+                <!--{loop $_G['setting']['activityfield'] $key $val}-->
+                <li>
+                    <input type="checkbox" name="userfield[]" id="userfield_$key" value="$key"{if $activity['ufield']['userfield'] && in_array($key, $activity['ufield']['userfield'])} checked="checked"{/if} />
+                    <label for="userfield_$key">$val</label>
+                </li>
+                <!--{/loop}-->
+            </ul>
+        </div>
+    </div>
+    <div class="row">
+        <!--{if $_GET[action] == 'newthread'}-->
+        <div class="input-box">
+            <span>{lang activity_city}</span>
+            <input name="activitycity" id="activitycity" type="text" tabindex="1" />
+        </div>
+        <!--{/if}-->
+        <div class="input-box" style="width:calc(75% + 1px)">
+            <span>{lang activity_space}<a class="tip-dot"></a></span>
+            <input type="text" name="activityplace" id="activityplace" value="$activity[place]" tabindex="1" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="input-box" style="width: 216px">
+            <span>{lang post_closing}<a class="tip-dot"></a></span>
+            <input type="text" name="activityexpiration" id="activityexpiration" onclick="showcalendar(event, this, true)" autocomplete="off" value="$activity[expiration]" tabindex="1" />
+        </div>
+        <div class="input-box ccbox" style="width: calc(100% - 214px)">
+            <span>{lang post_event_time}<a class="tip-dot"></a></span>
+            <span style="width: 90px">
+                <input type="checkbox" id="activitytime" name="activitytime" onclick="if(this.checked) {$('certainstarttime').style.display='none';$('uncertainstarttime').style.display='';} else {$('certainstarttime').style.display='';$('uncertainstarttime').style.display='none';}" value="1" {if $activity['starttimeto']}checked{/if} tabindex="1" />
+                <label for="activitytime">{lang activity_starttime_endtime}</label>
+            </span>
+            <div id="certainstarttime" {if $activity['starttimeto']}style="display:none;width:calc(100% - 170px);"{else} style="width:calc(100% - 170px)"{/if}>
+                <input style="width:100%;" type="text" name="starttimefrom[0]" id="starttimefrom_0" onclick="showcalendar(event, this, true)" autocomplete="off" value="$activity[starttimefrom]" tabindex="1" />
+            </div>
+            <div id="uncertainstarttime" {if !$activity['starttimeto']}style="display:none;width:calc(100% - 170px);font-size:0;"{else} style="width:calc(100% - 170px);font-size:0;"{/if}>
+                <input style="width:calc(50% - 40px); border-right:1px solid #eee;" type="text" name="starttimefrom[1]" id="starttimefrom_1" onclick="showcalendar(event, this, true)" autocomplete="off" value="$activity[starttimefrom]" tabindex="1" />
+                <span>到</span>
+                <input style="width:calc(50% - 40px)" onclick="showcalendar(event, this, true)" type="text" autocomplete="off" id="starttimeto" name="starttimeto" value="{if $activity['starttimeto']}$activity[starttimeto]{/if}" tabindex="1" />
+            </div>
+        </div>
+    </div>
+</div>
+<div class="photo">
+    <input type="hidden" name="activityaid" id="activityaid" {if $activityattach[attachment]}value="$activityattach[aid]" {/if}/>
+    <input type="hidden" name="activityaid_url" id="activityaid_url" />
+    <div id="activityattach_image">
+        <img src="{if $activityattach[attachment]}$activityattach[url]/$activityattach[attachment]{else}{IMGURL}/forum/activity/photo.png{/if}" alt="" />
+    </div>
+    <button type="button" onclick="uploadWindow(function (aid, url){activityaid_upload(aid, url)})"></button>
+</div>
+<!--{hook/post_activity_extra}-->
+<script type="text/javascript" reload="1">
+    simulateSelect('gender','81px');
+    function checkvalue(value, message){
+        if(!value.search(/^\d+$/)) {
+            $(message).innerHTML = '';
+        } else {
+            $(message).innerHTML = '<b>{lang input_invalid}</b>';
+        }
+    }
+
+    EXTRAFUNC['validator']['special'] = 'validateextra';
+    function validateextra() {
+        if($('postform').starttimefrom_0.value == '' && $('postform').starttimefrom_1.value == '') {
+            showDialog('{lang post_error_message_1}', 'alert', '', function () { if($('activitytime').checked) {$('postform').starttimefrom_1.focus();} else {$('postform').starttimefrom_0.focus();} });
+            return false;
+        }
+        if($('postform').activityplace.value == '') {
+            showDialog('{lang post_error_message_2}', 'alert', '', function () { $('postform').activityplace.focus() });
+            return false;
+        }
+        if($('postform').activityclass.value == '') {
+            showDialog('{lang post_error_message_3}', 'alert', '', function () { $('postform').activityclass.focus() });
+            return false;
+        }
+        return true;
+    }
+    function activityaid_upload(aid, url) {
+        $('activityaid_url').value = url;
+        updateactivityattach(aid, url, '{$_G['setting']['attachurl']}forum');
+    }
+</script>

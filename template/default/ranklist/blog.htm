@@ -1,0 +1,78 @@
+<!--{template ranklist/ranklist_header}-->
+<!--[nest=nestranklisttop]--><div id="nestranklisttop" class="area"></div><!--[/nest]-->
+<div class="plate layout-2-type3 milk app-ranklist">
+	<section class="col-1">
+		<!--{subtemplate ranklist/side_left}-->
+	</section>
+	<section class="col-2 pd-10">
+		<div class="vessel" id="ranklist_blog">
+			<div class="header">
+				<b>{lang blog_ranklist}</b>
+				<div class="dropmenu r" style="width: 93px">
+					<ul>
+						<li class="{if $_GET[view] == 'heats'}active{/if}"><a href="misc.php?mod=ranklist&type=blog&view=heats&orderby=$orderby">{lang hot_ranklist}</a></li>
+						<li class="{if $_GET[view] == 'replies'}active{/if}"><a href="misc.php?mod=ranklist&type=blog&view=replies&orderby=$orderby">{lang comment_ranklist}</a></li>
+						<li class="{if $_GET[view] == 'views'}active{/if}"><a href="misc.php?mod=ranklist&type=blog&view=views&orderby=$orderby">{lang visit_ranklist}</a></li>
+						<li class="{if $_GET[view] == 'sharetimes'}active{/if}"><a href="misc.php?mod=ranklist&type=blog&view=sharetimes&orderby=$orderby">{lang ranklist_share}</a></li>
+						<li class="{if $_GET[view] == 'favtimes'}active{/if}"><a href="misc.php?mod=ranklist&type=blog&view=favtimes&orderby=$orderby">{lang ranklist_favorite}</a></li>
+						<!--{if $clicks}-->
+						<!--{loop $clicks $key $value}-->
+						<li class="{if $_GET[view] == $key}active{/if}"><a href="misc.php?mod=ranklist&type=blog&view=$key&orderby=$orderby">$value[name]{lang ranklist}</a></li>
+						<!--{/loop}-->
+						<!--{/if}-->
+					</ul>
+				</div>
+				<div class="dropmenu r" style="width: 63px">
+					<ul>
+						<li class="{if $orderby == 'thisweek'}active{/if}" ><a href="misc.php?mod=ranklist&type=blog&view=$_GET[view]&orderby=thisweek" id="604800">{lang ranklist_week}</a></li>
+						<li class="{if $orderby == 'thismonth'}active{/if}"><a href="misc.php?mod=ranklist&type=blog&view=$_GET[view]&orderby=thismonth" id="2592000" >{lang ranklist_month}</a></li>
+						<li class="{if $orderby == 'today'}active{/if}"><a href="misc.php?mod=ranklist&type=blog&view=$_GET[view]&orderby=today" id="86400" >{lang ranklist_today}</a></li>
+						<li class="{if $orderby == 'all'}active{/if}"><a href="misc.php?mod=ranklist&type=blog&view=$_GET[view]&orderby=all" id="all" >{lang all}</a></li>
+					</ul>
+				</div>
+			</div>
+			<div class="body">
+				<!--[nest=nestcontenttop]--><div id="nestcontenttop" class="area"></div><!--[/nest]-->
+				<!--{if $bloglist}-->
+				<!--{loop $bloglist $blog}-->
+					<dl class="bbda">
+						<dd class="ranknum"><!--{if $blog[rank] <= 3}--><img src="{STATICURL}image/common/rank_$blog[rank].gif" alt="$blog[rank]" /><!--{else}-->$blog[rank]<!--{/if}--></dd>
+						<dd class="m">
+							<div class="avt">
+								<a href="home.php?mod=space&uid=$blog[uid]" target="_blank">$blog[avatar]</a>
+							</div>
+						</dd>
+						<dt class="xs2">
+							<!--{if helper_access::check_module('share')}-->
+							<a href="home.php?mod=spacecp&ac=share&type=blog&id=$blog[blogid]&handlekey=lsbloghk_{$blog[blogid]}" id="a_share_$blog[blogid]" onclick="showWindow(this.id, this.href, 'get', 0);" class="oshr xs1 xw0">{lang share}</a>
+							<!--{/if}-->
+							<a href="home.php?mod=space&uid=$blog[uid]&do=blog&id=$blog[blogid]" target="_blank">$blog[subject]</a>
+						</dt>
+						<dd>
+							<a href="home.php?mod=space&uid=$blog[uid]" target="_blank">$blog[username]</a> <span>$blog[dateline]</span>
+						</dd>
+						<dd class="cl">
+							$blog[message]
+						</dd>
+						<dd>
+							<!--{if $_GET[view] == 'heats'}-->{lang views} $blog[hot]
+							<!--{elseif $_GET[view] == 'replies'}--><a href="home.php?mod=space&uid=$blog[uid]&do=blog&id=$blog[blogid]#comment" target="_blank">{lang comment} $blog[replynum]</a>
+							<!--{elseif $_GET[view] == 'views'}-->{lang ranklist_thread_view} $blog[viewnum]
+							<!--{elseif $_GET[view] == 'sharetimes'}-->{lang ranklist_thread_share} $blog[sharetimes]
+							<!--{elseif $_GET[view] == 'favtimes'}-->{lang ranklist_thread_favorite} $blog[favtimes]
+							<!--{else}-->$clicks[$_GET[view]][name] $blog['click'.$_GET[view]]<!--{/if}-->
+						</dd>
+					</dl>
+				<!--{/loop}-->
+				<!--{else}-->
+					<div class="emp">{lang none_data}</div>
+				<!--{/if}-->
+				<!--[nest=nestcontentbottom]--><div id="nestcontentbottom" class="area"></div><!--[/nest]-->
+				<!--[nest=nestranklistbottom]--><div id="nestranklistbottom" class="area"></div><!--[/nest]-->
+			</div>
+		</div>
+	</section>
+</div>
+
+
+<!--{template common/footer}-->

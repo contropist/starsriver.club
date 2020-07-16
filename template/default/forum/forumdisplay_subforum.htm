@@ -1,0 +1,19 @@
+<div class="sub-forum" id="subforum_{$_G[forum][fid]}" >
+	<!--{loop $sublist $sub}-->
+	<!--{eval $forumurl = !empty($sub['domain']) && !empty($_G['setting']['domain']['root']['forum']) ? $_G['scheme'].'://'.$sub['domain'].'.'.$_G['setting']['domain']['root']['forum'] : 'forum.php?mod=forumdisplay&fid='.$sub['fid'];}-->
+	<div class="l chunk shadow-0D">
+		<!--{if $sub[icon]}-->
+			$sub[icon]
+		<!--{else}-->
+			<a href="$forumurl"{if $sub[redirect]} target="_blank"{/if}><img src="{STATICURL}image/common/forum{if $sub[folder]}_new{/if}.gif" alt="$sub[name]" /></a>
+		<!--{/if}-->
+		<div class="introbar trans-outback">
+			<a class="title" href="$forumurl" {if !empty($sub[redirect])}target="_blank"{/if}>$sub[name]<em class="r active" title="{lang forum_todayposts}">今日回复： $sub[todayposts]</em></a>
+			<!--{if $sub[description]}--><p class="descrip">$sub[description]</p><!--{/if}-->
+			<!--{if $sub['subforums']}--><p style="display:none;">{lang forum_subforums}: $sub['subforums']</p><!--{/if}-->
+			<!--{if $sub['moderators']}--><p style="display:none;">{lang forum_moderators}: $sub[moderators]</p><!--{/if}-->
+			<!--{hook/forumdisplay_subforum_extra $sub[fid]}-->
+		</div>
+	</div>
+	<!--{/loop}-->
+</div>

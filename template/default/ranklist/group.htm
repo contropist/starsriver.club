@@ -1,0 +1,60 @@
+<!--{template ranklist/ranklist_header}-->
+<!--[nest=nestranklisttop]--><div id="nestranklisttop" class="area"></div><!--[/nest]-->
+<div class="plate layout-2-type3 milk app-ranklist">
+	<section class="col-1">
+		<!--{subtemplate ranklist/side_left}-->
+	</section>
+	<section class="col-2 pd-10">
+		<div class="vessel" id="ranklist_group">
+			<div class="header">
+				<b>{lang ranklist_group}</b>
+				<div class="dropmenu r" style="width: 120px">
+					<ul>
+						<li class="{if $_GET[view] == 'credit'}active{/if}"><a href="misc.php?mod=ranklist&type=group&view=credit">{lang credit_ranking}</a></li>
+						<li class="{if $_GET[view] == 'member'}active{/if}"><a href="misc.php?mod=ranklist&type=group&view=member">{lang ranklist_member_num}</a></li>
+						<li class="{if $_GET[view] == 'threads'}active{/if}"><a href="misc.php?mod=ranklist&type=group&view=threads">{lang ranklist_post}</a></li>
+						<li class="{if $_GET[view] == 'posts'}active{/if}"><a href="misc.php?mod=ranklist&type=group&view=posts">{lang ranklist_reply}</a></li>
+						<li class="{if $_GET[view] == 'today'}active{/if}"><a href="misc.php?mod=ranklist&type=group&view=today">{lang ranklist_post_day}</a></li>
+					</ul>
+				</div>
+			</div>
+			<div class="body">
+				<!--[nest=nestcontenttop]--><div id="nestcontenttop" class="area"></div><!--[/nest]-->
+				<!--{if $groupsrank}-->
+					<table cellspacing="0" cellpadding="0">
+						<tr>
+							<td class="icn" height="36">&nbsp;</td>
+							<th>{lang group}<!--{if $_GET[view] == 'credit'}-->({lang ranklist_group_credit})<!--{/if}--></th>
+							<td width="100">
+								<!--{if $_GET[view] == 'today'}-->{lang ranklist_forum_day_post}
+								<!--{elseif $_GET[view] == 'posts'}-->{lang reply}
+								<!--{elseif $_GET[view] == 'thismonth'}-->{lang ranklist_forum_month_post}
+								<!--{elseif $_GET[view] == 'credit'}-->{lang credit_num}
+								<!--{elseif $_GET[view] == 'member'}-->{lang member_num}
+								<!--{else}-->{lang ranklist_forum_post}<!--{/if}-->
+							</td>
+						</tr>
+						<!--{loop $groupsrank $forum}-->
+						<tr>
+							<td class="icn" height="36"><!--{if $forum['rank'] <= 3}--><img src="{STATICURL}image/common/rank_$forum['rank'].gif" alt="$forum['rank']" /><!--{else}-->$forum['rank']<!--{/if}--></td>
+							<th><a href="forum.php?mod=forumdisplay&fid=$forum['fid']" target="_blank">$forum['name']</a></th>
+							<td>
+								<!--{if $_GET[view] == 'credit'}-->$forum['commoncredits']
+								<!--{elseif $_GET[view] == 'member'}-->$forum['membernum']
+								<!--{else}-->$forum['posts']<!--{/if}-->
+							</td>
+						</tr>
+						<!--{/loop}-->
+					</table>
+				<!--{else}-->
+				<div class="emp">{lang none_data}</div>
+				<!--{/if}-->
+				<!--[nest=nestcontentbottom]--><div id="nestcontentbottom" class="area"></div><!--[/nest]-->
+				<!--[nest=nestranklistbottom]--><div id="nestranklistbottom" class="area"></div><!--[/nest]-->
+			</div>
+		</div>
+	</section>
+</div>
+
+
+<!--{template common/footer}-->

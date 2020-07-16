@@ -1,0 +1,364 @@
+<!--{if $_G[inajax]}-->
+	<!--{template common/header}-->
+<!--{else}-->
+	<!--{template home/space_trends_header}-->
+<!--{/if}-->
+
+<!--{if !$_G[inajax]}-->
+	<div class="plate layout-2-type3 app-notice glass-box">
+		<section class="col-1">
+			<!--{subtemplate home/space_prompt_nav}-->
+		</section>
+		<section class="col-2">
+<!--{/if}-->
+		<!--{if $_GET['op'] == 'delete'}-->
+			<div class="header">
+				<span class="title-tip" id="return_$_GET[handlekey]">{lang delete_pm}</span>
+				<!--{if $_G[inajax]}--><a onclick="hideWindow('$_GET['handlekey']');" class="close" title="{lang close}">×</a><!--{/if}-->
+			</div>
+			<!--{if $uid}-->
+				<form id="delpmform_{$uid}" name="delpmform_{$uid}" method="post" autocomplete="off" action="home.php?mod=spacecp&ac=pm&op=delete&deletepm_deluid[]=$uid">
+					<!--{if $_G[inajax]}--><input type="hidden" name="handlekey" value="$_GET[handlekey]" /><!--{/if}-->
+					<input type="hidden" name="referer" value="{echo dreferer()}" />
+					<input type="hidden" name="deletesubmit" value="true" />
+					<input type="hidden" name="formhash" value="{FORMHASH}" />
+					<div class="body">{lang determine_delete_pm}</div>
+					<div class="footer">
+						<button class="btn-square fullwidth" style="border: none;"  type="submit" name="deletesubmit_btn" value="true">{lang determine}</button>
+					</div>
+				</form>
+			<!--{elseif $plid && $delplid}-->
+				<form id="delpmform_{$plid}" name="delpmform_{$plid}" method="post" autocomplete="off" action="home.php?mod=spacecp&ac=pm&op=delete&deletepm_delplid[]=$plid">
+					<!--{if $_G[inajax]}--><input type="hidden" name="handlekey" value="$_GET[handlekey]" /><!--{/if}-->
+					<input type="hidden" name="referer" value="{echo dreferer()}" />
+					<input type="hidden" name="deletesubmit" value="true" />
+					<input type="hidden" name="formhash" value="{FORMHASH}" />
+					<div class="body">{lang determine_delete_chatpm}</div>
+					<div class="footer">
+						<button class="btn-square fullwidth" style="border: none;"  type="submit" name="deletesubmit_btn" value="true">{lang determine}</button>
+					</div>
+				</form>
+			<!--{elseif $plid && $quitplid}-->
+				<form id="delpmform_{$plid}" name="delpmform_{$plid}" method="post" autocomplete="off" action="home.php?mod=spacecp&ac=pm&op=delete&deletepm_quitplid[]=$plid">
+					<!--{if $_G[inajax]}--><input type="hidden" name="handlekey" value="$_GET[handlekey]" /><!--{/if}-->
+					<input type="hidden" name="referer" value="{echo dreferer()}" />
+					<input type="hidden" name="deletesubmit" value="true" />
+					<input type="hidden" name="formhash" value="{FORMHASH}" />
+					<div class="body">{lang determine_quit_chatpm}</div>
+					<div class="footer">
+						<button class="btn-square fullwidth" style="border: none;"  type="submit" name="deletesubmit_btn" value="true">{lang quit}</button>
+					</div>
+				</form>
+			<!--{elseif $pmid && $delpmid}-->
+				<form id="delpmform_{$pmid}" name="delpmform_{$pmid}" method="post" autocomplete="off" action="home.php?mod=spacecp&ac=pm&op=delete&deletepm_pmid[]=$pmid&touid=$touid&daterange=$daterange">
+					<!--{if $_G[inajax]}--><input type="hidden" name="handlekey" value="$_GET[handlekey]" /><!--{/if}-->
+					<input type="hidden" name="referer" value="{echo dreferer()}" />
+					<input type="hidden" name="deletesubmit" value="true" />
+					<input type="hidden" name="formhash" value="{FORMHASH}" />
+					<div class="body">{lang determine_delete_pmid}</div>
+					<div class="footer">
+						<button class="btn-square fullwidth" style="border: none;"  type="submit" name="deletesubmit_btn" value="true">{lang determine}</button>
+					</div>
+				</form>
+			<!--{elseif $pmid && $gpmid}-->
+				<form id="delpmform_{$pmid}" name="delpmform_{$pmid}" method="post" autocomplete="off" action="home.php?mod=spacecp&ac=pm&op=delete&deletepm_gpmid[]=$pmid">
+					<!--{if $_G[inajax]}--><input type="hidden" name="handlekey" value="$_GET[handlekey]" /><!--{/if}-->
+					<input type="hidden" name="referer" value="{echo dreferer()}" />
+					<input type="hidden" name="deletesubmit" value="true" />
+					<input type="hidden" name="formhash" value="{FORMHASH}" />
+					<div class="body">{lang determine_delete_gpmid}</div>
+					<div class="footer">
+						<button class="btn-square fullwidth" style="border: none;"  type="submit" name="deletesubmit_btn" value="true">{lang determine}</button>
+					</div>
+				</form>
+			<!--{/if}-->
+			<script type="text/javascript">
+				function succeedhandle_$_GET[handlekey](url, msg, values) {
+					if($('pmlist_'+values['plid'])) {$('pmlist_'+values['plid']).style.display = 'none';}
+					if($('gpmlist_'+values['gpmid'])) {$('gpmlist_'+values['gpmid']).style.display = 'none';}
+				}
+			</script>
+
+		<!--{elseif $_GET['op'] == 'pm_report'}-->
+			<div class="header">
+				<span class="title-tip" id="return_$_GET[handlekey]">{lang pm_report}</span>
+				<!--{if $_G[inajax]}--><a onclick="hideWindow('$_GET['handlekey']');" class="close" title="{lang close}">×</a><!--{/if}-->
+			</div>
+			<form id="pmreportform_{$pmid}" name="pmreportform_{$pmid}" method="post" autocomplete="off" action="home.php?mod=spacecp&ac=pm&op=pm_report&pmid=$pmid"  {if $_G[inajax]}onsubmit="ajaxpost(this.id, 'return_$_GET[handlekey]');"{/if}>
+				<!--{if $_G[inajax]}--><input type="hidden" name="handlekey" value="$_GET[handlekey]" /><!--{/if}-->
+				<input type="hidden" name="referer" value="{echo dreferer()}" />
+				<input type="hidden" name="pmreportsubmit" value="true" />
+				<input type="hidden" name="formhash" value="{FORMHASH}" />
+				<div class="body">{lang determine_report_pm}</div>
+				<div class="footer">
+					<button class="btn-square fullwidth" style="border: none;"  type="submit" name="pmreportsubmit_btn" value="true">{lang determine}</button>
+				</div>
+			</form>
+		<!--{elseif $_GET['op'] == 'pm_ignore'}-->
+			<div class="header">
+				<span class="title-tip" id="return_$_GET[handlekey]">{lang pm_ignore}</span>
+				<!--{if $_G[inajax]}--><a onclick="hideWindow('$_GET['handlekey']');" class="close" title="{lang close}">×</a><!--{/if}-->
+			</div>
+			<form id="pmignoreform_{$plid}" name="pmignoreform_{$plid}" method="post" autocomplete="off" action="home.php?mod=spacecp&ac=pm&op=pm_ignore&plid=$plid&username=$username"  {if $_G[inajax]}onsubmit="ajaxpost(this.id, 'return_$_GET[handlekey]');"{/if}>
+				<!--{if $_G[inajax]}--><input type="hidden" name="handlekey" value="$_GET[handlekey]" /><!--{/if}-->
+				<input type="hidden" name="referer" value="{echo dreferer()}" />
+				<input type="hidden" name="pmignoresubmit" value="true" />
+				<input type="hidden" name="formhash" value="{FORMHASH}" />
+				<div class="body">{lang determine_ignore_pm}</div>
+				<div class="footer">
+					<button class="btn-square fullwidth" style="border: none;"  type="submit" name="pmignoresubmit_btn" value="true">{lang determine}</button>
+				</div>
+			</form>
+		<!--{elseif $_GET['op'] == 'kickmember'}-->
+			<div class="header">
+				<span class="title-tip" id="return_$_GET[handlekey]">{lang pm_kickmember}</span>
+				<!--{if $_G[inajax]}--><a onclick="hideWindow('$_GET['handlekey']');" class="close" title="{lang close}">×</a><!--{/if}-->
+			</div>
+			<form id="kickmemberform_{$memberuid}" name="kickmemberform_{$memberuid}" method="post" autocomplete="off" action="home.php?mod=spacecp&ac=pm&op=kickmember&plid=$plid&memberuid=$memberuid"  {if $_G[inajax]}onsubmit="ajaxpost(this.id, 'return_$_GET[handlekey]');"{/if}>
+				<!--{if $_G[inajax]}--><input type="hidden" name="handlekey" value="$_GET[handlekey]" /><!--{/if}-->
+				<input type="hidden" name="referer" value="{echo dreferer()}" />
+				<input type="hidden" name="pmkickmembersubmit" value="true" />
+				<input type="hidden" name="formhash" value="{FORMHASH}" />
+				<div class="body">{lang determine_kickmember}</div>
+				<div class="footer">
+					<button class="btn-square fullwidth" style="border: none;"  type="submit" name="pmkickmembersubmit_btn" value="true">{lang determine}</button>
+				</div>
+			</form>
+		<!--{elseif $_GET['op'] == 'appendmember'}-->
+			<div class="header">
+				<span class="title-tip" id="return_$_GET[handlekey]">{lang pm_appendmember}</span>
+				<!--{if $_G[inajax]}--><a onclick="hideWindow('$_GET['handlekey']');" class="close" title="{lang close}">×</a><!--{/if}-->
+			</div>
+			<div id="appendmember">
+				<form name="appendmemberform" method="post" autocomplete="off" action="home.php?mod=spacecp&ac=pm&op=appendmember&plid=$plid&memberusername=$memberusername"  {if $_G[inajax]}onsubmit="ajaxpost('appendmemberform', 'return_$_GET[handlekey]');"{/if}>
+					<!--{if $_G[inajax]}--><input type="hidden" name="handlekey" value="$_GET[handlekey]" /><!--{/if}-->
+					<input type="hidden" name="referer" value="{echo dreferer()}" />
+					<input type="hidden" name="pmappendmembersubmit" value="true" />
+					<input type="hidden" name="formhash" value="{FORMHASH}" />
+					<div class="body">{lang determine_appendmember}</div>
+					<div class="footer">
+						<button class="btn-square fullwidth" style="border: none;"  type="submit" name="pmappendmembersubmit_btn" value="true">{lang determine}</button>
+					</div>
+				</form>
+			</div>
+		<!--{elseif $_GET['op'] == 'getpmuser'}-->
+			$jsstr
+		<!--{elseif $_GET['op'] == 'ignore'}-->
+			<div class="header">
+				<span class="title-tip" id="return_$_GET[handlekey]">{lang shield}{$username}</span>
+				<!--{if $_G[inajax]}--><a onclick="hideWindow('$_GET['handlekey']');" class="close" title="{lang close}">×</a><!--{/if}-->
+			</div>
+			<form class="body" name="ignoreuserform" method="post" autocomplete="off" action="home.php?mod=spacecp&ac=pm&op=ignore&only=1"  {if $_G[inajax]}onsubmit="ajaxpost('ignoreuserform', 'return_$_GET[handlekey]');"{/if}>
+				<!--{if $_G[inajax]}--><input type="hidden" name="handlekey" value="$_GET[handlekey]" /><!--{/if}-->
+				<input type="hidden" name="referer" value="{echo dreferer()}" />
+				<input type="hidden" name="ignoresubmit" value="true" />
+				<input type="hidden" name="ignoreuser" value="$_GET[username]" />
+				<input type="hidden" name="single" value="1" />
+				<input type="hidden" name="formhash" value="{FORMHASH}" />
+				<div class="body">{lang shield_the_user}</div>
+				<div class="footer">
+					<button class="btn-square fullwidth" style="border: none;"  type="submit" name="deletesubmit_btn" value="true">{lang determine}</button>
+				</div>
+			</form>
+		<!--{elseif $_GET['op'] == 'showchatmsg'}-->
+			<!--{loop $list $key $value}-->
+				<div class="reply{if $value['authorid'] == $_G['uid']} self{/if}">
+					<a class="avatar" href="home.php?mod=space&uid=$value[authorid]" target="_blank"><!--{avatar($value['authorid'],'small')}--></a>
+					<!--{if $value['authorid'] != $_G['uid']}--><a class="name" href="home.php?mod=space&uid=$value[authorid]" target="_blank">$value[author]</a><br /><!--{/if}-->
+					<div class="msg">
+						$value[message]
+						<i class="time"><!--{date($value[dateline], 'u')}--></i>
+					</div>
+				</div>
+			<!--{/loop}-->
+		<!--{elseif $_GET['op'] == 'showmsg'}-->
+			<!--{if $msgonly}-->
+				<!--{loop $msglist $day $msgarr}-->
+					<li class="time">$day</li>
+					<!--{loop $msgarr $key $value}-->
+					<!--{eval $class=$value['touid']==$_G['uid']?'other':'self';}-->
+					<li class="$class"><p>{$value[message]}</p></li>
+					<!--{/loop}-->
+				<!--{/loop}-->
+			<!--{else}-->
+				<div class="talk-box">
+					<div class="header">
+						<span class="title-tip">{lang taking_with_user}<!--{if $online}-->[{lang online}]<!--{else}-->[{lang offline}]<!--{/if}--></span>
+						<!--{if $_G[inajax]}--><a onclick="hideWindow('$_GET['handlekey']');" class="close" title="{lang close}">×</a><!--{/if}-->
+					</div>
+					<div class="body" style="height:360px;">
+						<ul id="msglist">
+							<!--{loop $msglist $day $msgarr}-->
+								<li class="time">$day</li>
+								<!--{loop $msgarr $key $value}-->
+									<!--{eval $class=$value['touid']==$_G['uid']?'other':'self';}-->
+									<li class="msg $class"><p>{$value[message]}</p></li>
+								<!--{/loop}-->
+							<!--{/loop}-->
+						</ul>
+						<script type="text/javascript">var refresh = true; var refreshHandle = -1;</script>
+						<form class="talk" id="pmform_{$touid}" name="pmform_{$touid}" method="post" autocomplete="off" action="home.php?mod=spacecp&ac=pm&op=send&touid=$touid" onsubmit="this.message.value = parseurl(this.message.value);{if $_G[inajax]}ajaxpost(this.id,  'return_$_GET[handlekey]');refreshMsg();{/if}">
+							<input type="hidden" name="pmsubmit" value="true" />
+							<input type="hidden" name="touid" value="$touid" />
+							<input type="hidden" name="formhash" value="{FORMHASH}" />
+							<!--{if $_G[inajax]}-->
+							<div id="return_$_GET[handlekey]" style="margin-bottom:5px"></div>
+							<input type="hidden" name="handlekey" value="$_GET[handlekey]" />
+							<!--{/if}-->
+							<div class="bar">
+								<!--{eval $seditor = array('pm', array('link', 'smilies'));}-->
+								<!--{subtemplate common/seditor}-->
+								<a href="home.php?mod=space&do=pm&subop=view&touid={$touid}#last" target="_blank" class="mt-schedule r"></a>
+								<a href="home.php?mod=space&uid=$touid" target="_blank" class="mt-home r"></a>
+							</div>
+							<textarea name="message" id="pmmessage" onkeydown="ctrlEnter(event, 'pmsubmit_btn');" autofocus></textarea>
+							<button class="trans-outback" type="submit" id="pmsubmit_btn">{lang send}</button>
+							<input type="hidden" name="messageappend" id="messageappend" value="$messageappend" />
+							<script type="text/javascript">$('pmmessage').focus();</script>
+						</form>
+						<script type="text/javascript">var forumallowhtml = 0,allowhtml = 0,allowsmilies = true,allowbbcode = parseInt('{$_G[group][allowsigbbcode]}'),allowimgcode = parseInt('{$_G[group][allowsigimgcode]}');var DISCUZCODE = [];DISCUZCODE['num'] = '-1';DISCUZCODE['html'] = [];</script>
+						<script type="text/javascript" src="{$_G[setting][jspath]}bbcode.js?{VERHASH}"></script>
+						<script type="text/javascript">
+							var msgListObj = $('msglist');
+							msgListObj.scrollTop = msgListObj.scrollHeight;
+							function succeedhandle_$_GET[handlekey](url, msg, values) {
+								var liObj = document.createElement("li");
+								var pmMsg = $('pmmessage');
+								liObj.className = 'self';
+								pmMsg.value = ($('messageappend').value ? $('messageappend').value + '\n' : '') + pmMsg.value;
+								$('messageappend').value = '';
+								liObj.innerHTML = '<p>'+bbcode2html(parseurl(pmMsg.value))+'</p>';
+								msgListObj.appendChild(liObj);
+								msgListObj.scrollTop = msgListObj.scrollHeight;
+								pmMsg.value = "";
+								showCreditPrompt();
+							}
+
+							function refreshMsg() {
+								if(refresh) {
+									var x = new Ajax();
+									x.get('home.php?mod=spacecp&ac=pm&op=showmsg&msgonly=1&touid=$touid&pmid=$pmid&inajax=1&daterange=$daterange', function(s){
+										msgListObj.innerHTML = s;
+										msgListObj.scrollTop = msgListObj.scrollHeight;
+									});
+								} else {
+									window.clearInterval(refreshHandle);
+								}
+							}
+							refreshHandle = window.setInterval(function () {
+								refreshMsg();
+							}, 4000);
+							hideMenu();
+						</script>
+					</div>
+				</div>
+			<!--{/if}-->
+		<!--{else}-->
+			<!--{eval $funckey = time(); //用于防止new 函数在Dz伪ajax的iframe冲突}-->
+			<div class="header">
+				<span class="title-tip" id="return_$_GET[handlekey]"><!--{if empty($_GET['type'])}-->{lang new_upm}<!--{else}-->{lang new_ugpm}<!--{/if}--></span>
+				<!--{if $_G[inajax]}--><a onclick="hideWindow('$_GET['handlekey']');" class="close" title="{lang close}">×</a><!--{/if}-->
+			</div>
+			<form id="pmform_{$pmid}" name="pmform_{$pmid}" method="post" autocomplete="off" action="home.php?mod=spacecp&ac=pm&op=send&touid=$touid&pmid=$pmid" onsubmit="this.message.value = parseurl(this.message.value);{if $_G[inajax]}ajaxpost(this.id,  'return_$_GET[handlekey]');{/if}">
+				<!--{if empty($_GET['type'])}--><!--{if $_G[inajax]}--><input type="hidden" name="handlekey" value="$_GET[handlekey]" /><!--{/if}--><!--{elseif $_GET['type'] == 1}--><input type="hidden" name="type" value="1" /><!--{/if}-->
+				<input type="hidden" name="referer" value="{echo dreferer()}" />
+				<input type="hidden" name="pmsubmit" value="true" />
+				<input type="hidden" name="formhash" value="{FORMHASH}" />
+				<div class="body">
+					<!--{if $_GET['type'] == 1 && !$touid}-->
+					<p class="common-tip"><i class="ft-bookmark heart-pink"></i>{lang title}：</p>
+					<div class="input-box">
+						<span>{lang title}：</span>
+						<input type="text" name="subject" id="subject" placeholder="{lang title}"/>
+					</div>
+					<!--{/if}-->
+					<p class="common-tip"><i class="ft-user-plus heart-pink"></i>{lang joiner}：<a onclick="showMenu({'showid':'showSelectBox', 'duration':3, 'pos':'34'});fs_$funckey.showPMFriend('showSelectBox_menu','selectorBox', this);" title="{lang selectfromfriendlist}">{lang select_friend}</a></p>
+					<div class="tags"><ul id="selectedlist"></ul></div>
+					<div class="input-box">
+						<span>{lang username}：</span>
+						<input type="text" name="username" id="username" autocomplete="off" />
+					</div>
+					<div class="drop-menu free cblock mager" id="username_menu" style="display: none;"><ul id="friends"></ul></div>
+					<div class="drop-menu free cblock mager" id="showSelectBox_menu" unselectable="on" style="display:none;">
+						<select class="dropmenu" style="padding: 0 10px" onchange="clearlist=1;getUser(1, this.value)">
+							<option value="-1">{lang invite_all_friend}</option>
+							<!--{loop $friendgrouplist $groupid $group}-->
+							<option value="$groupid">$group</option>
+							<!--{/loop}-->
+						</select>
+						<a class="close" onclick="fs_$funckey.showPMFriend('showSelectBox_menu','selectorBox', $('showSelectBox'));doane(event)" title="{lang close}">×</a>
+						<hr>
+						<div id="selBox"><ul id="selectorBox"></ul></div>
+					</div>
+					<hr>
+					<div class="deliver">
+						<!--{eval $seditor = array('send', array('bold', 'color', 'img', 'link', 'quote', 'code', 'smilies'));}-->
+						<div class="common-tip"><i class="ft-clipboard heart-pink"></i>{lang content}：<!--{subtemplate common/seditor}--></div>
+						<textarea name="message" id="sendmessage" onkeydown="ctrlEnter(event, 'pmsubmit_btn');" placeholder="{lang reply_rule}"></textarea>
+					</div>
+					<script type="text/javascript">
+                        var fs_$funckey = new friendSelector({
+							searchId:'username',
+							showId:'friends',
+							formId:'',
+							showType:3,
+							handleKey:'fs_$funckey',
+							selBox:'selectorBox',
+							selBoxMenu:'showSelectBox_menu',
+							maxSelectNumber:'20',
+							selectTabId:'selectNum',
+							unSelectTabId:'unSelectTab',
+							maxSelectTabId:'remainNum'
+                        });
+                        var clearlist = showNum = 0,
+						    page = haveFriend = 1;
+						    gid = -1;
+
+                        function succeedhandle_$_GET[handlekey](url, msg, values) {
+                            hideWindow('$_GET['handlekey']');
+                            window.location.reload();
+                        }
+
+						function getUser(pageId, gid) {
+							page = parseInt(pageId);
+							gid = isUndefined(gid) ? -1 : parseInt(gid);
+							var x = new Ajax();
+							x.get('home.php?mod=spacecp&ac=friend&op=getinviteuser&inajax=1&page='+ page + '&gid=' + gid + '&' + Math.random(), function(s) {
+								var data = eval('('+s+')');
+								var singlenum = parseInt(data['singlenum']);
+								var maxfriendnum = parseInt(data['maxfriendnum']);
+								fs_$funckey.addDataSource(data, clearlist);
+								haveFriend = singlenum && singlenum == 20 ? true : false;
+								if(singlenum && fs_$funckey.allNumber < 20 && fs_$funckey.allNumber < maxfriendnum && maxfriendnum > 20 && haveFriend) {
+									page++;
+									getUser(page);
+								}
+							});
+						}
+						function selector() {
+							var listObj = $('selBox');
+							listObj.onscroll = function() {
+								clearlist = 0;
+								if(this.scrollTop >= this.scrollHeight/5) {
+									page++;
+									gid = isUndefined(gid) ? -1 : parseInt(gid);
+									if(haveFriend) {
+										getUser(page, gid);
+									}
+								}
+							};
+							getUser(page);
+						}
+						selector();
+					</script>
+				</div>
+				<div class="footer">
+					<button class="btn-square fullwidth" style="border: none;"  type="submit" name="pmsubmit_btn" id="pmsubmit_btn" value="true">{lang send}</button>
+				</div>
+			</form>
+		<!--{/if}-->
+<!--{if !$_G[inajax]}-->
+		</section>
+	</div>
+<!--{/if}-->
+<!--{template common/footer}-->

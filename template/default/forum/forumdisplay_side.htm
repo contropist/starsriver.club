@@ -1,0 +1,51 @@
+<div class="side_block">
+	<a>{lang their}</a>
+	<ul class="xl xl2 cl">
+		<!--{loop $_G['cache']['forums'] $bforum}--><!--{if $bforum['fup'] == $_G['forum']['fup'] && $bforum['status']}-->
+		<li><a href="forum.php?mod=forumdisplay&fid=$bforum[fid]">$bforum['name']</a></li>
+		<!--{/if}--><!--{/loop}-->
+	</ul>
+</div>
+<!--{if $recommendgroups}-->
+<div class="side_block">
+	<a>{lang recommended_groups}</a>
+	<ul class="ml mls cl">
+		<!--{loop $recommendgroups $key $group}-->
+		<li>
+			<a href="forum.php?mod=group&fid=$group[fid]" title="$group[name]" target="_blank" class="avt"><img src="$group[icon]" alt="$group[name]"></a>
+			<p><a href="forum.php?mod=group&fid=$group[fid]" target="_blank">$group[name]</a></p>
+		</li>
+		<!--{/loop}-->
+	</ul>
+</div>
+<!--{/if}-->
+
+
+<!--{if $leftside['favorites']}-->
+	<h2 class="mbn"><a href="home.php?mod=space&do=favorite&type=forum">{lang favorite_forums}</a></h2>
+	<dl id="lf_fav" class="bdl_fav mbm">
+		<!--{loop $leftside['favorites'] $favfid $fdata}-->
+			<!--{if !empty($_G['cache']['forums'][$favfid]['domain']) && !empty($_G['setting']['domain']['root']['forum'])}-->
+				<a href="{$_G['scheme']}://{$_G['cache']['forums'][$favfid]['domain']}.{$_G['setting']['domain']['root']['forum']}" title="$fdata[0]">$fdata[0]</a>
+			<!--{else}-->
+				<a href="forum.php?mod=forumdisplay&fid=$favfid">$fdata[0]</a>
+			<!--{/if}-->
+		<!--{/loop}-->
+	</dl>
+<!--{else}-->
+	<h2 class="bdl_h">{lang forum_nav}</h2>
+<!--{/if}-->
+<!--{loop $leftside['forums'] $upfid $gdata}-->
+	<dl class="{if $fgroupid == $upfid || $_G['setting']['leftsideopen']}a{/if}" id="lf_$upfid">
+		<dt><a hidefocus="true" onclick="leftside('lf_$upfid')" title="$gdata['name']">$gdata['name']</a></dt>
+	<!--{loop $gdata['sub'] $subfid $name}-->
+		<dd {if $_G['fid'] == $subfid || $_G['forum']['fup'] == $subfid} class="bdl_a"{/if}>
+			<!--{if !empty($_G['cache']['forums'][$subfid]['domain']) && !empty($_G['setting']['domain']['root']['forum'])}-->
+				<a href="{$_G['scheme']}://{$_G['cache']['forums'][$subfid]['domain']}.{$_G['setting']['domain']['root']['forum']}" title="$name">$name</a>
+			<!--{else}-->
+				<a href="forum.php?mod=forumdisplay&fid=$subfid" title="$name">$name</a>
+			<!--{/if}-->
+		</dd>
+	<!--{/loop}-->
+	</dl>
+<!--{/loop}-->

@@ -1,0 +1,56 @@
+<!--{loop $attachlist $attach}-->
+	<div class="item" id="attach_$attach[aid]">
+		<a class="r delete awe-close" onclick="delAttach($attach[aid],{if !$attach[pid]}1{else}0{/if});return false;" title="{lang e_attach_del}"></a>
+		<!--{if $_GET[result] != 'simple'}-->
+			<!--{if $_G['group']['maxprice']}-->
+			<input class="r price" type="text" name="attachnew[{$attach[aid]}][price]" value="$attach[price]" size="1" />
+			<!--{/if}-->
+			<!--{if $_G['group']['allowsetattachperm']}-->
+				<!--{if $_G['cache']['groupreadaccess']}-->
+				<select class="r permis icon-list" name="attachnew[{$attach[aid]}][readperm]" id="readperm" tabindex="1">
+					<option value="">{lang unlimited}</option>
+					<!--{loop $_G['cache']['groupreadaccess'] $val}-->
+					<option value="$val[readaccess]" title="{lang readperm}: $val[readaccess]"{if $attach[readperm] == $val[readaccess]} selected{/if}>$val[grouptitle]</option>
+					<!--{/loop}-->
+					<option value="255"{if $attach[readperm] == 255} selected{/if}>{lang highest_right}</option>
+				</select>
+				<!--{/if}-->
+			<!--{/if}-->
+			<input class="r descrip" type="text" name="attachnew[{$attach[aid]}][description]" value="$attach[description]"/>
+		<!--{/if}-->
+
+		<div class="file l">
+			<span id="attach$attach[aid]">
+				$attach[filetype]
+				<a class="filename" id="attachname$attach[aid]" isimage="{if $attach['isimage']}1{else}0{/if}" onclick="{if $attach['isimage']}insertAttachimgTag('$attach[aid]');hideMenu('attach_preview_$attach[aid]_menu'){else}insertAttachTag('$attach[aid]'){/if};doane(event);" title="{lang upload_msg}" {if $attach['isimage']}onmouseout="hideMenu('attach_preview_$attach[aid]_menu');" onmouseover="showMenu({'ctrlid':this.id,'menuid':'attach_preview_$attach[aid]_menu','pos':'!'});"{/if}>{$attach[filename]}</a>
+				<!--{if $_G['setting']['allowattachurl']}-->
+					<a class="r icon-link" title="{lang e_attach_url}" onclick="insertText('attach://$attach[aid].{echo fileext($attach[filenametitle])}');doane(event);"></a>
+				<!--{/if}-->
+				<!--{if $attach['pid']}-->
+					<input type="hidden" name="attachupdate[{$attach[aid]}]" id="attachupdate{$attach[aid]}"/>
+					<!--{if !empty($allowuploadnum)}-->
+						<a class="ft-refresh-cw r" onclick="uploadWindow(function (aid, url, name){$('attachupdate$attach[aid]').value = aid;$('attachname$attach[aid]').title = '';$('attachname$attach[aid]').innerHTML = name;$('attachname$attach[aid]').onmouseover=null}, 'file');return false;" title="{lang update}"></a>
+					<!--{/if}-->
+				<!--{/if}-->
+			</span>
+			<span class="hidden" id="attachupdate$attach[aid]"></span>
+			<!--{if $attach['isimage']}-->
+			<a id="attach_preview_$attach[aid]_menu" class="img_preview lip_radius D2_shadow" style="display:none"><img src="{echo getforumimg($attach[aid], 1, 300, 300, 'fixnone')}&ramdom={echo random(5)}" id="image_$attach[aid]" cwidth="{if $attach[width] < 300}$attach[width]{else}300{/if}"/></a>
+			<!--{/if}-->
+			<!--{if $_GET[result] == 'simple'}-->
+			<input type="hidden" name="attachnew[{$attach[aid]}][description]" value="" />
+			<input type="hidden" name="attachnew[{$attach[aid]}][readperm]" value="" />
+			<input type="hidden" name="attachnew[{$attach[aid]}][price]" value="" />
+			<!--{/if}-->
+		</div>
+	</div>
+<!--{/loop}-->
+<!--{if $_G[inajax]}-->
+	<script type="text/javascript" reload="1">
+	ATTACHNUM['attachunused'] += <!--{echo count($attachlist)}-->;
+	updateattachnum('attach');
+	if($('attachlimitnotice')) {
+		ajaxget('forum.php?mod=ajax&action=updateattachlimit&fid=' + fid, 'attachlimitnotice');
+	}
+	</script>
+<!--{/if}-->

@@ -1,0 +1,56 @@
+<!--{template common/header}-->
+<div class="plate layout-2-type3 console app-modcp" id="console">
+	<section class="col-1">
+		<div class="menu trans-ease">
+			<h3 class="title">{lang forum_manager}</h3>
+			<ul class="list wave mid">
+                <li class="dbtn"><a href="{if $forcefid}forum.php?mod=forumdisplay{$forcefid}{else}forum.php{/if}"><i class="icon-arrow-left2"></i>{lang back}</a></li>
+                <li class="dbtn"><a href="{$cpscript}?mod=modcp&action=logout"><i class="icon-switch"></i>{lang logout}</a></li>
+                <li class="seperate-line"></li>
+                <!--{if $_G['group']['allowpostannounce']}--><li{if $_GET[action] == 'announcement'} class="current"{/if}><a href="{$cpscript}?mod=modcp&action=announcement$forcefid"><i class="icon-bullhorn"></i>{lang announcements}</a></li><!--{/if}-->
+                <!--{if $modforums['fids'] && ( $_G['group']['allowmodpost'] || $_G['group']['allowmoduser'] )}--><li {if $_GET[action] == 'moderate'} class="current"{/if}><a href="{$cpscript}?mod=modcp&action=moderate&op={if $_G['group']['allowmodpost']}threads{$forcefid}{else}members{/if}"><i class="icon-spell-check"></i>{lang forum_moderate}<span class="num">{if $modnum}$modnum{/if}</span></a></li><!--{/if}-->
+                <li {if $_GET[action] == 'report'} class="current"{/if}><a href="{$cpscript}?mod=modcp&action=report$forcefid"><i class="icon-warning"></i>{lang modcp_report}</a></li>
+                <li class="seperate-line"></li>
+                <!--{if $_G['group']['allowedituser'] || $_G['group']['allowbanuser'] || $_G['group']['allowbanvisituser'] || $_G['group']['allowbanip']}-->
+                <!--{if $_G['group']['allowbanip']}--><li{if $_GET[action] == 'member' && $op == 'ipban'} class="current"{/if}><a href="{$cpscript}?mod=modcp&action=member&op=ipban$forcefid"><i class="icon-infinite"></i>{lang mod_option_member_ipban}</a></li><!--{/if}-->
+                <!--{if $_G['group']['allowbanuser'] || $_G['group']['allowbanvisituser']}--><li{if $_GET[action] == 'member' && $op == 'ban'} class="current"{/if}><a href="{$cpscript}?mod=modcp&action=member&op=ban$forcefid"><i class="icon-blocked"></i>{lang mod_option_member_ban}</a></li><!--{/if}-->
+                <!--{if $_G['group']['allowedituser']}--><li{if $_GET[action] == 'member' && $op == 'edit'} class="current"{/if}><a href="{$cpscript}?mod=modcp&action=member&op=edit$forcefid"><i class="icon-users"></i>{lang mod_option_member_edit}</a></li><!--{/if}--><!--{/if}-->
+                <!--{if $modforums['fids']}--><li{if $_GET[action] == 'forumaccess'} class="current"{/if}><a href="{$cpscript}?mod=modcp&action=forumaccess{$forcefid}"><i class="icon-user-check"></i>{lang mod_option_member_access}</a></li><!--{/if}-->
+                <li class="seperate-line"></li>
+                <!--{if $modforums['fids']}--><li {if $_GET[action] == 'thread' || $_GET[action] == 'recyclebin' || $_GET[action] == 'recyclebinpost' } class="current"{/if}><a href="{$cpscript}?mod=modcp&action=thread&op=thread{$forcefid}"><i class="icon-cog"></i>{lang mod_option_subject}</a></li>
+				<!--{if $_G['group']['allowrecommendthread']}--><li{if $_GET[action] == 'forum' && $op == 'recommend'} class="current"{/if}><a href="{$cpscript}?mod=modcp&action=forum&op=recommend&show=all{$forcefid}"><i class="icon-make-group"></i>{lang mod_option_forum_recommend}</a></li><!--{/if}-->
+				<!--{if $_G['group']['alloweditforum']}--><li{if $_GET[action] == 'forum' && $op == 'editforum'} class="current"{/if}><a href="{$cpscript}?mod=modcp&action=forum&op=editforum{$forcefid}"><i class="icon-blog"></i>{lang mod_option_forum_edit}</a></li><!--{/if}--><!--{/if}-->
+                <li class="seperate-line"></li>
+				<!--{if $_G['group']['allowviewlog']}--><li{if $_GET[action] == 'log'} class="current"{/if}><a href="{$cpscript}?mod=modcp&action=log$forcefid"><i class="icon-libreoffice"></i>{lang modcp_logs}</a></li><!--{/if}-->
+				<!--{if !empty($_G['setting']['plugins']['modcp_base'])}-->
+					<!--{loop $_G['setting']['plugins']['modcp_base'] $id $module}-->
+						<li {if $_GET[id] == $id} class="current"{/if}><a href="{$cpscript}?mod=modcp&action=plugin&op=base&id=$id{$forcefid}">$module[name]</a></li>
+					<!--{/loop}-->
+				<!--{/if}-->
+				<!--{if !empty($_G['setting']['plugins']['modcp_tools'])}-->
+					<!--{loop $_G['setting']['plugins']['modcp_tools'] $id $module}-->
+						<li {if $_GET[id] == $id} class="current"{/if}><a href="{$cpscript}?mod=modcp&action=plugin&op=tools&id=$id">$module[name]</a></li>
+					<!--{/loop}-->
+				<!--{/if}-->
+                <li {if $_GET[action] == 'home'} class="current"{/if}><a href="{$cpscript}?mod=modcp&action=home$forcefid"><i class="icon-bubbles3"></i>{lang mod_notice_title}<span class="num pxa-radius">$notenum</span></a></li>
+            </ul>
+		</div>
+	</section>
+	<section class="col-2">
+        <div class="panel">
+            <!--{if $script == 'noperm'}-->
+                <div class="title">
+                    <h2 class="nav text-danger">{lang mod_option_error}：{lang mod_error_invalid}</h2>
+                </div>
+                <ol class="panel-container">
+                    <li class="box size-10-0">
+                        <img style="margin: 20px auto; display: block; width:390px; min-height: 100px" src="">
+                    </li>
+                </ol>
+            <!--{elseif !empty($modtpl)}-->
+                <!--{eval include(template($modtpl));}-->
+            <!--{/if}-->
+        </div>
+	</section>
+</div>
+<!--{template common/footer}-->

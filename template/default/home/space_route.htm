@@ -1,0 +1,96 @@
+<!--{if empty($nestmode)}-->
+    <!--{template home/space_trends_header}-->
+    <div class="plate layout-0">
+        <!--[nest=nest1]--><div id="nest1" class="area"></div><!--[/nest]-->
+    </div>
+    <div class="plate layout-3-type2 app-dynamic soft">
+        <section>
+            <!--{subtemplate home/space_trends_side_left}-->
+        </section>
+        <section>
+            <!--{if $space['uid'] && $space[self]}-->
+                <!--{template home/space_status}-->
+            <!--{/if}-->
+            <!--[nest=nestcontenttop]--><div class="area" id="nestcontenttop"></div><!--[/nest]-->
+            <!--{hook/space_trends_top}-->
+            <div class="vessel">
+                <div class="nav">
+                    <a class="$actives[all]" href="home.php?mod=space&do=home&view=all">{lang view_all}</a>
+                    <!--{if $_G['uid']}-->
+                        <a class="$actives[we]" href="home.php?mod=space&do=home&view=we">{lang friend_feed}</a>
+                        <a class="$actives[me]" href="home.php?mod=space&do=home&view=me">{lang my_feed}</a>
+                        <!--{hook/space_trends_navlink}-->
+                        <!--{if $_G['setting']['magicstatus'] && $_G['setting']['magics']['thunder']}-->
+                        <a id="a_magic_thunder" href="home.php?mod=magic&mid=thunder" onclick="showWindow('magics', this.href, 'get', 0)">{$_G[setting][magics][thunder]}</a>
+                        <!--{/if}-->
+                    <!--{/if}-->
+                </div>
+                <!--{if $_GET['view'] !== 'me'}-->
+                    <hr>
+                    <ul class="tags">
+                        <!--{if $_GET[view] == 'all'}-->
+                            <li class="$orderactives[dateline]"><a href="home.php?mod=space&do=home&view=all&order=dateline">{lang newest_feed}</a></li>
+                            <li class="$orderactives[hot]"><a href="home.php?mod=space&do=home&view=all&order=hot">{lang hot_feed}</a></li>
+                        <!--{elseif $groups}-->
+                            <li class="{$gidactives[-1]}"><a href="home.php?mod=space&do=home&view=we">{lang all_friends}</a></li>
+                            <!--{loop $groups $key $value}--><li class="{$gidactives[$key]}"><a href="home.php?mod=space&do=home&view=we&gid=$key">$value</a></li><!--{/loop}-->
+                        <!--{/if}-->
+                    </ul>
+                <!--{/if}-->
+            </div>
+            <!--[nest=nestcontentmiddle]--><div class="area" id="nestcontentmiddle"></div><!--[/nest]-->
+            <!--{subtemplate home/space_trends_mod_feed_list}-->
+            <!--{if $multi}-->
+            <div class="vessel">
+                <div class="pgs">$multi</div>
+            </div>
+            <!--{/if}-->
+            <!--{hook/space_trends_bottom}-->
+            <div class="vessel" id="ajax_wait"></div>
+            <!--[nest=nestcontentbottom]--><div class="area" id="nestcontentbottom"></div><!--[/nest]-->
+            <!--[nest=nest3]--><div id="nest3" class="area"></div><!--[/nest]-->
+        </section>
+        <section>
+            <!--{subtemplate home/space_trends_side_right}-->
+        </section>
+    </div>
+<!--{else}-->
+    <!--{template home/space_home_header}-->
+    <!--[nest=nest1]--><div id="nest1" class="area"></div><!--[/nest]-->
+    <div class="mas-viewer">
+        <section class="col-1">
+            <!--{if $space['uid'] && $space[self]}-->
+                <!--{template home/space_status}-->
+            <!--{/if}-->
+            <!--[nest=nestcontenttop]--><div class="area" id="nestcontenttop"></div><!--[/nest]-->
+            <!--{subtemplate home/space_home_mod_feed_list}-->
+        </section>
+        <section class="col-2">
+            <div class="vessel">
+                <!--{subtemplate home/space_home_userabout}-->
+            </div>
+        </section>
+    </div>
+<!--{/if}-->
+<script type="text/javascript">
+    function filter_more(id) {
+        if($('feed_filter_div_'+id).style.display == '') {
+            $('feed_filter_div_'+id).style.display = 'none';
+            $('feed_filter_notice_'+id).style.display = '';
+        } else {
+            $('feed_filter_div_'+id).style.display = '';
+            $('feed_filter_notice_'+id).style.display = 'none';
+        }
+    }
+    function close_feedbox() {
+        var x = new Ajax();
+        x.get('home.php?mod=spacecp&ac=common&op=closefeedbox', function(s){
+            $('feed_box').style.display = 'none';
+        });
+    }
+    var elems = selector('li[class~=magicthunder]', $('feed_div'));
+    for(var i=0; i<elems.length; i++){
+        magicColor(elems[i]);
+    }
+</script>
+<!--{template common/footer}-->

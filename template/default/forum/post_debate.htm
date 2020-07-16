@@ -1,0 +1,51 @@
+<div class="row">
+	<div class="input-box" style="width: calc(50% - 3px); margin:0 4px 0 -1px;">
+		<span class="f" style=" text-align: left"><a class="tip-dot"></a>{lang debate_square_point}</span>
+		<textarea name="affirmpoint" id="affirmpoint" tabindex="1">$debate[affirmpoint]</textarea>
+	</div>
+	<div class="input-box" style="width: calc(50% - 3px); margin:0 0 0 3px;">
+		<span class="f" style=" text-align: left"><a class="tip-dot"></a>{lang debate_opponent_point}</span>
+		<textarea name="negapoint" id="negapoint" tabindex="1">$debate[negapoint]</textarea>
+	</div>
+</div>
+<div class="row">
+	<div class="input-box">
+		<span>{lang endtime}</span>
+		<input type="text" name="endtime" id="endtime" onclick="showcalendar(event, this, true)" autocomplete="off" value="$debate[endtime]" tabindex="1" />
+	</div>
+	<div class="input-box">
+		<span>{lang debate_umpire}</span>
+		<input type="text" name="umpire" id="umpire" onblur="checkuserexists(this.value, 'checkuserinfo')" value="$debate[umpire]" tabindex="1" />
+	</div>
+	<div class="input-box" style="width: calc(50% + 1px)">
+		<span class="f" id="checkuserinfo"><a class="animal line-scale"><p></p><p></p><p></p><p></p><p></p></a></span>
+	</div>
+</div>
+<!--{hook/post_debate_extra}-->
+
+<script type="text/javascript" reload="1">
+function checkuserexists(username, objname) {
+	if(!username) {
+		$(objname).innerHTML = '<a class="animal line-scale"><p></p><p></p><p></p><p></p><p></p></a>';
+		return;
+	}
+	var x = new Ajax();
+	username = BROWSER.ie && document.charset == 'utf-8' ? encodeURIComponent(username) : username;
+	x.get('forum.php?mod=ajax&inajax=1&action=checkuserexists&username=' + username, function(s){
+		var obj = $(objname);
+		obj.innerHTML = s;
+	});
+}
+EXTRAFUNC['validator']['special'] = 'validateextra';
+function validateextra() {
+	if($('postform').affirmpoint.value == '') {
+		showDialog('{lang post_debate_message_1}', 'alert', '', function () { $('postform').affirmpoint.focus() });
+		return false;
+	}
+	if($('postform').negapoint.value == '') {
+		showDialog('{lang post_debate_message_2}', 'alert', '', function () { $('postform').negapoint.focus() });
+		return false;
+	}
+	return true;
+}
+</script>

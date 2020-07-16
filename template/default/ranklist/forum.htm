@@ -1,0 +1,54 @@
+<!--{template ranklist/ranklist_header}-->
+<!--[nest=nestranklisttop]--><div id="nestranklisttop" class="area"></div><!--[/nest]-->
+<div class="plate layout-2-type3 milk app-ranklist">
+	<section class="col-1">
+		<!--{subtemplate ranklist/side_left}-->
+	</section>
+	<section class="col-2 pd-10">
+		<div class="vessel" id="ranklist_forum">
+			<div class="header">
+				<b>{lang ranklist_forum}</b>
+				<div class="dropmenu r" style="width: 120px">
+					<ul>
+						<li{if $_GET[view] == 'threads'} class="active"{/if}><a href="misc.php?mod=ranklist&type=forum&view=threads">{lang ranklist_thread}</a></li>
+						<li{if $_GET[view] == 'posts'} class="active"{/if}><a href="misc.php?mod=ranklist&type=forum&view=posts">{lang ranklist_reply}</a></li>
+						<li{if $_GET[view] == 'today'} class="active"{/if}><a href="misc.php?mod=ranklist&type=forum&view=today">{lang ranklist_post_day}</a></li>
+					</ul>
+				</div>
+			</div>
+			<div class="body">
+				<!--[nest=nestcontenttop]--><div id="nestcontenttop" class="area"></div><!--[/nest]-->
+				<!--{if $forumsrank}-->
+				<table cellspacing="0" cellpadding="0">
+					<tr>
+						<td class="icn" height="36">&nbsp;</td>
+						<th>{lang forum}</th>
+						<td width="100">
+							<!--{if $_GET[view] == 'today'}-->{lang ranklist_forum_day_post}
+							<!--{elseif $_GET[view] == 'posts'}-->{lang reply}
+							<!--{elseif $_GET[view] == 'thismonth'}-->{lang ranklist_forum_month_post}
+							<!--{else}-->{lang ranklist_forum_post}<!--{/if}-->
+						</td>
+					</tr>
+					<!--{loop $forumsrank $forum}-->
+						<tr>
+							<td class="icn" height="36"><!--{if $forum['rank'] <= 3}--><img src="{STATICURL}image/common/rank_$forum['rank'].gif" alt="$forum['rank']" /><!--{else}-->$forum['rank']<!--{/if}--></td>
+							<th><a href="forum.php?mod=forumdisplay&fid=$forum['fid']" target="_blank">$forum['name']</a></th>
+							<td>
+								$forum['posts']
+							</td>
+						</tr>
+					<!--{/loop}-->
+				</table>
+				<!--{else}-->
+				<div class="emp">{lang none_data}</div>
+				<!--{/if}-->
+				<!--[nest=nestcontentbottom]--><div id="nestcontentbottom" class="area"></div><!--[/nest]-->
+				<!--[nest=nestranklistbottom]--><div id="nestranklistbottom" class="area"></div><!--[/nest]-->
+			</div>
+		</div>
+	</section>
+</div>
+
+
+<!--{template common/footer}-->

@@ -1,0 +1,61 @@
+<!--{template common/header}-->
+<!--{if empty($_GET['infloat'])}-->
+<div>
+<!--{/if}-->
+
+<form id="attachpayform" method="post" autocomplete="off" action="forum.php?mod=misc&action=attachpay&tid={$_G[tid]}{if !empty($_GET['infloat'])}&paysubmit=yes&infloat=yes" onsubmit="ajaxpost('attachpayform', 'return_$_GET['handlekey']', 'return_$_GET['handlekey']', 'onerror');return false;"{else}"{/if}>
+	<div class="header">
+		<span class="title-tip" id="return_$_GET['handlekey']">{lang pay_attachment}：$attach[filename]</span>
+		<!--{if !empty($_GET['infloat'])}--><a onclick="hideWindow('$_GET['handlekey']');" class="close" title="{lang close}">×</a><!--{/if}-->
+	</div>
+	<div class="body">
+		<input type="hidden" name="formhash" value="{FORMHASH}" />
+		<input type="hidden" name="referer" value="{echo dreferer()}" />
+		<input type="hidden" name="aid" value="$aid" />
+		<!--{if !empty($_GET['infloat'])}--><input type="hidden" name="handlekey" value="$_GET['handlekey']" /><!--{/if}-->
+        <div class="stat">
+            <span class="text-warning">{lang author}：<a class="text-warning" href="home.php?mod=space&uid=$attach[uid]">$attach[author]</a></span>
+            <b class="bar"></b>
+            <span class="info">
+                {lang price}：
+                $attach[price]{$_G['setting']['extcredits'][$_G['setting']['creditstransextra'][1]][unit]}{$_G['setting']['extcredits'][$_G['setting']['creditstransextra'][1]][title]}
+            </span>
+            <b class="bar"></b>
+            <span class="info">
+                {lang pay_author_income}：
+                $attach[netprice]{$_G['setting']['extcredits'][$_G['setting']['creditstransextra'][1]][unit]}{$_G['setting']['extcredits'][$_G['setting']['creditstransextra'][1]][title]}
+            </span>
+        </div>
+        <br />
+        <!--{if $attach['description']}--><blockquote>$attach[description]</blockquote><!--{/if}-->
+        <!--{if $status == 1}-->
+            <p class="alert hi-disabled">{lang status_insufficient}</p>
+        <!--{elseif $status == 2}-->
+            <p class="alert hi-info">{lang status_download}, <a class="heart-pink" href="forum.php?mod=attachment&aid=$aidencode" target="_blank">{lang download}</a></p>
+        <!--{/if}-->
+	</div>
+	<div class="footer ccbox">
+		<!--{if $status != 1}-->
+			<input name="buyall" type="checkbox" value="yes" id="buyall" />
+			<label for="buyall">{lang buy_all_attch}</label>
+			<button class="btn-square" style="width: 64%" type="submit" name="paysubmit" value="true"><!--{if $status == 0}-->{lang pay_attachment}<!--{else}-->{lang free_buy}<!--{/if}--></button>
+		<!--{else}-->
+			<button class="btn-square fullwidth" style="border: none;"  type="button" onclick="hideWindow('$_GET['handlekey']');">{lang close}</button>
+		<!--{/if}-->
+	</div>
+</form>
+
+<!--{if !empty($_GET['infloat'])}-->
+<script type="text/javascript" reload="1">
+function succeedhandle_$_GET['handlekey'](locationhref) {
+	ajaxget('forum.php?mod=viewthread&tid=$attach[tid]&viewpid=$attach[pid]', 'post_$attach[pid]');
+	hideWindow('$_GET['handlekey']');
+	showCreditPrompt();
+}
+</script>
+<!--{/if}-->
+
+<!--{if empty($_GET['infloat'])}-->
+</div>
+<!--{/if}-->
+<!--{template common/footer}-->

@@ -1,0 +1,29 @@
+<!--{if $hasinblocks}-->
+<div class="tags" id="hasinblocks">
+    <p class="common-tip"><i class="ft-x-circle"></i>{lang block_recommend_data_in_block}</p>
+    <ul id="recommenditem_ul">
+        <!--{loop $hasinblocks $block}-->
+        <li id="recommenditem_$block[dataid]">
+            <span {if $op=='recommend'} onclick="if($('recommendto')){$('recommendto').value=(this.innerText ? this.innerText : this.textContent);}recommenditem_byblock('$block[bid]', '$_GET[id]', '$_GET[idtype]')"{/if}><!--{if empty($block['name'])}-->#$block[bid]<!--{else}-->$block[name]<!--{/if}--></span>
+            &nbsp;&nbsp;<a class="close" onclick="delete_recommenditem($block[dataid], $block[bid]);">×</a>
+        </li>
+        <!--{/loop}-->
+    </ul>
+</div>
+<!--{/if}-->
+
+<!--{if !empty($blocks)}-->
+<div class="tags">
+    <p class="common-tip"><i class="ft-plus-circle"></i>{lang select_block}</p>
+    <ul>
+        <!--{loop $blocks $block}-->
+        <li {if $op=='recommend'} onclick="if($('recommendto')){$('recommendto').value=(this.innerText ? this.innerText : this.textContent);}recommenditem_byblock('$block[bid]', '$_GET[id]', '$_GET[idtype]')"{/if}>$block[name]</li>
+        <!--{/loop}-->
+    </ul>
+</div>
+<!--{else}-->
+<div class="tags">
+    <p class="common-tip"><i class="ft-plus-circle"></i>{lang select_block} <em class="heart-pink" style="font-size: 12px; vertical-align: 3%">({lang has_no_block})</em></p>
+</div>
+<!--{/if}-->
+<!--{if $multi}--><div class="pgs mtm cl">$multi</div><!--{/if}-->

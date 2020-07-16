@@ -1,0 +1,233 @@
+{eval 
+    global $_G;
+    $hasPhone_auth = !!$_G['cache']['pluginlanguage_script']['phone_auth'];
+}
+<link rel="stylesheet" href="{$static_path}/css/colpick.css" type="text/css" />
+<link rel="stylesheet" href="{$static_path}/css/set.css" type="text/css" />
+<script src="{$static_path}/js/jquery.min.js"></script>
+<script src="{$static_path}/js/colpick.js"></script>
+<body>
+    <style>
+    .i-select-dropdown__item, .i-select-group__title{
+        text-align: left;
+    }
+    .Checkbox.is-bordered.Checkbox--mini .Checkbox__label{
+        line-height: 19px !important;
+    }
+    </style>
+   <form class="dz-set" method="POST" id='app' v-cloak >
+       <div class="content">
+            <div class="basic-setup">
+                <div class="title">
+                    <h2>&#22522;&#26412;&#35774;&#32622;</h2>
+                </div>
+                <p class="pad">&#39564;&#35777;&#21333;&#20803;&#37197;&#32622;</p>
+                <div class="item">
+                    <label for="id">VID:</label>
+                    <i-input style="width: 300px" :maxlength='24' :minlength='24' label="VID:" v-model="config.vid"></i-input>
+                </div>
+                <div class="item">
+                    <label for="key">KEY:</label>
+                    <i-input style="width: 300px" :maxlength='32' :minlength='32' v-model="config.key"></i-input>
+                </div>
+                <i-row :gutter="20">
+                    <i-col class="clear" :span="12">
+                        <p  class="pad" style="clear:both">
+                            &#36873;&#25321;&#38656;&#35201;&#39564;&#35777;&#30340;&#27169;&#22359;
+                            <Checkbox class="right" v-model="modulesAll">&#20840;&#36873;</Checkbox>
+                        </p>
+                        <i-select class="pl-15" style="width: 100%" size="mini" filterable v-model="config.enableModules" multiple placeholder="&#35831;&#36873;&#25321;">
+                            <i-option
+                                v-for="(module, key) in modules"
+                                :key="key + 1"
+                                :label="module"
+                                :value="key + 1 + ''">
+                            </i-option>
+                        </i-select>
+                    </i-col>
+                    <i-col  class="clear" :span="12">
+                        <p  class="pad" style="clear:both">
+                            &#36873;&#25321;&#38656;&#35201;&#39564;&#35777;&#30340;&#29992;&#25143;&#32452;
+                            <Checkbox class="right" v-model="groupsAll" label="1">&#20840;&#36873;</Checkbox>
+                        </p>
+                        <i-select class="pl-15" style="width: 100%" size="mini" filterable v-model="config.enableGroups" multiple placeholder="&#35831;&#36873;&#25321;">
+                            <option-group label="&#31995;&#32479;&#29992;&#25143;&#32452;">
+                                <i-option
+                                    v-for="(group, key) in groups"
+                                    v-if="group.type == 'system'"
+                                    :key="group.groupid"
+                                    :label="group.grouptitle"
+                                    :value="group.groupid">
+                                </i-option>
+                            </option-group>
+                            <option-group label="&#20250;&#21592;&#29992;&#25143;&#32452;">
+                                <i-option
+                                    v-for="(group, key) in groups"
+                                    v-if="group.type == 'member'"
+                                    :key="group.groupid"
+                                    :label="group.grouptitle"
+                                    :value="group.groupid">
+                                </i-option>
+                            </option-group>
+                            <option-group label="&#33258;&#23450;&#20041;&#29992;&#25143;&#32452;">
+                                <i-option
+                                    v-for="(group, key) in groups"
+                                    v-if="group.type == 'special'"
+                                    :key="group.groupid"
+                                    :label="group.grouptitle"
+                                    :value="group.groupid">
+                                </i-option>
+                            </option-group>
+                        </i-select>
+                    </i-col>
+                </i-row>
+            </div>
+            <div class="advanced-setting">
+                <div class="title">
+                    <h2>&#39640;&#32423;&#35774;&#32622;</h2>
+                </div>
+                &#35821;&#35328;&#36873;&#25321;:
+                <i-select size="small" v-model="config.lang" placeholder="&#36873;&#25321;&#35821;&#35328;" style="width: 100px">
+                    <i-option label="&#31616;&#20307;&#20013;&#25991;" value="zh-CN"></i-option>
+                    <i-option label="&#32321;&#20307;&#20013;&#25991;" value="zh-TW"></i-option>
+                    <i-option label="English" value="en"></i-option>
+                </i-select>
+                <div class="item">
+                    <Checkbox size="mini" border v-model="config.pc">&#21551;&#29992;&#87;&#69;&#66;&#31471;</Checkbox>
+                </div>
+                <div class="item">
+                    <Checkbox size="mini" border v-model="config.mobile">&#21551;&#29992;&#31227;&#21160;&#31471;</Checkbox>
+                </div>
+                <div class="item">
+                    <Checkbox size="mini" border v-model="config.https">&#24378;&#21046;&#21551;&#29992;https</Checkbox>
+                </div>
+                <!-- <div class="item">
+                    <Checkbox size="mini" v-model="config.ai">
+                        &#21551;&#29992;&#26234;&#33021;&#39564;&#35777;
+                    <Tooltip placement="top">
+                            <div slot="content">
+                                &#22914;&#26524;&#24320;&#21551;&#65292;&#39640;&#39118;&#38505;&#25805;&#20316;&#25110;&#32773;&#23458;&#25143;&#31471;&#22312;&#39564;&#35777;&#26102;
+                                <br>&#38656;&#35201;&#36827;&#34892;&#25163;&#21183;&#39564;&#35777;&#65292;&#26080;&#39118;&#38505;&#23458;&#25143;&#31471;&#21017;&#21487;&#20197;&#19968;
+                                <br>&#38190;&#36890;&#36807;&#39564;&#35777;&#65292;&#22823;&#24133;&#25552;&#21319;&#29992;&#25143;&#20307;&#39564;&#12290;
+                                <br>&#24314;&#35758;&#24320;&#21551;&#27492;&#39033;   
+                            </div>
+                            <Icon type="help-circled"></Icon>
+                        </Tooltip>
+                    </Checkbox>
+                </div> -->
+            </div>
+            <div class="btn-setting">
+                <div class="title">
+                    <h2>&#25353;&#38062;&#26679;&#24335;&#35774;&#32622;<span class="right" @click="setDefaultConfig">&#24674;&#22797;&#40664;&#35748;&#35774;&#32622;</span></h2>
+                </div>
+                {if $hasPhone_auth}
+                <Alert type="warning" show-icon>
+                        &#26816;&#27979;&#21040;&#24744;&#23433;&#35013;&#20102;&#25554;&#20214;&#65306;&#12304;&#25163;&#26426;&#27880;&#20876;&#86;&#25163;&#26426;&#30331;&#24405;&#12305;&#65292;&#30331;&#24405;&#21644;&#27880;&#20876;&#27169;&#22359;&#23558;&#37319;&#29992;&#12304;&#25163;&#26426;&#27880;&#20876;&#86;&#25163;&#26426;&#30331;&#24405;&#12305;&#25152;&#35774;&#32622;&#30340;&#26679;&#24335;&#12290;
+                </Alert>
+                {/if}
+                <div v-for="(module, key) in config.modules" :key="key" class="model" :class='[key]' >
+                    <div class="model-item">
+                        <span class="model-intro">{{modules[key]}}&#27169;&#22359;</span>
+                        <div class="group-set">
+                            <label for="vaptchaWidth">width(px)</label>
+                            <i-input class="form-control minw" v-model="module.width"  @on-blur="limitNumber(module, 'width', 200)" size="small"></i-input>                            
+                            <!-- <input class="form-control minw" type="text" v-model="module.width" @blur="limitNumber(module, 'width', 200)"/> -->
+                        </div>
+                        <div class="group-set">
+                            <label for="vaptchaHeight">height(px)</label>
+                            <i-input class="form-control minw"  v-model="module.height" @on-blur="limitNumber(module, 'height', 36, 46)" size="small"></i-input>                            
+                            <!-- <input class="form-control minw" type="text" v-model="module.height" @blur="limitNumber(module, 'height', 36, 46)"/> -->
+                        </div>
+                        <div class="group-set">
+                            <label>color</label>
+                            <div class="example-ex">
+                                <span># </span>
+                                <input type="text" id="picker" class="picker" v-model="module.color">
+                            </div>
+                        </div>
+                        <div class="group-set">
+                            <label for="vaptchaWidth">style</label>
+                            <i-select style="width: 80px;display:block" v-model="module.style" size="small" placeholder="style">
+                                <i-option
+                                    label="Widows"
+                                    value="dark">
+                                </i-option>
+                                <i-option
+                                    label="IOS"
+                                    value="light">
+                                </i-option>
+                            </i-select>
+                        </div>
+                        <!-- <div class="group-set">
+                            <label for="vaptchaWidth">&#26174;&#31034;&#31867;&#22411;</label>
+                            <i-select style="width: 80px;display:block" v-model="module.type" size="small" placeholder="style">
+                                <i-option
+                                    label="&#28014;&#21160;&#24335;"
+                                    value="float">
+                                </i-option>
+                                <i-option
+                                    label="&#24377;&#20986;&#24335;"
+                                    value="popup">
+                                </i-option>
+                            </i-select>
+                        </div> -->
+                        <div class="group-set group-checkbox" :style="{visibility: key < 2 ? 'visible' : 'hidden'}">
+                            <Checkbox size="small"  v-model="module.required" ></Checkbox>
+                            <span class="check-mark">*</span>
+                        </div>
+                        <div class="group-set" :style="{visibility: key < 2 ? 'visible' : 'hidden'}">
+                            <label for="vaptchaLabel">label</label>
+                            <i-input class="form-control"  v-model="module.label" size="small"></i-input>
+                        </div>
+                    </div>
+                    <div class="model-preview">
+                        <div class="preview-intro">
+                            <span class="model-intro">
+                                <sup class="check-mark" v-if="module.required">*</sup>{{module.label}}</span>
+                        </div>
+                        <div class="preview-btn">
+                            <div v-show="module.style == 'dark'" :style="{width: module.width + 'px', height: module.height + 'px'}" class="vp-basic-btn vp-dark-btn vp-default-btn vp-waves">
+                                <div class="vp-basic-cont ">
+                                    <div class="vp-shield vp-vertical hide">
+                                        <span class="vp-vertical-cont">
+                                            <i></i>
+                                            <span class="vp-circle-h"></span>
+                                        </span>
+                                    </div>
+                                    <div :style="{lineHeight: module.height + 'px'}" class="vp-tip">{{{tip}}}</div>
+                                </div>
+                            </div>
+                            <div v-show="module.style == 'light'" :style="{width: module.width + 'px', height: module.height + 'px'}"  class="vp-basic-btn vp-light-btn vp-default-btn" style="display: none;">
+                                <div :style="{top: (module.height - 46) / 2 + 'px'}"  class="vp-basic-cont ">
+                                    <div class="vp-basic-bar"></div>
+                                    <div class="vp-shield vp-vertical">
+                                        <span class="vp-vertical-cont">
+                                            <span class="vp-circle-h"></span>                                            
+                                        </span>
+                                    </div>
+                                    <div class="vp-tip">{{{tip}}}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+       </div>
+		<button class="vp-btn" @click.prevent="submitSettig">&#20445;&#23384;&#35774;&#32622;</button>      
+   </form>
+   <form method="POST" id="configForm">
+   </form>
+   <script src="https://cdn.bootcss.com/vue/2.5.13/vue.min.js"></script>
+   <link href="https://cdn.bootcss.com/iview/2.9.2/styles/iview.css" rel="stylesheet">
+   <script src="https://cdn.bootcss.com/iview/2.9.2/iview.min.js"></script>
+   <script src="{$static_path}/js/set.js?v=2.6.2"></script>   
+<script>
+    var config = JSON.parse('{eval echo json_encode($config)}');
+    init(config, JSON.parse('{eval echo json_encode($groups)}'));
+    $.ajaxSetup({
+        beforeSend: function(xhr) {
+            this.url = '{$site_url}' + this.url;
+        }
+    })
+</script>
+</body>

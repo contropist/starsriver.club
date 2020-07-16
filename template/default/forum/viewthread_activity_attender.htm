@@ -1,0 +1,19 @@
+<div class="attender mg-10 mg-10-vertical">
+    <a class="avatar pxa-radius" target="_blank" href="home.php?mod=space&uid=$apply[uid]"><!--{echo avatar($apply[uid], 'mid')}--></a>
+    <!--{if  $activity['cost'] && $apply[payment] >= 0}-->
+        <em class="payway hi-primary-case px4-radius">￥{$apply[payment]}</em>
+    <!--{else}-->
+        <em class="payway hi-success-case px4-radius">{lang activity_self} </em>
+    <!--{/if}-->
+    <div class="msg px4-radius">
+        <div class="nv">
+            <a class="name" target="_blank" href="home.php?mod=space&uid=$apply[uid]">$apply[username]</a>
+            <span class="date r">$apply[dateline]</span>
+        </div>
+        <!--{if $apply[message]}-->
+        <p>$apply[message]</p>
+        <!--{else}-->
+        <p>{lang global_msg}</p>
+        <!--{/if}-->
+    </div>
+</div>

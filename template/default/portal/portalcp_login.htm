@@ -1,0 +1,62 @@
+<!--{template common/header}-->
+
+<style type="text/css">
+.parentcat {}
+.cat { margin-left: 20px; }
+.lastchildcat, .childcat { margin-left: 40px; }
+</style>
+<!--{if $op == 'push'}-->
+	<div class="header">
+		<span class="title-tip">{lang article_push}</span>
+		<!--{if $_G[inajax]}--><a onclick="hideWindow('$_GET['handlekey']');" class="close" title="{lang close}">×</a><!--{/if}-->
+	</div>
+	<div class="c" style="width:220px; height: 300px; overflow: hidden; overflow-y: scroll;">
+		<p>{lang category_push_select}</p>
+		<table class="mtw dt">
+			$categorytree
+		</table>
+	</div>
+
+<!--{else}-->
+<div id="pt" class="bm cl">
+	<div class="z">
+		<a href="./" class="nvhm" title="{lang homepage}">$_G[setting][bbname]</a><em class="direct"></em>
+		<!--{if $_G['setting']['portalstatus'] }--><a href="portal.php">{lang portal}</a><em class="direct"></em><!--{/if}-->
+		<a href="portal.php?mod=portalcp"><!--{if $_G['setting']['portalstatus'] }-->{lang portal_manage}<!--{else}-->{lang portal_block_manage}<!--{/if}--></a><em class="direct"></em>
+		{lang login}
+	</div>
+</div>
+
+<div>
+	<div class="mn">
+		<div class="bm bw0 mdcp">
+			<h1 class="mt">{lang panel_login}</h1>
+			<div class="mbw">{lang panel_notice_login}</div>
+			<form method="post" autocomplete="off" action="portal.php?mod=portalcp" class="exfm">
+				<input type="hidden" name="formhash" value="{FORMHASH}">
+				<input type="hidden" name="submit" value="yes">
+				<input type="hidden" name="login_panel" value="yes">
+				<table cellspacing="0" cellpadding="5">
+					<tr>
+						<th width="60">{lang panel_login_username}:</th><td>{$_G[member][username]}</td>
+					</tr>
+					<tr>
+						<th>{lang panel_login_password}:</th><td><input id="cppwd" type="password" name="cppwd" /></td>
+					</tr>
+					<tr>
+						<th></th><td><button type="submit" name="submit" id="submit" value="true"><strong>{lang submit}</strong></button></td>
+					</tr>
+				</table>
+			</form>
+		</div>
+		<script type="text/javascript">
+			$("cppwd").focus();
+		</script>
+	</div>
+	<div class="appl">
+		<!--{subtemplate portal/portalcp_nav}-->
+	</div>
+</div>
+<!--{/if}-->
+<!--{template common/footer}-->
+

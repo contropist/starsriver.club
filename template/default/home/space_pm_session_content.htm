@@ -1,0 +1,118 @@
+<div class="toolbar">
+	<!--{if $_GET['subop'] == 'view'}-->
+		<i class="str">{lang pm_totail}</i>
+		<!--{if $touid }-->
+			<a id="a_pmdelete_$plid" onclick="showWindow(this.id, 'home.php?mod=spacecp&ac=pm&op=delete&deletepm_deluid[]=$touid&uid=$touid&handlekey=pmdeletehk_{$plid}', 'get', 0);">{lang pm_delete_all}</a>
+			<a href="home.php?mod=spacecp&ac=pm&op=export&touid=$touid">[{lang pm_export}]</a>
+		<!--{elseif $plid}-->
+			<!--{if $founderuid == $_G[uid]}-->
+			<a id="a_pmdelete_$plid" onclick="showWindow(this.id, 'home.php?mod=spacecp&ac=pm&op=delete&deletepm_delplid[]=$plid&plid=$plid&handlekey=pmdeletehk_{$plid}', 'get', 0);">{lang delete_chatpm}</a>
+			<!--{else}-->
+			<a id="a_pmdelete_$plid" onclick="showWindow(this.id, 'home.php?mod=spacecp&ac=pm&op=delete&deletepm_quitplid[]=$plid&plid=$plid&handlekey=pmdeletehk_{$plid}', 'get', 0);">{lang quit_chatpm}</a>
+			<!--{/if}-->
+			<a href="home.php?mod=spacecp&ac=pm&op=export&plid=$plid&type=1">[{lang pm_export}]</a>
+		<!--{/if}-->
+    <!--{/if}-->
+    <!--{if $multi}--><div class="pager r">$multi</div><!--{/if}-->
+</div>
+
+<div class="messages">
+	<!--{if $list && $touid}-->
+		<div class="msglist" id="pm_list">
+			<!--{loop $list $key $value}-->
+            <!--{subtemplate home/space_pm_node}-->
+            <!--{/loop}-->
+			<div id="pm_append" style="display: none"></div>
+		</div>
+		<script>
+			var msglist = document.querySelector('#pm_list');
+            msglist.scrollTop = msglist.scrollHeight;
+		</script>
+    <!--{elseif $plid}-->
+    	<!--{if empty($lastanchor)}--><!--{eval $lastanchor=1;}--><!--{/if}-->
+		<div class="msglist" id="msglist"></div>
+		<!--{if $chatpmmemberlist}-->
+			<div class="meblist" id="meblist">
+				<ul class="list">
+					<!--{loop $chatpmmemberlist $key $value}-->
+						<li>
+							<a href="home.php?mod=space&uid=$value[uid]" target="_blank" {if $ols[$value[uid]]}title="{lang online}"{/if}><i class="avatar"><!--{avatar($value[uid],'small')}--></i><i class="name">$value[username]</i></a>
+							<!--{if $authorid == $_G['uid'] && $value['uid'] != $_G['uid']}-->
+								<a class="del ft-x" id="a_kickmmeber_$key" title="{lang kickmemberwho}" onclick="showWindow(this.id, 'home.php?mod=spacecp&ac=pm&op=kickmember&memberuid=$key&plid=$plid', 'get', 0);"></a>
+							<!--{/if}-->
+						</li>
+					<!--{/loop}-->
+				</ul>
+				<!--{if $authorid == $_G['uid']}-->
+					<input class="u-thumb" type="text" name="username" id="username" placeholder="添加成员"/>
+					<a class="add-thumb" href="home.php?mod=spacecp&ac=pm&op=appendmember&plid=$plid" id="a_appendmember" title="{lang appendchatpmmember_comment}" onclick="getchatpmappendmember();">+</a>
+				<!--{/if}-->
+			</div>
+			<a class="btn-thumb meblist-thumb ft-user" onclick="this.trgClass('close dark'); document.querySelector('#meblist').trgClass('open')"></a>
+		<!--{/if}-->
+		<script type="text/javascript" src="{$_G[setting][jspath]}bbcode.js?{VERHASH}"></script>
+		<script type="text/javascript">
+			var refresh = true,
+                refreshHandle = -1,
+                autorefresh = {$refreshtime},
+                forumallowhtml = 0,
+                allowhtml = 0,
+                allowsmilies = true,
+                allowbbcode = parseInt('{$_G[group][allowsigbbcode]}'),
+                allowimgcode = parseInt('{$_G[group][allowsigimgcode]}'),
+                DISCUZCODE = {
+                    'num': '-1',
+                    'html': []
+                };
+            var msgListObj = $('msglist');
+
+            hideMenu();
+            refreshMsg(1);
+
+            <!--{if $refreshtime}-->
+            refreshHandle = window.setInterval('refreshMsg(0);', 1000);
+            <!--{/if}-->
+
+            function refreshMsg(refreshnow) {
+                if(refresh) {
+                    if(autorefresh <= 0 || refreshnow){
+                        var x = new Ajax();
+                        x.get('home.php?mod=spacecp&ac=pm&op=showchatmsg&inajax=1&daterange=$daterange&plid=$plid&page=$page', function(s){
+                            if(msgListObj.scrollTop  >= msgListObj.scrollHeight){
+                                msgListObj.innerHTML = s;
+                                msgListObj.scrollTop = msgListObj.scrollHeight;
+                            } else {
+                                msgListObj.innerHTML = s;
+                            }
+                            if(refreshnow){
+                                msgListObj.scrollTop = msgListObj.scrollHeight;
+                            }
+                        });
+                        autorefresh = {$refreshtime};
+                    }
+                    autorefresh -= 1;
+                } else {
+                    window.clearInterval(refreshHandle);
+                }
+            }
+
+            function succeedhandle_pmsend(url, msg, values) {
+                var pObj = document.createElement("div");
+                var pmMsg = $('replymessage');
+                pObj.className = 'reply self';
+                pObj.innerHTML = '' +
+                    '<a class="avatar" href="home.php?mod=space&uid=$_G[uid]" target="_blank"><!--{avatar($_G[uid],\'small\')}--></a>' +
+                    '<div class="msg">' +
+                    bbcode2html(parseurl(pmMsg.value))+
+                    '<i class="time">{lang just_now}</i>' +
+                    '</div>';
+                msgListObj.appendChild(pObj);
+                msgListObj.scrollTop = msgListObj.scrollHeight;
+                pmMsg.value = "";
+                showCreditPrompt();
+            }
+		</script>
+    <!--{else}-->
+		<i class="none"></i>
+    <!--{/if}-->
+</div>

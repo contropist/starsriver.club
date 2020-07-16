@@ -1,0 +1,187 @@
+/****************\
+     马甲设置     |
+\****************/ /** home::spacecp **/
+    [id*="setting_repeat"] .repeat{
+        width: calc(33.333333% - 25px) !important;
+        box-sizing: border-box;
+        padding: 12px;
+        font-size: 0;
+        overflow: hidden;
+    }
+    [id*="setting_repeat"] .repeat .avatar{
+        position: relative;
+        width: 58px;
+        height: 58px;
+        box-shadow: 0 0 0 1px rgba(0,0,0,.19);
+        border-radius: 50%;
+    }
+    [id*="setting_repeat"] .repeat .arp{
+        display: inline-block;
+        box-sizing: content-box;
+        width: calc(100% - 68px);
+        padding-left: 10px;
+        height: 58px;
+    }
+    [id*="setting_repeat"] .repeat .que{
+        display: inline-block;
+        padding-left: 20px;
+        border-left: inherit;
+        height: 68px;
+        box-sizing: border-box;
+    }
+    [id*="setting_repeat"] .repeat .arp.tpl{
+        width: 240px;
+        height: 68px;
+        padding:0 20px ;
+        box-sizing: border-box;
+    }
+    [id*="setting_repeat"] .repeat .que.tpl{
+        width: 275px;
+    }
+    [id*="setting_repeat"] .repeat .tpl select,
+    [id*="setting_repeat"] .repeat .tpl input{
+        padding: 2px 10px;
+        margin: 3px 0;
+        width: 100%;
+        border-radius: 5px;
+        border: 1px solid #eaeaea;
+        color: #888;
+        height: 28px;
+        line-height: 28px;
+        box-shadow:inset 0 0 0 50px #fff;
+    }
+    [id*="setting_repeat"] .repeat hr{
+        margin: 10px !important;
+    }
+    [id*="setting_repeat"] .repeat .name{
+        display: inline-block;
+        line-height: 36px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        color: #585858;
+        max-width:100px;
+    }
+    [id*="setting_repeat"] .repeat .name input,
+    [id*="setting_repeat"] .repeat .name select {
+        border:none;
+        padding: 0;
+        width: 100%;
+        height: 36px;
+        line-height: 36px;
+        box-shadow: inset 0 0 0 50px #fff;
+    }
+    [id*="setting_repeat"] .repeat .status input,
+    [id*="setting_repeat"] .repeat .status select {
+        font-size: 12px;
+        padding: 0;
+        line-height: 16px;
+        height: 16px;
+        width: 100%;
+        box-shadow: inset 0 0 0 50px #fff;
+    }
+    [id*="setting_repeat"] .repeat .shift{
+        line-height: 36px;
+        width: 16px;
+        margin: 0 0 0 10px;
+        vertical-align: top;
+    }
+    [id*="setting_repeat"] .repeat .status{
+        display: inline-block;
+        font-size: 12px;
+        color: #969696;
+        width: 100%;
+    }
+    [id*="setting_repeat"] .repeat .selector + label{
+        display: inline-block;
+        color: #d8d8d8;
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 28px;
+        height: 28px;
+        border-radius: 0 50%;
+        border-bottom: 1px solid;
+        box-sizing: border-box;
+        border-left: 1px solid;
+        background: #fff;
+    }
+    [id*="setting_repeat"] .repeat .selector + label::before{
+        line-height: 28px !important;
+        font-size: 21px !important;
+        position: absolute;
+        display: block;
+        width: 100%;
+        height: 100%;
+        text-align: center;
+    }
+    [id*="setting_repeat"] .repeat .selector:checked + label{
+        width: 50%;
+        height: 130%;
+        border-radius: 100% 0 0 100%;
+        border: none;
+        background: rgb(0, 160, 216);
+        top: -15%;
+    }
+    [id*="setting_repeat"] .repeat .selector:checked + label::before{
+        color: #ffffff;
+        font-size: 72px !important;
+        line-height: 176px !important;
+        text-shadow: 0 0 15px rgba(0,0,0,.1);
+    }
+    [id*="setting_repeat"] .repeat .comment{
+        display: block;
+        border: 1px solid transparent;
+        border-radius: 6px;
+        width: 100%;
+        height: 32px;
+        padding: 7px;
+        font-size: 12px;
+    }
+    [id*="setting_repeat"] .repeat .comment.hover,
+    [id*="setting_repeat"] .repeat .comment:hover{
+        border-color: rgba(0,0,0,.1);
+    }
+    [id*="setting_repeat"] .repeat .comment.active,
+    [id*="setting_repeat"] .repeat .comment:focus{
+        border-color: rgba(0,0,0,.1);
+        box-shadow: 0 0 10px rgba(0,0,0,.1);
+    }
+    [id*="setting_repeat"] .submit{
+        position: relative;
+        height: 137px;
+        letter-spacing: 10px;
+        text-indent: 10px;
+        color: #969696;
+    }
+    [id*="setting_repeat"] .submit span{
+        font-size: 22px;
+    }
+    [id*="setting_repeat"] .submit:hover{
+        color: #fff;
+    }
+    [id*="setting_repeat"] .submit::before{
+        content: '';
+        position: absolute;
+        display: block;
+        height: 180%;
+        top: -40%;
+        width: 120%;
+        border-radius: 100% 0 0 100%;
+        background: #00a0d8;
+        right: -130%;
+    }
+    [id*="setting_repeat"] .submit:hover::before{
+        right: 0;
+        height: 280%;
+        top: -90%;
+    }
+
+    @media screen and (max-width:1240px) {
+        [id*="setting_repeat"] .repeat .que.tpl{
+             width: 225px;
+         }
+        [id*="setting_repeat"] .repeat .arp.tpl{
+            width: 175px;
+        }
+    }
+/** end **/

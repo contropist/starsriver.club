@@ -1,0 +1,84 @@
+<!--{subtemplate common/header_common}-->
+	<!--{if $_G['basescript'] == 'forum' && $_G['setting']['archiver']}--><link rel="archives" title="$_G['setting']['bbname']" href="{$_G[siteurl]}archiver/" /><!--{/if}-->
+	<!--{if !empty($rsshead)}-->$rsshead<!--{/if}-->
+	<!--{if $_G['basescript'] == 'forum' || $_G['basescript'] == 'group'}-->
+		<script type="text/javascript" src="{$_G[setting][jspath]}forum.js?{VERHASH}"></script>
+	<!--{elseif $_G['basescript'] == 'home'}-->
+		<script type="text/javascript" src="{$_G[setting][jspath]}home.js?{VERHASH}"></script>
+	<!--{elseif $_G['basescript'] == 'portal'}-->
+		<script type="text/javascript" src="{$_G[setting][jspath]}portal.js?{VERHASH}"></script>
+	<!--{/if}-->
+</head>
+
+<body>
+    <layout:html html-cache>
+		<!--{template common/header_nestmod}-->
+    </layout:html>
+    <layout:html html-accessory style="width: 100%">
+        <div class="cover">
+            <div id="ajaxwaitid"></div>
+            <div id="append_parent">
+                <!--{if !IS_ROBOT && $_G['uid'] && !empty($_G['style']['extstyle'])}-->
+                <div class="full-cover trans-ease" id="maintheme-menu">
+                    <a class="closer animal2 trans-outback">×</a>
+                    <div class="container panel theme-list trans-ease-slow" data-protect>
+                        <ol class="panel-container">
+                            <li class="box size-3-1" onclick="extstyle('')"><i class="preview"></i><i class="info">{lang default}</i></li>
+                            <!--{loop $_G['style']['extstyle'] $extstyle}-->
+                            <li class="box size-3-1" onclick="extstyle('$extstyle[0]')"><i class="preview" style='background:$extstyle[2]'></i><i class="info">$extstyle[2]</i></li>
+                            <!--{/loop}-->
+                        </ol>
+                    </div>
+                </div>
+                <script>
+                    jQuery(document).ready(function () {
+                        menu_initialize('#maintheme-btn','#maintheme-menu',[document,window,'#maintheme-menu > .closer']);
+                    });
+                </script>
+                <!--{/if}-->
+            </div>
+        </div>
+        <div class="container">
+            <!--{if empty($topic) || $topic['useheader']}-->
+                <!--{if $_G['setting']['mobile']['allowmobile'] && (!$_G['setting']['cacheindexlife'] && !$_G['setting']['cachethreadon'] || $_G['uid']) && ($_GET['nest'] != 'yes' || !$_GET['inajax']) && ($_G['mobile'] != '' && $_G['cookie']['mobile'] == '' && $_GET['mobile'] != 'no')}-->
+                    <div>
+                        {lang your_mobile_browser}
+                        <a href="{$_G['siteurl']}forum.php?mobile=yes">{lang go_to_mobile}</a>
+                        <span>|</span>
+                        <a href="$_G['setting']['mobile']['nomobileurl']">{lang to_be_continue}</a>
+                    </div>
+                <!--{/if}-->
+
+                <!--{if $_G['setting']['shortcut'] && $_G['member'][credits] >= $_G['setting']['shortcut']}-->
+                    <div id="shortcut">
+                        <span><a id="shortcutcloseid" title="{lang close}">{lang close}</a></span>
+                        {lang shortcut_notice}
+                        <a id="shortcuttip">{lang shortcut_add}</a>
+                    </div>
+                    <script type="text/javascript">setTimeout(setShortcut, 2000);</script>
+                <!--{/if}-->
+
+                <!--{ad/headerbanner/wp a_h}-->
+
+                <!--{if !empty($_G['setting']['plugins']['jsmenu'])}-->
+                    <ul class="p_pop h_pop" id="plugin_menu" style="display: none">
+                        <!--{loop $_G['setting']['plugins']['jsmenu'] $module}-->
+                        <!--{if !$module['adminid'] || ($module['adminid'] && $_G['adminid'] > 0 && $module['adminid'] >= $_G['adminid'])}-->
+                        <li>$module[url]</li>
+                        <!--{/if}-->
+                        <!--{/loop}-->
+                    </ul>
+                <!--{/if}-->
+                $_G[setting][menunavs]
+                <!--{ad/subnavbanner/a_mu}-->
+                <!--{hook/global_header}-->
+            <!--{/if}-->
+        </div>
+    </layout:html>
+   <layout:html html-header>
+        <!--{eval $navback = "white";}-->
+        <!--{template common/header_nav}-->
+        <!--{template group/group_header_banner}-->
+        <!--{hook/global_nav_extra}-->
+    </layout:html>
+	<layout:html html-wrapper>

@@ -1,0 +1,35 @@
+<style>body{background: #fff !important;}</style>
+<div class="cupy-nav">
+	<ul>
+		<li class="{if !$op && !$tid}active{/if}"><a href="forum.php?mod=collection">{lang collection_recommended}</a></li>
+		<li><a class="spline"></a></li>
+		<li class="{if $op == 'all'}active{/if}"><a href="forum.php?mod=collection&op=all">{lang collection_all}</a></li>
+		<li><a class="spline"></a></li>
+		<li class="{if $op == 'my'}active{/if}"><a href="forum.php?mod=collection&op=my">{lang collection_my}</a></li>
+		<!--{if !$op && $tid}--><li class="active"><a href="forum.php?mod=collection&tid=$tid">{lang collection_nav_related}</a></li><!--{/if}-->
+		<!--{hook/collection_nav_extra}-->
+		<!--{if helper_access::check_module('collection')}-->
+		<li class="r"><a class="create trans-ease-swift" href="forum.php?mod=collection&action=edit" onclick="showWindow('createcollection', this.href, 'get', 0)" >{lang collection_create}</a></li>
+		<!--{/if}-->
+		<!--{if $op && $_G['setting']['search']['collection']['status'] && ($_G['group']['allowsearch'] & 64 || $_G['adminid'] == 1)}-->
+		<li><a class="spline"></a></li>
+		<li>
+			<form class="r search-coll" style="margin: -2px 0;" method="post">
+				<input type="text" name="kw" placeholder=""/>
+				<button type="submit" value="submit">{lang search}</button>
+			</form>
+		</li>
+		<!--{/if}-->
+	</ul>
+</div>
+
+<!--{if $op}-->
+	<div class="filter-nav">
+		<ul>
+			<li {if !in_array($orderby, array('threadnum', 'commentnum', 'follownum'))}class="active"{/if}><a href="forum.php?mod=collection&op={$op}">{lang collection_sortby_update}</a></li>
+			<li {if $orderby == 'threadnum'}class="active"{/if}><a href="forum.php?mod=collection&op={$op}&order=threadnum">{lang collection_sortby_threadnum}</a></li>
+			<li {if $orderby == 'commentnum'}class="active"{/if}><a href="forum.php?mod=collection&op={$op}&order=commentnum">{lang collection_sortby_coomentnum}</a></li>
+			<li {if $orderby == 'follownum'}class="active"{/if}><a href="forum.php?mod=collection&op={$op}&order=follownum">{lang collection_sortby_follownum}</a></li>
+		</ul>
+	</div>
+<!--{/if}-->

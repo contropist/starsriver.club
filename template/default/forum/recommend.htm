@@ -1,0 +1,28 @@
+<!--{if $_G['forum']['recommendlist']['images'] && $_G['forum']['modrecommend']['imagenum']}-->
+	<div class="category_gridbox px4-radius">
+		<script type="text/javascript">
+            var slideSpeed = 6000;
+            var slideImgsize = [440,270];
+            var slideBorderColor = 'rgba(0,0,0,0)';
+            var slideBgColor = 'rgba(0,0,0,0)';
+            var slideSwitchColor = 'rgba(0,0,0,0)';
+            var slideSwitchbgColor = '#fff';
+            var slideSwitchHiColor = 'rgba(0,205,225,1)';
+            var slideImgs = [];
+            var slideImgLinks = [];
+            var slideImgTexts = [];
+		<!--{loop $_G['forum']['recommendlist']['images'] $k $imginfo}-->
+			slideImgs[<!--{echo $k+1}-->] = '$imginfo[filename]';
+			slideImgLinks[<!--{echo $k+1}-->] = 'forum.php?mod=viewthread&tid=$imginfo[tid]';
+			slideImgTexts[<!--{echo $k+1}-->] = '$imginfo[subject]';
+		<!--{/loop}-->
+		</script>
+		<script language="javascript" type="text/javascript" src="{$_G[setting][jspath]}forum_slide.js?{VERHASH}"></script>
+	</div>
+<!--{/if}-->
+<div class="sublist hover-black pxa-radius-a">
+	<!--{eval unset($_G['forum']['recommendlist']['images']);}-->
+	<!--{loop $_G['forum']['recommendlist'] $rtid $recommend}-->
+    <a href="forum.php?mod=viewthread&tid=$rtid" $recommend[subjectstyles] target="_blank">$recommend[subject]</a>
+	<!--{/loop}-->
+</div>

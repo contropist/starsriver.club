@@ -1,0 +1,427 @@
+<!--{if $post['first'] }-->
+    <!--{eval $needhiddenreply = ($hiddenreplies && $_G['uid'] != $post['authorid'] && $_G['uid'] != $_G['forum_thread']['authorid'] && !$post['first'] && !$_G['forum']['ismoderator']); $postshowavatars = !($_G['setting']['bannedmessages'] & 2 && ($post['memberstatus'] == '-1' || ($post['authorid'] && !$post['username']) || ($post['groupid'] == 4 || $post['groupid'] == 5) || ($post['status'] & 1)));}-->
+    <!--{block authorverifys}-->
+        <!--{loop $post['verifyicon'] $vid}-->
+            <a href="home.php?mod=spacecp&ac=profile&op=verify&vid=$vid" target="_blank"><!--{if $_G['setting']['verify'][$vid]['icon']}--><img src="$_G['setting']['verify'][$vid]['icon']" class="vm" alt="$_G['setting']['verify'][$vid][title]" title="$_G['setting']['verify'][$vid][title]" /><!--{else}-->$_G['setting']['verify'][$vid]['title']<!--{/if}--></a>
+        <!--{/loop}-->
+        <!--{loop $post['unverifyicon'] $vid}-->
+            <a href="home.php?mod=spacecp&ac=profile&op=verify&vid=$vid" target="_blank"><img src="$_G['setting']['verify'][$vid]['unverifyicon']" class="vm" alt="$_G['setting']['verify'][$vid][title]" title="$_G['setting']['verify'][$vid][title]" /></a>
+        <!--{/loop}-->
+    <!--{/block}-->
+    <!--{if empty($post['deleted'])}-->
+        <div class="content">
+            <!--{subtemplate forum/viewthread_node_body}-->
+        </div>
+        <!--{if $post['first'] &&  $_G['forum_threadstamp']}-->
+        <div id="threadstamp"><img src="{STATICURL}image/stamp/$_G[forum_threadstamp][url]"/></div>
+        <!--{/if}-->
+        <!--{if (($post[tags] || $relatedkeywords) && $_GET['from'] != 'preview') || ((helper_access::check_module('collection') && !$_G['forum']['disablecollect']) && $post['relatecollection'])}-->
+            <div class="tags trans-ease-quick">
+                <img class="tag-icon no-radius" src="{IMGURL}/common/icon/tag.svg">
+                <!--{if $post[tags]}-->
+                    <!--{eval $tagi = 0;}-->
+                    <!--{loop $post[tags] $var}-->
+                        <a class="tag pxa-radius" title="$var[1]" href="misc.php?mod=tag&id=$var[0]" target="_blank"><span>$var[1]</span></a>
+                        <!--{eval $tagi++;}-->
+                    <!--{/loop}-->
+                    <!--{if $relatedkeywords}-->
+                        <span>$relatedkeywords</span>
+                    <!--{/if}-->
+                <!--{/if}-->
+
+                <!--{loop $post['relatecollection'] $var}-->
+                    <a class="tag collector pxa-radius"  href="forum.php?mod=collection&action=view&ctid=$var[ctid]" title="$var[name]" target="_blank"><i class="ft-tag "></i>$var[name]</a>
+                <!--{/loop}-->
+                <!--{if $post['releatcollectionmore']}-->
+                    <a class="tag collector pxa-radius"  href="forum.php?mod=collection&tid=$_G[tid]" target="_blank"><i class="ft-layers "></i>{lang more}</a>
+                <!--{/if}-->
+            </div>
+        <!--{/if}-->
+        <div class="toolbar">
+            <!--{if !IS_ROBOT && !$_G['forum_thread']['archiveid'] && $post['invisible'] == 0}-->
+                <ul class="l trans-ease-quick">
+                        <li><a class="tool mid ease " id="like" href="home.php?mod=spacecp&ac=favorite&type=thread&id=$_G[tid]&formhash={FORMHASH}" onclick="showWindow(this.id, this.href, 'get', 0);"><img src="{IMGURL}/common/icon/like.svg" alt="{lang thread_favorite}" /><span class="heart-pink" id="favoritenumber" >{$_G['forum_thread']['favtimes']}</span></a></li>
+                    <!--{if $_G['group']['raterange'] && $post['authorid']}-->
+                        <li class="hv-show">
+                            <a class="tool mid ease" id="gratuitie" onclick="showWindow('rate', 'forum.php?mod=misc&action=rate&tid=$_G[tid]&pid=$post[pid]', 'get', -1);return false;"><img src="{IMGURL}/common/icon/coin.svg" alt="{lang gratuitie}"/>
+                                <span class="hat-green">
+                                    <!--{loop $post['ratelogextcredits'] $id $score}-->
+                                    <!--{if !empty($score)}-->$score<!--{else}-->0<!--{/if}-->
+                                    <!--{/loop}-->
+                                </span>
+                            </a>
+                            <div class="tool-list gratuitie"  id="ratelog_$post[pid]">
+                                <div class="header">这里是头部，后期美化</div>
+                                <div class="body">
+                                    <!--{if $_GET['from'] != 'preview' && !empty($post['ratelog']) && $_G['setting']['ratelogon']}-->
+                                    <section>
+                                        <!--{loop $post['ratelog'] $uid $ratelog}-->
+                                        <div class="person">
+                                            <a class="avatar pxa-radius shadow-3D" href="home.php?mod=space&uid=$uid" target="_blank"><!--{echo avatar($uid, 'mid');}--></a>
+                                            <div style="margin-top: 22px; display: block; width: 100%;">
+                                                <!--{loop $post['ratelogextcredits'] $id $score}-->
+                                                <!--{if $ratelog[score][$id] > 0}-->
+                                                <em class="score r" style="color:gray;">$ratelog[score][$id]</em>
+                                                <!--{else}-->
+                                                <em class="score r">$ratelog[score][$id]</em>
+                                                <!--{/if}-->
+                                                <!--{/loop}-->
+                                                <a class="name" href="home.php?mod=space&uid=$uid" target="_blank">$ratelog[username]</a>
+                                            </div>
+                                            <!--{if !empty($ratelog[reason])}-->
+                                            <p class="message px4-radius">$ratelog[reason]</p>
+                                            <!--{/if}-->
+                                        </div>
+                                        <!--{/loop}-->
+                                    </section>
+                                    <!--{else}-->
+                                    空背景
+                                    <!--{/if}-->
+                                </div>
+                                <a class="footer" href="forum.php?mod=misc&action=viewratings&tid=$_G[tid]&pid=$post[pid]" onclick="showWindow('viewratings', this.href)" title="{lang rate_view}">{lang rate_view}</a>
+                            </div>
+                        </li>
+                    <!--{/if}-->
+
+                    <!--{if !$_G['forum']['disablecollect'] && helper_access::check_module('collection')}-->
+                        <li><a class="tool mid ease" href="forum.php?mod=collection&action=edit&op=addthread&tid=$_G[tid]" id="collection" onclick="showWindow(this.id, this.href);return false;"><img src="{IMGURL}/common/icon/collection.svg" alt="{lang thread_collection}" /><span class="file-yel" id="collectionnumber">{$post['releatcollectionnum']}</span></a></li>
+                    <!--{/if}-->
+
+                    <!--{if $post['authorid'] != $_G['uid']}-->
+                        <li><a class="tool mid ease" onclick="showWindow('miscreport$post[pid]', 'misc.php?mod=report&rtype=post&rid=$post[pid]&tid=$_G[tid]&fid=$_G[fid]', 'get', -1);return false;"><img src="{IMGURL}/common/icon/report.svg" alt="{lang report}"/><span class="heart-pink">{lang report}</span></a></li>
+                    <!--{/if}-->
+
+                    <!--{if !empty($postlist[$post[pid]]['totalrate']) && $_G['forum']['ismoderator']}-->
+                        <li><a class="tool mid"  href="forum.php?mod=misc&action=removerate&tid=$_G[tid]&pid=$post[pid]&page=$page" onclick="showWindow('rate', this.href, 'get', -1)"><img src="{IMGURL}/common/icon/cake.svg" alt="{lang removerate}}" /></a></li>
+                    <!--{/if}-->
+
+                </ul>
+            <!--{/if}-->
+
+            <!--{if !$_G['forum_thread']['archiveid']}-->
+                <ul class="r">
+                    <!--评论-->
+                    <!--{if $post['invisible'] == 0 }-->
+                    <!--{if (!$_G['uid'] || $allowpostreply) && !$needhiddenreply}-->
+                        <!--{if $post['first']}-->
+                            <li><a class="tool mid" href="forum.php?mod=post&action=reply&fid=$_G[fid]&tid=$_G[tid]&reppost=$post[pid]&extra=$_GET[extra]&page=$page" onclick="showWindow('reply', this.href)"><img src="{IMGURL}/common/icon/comment.svg" /></a></li>
+                        <!--{else}-->
+                            <li><a class="tool mid" href="forum.php?mod=post&action=reply&fid=$_G[fid]&tid=$_G[tid]&repquote=$post[pid]&extra=$_GET[extra]&page=$page" onclick="showWindow('reply', this.href)"><img src="{IMGURL}/common/icon/comment.svg"/></a></li>
+                    <!--{/if}-->
+                    <!--{/if}-->
+                    <!--{/if}-->
+
+                    <!--道具-->
+                    <!--{if $post['invisible'] == 0}-->
+                        <!--{if $_G['setting']['magicstatus']}-->
+                        <li>
+                            <a class="tool mid" id="mgc_post_$post[pid]"><img src="{IMGURL}/common/icon/magic.svg" alt="{lang thread_magic}"/></a>
+                            <ul class="menu" id="mgc_post_$post[pid]_menu" >
+                                <!--{if !empty($_G['setting']['magics']['bump'])}-->
+                                    <li><a href="home.php?mod=magic&mid=bump&idtype=tid&id=$_G[tid]" id="a_bump" onclick="showWindow(this.id, this.href)"><img src="{IMGURL}/magic/bump.svg" />$_G['setting']['magics']['bump']</a></li>
+                                <!--{/if}-->
+                                <!--{if !empty($_G['setting']['magics']['stick'])}-->
+                                    <li><a href="home.php?mod=magic&mid=stick&idtype=tid&id=$_G[tid]" id="a_stick" onclick="showWindow(this.id, this.href)"><img src="{IMGURL}/magic/stick.svg" />$_G['setting']['magics']['stick']</a></li>
+                                <!--{/if}-->
+                                <!--{if !empty($_G['setting']['magics']['close'])}-->
+                                    <li><a href="home.php?mod=magic&mid=close&idtype=tid&id=$_G[tid]" id="a_stick" onclick="showWindow(this.id, this.href)"><img src="{IMGURL}/magic/close.svg" />$_G['setting']['magics']['close']</a></li>
+                                <!--{/if}-->
+                                <!--{if !empty($_G['setting']['magics']['open'])}-->
+                                    <li><a href="home.php?mod=magic&mid=open&idtype=tid&id=$_G[tid]" id="a_stick" onclick="showWindow(this.id, this.href)"><img src="{IMGURL}/magic/open.svg" />$_G['setting']['magics']['open']</a></li>
+                                <!--{/if}-->
+                                <!--{if !empty($_G['setting']['magics']['highlight'])}-->
+                                    <li><a href="home.php?mod=magic&mid=highlight&idtype=tid&id=$_G[tid]" id="a_stick" onclick="showWindow(this.id, this.href)"><img src="{IMGURL}/magic/highlight.svg" />$_G['setting']['magics']['highlight']</a></li>
+                                <!--{/if}-->
+                                <!--{if !empty($_G['setting']['magics']['jack'])}-->
+                                    <li><a href="home.php?mod=magic&mid=jack&idtype=tid&id=$_G[tid]" id="a_jack" onclick="showWindow(this.id, this.href)"><img src="{IMGURL}/magic/jack.svg" />$_G['setting']['magics']['jack']</a></li>
+                                <!--{/if}-->
+                                <!--{hook/viewthread_magic_thread}-->
+
+
+                                <!--{if !empty($_G['setting']['magics']['repent']) && $post['authorid'] == $_G['uid'] && !$rushreply}-->
+                                    <li><a href="home.php?mod=magic&mid=repent&idtype=pid&id=$post[pid]:$_G[tid]" id="a_repent_$post[pid]" onclick="showWindow(this.id, this.href)"><img src="{IMGURL}/magic/repent.svg" />$_G['setting']['magics']['repent']</a></li>
+                                <!--{/if}-->
+                                <!--{if !empty($_G['setting']['magics']['anonymouspost']) && $post['authorid'] == $_G['uid']}-->
+                                    <li><a href="home.php?mod=magic&mid=anonymouspost&idtype=pid&id=$post[pid]:$_G[tid]" id="a_anonymouspost_$post[pid]" onclick="showWindow(this.id, this.href)"><img src="{IMGURL}/magic/anonymouspost.svg" />$_G['setting']['magics']['anonymouspost']</a><li>
+                                <!--{/if}-->
+                                <!--{if !empty($_G['setting']['magics']['namepost'])}-->
+                                    <li><a href="home.php?mod=magic&mid=namepost&idtype=pid&id=$post[pid]:$_G[tid]" id="a_namepost_$post[pid]" onclick="showWindow(this.id, this.href)"><img src="{IMGURL}/magic/namepost.svg" />$_G['setting']['magics']['namepost']</a><li>
+                                <!--{/if}-->
+                                <!--{hook/viewthread_magic_post $postcount}-->
+                            </ul>
+                        </li>
+                        <script type="text/javascript" reload="1">checkmgcmn('post_$post[pid]')</script>
+                        <!--{/if}-->
+                        <!--{hook/viewthread_postaction $postcount}-->
+                    <!--{/if}-->
+
+                    <!--修改/补充内容-->
+                    <!--{if (($_G['forum']['ismoderator'] && $_G['group']['alloweditpost'] && (!in_array($post['adminid'], array(1, 2, 3)) || $_G['adminid'] <= $post['adminid'])) || ($_G['forum']['alloweditpost'] && $_G['uid'] && ($post['authorid'] == $_G['uid'] && $_G['forum_thread']['closed'] == 0) && !(!$alloweditpost_status && $edittimelimit && TIMESTAMP - $post['dbdateline'] > $edittimelimit)))}-->
+                        <li><a class="tool mid" href="forum.php?mod=post&action=edit&fid=$_G[fid]&tid=$_G[tid]&pid=$post[pid]{if !empty($_GET[modthreadkey])}&modthreadkey=$_GET[modthreadkey]{/if}&page=$page"><img src="{IMGURL}/common/icon/edit.svg" /></a></li>
+                        <li><a class="tool mid" href="forum.php?mod=misc&action=postappend&tid=$post[tid]&pid=$post[pid]&extra=$_GET[extra]&page=$page" onClick="showWindow('postappend', this.href, 'get', 0)"><img src="{IMGURL}/common/icon/append.svg"/></a></li>
+                    <!--{elseif $_G['uid'] && $post['authorid'] == $_G['uid'] && $_G['setting']['postappend']}-->
+                        <li><a class="tool mid" href="forum.php?mod=misc&action=postappend&tid=$post[tid]&pid=$post[pid]&extra=$_GET[extra]&page=$page" onClick="showWindow('postappend', this.href, 'get', 0)"><img src="{IMGURL}/common/icon/append.svg"/></a></li>
+                    <!--{/if}-->
+
+                    <!--推送文章到 nest 区域-->
+                    <!--{if $allowblockrecommend}-->
+                        <li><a class="tool mid" onclick="modaction('recommend', '$_G[forum_firstpid]', 'op=recommend&idtype={if $_G[forum_thread][isgroup]}gtid{else}tid{/if}&id=$_G[tid]&pid=$post[pid]', 'portal.php?mod=portalcp&ac=portalblock')"><img src="{IMGURL}/common/icon/push.svg"/></a></li>
+                    <!--{/if}-->
+
+                    <!--赞/踩-->
+                    <!--{if ($_G['group']['allowrecommend'] || !$_G['uid']) && $_G['setting']['recommendthread']['status']}-->
+                        <!--{if !empty($_G['setting']['recommendthread']['addtext'])}-->
+                            <li><a class="tool small" id="recommend_add" href="forum.php?mod=misc&action=recommend&do=add&tid=$_G[tid]&hash={FORMHASH}" {if $_G['uid']}onclick="ajaxmenu(this, 3000, 1, 0, '43', 'recommendupdate({$_G['group']['allowrecommend']})');return false;"{else} onclick="showWindow('login', this.href)"{/if}  title="{lang maketoponce}"><img src="{IMGURL}/common/icon/agree.svg" alt="{lang rate}" /><span class="hat-green" id="recommendv_add"{if !$_G['forum_thread']['recommend_add']} style="display:none"{/if}>$_G[forum_thread][recommend_add]</span></a></li>
+                        <!--{/if}-->
+                        <!--{if !empty($_G['setting']['recommendthread']['subtracttext'])}-->
+                            <li><a  class="tool small" id="recommend_subtract" href="forum.php?mod=misc&action=recommend&do=subtract&tid=$_G[tid]&hash={FORMHASH}" {if $_G['uid']}onclick="ajaxmenu(this, 3000, 1, 0, '43', 'recommendupdate(-{$_G['group']['allowrecommend']})');return false;"{else} onclick="showWindow('login', this.href)"{/if} title="{lang makebottomonce}"><img src="{IMGURL}/common/icon/disagree.svg" alt="{lang rate}" /><span class="heart-pink" id="recommendv_subtract"{if !$_G['forum_thread']['recommend_sub']} style="display:none"{/if}>$_G[forum_thread][recommend_sub]</span></a></li>
+                        <!--{/if}-->
+                    <!--{/if}-->
+                    <!--{hook/viewthread_useraction}-->
+                    <!--{hook/viewthread_postfooter $postcount}-->
+                </ul>
+            <!--{/if}-->
+            <!--{hook/viewthread_postsightmlafter $postcount}-->
+        </div>
+    <!--{/if}-->
+<!--{else}-->
+    <!--{eval $needhiddenreply = ($hiddenreplies && $_G['uid'] != $post['authorid'] && $_G['uid'] != $_G['forum_thread']['authorid'] && !$_G['forum']['ismoderator']); $postshowavatars = !($_G['setting']['bannedmessages'] & 2 && ($post['memberstatus'] == '-1' || ($post['authorid'] && !$post['username']) || ($post['groupid'] == 4 || $post['groupid'] == 5) || ($post['status'] & 1)));}-->
+    <!--{block authorverifys}-->
+        <!--{loop $post['verifyicon'] $vid}-->
+            <a href="home.php?mod=spacecp&ac=profile&op=verify&vid=$vid" target="_blank"><!--{if $_G['setting']['verify'][$vid]['icon']}--><img src="$_G['setting']['verify'][$vid]['icon']" class="vm" alt="$_G['setting']['verify'][$vid][title]" title="$_G['setting']['verify'][$vid][title]" /><!--{else}-->$_G['setting']['verify'][$vid]['title']<!--{/if}--></a>
+        <!--{/loop}-->
+
+        <!--{loop $post['unverifyicon'] $vid}-->
+            <a href="home.php?mod=spacecp&ac=profile&op=verify&vid=$vid" target="_blank"><img src="$_G['setting']['verify'][$vid]['unverifyicon']" class="vm" alt="$_G['setting']['verify'][$vid][title]" title="$_G['setting']['verify'][$vid][title]" /></a>
+        <!--{/loop}-->
+    <!--{/block}-->
+    <!--{if empty($post['deleted'])}-->
+        <!--{if $post['authorid'] && $post['username'] && !$post['anonymous']}-->
+            <!--{if !$postshowavatars}-->
+                <a class="avatar pxa-radius"><img src="{IMGURL}/common/background-mark/ban.svg"></a>
+            <!--{elseif $post['avatar'] && $showavatars}-->
+                <a class="avatar pxa-radius" href="home.php?mod=space&uid=$post[authorid]" target="_blank">$post[avatar]</a>
+            <!--{/if}-->
+            <!--{hook/viewthread_avatar $postcount}-->
+        <!--{/if}-->
+        <div class="nav">
+            <!--{if $post['authorid'] && $post['username'] && !$post['anonymous']}-->
+                <!--{if !$postshowavatars}-->
+                    <a class="name" >{lang banned}</a>
+                <!--{elseif $post['avatar'] && $showavatars}-->
+                    <a class="name" href="home.php?mod=space&uid=$post['authorid']&do=thread&view=me&from=space" target="_blank" >$post[author]</a>
+                <!--{/if}-->
+                <!--{hook/viewthread_avatar $postcount}-->
+            <!--{/if}-->
+
+            <!--{if !IS_ROBOT}-->
+            <em class="info" id="postnum$post[pid]">#{$post[number]}</em>
+            <!--{/if}-->
+
+            <em class="info" id="authorposton$post[pid]">$post[dateline]</em>
+
+            <!--{if !IS_ROBOT && $post['warned']}-->
+                <a class="warn hi-danger-case" href="forum.php?mod=misc&action=viewwarning&tid=$_G[tid]&uid=$post[authorid]" onclick="showWindow('viewwarning', this.href)">{lang warn_get}</a>
+            <!--{/if}-->
+
+            <!--{if !IS_ROBOT && isset($post[isstick])}-->
+                <a class="warn hi-tip-case">{lang thread_stick}</a>
+            <!--{/if}-->
+
+            <!--{if $post['rewardfloor']}-->
+                <a class="warn hi-warning-case" href="forum.php?mod=viewthread&tid=$post[tid]&checkrush=1" rel="nofollow">{lang rushreply_hit}</a>
+            <!--{/if}-->
+
+            <!--{if $post['status'] & 8}-->
+                <span class="info">
+                    <!--{if $_G['setting']['mobile']['mobilecomefrom']}-->
+                        {$_G['setting']['mobile']['mobilecomefrom']}
+                    <!--{else}-->
+                        {lang from_mobile}
+                    <!--{/if}-->
+                </span>
+            <!--{/if}-->
+
+            <!--{if !$_G['forum_thread']['archiveid'] && $post['invisible'] == -2}-->
+                <span class="info">({lang moderate_need})</span>
+            <!--{/if}-->
+
+            <div class="tool r">
+                <b class="dots"><i class="dot"></i><i class="dot"></i><i class="dot"></i></b>
+                <span class="tooltip lt" data-ignore='1'>
+                    <!--{if !$rushreply}-->
+                        <!--{if $ordertype != 1}-->
+                            <a href="forum.php?mod=viewthread&tid=$_G[tid]&extra=$_GET[extra]&ordertype=1">{lang post_descview}</a>
+                        <!--{else}-->
+                            <a href="forum.php?mod=viewthread&tid=$_G[tid]&extra=$_GET[extra]&ordertype=2">{lang post_ascview}</a>
+                        <!--{/if}-->
+                    <!--{/if}-->
+
+                    <!--{if $_G['forum_thread']['special'] == 5}-->
+                        <!--{if $post[stand] == 1}-->
+                            <a href="forum.php?mod=viewthread&tid=$_G[tid]&extra=$_GET[extra]&filter=debate&stand=1">{lang debate_view_square}</a>
+                        <!--{elseif $post[stand] == 2}-->
+                            <a href="forum.php?mod=viewthread&tid=$_G[tid]&extra=$_GET[extra]&filter=debate&stand=2">{lang debate_view_opponent}</a>
+                        <!--{else}-->
+                            <a href="forum.php?mod=viewthread&tid=$_G[tid]&extra=$_GET[extra]&filter=debate&stand=0">{lang debate_view_neutral}</a>
+                        <!--{/if}-->
+                    <!--{/if}-->
+
+                    <!--{eval $_self = $thread['author'] && $post['author'] == $thread['author'] && $post['position'] !== '1';}-->
+                        <!--{if $post['authorid'] && !$post['anonymous']}-->
+                        <!--{if !$_G['setting']['authoronleft']}-->
+                    <a href="home.php?mod=space&uid=$post[authorid]" target="_blank">$post[author]</a>$authorverifys
+                        <!--{/if}-->
+
+                        <!--{if $post['invisible'] == 0}-->
+                        <!--{if !IS_ROBOT && !$_GET['authorid'] && !$_G['forum_thread']['archiveid']}-->
+                    <a href="forum.php?mod=viewthread&tid=$post[tid]&page=$page&authorid=$post[authorid]" rel="nofollow">{lang thread_show_author}</a>
+                        <!--{elseif !$_G['forum_thread']['archiveid']}-->
+                    <a href="forum.php?mod=viewthread&tid=$post[tid]&page=$page" rel="nofollow">{lang thread_show_all}</a>
+                        <!--{/if}-->
+                        <!--{/if}-->
+
+                        <!--{elseif getstatus($post['status'], 5)}-->
+                        <!--{if !$_G['setting']['authoronleft']}-->
+                    <a href="javascript:;">$post[author]</a>
+                        <!--{/if}-->
+                    <em id="authorposton$post[pid]">{lang poston} $post[dateline]</em>
+                        <!--{elseif $post['authorid'] && $post['username'] && $post['anonymous'] || !$post['authorid'] && !$post['username']}-->
+                    $_G[setting][anonymoustext]&nbsp;
+                    <em id="authorposton$post[pid]">{lang poston} $post[dateline]</em>
+                        <!--{/if}-->
+                        <!--{hook/viewthread_postheader $postcount}-->
+
+                    <!--{if !$_G['forum_thread']['archiveid']}-->
+
+                        <!--{if (($_G['forum']['ismoderator'] && $_G['group']['alloweditpost'] && (!in_array($post['adminid'], array(1, 2, 3)) || $_G['adminid'] <= $post['adminid'])) || ($_G['forum']['alloweditpost'] && $_G['uid'] && ($post['authorid'] == $_G['uid'] && $_G['forum_thread']['closed'] == 0) && !(!$alloweditpost_status && $edittimelimit && TIMESTAMP - $post['dbdateline'] > $edittimelimit)))}-->
+                        <a class="editp" href="forum.php?mod=post&action=edit&fid=$_G[fid]&tid=$_G[tid]&pid=$post[pid]{if !empty($_GET[modthreadkey])}&modthreadkey=$_GET[modthreadkey]{/if}&page=$page"><!--{if $_G['forum_thread']['special'] == 2 && !$post['message']}-->{lang post_add_aboutcounter}<!--{else}-->{lang edit}</a><!--{/if}-->
+                        <!--{elseif $_G['uid'] && $post['authorid'] == $_G['uid'] && $_G['setting']['postappend']}-->
+                        <a class="appendp" href="forum.php?mod=misc&action=postappend&tid=$post[tid]&pid=$post[pid]&extra=$_GET[extra]&page=$page" onClick="showWindow('postappend', this.href, 'get', 0)">{lang postappend}</a>
+                        <!--{/if}-->
+
+                        <!--{if $post['invisible'] == -2}-->
+                        <span>({lang moderate_need})</span>
+                        <!--{/if}-->
+                        <!--{if $post['first'] && $allowblockrecommend}--><a class="push" onclick="modaction('recommend', '$_G[forum_firstpid]', 'op=recommend&idtype={if $_G[forum_thread][isgroup]}gtid{else}tid{/if}&id=$_G[tid]&pid=$post[pid]', 'portal.php?mod=portalcp&ac=portalblock')">{lang modmenu_blockrecommend}</a><!--{/if}-->
+                        <!--{if !$_G['forum_thread']['special'] && !$rushreply && !$hiddenreplies && $_G['setting']['repliesrank'] && !$post['first'] && !($post['isWater'] && $_G['setting']['filterednovote'])}-->
+                        <a class="replyadd" href="forum.php?mod=misc&action=postreview&do=support&tid=$_G[tid]&pid=$post[pid]&hash={FORMHASH}" {if $_G['uid']}onclick="ajaxmenu(this, 3000, 1, 0, '43', '');return false;"{else} onclick="showWindow('login', this.href)"{/if} onmouseover="this.title = ($('review_support_$post[pid]').innerHTML ? $('review_support_$post[pid]').innerHTML : 0) + ' {lang activity_member_unit} {lang support_reply}'">{lang support_reply} <span id="review_support_$post[pid]">$post[postreview][support]</span></a>
+                        <a class="replysubtract" href="forum.php?mod=misc&action=postreview&do=against&tid=$_G[tid]&pid=$post[pid]&hash={FORMHASH}" {if $_G['uid']}onclick="ajaxmenu(this, 3000, 1, 0, '43', '');return false;"{else} onclick="showWindow('login', this.href)"{/if} onmouseover="this.title = ($('review_against_$post[pid]').innerHTML ? $('review_against_$post[pid]').innerHTML : 0) + ' {lang activity_member_unit} {lang against_reply}'">{lang against_reply} <span id="review_against_$post[pid]">$post[postreview][against]</span></a>
+                        <!--{/if}-->
+                        <!--{hook/viewthread_postfooter $postcount}-->
+
+                        <!--{if $post['invisible'] == 0}-->
+
+                        <!--{if !empty($postlist[$post[pid]]['totalrate']) && $_G['forum']['ismoderator']}-->
+                        <a href="forum.php?mod=misc&action=removerate&tid=$_G[tid]&pid=$post[pid]&page=$page" onclick="showWindow('rate', this.href, 'get', -1)">{lang removerate}</a>
+                        <!--{/if}-->
+                        <!--{if $post['authorid'] != $_G['uid']}-->
+                        <a onclick="showWindow('miscreport$post[pid]', 'misc.php?mod=report&rtype=post&rid=$post[pid]&tid=$_G[tid]&fid=$_G[fid]', 'get', -1);return false;">{lang report}</a>
+                        <!--{/if}-->
+                        <!--{/if}-->
+                    <!--{/if}-->
+                </span>
+            </div>
+        </div>
+        <div class="content">
+            <!--{if $post['replycredit'] > 0}-->
+                <em>{lang replycredit} <span class="xw1 xs2 xi1">+{$post['replycredit']}</span> {$_G['setting']['extcredits'][$_G['forum_thread']['replycredit_rule']['extcreditstype']][unit]}{$_G['setting']['extcredits'][$_G['forum_thread']['replycredit_rule']['extcreditstype']][title]}</em>
+            <!--{/if}-->
+            <!--{subtemplate forum/viewthread_node_body}-->
+        </div>
+        <!--{if !$_G['forum_thread']['archiveid']}-->
+            <div class="toolbar">
+                <!--{subtemplate forum/viewthread_coins}-->
+                <!--{if $_GET['from'] != 'preview' && !empty($post['ratelog']) && $_G['setting']['ratelogon']}-->
+                <div class="l coiner">
+                    <!--{loop $post['ratelog'] $uid $ratelog}-->
+                    <a class="avatar pxa-radius" id="rate_{$post[pid]}_{$uid}" href="home.php?mod=space&uid=$uid" target="_blank"><!--{echo avatar($uid, 'small');}-->
+                        <span class="tooltip" data-pos="tl">
+                        <strong>{$ratelog[username]}</strong> 表示：<strong>$ratelog[reason]</strong>
+                            <!--{loop $ratelog['score'] $id $score}-->
+                            <!--{if $score > 0}-->
+                            <em class='orange'>+ $score $_G['setting']['extcredits'][$id][unit]</em>
+                            <!--{else}-->
+                            <em class="gray">$score $_G['setting']['extcredits'][$id][unit]</em>
+                            <!--{/if}-->
+                            <!--{/loop}-->
+                    </span>
+                    </a>
+                    <!--{/loop}-->
+                    <a class="info" href="forum.php?mod=misc&action=viewratings&tid=$_G[tid]&pid=$post[pid]" onclick="showWindow('viewratings', this.href)" title="{lang rate_view}">有<!--{echo count($postlist[$post[pid]][totalrate]);}-->人向他投币</a>
+                    <a class="info" id="ratelog_$post[pid]">
+                        <!--{loop $post['ratelogextcredits'] $id $score}-->
+                        +$score
+                        <!--{/loop}-->
+                    </a>
+                </div>
+                <!--{/if}-->
+                <div class="r node">
+                    <!--{if $post['invisible'] == 0}-->
+
+                        <!--{if $_G['forum_thread']['special'] == 5 && $post[stand]}-->
+                            <a href="forum.php?mod=misc&action=debatevote&tid=$_G[tid]&pid=$post[pid]" id="voterdebate_$post[pid]" onclick="ajaxmenu(this);doane(event);">{lang debate_support}<span class="tooltip" data-pos="tl">$post[voters]人{lang debate_support}</span></a>
+                        <!--{/if}-->
+
+                        <!--{if $_G['forum_thread']['special'] == 3 && ($_G['forum']['ismoderator'] && (!$_G['setting']['rewardexpiration'] || $_G['setting']['rewardexpiration'] > 0 && ($_G[timestamp] - $_G['forum_thread']['dateline']) / 86400 > $_G['setting']['rewardexpiration']) || $_G['forum_thread']['authorid'] == $_G['uid']) && $post['authorid'] != $_G['forum_thread']['authorid'] && $post['first'] == 0 && $_G['uid'] != $post['authorid'] && $_G['forum_thread']['price'] > 0}-->
+                            <a onclick="setanswer($post['pid'], '$_GET[from]')">{lang reward_set_bestanswer}</a>
+                        <!--{/if}-->
+                        <!--{if !$post['first'] && $_G['group']['raterange'] && $post['authorid']}-->
+                            <a onclick="showWindow('rate', 'forum.php?mod=misc&action=rate&tid=$_G[tid]&pid=$post[pid]', 'get', -1);return false;">{lang rate}</a>
+                        <!--{/if}-->
+
+                        <!--{if $allowpostreply && $post['allowcomment'] && (!$thread['closed'] || $_G['forum']['ismoderator'])}-->
+                            <!--<a class="cmmnt" href="forum.php?mod=misc&action=comment&tid=$post[tid]&pid=$post[pid]&extra=$_GET[extra]&page=$page{if $_G['forum_thread']['special'] == 127}&special=$specialextra{/if}" onclick="showWindow('comment', this.href, 'get', 0)">{lang comments}</a>-->
+                        <!--{/if}-->
+
+                        <!--{if (!$_G['uid'] || $allowpostreply) && !$needhiddenreply}-->
+                            <a class="fastre" href="forum.php?mod=post&action=reply&fid=$_G[fid]&tid=$_G[tid]&repquote=$post[pid]&extra=$_GET[extra]&page=$page" onclick="showWindow('reply', this.href)">{lang reply}</a>
+                        <!--{/if}-->
+
+                        <!--{if !$_G['forum_thread']['special'] && !$rushreply && !$hiddenreplies && $_G['setting']['repliesrank'] && !$post['first'] && !($post['isWater'] && $_G['setting']['filterednovote'])}-->
+                            <a class="replyadd" href="forum.php?mod=misc&action=postreview&do=support&tid=$_G[tid]&pid=$post[pid]&hash={FORMHASH}" {if $_G['uid']}onclick="ajaxmenu(this, 3000, 1, 0, '43', '');return false;"{else} onclick="showWindow('login', this.href)"{/if} onmouseover="this.title = ($('review_support_$post[pid]').innerHTML ? $('review_support_$post[pid]').innerHTML : 0) + ' {lang activity_member_unit} {lang support_reply}'">{lang support_reply} <span id="review_support_$post[pid]">$post[postreview][support]</span></a>
+                            <a class="replysubtract" href="forum.php?mod=misc&action=postreview&do=against&tid=$_G[tid]&pid=$post[pid]&hash={FORMHASH}" {if $_G['uid']}onclick="ajaxmenu(this, 3000, 1, 0, '43', '');return false;"{else} onclick="showWindow('login', this.href)"{/if} onmouseover="this.title = ($('review_against_$post[pid]').innerHTML ? $('review_against_$post[pid]').innerHTML : 0) + ' {lang activity_member_unit} {lang against_reply}'">{lang against_reply} <span id="review_against_$post[pid]">$post[postreview][against]</span></a>
+                        <!--{/if}-->
+                    <!--{/if}-->
+                    <!--{hook/viewthread_postfooter $postcount}-->
+                    <!--{hook/viewthread_postaction $postcount}-->
+
+                    <!--{if !$post['first'] && $modmenu['post']}-->
+                    <a class="r ccbox admin">
+                        <input type="checkbox" id="manage$post[pid]" {if !empty($modclick)}checked="checked" {/if}onclick="pidchecked(this);modclick(this, $post[pid])" value="$post[pid]" autocomplete="off" />
+                        <label for="manage$post[pid]"></label>
+                    </a>
+                    <!--{/if}-->
+                </div>
+            </div>
+        <!--{/if}-->
+    <!--{else} //如果楼层被删，显示一条广告-->
+        <div id="ad">
+            <a class="pls"></a>
+        </div>
+    <!--{/if}-->
+    <!--{hook/viewthread_endline $postcount}-->
+<!--{/if}-->
+
+<!--{if !empty($aimgs[$post[pid]])}-->
+<script type="text/javascript" reload="1">
+    aimgcount[{$post[pid]}] = [<!--{echo dimplode($aimgs[$post[pid]]);}-->];
+    attachimggroup($post['pid']);
+    <!--{if empty($_G['setting']['lazyload'])}-->
+        <!--{if !$post['imagelistthumb']}-->
+            attachimgshow($post[pid]);
+        <!--{else}-->
+            attachimgshow($post[pid], 1);
+        <!--{/if}-->
+    <!--{/if}-->
+    var aimgfid = 0;
+    <!--{if $_G['forum']['picstyle'] && ($_G['forum']['ismoderator'] || $_G['uid'] == $_G['thread']['authorid'])}-->
+        aimgfid = $_G[fid];
+    <!--{/if}-->
+    <!--{if $post['imagelistthumb']}-->
+        attachimglstshow($post['pid'], <!--{echo intval($_G['setting']['lazyload'])}-->, aimgfid, '{$_G[setting][showexif]}');
+    <!--{/if}-->
+</script>
+<!--{/if}-->
+
+<!--{hook/viewthread_endline $postcount}-->

@@ -1,0 +1,243 @@
+<!--{eval}-->
+<!--function tpl_hide_credits_hidden($creditsrequire) {
+	global $_G;
+	--><!--{/eval}-->
+<!--{block return}--><div class="locked">{lang post_hide_credits_hidden}</div><!--{/block}-->
+<!--{eval}-->
+<!--
+	return $return;
+}
+
+function tpl_hide_credits($creditsrequire, $message) {
+-->
+<!--{/eval}-->
+<!--{block return}--><div class="locked">{lang post_hide_credits}</div>$message<!--{/block}-->
+<!--{eval}-->
+<!--
+	return $return;
+}
+
+function tpl_codedisp($code) {
+	$randomid = 'code_'.random(3);
+-->
+<!--{/eval}-->
+<!--{block return}--><div class="code"><pre class="prettyprint linenums trans-ease" id="$randomid">$code</pre><a class="btn-clip icon-copy trans-outback" onclick="copycode($('$randomid'));"><span class="tooltip" data-pos="tr">{lang discuzcode_copyclipboard}</span></a></div><!--{/block}-->
+<!--{eval}-->
+<!--
+	return $return;
+}
+
+function tpl_quote() {
+-->
+<!--{/eval}-->
+<!--{block return}--><blockquote>\\1</blockquote><!--{/block}-->
+<!--{eval}-->
+<!--
+	return $return;
+}
+
+function tpl_free() {
+-->
+<!--{/eval}-->
+<!--{block return}--><blockquote>\\1</blockquote><!--{/block}-->
+<!--{eval}-->
+<!--
+	return $return;
+}
+
+function tpl_hide_reply() {
+	global $_G;
+-->
+<!--{/eval}-->
+<!--{block return}--><div class="showhide">\\1</div><!--{/block}-->
+<!--{eval}-->
+<!--
+	return $return;
+}
+
+function tpl_hide_reply_hidden() {
+	global $_G;
+-->
+<!--{/eval}-->
+<!--{block return}--><div class="locked">{lang post_hide_reply_hidden}</div><!--{/block}-->
+<!--{eval}-->
+<!--
+	return $return;
+}
+
+function attachlist($attach) {
+	global $_G;
+	$attach['refcheck'] = (!$attach['remote'] && $_G['setting']['attachrefcheck']) || ($attach['remote'] && ($_G['setting']['ftp']['hideurl'] || ($attach['isimage'] && $_G['setting']['attachimgpost'] && strtolower(substr($_G['setting']['ftp']['attachurl'], 0, 3)) == 'ftp')));
+	$aidencode = packaids($attach);
+	$widthcode = attachwidth($attach['width']);
+	$is_archive = $_G['forum_thread']['is_archived'] ? "&fid=".$_G['fid']."&archiveid=".$_G[forum_thread][archiveid] : '';
+	$pluginhook = !empty($_G['setting']['pluginhooks']['viewthread_attach_extra'][$attach[aid]]) ? $_G['setting']['pluginhooks']['viewthread_attach_extra'][$attach[aid]] : '';
+-->
+<!--{/eval}-->
+<!--{block return}--><li class="attachment-dl">
+        <!--{if !$attach['price'] || $attach['payed']}-->
+            <a class="item-name" href="forum.php?mod=attachment{$is_archive}&aid=$aidencode" id="aid$attach[aid]" >$attach[attachicon] $attach[filename]</a>
+        <!--{else}-->
+            <a class="item-name" href="forum.php?mod=misc&action=attachpay&aid=$attach[aid]&tid=$attach[tid]" onclick="showWindow('attachpay', this.href)">$attach[attachicon] $attach[filename]</a>
+        <!--{/if}-->
+        <p class="item-dec" <!--{if $attach['description']}-->title="{$attach[description]}">{$attach[description]}<!--{else}-->><span class="gray">*</span><!--{/if}--></p>
+        <i class="item-size">$attach[attachsize]</i>
+        <i class="item-rp"><!--{if $attach['readperm']}-->$attach[readperm]<!--{else}-->{lang everyone}<!--{/if}--></i>
+        <i class="item-dlc hidden">$attach[downloads]</i>
+        <i class="item-crd hidden"><!--{if !$attach['attachimg'] && $_G['getattachcredits']}-->$_G[getattachcredits]<!--{/if}--></i>
+        <i class="item-prc"><!--{if $attach['price']}-->$attach[price] {$_G['setting']['extcredits'][$_G['setting']['creditstransextra'][1]][unit]}{$_G['setting']['extcredits'][$_G['setting']['creditstransextra'][1]][title]}<!--{else}-->0<!--{/if}--></i>
+        <i class="item-rec">
+            <!--{if $attach['price'] }-->
+                <!--{if $attach['payed']}-->
+					<a class="ft-clock" href="forum.php?mod=misc&action=viewattachpayments&aid=$attach[aid]" onclick="showWindow('attachpay', this.href)"> </a>
+				<!--{else}-->
+					<a class="ft-download" href="forum.php?mod=misc&action=attachpay&aid=$attach[aid]&tid=$attach[tid]" onclick="showWindow('attachpay', this.href)"> </a>
+                <!--{/if}-->
+            <!--{else}-->
+				<a class="ft-download" href="forum.php?mod=attachment{$is_archive}&aid=$aidencode" ></a>
+            <!--{/if}-->
+        </i>
+        $pluginhook
+    </li><!--{/block}-->
+<!--{eval}-->
+<!--
+	return $return;
+}
+
+function imagelist($attach, $firstpost = 0) {
+	global $_G;
+	$attach['refcheck'] = (!$attach['remote'] && $_G['setting']['attachrefcheck']) || ($attach['remote'] && ($_G['setting']['ftp']['hideurl'] || ($attach['isimage'] && $_G['setting']['attachimgpost'] && strtolower(substr($_G['setting']['ftp']['attachurl'], 0, 3)) == 'ftp')));
+	$aidencode = packaids($attach);
+	$widthcode = attachwidth($attach['width']);
+	$is_archive = $_G['forum_thread']['is_archived'] ? "&fid=".$_G['fid']."&archiveid=".$_G[forum_thread][archiveid] : '';
+	$attachthumb = getimgthumbname($attach['attachment']);
+	$pluginhook = !empty($_G['setting']['pluginhooks']['viewthread_attach_extra'][$attach[aid]]) ? $_G['setting']['pluginhooks']['viewthread_attach_extra'][$attach[aid]] : '';
+	$guestviewthumb = !empty($_G['setting']['guestviewthumb']['flag']) && !$_G['uid'];
+	if($guestviewthumb) {
+		$guestviewthumbcss = guestviewthumbstyle();
+	}
+-->
+<!--{/eval}-->
+<!--{block return}-->
+	$pluginhook
+    <!--{eval}--><!--
+            $thumbpath = helper_attach::attachpreurl().'image/'.helper_attach::makethumbpath($attach['aid'], $_G['setting']['guestviewthumb']['width'], $_G['setting']['guestviewthumb']['height']);
+            $makefile = 'forum.php?mod=image&aid='.$attach['aid'].'&size='.$_G['setting']['guestviewthumb']['width'].'x'.$_G['setting']['guestviewthumb']['height'].'&key='.dsign($attach['aid'].'|'.$_G['setting']['guestviewthumb']['width'].'|'.$_G['setting']['guestviewthumb']['height']).'&type=1';
+    --><!--{/eval}-->
+	<!--{if $attach['attachimg'] && $_G['setting']['showimages'] && (($_G['group']['allowgetimage'] || $_G['uid'] == $attach['uid']) || (($guestviewthumb)))}-->
+		<!--{if !IS_ROBOT}-->
+            <!--{if $guestviewthumb && $makefile}-->
+                <div class="thread-img-preview px4-radius">
+                    <img class="previewimage" id="aimg_$attach[aid]" aid="$attach[aid]" src="$makefile" onclick="showWindow('login', 'member.php?mod=logging&action=login'+'&referer='+encodeURIComponent(location))" onerror="javascript:if(this.getAttribute('makefile')){this.src=this.getAttribute('makefile'); this.removeAttribute('makefile');}" file="$thumbpath" makefile="$makefile" alt="$attach[imgalt]"/>
+                    <canvas id="aimg_$attach[aid]_canvas"></canvas>
+                    <a class="preview-tip" href="member.php?mod=logging&action=login" onclick="showWindow('login', this.href+'&referer='+encodeURIComponent(location));">{lang guestviewthumb}</a>
+                </div>
+            <!--{elseif $attach['price'] && !$attach['payed'] && $makefile}-->
+                <div class="thread-img-preview px4-radius" onclick="showWindow('attachpay', 'forum.php?mod=misc&action=attachpay&aid=$attach[aid]&tid=$attach[tid]')">
+                    <img class="previewimage" id="aimg_$attach[aid]" aid="$attach[aid]" src="$makefile" onerror="javascript:if(this.getAttribute('makefile')){this.src=this.getAttribute('makefile'); this.removeAttribute('makefile');}" file="$thumbpath" makefile="$makefile" alt="$attach[imgalt]" title="$attach[imgalt]"/>
+                    <canvas id="aimg_$attach[aid]_canvas"></canvas>
+                    <p class="preview-tip" onclick="showWindow('login', this.href+'&referer='+encodeURIComponent(location));">{lang noprem_dlimg1} $attach[price] {$_G['setting']['extcredits'][$_G['setting']['creditstransextra'][1]][unit]}{$_G['setting']['extcredits'][$_G['setting']['creditstransextra'][1]][title]} {lang noprem_dlimg2}</p>
+                </div>
+            <!--{else}-->
+                <div class="thread-img">
+                    <!--{if $_G['setting']['thumbstatus'] && $attach['thumb']}-->
+                    <img class="pointer" id="aimg_$attach[aid]" aid="$attach[aid]" src="{STATICURL}image/common/none.gif" onclick="zoom(this, this.getAttribute('zoomfile'), 0, 0, '{$_G[setting][showexif]}')" zoomfile="{if $attach[refcheck]}forum.php?mod=attachment{$is_archive}&aid=$aidencode&noupdate=yes&nothumb=yes{else}{$attach[url]}$attach[attachment]{/if}" file="{if $attach[refcheck]}forum.php?mod=attachment{$is_archive}&aid=$aidencode{else}{$attach[url]}$attachthumb{/if}" alt="$attach[imgalt]" w="$attach[width]" />
+                    <!--{else}-->
+                    <img id="aimg_$attach[aid]" aid="$attach[aid]" src="{STATICURL}image/common/none.gif" zoomfile="{if $attach[refcheck]}forum.php?mod=attachment{$is_archive}&aid=$aidencode&noupdate=yes&nothumb=yes{else}{$attach[url]}$attach[attachment]{/if}" file="{if $attach[refcheck]}forum.php?mod=attachment{$is_archive}&aid=$aidencode&noupdate=yes{else}{$attach[url]}$attach[attachment]{/if}" $widthcode  alt="$attach[imgalt]" w="$attach[width]" />
+                    <!--{/if}-->
+                    <!--{if $attach['description'] || $attach['readperm'] || $attach['price']}-->
+                        <div class="tooltip" data-animal="emY" data-pos="i3">
+                            <p class="info"><!--{if $attach['readperm']}-->[ {lang readperm}:$attach[readperm] ]<!--{/if}--><!--{if $attach['price']}--> [ {lang price}:$attach[price] {$_G['setting']['extcredits'][$_G['setting']['creditstransextra'][1]][unit]}{$_G['setting']['extcredits'][$_G['setting']['creditstransextra'][1]][title]} ]<!--{/if}--></p>
+                            <!--{if $attach['description'] || $attach['price']}--><p class="desc">{$attach[description]}<!--{if $attach['price']}--><span class="pointer" onclick="showWindow('attachpay', 'forum.php?mod=misc&action=viewattachpayments&aid=$attach[aid]')">[{lang pay_view}]</span><!--{/if}--></p><!--{/if}-->
+                        </div>
+                    <!--{/if}-->
+                </div>
+            <!--{/if}-->
+		<!--{else}-->
+			<!--{if !$attach['price'] || $attach['payed']}-->
+				<!--{if $attach['description']}--><p>{$attach[description]}</p><!--{/if}-->
+				<img src="{if $attach[refcheck]}forum.php?mod=attachment{$is_archive}&aid=$aidencode&noupdate=yes{else}{$attach[url]}$attach[attachment]{/if}"/>
+			<!--{/if}-->
+		<!--{/if}-->
+	<!--{elseif $makefile}-->
+        <div class="thread-img-preview px4-radius">
+            <img class="previewimage" id="aimg_$attach[aid]" aid="$attach[aid]" src="$makefile" onerror="javascript:if(this.getAttribute('makefile')){this.src=this.getAttribute('makefile'); this.removeAttribute('makefile');}" file="$thumbpath" makefile="$makefile" alt="$attach[imgalt]" />
+            <canvas id="aimg_$attach[aid]_canvas"></canvas>
+            <p class="preview-tip" onclick="showWindow('login', this.href+'&referer='+encodeURIComponent(location));">{lang noprem_viewimg}</p>
+        </div>
+	<!--{/if}-->
+<!--{/block}-->
+<!--{eval}-->
+<!--return $return;
+}
+
+function attachinpost($attach, $post) {
+	global $_G;
+	$firstpost = $post['first'];
+	$attach['refcheck'] = (!$attach['remote'] && $_G['setting']['attachrefcheck']) || ($attach['remote'] && ($_G['setting']['ftp']['hideurl'] || ($attach['isimage'] && $_G['setting']['attachimgpost'] && strtolower(substr($_G['setting']['ftp']['attachurl'], 0, 3)) == 'ftp')));
+	$aidencode = packaids($attach);
+	$widthcode = attachwidth($attach['width']);
+	$is_archive = $_G['forum_thread']['is_archived'] ? '&fid='.$_G['fid'].'&archiveid='.$_G[forum_thread][archiveid] : '';
+	$attachthumb = getimgthumbname($attach['attachment']);
+	$musiccode = getstatus($post[status], 7) && fileext($attach['attachment']) == 'mp3' ? (browserversion('ie') > 8 || browserversion('safari') ? '<audio controls="controls"><source src="'.$attach['url'].$attach['attachment'].'"></audio>' : parseaudio($attach['url'].$attach['attachment'], 400)) : '';
+	$guestviewthumb = !empty($_G['setting']['guestviewthumb']['flag']) && !$_G['uid'];
+	if($guestviewthumb) {
+		$guestviewthumbcss = guestviewthumbstyle();
+	}
+-->
+<!--{/eval}-->
+<!--{block return}-->
+	<!--{if $attach['attachimg'] && $_G['setting']['showimages'] && (((!$attach['price'] || $attach['payed']) && ($_G['group']['allowgetimage'] || $_G['uid'] == $attach['uid'])) || (($guestviewthumb)))}-->
+		<!--{if !IS_ROBOT}-->
+			<!--{if $guestviewthumb}-->
+				<!--{eval}--><!--
+					$thumbpath = helper_attach::attachpreurl().'image/'.helper_attach::makethumbpath($attach['aid'], $_G['setting']['guestviewthumb']['width'], $_G['setting']['guestviewthumb']['height']);
+					$makefile = 'forum.php?mod=image&aid='.$attach['aid'].'&size='.$_G['setting']['guestviewthumb']['width'].'x'.$_G['setting']['guestviewthumb']['height'].'&key='.dsign($attach['aid'].'|'.$_G['setting']['guestviewthumb']['width'].'|'.$_G['setting']['guestviewthumb']['height']).'&type=1';
+				--><!--{/eval}-->
+				{$guestviewthumbcss}
+				<div class="thread-img-preview px4-radius">
+					<div style="margin: 0 auto;">
+						<img id="aimg_$attach[aid]" aid="$attach[aid]" src="{STATICURL}image/common/none.gif" onerror="javascript:if(this.getAttribute('makefile')){this.src=this.getAttribute('makefile'); this.removeAttribute('makefile');}" file="$thumbpath" makefile="$makefile" inpost="1" alt="$attach[imgalt]" title="$attach[imgalt]"/>
+                        <canvas id="aimg_$attach[aid]_canvas"></canvas>
+                        <p class="preview-tip" onclick="showWindow('login', 'member.php?mod=logging&action=login'+'&referer='+encodeURIComponent(location))">{lang noprem_viewimg}</p>
+                    </div>
+				</div>
+			<!--{else}-->
+                <div class="thread-img">
+                    <!--{if $_G['setting']['thumbstatus'] && $attach['thumb']}-->
+                        <img id="aimg_$attach[aid]" aid="$attach[aid]" src="{STATICURL}image/common/none.gif" zoomfile="{if $attach[refcheck]}forum.php?mod=attachment{$is_archive}&aid=$aidencode&noupdate=yes&nothumb=yes{else}{$attach[url]}$attach[attachment]{/if}" file="{if $attach[refcheck]}forum.php?mod=attachment{$is_archive}&aid=$aidencode{else}{$attach[url]}$attachthumb{/if}" inpost="1" onclick="zoom(this, this.getAttribute('zoomfile'), 0, 0, '{$_G[setting][showexif]}')" />
+                    <!--{else}-->
+                        <img id="aimg_$attach[aid]" aid="$attach[aid]" src="{STATICURL}image/common/none.gif" zoomfile="{if $attach[refcheck]}forum.php?mod=attachment{$is_archive}&aid=$aidencode&noupdate=yes&nothumb=yes{else}{$attach[url]}$attach[attachment]{/if}" file="{if $attach[refcheck]}forum.php?mod=attachment{$is_archive}&aid=$aidencode&noupdate=yes{else}{$attach[url]}$attach[attachment]{/if}" inpost="1" onclick="zoom(this, this.getAttribute('zoomfile'), 0, 0, '{$_G[setting][showexif]}')" />
+                    <!--{/if}-->
+                </div>
+			<!--{/if}-->
+		<!--{else}-->
+            <div class="thread-img">
+                <img src="{if $attach[refcheck]}forum.php?mod=attachment{$is_archive}&aid=$aidencode&noupdate=yes{else}{$attach[url]}$attach[attachment]{/if}" alt="$attach[imgalt]" title="$attach[imgalt]" />
+                <!--{if $attach['description']}-->
+                <div class="tooltip" data-animal="emY" data-pos="i3"><p>{$attach[description]}</p></div>
+                <!--{/if}-->
+            </div>
+        <!--{/if}-->
+	<!--{else}-->
+		<!--{if $musiccode}--><div>$musiccode</div><!--{/if}-->
+			<!--{if !$attach['price'] || $attach['payed']}-->
+				<a class="stack-file px4-radius" href="forum.php?mod=attachment{$is_archive}&aid=$aidencode">
+			<!--{else}-->
+				<a class="stack-file px4-radius" id="attach_$attach[aid]" onclick="showWindow('attachpay', 'forum.php?mod=misc&action=attachpay&aid=$attach[aid]&tid=$attach[tid]')">
+			<!--{/if}-->
+            $attach[attachicon] $attach[filename]
+            <div class="tooltip" data-animal="emY">
+                <p class="info"><span>$attach[dateline] {lang upload}</span>[ $attach[attachsize] ]<!--{if $attach['readperm']}-->-[{lang readperm}: {$attach[readperm]}]<!--{/if}--><!--{if $attach['price']}-->-[{lang price}: $attach[price] {$_G['setting']['extcredits'][$_G['setting']['creditstransextra'][1]][unit]}{$_G['setting']['extcredits'][$_G['setting']['creditstransextra'][1]][title]}]<!--{/if}--></p>
+                <!--{if $attach['description'] || $attach['price']}--><p class="desc"><!--{if $attach['description'] || $attach['price']}-->$attach[description]<!--{/if}--><!--{if $attach['price']}--><span class="pointer" onclick="showWindow('attachpay', 'forum.php?mod=misc&action=viewattachpayments&aid=$attach[aid]')">[{lang pay_view}] </span><!--{if !$attach['payed']}--><span class="pointer" onclick="showWindow('attachpay', 'forum.php?mod=misc&action=attachpay&aid=$attach[aid]&tid=$attach[tid]')"> [{lang attachment_buy}]</span><!--{/if}--><!--{/if}--></p><!--{/if}-->
+                <!--{if !$attach['attachimg'] && $_G['getattachcredits']}-->{lang attachcredits}: $_G[getattachcredits]<!--{/if}-->
+            </div>
+        </a>
+	<!--{/if}-->
+<!--{/block}-->
+<!--{eval}-->
+<!--
+	return $return;
+}
+-->
+<!--{/eval}-->

@@ -1,0 +1,120 @@
+<section id="mod_nest">
+	<!--{if $_GET['nest'] == 'yes' && check_nest_perm($topic)}-->
+		<style>
+			 /* NESTIN MODE CSS STYLE */
+			#mod_nest .hide {
+				display: none;
+			}
+
+			#mod_nest .frame, .tab, .block {
+				position: relative;
+				zoom: 1;
+				min-height: 20px;
+			}
+
+			#mod_nest .edit {
+				position: absolute;
+				top: 0;
+				right: 0;
+				z-index: 69;
+				padding: 0 5px;
+				background: red;
+				line-height: 26px;
+				color: #FFF;
+				cursor: pointer;
+			}
+
+			#mod_nest .block .edit {
+				background: #369;
+			}
+
+			#mod_nest .edit-menu {
+				position: absolute;
+				z-index: 80;
+				border-style: solid;
+				border-width: 0 1px 1px 1px;
+				border-color: #DDD #999 #999 #CCC;
+				background: #FFF;
+			}
+
+			#mod_nest .mitem {
+				padding: 4px 4px 4px 14px;
+				width: 36px;
+				border-top: 1px solid #DDD;
+				cursor: pointer;
+			}
+
+			#mod_nest .mitem:hover {
+				background: #F2F2F2;
+				color: #06C;
+			}
+
+			#mod_nest .subtitle {
+				margin: 0 4px;
+			}
+
+			#mod_nest .frame-tab .title .move-span {
+				float: left;
+				margin: 0 3px 0 0;
+				padding: 0;
+				width: 100px;
+				border-bottom: none;
+				cursor: pointer;
+			}
+
+			#mod_nest #samplepanel {
+				cursor: default;
+				margin-top: 10px;
+				padding: 10px;
+				background: #f4f4f4;
+				color: #7b7777;
+				font-weight: 400;
+				font-size: 14px;
+				line-height: 16px;
+				text-align: center;
+				border-top: 4px dashed rgba(0,0,0,.1);
+				border-bottom: 4px dashed rgba(0,0,0,.1);
+				position: fixed;
+				bottom: 0;
+				width: 100%;
+				z-index: 101;
+			}
+
+			#mod_nest .block-name {
+				display: block;
+				visibility: hidden;
+				background: #000;
+				color: #FFF;
+				position: absolute;
+				top: 5px;
+				left: 5px;
+				padding: 2px;
+				opacity: 0.85;
+				filter: alpha(opacity=85);
+				z-index: 1;
+			}
+		</style>
+		<link rel="stylesheet" type="text/css" id="nest_common" href="{$_G['setting']['csspath']}css_nest.css?{VERHASH}" />
+	<!--{/if}-->
+
+	<!--{if $_G['basescript'] != 'portal' && $_GET['nest'] == 'yes' && check_nest_perm($topic)}-->
+		<script type="text/javascript" src="{$_G[setting][jspath]}portal.js?{VERHASH}"></script>
+	<!--{/if}-->
+
+	<!--{if $_GET['nest'] == 'yes' && check_nest_perm($topic)}--><!--{template common/header_nest}--><!--{/if}-->
+
+	<!--{if check_nest_perm($topic)}--><!--{template common/header_nestnav}--><!--{/if}-->
+
+	<!--{if CURMODULE == 'topic' && $topic && empty($topic['useheader']) && check_nest_perm($topic)}-->$nestnav<!--{/if}-->
+
+	<!--{if $_GET['nest'] == 'yes'}-->
+		<!--{if check_nest_perm($topic) && (empty($do) || $do != 'index')}-->
+			<script type="text/javascript" src="{$_G[setting][jspath]}common_nest.js?{VERHASH}"></script>
+			<script type="text/javascript" src="{$_G[setting][jspath]}portal_nest{if !check_nest_perm($topic, 'layout')}_data{/if}.js?{VERHASH}"></script>
+		<!--{/if}-->
+		<!--{if $space['self'] && CURMODULE == 'space' && $do == 'index'}-->
+			<script type="text/javascript" src="{$_G[setting][jspath]}common_nest.js?{VERHASH}"></script>
+			<script type="text/javascript" src="{$_G[setting][jspath]}space_nest.js?{VERHASH}"></script>
+		<!--{/if}-->
+	<!--{/if}-->
+</section>

@@ -1,0 +1,207 @@
+<div id="livethread" style="border-radius: 10px; margin-bottom: 10px">
+    <div class="livethreadtitle">
+        <a class="pxa-radius" href="forum.php?mod=viewthread&tid=$livethread[tid]" target="_blank">直播贴：$livethread[subject]</a>
+        <span class="replynumber r">{lang reply}：<span id="livereplies">$livethread[replies]</span></span>
+    </div>
+    <div class="livethreadcon">$livemessage</div>
+    <div id="livereplycontentout">
+        <div id="livereplycontent"></div>
+    </div>
+    <div id="liverefresh">{lang group_live_newreply_refresh}</div>
+    <div id="livefastreply">
+        <form id="livereplypostform" method="post" action="forum.php?mod=post&action=reply&fid=$_G[fid]&tid=$livethread[tid]&replysubmit=yes&infloat=yes&handlekey=livereplypost&inajax=1" onsubmit="return livereplypostvalidate(this)">
+            <div id="livefastcomment">
+                <textarea id="livereplymessage" name="message" style="color:gray;<!--{if !$liveallowpostreply}-->display:none;<!--{/if}-->">{lang group_live_fastreply_notice}</textarea>
+                <!--{if !$liveallowpostreply}-->
+                <div class="nologin">
+                    <!--{if !$_G[uid]}-->
+                    {lang login_to_reply} <a href="member.php?mod=logging&action=login" onclick="showWindow('login', this.href)">{lang login}</a> | <a href="member.php?mod={$_G[setting][regname]}">$_G['setting']['reglinkname']</a>
+                    <!--{else}-->
+                    {lang no_permission_to_post}<a onclick="ajaxpost('livereplypostform', 'livereplypostreturn', 'livereplypostreturn', 'onerror', $('livereplysubmit'));">{lang click_to_show_reason}</a>
+                    <!--{/if}-->
+                </div>
+                <!--{/if}-->
+            </div>
+            <div id="livepostsubmit">
+                <button class="r livesubmit trans-jumpout"  type="submit" name="replysubmit" value="replysubmit" id="livereplysubmit">{lang group_live_post}</button>
+                <!--{if $secqaacheck || $seccodecheck}-->
+                <!--{subtemplate common/seccheck}-->
+                <!--{/if}-->
+            </div>
+            <input type="hidden" name="formhash" value="{FORMHASH}">
+            <input type="hidden" name="subject" value="  ">
+        </form>
+    </div>
+    <span id="livereplypostreturn"></span>
+</div>
+<script type="text/javascript" src="{$_G['setting']['jspath']}seditor.js?{VERHASH}"></script>
+<script type="text/javascript">
+    var postminchars = parseInt('$_G['setting']['minpostsize']');
+    var postmaxchars = parseInt('$_G['setting']['maxpostsize']');
+    var disablepostctrl = parseInt('{$_G['group']['disablepostctrl']}');
+    var replycontentlist = [];
+    var addreplylist = [];
+    var timeoutid = timeid = movescrollid = waitescrollid = null;
+    var replycontentnum = 0;
+    getnewlivepostlist(1);
+    timeid = setInterval(getnewlivepostlist, 5000);
+    $('livereplycontent').style.position = 'absolute';
+    $('livereplymessage').onfocus = function() {
+        if(this.style.color == 'gray') {
+            this.value = '';
+            this.style.color = 'black';
+            $('livepostsubmit').style.display = 'block';
+            this.style.height = '64px';
+            $('livefastcomment').style.height = '58px';
+        }
+    };
+    $('livereplymessage').onblur = function() {
+        if(this.value == '') {
+            this.style.color = 'gray';
+            this.value = '{lang group_live_fastreply_notice}';
+        }
+    };
+
+    $('liverefresh').onclick = function() {
+        $('livereplycontent').style.position = 'absolute';
+        getnewlivepostlist();
+        this.style.display = 'none';
+    };
+
+    $('livereplycontentout').onmouseover = function(e) {
+
+        if($('livereplycontent').style.position == 'absolute' && $('livereplycontent').clientHeight > 215) {
+            $('livereplycontent').style.position = 'static';
+            this.scrollTop = this.scrollHeight;
+        }
+
+        if(this.scrollTop + this.clientHeight != this.scrollHeight) {
+            clearInterval(timeid);
+            clearTimeout(timeoutid);
+            clearInterval(movescrollid);
+            timeid = timeoutid = movescrollid = null;
+
+            if(waitescrollid == null) {
+                waitescrollid = setTimeout(function() {
+                    $('liverefresh').style.marginTop = '-30px';
+                }, 60000 * 10);
+            }
+        } else {
+            clearTimeout(waitescrollid);
+            waitescrollid = null;
+        }
+    };
+
+    $('livereplycontentout').onmouseout = function(e) {
+        if(this.scrollTop + this.clientHeight == this.scrollHeight) {
+            $('livereplycontent').style.position = 'absolute';
+            clearInterval(timeid);
+            timeid = setInterval(getnewlivepostlist, 3000);
+        }
+    };
+
+    function getnewlivepostlist(first) {
+        var x = new Ajax('JSON');
+        x.getJSON('forum.php?mod=misc&action=livelastpost&fid=$livethread[fid]', function(s, x) {
+            var count = s.data.count;
+            $('livereplies').innerHTML = count;
+            var newpostlist = s.data.list;
+            for(i in newpostlist) {
+                var postid = i;
+                var postcontent = '';
+                postcontent += newpostlist[i].authorid ? '<div class="avatar pxa-radius"><a href="home.php?mod=space&uid=' + newpostlist[i].authorid + '" target="_blank">' + newpostlist[i].avatar + '</a></div>' : '<div><a></a></div>';
+                postcontent += '<div class="message px4-radius">';
+                postcontent += newpostlist[i].authorid ? '<div class="userinfo"><a href="home.php?mod=space&uid=' + newpostlist[i].authorid + '" target="_blank">' + newpostlist[i].author + '</a><a class="r dataline">' + newpostlist[i].dateline + '</a></div>' : '<div><a>' + newpostlist[i].author + '</a><a class="r dataline">' + newpostlist[i].dateline + '</a></div>';
+                postcontent += '<p class="content">' + htmlspecialchars(newpostlist[i].message) + '</p>';
+                postcontent += '</div>';
+                if(replycontentlist[postid]) {
+                    $('livereply_' + postid).innerHTML = postcontent;
+                    continue;
+                }
+                addreplylist[postid] = '<div class="onecomment" id="livereply_' + postid + '">' + postcontent + '</div>';
+            }
+            if(first) {
+                for(i in addreplylist) {
+                    replycontentlist[i] = addreplylist[i];
+                    replycontentnum++;
+                    var div = document.createElement('div');
+                    div.innerHTML = addreplylist[i];
+                    $('livereplycontent').appendChild(div);
+                    delete addreplylist[i];
+                }
+            } else {
+                livecontentfacemove();
+            }
+        });
+    }
+
+    function livecontentfacemove() {
+        //note 从队列中取出数据
+        var reply = '';
+        for(i in addreplylist) {
+            reply = replycontentlist[i] = addreplylist[i];
+            replycontentnum++;
+            delete addreplylist[i];
+            break;
+        }
+        if(reply) {
+            var div = document.createElement('div');
+            div.innerHTML = reply;
+            var oldclientHeight = $('livereplycontent').clientHeight;
+            $('livereplycontent').appendChild(div);
+            $('livereplycontentout').style.overflowY = 'hidden';
+            $('livereplycontent').style.bottom = oldclientHeight - $('livereplycontent').clientHeight + 'px';
+
+            if(replycontentnum > 20) {
+                $('livereplycontent').removeChild($('livereplycontent').firstChild);
+                for(i in replycontentlist) {
+                    delete replycontentlist[i];
+                    break;
+                }
+                replycontentnum--;
+            }
+
+            if(!movescrollid) {
+                movescrollid = setInterval(function() {
+                    if(parseInt($('livereplycontent').style.bottom) < 0) {
+                        $('livereplycontent').style.bottom =
+                            ((parseInt($('livereplycontent').style.bottom) + 5) > 0 ? 0 : (parseInt($('livereplycontent').style.bottom) + 5)) + 'px';
+                    } else {
+                        $('livereplycontentout').style.overflowY = 'auto';
+                        clearInterval(movescrollid);
+                        movescrollid = null;
+                        timeoutid = setTimeout(livecontentfacemove, 0);
+                    }
+                }, 4);
+            }
+        }
+    }
+
+    function livereplypostvalidate(theform) {
+        var s;
+        if(theform.message.value == '' || $('livereplymessage').style.color == 'gray') {
+            s = '{lang group_live_nocontent_error}';
+        }
+        if(s) {
+            showError(s);
+            doane();
+            $('livereplysubmit').disabled = false;
+            return false;
+        }
+        $('livereplysubmit').disabled = true;
+        theform.message.value = theform.message.value.replace(/([^>=\]"'\/]|^)((((https?|ftp):\/\/)|www\.)([\w\-]+\.)*[\w\-\u4e00-\u9fa5]+\.([\.a-zA-Z0-9]+|\u4E2D\u56FD|\u7F51\u7EDC|\u516C\u53F8)((\?|\/|:)+[\w\.\/=\?%\-&~`@':+!]*)+\.(jpg|gif|png|bmp))/ig, '$1[img]$2[/img]');
+        theform.message.value = parseurl(theform.message.value);
+        ajaxpost('livereplypostform', 'livereplypostreturn', 'livereplypostreturn', 'onerror', $('livereplysubmit'));
+        return false;
+    }
+
+    function succeedhandle_livereplypost(url, msg, param) {
+        $('livereplymessage').value = '';
+        $('livereplycontent').style.position = 'absolute';
+        if(param['sechash']) {
+            updatesecqaa(param['sechash']);
+            updateseccode(param['sechash']);
+        }
+        getnewlivepostlist();
+    }
+</script>

@@ -1,0 +1,48 @@
+<!--{if empty($nestmode)}-->
+    <!--{template home/space_trends_header}-->
+	<div class="plate layout-0">
+		<!--[nest=nestcontenttop]--><div id="nestcontenttop" class="area"></div><!--[/nest]-->
+	</div>
+    <div class="plate layout-3-type2 app-dynamic soft">
+        <section>
+            <!--{subtemplate home/space_trends_side_left}-->
+        </section>
+        <section>
+            <!--{hook/space_doing_top}-->
+            <!--{if $space[self] && helper_access::check_module('doing')}-->
+                <!--{template home/space_trends_mod_doing_deliverer}-->
+            <!--{/if}-->
+            <!--{hook/space_doing_bottom}-->
+            <div class="vessel">
+                <div class="nav">
+                    <a class="$actives[all]" href="home.php?mod=space&do=$do&view=all">{lang view_all}</a>
+                    <a class="$actives[we]" href="home.php?mod=space&do=$do&view=we">{lang me_friend_doing}</a>
+                    <a class="$actives[me]" href="home.php?mod=space&do=$do&view=me">{lang doing_view_me}</a>
+                </div>
+            </div>
+            <!--{subtemplate home/space_trends_mod_doing_list}-->
+            <!--[nest=nest1]--><div id="nest1" class="area"></div><!--[/nest]-->
+            <!--[nest=nest2]--><div id="nest2" class="area"></div><!--[/nest]-->
+            <!--[nest=nest3]--><div id="nest3" class="area"></div><!--[/nest]-->
+            <!--[nest=nestcontentbottom]--><div id="nestcontentbottom" class="area"></div><!--[/nest]-->
+        </section>
+        <section>
+            <!--{subtemplate home/space_trends_side_right}-->
+        </section>
+    </div>
+<!--{else}-->
+    <!--{template home/space_home_header}-->
+    <div class="mas-viewer">
+        <!--[nest=nestcontenttop]--><div id="nestcontenttop" class="area"></div><!--[/nest]-->
+        <section class="col-1">
+            <!--{subtemplate home/space_home_mod_doing_list}-->
+        </section>
+        <section class="col-2">
+            <div class="vessel">
+                <!--{subtemplate home/space_home_userabout}-->
+            </div>
+        </section>
+    </div>
+<!--{/if}-->
+
+<!--{template common/footer}-->

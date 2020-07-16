@@ -1,0 +1,106 @@
+<!--{template common/header}-->
+
+<!--{if $_GET['op'] == 'getcomment'}-->
+	<form class="sender" id="feedform_{$feedid}" method="post" autocomplete="off" action="home.php?mod=spacecp&ac=feed&feedid=$feedid" onsubmit="{if $_G[inajax]}ajaxpost(this.id, 'return_$_GET[handlekey]'){/if}">
+		<input type="hidden" name="referer" value="home.php?mod=space&do=hot&id=$feedid" />
+		<input type="hidden" name="formhash" value="{FORMHASH}" />
+		<input type="hidden" name="quickcomment" value="1" />
+		<input type="hidden" name="commentsubmit" value="true" />
+		<!--{if $_G[inajax]}--><input type="hidden" name="handlekey" value="$_GET[handlekey]" /><!--{/if}-->
+
+		<textarea class="msg" id="feedmessage_{$feedid}" name="message" onkeydown="return ctrlEnter(event, 'feedbutton');" placeholder="{lang reply_rule}"></textarea>
+		<div class="tipline">
+			<i class="str" id="return_$_GET[handlekey]"></i>
+		</div>
+		<div class="subline">
+            <i class="smilies" id="face_{$feedid}" title="{lang insert_emoticons}" onclick="emoticons(this.id, 'feedmessage_{$feedid}');return false;">(..•˘_˘•..)</i>
+			<i id="note_{$feedid}"></i>
+			<button class="submit r" type="submit" name="feedbutton" id="feedbutton" value="true">{lang comment}</button>
+			<!--{if $secqaacheck || $seccodecheck}-->
+				<!--{subtemplate common/seccheck}-->
+			<!--{/if}-->
+		</div>
+	</form>
+
+	<ol id="comment_ol_$feedid">
+	<!--{loop $list $k $value}-->
+		<!--{template home/space_comment_li}-->
+	<!--{/loop}-->
+	</ol>
+
+	<!--{if $multi}--><div class="pgs">$multi</div><!--{/if}-->
+
+	<script type="text/javascript">
+		function succeedhandle_$_GET['handlekey'] (url, message, values) {
+			feedcomment_add(values['cid'], $feedid);
+			hideWindow('$_GET['handlekey']');
+			<!--{if $sechash}-->
+				<!--{if $secqaacheck}-->
+				updatesecqaa('$sechash');
+				<!--{/if}-->
+				<!--{if $seccodecheck}-->
+				updateseccode('$sechash');
+				<!--{/if}-->
+			<!--{/if}-->
+
+		}
+	</script>
+
+<!--{elseif $_GET['op'] == 'menu'}-->
+
+	<!--{if $feed[uid]==$_G[uid]}-->
+	<div class="header">
+		<span class="title-tip" id="return_$_GET[handlekey]">{lang delete_feed}</span>
+		<!--{if $_G[inajax]}--><a onclick="hideWindow('$_GET['handlekey']');" class="close" title="{lang close}">×</a><!--{/if}-->
+	</div>
+	<form method="post" autocomplete="off" id="feedform_{$feedid}" name="feedform_{$feedid}" action="home.php?mod=spacecp&ac=feed&op=delete&feedid=$feedid&handlekey=$_GET[handlekey]" {if $_G[inajax]}onsubmit="ajaxpost(this.id, 'return_$_GET[handlekey]');"{/if}>
+		<input type="hidden" name="referer" value="{echo dreferer()}" />
+		<input type="hidden" name="feedsubmit" value="true" />
+		<input type="hidden" name="formhash" value="{FORMHASH}" />
+		<div class="c altw">
+			<div class="alert_info">{lang determine_delete_feed}</div>
+		</div>
+		<p class="o pns">
+			<button name="feedsubmitbtn" type="submit" class="pn pnc" value="true"><strong>{lang determine}</strong></button>
+			<!--
+			<!--{if checkperm('managefeed')}-->
+			<a href="home.php?mod=spacecp&ac=feed&op=edit&feedid=$feedid" target="_blank"><strong class="z">{lang edit}</strong></a>
+			<!--{/if}-->
+			-->
+		</p>
+	</form>
+	<!--{else}-->
+	<div class="header">
+		<span class="title-tip" id="return_$_GET[handlekey]">{lang shield_feed}</span>
+		<!--{if $_G[inajax]}--><a onclick="hideWindow('$_GET['handlekey']');" class="close" title="{lang close}">×</a><!--{/if}-->
+	</div>
+	<form method="post" autocomplete="off" id="feedform_{$feedid}" name="feedform_{$feedid}" action="home.php?mod=spacecp&ac=feed&op=ignore&icon=$feed[icon]&feedid=$feedid" {if $_G[inajax]}onsubmit="ajaxpost(this.id, 'return_$_GET[handlekey]');"{/if}>
+		<input type="hidden" name="referer" value="{echo dreferer()}" />
+		<input type="hidden" name="feedignoresubmit" value="true" />
+		<input type="hidden" name="formhash" value="{FORMHASH}" />
+		<!--{if $_G[inajax]}--><input type="hidden" name="handlekey" value="$_GET[handlekey]" /><!--{/if}-->
+		<div class="c altw">
+			<p>{lang next_visit_not_view_feed}</p>
+			<p class="ptn"><label for="uid1"><input type="radio" name="uid" id="uid1" value="$feed[uid]" checked="checked" />{lang shield_this_friend}</label></p>
+			<p class="ptn"><label for="uid0"><input type="radio" name="uid" id="uid0" value="0" />{lang shield_all_friend}</label></p>
+		</div>
+		<p class="o pns">
+			<button name="feedignoresubmitbtn" type="submit" class="pn pnc" value="true"><strong>{lang determine}</strong></button>
+			<!--
+			<!--{if checkperm('managefeed')}-->
+			<a href="webcontroller.php?action=feed&operation=edit&feedid=$feedid" target="_blank"><strong class="z">{lang edit}</strong></a>
+			<!--{/if}-->
+			-->
+		</p>
+	</form>
+	<!--{/if}-->
+	<script type="text/javascript">
+		function succeedhandle_$_GET[handlekey](url, msg, values) {
+			var obj = $('feed_'+ values['feedid'] +'_li');
+			obj.style.display = "none";
+			hideWindow('$_GET['handlekey']');
+		}
+	</script>
+<!--{/if}-->
+
+<!--{template common/footer}-->

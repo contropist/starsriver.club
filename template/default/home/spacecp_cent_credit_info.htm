@@ -1,0 +1,29 @@
+<div class="withedge">
+	<ul class="credit-list">
+		<li class="credit-int"><i><img src="{IMGURL}/common/icon/credit-int.png"></i><span>{lang credits} : </span><em>$_G['member']['credits']</em></li>
+		<br>
+		<!--{eval $creditid=0;}-->
+		<!--{if $_G['setting']['creditstrans']}-->
+			<!--{eval $creditid=$_G['setting']['creditstrans'];}-->
+			<!--{if $_G['setting']['extcredits'][$creditid]}-->
+				<!--{eval $credit=$_G['setting']['extcredits'][$creditid]; }-->
+				<li class="credit-it">
+					<i><!--{if $credit[img]}-->{$credit[img]}<!--{/if}--></i>
+					{$credit[title]} : <!--{echo getuserprofile('extcredits'.$creditid) != 0 ? getuserprofile('extcredits'.$creditid) : '--';}-->{$credit[unit]}
+					<!--{if ($_G['setting']['ec_ratio'] && ($_G['setting']['ec_tenpay_opentrans_chnid'] || $_G['setting'][ec_tenpay_bargainor] || $_G['setting']['ec_account'])) || $_G['setting']['card']['open']}-->
+					<a href="home.php?mod=spacecp&ac=credit&op=buy">{lang card_use}</a>
+					<!--{/if}-->
+				</li>
+			<!--{/if}-->
+		<!--{/if}-->
+		<!--{loop $_G['setting']['extcredits'] $id $credit}-->
+			<!--{if $id!=$creditid}-->
+				<li class="credit-it">
+					<i><!--{if $credit[img]}-->{$credit[img]}<!--{/if}--></i>
+					{$credit[title]} : <!--{echo getuserprofile('extcredits'.$id) != 0 ? getuserprofile('extcredits'.$id) : '--';}--> {$credit[unit]}
+				</li>
+			<!--{/if}-->
+		<!--{/loop}-->
+		<!--{hook/spacecp_credit_extra}-->
+	</ul>
+</div>

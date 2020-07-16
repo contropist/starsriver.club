@@ -1,0 +1,207 @@
+<script type="text/javascript">
+	function checkform(theform) {
+		if (theform.message.value.length > 200) {
+			alert('{lang activiy_guest_more}');
+			theform.message.focus();
+			return false;
+		}
+		return true;
+	}
+</script>
+
+<div class="activity shadow-3D">
+    <header>
+        <p class="mg-10 l">{lang activity_type}：$activity[class]</p>
+        <p class="info r mg-10">
+            {lang activity_starttime}:
+            <!--{if $activity['starttimeto']}-->
+            {lang activity_start_between}
+            <!--{else}-->
+            $activity[starttimefrom]
+            <!--{/if}-->
+        </p>
+    </header>
+	<div class="details">
+        <div class="cover l">
+            <!--{if $activity['thumb']}-->
+                <img src="$activity['thumb']"/>
+            <!--{else}-->
+                <img src="{IMGURL}/forum/activity/nopic.png"/>
+            <!--{/if}-->
+        </div>
+        <ul class="message">
+            <!--{if $activity['cost']}-->
+            <li>
+                <i class=""></i>
+                <span class="key">{lang activity_payment}：</span>
+                <em class="value">$activity[cost]{lang payment_unit}</em>
+
+            </li>
+            <!--{/if}-->
+            <li>
+                <i class=""></i>
+                <span class="key">{lang gender}：</span>
+                <em class="value">
+                    <!--{if $activity['gender'] == 1}-->
+                        {lang male}
+                    <!--{elseif $activity['gender'] == 2}-->
+                        {lang female}
+                    <!--{else}-->
+                        {lang unlimited}
+                    <!--{/if}-->
+                </em>
+            </li>
+            <!--{if !$_G['forum_thread']['is_archived']}-->
+            <li>
+                <i class=""></i>
+                <span class="key">
+                    <!--{hook/viewthread_activity_extra1}-->
+                    {lang activity_already}：
+                </span>
+                <em class="value">
+                    $allapplynum<!--{if $activity['number']}-->/$aboutmembers<!--{/if}-->
+                    <!--{hook/viewthread_activity_extra2}-->
+                </em>
+            </li>
+            <!--{/if}-->
+            <li>
+                <i class=""></i>
+                <span class="key">{lang activity_space}：</span>
+                <em class="value">$activity[place]</em>
+            </li>
+        </ul>
+	</div>
+    <footer class="trans-ease-quick">
+        <!--{if !$post['invisible']}-->
+            <!--{if $applied && $isverified < 2}-->
+                <!--{if !$isverified}-->
+                    <p class="info mg-10 l">{lang activity_wait}</p>
+                <!--{else}-->
+                    <p class="info mg-10 l">{lang activity_join_audit}</p>
+                <!--{/if}-->
+                <!--{if !$activityclose}-->
+                    <button class="btn cancel r" type="submit" value="true" name="applylistsubmit" onclick="showDialog($('activityjoincancel').innerHTML, 'form', '{lang activity_join_cancel}')">{lang activity_join_cancel}</button>
+                <!--{/if}-->
+            <!--{elseif !$activityclose}-->
+                <!--{if $isverified != 2}-->
+                    <!--{if $activity['expiration']}-->
+                        <p class="info mg-10 l">{lang post_closing}:$activity[expiration]</p>
+                    <!--{/if}-->
+                    <!--{if !$activity['number'] || $aboutmembers > 0}-->
+                        <button class="btn join r" value="true" name="ijoin" onclick="{if $_G['uid']}showDialog($('activityjoin').innerHTML, 'form', '{lang activity_join}'){else}showWindow('login', 'member.php?mod=logging&action=login&guestmessage=yes'){/if}">{lang activity_join}</button>
+                    <!--{/if}-->
+                <!--{else}-->
+                    <button class="btn unknow r" value="true" name="ijoin" onclick="showDialog($('activityjoin').innerHTML, 'info', '{lang complete_data}')">{lang complete_data}</button>
+                <!--{/if}-->
+            <!--{else}-->
+                <p class="info mg-10 l">{lang activity_cantjoin}</p>
+            <!--{/if}-->
+        <!--{/if}-->
+        <!--{if $post['invisible'] == 0 && ($_G['forum_thread']['authorid'] == $_G['uid'] || (in_array($_G['group']['radminid'], array(1, 2)) && $_G['group']['alloweditactivity']) || ( $_G['group']['radminid'] == 3 && $_G['forum']['ismoderator'] && $_G['group']['alloweditactivity']))}-->
+            <a class="btn mag r" href="misc.php?mod=invite&action=thread&id=$_G[tid]&activity=1" onclick="showWindow('invite', this.href, 'get', 0);">{lang invite}</a>
+            <a class="btn mag r" href="forum.php?mod=misc&action=activityapplylist&tid=$_G[tid]&pid=$post[pid]{if $_GET['from']}&from=$_GET['from']{/if}" onclick="showWindow('activity', this.href, 'get', 0)" title="{lang manage}">{lang manage}</a> &nbsp;
+            <a class="btn mag r" href="forum.php?mod=misc&action=activityexport&tid=$_G[tid]" title="{lang pm_archive}">{lang pm_archive}</a>
+        <!--{/if}-->
+    </footer>
+</div>
+<div id="postmessage_$post[pid]">$post[message]</div>
+
+<!--{if $applylist}-->
+	<div class="attend-list joined" id="applylist_$_G[tid]">
+		<div class="tip pxa-radius">{$applynumbers}{lang activity_member_unit} {lang activity_new_join}</div>
+			<!--{loop $applylist $apply}--><!--{subtemplate forum/viewthread_activity_attender}--><!--{/loop}-->
+			<!--{if $applynumbers > $_G['setting']['activitypp']}-->
+		<div class="pgs mbm cl">
+			<div class="pg">
+				<a onclick="ajaxget('forum.php?mod=misc&amp;action=getactivityapplylist&amp;tid=$_G[tid]&amp;page=2', 'applylist_$_G[tid]')" class="next" href="javascript:;"></a>
+			</div>
+		</div>
+		<!--{/if}-->
+	</div>
+<!--{/if}-->
+
+<!--{if $applylistverified}-->
+	<div class="attend-list needverify">
+		<div class="tip pxa-radius">{$noverifiednum}{lang activity_member_unit} {lang activity_new_signup}</div>
+		<!--{loop $applylistverified $apply}--><!--{subtemplate forum/viewthread_activity_attender}--><!--{/loop}-->
+	</div>
+<!--{/if}-->
+
+<!--{if $_G['uid'] && !$activityclose && (!$applied || $isverified == 2)}-->
+	<div id="activityjoin" style="display:none">
+	<!--{if $_G['forum']['status'] == 3 && helper_access::check_module('group') && $isgroupuser != 'isgroupuser'}-->
+        <div class="body"><p>{lang activity_no_member}</p></div>
+        <div class="footer"><a class="btn btn-small btn-danger glass px4-radius r" href="forum.php?mod=group&action=join&fid=$_G[fid]">{lang activity_join_group}</a></div>
+	<!--{else}-->
+		<form class="join-board" name="activity" id="activity" method="post" autocomplete="off" action="forum.php?mod=misc&action=activityapplies&fid=$_G[fid]&tid=$_G[tid]&pid=$post[pid]{if $_GET['from']}&from=$_GET['from']{/if}" onsubmit="ajaxpost('activity', 'return_activityapplies', 'return_activityapplies', 'onerror');return false;">
+			<input type="hidden" name="formhash" value="{FORMHASH}" />
+			<input type="hidden" name="handlekey" value="activityapplies" />
+			<div class="body">
+                <!--{if !empty($activity['ufield']['userfield'])}-->
+                    <!--{if $settings[$fieldid][available]}-->
+                        <ul class="field-list" id="th_$fieldid">
+                            <!--{loop $activity['ufield']['userfield'] $fieldid}-->
+                            <li>
+                                <span>$settings[$fieldid][title]</span>
+                                <!--{if $settings[$fieldid][formtype] != 'file'}-->
+                                $htmls[$fieldid]
+                                <!--{/if}-->
+                            </li>
+                            <!--{/loop}-->
+                        </ul>
+                    <!--{/if}-->
+                <!--{/if}-->
+                <!--{if !empty($activity['ufield']['extfield'])}-->
+                    <!--{loop $activity['ufield']['extfield'] $extname}-->
+                        <div class="exname">
+                            $extname
+                            <input type="text" name="$extname" maxlength="200" value="{if !empty($ufielddata)}$ufielddata[extfield][$extname]{/if}" />
+                        </div>
+                    <!--{/loop}-->
+                <!--{/if}-->
+                    <textarea class="leaveword" placeholder="{lang global_msg}"  name="message" maxlength="200">$applyinfo[message]</textarea>
+			</div>
+			<div class="footer">
+                <!--{if $_G['setting']['activitycredit'] && $activity['credit'] && !$applied}-->
+                    <!--{if checklowerlimit(array('extcredits'.$_G['setting']['activitycredit'] => '-'.$activity['credit']), $_G['uid'], 1, 0, 1) !== true}-->
+                        <p class="text-info l">{$_G['setting']['extcredits'][$_G['setting']['activitycredit']][title]} {lang not_enough}$activity['credit']</p>
+                    <!--{else}-->
+                        <p class="text-warning l">{lang activity_need_credit} $activity[credit] {$_G['setting']['extcredits'][$_G['setting']['activitycredit']][title]}</p>
+                    <!--{/if}-->
+                <!--{/if}-->
+                <!--{if $_G['setting']['activitycredit'] && $activity['credit'] && checklowerlimit(array('extcredits'.$_G['setting']['activitycredit'] => '-'.$activity['credit']), $_G['uid'], 1, 0, 1) !== true}-->
+				<!--{else}-->
+                    <button class="btn btn-success btn-small px4-radius r glass" type="submit" >{lang submit}</button>
+                    <!--{if $activity['cost']}-->
+                        <div class="cost r">
+                            <input type="radio" value="0" name="payment" id="payment_0" checked="checked" />
+                            <label class="px4-radius glass btn" for="payment_0">{lang activity_pay_myself}</label>
+                            <input type="radio" name="payment" id="payment_1" value="1" />
+                            <label class="px4-radius glass btn"for="payment_1">{lang activity_would_payment}<input class="pxa-radius" name="payvalue" onfocus="$('payment_1').checked = true;" /> {lang payment_unit}</label>
+                        </div>
+                    <!--{/if}-->
+                    <input type="hidden" name="activitysubmit" value="true">
+                    <em class="text-info l" id="return_activityapplies"></em>
+				<!--{/if}-->
+			</div>
+		</form>
+		<script type="text/javascript">
+			function succeedhandle_activityapplies(locationhref, message) {
+				showDialog(message, 'right', '', 'location.href="' + locationhref + '"');
+			}
+		</script>
+	<!--{/if}-->
+	</div>
+<!--{elseif $_G['uid'] && !$activityclose && $applied}-->
+	<div id="activityjoincancel" style="display:none">
+		<form class="leave-board" name="activity" method="post" autocomplete="off" action="forum.php?mod=misc&action=activityapplies&fid=$_G[fid]&tid=$_G[tid]&pid=$post[pid]{if $_GET['from']}&from=$_GET['from']{/if}">
+			<div class="body">
+                <textarea class="pd-10 pd-10-vertical" placeholder="{lang reason_leaveword}" name="message" maxlength="200"></textarea>
+            </div>
+			<div class="footer">
+                <input type="hidden" name="formhash" value="{FORMHASH}" />
+                <button class="r btn btn-small btn-success glass px4-radius" type="submit" name="activitycancel" value="true">{lang submit}</button>
+            </div>
+		</form>
+	</div>
+<!--{/if}-->

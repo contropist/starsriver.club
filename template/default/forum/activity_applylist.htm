@@ -1,0 +1,94 @@
+<!--{template common/header}-->
+<!--{if empty($_GET['infloat'])}-->
+<div>
+<!--{/if}-->
+
+<form id="applylistform" method="post" autocomplete="off" action="forum.php?mod=misc&action=activityapplylist&tid=$_G[tid]&applylistsubmit=yes&infloat=yes{if !empty($_GET['from'])}&from=$_GET['from']{/if}"{if !empty($_GET['infloat']) && empty($_GET['from'])} onsubmit="ajaxpost('applylistform', 'return_$_GET['handlekey']', 'return_$_GET['handlekey']', 'onerror');return false;"{/if}>
+	<div class="header">
+		<span class="title-tip" id="return_$_GET['handlekey']"><!--{if $isactivitymaster}-->{lang activity_applylist_manage}<!--{else}-->{lang activity_applylist}<!--{/if}--></span>
+		<!--{if !empty($_GET['infloat'])}--><a onclick="hideWindow('$_GET['handlekey']');" class="close" title="{lang close}">×</a><!--{/if}-->
+	</div>
+	<input type="hidden" name="formhash" value="{FORMHASH}" />
+	<input type="hidden" name="operation" value="" />
+	<!--{if !empty($_GET['infloat'])}--><input type="hidden" name="handlekey" value="$_GET['handlekey']" /><!--{/if}-->
+	<div class="body">
+		<table class="wb dc">
+			<thead>
+				<tr>
+					<!--{if $isactivitymaster}--><td width="40">&nbsp#</td><!--{/if}-->
+					<td width="100">{lang activity_join_members}</td>
+					<td width="190">{lang extension_project}</td>
+					<!--{if $isactivitymaster}--><th width="30">{lang status}</th><!--{/if}-->
+				</tr>
+			</thead>
+			<tbody>
+			<!--{loop $applylist $apply}-->
+				<tr>
+					<!--{if $isactivitymaster}-->
+						<td class="ccbox">
+						<!--{if $apply[uid] != $_G[uid]}-->
+							<input type="checkbox" name="applyidarray[]" id="apl_$apply[uid]" value="$apply[applyid]" />
+							<label for="apl_$apply[uid]"></label>
+						<!--{else}-->
+							<input id="adm_$apply[uid]" type="checkbox" disabled="disabled" />
+							<label for="adm_$apply[uid]"></label>
+						<!--{/if}-->
+						</td>
+					<!--{/if}-->
+					<td>
+						<a target="_blank" href="home.php?mod=space&uid=$apply[uid]">$apply[username]</a>
+						<!--{if $apply[uid] != $_G[uid]}-->
+							<a href="home.php?mod=spacecp&ac=pm&op=showmsg&handlekey=showmsg_$apply[uid]&touid=$apply[uid]&pmid=0&daterange=2" onclick="hideMenu('aplayuid{$apply[uid]}_menu');showWindow('sendpm', this.href)" title="{lang send_pm}"><i style="font-size: 16px" class="ft-comment-circle text-warning"></i></a>
+						<!--{/if}-->
+					</td>
+					<td>
+						<!--{if $apply[ufielddata]}-->
+							<a class="ap-info" id="actl_$apply[uid]">{lang views}
+                                <div class="tooltip rt"><ul>$apply[ufielddata]</ul></div>
+                            </a>
+						<!--{else}-->
+							{lang no_informations}
+						<!--{/if}-->
+					</td>
+					<!--{if $isactivitymaster}-->
+						<td><!--{if $apply[verified] == 1}-->
+                                <i class="ft-check text-success" title="{lang activity_allow_join}"></i>
+							<!--{elseif $apply[verified] == 2}-->
+                                <i class="ft-alert-octagon text-danger" title="{lang activity_do_replenish}"></i>
+							<!--{else}-->
+                                <i class="ft-loader text-info" title="{lang activity_cant_audit}"></i>
+							<!--{/if}-->
+						</td>
+					<!--{/if}-->
+				</tr>
+			<!--{/loop}-->
+			</tbody>
+		</table>
+		<p class="common-tip"><i class="ft-clipboard heart-pink"></i>{lang activity_ps}:</p>
+		<textarea name="reason" style="height: 42px"></textarea>
+	</div>
+	<!--{if $isactivitymaster}-->
+	<div class="footer ccbox">
+		<input id="aap_chkall" type="checkbox" name="chkall" onclick="checkall(this.form, 'applyid')" />
+		<label for="aap_chkall">{lang checkall}</label>
+		<button class="px4-radius r glass btn btn-small btn-success" type="submit" value="true" name="applylistsubmit">{lang confirm}</button>
+		<button class="px4-radius r glass btn btn-small btn-primary" type="submit" value="true" name="applylistsubmit" onclick="$('applylistform').operation.value='replenish';"><span>{lang to_improve}</span></button>
+		<button class="px4-radius r glass btn btn-small btn-info" type="submit" value="true" name="applylistsubmit" onclick="$('applylistform').operation.value='notification';"><span>{lang send_notification}</span></button>
+		<button class="px4-radius r glass btn btn-small btn-danger" type="submit" value="true" name="applylistsubmit" onclick="$('applylistform').operation.value='delete';"><span>{lang activity_refuse}</span></button>
+	</div>
+	<!--{/if}-->
+</form>
+
+<!--{if !empty($_GET['infloat'])}-->
+<script type="text/javascript" reload="1">
+function succeedhandle_$_GET['handlekey'](locationhref) {
+	ajaxget('forum.php?mod=viewthread&tid=$_G[tid]&viewpid=$_GET[pid]', 'post_$_GET[pid]');
+	hideWindow('$_GET['handlekey']');
+}
+</script>
+<!--{/if}-->
+
+<!--{if empty($_GET['infloat'])}-->
+</div>
+<!--{/if}-->
+<!--{template common/footer}-->

@@ -1,0 +1,666 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<root>
+	<item id="Title"><![CDATA[Discuz! Smilies]]></item>
+	<item id="Version"><![CDATA[3.4]]></item>
+	<item id="Time"><![CDATA[2017-10-02 22:23]]></item>
+	<item id="From"><![CDATA[StarsRiver (http://bbs.starsriver.com/)]]></item>
+	<item id="Data">
+		<item id="typeid"><![CDATA[4]]></item>
+		<item id="available"><![CDATA[1]]></item>
+		<item id="name"><![CDATA[Emoji]]></item>
+		<item id="type"><![CDATA[smiley]]></item>
+		<item id="displayorder"><![CDATA[1]]></item>
+		<item id="directory"><![CDATA[emoji]]></item>
+		<item id="smilies">
+			<item id="0">
+				<item id="id"><![CDATA[343]]></item>
+				<item id="typeid"><![CDATA[4]]></item>
+				<item id="displayorder"><![CDATA[0]]></item>
+				<item id="type"><![CDATA[smiley]]></item>
+				<item id="code"><![CDATA[[emoji-anguished]]]></item>
+				<item id="url"><![CDATA[anguished.png]]></item>
+			</item>
+			<item id="1">
+				<item id="id"><![CDATA[344]]></item>
+				<item id="typeid"><![CDATA[4]]></item>
+				<item id="displayorder"><![CDATA[0]]></item>
+				<item id="type"><![CDATA[smiley]]></item>
+				<item id="code"><![CDATA[[emoji-astonished]]]></item>
+				<item id="url"><![CDATA[astonished.png]]></item>
+			</item>
+			<item id="2">
+				<item id="id"><![CDATA[345]]></item>
+				<item id="typeid"><![CDATA[4]]></item>
+				<item id="displayorder"><![CDATA[0]]></item>
+				<item id="type"><![CDATA[smiley]]></item>
+				<item id="code"><![CDATA[[emoji-blush]]]></item>
+				<item id="url"><![CDATA[blush.png]]></item>
+			</item>
+			<item id="3">
+				<item id="id"><![CDATA[346]]></item>
+				<item id="typeid"><![CDATA[4]]></item>
+				<item id="displayorder"><![CDATA[0]]></item>
+				<item id="type"><![CDATA[smiley]]></item>
+				<item id="code"><![CDATA[[emoji-bowtie]]]></item>
+				<item id="url"><![CDATA[bowtie.png]]></item>
+			</item>
+			<item id="4">
+				<item id="id"><![CDATA[347]]></item>
+				<item id="typeid"><![CDATA[4]]></item>
+				<item id="displayorder"><![CDATA[0]]></item>
+				<item id="type"><![CDATA[smiley]]></item>
+				<item id="code"><![CDATA[[emoji-cold_sweat]]]></item>
+				<item id="url"><![CDATA[cold_sweat.png]]></item>
+			</item>
+			<item id="5">
+				<item id="id"><![CDATA[348]]></item>
+				<item id="typeid"><![CDATA[4]]></item>
+				<item id="displayorder"><![CDATA[0]]></item>
+				<item id="type"><![CDATA[smiley]]></item>
+				<item id="code"><![CDATA[[emoji-confounded]]]></item>
+				<item id="url"><![CDATA[confounded.png]]></item>
+			</item>
+			<item id="6">
+				<item id="id"><![CDATA[349]]></item>
+				<item id="typeid"><![CDATA[4]]></item>
+				<item id="displayorder"><![CDATA[0]]></item>
+				<item id="type"><![CDATA[smiley]]></item>
+				<item id="code"><![CDATA[[emoji-confused]]]></item>
+				<item id="url"><![CDATA[confused.png]]></item>
+			</item>
+			<item id="7">
+				<item id="id"><![CDATA[350]]></item>
+				<item id="typeid"><![CDATA[4]]></item>
+				<item id="displayorder"><![CDATA[0]]></item>
+				<item id="type"><![CDATA[smiley]]></item>
+				<item id="code"><![CDATA[[emoji-cry]]]></item>
+				<item id="url"><![CDATA[cry.png]]></item>
+			</item>
+			<item id="8">
+				<item id="id"><![CDATA[351]]></item>
+				<item id="typeid"><![CDATA[4]]></item>
+				<item id="displayorder"><![CDATA[0]]></item>
+				<item id="type"><![CDATA[smiley]]></item>
+				<item id="code"><![CDATA[[emoji-disappointed]]]></item>
+				<item id="url"><![CDATA[disappointed.png]]></item>
+			</item>
+			<item id="9">
+				<item id="id"><![CDATA[352]]></item>
+				<item id="typeid"><![CDATA[4]]></item>
+				<item id="displayorder"><![CDATA[0]]></item>
+				<item id="type"><![CDATA[smiley]]></item>
+				<item id="code"><![CDATA[[emoji-disappointed_relieved]]]></item>
+				<item id="url"><![CDATA[disappointed_relieved.png]]></item>
+			</item>
+			<item id="10">
+				<item id="id"><![CDATA[353]]></item>
+				<item id="typeid"><![CDATA[4]]></item>
+				<item id="displayorder"><![CDATA[0]]></item>
+				<item id="type"><![CDATA[smiley]]></item>
+				<item id="code"><![CDATA[[emoji-dizzy_face]]]></item>
+				<item id="url"><![CDATA[dizzy_face.png]]></item>
+			</item>
+			<item id="11">
+				<item id="id"><![CDATA[354]]></item>
+				<item id="typeid"><![CDATA[4]]></item>
+				<item id="displayorder"><![CDATA[0]]></item>
+				<item id="type"><![CDATA[smiley]]></item>
+				<item id="code"><![CDATA[[emoji-expressionless]]]></item>
+				<item id="url"><![CDATA[expressionless.png]]></item>
+			</item>
+			<item id="12">
+				<item id="id"><![CDATA[355]]></item>
+				<item id="typeid"><![CDATA[4]]></item>
+				<item id="displayorder"><![CDATA[0]]></item>
+				<item id="type"><![CDATA[smiley]]></item>
+				<item id="code"><![CDATA[[emoji-fearful]]]></item>
+				<item id="url"><![CDATA[fearful.png]]></item>
+			</item>
+			<item id="13">
+				<item id="id"><![CDATA[356]]></item>
+				<item id="typeid"><![CDATA[4]]></item>
+				<item id="displayorder"><![CDATA[0]]></item>
+				<item id="type"><![CDATA[smiley]]></item>
+				<item id="code"><![CDATA[[emoji-flushed]]]></item>
+				<item id="url"><![CDATA[flushed.png]]></item>
+			</item>
+			<item id="14">
+				<item id="id"><![CDATA[357]]></item>
+				<item id="typeid"><![CDATA[4]]></item>
+				<item id="displayorder"><![CDATA[0]]></item>
+				<item id="type"><![CDATA[smiley]]></item>
+				<item id="code"><![CDATA[[emoji-frowning]]]></item>
+				<item id="url"><![CDATA[frowning.png]]></item>
+			</item>
+			<item id="15">
+				<item id="id"><![CDATA[401]]></item>
+				<item id="typeid"><![CDATA[4]]></item>
+				<item id="displayorder"><![CDATA[0]]></item>
+				<item id="type"><![CDATA[smiley]]></item>
+				<item id="code"><![CDATA[[emoji-wink]]]></item>
+				<item id="url"><![CDATA[wink.png]]></item>
+			</item>
+			<item id="16">
+				<item id="id"><![CDATA[402]]></item>
+				<item id="typeid"><![CDATA[4]]></item>
+				<item id="displayorder"><![CDATA[0]]></item>
+				<item id="type"><![CDATA[smiley]]></item>
+				<item id="code"><![CDATA[[emoji-worried]]]></item>
+				<item id="url"><![CDATA[worried.png]]></item>
+			</item>
+			<item id="17">
+				<item id="id"><![CDATA[360]]></item>
+				<item id="typeid"><![CDATA[4]]></item>
+				<item id="displayorder"><![CDATA[0]]></item>
+				<item id="type"><![CDATA[smiley]]></item>
+				<item id="code"><![CDATA[[emoji-grimacing]]]></item>
+				<item id="url"><![CDATA[grimacing.png]]></item>
+			</item>
+			<item id="18">
+				<item id="id"><![CDATA[361]]></item>
+				<item id="typeid"><![CDATA[4]]></item>
+				<item id="displayorder"><![CDATA[0]]></item>
+				<item id="type"><![CDATA[smiley]]></item>
+				<item id="code"><![CDATA[[emoji-grin]]]></item>
+				<item id="url"><![CDATA[grin.png]]></item>
+			</item>
+			<item id="19">
+				<item id="id"><![CDATA[362]]></item>
+				<item id="typeid"><![CDATA[4]]></item>
+				<item id="displayorder"><![CDATA[0]]></item>
+				<item id="type"><![CDATA[smiley]]></item>
+				<item id="code"><![CDATA[[emoji-grinning]]]></item>
+				<item id="url"><![CDATA[grinning.png]]></item>
+			</item>
+			<item id="20">
+				<item id="id"><![CDATA[363]]></item>
+				<item id="typeid"><![CDATA[4]]></item>
+				<item id="displayorder"><![CDATA[0]]></item>
+				<item id="type"><![CDATA[smiley]]></item>
+				<item id="code"><![CDATA[[emoji-heart_eyes]]]></item>
+				<item id="url"><![CDATA[heart_eyes.png]]></item>
+			</item>
+			<item id="21">
+				<item id="id"><![CDATA[364]]></item>
+				<item id="typeid"><![CDATA[4]]></item>
+				<item id="displayorder"><![CDATA[0]]></item>
+				<item id="type"><![CDATA[smiley]]></item>
+				<item id="code"><![CDATA[[emoji-hushed]]]></item>
+				<item id="url"><![CDATA[hushed.png]]></item>
+			</item>
+			<item id="22">
+				<item id="id"><![CDATA[403]]></item>
+				<item id="typeid"><![CDATA[4]]></item>
+				<item id="displayorder"><![CDATA[0]]></item>
+				<item id="type"><![CDATA[smiley]]></item>
+				<item id="code"><![CDATA[[emoji-yum]]]></item>
+				<item id="url"><![CDATA[yum.png]]></item>
+			</item>
+			<item id="23">
+				<item id="id"><![CDATA[366]]></item>
+				<item id="typeid"><![CDATA[4]]></item>
+				<item id="displayorder"><![CDATA[0]]></item>
+				<item id="type"><![CDATA[smiley]]></item>
+				<item id="code"><![CDATA[[emoji-innocent]]]></item>
+				<item id="url"><![CDATA[innocent.png]]></item>
+			</item>
+			<item id="24">
+				<item id="id"><![CDATA[367]]></item>
+				<item id="typeid"><![CDATA[4]]></item>
+				<item id="displayorder"><![CDATA[0]]></item>
+				<item id="type"><![CDATA[smiley]]></item>
+				<item id="code"><![CDATA[[emoji-joy]]]></item>
+				<item id="url"><![CDATA[joy.png]]></item>
+			</item>
+			<item id="25">
+				<item id="id"><![CDATA[368]]></item>
+				<item id="typeid"><![CDATA[4]]></item>
+				<item id="displayorder"><![CDATA[0]]></item>
+				<item id="type"><![CDATA[smiley]]></item>
+				<item id="code"><![CDATA[[emoji-kissing]]]></item>
+				<item id="url"><![CDATA[kissing.png]]></item>
+			</item>
+			<item id="26">
+				<item id="id"><![CDATA[369]]></item>
+				<item id="typeid"><![CDATA[4]]></item>
+				<item id="displayorder"><![CDATA[0]]></item>
+				<item id="type"><![CDATA[smiley]]></item>
+				<item id="code"><![CDATA[[emoji-kissing_1]]]></item>
+				<item id="url"><![CDATA[kissing_1.png]]></item>
+			</item>
+			<item id="27">
+				<item id="id"><![CDATA[370]]></item>
+				<item id="typeid"><![CDATA[4]]></item>
+				<item id="displayorder"><![CDATA[0]]></item>
+				<item id="type"><![CDATA[smiley]]></item>
+				<item id="code"><![CDATA[[emoji-kissing_2]]]></item>
+				<item id="url"><![CDATA[kissing_2.png]]></item>
+			</item>
+			<item id="28">
+				<item id="id"><![CDATA[371]]></item>
+				<item id="typeid"><![CDATA[4]]></item>
+				<item id="displayorder"><![CDATA[0]]></item>
+				<item id="type"><![CDATA[smiley]]></item>
+				<item id="code"><![CDATA[[emoji-kissing_3]]]></item>
+				<item id="url"><![CDATA[kissing_3.png]]></item>
+			</item>
+			<item id="29">
+				<item id="id"><![CDATA[342]]></item>
+				<item id="typeid"><![CDATA[4]]></item>
+				<item id="displayorder"><![CDATA[0]]></item>
+				<item id="type"><![CDATA[smiley]]></item>
+				<item id="code"><![CDATA[[emoji-angry]]]></item>
+				<item id="url"><![CDATA[angry.png]]></item>
+			</item>
+			<item id="30">
+				<item id="id"><![CDATA[373]]></item>
+				<item id="typeid"><![CDATA[4]]></item>
+				<item id="displayorder"><![CDATA[0]]></item>
+				<item id="type"><![CDATA[smiley]]></item>
+				<item id="code"><![CDATA[[emoji-laughing]]]></item>
+				<item id="url"><![CDATA[laughing.png]]></item>
+			</item>
+			<item id="31">
+				<item id="id"><![CDATA[374]]></item>
+				<item id="typeid"><![CDATA[4]]></item>
+				<item id="displayorder"><![CDATA[0]]></item>
+				<item id="type"><![CDATA[smiley]]></item>
+				<item id="code"><![CDATA[[emoji-mask]]]></item>
+				<item id="url"><![CDATA[mask.png]]></item>
+			</item>
+			<item id="32">
+				<item id="id"><![CDATA[375]]></item>
+				<item id="typeid"><![CDATA[4]]></item>
+				<item id="displayorder"><![CDATA[0]]></item>
+				<item id="type"><![CDATA[smiley]]></item>
+				<item id="code"><![CDATA[[emoji-neutral_face]]]></item>
+				<item id="url"><![CDATA[neutral_face.png]]></item>
+			</item>
+			<item id="33">
+				<item id="id"><![CDATA[376]]></item>
+				<item id="typeid"><![CDATA[4]]></item>
+				<item id="displayorder"><![CDATA[0]]></item>
+				<item id="type"><![CDATA[smiley]]></item>
+				<item id="code"><![CDATA[[emoji-no_mouth]]]></item>
+				<item id="url"><![CDATA[no_mouth.png]]></item>
+			</item>
+			<item id="34">
+				<item id="id"><![CDATA[377]]></item>
+				<item id="typeid"><![CDATA[4]]></item>
+				<item id="displayorder"><![CDATA[0]]></item>
+				<item id="type"><![CDATA[smiley]]></item>
+				<item id="code"><![CDATA[[emoji-open_mouth]]]></item>
+				<item id="url"><![CDATA[open_mouth.png]]></item>
+			</item>
+			<item id="35">
+				<item id="id"><![CDATA[378]]></item>
+				<item id="typeid"><![CDATA[4]]></item>
+				<item id="displayorder"><![CDATA[0]]></item>
+				<item id="type"><![CDATA[smiley]]></item>
+				<item id="code"><![CDATA[[emoji-pensive]]]></item>
+				<item id="url"><![CDATA[pensive.png]]></item>
+			</item>
+			<item id="36">
+				<item id="id"><![CDATA[379]]></item>
+				<item id="typeid"><![CDATA[4]]></item>
+				<item id="displayorder"><![CDATA[0]]></item>
+				<item id="type"><![CDATA[smiley]]></item>
+				<item id="code"><![CDATA[[emoji-persevere]]]></item>
+				<item id="url"><![CDATA[persevere.png]]></item>
+			</item>
+			<item id="37">
+				<item id="id"><![CDATA[380]]></item>
+				<item id="typeid"><![CDATA[4]]></item>
+				<item id="displayorder"><![CDATA[0]]></item>
+				<item id="type"><![CDATA[smiley]]></item>
+				<item id="code"><![CDATA[[emoji-rage]]]></item>
+				<item id="url"><![CDATA[rage.png]]></item>
+			</item>
+			<item id="38">
+				<item id="id"><![CDATA[381]]></item>
+				<item id="typeid"><![CDATA[4]]></item>
+				<item id="displayorder"><![CDATA[0]]></item>
+				<item id="type"><![CDATA[smiley]]></item>
+				<item id="code"><![CDATA[[emoji-relaxed]]]></item>
+				<item id="url"><![CDATA[relaxed.png]]></item>
+			</item>
+			<item id="39">
+				<item id="id"><![CDATA[382]]></item>
+				<item id="typeid"><![CDATA[4]]></item>
+				<item id="displayorder"><![CDATA[0]]></item>
+				<item id="type"><![CDATA[smiley]]></item>
+				<item id="code"><![CDATA[[emoji-relieved]]]></item>
+				<item id="url"><![CDATA[relieved.png]]></item>
+			</item>
+			<item id="40">
+				<item id="id"><![CDATA[383]]></item>
+				<item id="typeid"><![CDATA[4]]></item>
+				<item id="displayorder"><![CDATA[0]]></item>
+				<item id="type"><![CDATA[smiley]]></item>
+				<item id="code"><![CDATA[[emoji-scream]]]></item>
+				<item id="url"><![CDATA[scream.png]]></item>
+			</item>
+			<item id="41">
+				<item id="id"><![CDATA[384]]></item>
+				<item id="typeid"><![CDATA[4]]></item>
+				<item id="displayorder"><![CDATA[0]]></item>
+				<item id="type"><![CDATA[smiley]]></item>
+				<item id="code"><![CDATA[[emoji-sleeping]]]></item>
+				<item id="url"><![CDATA[sleeping.png]]></item>
+			</item>
+			<item id="42">
+				<item id="id"><![CDATA[385]]></item>
+				<item id="typeid"><![CDATA[4]]></item>
+				<item id="displayorder"><![CDATA[0]]></item>
+				<item id="type"><![CDATA[smiley]]></item>
+				<item id="code"><![CDATA[[emoji-sleepy]]]></item>
+				<item id="url"><![CDATA[sleepy.png]]></item>
+			</item>
+			<item id="43">
+				<item id="id"><![CDATA[386]]></item>
+				<item id="typeid"><![CDATA[4]]></item>
+				<item id="displayorder"><![CDATA[0]]></item>
+				<item id="type"><![CDATA[smiley]]></item>
+				<item id="code"><![CDATA[[emoji-smile]]]></item>
+				<item id="url"><![CDATA[smile.png]]></item>
+			</item>
+			<item id="44">
+				<item id="id"><![CDATA[387]]></item>
+				<item id="typeid"><![CDATA[4]]></item>
+				<item id="displayorder"><![CDATA[0]]></item>
+				<item id="type"><![CDATA[smiley]]></item>
+				<item id="code"><![CDATA[[emoji-smiley]]]></item>
+				<item id="url"><![CDATA[smiley.png]]></item>
+			</item>
+			<item id="45">
+				<item id="id"><![CDATA[389]]></item>
+				<item id="typeid"><![CDATA[4]]></item>
+				<item id="displayorder"><![CDATA[0]]></item>
+				<item id="type"><![CDATA[smiley]]></item>
+				<item id="code"><![CDATA[[emoji-smirk]]]></item>
+				<item id="url"><![CDATA[smirk.png]]></item>
+			</item>
+			<item id="46">
+				<item id="id"><![CDATA[390]]></item>
+				<item id="typeid"><![CDATA[4]]></item>
+				<item id="displayorder"><![CDATA[0]]></item>
+				<item id="type"><![CDATA[smiley]]></item>
+				<item id="code"><![CDATA[[emoji-sob]]]></item>
+				<item id="url"><![CDATA[sob.png]]></item>
+			</item>
+			<item id="47">
+				<item id="id"><![CDATA[391]]></item>
+				<item id="typeid"><![CDATA[4]]></item>
+				<item id="displayorder"><![CDATA[0]]></item>
+				<item id="type"><![CDATA[smiley]]></item>
+				<item id="code"><![CDATA[[emoji-stuckout_1]]]></item>
+				<item id="url"><![CDATA[stuckout_1.png]]></item>
+			</item>
+			<item id="48">
+				<item id="id"><![CDATA[392]]></item>
+				<item id="typeid"><![CDATA[4]]></item>
+				<item id="displayorder"><![CDATA[0]]></item>
+				<item id="type"><![CDATA[smiley]]></item>
+				<item id="code"><![CDATA[[emoji-stuckout_2]]]></item>
+				<item id="url"><![CDATA[stuckout_2.png]]></item>
+			</item>
+			<item id="49">
+				<item id="id"><![CDATA[393]]></item>
+				<item id="typeid"><![CDATA[4]]></item>
+				<item id="displayorder"><![CDATA[0]]></item>
+				<item id="type"><![CDATA[smiley]]></item>
+				<item id="code"><![CDATA[[emoji-stuckout_3]]]></item>
+				<item id="url"><![CDATA[stuckout_3.png]]></item>
+			</item>
+			<item id="50">
+				<item id="id"><![CDATA[394]]></item>
+				<item id="typeid"><![CDATA[4]]></item>
+				<item id="displayorder"><![CDATA[0]]></item>
+				<item id="type"><![CDATA[smiley]]></item>
+				<item id="code"><![CDATA[[emoji-sunglasses]]]></item>
+				<item id="url"><![CDATA[sunglasses.png]]></item>
+			</item>
+			<item id="51">
+				<item id="id"><![CDATA[395]]></item>
+				<item id="typeid"><![CDATA[4]]></item>
+				<item id="displayorder"><![CDATA[0]]></item>
+				<item id="type"><![CDATA[smiley]]></item>
+				<item id="code"><![CDATA[[emoji-sweat]]]></item>
+				<item id="url"><![CDATA[sweat.png]]></item>
+			</item>
+			<item id="52">
+				<item id="id"><![CDATA[396]]></item>
+				<item id="typeid"><![CDATA[4]]></item>
+				<item id="displayorder"><![CDATA[0]]></item>
+				<item id="type"><![CDATA[smiley]]></item>
+				<item id="code"><![CDATA[[emoji-sweat_smile]]]></item>
+				<item id="url"><![CDATA[sweat_smile.png]]></item>
+			</item>
+			<item id="53">
+				<item id="id"><![CDATA[397]]></item>
+				<item id="typeid"><![CDATA[4]]></item>
+				<item id="displayorder"><![CDATA[0]]></item>
+				<item id="type"><![CDATA[smiley]]></item>
+				<item id="code"><![CDATA[[emoji-tired_face]]]></item>
+				<item id="url"><![CDATA[tired_face.png]]></item>
+			</item>
+			<item id="54">
+				<item id="id"><![CDATA[398]]></item>
+				<item id="typeid"><![CDATA[4]]></item>
+				<item id="displayorder"><![CDATA[0]]></item>
+				<item id="type"><![CDATA[smiley]]></item>
+				<item id="code"><![CDATA[[emoji-triumph]]]></item>
+				<item id="url"><![CDATA[triumph.png]]></item>
+			</item>
+			<item id="55">
+				<item id="id"><![CDATA[399]]></item>
+				<item id="typeid"><![CDATA[4]]></item>
+				<item id="displayorder"><![CDATA[0]]></item>
+				<item id="type"><![CDATA[smiley]]></item>
+				<item id="code"><![CDATA[[emoji-unamused]]]></item>
+				<item id="url"><![CDATA[unamused.png]]></item>
+			</item>
+			<item id="56">
+				<item id="id"><![CDATA[400]]></item>
+				<item id="typeid"><![CDATA[4]]></item>
+				<item id="displayorder"><![CDATA[0]]></item>
+				<item id="type"><![CDATA[smiley]]></item>
+				<item id="code"><![CDATA[[emoji-weary]]]></item>
+				<item id="url"><![CDATA[weary.png]]></item>
+			</item>
+			<item id="57">
+				<item id="id"><![CDATA[358]]></item>
+				<item id="typeid"><![CDATA[4]]></item>
+				<item id="displayorder"><![CDATA[1]]></item>
+				<item id="type"><![CDATA[smiley]]></item>
+				<item id="code"><![CDATA[[emoji-full_moon_with_face]]]></item>
+				<item id="url"><![CDATA[full_moon_with_face.png]]></item>
+			</item>
+			<item id="58">
+				<item id="id"><![CDATA[372]]></item>
+				<item id="typeid"><![CDATA[4]]></item>
+				<item id="displayorder"><![CDATA[1]]></item>
+				<item id="type"><![CDATA[smiley]]></item>
+				<item id="code"><![CDATA[[emoji-last_quarter]]]></item>
+				<item id="url"><![CDATA[last_quarter.png]]></item>
+			</item>
+			<item id="59">
+				<item id="id"><![CDATA[359]]></item>
+				<item id="typeid"><![CDATA[4]]></item>
+				<item id="displayorder"><![CDATA[2]]></item>
+				<item id="type"><![CDATA[smiley]]></item>
+				<item id="code"><![CDATA[[emoji-ghost]]]></item>
+				<item id="url"><![CDATA[ghost.png]]></item>
+			</item>
+			<item id="60">
+				<item id="id"><![CDATA[365]]></item>
+				<item id="typeid"><![CDATA[4]]></item>
+				<item id="displayorder"><![CDATA[2]]></item>
+				<item id="type"><![CDATA[smiley]]></item>
+				<item id="code"><![CDATA[[emoji-imp]]]></item>
+				<item id="url"><![CDATA[imp.png]]></item>
+			</item>
+			<item id="61">
+				<item id="id"><![CDATA[388]]></item>
+				<item id="typeid"><![CDATA[4]]></item>
+				<item id="displayorder"><![CDATA[2]]></item>
+				<item id="type"><![CDATA[smiley]]></item>
+				<item id="code"><![CDATA[[emoji-smiling_imp]]]></item>
+				<item id="url"><![CDATA[smiling_imp.png]]></item>
+			</item>
+			<item id="62">
+				<item id="id"><![CDATA[404]]></item>
+				<item id="typeid"><![CDATA[4]]></item>
+				<item id="displayorder"><![CDATA[3]]></item>
+				<item id="type"><![CDATA[smiley]]></item>
+				<item id="code"><![CDATA[[emoji-z-balloon]]]></item>
+				<item id="url"><![CDATA[z-balloon.png]]></item>
+			</item>
+			<item id="63">
+				<item id="id"><![CDATA[405]]></item>
+				<item id="typeid"><![CDATA[4]]></item>
+				<item id="displayorder"><![CDATA[3]]></item>
+				<item id="type"><![CDATA[smiley]]></item>
+				<item id="code"><![CDATA[[emoji-z-bangbang]]]></item>
+				<item id="url"><![CDATA[z-bangbang.png]]></item>
+			</item>
+			<item id="64">
+				<item id="id"><![CDATA[406]]></item>
+				<item id="typeid"><![CDATA[4]]></item>
+				<item id="displayorder"><![CDATA[3]]></item>
+				<item id="type"><![CDATA[smiley]]></item>
+				<item id="code"><![CDATA[[emoji-z-broken_heart]]]></item>
+				<item id="url"><![CDATA[z-broken_heart.png]]></item>
+			</item>
+			<item id="65">
+				<item id="id"><![CDATA[407]]></item>
+				<item id="typeid"><![CDATA[4]]></item>
+				<item id="displayorder"><![CDATA[3]]></item>
+				<item id="type"><![CDATA[smiley]]></item>
+				<item id="code"><![CDATA[[emoji-z-hotsprings]]]></item>
+				<item id="url"><![CDATA[z-hotsprings.png]]></item>
+			</item>
+			<item id="66">
+				<item id="id"><![CDATA[408]]></item>
+				<item id="typeid"><![CDATA[4]]></item>
+				<item id="displayorder"><![CDATA[3]]></item>
+				<item id="type"><![CDATA[smiley]]></item>
+				<item id="code"><![CDATA[[emoji-z-interrobang]]]></item>
+				<item id="url"><![CDATA[z-interrobang.png]]></item>
+			</item>
+			<item id="67">
+				<item id="id"><![CDATA[409]]></item>
+				<item id="typeid"><![CDATA[4]]></item>
+				<item id="displayorder"><![CDATA[3]]></item>
+				<item id="type"><![CDATA[smiley]]></item>
+				<item id="code"><![CDATA[[emoji-z-no_entry]]]></item>
+				<item id="url"><![CDATA[z-no_entry.png]]></item>
+			</item>
+			<item id="68">
+				<item id="id"><![CDATA[410]]></item>
+				<item id="typeid"><![CDATA[4]]></item>
+				<item id="displayorder"><![CDATA[3]]></item>
+				<item id="type"><![CDATA[smiley]]></item>
+				<item id="code"><![CDATA[[emoji-z-no_entry_sign]]]></item>
+				<item id="url"><![CDATA[z-no_entry_sign.png]]></item>
+			</item>
+			<item id="69">
+				<item id="id"><![CDATA[411]]></item>
+				<item id="typeid"><![CDATA[4]]></item>
+				<item id="displayorder"><![CDATA[3]]></item>
+				<item id="type"><![CDATA[smiley]]></item>
+				<item id="code"><![CDATA[[emoji-z-pill]]]></item>
+				<item id="url"><![CDATA[z-pill.png]]></item>
+			</item>
+			<item id="70">
+				<item id="id"><![CDATA[412]]></item>
+				<item id="typeid"><![CDATA[4]]></item>
+				<item id="displayorder"><![CDATA[3]]></item>
+				<item id="type"><![CDATA[smiley]]></item>
+				<item id="code"><![CDATA[[emoji-z-recycle]]]></item>
+				<item id="url"><![CDATA[z-recycle.png]]></item>
+			</item>
+			<item id="71">
+				<item id="id"><![CDATA[413]]></item>
+				<item id="typeid"><![CDATA[4]]></item>
+				<item id="displayorder"><![CDATA[3]]></item>
+				<item id="type"><![CDATA[smiley]]></item>
+				<item id="code"><![CDATA[[emoji-z-rocket]]]></item>
+				<item id="url"><![CDATA[z-rocket.png]]></item>
+			</item>
+			<item id="72">
+				<item id="id"><![CDATA[414]]></item>
+				<item id="typeid"><![CDATA[4]]></item>
+				<item id="displayorder"><![CDATA[4]]></item>
+				<item id="type"><![CDATA[smiley]]></item>
+				<item id="code"><![CDATA[[emoji-zf-cn]]]></item>
+				<item id="url"><![CDATA[zf-cn.png]]></item>
+			</item>
+			<item id="73">
+				<item id="id"><![CDATA[415]]></item>
+				<item id="typeid"><![CDATA[4]]></item>
+				<item id="displayorder"><![CDATA[4]]></item>
+				<item id="type"><![CDATA[smiley]]></item>
+				<item id="code"><![CDATA[[emoji-zf-de]]]></item>
+				<item id="url"><![CDATA[zf-de.png]]></item>
+			</item>
+			<item id="74">
+				<item id="id"><![CDATA[416]]></item>
+				<item id="typeid"><![CDATA[4]]></item>
+				<item id="displayorder"><![CDATA[4]]></item>
+				<item id="type"><![CDATA[smiley]]></item>
+				<item id="code"><![CDATA[[emoji-zf-es]]]></item>
+				<item id="url"><![CDATA[zf-es.png]]></item>
+			</item>
+			<item id="75">
+				<item id="id"><![CDATA[417]]></item>
+				<item id="typeid"><![CDATA[4]]></item>
+				<item id="displayorder"><![CDATA[4]]></item>
+				<item id="type"><![CDATA[smiley]]></item>
+				<item id="code"><![CDATA[[emoji-zf-it]]]></item>
+				<item id="url"><![CDATA[zf-it.png]]></item>
+			</item>
+			<item id="76">
+				<item id="id"><![CDATA[418]]></item>
+				<item id="typeid"><![CDATA[4]]></item>
+				<item id="displayorder"><![CDATA[4]]></item>
+				<item id="type"><![CDATA[smiley]]></item>
+				<item id="code"><![CDATA[[emoji-zf-jp]]]></item>
+				<item id="url"><![CDATA[zf-jp.png]]></item>
+			</item>
+			<item id="77">
+				<item id="id"><![CDATA[419]]></item>
+				<item id="typeid"><![CDATA[4]]></item>
+				<item id="displayorder"><![CDATA[4]]></item>
+				<item id="type"><![CDATA[smiley]]></item>
+				<item id="code"><![CDATA[[emoji-zf-kr]]]></item>
+				<item id="url"><![CDATA[zf-kr.png]]></item>
+			</item>
+			<item id="78">
+				<item id="id"><![CDATA[420]]></item>
+				<item id="typeid"><![CDATA[4]]></item>
+				<item id="displayorder"><![CDATA[4]]></item>
+				<item id="type"><![CDATA[smiley]]></item>
+				<item id="code"><![CDATA[[emoji-zf-ru]]]></item>
+				<item id="url"><![CDATA[zf-ru.png]]></item>
+			</item>
+			<item id="79">
+				<item id="id"><![CDATA[421]]></item>
+				<item id="typeid"><![CDATA[4]]></item>
+				<item id="displayorder"><![CDATA[4]]></item>
+				<item id="type"><![CDATA[smiley]]></item>
+				<item id="code"><![CDATA[[emoji-zf-uk]]]></item>
+				<item id="url"><![CDATA[zf-uk.png]]></item>
+			</item>
+			<item id="80">
+				<item id="id"><![CDATA[422]]></item>
+				<item id="typeid"><![CDATA[4]]></item>
+				<item id="displayorder"><![CDATA[4]]></item>
+				<item id="type"><![CDATA[smiley]]></item>
+				<item id="code"><![CDATA[[emoji-zf-us]]]></item>
+				<item id="url"><![CDATA[zf-us.png]]></item>
+			</item>
+		</item>
+		<item id="version"><![CDATA[3.4]]></item>
+	</item>
+</root>

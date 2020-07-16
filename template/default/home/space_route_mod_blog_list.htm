@@ -1,0 +1,117 @@
+{eval
+	$_G[home_tpl_spacemenus][] = "<a href=\"home.php?mod=space&uid=$space[uid]&do=blog&view=me\">{lang they_blog}</a>";
+	$friendsname = array(1 => '{lang friendname_1}',2 => '{lang friendname_2}',3 => '{lang friendname_3}',4 => '{lang friendname_4}');
+}
+
+<!--{if empty($nestmode)}-->
+    <!--{template home/space_trends_header}-->
+    <div class="plate layout-0">
+        <!--[nest=nest1]--><div id="nest1" class="area"></div><!--[/nest]-->
+    </div>
+		<div class="plate layout-3-type2 app-dynamic soft">
+			<section>
+				<!--{subtemplate home/space_trends_side_left}-->
+			</section>
+			<section>
+				<!--[nest=nestcontenttop]--><div id="nestcontenttop" class="area"></div><!--[/nest]-->
+				<!--{if helper_access::check_module('blog')}-->
+				<div class="vessel">
+					<a class="post-new-blog ft-edit" href="home.php?mod=spacecp&ac=blog">{lang post_new_blog}</a>
+				</div>
+				<!--{/if}-->
+				<div class="vessel">
+					<div class="nav">
+						<a class="$actives[all]" href="home.php?mod=space&do=blog&view=all">{lang view_all}</a>
+						<!--{if $_G[uid]}-->
+						<a class="$actives[we]" href="home.php?mod=space&do=blog&view=we">{lang friend_blog}</a>
+						<a class="$actives[me]" href="home.php?mod=space&do=blog&view=me">{lang my_blog}</a>
+						<!--{/if}-->
+					</div>
+
+					<!--{if $_GET[view] == 'all' || $userlist}--><hr><!--{/if}-->
+
+					<!--{if $_GET[view] == 'all'}-->
+						<ul class="tags">
+							<li class="{if !$_GET[catid]}$orderactives[dateline]{/if}"><a href="home.php?mod=space&do=blog&view=all">{lang newest_blog}</a></li>
+							<li class="$orderactives[hot]"><a href="home.php?mod=space&do=blog&view=all&order=hot">{lang recommend_blog}</a></li>
+							<!--{if $category}-->
+							<!--{loop $category $value}-->
+								<li><a href="home.php?mod=space&do=blog&catid=$value[catid]&view=all&order=$_GET[order]"{if $_GET[catid]==$value[catid]} class="active"{/if}>$value[catname]</a></li>
+							<!--{/loop}-->
+							<!--{/if}-->
+						</ul>
+					<!--{/if}-->
+
+					<!--{if $userlist}-->
+						<ul class="tags hideoverflow trans-ease" id="userlist">
+							<!--{loop $userlist $value}-->
+								<li class="{$fuid_actives[$value[fuid]]}"><a onclick="fuidgoto($value[fuid]);">$value[fusername]</a></li>
+							<!--{/loop}-->
+						</ul>
+						<script type="javascript">
+							fold('#userlist',94,false);
+							function fuidgoto(fuid) {
+								var parameter = fuid != '' ? '&fuid='+fuid : '';
+								window.location.href = 'home.php?mod=space&do=blog&view=we'+parameter;
+							}
+						</script>
+					<!--{/if}-->
+				</div>
+				<!--{if $count}-->
+					<!--{loop $list $k $value}-->
+						<div class="vessel withedge">
+							<!--{template home/space_trends_mod_blog}-->
+						</div>
+					<!--{/loop}-->
+					<!--{if $pricount}-->
+						<p class="vessel alert hi-warning">{lang hide_pic}</p>
+					<!--{/if}-->
+					<!--{if $multi}-->
+						<div class="vessel withedge">
+							<div class="pg">$multi</div>
+						</div>
+					<!--{/if}-->
+				<!--{else}-->
+					<div class="vessel withedge">
+						<div class="global_nothing">{lang global_nothing}</div>
+					</div>
+				<!--{/if}-->
+			</section>
+			<section>
+				<!--{subtemplate home/space_trends_side_right}-->
+			</section>
+		</div>
+<!--{else}-->
+    <!--{template home/space_home_header}-->
+    <div class="mas-viewer">
+        <section class="col-1">
+            <!--{if $count}-->
+                <!--{loop $list $k $value}-->
+                    <div class="vessel withedge">
+                        <!--{template home/space_home_mod_blog}-->
+                    </div>
+                <!--{/loop}-->
+                <!--{if $pricount}-->
+                    <p class="vessel align-center alert hi-danger">{lang hide_blog}</p>
+                <!--{/if}-->
+                <!--{if $multi}-->
+                    <div class="vessel withedge">
+                        <div class="pg">$multi</div>
+                    </div>
+                <!--{/if}-->
+            <!--{else}-->
+                <div class="vessel withedge">
+                    <div class="global_nothing">{lang global_nothing}</div>
+                </div>
+            <!--{/if}-->
+        </section>
+        <section class="col-2">
+            <div class="vessel">
+                <!--{subtemplate home/space_home_userabout}-->
+                <!--[nest=nest3]--><div id="nest3" class="area"></div><!--[/nest]-->
+            </div>
+        </section>
+        <!--[nest=nest1]--><div id="nest1" class="area"></div><!--[/nest]-->
+    </div>
+<!--{/if}-->
+<!--{template common/footer}-->

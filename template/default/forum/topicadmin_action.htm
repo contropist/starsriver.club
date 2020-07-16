@@ -1,0 +1,215 @@
+<!--{template common/header}-->
+<!--{if empty($_GET['infloat'])}-->
+<div>
+	<div class="mn">
+		<div class="bm bw0">
+<!--{/if}-->
+
+<div class="tm_c" id="floatlayout_topicadmin">
+	<div class="header">
+		<span class="title-tip" id="return_mods"><!--{if in_array($_GET[action], array('delpost', 'banpost', 'warn', 'stickreply'))}-->{lang admin_select_piece}<!--{elseif $_GET['action'] == 'delcomment'}-->{lang topicadmin_select_comment}<!--{else}-->{lang admin_select_one_piece}<!--{/if}--></span>
+		<a onclick="{if $_GET[action] == 'stamp'}if ($('threadstamp')) $('threadstamp').innerHTML = oldthreadstamp;{/if}hideWindow('mods')" class="close" title="{lang close}">×</a>
+	</div>
+	<form id="topicadminform" method="post" autocomplete="off" action="forum.php?mod=topicadmin&action=$_GET[action]&modsubmit=yes&infloat=yes&modclick=yes" onsubmit="ajaxpost('topicadminform', 'return_mods', 'return_mods', 'onerror');return false;">
+		<input type="hidden" name="formhash" value="{FORMHASH}" />
+		<input type="hidden" name="fid" value="$_G[fid]">
+		<input type="hidden" name="tid" value="$_G[tid]">
+		<!--{if !empty($_GET['page'])}--><input type="hidden" name="page" value="$_GET['page']" /><!--{/if}-->
+		<!--{if !empty($_GET['infloat'])}--><input type="hidden" name="handlekey" value="$_GET['handlekey']" /><!--{/if}-->
+		<div class="body">
+            <!--{if $_GET[action] == 'delpost'}-->
+                $deleteid
+                <p class="common-tip l"><i class="ft-activity heart-pink"></i>{lang topicadmin_opt}：{lang admin_delposts}</p>
+            <!--{elseif $_GET[action] == 'delcomment'}-->
+                $deleteid
+                <p class="common-tip l"><i class="ft-activity heart-pink"></i>{lang topicadmin_opt}：{lang topicadmin_delet_comment}</p>
+            <!--{elseif $_GET[action] == 'restore'}-->
+                <input type="hidden" name="archiveid" value="$archiveid" />
+                <p class="common-tip l"><i class="ft-activity heart-pink"></i>{lang topicadmin_opt}：{lang admin_threadsplit_restore}</p>
+            <!--{elseif $_GET[action] == 'copy'}-->
+                <p class="common-tip l"><i class="ft-activity heart-pink"></i>{lang topicadmin_opt}：{lang admin_copy_target}</p>
+                <div class="input-box">
+                    <span>{lang admin_target}</span>
+                    <select name="copyto" id="copyto" onchange="ajaxget('forum.php?mod=ajax&action=getthreadtypes&fid=' + this.value, 'threadtypes')">
+                        $forumselect
+                    </select>
+                </div>
+                <div class="input-box">
+                    <span>{lang admin_targettype}</span>
+                    <select id="threadtypes" name="threadtypeid" ><option value="0"></option></select>
+                </div>
+            <!--{elseif $_GET[action] == 'banpost'}-->
+                $banid
+                <p class="common-tip l"><i class="ft-activity heart-pink"></i>{lang topicadmin_opt}：</p>
+                <div class="ccbox" style="line-height: 32px">
+                    <input type="radio" name="banned" id="bany" value="1" $checkban />
+                    <label for="bany">{lang admin_banpost}</label>
+                    <input type="radio" name="banned" id="banx" value="0" $checkunban />
+                    <label for="banx">{lang admin_unbanpost}</label>
+                </div>
+                <!--{if ($modpostsnum == 1 || $authorcount == 1) && $crimenum > 0}-->
+                    <p class="alert hi-warning f">{lang topicadmin_crime_banpost_nums}</p>
+                <!--{/if}-->
+            <!--{elseif $_GET[action] == 'warn'}-->
+                $warnpid
+                <p class="common-tip l"><i class="ft-activity heart-pink"></i>{lang topicadmin_opt}：</p>
+                <div class="ccbox" style="line-height: 32px">
+                    <input type="radio" name="warned" id="warny" value="1" $checkwarn />
+                    <label for="warny">{lang topicadmin_warn_add}</label>
+                    <input type="radio" name="warned" id="warnx" value="0" $checkunwarn />
+                    <label for="warnx">{lang topicadmin_warn_delete}</label>
+                </div>
+                <!--{if ($modpostsnum == 1 || $authorcount == 1) && $authorwarnings > 0}-->
+                    <p class="alert hi-warning f" title="{lang topicadmin_warn_prompt}">{lang topicadmin_warn_nums}</p>
+                <!--{/if}-->
+            <!--{elseif $_GET[action] == 'merge'}-->
+                <p class="common-tip l"><i class="ft-activity heart-pink"></i>{lang topicadmin_opt}：{lang admin_merge}</p>
+                <div class="input-box">
+                    <span>{lang admin_merge_span}</span>
+                    <input type="text" name="othertid" id="othertid" placeholder="{lang admin_merge_tid}"/>
+                </div>
+            <!--{elseif $_GET[action] == 'refund'}-->
+                {lang pay_buyers}：
+                $payment[payers]，
+                {lang pay_author_income}：
+                $payment[income] {$_G[setting][extcredits][$_G['setting']['creditstransextra'][1]][unit]}{$_G[setting][extcredits][$_G['setting']['creditstransextra'][1]][title]}
+            <!--{elseif $_GET[action] == 'split'}-->
+                <p class="common-tip l"><i class="ft-activity heart-pink"></i>{lang topicadmin_opt}：{lang admin_split_action}</p>
+                <div class="input-box">
+                    <span>{lang admin_split_newsubject}</span>
+                    <input type="text" name="subject" id="subject"/>
+                </div>
+                <div class="input-box">
+                    <span>{lang admin_split_comment}</span>
+                    <textarea name="split" id="split">{lang admin_split_comment2}</textarea>
+                </div>
+            <!--{elseif $_GET[action] == 'live'}-->
+                <p class="common-tip l"><i class="ft-activity heart-pink"></i>{lang topicadmin_opt}：</p>
+                <div class="ccbox" style="line-height: 32px">
+                    <input type="radio" name="live" id="livey" value="1" <!--{if $_G[forum][livetid] != $_G[tid]}-->checked<!--{/if}-->/>
+                    <label for="livey">{lang admin_live}</label>
+                    <input type="radio" name="live" id="livex" value="0" <!--{if $_G[forum][livetid] == $_G[tid]}-->checked<!--{/if}-->/>
+                    <label for="livex">{lang admin_live_cancle}</label>
+                </div>
+                <p class="alert hi-info">{lang admin_live_tips}</p>
+            <!--{elseif $_GET[action] == 'stamp'}-->
+                <p class="common-tip l"><i class="ft-activity heart-pink"></i>{lang topicadmin_opt}：</p>
+                <p class="option" style="line-height: 32px">
+                    {lang admin_stamp_select}:
+                    <select name="stamp" id="stamp" onchange="updatestampimg()">
+                        <option value="">{lang admin_stamp_none}</option>
+                        <!--{loop $_G['cache']['stamps'] $stampid $stamp}-->
+                        <!--{if $stamp['type'] == 'stamp'}-->
+                        <option value="$stampid"{if $thread[stamp] == $stampid} selected="selected"{/if}>$stamp[text]</option>
+                        <!--{/if}-->
+                        <!--{/loop}-->
+                    </select>
+                </p>
+                <script type="text/javascript" reload="1">
+                    if($('threadstamp')) {
+                        var oldthreadstamp = $('threadstamp').innerHTML;
+                    }
+                    var stampurls = [];
+                    <!--{loop $_G['cache']['stamps'] $stampid $stamp}-->
+                    stampurls[$stampid] = '$stamp[url]';
+                    <!--{/loop}-->
+                    function updatestampimg() {
+                        if($('threadstamp')) {
+                            $('threadstamp').innerHTML = $('stamp').value ? '<img src="{STATICURL}image/stamp/' + stampurls[$('stamp').value] + '">' : '<img src="{STATICURL}image/common/none.gif">';
+                        }
+                    }
+                </script>
+            <!--{elseif $_GET[action] == 'stamplist'}-->
+                <p class="common-tip l"><i class="ft-activity heart-pink"></i>{lang topicadmin_opt}：</p>
+                <p class="option">
+                    {lang admin_stamplist_select}：
+                    <select name="stamplist" id="stamplist" onchange="updatestamplistimg()">
+                    <!--{if $thread[icon] >= 0}--><option value="$thread[icon]">{lang admin_stamplist_current}</option><!--{/if}-->
+                    <option value="">{lang admin_stamplist_none}</option>
+                    <!--{loop $_G['cache']['stamps'] $stampid $stamp}-->
+                        <!--{if $stamp['type'] == 'stamplist' && $stamp['icon']}-->
+                            <option value="$stampid"{if $thread[icon] == $stampid} selected="selected"{/if}>$stamp[text]</option>
+                        <!--{/if}-->
+                    <!--{/loop}-->
+                    </select>
+                </p>
+                <p style="height:24px; line-height: 24px" id="stamplistprev"></p>
+                <script type="text/javascript" reload="1">
+                    var stampurls = [];
+                    <!--{loop $_G['cache']['stamps'] $stampid $stamp}-->
+                    stampurls[$stampid] = '$stamp[url]';
+                    <!--{/loop}-->
+                    function updatestamplistimg(icon) {
+                        icon = !icon ? $('stamplist').value : icon;
+
+                        if($('stamplistprev')) {
+                            $('stamplistprev').innerHTML = icon && icon >= 0 ? '<img src="{STATICURL}image/stamp/' + stampurls[icon] + '">' : '<img src="{STATICURL}image/common/none.gif">';
+                        }
+                    }
+                    <!--{if $thread[icon]}-->
+                        updatestamplistimg($thread[icon]);
+                    <!--{/if}-->
+                </script>
+            <!--{elseif $_GET[action] == 'stickreply'}-->
+                $stickpid
+                <p class="common-tip l"><i class="ft-activity heart-pink"></i>{lang topicadmin_opt}：</p>
+                <div class="ccbox" style="line-height: 32px">
+                    <input type="radio" name="stickreply" id="stickreplyy" value="1"{if empty($_GET['undo'])} checked="checked"{/if}/>
+                    <label for="stickreplyy">{lang admin_stickreply} </label>
+                    <input type="radio" name="stickreply" id="stickreplyx" value="0"{if !empty($_GET['undo'])} checked="checked"{/if}/>
+                    <label for="stickreplyx">{lang admin_unstickreply} </label>
+                </div>
+            <!--{/if}-->
+            <!--{if $_GET[action] == 'delpost' && $_G['group']['allowbanuser']}-->
+                <!--{if ($modpostsnum == 1 || $authorcount == 1) && $crimenum > 0}-->
+                    <div class="alert hi-warning f">{lang topicadmin_crime_delpost_nums}</div>
+                <!--{/if}-->
+                <hr>
+                <p class="common-tip l"><i class="ft-anchor heart-pink"></i>{lang more_c}：</p>
+                <div class="ccbox" style="line-height: 32px">
+                    <input type="checkbox" name="banuser" id="userban"/>
+                    <label for="userban">{lang topicadmin_banuser}</label>
+                    <input type="checkbox" name="userdelpost" id="userdelpost"/>
+                    <label for="userdelpost">{lang topicadmin_userdelpost}</label>
+                </div>
+            <!--{/if}-->
+            <hr>
+            <div class="common-tip"><i class="ft-clipboard heart-pink"></i>{lang admin_operation_explain}：</div>
+            <textarea name="reason" id="reason" onkeyup="seditor_ctlent(event, '$(\'modsubmit\').click()')"></textarea>
+		</div>
+		<div class="footer ccbox">
+            <input type="checkbox" <!--{if $_GET[action] != 'delpost'}-->disabled<!--{/if}--> name="crimerecord" id="crimerecord"/>
+            <label for="crimerecord">{lang crimerecord}</label>
+			<input type="checkbox" name="sendreasonpm" id="sendreasonpm" {if $_G['group']['reasonpm'] == 2 || $_G['group']['reasonpm'] == 3} checked="checked" disabled="disabled"{/if} />
+			<label for="sendreasonpm">{lang admin_pm}</label>
+			<button class="btn-square" type="submit" name="modsubmit" id="modsubmit" value="ture">{lang confirms}</button>
+		</div>
+	</form>
+</div>
+<script type="text/javascript" reload="1">
+function succeedhandle_mods(locationhref) {
+	<!--{if $_GET[action] == 'delcomment'}-->
+		ajaxget('forum.php?mod=misc&action=commentmore&tid=$_G[tid]&pid=$pid', 'comment_$pid');
+		hideWindow('mods');
+	<!--{elseif $_GET[action] == 'banpost' || $_GET[action] == 'warn'}-->
+		<!--{loop $topiclist $pid}-->
+			ajaxget('forum.php?mod=viewthread&tid=$_G[tid]&viewpid=$pid&modclick=yes', 'post_$pid', 'post_$pid');
+			if($('topiclist_$pid')) {
+				$('modactions').removeChild($('topiclist_$pid'));
+			}
+		<!--{/loop}-->
+		hideWindow('mods');
+		resetmodcount();
+	<!--{else}-->
+		hideWindow('mods');
+		location.href = locationhref;
+	<!--{/if}-->
+}
+</script>
+
+<!--{if empty($_GET['infloat'])}-->
+		</div>
+	</div>
+</div>
+<!--{/if}-->
+<!--{template common/footer}-->

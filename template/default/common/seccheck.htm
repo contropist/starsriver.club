@@ -1,0 +1,13 @@
+<!--{block sectpl}--><sec><sec><!--{/block}-->
+{eval
+	$sechash = !isset($sechash) ? 'S'.($_G['inajax'] ? 'A' : '').$_G['sid'] : $sechash.random(3);
+	$sectpl = str_replace("'", "\'", $sectpl);
+}
+<!--{if $secqaacheck}-->
+	<cite id="secqaa_q$sechash"></cite>
+	<script type="text/javascript" reload="1">updatesecqaa('q$sechash', '$sectpl', '{$_G[basescript]}::{CURMODULE}');</script>
+<!--{/if}-->
+<!--{if $seccodecheck}-->
+	<cite id="seccode_c$sechash"></cite>
+	<script type="text/javascript" reload="1">updateseccode('c$sechash', '$sectpl', '{$_G[basescript]}::{CURMODULE}');</script>
+<!--{/if}-->

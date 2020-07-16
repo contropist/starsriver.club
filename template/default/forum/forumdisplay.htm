@@ -1,0 +1,90 @@
+<!--{template common/header}-->
+<!--{if $_G['forum']['ismoderator']}-->
+	<script type="text/javascript" src="{$_G[setting][jspath]}forum_moderate.js?{VERHASH}"></script>
+<!--{/if}-->
+
+<!--[nest=forumnavtop]--><div id="forumnavtop" class="area"></div><!--[/nest]-->
+
+<div class="plate layout-0">
+	<!--{subtemplate forum/forumdisplay_infonav}-->
+</div>
+<!--{if $subexists && $_G['page'] == 1}-->
+<div class="plate layout-0">
+	<!--{template forum/forumdisplay_subforum}-->
+</div>
+<!--{/if}-->
+
+<div class="plate layout-ad">
+	<!--[nest=gmadlotalpha]-->
+	<div id="gmadlotalpha" class="area"></div>
+	<!--[/nest]-->
+</div>
+
+<!--{if !$subforumonly}-->
+<div class="plate layout-2-type1">
+	<section class="col-1 forum-box">
+		<!--{if $threadmodcount}-->
+		<div class="plate-block">
+				<div class="banner_tip">
+					{lang forum_moderate_unhandled}
+				</div>
+			</div>
+		<!--{/if}-->
+		<!--{if $livethread}-->
+			<div class="plate-block">
+				<!--{subtemplate forum/forumdisplay_livethread}-->
+			</div>
+		<!--{/if}-->
+		<!--{if !empty($_G['forum']['recommendlist'])}-->
+			<div class="plate-block">
+				<div class="thread-recommend">
+					<div class="subtitle icon-glass"><a>{lang forum_recommend}</a></div>
+					<!--{subtemplate forum/recommend}-->
+				</div>
+			</div>
+		<!--{/if}-->
+		<!--{hook/forumdisplay_threadtype_extra}-->
+		<!--{if empty($_G['forum']['sortmode'])}-->
+			<div class="plate-block">
+				<!--{subtemplate forum/forumdisplay_list}-->
+			</div>
+		<!--{else}-->
+			<div class="plate-block">
+				<!--{subtemplate forum/forumdisplay_sort}-->
+			</div>
+		<!--{/if}-->
+		<!--{if $fastpost}-->
+			<div class="plate-block">
+				<!--{template forum/forumdisplay_fastpost}-->
+			</div>
+		<!--{/if}-->
+	</section>
+	<section class="col-2">
+		<!--{hook/forumdisplay_side_top}-->
+		<div class="side_block" onmouseover="showMenu({'ctrlid':this.id, 'pos':'dz'});">
+			<!--{hook/forumdisplay_leftside_top}-->
+			<div id="forumleftside">
+				<!--{subtemplate forum/forumdisplay_side}-->
+			</div>
+			<!--{hook/forumdisplay_leftside_bottom}-->
+		</div>
+		<!--{hook/forumdisplay_side_bottom}-->
+
+		<!--[nest=adlotsip]-->
+			<div id="adlotsip" class="area"></div>
+		<!--[/nest]-->
+	</section>
+</div>
+<!--{/if}-->
+
+<!--[nest=forum_display_bottom]--><div id="forum_display_bottom" class="area"></div><!--[/nest]-->
+
+<!--{if $_G['setting']['threadmaxpages'] > 1 && $page && !$subforumonly}-->
+	<script type="text/javascript">document.onkeyup = function(e){keyPageScroll(e, <!--{if $page > 1}-->1<!--{else}-->0<!--{/if}-->, <!--{if $page < $_G['setting']['threadmaxpages'] && $page < $_G['page_next']}-->1<!--{else}-->0<!--{/if}-->, 'forum.php?mod=forumdisplay&fid={$_G[fid]}&filter={$filter}&orderby={$_GET[orderby]}{$forumdisplayadd[page]}&{$multipage_archive}', $page);}</script>
+<!--{/if}-->
+
+<!--{if empty($_G['forum']['picstyle']) && $_GET['orderby'] == 'lastpost' && empty($_GET['filter']) }-->
+	<script type="text/javascript">checkForumnew_handle = setTimeout(function () {checkForumnew($_G[fid], lasttime);}, checkForumtimeout);</script>
+<!--{/if}-->
+
+<!--{template common/footer}-->

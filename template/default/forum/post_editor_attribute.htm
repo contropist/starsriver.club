@@ -1,0 +1,242 @@
+<div id="post_extra">
+	<ul id="post_ext_nav" onselectstart="return false">
+		<li id="extra_additional_b" onclick="showExtra('extra_additional')">{lang post_additional_options}</li>
+		<!--{if $_GET[action] == 'newthread' || $_GET[action] == 'edit' && $isfirstpost}-->
+            <!--{if ($_GET[action] == 'newthread' && $_G['group']['allowpostrushreply'] && $special != 2) || ($_GET[action] == 'edit' && getstatus($thread['status'], 3))}-->
+                <li id="extra_rushreplyset_b" onclick="showExtra('extra_rushreplyset')">{lang rushreply_thread}</li>
+            <!--{/if}-->
+            <!--{if $_G['group']['allowreplycredit'] && !in_array($special, array(2, 3))}-->
+				<!--{if $_GET[action] == 'newthread'}-->
+					<!--{eval $extcreditstype = $_G['setting']['creditstransextra'][10];}-->
+				<!--{else}-->
+					<!--{eval $extcreditstype = $replycredit_rule['extcreditstype'] ? $replycredit_rule['extcreditstype'] : $_G['setting']['creditstransextra'][10];}-->
+				<!--{/if}-->
+				<!--{eval $userextcredit = getuserprofile('extcredits'.$extcreditstype);}-->
+				<!--{if ($_GET[action] == 'newthread' && $userextcredit > 0) || ($_GET[action] == 'edit' && $isorigauthor && isfirstpost)}-->
+					<li id="extra_replycredit_b" onclick="showExtra('extra_replycredit')">{lang replycredit}</li>
+				<!--{/if}-->
+                <!--{if $_G['group']['allowsetreadperm']}-->
+                    <li id="extra_readperm_b" onclick="showExtra('extra_readperm')">{lang readperm}</li>
+                <!--{/if}-->
+			<!--{/if}-->
+			<!--{if $_G['group']['maxprice'] && !$special}-->
+				<li id="extra_price_b" onclick="showExtra('extra_price')">{lang thread_pricepay}</li>
+			<!--{/if}-->
+			<!--{if $_G['group']['allowposttag']}-->
+				<li id="extra_tag_b" onclick="showExtra('extra_tag')">{lang posttag}</li>
+			<!--{/if}-->
+			<!--{if $_G['group']['allowsetpublishdate'] && ($_GET[action] == 'newthread' || ($_GET[action] == 'edit' && $isfirstpost && $thread['displayorder'] == -4))}-->
+				<li id="extra_pubdate_b" onclick="showExtra('extra_pubdate')">{lang post_timer}</li>
+			<!--{/if}-->
+		<!--{/if}-->
+		<!--{hook/post_attribute_extra}-->
+	</ul>
+
+	<div id="post_ext_c">
+		<div class="tab-container csbox" id="extra_additional_c" style="display: none;">
+            <div class="tab-box">
+                <span>{lang basic_attr}</span>
+                <!--{if $_GET[action] != 'edit'}-->
+                <!--{if $_G['group']['allowanonymous']}-->
+                    <input type="checkbox" name="isanonymous" id="isanonymous" value="1" />
+                    <label for="isanonymous">{lang post_anonymous}</label><!--{/if}-->
+                <!--{else}-->
+                <!--{if $_G['group']['allowanonymous'] || (!$_G['group']['allowanonymous'] && $orig['anonymous'])}-->
+                    <input type="checkbox" name="isanonymous" id="isanonymous" value="1" {if $orig['anonymous']}checked="checked"{/if} />
+                    <label for="isanonymous">{lang post_anonymous}</label><!--{/if}-->
+                <!--{/if}-->
+                <!--{if $_GET[action] == 'newthread' || $_GET[action] == 'edit' && $isfirstpost}-->
+                    <input type="checkbox" name="hiddenreplies" id="hiddenreplies" {if $thread['hiddenreplies']} checked="checked"{/if} value="1">
+                    <label for="hiddenreplies">{lang hiddenreplies}</label>
+                <!--{/if}-->
+                <!--{if $_G['uid'] && ($_GET[action] == 'newthread' || $_GET[action] == 'edit' && $isfirstpost) && $special != 3}-->
+                    <input type="checkbox" name="ordertype" id="ordertype" value="1" $ordertypecheck />
+                    <label for="ordertype">{lang post_descviewdefault}</label>
+                <!--{/if}-->
+                <!--{if ($_GET[action] == 'newthread' || $_GET[action] == 'edit' && $isfirstpost)}-->
+                    <input type="checkbox" name="allownoticeauthor" id="allownoticeauthor" value="1"{if $allownoticeauthor} checked="checked"{/if} />
+                    <label for="allownoticeauthor">{lang post_noticeauthor}</label>
+                <!--{/if}-->
+                <!--{if $_GET[action] != 'edit' && helper_access::check_module('feed') && $_G['forum']['allowfeed']}-->
+                    <input type="checkbox" name="addfeed" id="addfeed" value="1" $addfeedcheck>
+                    <label for="addfeed">{lang addfeed}</label>
+                <!--{/if}-->
+            </div>
+            <div class="tab-box">
+                <span >{lang text_feature}</span>
+                <!--{if ($_G['forum']['allowhtml'] || ($_GET[action] == 'edit' && ($orig['htmlon'] & 1))) && $_G['group']['allowhtml']}-->
+                    <input type="checkbox" name="htmlon" id="htmlon" value="1" $htmloncheck />
+                    <label for="htmlon">{lang post_html}</label>
+                <!--{else}-->
+                    <input type="checkbox" name="htmlon" id="htmlon" value="0" $htmloncheck disabled="disabled" />
+                    <label for="htmlon">{lang post_html}</label>
+                <!--{/if}-->
+                    <input type="checkbox" id="allowimgcode" disabled="disabled"{if $_G['forum']['allowimgcode']} checked="checked"{/if} />
+                    <label for="allowimgcode">{lang post_imgcode}</label>
+                <!--{if $_G['forum']['allowimgcode']}-->
+                    <input type="checkbox" id="allowimgurl" checked="checked" />
+                    <label for="allowimgurl">{lang post_imgurl}</label>
+                <!--{/if}-->
+                    <input type="checkbox" name="parseurloff" id="parseurloff" value="1" $urloffcheck />
+                    <label for="parseurloff">{lang disable}{lang post_parseurl}</label>
+
+                    <input type="checkbox" name="smileyoff" id="smileyoff" value="1" $smileyoffcheck />
+                    <label for="smileyoff">{lang disable}{lang smilies}</label>
+
+                    <!--input type="checkbox" name="bbcodeoff" id="bbcodeoff" value="1" $codeoffcheck /-->
+                    <!--label for="bbcodeoff">{lang disable}{lang discuzcode}</label-->
+                <!--{if $_G['group']['allowimgcontent']}-->
+                    <input type="checkbox" name="imgcontent" id="imgcontent" value="1" $imgcontentcheck onclick="switchEditor(this.checked?0:1);$('e_switchercheck').checked=this.checked;" />
+                    <label for="imgcontent">{lang content_to_pic}</label>
+                <!--{else}-->
+                    <input type="checkbox" name="imgcontent" id="imgcontent" value="0" $imgcontentcheck disabled="disabled"/>
+                    <label for="imgcontent">{lang content_to_pic}</label>
+                <!--{/if}-->
+            </div>
+            <!--{if $_GET[action] == 'newthread' && $_G['forum']['ismoderator'] && ($_G['group']['allowdirectpost'] || !$_G['forum']['modnewposts'])}-->
+                <!--{if $_GET[action] == 'newthread' && $_G['forum']['ismoderator'] && ($_G['group']['allowdirectpost'] || !$_G['forum']['modnewposts']) && ($_G['group']['allowstickthread'] || $_G['group']['allowdigestthread'])}-->
+                <div class="tab-box">
+                    <span>{lang manage_operation}</span>
+                    <!--{if $_G['group']['allowstickthread']}-->
+                        <input type="checkbox" name="sticktopic" id="sticktopic" value="1" $stickcheck />
+                        <label for="sticktopic">{lang post_stick_thread}</label>
+                    <!--{/if}-->
+                    <!--{if $_G['group']['allowdigestthread']}-->
+                        <input type="checkbox" name="addtodigest" id="addtodigest" value="1" $digestcheck />
+                        <label for="addtodigest">{lang post_digest_thread}</label>
+                    <!--{/if}-->
+                </div>
+                <!--{/if}-->
+            <!--{elseif $_GET[action] == 'edit' && $_G['forum_auditstatuson']}-->
+                <div class="tab-box">
+                    <span>{lang manage_operation}</span>
+                    <input type="checkbox" name="audit" id="audit" value="1">
+                    <label for="audit">{lang auditstatuson}</label>
+                </div>
+            <!--{/if}-->
+            <!--{if $_GET[action] == 'edit' && $isorigauthor && ($isfirstpost && $thread['replies'] < 1 || !$isfirstpost) && !$rushreply && $_G['setting']['editperdel']}-->
+                <div class="tab-box">
+                    <span >{lang post_delpost}</span>
+                    <button type="button" class="btn btn-small btn-success px4-radius glass" onclick="deleteThread();">{lang post_delpost}-{lang del_thread_warning}<!--{if $thread[special] == 3}-->, {lang reward_price_back}<!--{/if}--></button>
+                    <input type="hidden" name="delete" id="delete" value="0" />
+                </div>
+            <!--{/if}-->
+		</div>
+
+		<!--{if $_GET[action] == 'newthread' || $_GET[action] == 'edit' && $isfirstpost}-->
+			<!--{if !empty($userextcredit)}-->
+				<div class="tab-container" id="extra_replycredit_c" style="display: none;">
+					{lang replycredit_once}<input style="width: 60px" type="text" name="replycredit_extcredits" id="replycredit_extcredits" value="{if $replycredit_rule['extcredits'] && $thread['replycredit'] > 0}{$replycredit_rule['extcredits']}{else}0{/if}" onkeyup="javascript:getreplycredit();" onblur="extraCheck(0)" />{$_G['setting']['extcredits'][$extcreditstype][unit]}{$_G['setting']['extcredits'][$extcreditstype][title]} {lang replycredit_empty}，
+					{lang replycredit_reward}<input  style="width: 60px"  type="text" name="replycredit_times" id="replycredit_times" value="{if $replycredit_rule['lasttimes']}{$replycredit_rule['lasttimes']}{else}1{/if}" onkeyup="javascript:getreplycredit();"  onblur="extraCheck(0)" />{lang replycredit_time}，
+                    {lang replycredit_member}
+					<select id="replycredit_membertimes" name="replycredit_membertimes">
+					    <!--{eval for($i=1;$i<11;$i++) {;}-->
+                        <option value="$i"{if $replycredit_rule['membertimes'] == $i} selected="selected"{/if}>$i</option>
+                        <!--{eval };}-->
+                    </select>
+                    {lang replycredit_time}， {lang replycredit_rate}
+                    <select id="replycredit_random" name="replycredit_random" class="ps vm">
+					    <!--{eval for($i=100;$i>9;$i=$i-10) {;}-->
+					    <option value="$i"{if $replycredit_rule['random'] == $i} selected="selected"{/if}>$i</option>
+					    <!--{eval };}-->
+					</select>
+                    <hr>
+					<div>
+                        {lang replycredit_total} <em class="text-info" id="replycredit_sum"><!--{if $thread['replycredit']}-->{$thread['replycredit']}<!--{else}-->0<!--{/if}--></em>
+                        {$_G['setting']['extcredits'][$extcreditstype][unit]}{$_G['setting']['extcredits'][$extcreditstype][title]}
+                        <!--{if $thread['replycredit']}-->
+                            <em class="text-info">
+                                ({lang replycredit_however}
+                                {$thread['replycredit']}
+                                {$_G['setting']['extcredits'][$extcreditstype][unit]}{$_G['setting']['extcredits'][$extcreditstype][title]})
+                            </em>
+                        <!--{/if}-->，
+                        {lang you_have}<em class="text-info">$userextcredit {$_G['setting']['extcredits'][$extcreditstype][unit]}{$_G['setting']['extcredits'][$extcreditstype][title]}</em>
+                    </div>
+				</div>
+			<!--{/if}-->
+
+			<!--{if $_G['group']['allowsetreadperm']}-->
+				<div class="tab-container" id="extra_readperm_c" style="display:none">
+                    {lang readperm}
+                    <select name="readperm" id="readperm" style="width:90px" onchange="extraCheck(1)">
+                        <option value="">{lang unlimited}</option>
+                        <!--{loop $_G['cache']['groupreadaccess'] $val}-->
+                            <option value="$val[readaccess]" title="{lang readperm}: $val[readaccess]"{if $thread['readperm'] == $val[readaccess]} selected="selected"{/if}>$val[grouptitle]</option>
+                        <!--{/loop}-->
+                        <option value="255"{if $thread['readperm'] == 255} selected="selected"{/if}>{lang highest_right}</option>
+                    </select>
+                    <span class="text-warning">({lang post_select_usergroup_readacces})</span>
+				</div>
+			<!--{/if}-->
+
+			<!--{if $_G['group']['maxprice'] && !$special}-->
+				<div class="tab-container" id="extra_price_c" style="display:none">
+					{lang price}:
+					<input type="text" id="price" name="price" value="$thread[pricedisplay]" onblur="extraCheck(2)" /> {$_G['setting']['extcredits'][$_G['setting']['creditstransextra'][1]][unit]}{$_G['setting']['extcredits'][$_G['setting']['creditstransextra'][1]][title]}
+					<span class="text-info"> ({lang post_price_comment})</span>
+					<!--{if $_G['group']['maxprice'] && ($_GET[action] == 'newthread' || $_GET[action] == 'edit' && $isfirstpost)}-->
+						<!--{if $_G['setting']['maxincperthread']}--><span class="text-info">{lang post_price_income_comment}</span><!--{/if}-->
+						<!--{if $_G['setting']['maxchargespan']}--><span class="text-info">{lang post_price_charge_comment}<!--{if $_GET[action] == 'edit' && $freechargehours}-->{lang post_price_free_chargehours}<!--{/if}--></span><!--{/if}-->
+					<!--{/if}-->
+				</div>
+			<!--{/if}-->
+
+			<!--{if $_G['group']['allowposttag']}-->
+				<div class="tab-container" id="extra_tag_c" style="display: none">
+                    <div class="tagbox">
+                        <input type="text" id="tags" name="tags" value="$postinfo[tag]" placeholder="{lang posttag_comment}" onblur="extraCheck(4)" />
+                        <a id="clickbutton[]" class="icon-magic-wand  c" onclick="relatekw('-1','-1');doane();" title="{lang auto_keyword}"></a>
+                        <a id="choosetag" class="ft-search s" onclick="showWindow(this.id, 'forum.php?mod=tag', 'get', 0)" title="{lang choosetag}"></a>
+                    </div>
+                    <!--{eval $recent_use_tag = recent_use_tag();}-->
+                    <!--{if $recent_use_tag}-->
+                        {lang recent_use_tag}
+                            <!--{eval $tagi = 0;}-->
+                            <!--{loop $recent_use_tag $var}-->
+                                <!--{if $tagi}-->, <!--{/if}--><a class="text-info" onclick="$('tags').value == '' ? $('tags').value += '$var' : $('tags').value += ',$var'; extraCheck(4); doane();">$var</a>
+                                <!--{eval $tagi++;}-->
+                            <!--{/loop}-->
+                    <!--{/if}-->
+				</div>
+			<!--{/if}-->
+
+			<!--{if ($_GET[action] == 'newthread' && $_G['group']['allowpostrushreply'] && $special != 2) || ($_GET[action] == 'edit' && getstatus($thread['status'], 3))}-->
+				<div class="tab-container" id="extra_rushreplyset_c" style="display: none;">
+					<div class="csbox">
+                        <input type="checkbox" name="rushreply" id="rushreply" value="1" {if $_GET[action] == 'edit' && getstatus($thread['status'], 3)}disabled="disabled" checked="checked"{/if} onclick="extraCheck(3)" />
+                        <label for="rushreply"> {lang rushreply_change}</label>
+                        <div class="time-line">
+                            <input type="text" name="rushreplyfrom" id="rushreplyfrom" onclick="showcalendar(event, this, true)" autocomplete="off" value="$postinfo[rush][starttimefrom]" onkeyup="$('rushreply').checked = true;" placeholder="开始时间" /> ~ <input type="text" onclick="showcalendar(event, this, true)" autocomplete="off" id="rushreplyto" name="rushreplyto" value="$postinfo[rush][starttimeto]" onkeyup="$('rushreply').checked = true;" placeholder="结束时间"/>
+                        </div>
+					</div>
+                    <hr>
+					<div>
+                        <div class="intendbox">
+                            <span>{lang rushreply_rewardfloor}</span><input type="text" name="rewardfloor" id="rewardfloor" value="$postinfo[rush][rewardfloor]" onkeyup="$('rushreply').checked = true;" placeholder="{lang rushreply_rewardfloor_comment}" />
+                        </div>
+                        <div class="intendbox">
+                            <span>{lang stopfloor}</span><input type="text" name="replylimit" id="replylimit" autocomplete="off" value="$postinfo[rush][replylimit]" onkeyup="$('rushreply').checked = true;" placeholder="{lang replylimit}" />
+                        </div>
+                        <div class="intendbox">
+                            <span>{lang rushreply_end}</span><input type="text" name="stopfloor" id="stopfloor" autocomplete="off" value="$postinfo[rush][stopfloor]" onkeyup="$('rushreply').checked = true;" />
+                        </div>
+                        <div class="intendbox">
+                            <span><!--{if $_G['setting']['creditstransextra'][11]}-->{$_G['setting']['extcredits'][$_G['setting']['creditstransextra'][11]][title]}<!--{else}-->{lang credits}<!--{/if}-->{lang min_limit}</span>
+                            <input type="text" name="creditlimit" id="creditlimit" autocomplete="off" value="$postinfo[rush][creditlimit]" onkeyup="$('rushreply').checked = true;" placeholder="{if $_G['setting']['creditstransextra'][11]} ({$_G['setting']['extcredits'][$_G['setting']['creditstransextra'][11]][title]}){else}{lang total_credits}{/if} {lang post_rushreply_credit}"/>
+                        </div>
+					</div>
+				</div>
+			<!--{/if}-->
+			<!--{if $_G['group']['allowsetpublishdate'] && ($_GET[action] == 'newthread' || ($_GET[action] == 'edit' && $isfirstpost && $thread['displayorder'] == -4))}-->
+				<div class="tab-container csbox mager" id="extra_pubdate_c" style="display: none;">
+                    <input type="checkbox" name="cronpublish" onclick="if(this.checked) {$('cronpublishdate').click();doane(event,false);};extraCheck(5);hidenFollowBtn(this.checked);" id="cronpublish" value="true" {if $cronpublish} checked="checked"{/if} />
+					<label for="cronpublish">{lang post_timer}</label>
+					<input type="text" name="cronpublishdate" id="cronpublishdate" onclick="showcalendar(event, this, true, false, false, true);" autocomplete="off" value="{$cronpublishdate}" onchange="if(this.value) $('cronpublish').checked = true;">
+				</div>
+			<!--{/if}-->
+		<!--{/if}-->
+
+		<!--{hook/post_attribute_extra_body}-->
+	</div>
+</div>

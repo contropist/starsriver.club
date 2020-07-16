@@ -1,0 +1,417 @@
+<!--{if $do == 'buy' || $do == 'exit'}-->
+	<!--{template common/header}-->
+	<div class="header">
+		<span class="title-tip" id="return_$_GET[handlekey]"><!--{if $join}-->{lang memcp_usergroups_joinbuy}<!--{else}-->{lang memcp_usergroups_joinexit}<!--{/if}--></span>
+		<!--{if $_G[inajax]}--><a onclick="hideWindow('$_GET['handlekey']');" class="close" title="{lang close}">×</a><!--{/if}-->
+	</div>
+	<form id="buygroupform_{$groupid}" name="buygroupform_{$groupid}" method="post" autocomplete="off" action="home.php?mod=spacecp&ac=usergroup&do=$do&groupid=$groupid" onsubmit="{if !empty($_GET['inajax'])}ajaxpost('buygroupform_{$groupid}', 'return_$_GET['handlekey']', 'return_$_GET['handlekey']', 'onerror');return false;{/if}">
+		<input type="hidden" name="referer" value="{echo dreferer()}" />
+		<input type="hidden" name="buysubmit" value="true" />
+		<input type="hidden" name="gid" value="$_GET[gid]" />
+		<!--{if $_G[inajax]}--><input type="hidden" name="handlekey" value="$_GET[handlekey]" /><!--{/if}-->
+		<input type="hidden" name="formhash" value="{FORMHASH}" />
+		<div class="body" >
+			<!--{if $join}-->
+				<!--{if $group['dailyprice']}-->
+					<div class="alert hi-success">{lang memcp_usergroups_explain}：<!--{if $join}-->{lang memcp_usergroups_join_comment}<!--{else}-->{lang memcp_usergroups_exit_comment}<!--{/if}--></div>
+					<div class="alert hi-warning">
+						{lang memcp_usergroups_dailyprice}$group[dailyprice] {$_G[setting][extcredits][$_G[setting][creditstrans]][unit]}{$_G[setting][extcredits][$_G[setting][creditstrans]][title]}，
+						{lang memcp_usergroups_credit}$usermaxdays {lang days}
+					</div>
+					<hr>
+					<p class="common-tip l"><i class="ft-activity heart-pink"></i>{lang credits_need}{$_G[setting][extcredits][$_G[setting][creditstrans]][title]}：<span id="credits_need"></span></p>
+					<div class="input-box">
+						<span>{lang memcp_usergroups_buy}{lang days_num}</span>
+						<input type="text" name="days" value="$group[minspan]" placeholder="{lang days_num}" onkeyup="change_credits_need(this.value)" />
+					</div>
+				<!--{else}-->
+					<div class="alert hi-success">{lang memcp_usergroups_explain}: {lang memcp_usergroups_free_comment}</div>
+				<!--{/if}-->
+			<!--{else}-->
+				<div class="alert hi-danger">
+					{lang memcp_usergroups_explain}：
+					<!--{if $group[type] != 'special' || $group[system]=='private'}-->
+					{lang memcp_usergroups_admin_exit_comment}
+					<!--{elseif $group['dailyprice']}-->
+					{lang memcp_usergroups_exit_comment}
+					<!--{else}-->
+					{lang memcp_usergroups_open_exit_comment}
+					<!--{/if}-->
+				</div>
+			<!--{/if}-->
+		</div>
+		<div class="footer">
+			<button class="btn-square fullwidth" style="border: none;" type="submit" name="editsubmit_btn" id="editsubmit_btn" value="true">{lang confirms}</button>
+		</div>
+		<script language="javascript">
+			var dailyprice = $group[dailyprice];
+			function change_credits_need(daynum) {
+				if(!isNaN(parseInt(daynum))) {
+					$('credits_need').innerHTML = parseInt(daynum) * dailyprice;
+				} else {
+					$('credits_need').innerHTML = '0';
+				}
+			}
+			change_credits_need($group[minspan]);
+		</script>
+	</form>
+<!--{elseif $do == 'switch'}-->
+	<!--{template common/header}-->
+	<div class="header">
+		<span class="title-tip" id="return_$_GET[handlekey]">{lang memcp_usergroups_switch}</span>
+		<!--{if $_G[inajax]}--><a onclick="hideWindow('$_GET['handlekey']');" class="close" title="{lang close}">×</a><!--{/if}-->
+	</div>
+	<form id="switchgroupform_{$groupid}" name="switchgroupform_{$groupid}" method="post" autocomplete="off" action="home.php?mod=spacecp&ac=usergroup&do=switch&groupid=$groupid" onsubmit="{if !empty($_GET['inajax'])}ajaxpost('switchgroupform_{$groupid}', 'return_$_GET['handlekey']', 'return_$_GET['handlekey']', 'onerror');return false;{/if}">
+		<input type="hidden" name="referer" value="{echo dreferer()}" />
+		<input type="hidden" name="groupsubmit" value="true" />
+		<input type="hidden" name="gid" value="$_GET[gid]" />
+
+		<!--{if $_G[inajax]}--><input type="hidden" name="handlekey" value="$_GET[handlekey]" /><!--{/if}-->
+		<input type="hidden" name="formhash" value="{FORMHASH}" />
+		<div class="body">
+			<div class="align-center pd-20-vertical">
+				<span style="box-shadow:0 2px 10px rgba(0,0,0,.1);font-size: 25px;color: #8a8a8a;padding: 10px 15px;background:#e4e4e4;border-radius: 12px;">$_G[group][grouptitle]</span>
+				<span style="padding: 12px 16px; font-size: 18px;">>>></span>
+				<span style="box-shadow:0 2px 10px rgba(224, 75, 123, 0.63);font-size: 25px; color: #fff;padding: 10px 15px;background: #ff4985;border-radius: 12px;">$group[grouptitle]</span>
+			</div>
+		</div>
+		<div class="footer">
+			<button class="btn-square fullwidth" style="border: none;" type="submit" name="editsubmit_btn" id="editsubmit_btn" value="true">{lang confirms}</button>
+		</div>
+	</form>
+<!--{elseif $do == 'expiry' || $do == 'list'}-->
+	<!--{template home/spacecp_cent_header}-->
+	<div class="plate layout-2-type3 app-profile cloud">
+		<section class="col-1"><!--{template home/spacecp_cent_vnav}--></section>
+		<section class="col-2">
+			<!--{subtemplate home/spacecp_cent_header_userinfo}-->
+			<div class="vessel" id="buy_usergroup" style="overflow: hidden">
+				<!--{hook/spacecp_usergroup_top}-->
+				<!--{template home/spacecp_cent_usergroup_header}-->
+				<p class="v-tip">
+					{lang youhave}$usermoney{$_G[setting][extcredits][$_G[setting][creditstrans]][unit]}{$_G[setting][extcredits][$_G[setting][creditstrans]][title]}，{lang yourusergroup}: {$_G['cache']['usergroups'][$_G[groupid]]['grouptitle']}
+					<!--{if $do == 'expiry'}--><span class="notice">{lang usergroup_expired}</span><!--{/if}-->
+				</p><hr>
+				<!--{hook/spacecp_usergroup_bottom}-->
+				<!--{if $expirylist}-->
+					<table class="dc">
+						<thead>
+							<tr>
+								<td>{lang usergroup}</td>
+								<td>{lang memcp_usergroups_dailyprice}</td>
+								<td>{lang memcp_usergroups_credit}</td>
+								<td>{lang group_expiry_time}</td>
+								<td></td>
+							</tr>
+						</thead>
+						<tbody>
+							<!--{loop $expirylist $groupid $group}-->
+							<tr>
+								<td class="gname"><a class="<!--{if $groupid == $_G['groupid']}-->current icon-sun<!--{/if}-->" href="home.php?mod=spacecp&ac=usergroup&gid=$groupid" target="_blank">$group[grouptitle]</a></td>
+								<td><!--{if $_G['cache']['usergroups'][$groupid]['pubtype'] == 'buy' && $group[dailyprice]}-->$group[dailyprice] {$_G[setting][extcredits][$_G[setting][creditstrans]][unit]}{$_G[setting][extcredits][$_G[setting][creditstrans]][title]}<!--{elseif $_G['cache']['usergroups'][$groupid]['pubtype'] == 'free'}-->{lang free_danger}<!--{else}-->&nbsp;&nbsp;--<!--{/if}--></td>
+								<td><!--{if $group[usermaxdays]}-->$group[usermaxdays] {lang days}<!--{else}-->&nbsp;&nbsp;--<!--{/if}--></td>
+								<td><!--{if $group[time]}-->$group[time]<!--{else}-->&nbsp;&nbsp;--<!--{/if}--></td>
+								<td class="func align-center">
+									<!--{if in_array($groupid, $extgroupids) || $groupid == $_G['groupid']}-->
+										<!--{if $groupid != $_G['groupid']}-->
+											<!--{if !$group[noswitch]}-->
+												<a onclick="showWindow('group', 'home.php?mod=spacecp&ac=usergroup&do=switch&groupid=$groupid&handlekey=switchgrouphk', 'get');" title="{lang memcp_usergroups_set_main}">{lang memcp_usergroups_set_main}</a>
+											<!--{else}-->
+												<a class="hi-fake">{lang coloregg}</a>
+											<!--{/if}-->
+											<!--{if !$group['maingroup']}-->
+												<!--{if $_G['cache']['usergroups'][$groupid]['pubtype'] == 'buy'}-->
+													<a class="hi-cute-dark" onclick="showWindow('group', 'home.php?mod=spacecp&ac=usergroup&do=buy&groupid=$groupid&handlekey=buygrouphk', 'get');" title="{lang renew}">{lang renew}</a>
+												<!--{else}-->
+													<a class="hi-fake">{lang coloregg}</a>
+												<!--{/if}-->
+												<a class="hi-danger-dark" onclick="showWindow('group', 'home.php?mod=spacecp&ac=usergroup&do=exit&groupid=$groupid&handlekey=exitgrouphk', 'get');" title="{lang memcp_usergroups_exit}">{lang memcp_usergroups_exit}</a>
+											<!--{else}-->
+												<a class="hi-fake">{lang coloregg}</a>
+												<a class="hi-fake">{lang coloregg}</a>
+											<!--{/if}-->
+										<!--{else}-->
+											<!--{if $_G['cache']['usergroups'][$groupid]['pubtype'] == 'buy'}-->
+                                                <a class="hi-fake">{lang coloregg}</a>
+												<a class="hi-cute-dark" onclick="showWindow('group', 'home.php?mod=spacecp&ac=usergroup&do=buy&groupid=$groupid&handlekey=buygrouphk', 'get');" title="{lang renew}">{lang renew}</a>
+												<a class="hi-fake">{lang coloregg}</a>
+											<!--{/if}-->
+										<!--{/if}-->
+									<!--{elseif in_array($_G['cache']['usergroups'][$groupid]['pubtype'],['free','buy'])}-->
+										<a class="hi-success-dark" onclick="showWindow('group', 'home.php?mod=spacecp&ac=usergroup&do=buy&groupid=$groupid&handlekey=buygrouphk', 'get');" title="{lang memcp_usergroups_get}">{lang memcp_usergroups_get}</a>
+										<a class="hi-fake">{lang coloregg}</a>
+										<a class="hi-fake">{lang coloregg}</a>
+									<!--{/if}-->
+								</td>
+							</tr>
+							<!--{/loop}-->
+						</tbody>
+					</table>
+				<!--{else}-->
+					<p class="b-tip">{lang memcp_usergroup_unallow}</p>
+				<!--{/if}-->
+			</div>
+		</section>
+	</div>
+<!--{elseif $do == 'forum'}-->
+	<!--{template home/spacecp_cent_header}-->
+	<div class="plate layout-2-type3 app-profile cloud">
+		<section class="col-1"><!--{template home/spacecp_cent_vnav}--></section>
+		<section class="col-2">
+			<!--{subtemplate home/spacecp_cent_header_userinfo}-->
+			<div class="vessel" id="setting_usergroup">
+				<!--{hook/spacecp_usergroup_top}-->
+				<!--{template home/spacecp_cent_usergroup_header}-->
+				<div class="withedge">
+					<table class="dc wb rb table-pm">
+						<thead>
+							<tr class="alt">
+								<td>{lang forum_name}</td>
+								<!--{loop $perms $perm}-->
+								<td style="text-align: center">$permlang['perms_'.$perm]</td>
+								<!--{/loop}-->
+							</tr>
+						</thead>
+						<tbody>
+						<!--{eval $key = 1;}-->
+						<!--{loop $_G['cache']['forums'] $fid $forum}-->
+						<!--{if $forum['status']}-->
+						<tr>
+							<td width="240">$forum[name]</td>
+							<!--{loop $perms $perm}-->
+							<td width="160">
+								<!--{if !empty($verifyperm[$fid][$perm])}-->
+									<!--{if $myverifyperm[$fid][$perm] || $forumperm[$fid][$perm]}-->
+										<img src="{IMGURL}/common/icon/accessed.svg" alt="$verifyperm[$fid][$perm]" />
+									<!--{else}-->
+										<img src="{IMGURL}/common/icon/disabled.svg" alt="$verifyperm[$fid][$perm]"/>
+									<!--{/if}-->
+								<!--{else}-->
+									<!--{if $forumperm[$fid][$perm]}-->
+										<img src="{IMGURL}/common/icon/accessed.svg" alt="data_valid" />
+									<!--{else}-->
+										<img src="{IMGURL}/common/icon/disabled.svg" alt="data_invalid" />
+									<!--{/if}-->
+								<!--{/if}-->
+							</td>
+							<!--{/loop}-->
+						</tr>
+						<!--{/if}-->
+						<!--{/loop}-->
+						</tbody>
+					</table>
+					<!--{if $_G['setting']['verify']['enabled']}-->
+					<!--{echo implode('', $verifyicon)}--> {lang usergroup_right_message3}
+					<!--{/if}-->
+					<!--{hook/spacecp_usergroup_bottom}-->
+				</div>
+			</div>
+		</section>
+	</div>
+<!--{else}-->
+	<!--{template home/spacecp_cent_header}-->
+	<div class="plate layout-2-type3 app-profile cloud">
+		<section class="col-1"><!--{template home/spacecp_cent_vnav}--></section>
+		<section class="col-2">
+			<!--{subtemplate home/spacecp_cent_header_userinfo}-->
+			<div class="vessel" id="setting_usergroup_list">
+				<!--{template home/spacecp_cent_usergroup_header}-->
+				<!--{hook/spacecp_usergroup_top}-->
+				<div style="z-index: 2;width: 160px;border-right: 1px solid #f7f7f7;height: calc(100% - 54px);position: absolute;left: 0;margin: 0;padding: 14px;box-sizing: border-box;text-align:center;">
+					<div class="dropmenu" style="margin:5px 0;z-index:4;">
+						<ul>
+							<li class="active"><a>{lang my_usergroups}</a></li>
+							$usergroups[my]
+						</ul>
+					</div>
+					<div class="dropmenu" style="margin:5px 0;z-index:3;">
+						<ul>
+							<li class="active"><a>{lang usergroup_group1}</a></li>
+							$usergroups[user]
+						</ul>
+					</div>
+					<div class="dropmenu" style="margin:5px 0;z-index:2;">
+						<ul>
+							<li class="active"><a>{lang usergroup_group2}</a></li>
+							$usergroups[upgrade]
+						</ul>
+					</div>
+					<div class="dropmenu" style="margin:5px 0;z-index:1;">
+						<ul>
+							<li class="active"><a>{lang usergroup_group3}</a></li>
+							$usergroups[admin]
+						</ul>
+					</div>
+				</div>
+				<!--{eval $permtype = ['{lang permission_menu_normaloptions}','{lang permission_modoptions_name}'];}-->
+				<div class="withedge" style="z-index:1;width: calc(100% - 200px);float:right;">
+					<div class="compare-table" style="{if !$group}border-right:0;{/if}">
+						<div class="col" style="width:30%;">
+							<div class="head"></div>
+							<ol class="stack">
+								<li>{lang user_level}</li>
+								<!--{loop $bperms $key $perm}-->
+								<li>$permlang['perms_'.$perm]</li>
+								<!--{/loop}-->
+							</ol>
+							<ol class="stack">
+								<li class="subtitle">{lang permission_menu_post}</li>
+								<!--{loop $pperms $key $perm}-->
+								<li>$permlang['perms_'.$perm]</li>
+								<!--{/loop}-->
+							</ol>
+							<ol class="stack">
+								<li class="subtitle">{lang about_space}</li>
+								<!--{loop $sperms $key $perm}-->
+								<li>$permlang['perms_'.$perm]</li>
+								<!--{/loop}-->
+							</ol>
+							<ol class="stack">
+								<li class="subtitle">{lang permission_menu_attachment}</li>
+								<!--{loop $aperms $key $perm}-->
+								<li>$permlang['perms_'.$perm]</li>
+								<!--{/loop}-->
+							</ol>
+						</div>
+						
+						
+						<div class="col highlight">
+							<div class="head">
+								<div class="title">{lang my_main_usergroup} - $maingroup[grouptitle]</div>
+								<div class="extra"><span class="notice">{lang credits}: $space[credits]</span></div>
+							</div>
+							<!--{echo permtbody($maingroup)}-->
+						</div>
+						
+						<!--{if $group}-->
+							<!--{if $switchtype == 'user'}--><!--{eval $cid = 1;$tlang = '{lang usergroup_group1}';}--><!--{/if}-->
+							<!--{if $switchtype == 'upgrade'}--><!--{eval $cid = 2;$tlang = '{lang usergroup_group2}';}--><!--{/if}-->
+							<!--{if $switchtype == 'admin'}--><!--{eval $cid = 3;$tlang = '{lang usergroup_group3}';}--><!--{/if}-->
+							<div class="col">
+								<div class="head">
+									<div class="title">$currentgrouptitle</div>
+									<div class="extra">
+										<!--{if $group['grouptype'] == 'member'}-->
+												<!--{eval $v = $group[groupcreditshigher] - $_G['member']['credits'];}-->
+												<!--{if $_G['group']['grouptype'] == 'member' && $v > 0}-->
+													<span class="notice">{lang spacecp_usergroup_message1} $v</span>
+												<!--{else}-->
+													<span class="notice">{lang spacecp_usergroup_message2} $group[groupcreditshigher]</span>
+												<!--{/if}-->
+										<!--{/if}-->
+										<!--{if array_key_exists($group['groupid'], $groupterms['ext'])}-->
+											<span class="notice">{lang memcp_usergroups_timelimit}: <!--{date($groupterms[ext][$group['groupid']])}--></span>
+										<!--{/if}-->
+										<!--{if isset($publicgroup[$group['groupid']]) && $group['groupid'] != $_G['groupid'] && $publicgroup[$group['groupid']]['allowsetmain']}-->
+											<a class="btn" href="home.php?mod=spacecp&ac=usergroup&do=switch&groupid=$group['groupid']&gid=$_GET[gid]&handlekey=switchgrouphk" class="xw1 xi2" onclick="showWindow('group', this.href, 'get', 0);">{lang memcp_usergroups_set_main}</a>
+										<!--{/if}-->
+										<!--{if in_array($group['groupid'], $extgroupids) && $switchmaingroup && $group['grouptype'] == 'special' && $group['groupid'] != $_G['groupid']}-->
+											<!--{if $_G['cache']['usergroups'][$group['groupid']]['pubtype'] == 'buy'}-->
+												<a class="btn" href="home.php?mod=spacecp&ac=usergroup&do=buy&groupid=$group['groupid']&gid=$_GET[gid]&handlekey=buygrouphk" class="xw1 xi2" onclick="showWindow('group', this.href, 'get', 0);">{lang renew}</a>
+											<!--{/if}-->
+											<a class="btn" href="home.php?mod=spacecp&ac=usergroup&do=exit&groupid=$group['groupid']&gid=$_GET[gid]&handlekey=exitgrouphk" class="xw1 xi2" onclick="showWindow('group', this.href, 'get', 0);">{lang memcp_usergroups_exit}</a>
+										<!--{/if}-->
+										<!--{if $group['grouptype']=='special' && $group['groupid'] != $_G['groupid'] && array_key_exists($group['groupid'], $publicgroup) && !$publicgroup[$group['groupid']]['allowsetmain']}-->
+											<a class="btn" href="home.php?mod=spacecp&ac=usergroup&do=buy&groupid=$group['groupid']&gid=$_GET[gid]&handlekey=buygrouphk" class="xw1 xi2" onclick="showWindow('group', this.href, 'get', 0);">{lang memcp_usergroups_buy}</a>
+										<!--{/if}-->
+									</div>
+								</div>
+								<!--{echo permtbody($group)}-->
+							</div>
+						<!--{/if}-->
+					</div>
+				</div>
+				<!--{hook/spacecp_usergroup_bottom}-->
+			</div>
+		</section>
+	</div>
+<!--{/if}-->
+<!--{template common/footer}-->
+
+{eval
+	function permtbody($maingroup) {
+		global $_G, $bperms, $pperms, $sperms, $aperms;
+}
+<ol class="stack">
+	<li><!--{echo showstars($_G['cache']['usergroups'][$maingroup['groupid']]['stars']);}--></li>
+	<!--{loop $bperms $key $groupbperm}-->
+	<li>
+		<!--{if $groupbperm == 'creditshigher' || $groupbperm == 'readaccess' || $groupbperm == 'maxpmnum'}-->
+		$maingroup[$groupbperm]
+		<!--{elseif $groupbperm == 'allowsearch'}-->
+			<!--{if $maingroup['allowsearch'] == '0'}-->{lang permission_basic_disable_search}<!--{elseif $maingroup['allowsearch'] == '1'}-->
+				{lang permission_basic_search_title}
+			<!--{else}-->
+				{lang permission_basic_search_content}
+			<!--{/if}-->
+		<!--{else}-->
+			<!--{if $maingroup[$groupbperm] >= 1}-->
+				<img src="{IMGURL}/common/icon/accessed.svg" alt="$verifyperm[$fid][$perm]" />
+			<!--{else}-->
+				<img src="{IMGURL}/common/icon/disabled.svg" alt="$verifyperm[$fid][$perm]" />
+			<!--{/if}-->
+		<!--{/if}-->
+	</li>
+	<!--{/loop}-->
+</ol>
+<ol class="stack">
+	<li class="subtitle"> </li>
+	<!--{loop $pperms $key $grouppperm}-->
+	<li>
+		<!--{if in_array($grouppperm, array('maxsigsize', 'maxbiosize'))}-->
+			$maingroup[$grouppperm] {lang bytes}
+		<!--{elseif $grouppperm == 'allowrecommend'}-->
+			<!--{if $maingroup[allowrecommend] > 0}-->+$maingroup[allowrecommend]<!--{else}--><img src="{IMGDIR}/data_invalid.gif" /><!--{/if}-->
+		<!--{elseif in_array($grouppperm, array('allowat', 'allowcreatecollection'))}-->
+			<!--{echo intval($maingroup[$grouppperm])}-->
+		<!--{else}-->
+			<!--{if $maingroup[$grouppperm] == 1 || (in_array($grouppperm, array('raterange', 'allowcommentpost')) && !empty($maingroup[$grouppperm]))}-->
+				<img src="{IMGURL}/common/icon/accessed.svg" alt="$verifyperm[$fid][$perm]" />
+			<!--{else}-->
+				<img src="{IMGURL}/common/icon/disabled.svg" alt="$verifyperm[$fid][$perm]" />
+			<!--{/if}-->
+		<!--{/if}-->
+	</li>
+	<!--{/loop}-->
+</ol>
+<ol class="stack">
+	<li class="subtitle"> </li>
+	<!--{loop $sperms $key $perm}-->
+	<li>
+		<!--{if in_array($perm, array('maxspacesize', 'maximagesize'))}-->
+			<!--{if $maingroup[$perm]}-->$maingroup[$perm]<!--{else}-->{lang permission_attachment_nopermission}<!--{/if}-->
+		<!--{else}-->
+			<!--{if $maingroup[$perm] == 1}-->
+				<img src="{IMGURL}/common/icon/accessed.svg" alt="$verifyperm[$fid][$perm]" />
+			<!--{else}-->
+				<img src="{IMGURL}/common/icon/disabled.svg" alt="$verifyperm[$fid][$perm]" />
+			<!--{/if}-->
+		<!--{/if}-->
+	</li>
+	<!--{/loop}-->
+</ol>
+<ol class="stack">
+	<li class="subtitle"> </li>
+	<!--{loop $aperms $key $groupaperm}-->
+	<li>
+		<!--{if in_array($groupaperm, array('maxattachsize', 'maxsizeperday', 'maxattachnum'))}-->
+			<!--{if $maingroup[$groupaperm]}-->$maingroup[$groupaperm]<!--{else}-->{lang permission_attachment_nopermission}<!--{/if}-->
+		<!--{elseif $groupaperm == 'attachextensions'}-->
+			<!--{if $maingroup[allowpostattach] == 1}-->
+				<!--{if $maingroup[attachextensions]}--><p style="font-size: 12px;line-height: 16px;">$maingroup[attachextensions]</p><!--{else}-->{lang permission_attachment_nopermission}<!--{/if}-->
+			<!--{else}-->
+				<img src="{IMGURL}/common/icon/disabled.svg" alt="$verifyperm[$fid][$perm]" />
+			<!--{/if}-->
+		<!--{else}-->
+			<!--{if $maingroup[$groupaperm] == 1}-->
+				<img src="{IMGURL}/common/icon/accessed.svg" alt="$verifyperm[$fid][$perm]" />
+			<!--{else}-->
+				<img src="{IMGURL}/common/icon/disabled.svg" alt="$verifyperm[$fid][$perm]" />
+			<!--{/if}-->
+		<!--{/if}-->
+	</li>
+	<!--{/loop}-->
+</ol>
+<!--{eval
+}
+}-->

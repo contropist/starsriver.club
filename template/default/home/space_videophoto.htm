@@ -1,0 +1,13 @@
+<!--{eval
+	$_G[home_tpl_titles] = array('{lang videophoto}');
+}-->
+<!--{template common/header}-->
+	<div class="header">
+		<span class="title-tip">{lang video_certification_photo}</span>
+		<!--{if $_G[inajax]}--><a onclick="hideWindow('$_GET['handlekey']');" class="close" title="{lang close}">×</a><!--{/if}-->
+	</div>
+	<div class="c">
+		<p>{lang this_is_certification_photo}</p>
+		<p class="mtm hm"><a href="$videophoto" target="_blank"><img src="$videophoto" alt="{lang video_certification_photo}"></a></p>
+	</div>
+<!--{template common/footer}-->

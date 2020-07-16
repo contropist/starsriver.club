@@ -1,0 +1,20 @@
+<div class="nav">
+	<a $opactives[base] href="home.php?mod=spacecp&ac=credit&op=base">{lang my_credits}</a>
+	<!--{if $_G[setting][ec_ratio] && ($_G[setting][ec_account] || $_G[setting][ec_tenpay_opentrans_chnid] || $_G[setting][ec_tenpay_bargainor]) || $_G['setting']['card']['open']}-->
+	<a $opactives[buy] href="home.php?mod=spacecp&ac=credit&op=buy">{lang buy_credits}</a>
+	<!--{/if}-->
+	<!--{if $_G[setting][transferstatus] && $_G['group']['allowtransfer']}-->
+	<a $opactives[transfer] href="home.php?mod=spacecp&ac=credit&op=transfer">{lang transfer_credits}</a>
+	<!--{/if}-->
+	<!--{if $_G[setting][exchangestatus]}-->
+	<a $opactives[exchange] href="home.php?mod=spacecp&ac=credit&op=exchange">{lang exchange_credits}</a>
+	<!--{/if}-->
+	<a $opactives[log] href="home.php?mod=spacecp&ac=credit&op=log">{lang memcp_credits_log}</a>
+	<a $opactives[rule] href="home.php?mod=spacecp&ac=credit&op=rule">{lang credit_rule}</a>
+	<!--{if !empty($_G['setting']['plugins']['spacecp_credit'])}-->
+	<!--{loop $_G['setting']['plugins']['spacecp_credit'] $id $module}-->
+	<!--{if !$module['adminid'] || ($module['adminid'] && $_G['adminid'] > 0 && $module['adminid'] >= $_G['adminid'])}--><a  class="{if $_GET[id] == $id}active{/if}" href="home.php?mod=spacecp&ac=plugin&op=credit&id=$id">$module[name]</a><!--{/if}-->
+	<!--{/loop}-->
+	<!--{/if}-->
+</div>
+<hr>
