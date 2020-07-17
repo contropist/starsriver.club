@@ -1,3 +1,4 @@
+###二次开发的Discuz程序
 
 	动态部分大体已经完成，部分细节还没有修改。
 	分享部分的模板全部通过语言文件 lang_feed.php -> feed_share***  来实现。
@@ -32,67 +33,7 @@
 			悬浮菜单错位问题。
 			
 		个人页面：
-			还没有开始。
+			详情内容的显示需要进行美化
 			
 		门户及门户管理
 			还没有开始。
-		
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!--{template home/space_home_header}-->
-<!--{if empty($nestmode)}-->
-	<div class="plate layout-0">
-		<!--[nest=nestcontenttop]--><div id="nestcontenttop" class="area"></div><!--[/nest]-->
-	</div>
-	<!--{if $_G[setting][homestyle]}-->
-		<div class="plate layout-3-type2 soft">
-			<section>
-				<!--{subtemplate home/space_home_side_left}-->
-			</section>
-			<section>
-				<!--[nest=nest1]--><div id="nest1" class="area"></div><!--[/nest]-->
-				<!--[nest=nest2]--><div id="nest2" class="area"></div><!--[/nest]-->
-				<!--[nest=nest3]--><div id="nest3" class="area"></div><!--[/nest]-->
-				<!--[nest=nestcontentbottom]--><div id="nestcontentbottom" class="area"></div><!--[/nest]-->
-			</section>
-			<section>
-				<!--{subtemplate home/space_home_side_right}-->
-			</section>
-		</div>
-	<!--{else}-->
-		<div class="please-wait-later">
-			本部件已放弃治疗
-		</div>
-	<!--{/if}-->
-<!--{else}-->
-	<!--{if $_G[setting][homepagestyle]}-->
-		<div class="plate layout-2-type2 soft">
-			<section class="col-1">
-			</section>
-			<section class="col-2">
-				<div class="vessel">
-					<!--{subtemplate home/space_userabout}-->
-				</div>
-			</section>
-		</div>
-	<!--{else}-->
-		<div class="please-wait-later">
-			本部件已放弃治疗
-		</div>
-	<!--{/if}-->
-<!--{/if}-->

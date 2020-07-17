@@ -1,0 +1,26 @@
+<!--{if $list}-->
+    <!--{loop $list $day $value}-->
+        <!--{template home/space_trends_mod_feed}-->
+    <!--{/loop}-->
+<!--{elseif $feeds}-->
+    <!--{loop $feeds $feed}-->
+        <!--{template home/space_trends_mod_feed}-->
+    <!--{/loop}-->
+<!--{else}-->
+    <div class="vessel withedge">
+        <p class="global_nothing">{lang no_feed}</p>
+    </div>
+<!--{/if}-->
+
+<!--{if $filtercount}-->
+<div class="vessel" id="feed_filter_notice_{$start}">
+    {lang depending_your}<a href="home.php?mod=spacecp&ac=privacy&op=filter" target="_blank">{lang filter_settings}</a>,{lang shield_feed_message} (<a onclick="filter_more($start);" id="a_feed_privacy_more">{lang click_view}</a>)
+</div>
+<div class="vessel" id="feed_filter_div_{$start}" style="display:none;">
+    <h4>{lang following_feed_shielding}</h4>
+        <!--{loop $filter_list $value}-->
+        <!--{template home/space_trends_mod_feed}-->
+        <!--{/loop}-->
+       <a onclick="filter_more($start);">&laquo; {lang pack_up}</a>
+</div>
+<!--{/if}-->

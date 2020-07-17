@@ -63,22 +63,8 @@
         </div>
         <div class="mas-viewer-container">
             <!--[nest=nestcontenttop]--><div class="area" id="nestcontenttop"></div><!--[/nest]-->
-
-            <!--{loop $list $day $values}-->
-                <!--{if $_GET['view']!='hot'}-->
-                    <h4 class="et">
-                        <!--{if $day=='yesterday'}-->{lang yesterday}<!--{elseif $day=='today'}-->{lang today}<!--{else}-->$day<!--{/if}-->
-                    </h4>
-                <!--{/if}-->
-
-                <ul class="el">
-                    <!--{loop $values $value}-->
-                        <!--{template home/space_home_mod_feed_li}-->
-                    <!--{/loop}-->
-                </ul>
-            <!--{/loop}-->
+            <!--{subtemplate home/space_home_mod_feed_list}-->
         </div>
-
     </div>
 <!--{/if}-->
 <script type="text/javascript">
