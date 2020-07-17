@@ -1,4 +1,4 @@
-<div class="trans-ease-quick" id="bottommenu" >
+<div id="bottommenu" class="trans-ease-quick">
     <ul class="itemlist ctm awe-reorder pxa-radius pxa-radius-li shadow-3D" >
         <li id="ScrollToTop"><a class="ft-arrow-up" href="#nav"></a ></li >
         <li class="item awe-exchange switchblind" id="blindswitch_btn" >
@@ -49,6 +49,7 @@
     <script >
         jQuery('#ScrollToTop').click(function () {
             jQuery('html,body').animate({scrollTop: '0px'}, 390);
+            jQuery('.mas-viewer').animate({scrollTop: '0px'}, 390);
         });
         var bottomMenu = document.querySelector('#bottommenu');
         var bottomMenuitem = document.querySelectorAll('#bottommenu > .itemlist > li');

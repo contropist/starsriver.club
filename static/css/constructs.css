@@ -747,7 +747,7 @@
      *      <input id='***' name=""/>
      *      <label></label>
      *      //验证码类
-     *      <!--{subtemplate common/seccheck}-->
+     *      <!--{template common/seccheck}-->
      *  </div>
      * label内可使用tooltip作为附加内容展示
      */
@@ -2003,6 +2003,7 @@
         --color-main-theme-shadow: #39c5bb33;
         --color-main-theme-opacity: #39c5bb69;
         --color-orange: #F26C4F;
+        --color-dark: #393939;
         --color-gray: #AAAAAA;
         --color-lightgray: rgba(0,0,0,.05);
         --color-slightgray: rgba(0,0,0,.1);
@@ -2634,7 +2635,7 @@
         right: 0;
         z-index: 0;
         transition: .1s .03s ease-in-out;
-        background-color: #f4f5f7;
+        background-color: #f9f9f9;
     }
     body[class*='WL-'] .Mas .mas-guide,
     body[class*='WL-'] .Mas .mas-viewer{
@@ -2953,6 +2954,12 @@
 
     .Mas.edge .mas-viewer{
         width: calc(100% - var(--width-mas-guide));
+    }
+    .Mas.edge .mas-viewer .mas-viewer-header{
+        width: 100%;
+    }
+    .Mas.edge .mas-viewer .mas-viewer-container{
+        width: 100%;
         padding: 0 10px;
     }
 

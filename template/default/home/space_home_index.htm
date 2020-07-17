@@ -1,7 +1,10 @@
 <!--{template home/space_home_header}-->
 
 <div class="mas-viewer">
-    <div class="area" id="nestpage" >
+    <div class="mas-viewer-header">
+        <!--{template home/space_home_userabout}-->
+    </div>
+    <div class="mas-viewer-container" id="nestpage" >
         <div class="frame cl" id="frame1" noedit="1" >
             <div class="z column" id="frame1_left" style="width:{$widths[0]}px" >
                 <!--{if empty($leftlist)}-->
@@ -46,18 +49,18 @@
         </div >
     </div >
 </div >
-<script type="text/javascript" >
+<script type="text/javascript">
     function succeedhandle_followmod(url, msg, values) {
-        var fObj = $('followmod');
-        if (values['type'] === 'add') {
-            fObj.innerHTML = '取消关注';
-            fObj.className = 'flw_btn_unfo';
-            fObj.href = 'home.php?mod=spacecp&ac=follow&op=del&fuid=' + values['fuid'];
-        } else if (values['type'] === 'del') {
-            fObj.innerHTML = '关注TA';
-            fObj.className = 'flw_btn_fo';
-            fObj.href = 'home.php?mod=spacecp&ac=follow&op=add&hash={FORMHASH}&fuid=' + values['fuid'];
+        var fObj = SR('#followmod')[0];
+        if(values['type'] === 'add') {
+            fObj.innerHTML = '{lang follow_added}';
+            fObj.addClass('active');
+            fObj.href = 'home.php?mod=spacecp&ac=follow&op=del&fuid='+values['fuid'];
+        } else if(values['type'] === 'del') {
+            fObj.innerHTML = '{lang follow_add}TA';
+            fObj.delClass('active');
+            fObj.href = 'home.php?mod=spacecp&ac=follow&op=add&hash={FORMHASH}&fuid='+values['fuid'];
         }
     }
-</script >
+</script>
 <!--{template common/footer}-->

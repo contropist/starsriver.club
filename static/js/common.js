@@ -1167,7 +1167,7 @@ function showDialog(msg, mode, t, func, cover, funccancel, leftmsg, confirmtxt, 
 	} catch(e) {}
 }
 
-function showWindow(k, url, mode, cache, menuv) {
+function showWindow(k, url, mode = false, cache, menuv) {
 	mode = isUndefined(mode) ? 'get' : mode;
 	cache = isUndefined(cache) ? 1 : cache;
 	var menuid = 'fwin_' + k;

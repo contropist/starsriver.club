@@ -12,8 +12,9 @@ if (!defined('IN_DISCUZ')) {
 }
 
 if (!$_G['uid'] && $_G['setting']['privacy']['view']['home']) {
-    showmessage('home_no_privilege', '', [], array('login' => true));
+    showmessage('home_no_privilege', '', [], ['login' => true]);
 }
+
 require_once libfile('function/feed');
 
 if (empty($_G['setting']['feedhotday'])) {
@@ -34,7 +35,7 @@ if (empty($_GET['view'])) {
     } else {
         $_GET['view'] = 'all';
     }
-} elseif (!in_array($_GET['view'], array('we', 'me', 'all', 'app'))) {
+} elseif (!in_array($_GET['view'], ['we', 'me', 'all', 'app'])) {
     $_GET['view'] = 'all';
 }
 if (empty($_GET['order'])) {
@@ -57,8 +58,19 @@ ckstart($start, $perpage);
 
 $_G['home_today'] = $_G['timestamp'] - ($_G['timestamp'] + $_G['setting']['timeoffset'] * 3600) % 86400;
 
-$gets = array('mod' => 'space', 'uid' => $space['uid'], 'do' => 'home', 'view' => $_GET['view'], 'order' => $_GET['order'], 'appid' => $_GET['appid'], 'type' => $_GET['type'], 'icon' => $_GET['icon']);
+$gets = [
+    'mod' => 'space',
+    'uid' => $space['uid'],
+    'do' => 'home',
+    'view' => $_GET['view'],
+    'order' => $_GET['order'],
+    'appid' => $_GET['appid'],
+    'type' => $_GET['type'],
+    'icon' => $_GET['icon']
+];
+
 $theurl = 'home.php?' . url_implode($gets);
+
 if (!IS_ROBOT) {
     $feeds = $feed_list = $user_list = $filter_list = $list = $magic = [];
 
@@ -123,13 +135,18 @@ if (!IS_ROBOT) {
         $icon = empty($_GET['icon']) ? '' : trim($_GET['icon']);
 
         $feed_list = $appfeed_list = $hiddenfeed_list = $filter_list = $hiddenfeed_num = $icon_num = [];
-        $feed_list = C::t('home_feed_app')->fetch_all_by_uid_icon($uids, $icon, $start, $perpage);
+
+        $feed_list = C::t('home_feed_app')->fetch_all_by_uid_icon(1, $icon, $start, $perpage);
+
+        var_dump($feed_list);
+
         $count = count($feed_list);
 
         $multi = simplepage($count, $perpage, $page, $theurl);
         require_once libfile('function/feed');
 
         $list = [];
+
         foreach ($feed_list as $value) {
             $nowcount = 0;
             $value = mkfeed($value);
@@ -139,8 +156,9 @@ if (!IS_ROBOT) {
             }
             $list[] = $value;
         }
+
         $need_count = false;
-        $typeactives = array($_GET['type'] => ' class="active"');
+        $typeactives = [$_GET['type'] => ' class="active"'];
 
     } else {
 

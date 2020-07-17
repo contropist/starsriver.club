@@ -1093,7 +1093,7 @@
         width: 70px;
     }
 
-    .avatar img{
+    .avatar .avatar-main{
         display: block;
         margin: 0 auto;
         border-radius: 500px;
@@ -1349,7 +1349,7 @@
         padding: 0;
     }
 
-    .wctrl-index [id*="mod_notes"] .adminnote .avatar img{
+    .wctrl-index [id*="mod_notes"] .adminnote .avatar .avatar-main{
         position: relative;
     }
 

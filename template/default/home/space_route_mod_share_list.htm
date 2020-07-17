@@ -40,7 +40,10 @@
 <!--{else}-->
     <!--{template home/space_home_header}-->
     <div class="mas-viewer">
-        <section class="col-1">
+        <div class="mas-viewer-header">
+            <!--{subtemplate home/space_home_userabout}-->
+        </div>
+        <div class="mas-viewer-container">
             <!--{if helper_access::check_module('share') && $space[self]}-->
                 <!--{template home/space_home_mod_share_form}-->
             <!--{/if}-->
@@ -62,12 +65,7 @@
                     <p class="global_nothing">{lang global_nothing}</p>
                 </div>
             <!--{/if}-->
-        </section>
-        <section class="col-2">
-            <div class="vessel">
-                <!--{subtemplate home/space_home_userabout}-->
-            </div>
-        </section>
+        </div>
     </div>
 <!--{/if}-->
 <script type="text/javascript">

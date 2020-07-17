@@ -31,16 +31,14 @@
 <!--{else}-->
     <!--{subtemplate home/space_home_header}-->
     <div class="mas-viewer">
-        <!--{hook/follow_top}-->
-        <section class="col-1">
+        <div class="mas-viewer-header">
+            <!--{hook/follow_top}-->
+            <!--{subtemplate home/space_home_userabout}-->
+        </div>
+        <div class="mas-viewer-container">
             <!--{template home/space_home_mod_follow_feed_form}-->
             <!--{template home/space_home_mod_follow_feed_list}-->
-        </section>
-        <section class="col-2">
-            <div class="vessel">
-                <!--{subtemplate home/space_home_userabout}-->
-            </div>
-        </section>
+        </div>
     </div>
 <!--{/if}-->
 

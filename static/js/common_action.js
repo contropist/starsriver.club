@@ -200,6 +200,9 @@
 /***********\
     Tool    |
 \***********/
+    function SR(obj) {
+        return document.querySelectorAll(obj)
+    }
     function addEvent(obj, evt, func) {
         if(obj.addEventListener) {
             obj.addEventListener(evt, func, false);

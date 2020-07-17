@@ -56,20 +56,29 @@
     </div>
 <!--{else}-->
     <!--{template home/space_home_header}-->
-    <!--[nest=nest1]--><div id="nest1" class="area"></div><!--[/nest]-->
     <div class="mas-viewer">
-        <section class="col-1">
-            <!--{if $space['uid'] && $space[self]}-->
-                <!--{template home/space_status}-->
-            <!--{/if}-->
+        <div class="mas-viewer-header">
+            <!--{template home/space_home_userabout}-->
+            <!--[nest=nest1]--><div id="nest1" class="area"></div><!--[/nest]-->
+        </div>
+        <div class="mas-viewer-container">
             <!--[nest=nestcontenttop]--><div class="area" id="nestcontenttop"></div><!--[/nest]-->
-            <!--{subtemplate home/space_home_mod_feed_list}-->
-        </section>
-        <section class="col-2">
-            <div class="vessel">
-                <!--{subtemplate home/space_home_userabout}-->
-            </div>
-        </section>
+
+            <!--{loop $list $day $values}-->
+                <!--{if $_GET['view']!='hot'}-->
+                    <h4 class="et">
+                        <!--{if $day=='yesterday'}-->{lang yesterday}<!--{elseif $day=='today'}-->{lang today}<!--{else}-->$day<!--{/if}-->
+                    </h4>
+                <!--{/if}-->
+
+                <ul class="el">
+                    <!--{loop $values $value}-->
+                        <!--{template home/space_home_mod_feed_li}-->
+                    <!--{/loop}-->
+                </ul>
+            <!--{/loop}-->
+        </div>
+
     </div>
 <!--{/if}-->
 <script type="text/javascript">

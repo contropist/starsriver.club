@@ -485,7 +485,6 @@ function getuserdefaultnest() {
 					'frame`frame1' => array(
 							'attr' => array('name'=>'frame1'),
 							'column`frame1_left' => array(
-									'block`profile' => array('attr' => array('name'=>'profile')),
 									'block`statistic' => array('attr' => array('name'=>'statistic')),
 									'block`album' => array('attr' => array('name'=>'album')),
 									'block`doing' => array('attr' => array('name'=>'doing'))

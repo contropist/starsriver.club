@@ -84,7 +84,11 @@
 <!--{else}-->
     <!--{template home/space_home_header}-->
     <div class="mas-viewer">
-        <section class="col-1">
+        <div class="mas-viewer-header">
+            <!--{subtemplate home/space_home_userabout}-->
+            <!--[nest=nest3]--><div id="nest3" class="area"></div><!--[/nest]-->
+        </div>
+        <div class="mas-viewer-container">
             <!--{if $count}-->
                 <!--{loop $list $k $value}-->
                     <div class="vessel withedge">
@@ -104,13 +108,7 @@
                     <div class="global_nothing">{lang global_nothing}</div>
                 </div>
             <!--{/if}-->
-        </section>
-        <section class="col-2">
-            <div class="vessel">
-                <!--{subtemplate home/space_home_userabout}-->
-                <!--[nest=nest3]--><div id="nest3" class="area"></div><!--[/nest]-->
-            </div>
-        </section>
+        </div>
         <!--[nest=nest1]--><div id="nest1" class="area"></div><!--[/nest]-->
     </div>
 <!--{/if}-->
