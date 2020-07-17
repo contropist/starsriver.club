@@ -792,15 +792,15 @@
         }
 
         .table-container table thead {
-            line-height: 42px;
+            line-height: 18px;
         }
 
         .table-container table tbody {
-            line-height: 32px;
+            line-height: 14px;
         }
 
         .table-container table td {
-            padding: 0 15px;
+            padding: 12px 15px;
             color: #5d6c82;
             font-size: 13px;
         }

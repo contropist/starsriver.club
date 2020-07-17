@@ -59,7 +59,7 @@ function friend_check($touids, $isfull = 0) {
 			$fvar = "home_friend_{$touid}_{$_G['uid']}";
 			$_G[$var] = $_G[$fvar] = true;
 			if($isfull) {
-				$fvarinfo = "home_friend_info_{$touid}_{$_G['uid']}";
+				$fvarinfo = "friend_info_{$touid}_{$_G['uid']}";
 				$_G[$fvarinfo] = $value;
 			}
 		}
@@ -79,7 +79,7 @@ function friend_check($touids, $isfull = 0) {
 			if($friend) {
 				$_G[$var] = $_G[$fvar] = true;
 				if($isfull) {
-					$fvarinfo = "home_friend_info_{$touid}_{$_G['uid']}";
+					$fvarinfo = "friend_info_{$touid}_{$_G['uid']}";
 					$_G[$fvarinfo] = $friend;
 				}
 			} else {

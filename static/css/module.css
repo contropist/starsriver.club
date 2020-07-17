@@ -5227,8 +5227,7 @@
         margin: 0 !important;
     }
     .app-modcp table thead{
-        height:42px;
-        line-height: 42px;
+        line-height: 28px;
     }
     .app-modcp table tbody tr td a{
         overflow: hidden;
@@ -6752,7 +6751,6 @@
     .app-userspace .space-head{
         position: relative;
         box-shadow: 0 0 3px rgba(0,0,0,.1);
-        margin-bottom: 10px;
     }
     .app-userspace .space-head > .banner{
         position: relative;
@@ -6918,6 +6916,110 @@
     }
     .app-userspace .space-head > .bank .btn-group a .tooltip{
         left: -10px !important;
+    }
+
+    .app-userspace #userspace_profile{
+        --box-border-color:  rgba(115, 115, 115,  .1);
+        --box-padding:  15px;
+    }
+    .app-userspace #userspace_profile .panel .box{
+        background: #fff;
+        border-radius: 5px;
+        border: 1px solid var(--box-border-color);
+        padding: 0 !important;
+        height: 260px;
+    }
+    .app-userspace #userspace_profile .panel .box > span{
+        display: block;
+        font-size: 15px;
+        color: var(--color-dark);
+        line-height: 39px;
+        border-bottom: 1px solid var(--box-border-color);
+        padding: 0 16px;
+    }
+    .app-userspace #userspace_profile .panel .box > span::before{
+        display: inline-block;
+        content: '';
+        width: 7px;
+        height: 14px;
+        background: var(--color-miku-green);
+        vertical-align: top;
+        margin: 13px 5px 12px 0;
+        border-radius: 3px;
+    }
+    .app-userspace #userspace_profile .panel .box > span a{
+        display: inline-block;
+        border: none;
+        color: var(--color-text-info);
+        margin: 0 5px;
+        font-size: 18px;
+    }
+    .app-userspace #userspace_profile .panel .box > div{
+        max-height: 210px;
+        overflow: auto;
+        box-sizing: border-box;
+    }
+    .app-userspace #userspace_profile .panel .box  * {
+        font-size: 13px;
+    }
+    .app-userspace #userspace_profile .panel .box  a {
+        color: var(--color-text-danger);
+        border-bottom: 1px dashed;
+        vertical-align: middle;
+        line-height: 13px;
+    }
+    .app-userspace #userspace_profile .panel .box .info-text{
+        display: inline-block;
+        padding: calc(var(--box-padding) / 2) var(--box-padding);
+
+    }
+    .app-userspace #userspace_profile .panel .box .info-text li{
+        display: block;
+        line-height: 24px;
+    }
+    .app-userspace #userspace_profile .panel .box .info-text li em{
+        color: var(--color-text-gray);
+    }
+    .app-userspace #userspace_profile .panel .box .info-text li s{
+        color: var(--color-text-info);
+    }
+    .app-userspace #userspace_profile .panel .box .info-text li i{
+        color: inherit;
+        border-bottom: 1px dashed;
+    }
+    .app-userspace #userspace_profile .panel .box .info-mix.medal li{
+        --li-padding-bottom: 10px;
+        --li-padding-left: 15px;
+        --li-icon-size: 36px;
+        padding: var(--li-padding-bottom) var(--li-padding-left);
+        position: relative;
+    }
+    .app-userspace #userspace_profile .panel .box .info-mix.medal li i{
+        width: var(--li-icon-size);
+        height: var(--li-icon-size);
+        text-align: center;
+        display: inline-block;
+    }
+    .app-userspace #userspace_profile .panel .box .info-mix.medal li em{
+        color: var(--color-text-info);
+    }
+    .app-userspace #userspace_profile .panel .box .info-mix.medal li s{
+        color: var(--color-text-gray);
+        position: absolute;
+        bottom: var(--li-padding-bottom);
+        left: calc(var(--li-padding-left) + var(--li-icon-size) + 5px);
+        white-space: nowrap;
+        width: calc(100% - 2 * var(--li-padding-left) - var(--li-icon-size));
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    .app-userspace #userspace_profile .panel .box .no-info{
+        width: 100%;
+        text-align: center;
+        display: block;
+        line-height: 200px;
+        color: var(--color-gray);
+        font-size: 12px;
     }
 
 /*endregion*/
