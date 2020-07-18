@@ -44,10 +44,6 @@ function dealHandle(msg) {
 	if (msg['cloudApiIp']) {
 		cloudApiIp = msg['cloudApiIp'];
 	}
-
-	if (msg['manyouUpdateTips']) {
-		$('manyou_update_tips').innerHTML = msg['manyouUpdateTips'];
-	}
 }
 
 function expiration() {

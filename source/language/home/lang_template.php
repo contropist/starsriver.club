@@ -440,7 +440,6 @@ $lang = [
     'expansion_friend_message' => '你可以购买道具“{$_G[setting][magics][friendnum]}”来扩容，让自己可以添加更多的好友 ',
     'friend_editnote' => '备注',
     'friend_list' => '好友列表',
-    'friend_manyou_message' => '将好友关系同步至Manyou平台，以便在应用里看到他们',
     'friend_message' => '按照<a href="home.php?mod=space&do=friend&order=num" class="xw1" onmouseover="showTip(this)" tip="好友热度是系统根据你与好友之间交互的动作自动累计的一个参考值，数值越大，表示你与这位好友互动越频繁">好友热度</a>排序',
     'friends' => '好友',
     'ignore_group_feed' => '屏蔽用户组动态',

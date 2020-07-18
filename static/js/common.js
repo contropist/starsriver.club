@@ -1711,10 +1711,6 @@ function showForummenu(fid) {
 	$F('_showForummenu', arguments);
 }
 
-function showUserApp() {
-	$F('_showUserApp', arguments);
-}
-
 function cardInit() {
 	var cardShow = function (obj) {
 		pos = obj.getAttribute('c') == '1' ? '43' : obj.getAttribute('c');

@@ -6948,31 +6948,6 @@ $lang = array(
     'category_area'    => '地区管理',
     'category_counter' => '统计数据',
 
-    'setting_manyou'                              => 'Manyou 设置',
-    'setting_manyou_tips'                         => '<li>开启漫游应用功能后，用户可以自由选择各种不同的应用(诸如开心农场、快乐庄园、德克萨斯扑克、荣光医院......)在站内进行使用。</li>
-		<li>开启漫游搜索功能后，用户可以使用基于漫游的搜索功能。</li>
-		<li>如果你更改了站点地址、站点名称等信息，请选择"同步漫游信息"提交即可。</li>
-		<li>漫游功能由 <a target="_blank" href="http://www.manyou.com/www/">MYOP开放平台</a> 提供， Manyou Open Platform(Manyou开放平台/MYOP)服务是由 Discuz 公司为应用开发者提供的开放平台，启用漫游服务前，<a href="http://wiki.developer.manyou.com/wiki/index.php?title=MYOP%E7%BD%91%E7%AB%99%E6%9C%8D%E5%8A%A1%E5%8D%8F%E8%AE%AE&printable=yes" target="_blank">请先阅读MYOP网站服务协议</a></li>',
-    'setting_manyou_base'                         => '基本设置',
-    'setting_manyou_base_status'                  => '启用漫游应用',
-    'setting_manyou_base_status_comment'          => '选择是否开启漫游应用。如果关闭漫游应用，你的网站用户将不能使用任何基于漫游的应用',
-    'setting_manyou_search_status'                => '启用漫游搜索',
-    'setting_manyou_search_status_comment'        => '漫游搜索是专为 Discuz! 产品量身定做的高效、全文搜索服务，无须网站的 MySQL 资源',
-    'setting_manyou_search_invite'                => '漫游搜索邀请码',
-    'setting_manyou_search_invite_comment'        => '目前处于测试阶段，需要输入邀请码方可开通漫游搜索，<a href="http://www.discuz.net/thread-1669366-1-1.html" target="_blank">点击这里申请邀请码</a>',
-    'setting_manyou_base_status_no'               => '尚未开启漫游功能，不能进行此管理',
-    'setting_manyou_base_ip'                      => 'MYOP/搜索的 IP',
-    'setting_manyou_base_ip_comment'              => '默认为空。如果你的服务器因 DNS 解析问题无法使用MYOP/搜索服务，请填写 MYOP 的 IP 地址。<a href="http://faq.Discuz.com/viewnews-400" target="_blank">查看 MYOP 的 IP</a>',
-    'setting_manyou_base_close_prompt'            => '关闭 MYOP 的更新提示',
-    'setting_manyou_base_close_prompt_comment'    => '你的站点开启了 MYOP 多应用服务后，当平台有了新的信息的时候 MYOP 会自动提示给管理员。关闭本功能后，你将不再获取更新提示',
-    'setting_manyou_base_open_app_prompt'         => '开启漫游应用公告',
-    'setting_manyou_base_open_app_prompt_comment' => '当平台有了新的应用公告时，用户打开浏览器的时候会弹出窗口提示，类似漫游应用更新提示',
-    'setting_manyou_base_refresh'                 => '同步漫游信息',
-    'setting_manyou_base_refresh_comment'         => '如果更改了导航名称、搜索设置等，请同步漫游信息',
-    'setting_manyou_base_showgift_comment'        => '如果你开启了 MYOP 平台的礼物应用后，可以在首页显示“推荐礼物”',
-    'setting_manyou_manage'                       => '漫游应用管理',
-    'setting_manyou_search_manage'                => '漫游搜索管理',
-
     'connect_menu_setting'               => '基本设置',
     'connect_menu_stat'                  => '数据统计',
     'connect_setting_allow'              => '开启QQ注册/绑定/登录服务',
