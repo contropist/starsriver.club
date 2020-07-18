@@ -193,7 +193,6 @@ $lang = array (
     'image_does_not_exist' => '抱歉，指定的图片不存在',
     'showcredit_error' => '抱歉，填写的数字需要大于0，并且小于你的积分数，请确认',
     'usergroup_not_found' => '用户组未找到',
-    'no_open_videophoto' => '站点已关闭视频认证功能',
     'admin_nopermission' => '抱歉，你没有权限使用管理功能',
     'postcomment_not_found' => '回复评论未找到',
     'special_noaction' => '无法操作特殊文章',
@@ -1005,7 +1004,6 @@ $lang = array (
     'post_message_tooshort' => '抱歉，你的回复小于 {minpostsize} 个字符的限制',
 
     'no_privilege_realname' => '抱歉，你需要填写姓名后才能进行当前操作，<a href="home.php?mod=spacecp&ac=profile">点击这里设置姓名</a>',
-    'no_privilege_videophoto' => '抱歉，你需要视频认证通过后才能进行当前操作，<a href="home.php?mod=spacecp&ac=videophoto">点击这里进行视频认证</a>',
 
     'threadtype_required_invalid' => '抱歉，资料填写不全，请检查 {typetitle} 选项',
     'threadtype_format_invalid' => '抱歉，资料格式不正确，请检查 {typetitle} 选项',

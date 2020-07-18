@@ -14,7 +14,7 @@ if (!defined('IN_DISCUZ')) {
 require_once libfile('function/spacecp');
 require_once libfile('function/magic');
 
-$acs = array('doing', 'upload', 'comment', 'blog', 'album', 'common', 'class', 'swfupload', 'poke', 'friend', 'eccredit', 'favorite', 'follow', 'avatar', 'profile', 'theme', 'feed', 'privacy', 'pm', 'share', 'invite', 'sendmail', 'credit', 'usergroup', 'domain', 'click', 'magic', 'top', 'videophoto', 'index', 'plugin', 'search', 'promotion');
+$acs = array('doing', 'upload', 'comment', 'blog', 'album', 'common', 'class', 'swfupload', 'poke', 'friend', 'eccredit', 'favorite', 'follow', 'avatar', 'profile', 'theme', 'feed', 'privacy', 'pm', 'share', 'invite', 'sendmail', 'credit', 'usergroup', 'domain', 'click', 'magic', 'top', 'index', 'plugin', 'search', 'promotion');
 
 $_GET['ac'] = $ac = (empty($_GET['ac']) || !in_array($_GET['ac'], $acs)) ? 'profile' : $_GET['ac'];
 $op = empty($_GET['op']) ? '' : $_GET['op'];

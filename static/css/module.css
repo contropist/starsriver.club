@@ -6921,7 +6921,7 @@
         position: fixed;
         z-index: 2;
         top: 0;
-        box-shadow: 0 0 3px rgba(0,0,0,.1);
+        box-shadow: 0 0 5px rgba(0,0,0,.2);
         padding: 11px 20px;
         transform: translate(0, -120%);
         transition: .2s ease-in-out;

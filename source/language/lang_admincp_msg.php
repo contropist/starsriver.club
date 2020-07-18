@@ -112,6 +112,7 @@ $lang = array(
     'usergroups_copy_source_invalid'                => '你没有选择源用户组',
     'members_verify_succeed'                        => '资料审核成功 ',
     'members_verify_update_succeed'                 => '认证设置更新成功 ',
+    'members_verify_update_error'                   => '认证设置发生错误 ',
     'action_noaccess'                               => '抱歉，你无权使用此功能',
     'members_delete_confirm'                        => '本操作不可恢复，你确定要删除符合条件的 {membernum} 个用户吗？',
     'cloudaddons_check_write_error'                 => '"data/download/" 或 "data/addonmd5/" 目录无法创建或写入，这将会导致应用无法安装，请检查服务器环境',

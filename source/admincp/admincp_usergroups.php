@@ -863,8 +863,6 @@ EOT;
 		showsetting('usergroups_edit_home_allow_click', 'allowclicknew', $group['allowclick'], 'radio');
 		showsetting('usergroups_edit_home_allow_comment', 'allowcommentnew', $group['allowcomment'], 'radio');
 		showsetting('usergroups_edit_home_allow_myop', 'allowmyopnew', $group['allowmyop'], 'radio');
-		showsetting('usergroups_edit_home_allow_video_photo_ignore', 'videophotoignorenew', $group['videophotoignore'], 'radio');
-		showsetting('usergroups_edit_home_allow_view_video_photo', 'allowviewvideophotonew', $group['allowviewvideophoto'], 'radio');
 		showsetting('usergroups_edit_home_allow_space_nest_html', 'allowspacenesthtmlnew', $group['allowspacenesthtml'], 'radio');
 		showsetting('usergroups_edit_home_allow_space_nest_bbcode', 'allowspacenestbbcodenew', $group['allowspacenestbbcode'], 'radio');
 		showsetting('usergroups_edit_home_allow_space_nest_imgcode', 'allowspacenestimgcodenew', $group['allowspacenestimgcode'], 'radio');
@@ -1139,8 +1137,6 @@ EOT;
 			'allowcommentarticle' => intval($_GET['allowcommentarticlenew']),
 			'allowmyop' => $_GET['allowmyopnew'],
 			'allowcommentpost' => bindec(intval($_GET['allowcommentpostnew'][2]).intval($_GET['allowcommentpostnew'][1])),
-			'videophotoignore' => $_GET['videophotoignorenew'],
-			'allowviewvideophoto' => $_GET['allowviewvideophotonew'],
 			'allowspacenesthtml' => $_GET['allowspacenesthtmlnew'],
 			'allowspacenestbbcode' => $_GET['allowspacenestbbcodenew'],
 			'allowspacenestimgcode' => $_GET['allowspacenestimgcodenew'],

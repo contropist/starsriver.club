@@ -165,7 +165,6 @@ $lang = array
 	'title_memcp_usergroup' => '用户组',
 	'title_memcp_album' => '编辑画廊',
 	'title_memcp_poke' => '打招呼',
-	'title_memcp_videophoto' => '视频认证',
 	'title_memcp_comment' => '评论',
 	'title_memcp_eccredit' => '信用评价',
 	'title_memcp_promotion' => '访问推广',

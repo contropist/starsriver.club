@@ -100,19 +100,6 @@
 								</p>
 							</div>
 							<!--{/if}-->
-							<!--{if $_G['setting'][videophoto] && $space[videophotostatus]}-->
-							<div class="inputline">
-								<span>{lang view_my_certified_photo}</span>
-								<div class="radiolist">
-									<input $sels[view][videoviewphoto][0] name="privacy[view][videoviewphoto]" id="privacy[view][videoviewphoto]_0" type="radio" value="0"><label for="privacy[view][videoviewphoto]_0">{lang site_default_setting}</label>
-									<input $sels[view][videoviewphoto][1] name="privacy[view][videoviewphoto]" id="privacy[view][videoviewphoto]_1" type="radio" value="1"><label for="privacy[view][videoviewphoto]_1">{lang allow}</label>
-									<input $sels[view][videoviewphoto][2] name="privacy[view][videoviewphoto]" id="privacy[view][videoviewphoto]_2" type="radio" value="2"><label for="privacy[view][videoviewphoto]_2">{lang ban}</label>
-								</div>
-								<p class="message">
-									<img src="{STATICURL}image/common/videophoto.gif" alt=""/> {lang certified_video_setting_right}
-								</p>
-							</div>
-							<!--{/if}-->
 							<!--{hook/spacecp_privacy_base_extra}-->
 							<button class="maintheme" type="submit" name="privacysubmit" value="true">{lang save}</button>
 						<!--{elseif $operation == 'feed'}-->

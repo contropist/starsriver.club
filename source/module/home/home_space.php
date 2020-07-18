@@ -12,7 +12,7 @@ if(!defined('IN_DISCUZ')) {
 }
 
 $dos = array('index', 'doing', 'blog', 'album', 'friend', 'wall',
-	'notice', 'share', 'home', 'pm', 'videophoto', 'favorite',
+	'notice', 'share', 'home', 'pm', 'favorite',
 	'thread', 'trade', 'poll', 'activity', 'debate', 'reward', 'profile', 'plugin', 'follow');
 
 $do = (!empty($_GET['do']) && in_array($_GET['do'], $dos))?$_GET['do']:'index';

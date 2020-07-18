@@ -250,7 +250,6 @@ e5aada35ae83ed630d30a5d36ebb5f0f *template/default/home/spacecp_friend.htm
 2399e22aac1341c95c61d64f04b2052e *template/default/home/spacecp_sendmail.htm
 b0d3d27f01b6615b2fd23be011e93521 *template/default/home/spacecp_share.htm
 0d5a18ecb3d00a80895564c8f0782cad *template/default/home/spacecp_upload.htm
-1b98bc38fd61ecf70ca7edaece5f5ddc *template/default/home/spacecp_videophoto.htm
 b0991fd614a2c758e4c4c6e5eea103fc *template/default/home/space_activity.htm
 3e814d6e086d3c8b62532468ad6bb1f3 *template/default/home/space_home_mod_album_list.htm
 eccef8e5dbd8e754ae181cdd91d09070 *template/default/home/space_album_pic.htm
@@ -304,7 +303,6 @@ b0670882ac1ccf35f4dc86776ba3017e *template/default/home/space_task_list.htm
 c91cc4fe514d417845acf896c19cb0ad *template/default/home/space_home_thread_nav.htm
 95f9c99d11899abcb7dd57c3f04023db *template/default/home/space_trade.htm
 188cdcbae06f3842304f17657c5c90bf *template/default/home/space_userabout.htm
-a777c333d8317675e23cb7f3bc084bd6 *template/default/home/space_videophoto.htm
 85d0286a1a890eac704e38abfbe0423d *template/default/home/space_home_wall.htm
 7215ee9c7d9dc229d2921a40e899ec5f *template/default/index.htm
 c8def757dc775d3fa95f5a7f788b31ac *template/default/m/css/activity.css
@@ -1536,7 +1534,6 @@ d06e40cfca343412608de12c4edb0866 *source/include/space/space_reward.php
 f5b3aaff3b75bdc31267c82620f4509a *source/include/space/space_share.php
 9b4c465d258136bcbeab3abed017455a *source/include/space/space_home_thread.php
 823e74c4f5cc8e06b38b649d5fc5f30a *source/include/space/space_trade.php
-7b24ce04de8204ca9b52d08a58046c54 *source/include/space/space_videophoto.php
 e91393e1353fc0e2d22cba334e02023a *source/include/space/space_home_wall.php
 d41d8cd98f00b204e9800998ecf8427e *source/include/spacecp/index.htm
 27cf3b3c645a4eb0b2fc5ae47e30efb4 *source/include/spacecp/spacecp_album.php
@@ -1572,7 +1569,6 @@ f12b57dcc3490079baf681b9f51109c8 *source/include/spacecp/spacecp_share.php
 04f3a928581850461a3cf3d9ffe71c85 *source/include/spacecp/spacecp_top.php
 db6cbe047506f0829b6a118cb0cb9b84 *source/include/spacecp/spacecp_upload.php
 edf6724f2c728bb67393c4643b2f039c *source/include/spacecp/spacecp_usergroup.php
-7640f6ed703d3fde239b67d79ce921d0 *source/include/spacecp/spacecp_videophoto.php
 b21b2f42578a675b7fbddf31ccd44184 *source/include/table/big5-unicode.table
 834a6248f48e883b14dcb83a14cd5c68 *source/include/table/gb-big5.table
 e914c1c998605c629042698c546d9b84 *source/include/table/gb-unicode.table
@@ -2602,8 +2598,6 @@ cf8556be5d0a96d086e5176f2adcaa5f *static/image/common/user_link.gif
 e4efc45663dff627e089377222cb652a *static/image/common/v.png
 24a292cf10f38534f035f8deb93a0e81 *static/image/common/vd.gif
 d8ed37a9516777d25c3be8faabe2de40 *static/image/common/vds.png
-844c4ab07af2340c8ca61ae35ed121b4 *static/image/common/videophoto.gif
-3dadeb4406dc9ffdd362cc25aa3f6baa *static/image/common/videophoto_btn.gif
 a109e4534c66f70c9f6c4b231e064c85 *static/image/common/viewpay.gif
 31b2d60698366d298dbb0b07232c0c2d *static/image/common/vline.png
 a455b47c319be28f852fe96310af8ee8 *static/image/common/vline2.png
