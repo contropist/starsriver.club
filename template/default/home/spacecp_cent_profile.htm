@@ -146,83 +146,85 @@
 							<!--{if $vid}-->
 								<p class="tool-notice">
 									<!--{if $showbtn}-->
-									{lang spacecp_profile_message1}
+									    {lang spacecp_profile_message1}
 									<!--{else}-->
-									{lang spacecp_profile_message2}
+									    {lang spacecp_profile_message2}
 									<!--{/if}-->
 								</p>
 							<!--{/if}-->
 							<iframe id="frame_profile" name="frame_profile" style="display: none"></iframe>
 							<form action="{if $operation != 'plugin'}home.php?mod=spacecp&ac=profile&op=$operation{else}home.php?mod=spacecp&ac=plugin&op=profile&id=$_GET[id]{/if}" method="post" enctype="multipart/form-data" autocomplete="off"  target="{if $operation != 'plugin'}frame_profile{/if}" onsubmit="clearErrorInfo();">
 								<input type="hidden" value="{FORMHASH}" name="formhash" />
-								<!--{if $_GET[vid]}--><input type="hidden" value="$_GET[vid]" name="vid" /><!--{/if}-->
-									<!--{loop $settings $key $value}-->
-										<!--{if $value[available]}-->
-											<div class="inputline" id="line_$key">
-												<span><!--{if $value[required]}--><i class="must"></i><!--{/if}-->$value[title]</span>
-												$htmls[$key]
-												<!--{if $vid}-->
-													<input type="hidden" name="privacy[$key]" value="3"/>
-												<!--{else}-->
-													<div class="radiolist r">
-														<input name="privacy[$key]" id="privacy[$key]_3" type="radio" value="3" {if $privacy[$key] == '3'}checked{/if}/>
-														<label for="privacy[$key]_3">{lang secrecy}</label>
-														<input name="privacy[$key]" id="privacy[$key]_1" type="radio" value="0" {if $privacy[$key] == '0'}checked{/if}/>
-														<label for="privacy[$key]_1">{lang open_privacy}</label>
-														<input name="privacy[$key]" id="privacy[$key]_2" type="radio" value="1" {if $privacy[$key] == '1'}checked{/if}/>
-														<label for="privacy[$key]_2">{lang friend_privacy}</label>
-													</div>
-												<!--{/if}-->
-											</div>
-										<!--{/if}-->
-									<!--{/loop}-->
-									<!--{if $allowcstatus && in_array('customstatus', $allowitems)}-->
-										<div class="inputline" id="line_customstatus">
-											<span>{lang permission_basic_status}</span>
-											<input type="text" value="$space[customstatus]" name="customstatus" id="customstatus" />
-											<p class="message" id="showerror_customstatus"></p>
-										</div>
-									<!--{/if}-->
-									<!--{if $_G['group']['maxsigsize'] && in_array('sightml', $allowitems)}-->
-										<div class="inputline" id="line_sightml">
-											<span>{lang personal_signature}</span>
-											<div class="editor">
-												<textarea name="sightml" id="sightmlmessage" onkeydown="ctrlEnter(event, 'profilesubmitbtn');" placeholder="">$space[sightml]</textarea>
-												<!--{if $_G['group']['allowsigimgcode']}-->
-												<!--{eval $seditor = array('sightml', array('bold', 'color','link'));}-->
-												<!--{/if}-->
-												<!--{subtemplate common/seditor}-->
-											</div>
-										</div>
-										<div id="signhtmlpreview"></div>
-										<script type="text/javascript" src="{$_G[setting][jspath]}bbcode.js?{VERHASH}"></script>
-										<script type="text/javascript">var forumallowhtml = 0,allowhtml = 0,allowsmilies = 0,allowbbcode = parseInt('{$_G[group][allowsigbbcode]}'),allowimgcode = parseInt('{$_G[group][allowsigimgcode]}');var DISCUZCODE = [];DISCUZCODE['num'] = '-1';DISCUZCODE['html'] = [];</script>
-									<!--{/if}-->
-									<!--{if in_array('timeoffset', $allowitems)}-->
-									<!--{eval $timeoffset = array({lang timezone});}-->
-										<div class="inputline" id="line_timeoffset">
-											<span>{lang time_zone}</span>
-											<select name="timeoffset">
-												<!--{loop $timeoffset $key $desc}-->
-												<option value="$key"{if $key==$space[timeoffset]} selected="selected"{/if}>$desc</option>
-												<!--{/loop}-->
-											</select>
-											<p class="message">
-												{lang current_time} : <a><!--{date($_G[timestamp])}--></a>
-												<br>
-												{lang time_zone_message}
-											</p>
-										</div>
-									<!--{/if}-->
-									<!--{if $operation == 'plugin'}-->
-										<!--{eval include(template($_GET['id']));}-->
-									<!--{/if}-->
-									<!--{hook/spacecp_profile_extra}-->
-									<!--{if $showbtn}-->
-										<input type="hidden" name="profilesubmit" value="true" />
-										<button class="maintheme" type="submit" name="profilesubmitbtn" id="profilesubmitbtn" value="true" >{lang save}</button>
-										<span id="submit_result" class="rq"></span>
-									<!--{/if}-->
+								<!--{if $_GET[vid]}-->
+                                    <input type="hidden" value="$_GET[vid]" name="vid" />
+                                <!--{/if}-->
+                                <!--{loop $settings $key $value}-->
+                                    <!--{if $value[available]}-->
+                                        <div class="inputline" id="line_$key">
+                                            <span><!--{if $value[required]}--><i class="must"></i><!--{/if}-->$value[title]</span>
+                                            $htmls[$key]
+                                            <!--{if $vid}-->
+                                                <input type="hidden" name="privacy[$key]" value="3"/>
+                                            <!--{else}-->
+                                                <div class="radiolist r">
+                                                    <input name="privacy[$key]" id="privacy[$key]_3" type="radio" value="3" {if $privacy[$key] == '3'}checked{/if}/>
+                                                    <label for="privacy[$key]_3">{lang secrecy}</label>
+                                                    <input name="privacy[$key]" id="privacy[$key]_1" type="radio" value="0" {if $privacy[$key] == '0'}checked{/if}/>
+                                                    <label for="privacy[$key]_1">{lang open_privacy}</label>
+                                                    <input name="privacy[$key]" id="privacy[$key]_2" type="radio" value="1" {if $privacy[$key] == '1'}checked{/if}/>
+                                                    <label for="privacy[$key]_2">{lang friend_privacy}</label>
+                                                </div>
+                                            <!--{/if}-->
+                                        </div>
+                                    <!--{/if}-->
+                                <!--{/loop}-->
+                                <!--{if $allowcstatus && in_array('customstatus', $allowitems)}-->
+                                    <div class="inputline" id="line_customstatus">
+                                        <span>{lang permission_basic_status}</span>
+                                        <input type="text" value="$space[customstatus]" name="customstatus" id="customstatus" />
+                                        <p class="message" id="showerror_customstatus"></p>
+                                    </div>
+                                <!--{/if}-->
+                                <!--{if $_G['group']['maxsigsize'] && in_array('sightml', $allowitems)}-->
+                                    <div class="inputline" id="line_sightml">
+                                        <span>{lang personal_signature}</span>
+                                        <div class="editor">
+                                            <textarea name="sightml" id="sightmlmessage" onkeydown="ctrlEnter(event, 'profilesubmitbtn');" placeholder="">$space[sightml]</textarea>
+                                            <!--{if $_G['group']['allowsigimgcode']}-->
+                                            <!--{eval $seditor = array('sightml', array('bold', 'color','link'));}-->
+                                            <!--{/if}-->
+                                            <!--{subtemplate common/seditor}-->
+                                        </div>
+                                    </div>
+                                    <div id="signhtmlpreview"></div>
+                                    <script type="text/javascript" src="{$_G[setting][jspath]}bbcode.js?{VERHASH}"></script>
+                                    <script type="text/javascript">var forumallowhtml = 0,allowhtml = 0,allowsmilies = 0,allowbbcode = parseInt('{$_G[group][allowsigbbcode]}'),allowimgcode = parseInt('{$_G[group][allowsigimgcode]}');var DISCUZCODE = [];DISCUZCODE['num'] = '-1';DISCUZCODE['html'] = [];</script>
+                                <!--{/if}-->
+                                <!--{if in_array('timeoffset', $allowitems)}-->
+                                <!--{eval $timeoffset = array({lang timezone});}-->
+                                    <div class="inputline" id="line_timeoffset">
+                                        <span>{lang time_zone}</span>
+                                        <select name="timeoffset">
+                                            <!--{loop $timeoffset $key $desc}-->
+                                            <option value="$key"{if $key==$space[timeoffset]} selected="selected"{/if}>$desc</option>
+                                            <!--{/loop}-->
+                                        </select>
+                                        <p class="message">
+                                            {lang current_time} : <a><!--{date($_G[timestamp])}--></a>
+                                            <br>
+                                            {lang time_zone_message}
+                                        </p>
+                                    </div>
+                                <!--{/if}-->
+                                <!--{if $operation == 'plugin'}-->
+                                    <!--{eval include(template($_GET['id']));}-->
+                                <!--{/if}-->
+                                <!--{hook/spacecp_profile_extra}-->
+                                <!--{if $showbtn}-->
+                                    <input type="hidden" name="profilesubmit" value="true" />
+                                    <button class="maintheme" type="submit" name="profilesubmitbtn" id="profilesubmitbtn" value="true" >{lang save}</button>
+                                    <span id="submit_result" class="rq"></span>
+                                <!--{/if}-->
 								<!--{hook/spacecp_profile_bottom}-->
 							</form>
 							<script type="text/javascript">
@@ -242,7 +244,7 @@
 									}
 								}
 								function show_success(message) {
-									message = message == '' ? '{lang update_date_success}' : message;
+									message = message === '' ? '{lang update_date_success}' : message;
 									showDialog(message, 'right', '{lang reminder}', function(){
 										top.window.location.href = top.window.location.href;
 									}, 0, null, '', '', '', '');

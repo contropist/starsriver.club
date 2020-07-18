@@ -208,7 +208,6 @@ function show_credit() {
     }
 }
 
-
 if(!$_G['privacy']) {
 	if(!$_G['inajax']) {
 		include_once template("home/space_home_profile");

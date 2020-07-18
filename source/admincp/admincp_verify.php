@@ -634,8 +634,8 @@ EOF;
 		showformheader("verify");
 		showtableheader('members_verify_setting', 'fixpadding');
 		showsubtitle(array('members_verify_available', 'members_verify_id', 'members_verify_title', ''), 'header');
-		for($i = 1; $i < 7; $i++) {
-			$readonly = $i == 6 ? true : false;
+		for($i = 1; $i < 16; $i++) {
+			$readonly = $i == 1 ? true : false;
 			$url = parse_url($_G['setting']['verify'][$i]['icon']);
 			if(!$url['host'] && $_G['setting']['verify'][$i]['icon'] && strpos($_G['setting']['verify'][$i]['icon'], $_G['setting']['attachurl'].'common/') === false) {
 				$_G['setting']['verify'][$i]['icon'] = $_G['setting']['attachurl'].'common/'.$_G['setting']['verify'][$i]['icon'];

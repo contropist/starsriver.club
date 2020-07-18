@@ -51,7 +51,7 @@ function profile_setting($fieldid, $space=[], $showstatus=false, $ignoreunchanga
 	$field['unchangeable'] = !$ignoreunchangable && $field['unchangeable'] ? 1 : 0;
 	if($fieldid == 'birthday') {
 		if($field['unchangeable'] && !empty($space[$fieldid])) {
-			return '<span>'.$space['birthyear'].'-'.$space['birthmonth'].'-'.$space['birthday'].'</span>';
+			return '<s class="input-simulate">'.$space['birthyear'].'-'.$space['birthmonth'].'-'.$space['birthday'].'</s>';
 		}
 		$birthyeayhtml = '';
 		$nowy = dgmdate($_G['timestamp'], 'Y');
@@ -95,7 +95,7 @@ function profile_setting($fieldid, $space=[], $showstatus=false, $ignoreunchanga
 
 	} elseif($fieldid=='gender') {
 		if($field['unchangeable'] && $space[$fieldid] > 0) {
-			return '<span>'.lang('space', 'gender_'.intval($space[$fieldid])).'</span>';
+			return '<s class="input-simulate">'.lang('space', 'gender_'.intval($space[$fieldid])).'</s>';
 		}
 		$selected = array($space[$fieldid]=>' selected="selected"');
 		$html = '<select name="gender" id="gender">';
@@ -111,7 +111,7 @@ function profile_setting($fieldid, $space=[], $showstatus=false, $ignoreunchanga
 
 	} elseif($fieldid=='birthcity') {
 		if($field['unchangeable'] && !empty($space[$fieldid])) {
-			return '<span>'.$space['birthprovince'].'-'.$space['birthcity'].'</span>';
+			return '<s class="input-simulate">'.$space['birthprovince'].'-'.$space['birthcity'].'</s>';
 		}
 		$values = array(0,0,0,0);
 		$elems = array('birthprovince', 'birthcity', 'birthdist', 'birthcommunity');
@@ -124,7 +124,7 @@ function profile_setting($fieldid, $space=[], $showstatus=false, $ignoreunchanga
 
 	} elseif($fieldid=='residecity') {
 		if($field['unchangeable'] && !empty($space[$fieldid])) {
-			return '<span>'.$space['resideprovince'].'-'.$space['residecity'].'</span>';
+			return '<s class="input-simulate">'.$space['resideprovince'].'-'.$space['residecity'].'</s>';
 		}
 		$values = array(0,0,0,0);
 		$elems = array('resideprovince', 'residecity', 'residedist', 'residecommunity');
@@ -138,9 +138,9 @@ function profile_setting($fieldid, $space=[], $showstatus=false, $ignoreunchanga
 		if($field['unchangeable'] && $space[$fieldid]!='') {
 			if($field['formtype']=='file') {
 				$imgurl = getglobal('setting/attachurl').'./profile/'.$space[$fieldid];
-				return '<span><a href="'.$imgurl.'" target="_blank"><img src="'.$imgurl.'"  style="max-width: 500px;" /></a></span>';
+				return '<s class="input-simulate"><a href="'.$imgurl.'" target="_blank"><img src="'.$imgurl.'"  style="max-width: 500px;" /></a></s>';
 			} else {
-				return '<span>'.nl2br($space[$fieldid]).'</span>';
+				return '<s class="input-simulate">'.nl2br($space[$fieldid]).'</s>';
 			}
 		}
 		if($field['formtype']=='textarea') {

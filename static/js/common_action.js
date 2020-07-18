@@ -8,6 +8,7 @@
         Window:{
             Width:'',
             Height:'',
+            Guide_Width:'',
             Scroll:{
                 Dir:'',
                 Pos:{
@@ -42,15 +43,18 @@
 
     addEvent(document,'DOMContentLoaded',function () {
 
-        nav =  document.querySelector('#nav');
+        nav =  SR('#nav')[0];
 
-        banner = document.querySelector('.banner');
-        banner_on = document.querySelector('.banner.off') ? 0 : 1 ;
-        uconsole = document.getElementById('console');
-        bottommenu = document.getElementById('bottommenu');
+        banner = SR('.banner')[0];
+        banner_on = SR('.banner.off')[0] ? 0 : 1 ;
+        uconsole = SR('#console')[0];
+        mas_viewer = SR('.Mas > .mas-viewer')[0];
+        bottommenu = SR('#bottommenu')[0];
 
         addEvent(document,'click',doc_onclick);
         addEvent(window,'scroll',doc_onscroll);
+        addEvent(mas_viewer,'scroll',mas_onscroll);
+
         window.onresize = function () {doc_resize();};
         if(document.addEventListener){ //firefox
             document.addEventListener('DOMMouseScroll', doc_onwheel, false);
@@ -78,8 +82,8 @@
                 }
             }
             return {
-                width: self.scrollWidth || self.offsetWidth,
-                height: self.scrollHeight || self.offsetHeight,
+                width: self.clientWidth || self.offsetWidth,
+                height: self.clientHeight || self.offsetHeight,
                 boxSizing: parseFloat(calcstyle('boxSizing')),
                 paddingTop: parseFloat(calcstyle('paddingTop')),
                 paddingLeft: parseFloat(calcstyle('paddingLeft')),
@@ -204,17 +208,21 @@
         return document.querySelectorAll(obj)
     }
     function addEvent(obj, evt, func) {
-        if(obj.addEventListener) {
-            obj.addEventListener(evt, func, false);
-        } else if(obj.attachEvent) {
-            obj.attachEvent('on' + evt, func);
+        if(!isUndefined(obj)){
+            if(obj.addEventListener) {
+                obj.addEventListener(evt, func, false);
+            } else if(obj.attachEvent) {
+                obj.attachEvent('on' + evt, func);
+            }
         }
     }
     function delEvent(obj, evt, func) {
-        if(obj.removeEventListener) {
-            obj.removeEventListener(evt, func, false);
-        } else if(obj.detachEvent) {
-            obj.detachEvent('on' + evt, func);
+        if(!isUndefined(obj)){
+            if(obj.removeEventListener) {
+                obj.removeEventListener(evt, func, false);
+            } else if(obj.detachEvent) {
+                obj.detachEvent('on' + evt, func);
+            }
         }
     }
 
@@ -804,12 +812,16 @@
             },
 
             open: function () {
-                m.obj.addClass('open');
-                stopBubble();
+                if(!m.obj.hasClass('open')){
+                    m.obj.addClass('open');
+                    stopBubble();
+                }
             },
 
             close: function () {
-                m.obj.delClass('open');
+                if(m.obj.hasClass('open')){
+                    m.obj.delClass('open');
+                }
             },
 
             bind: function (e, func) {
@@ -1014,6 +1026,8 @@
     function doc_onscroll() {
         BodyHeight = document.documentElement.scrollHeight || document.body.scrollHeight;
         WinHeight = document.documentElement.clientHeight || document.body.clientHeight;
+
+
         var ScrollToBottom = _Scroll_top() + WinHeight >= BodyHeight ? 1 : 0;
         var dr = _Scroll_dir();
 
@@ -1120,6 +1134,26 @@
             }
         }
     }
+
+    function mas_onscroll() {
+        // Mas界面滚动
+        (function () {
+            if(mas_viewer){
+                var mas = mas_viewer.parentElement;
+                var mas_guide = mas.querySelector('.mas-guide');
+                var mas_guide_switch = mas_guide.querySelector('.mas-guide-switch');
+
+                if(mas_viewer.scrollTop >= mas_viewer.querySelector('.mas-viewer-header').Css.height){
+                    mas_viewer.querySelector('.bank.type-scroll').addClass('active');
+                    mas_guide_switch.addClass('highlight');
+                } else {
+                    mas_viewer.querySelector('.bank.type-scroll').delClass('active');
+                    mas_guide_switch.delClass('highlight');
+                }
+            }
+        })();
+    }
+
     function doc_onclick(e) { //传入e事件来兼容火狐
         var x = _Cursor_pos(e).x;
         var y = _Cursor_pos(e).y;
@@ -1142,30 +1176,32 @@
     }
     function doc_resize() {
 
-        SRGlobal.Window.Width = document.getElementsByTagName('body')[0].clientWidth;
-        SRGlobal.Window.Height = document.getElementsByTagName('body')[0].clientHeight;
+        SRGlobal.Window.Width = SR('body')[0].clientWidth;
+        SRGlobal.Window.Height = SR('body')[0].clientHeight;
+
+        SRGlobal.Window.Guide_Width = isUndefined(SR('.Mas .mas-guide')[0]) ? 0 : 72;
 
         var Global_Style_Tag = 'WL-0';
 
-        if(SRGlobal.Window.Width > 360){
+        if(SRGlobal.Window.Width > 350 + SRGlobal.Window.Guide_Width){
             Global_Style_Tag = 'WL-3P';
         }
-        if(SRGlobal.Window.Width > 480){
+        if(SRGlobal.Window.Width > 470 + SRGlobal.Window.Guide_Width){
             Global_Style_Tag = 'WL-4P';
         }
-        if(SRGlobal.Window.Width > 780){
+        if(SRGlobal.Window.Width > 760){
             Global_Style_Tag = 'WL-7P';
         }
-        if(SRGlobal.Window.Width > 1330){
+        if(SRGlobal.Window.Width > 1320){
             Global_Style_Tag = 'WL-13P';
         }
-        if(SRGlobal.Window.Width > 1920){
+        if(SRGlobal.Window.Width > 1910){
             Global_Style_Tag = 'WL-1K';
         }
-        if(SRGlobal.Window.Width > 2560){
+        if(SRGlobal.Window.Width > 2550){
             Global_Style_Tag = 'WL-2K';
         }
-        if(SRGlobal.Window.Width > 4096){
+        if(SRGlobal.Window.Width > 4080){
             Global_Style_Tag = 'WL-4K';
         }
 

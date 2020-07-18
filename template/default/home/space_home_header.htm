@@ -17,8 +17,14 @@
             <!--{template common/header_nestmod}-->
         </div>
     </layout:html>
-    <layout:html html-ws class="Mas edge app-userspace">
-        <div class="mas-guide">
+    <layout:html html-ws class="Mas edge" id="app_userspace">
+        <script>
+            jQuery(document).ready(function () {
+                menu_initialize('#app_userspace > .mas-guide > .mas-guide-switch','#app_userspace > .mas-guide',[document,window]);
+            })
+        </script>
+        <div class="mas-guide" data-protect>
             <!--{template home/space_home_header_guide}-->
+            <div class="mas-guide-switch ft-arrow-right"></div>
         </div>
         <div class="mas-cover"></div>
