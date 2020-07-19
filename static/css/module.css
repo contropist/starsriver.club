@@ -3245,7 +3245,6 @@
 |  搜索页面
 -----------------------------------------------------------------------------------------------------------------------*/
 /** search **/
-
 /*region 搜索页*/
     .s_header{
         height:36px;
@@ -3461,7 +3460,6 @@
         width:450px;
     }
 /*endregion*/
-
 /** end **/
 
 
@@ -3472,7 +3470,6 @@
 |  群组的全部样式表都在这里
 -----------------------------------------------------------------------------------------------------------------------*/
 /** group **/
-
 /*region 群组通用*/
     .input-group .animal{
         transform: scale(.5);
@@ -3572,10 +3569,11 @@
         padding: 10px;
     }
 /*endregion*/
-
 /** end **/
-/** group, group::my **/
 
+
+
+/** group, group::my **/
 /*region 群组首页 和 我的群组*/
     .groups {
         margin-bottom: 10px;
@@ -3776,10 +3774,11 @@
         }
     }
 /*endregion*/
-
 /** end **/
-/** group::forumdisplay, group::group **/
 
+
+
+/** group::forumdisplay, group::group **/
 /*region 群组首页*/
     .group-container{
         width: 100%;
@@ -4079,10 +4078,11 @@
         border-right: 1px solid #e6e6e6;
     }
 /*endregion*/
-
 /** end **/
-/** group::forumdisplay, group::group, group::my **/
 
+
+
+/** group::forumdisplay, group::group, group::my **/
 /*region 标签和按钮*/
     .group-tabs {
         margin:0 0 20px 0;
@@ -4142,10 +4142,11 @@
         vertical-align: -5px;
     }
 /*endregion*/
-
 /** end **/
-/** group::my **/
 
+
+
+/** group::my **/
 /*region 我的群组*/
     .group-tabs {
         margin:5px 0 5px 0;
@@ -4209,7 +4210,6 @@
         max-width: 100% !important;
     }
 /*endregion*/
-
 /** end **/
 
 
@@ -4220,7 +4220,6 @@
 |  导读页面风格
 -----------------------------------------------------------------------------------------------------------------------*/
 /** forum::guide **/
-
 /*region 导读*/
     [id*='_guide_btn']{
         width: 100%;
@@ -4325,8 +4324,8 @@
         vertical-align: -2%;
     }
 /*endregion*/
-
 /** end **/
+
 
 
 /*---------------
@@ -4335,7 +4334,6 @@
 |  专辑页面风格
 -----------------------------------------------------------------------------------------------------------------------*/
 /** forum::collection **/
-
 /*region 专辑*/
 
     body {
@@ -5074,7 +5072,6 @@
         .app-collection .collist .coll.fourth .cover > img{ width: 150px }
     }
 /*endregion*/
-
 /** end **/
 
 
@@ -5085,7 +5082,6 @@
 |  一般管理员的管理后台
 -----------------------------------------------------------------------------------------------------------------------*/
 /** forum::modcp **/
-
 /*region 通用样式*/
     .app-modcp .editor{
         margin-bottom: 5px;
@@ -5955,7 +5951,6 @@
         word-break: break-all;
     }
 /*endregion*/
-
 /** end **/
 
 
@@ -5966,7 +5961,6 @@
 |  排行榜的全部样式表
 -----------------------------------------------------------------------------------------------------------------------*/
 /** misc::ranklist **/
-
 /*region 排行榜*/
     body {
         background: #fafdff;
@@ -6308,18 +6302,16 @@
         }
     }
 /*endregion*/
-
 /** end **/
 
 
 
 /*---------------
-|       动态     |::app-dynamic
+|       空间     |::app-dynamic
 |----------------
-|  排行榜的全部样式表
+|  空间样式表
 -----------------------------------------------------------------------------------------------------------------------*/
 /** home::space, home::follow **/
-
 /*region space 和 follow 通用*/
     body {
         background: #d2e9fb url(//s2.hdslb.com/bfs/static/blive/blfe-dynamic-web/static/img/background.bc72515.png) top/contain no-repeat;
@@ -6628,11 +6620,11 @@
     }
 
 /*endregion*/
-
 /** end **/
-/** home::space **/
 
-/*region 仅 space*/
+
+/** home::space **/
+/*region 公共动态-space*/
     .app-dynamic .side-box .task{
         line-height: 24px;
         font-size: 0;
@@ -6997,7 +6989,9 @@
         position: absolute;
         transform: translate3d(-50%, -50%, 0);
     }
+/*endregion*/
 
+/*region 用户空间 */
     #app_userspace .user-menu{
         cursor: pointer;
         position: relative;
@@ -7451,511 +7445,6 @@
     }
 /*endregion*/
 
-/** end **/
-/** home::follow **/
-
-/*region 仅 follow*/
-    .app-dynamic .actstruct.follow .relay{
-
-    }
-    .app-dynamic .actstruct.follow .content{
-         margin-top: 6px;
-     }
-    .app-dynamic .actstruct.follow .content.quote{
-        border: 1px solid #e6e6e6;
-        padding: 10px;
-        border-radius: 8px;
-        background: #f9f9f9;
-    }
-    .app-dynamic .actstruct.follow .content .follow-below{
-        color: var(--color-onnanoko-pink);
-        margin: 10px 0 0 5px;;
-    }
-    .app-dynamic .actstruct.follow .content .follow-below::before{
-        content: '';
-        display: inline-block;
-        height: 14px;
-        width: 6px;
-        border-radius: 2px;
-        background: var(--color-onnanoko-pink);
-        opacity: .8;
-        margin-right: 5px;
-        vertical-align: -10%;
-    }
-    .app-dynamic .actstruct.follow .content .follow-author{
-        line-height: 32px;
-        margin-top: 10px;
-    }
-    .app-dynamic .actstruct.follow .content .follow-author .avatar{
-        position: relative;
-        width: 32px;
-        height: 32px;
-    }
-    .app-dynamic .actstruct.follow .content .follow-author .username{
-        color: #738190;
-        font-weight: 700;
-    }
-    .app-dynamic .actstruct.follow .content .follow-author .time{
-        margin-left: 10px;
-        color: #999999;
-        font-size: 12px
-    }
-    .app-dynamic .actstruct.follow .content .follow-title{
-        display: block;
-        overflow: hidden;
-        font-size: 17px;
-        font-weight: 700;
-        word-break: keep-all;
-        white-space: nowrap;
-    }
-    .app-dynamic .actstruct.follow .content .follow-article{
-        margin-top: 8px;
-        padding: 0 5px;
-        line-height: 22px;
-    }
-    .app-dynamic .actstruct.follow .content .follow-article img{
-        max-width: 100%;
-        margin: 5px 0;
-        border: 1px solid #e6e6e6;
-    }
-    .app-dynamic .actstruct.follow .content .follow-article .fold,
-    .app-dynamic .actstruct.follow .content .follow-article .unfold{
-        display: block;
-        text-align: center;
-        border: 1px solid #ccc;
-        margin-top: 8px;
-        border-radius: 5px;
-        color: #aaa;
-    }
-    .app-dynamic .actstruct.follow .content .follow-article .fold:hover,
-    .app-dynamic .actstruct.follow .content .follow-article .unfold:hover{
-        border-color: #39a5c5;
-        color: #39a5c5;
-    }
-    .app-dynamic .actstruct.follow .content .follow-article .attach{
-        border: 1px solid #dedede;
-        padding: 3px 10px;
-        border-radius: 4px;
-        background: #ffffff;
-        margin-top: 5px;
-    }
-    .app-dynamic .actstruct.follow .content .follow-article .attach .title{
-        margin:0 0 3px -11px;
-        color: #999;
-        display: block;
-    }
-    .app-dynamic .actstruct.follow .content .follow-article .attach .title::before{
-        content: '';
-        display: inline-block;
-        background: var(--color-main-theme);
-        width: 4px;
-        height: 13px;
-        vertical-align: -10%;
-        margin-right: 5px;
-        border-radius: 1px;
-    }
-    .app-dynamic .actstruct.follow .content .follow-article .attach ul li{
-        display: block;
-        padding-left: 4px;
-    }
-    .app-dynamic .actstruct.follow .content .follow-article .attach ul li strong{
-        color: #737373;
-    }
-    .app-dynamic .actstruct.follow .content .follow-article .attach ul li span{
-        font-size: 12px;
-        margin-left: 5px;
-        color: #999;
-    }
-
-    .app-dynamic .starer .user, .app-dynamic .starer .fun {
-        display: inline-block;
-        box-sizing: border-box;
-        width: 50%;
-    }
-    .app-dynamic .starer .user *, .app-dynamic .starer .fun *{
-        margin: 0 auto;
-    }
-    .app-dynamic .starer .user{
-        padding: 10px 0 10px 15px;
-        text-align: center;
-    }
-    .app-dynamic .starer .user *{
-        display: block;
-    }
-    .app-dynamic .starer .user .avatar{
-        display: block;
-        position: relative;
-        width: 48px;
-        height: 48px;
-    }
-    .app-dynamic .starer .user .username{
-        margin-top: 5px;
-        font-size: 0;
-    }
-    .app-dynamic .starer .user .username .name{
-        display: inline-block;
-        max-width: calc(100% - 22px);
-        font-weight: 700;
-        color: #738190;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        word-break: keep-all;
-        white-space: nowrap;
-    }
-    .app-dynamic .starer .user .username .setbk{
-        text-align: left;
-        display: inline-block;
-        width: 22px;
-        color: #3ca5f1;
-    }
-    .app-dynamic .starer .user .username .setbk::before{
-        vertical-align: -3%;
-    }
-    .app-dynamic .starer .fun {
-        text-align: center;
-        padding: 32px 15px 10px 0;
-    }
-    .app-dynamic .starer .fun *{
-        text-align: center;
-        display: inline-block;
-        box-sizing: border-box;
-        transition: .05s ease-in-out;
-        border-radius: 4px;
-        height: 28px;
-        line-height: 20px;
-    }
-    .app-dynamic .starer .fun .star{
-        color: #fff;
-        padding: 2px 0;
-        width: 68px;
-        background: #489ae0;
-        border: 2px solid #489ae0;
-    }
-    .app-dynamic .starer .fun .star.on{
-        color: #989898;
-        background: #ffffff;
-        border-color: #dadada;
-    }
-    .app-dynamic .starer .fun .star-sp{
-        color: #b1b1b1;
-        padding: 2px 0;
-        width: 28px;
-        border: 2px solid #dadada;
-    }
-    .app-dynamic .starer .fun .star-sp::before{
-        vertical-align: -3%;
-    }
-    .app-dynamic .starer .fun .star-sp.on{
-        color: #e65182;
-        border-color: #e65182;
-    }
-
-    .app-dynamic .starer .status{
-        display: block;
-        width: 100%;
-        text-align: center;
-        margin-top: 5px;
-        padding: 11px 0 10px 0;
-        border-top: 1px solid #ececec;
-        border-radius: 35% 35% 0 0;
-        box-shadow: inset 0 2px 10px rgba(0,0,0,.05);
-    }
-    .app-dynamic .starer .status span{
-        display: inline-block;
-        width: 72px;
-    }
-    .app-dynamic .starer .status span *{
-        display: block;
-        width: 100%;
-        text-align: center;
-        font-weight: 700;
-    }
-    .app-dynamic .starer .status span i{
-        color: #99a2aa;
-        letter-spacing: 6px;
-        text-indent: 3px;
-    }
-    .app-dynamic .starer .status span a{
-        color: #00a1d6;
-        margin-top: 8px;
-    }
-    .app-dynamic .starer .status b{
-        display: inline-block;
-        margin: 5px;
-        width: 1px;
-        height: 30px;
-        background: #dcdcdc;
-    }
-/*endregion*/
-
-/** end **/
-
-
-
-/*---------------
-|     个人中心   |::app-profile
-|----------------
-|  个人设置页面
------------------------------------------------------------------------------------------------------------------------*/
-/** home::spacecp **/
-
-/*region 个人中心*/
-    body {
-        background: #f5f5f8;
-    }
-    .banner{
-        z-index: 0;
-        height:128px;
-        background: #00a0d8;
-    }
-    .app-profile [id*='_ctrl_menu']{
-        max-height: 390px;
-        margin: 1px 0 0 -1px;
-    }
-
-    .app-profile [id*="setting_"] .user-info{
-        min-height: 72px;
-        box-sizing: border-box;
-        padding: 4px 0 0 120px;
-        line-height: 39px;
-    }
-    .app-profile [id*="setting_"] .user-info p{
-        display: inline-block;
-    }
-    .app-profile [id*="setting_"] .user-info .avatar{
-        width: 96px;
-        height: 96px;
-        top: -36px;
-        left: 5px;
-        border-radius: 64px;
-        box-shadow: 0 0 0 4px #e4e4e4;
-        background: #e4e4e4;
-    }
-    .app-profile [id*="setting_"] .user-info .avatar .avatar-main{
-        width: 100%;
-        border-radius: 64px;
-    }
-    .app-profile [id*="setting_"] .user-info .p{
-        display: inline-block;
-    }
-    .app-profile [id*="setting_"] .user-info .name{
-        font-size: 22px;
-        color: #393939;
-    }
-    .app-profile [id*="setting_"] .user-info .email{
-        position: absolute;
-        left: 120px;
-        margin-top: 28px;
-        font-size: 12px;
-        color: #aaaaaa;
-    }
-    .app-profile [id*="setting_"] .user-info .email a{
-        text-align: right;
-        margin-left: 10px;
-        display: inline-block;
-        color: #00a0d8;
-        font-size: 14px;
-        width: 14px;
-        vertical-align: -3%;
-    }
-
-    .app-profile [id*="setting_"] .credit-list{
-
-    }
-    .app-profile [id*="setting_"] .credit-list li{
-    display: inline-block;
-    padding: 0 10px;
-    }
-    .app-profile [id*="setting_"] .credit-list li *{
-    display: inline-block;
-    }
-    .app-profile [id*="setting_"] .credit-list .credit-int{
-    height: 54px;
-    line-height: 54px;
-    margin-top: 6px;
-    }
-    .app-profile [id*="setting_"] .credit-list .credit-int *{
-    font-size: 22px;
-    color: #999999;
-    }
-    .app-profile [id*="setting_"] .credit-list .credit-int i{
-    height: 54px;
-    width: 54px;
-    margin-right: 10px;
-    }
-    .app-profile [id*="setting_"] .credit-list .credit-it{
-    line-height: 34px;
-    margin-top: 8px;
-
-    color: #666666;
-    }
-    .app-profile [id*="setting_"] .credit-list .credit-it i{
-    width: 20px;
-    height: 20px;
-    line-height: 20px;
-    vertical-align: middle;
-    margin: -3px 3px 0 0;
-    }
-
-    .app-profile [id*="setting_avatar"] .avatar-preview{
-        margin: 0 auto;
-        display: block;
-        width: 570px;
-    }
-    .app-profile [id*="setting_avatar"] .avatar-preview .avt{
-        display: inline-block;
-        position: relative;
-        vertical-align: middle;
-        border-radius: 50%;
-        box-shadow: 0 0 0 6px rgba(29, 37, 39, 0.09);
-        margin: 10px;
-    }
-    .app-profile [id*="setting_avatar"] .avatar-preview .avt#am{
-        height: 144px;
-        width: 144px;
-    }
-    .app-profile [id*="setting_avatar"] .avatar-preview .avt#ab{
-        height: 256px;
-        width: 256px;
-    }
-    .app-profile [id*="setting_avatar"] .avatar-preview .avt#as{
-        height: 96px;
-        width: 96px;
-    }
-    .app-profile [id*="setting_avatar"] .avatar-preview .avt img{
-        border-radius: 50%;
-		width:100%;
-		height:100%;
-    }
-
-    .app-profile [id*="setting_privacy"] .filter{
-        border-radius: 50%;
-    }
-    .app-profile [id*="setting_privacy"] .filter h2{
-        text-align: center;
-        border-bottom: 1px solid #dedede;
-        line-height: 34px;
-        height: 17px;
-        margin: 19px 0;
-    }
-    .app-profile [id*="setting_privacy"] .filter span{
-        background: #fff;
-        padding: 0 10px;
-        color: #a5a5a5;
-    }
-
-    .app-profile [id*="setting_credit"] .input-group{
-        border-radius: 12px;
-        border-color: #e9eaec;
-    }
-    .app-profile [id*="setting_credit"] .input-group *{
-        border-color: #e9eaec !important;
-    }
-    .app-profile [id*="setting_credit"] .input-group span{
-        background: #fafbfc;
-        color: #535d6f;
-    }
-    .app-profile [id*="setting_credit"] .input-group .typec{
-        min-width: 70px !important;
-    }
-
-    .app-profile [id*="setting_usergroup"] .table-container,
-    .app-profile [id*="setting_usergroup"] .table-pm{
-        margin: 24px 0 ;
-    }
-    .app-profile [id*="setting_usergroup"] .table-container{
-        border: 1px solid #e5e9ef;
-    }
-    .app-profile [id*="setting_usergroup"] .table-pm tr td{
-        text-align: center;
-        line-height: 48px !important;
-    }
-    .app-profile [id*="setting_usergroup"] .table-pm tr td:first-of-type{
-        text-align: left;
-        padding-left: 15px;
-        color: #718688;
-        font-weight: 700;
-    }
-    .app-profile [id*="setting_usergroup"] .table-pm tr td img{
-        vertical-align: middle;
-        height: 13px;
-        width: auto;
-    }
-    .app-profile [id*="setting_usergroup"] .table-pm thead{
-        background: #f1f5f7 !important;
-    }
-    .app-profile [id*="setting_usergroup"] .table-pm thead tr td{
-        color: #717480 !important;
-    }
-
-    .app-profile [id*="buy_usergroup"] tbody tr td.gname a.current{
-        position: relative;
-        color: #ef7941;
-    }
-    .app-profile [id*="buy_usergroup"] tbody tr td.gname a.current::before{
-        position: absolute;
-        display: inline-block;
-        width: 16px;
-        height: 18px;
-        margin: 11px 0 10px -24px;
-        line-height: 20px;
-        color: #ef7941;
-        font-size: 16px;
-        text-shadow: 0 0 1px;
-    }
-    .app-profile [id*="buy_usergroup"] tbody tr td.func a{
-        box-sizing: border-box;
-        display: inline-block;
-        margin: 7px 3px 0 0;
-        padding: 0 9px;
-        background: #31b6de;
-        border-radius: 6px;
-        height: 26px;
-        line-height: 24px;
-        font-size: 12px;
-        border: 1px solid #4ed1f9;
-        color: #fff;
-    }
-
-    .app-profile [id*="setting_promotion"] .copyurl{
-        display: block;
-        line-height: 36px;
-        font-size: 0;
-        border: 1px solid #0aafd4;
-        margin: 24px 10px;
-        border-radius: 4px;
-        width: 390px;
-    }
-    .app-profile [id*="setting_promotion"] .copyurl span{
-        display: inline-block;
-        width: calc(100% - 42px);
-        box-sizing: border-box;
-        padding: 0 10px;
-        color: #0aafd4;
-        white-space: nowrap;
-        overflow: hidden;
-        cursor: copy;
-    }
-    .app-profile [id*="setting_promotion"] .copyurl a{
-        display: inline-block;
-        text-align: center;
-        width: 42px;
-        background: #00a0d8;
-        color: #fff;
-    }
-/*endregion*/
-
-/** end **/
-
-
-
-/*---------------
-|      通知      |::app-notice
-|----------------
-|  消息通知页面
------------------------------------------------------------------------------------------------------------------------*/
-/** home::space **/
-
 /*region 通知面板*/
     .app-notice .vessel.new{
         border-left: 5px solid rgba(255, 59, 0, 0.8);
@@ -8095,10 +7584,10 @@
         color: #fff;
         font-size: 12px;
         opacity: 0;
-     }
+    }
     .app-notice .session-list .session-item:hover .avatar .overlay{
-         opacity: 1;
-     }
+        opacity: 1;
+    }
     .app-notice .session-list .session-item .brevity{
         display: inline-block;
         width: calc(100% - 48px);
@@ -8541,9 +8030,500 @@
         display: inline-block;
         width: auto;
     }
-
 /*endregion*/
+/** end **/
 
+
+
+/** home::follow **/
+/*region 公共动态-follow*/
+    .app-dynamic .actstruct.follow .relay{
+
+    }
+    .app-dynamic .actstruct.follow .content{
+         margin-top: 6px;
+     }
+    .app-dynamic .actstruct.follow .content.quote{
+        border: 1px solid #e6e6e6;
+        padding: 10px;
+        border-radius: 8px;
+        background: #f9f9f9;
+    }
+    .app-dynamic .actstruct.follow .content .follow-below{
+        color: var(--color-onnanoko-pink);
+        margin: 10px 0 0 5px;;
+    }
+    .app-dynamic .actstruct.follow .content .follow-below::before{
+        content: '';
+        display: inline-block;
+        height: 14px;
+        width: 6px;
+        border-radius: 2px;
+        background: var(--color-onnanoko-pink);
+        opacity: .8;
+        margin-right: 5px;
+        vertical-align: -10%;
+    }
+    .app-dynamic .actstruct.follow .content .follow-author{
+        line-height: 32px;
+        margin-top: 10px;
+    }
+    .app-dynamic .actstruct.follow .content .follow-author .avatar{
+        position: relative;
+        width: 32px;
+        height: 32px;
+    }
+    .app-dynamic .actstruct.follow .content .follow-author .username{
+        color: #738190;
+        font-weight: 700;
+    }
+    .app-dynamic .actstruct.follow .content .follow-author .time{
+        margin-left: 10px;
+        color: #999999;
+        font-size: 12px
+    }
+    .app-dynamic .actstruct.follow .content .follow-title{
+        display: block;
+        overflow: hidden;
+        font-size: 17px;
+        font-weight: 700;
+        word-break: keep-all;
+        white-space: nowrap;
+    }
+    .app-dynamic .actstruct.follow .content .follow-article{
+        margin-top: 8px;
+        padding: 0 5px;
+        line-height: 22px;
+    }
+    .app-dynamic .actstruct.follow .content .follow-article img{
+        max-width: 100%;
+        margin: 5px 0;
+        border: 1px solid #e6e6e6;
+    }
+    .app-dynamic .actstruct.follow .content .follow-article .fold,
+    .app-dynamic .actstruct.follow .content .follow-article .unfold{
+        display: block;
+        text-align: center;
+        border: 1px solid #ccc;
+        margin-top: 8px;
+        border-radius: 5px;
+        color: #aaa;
+    }
+    .app-dynamic .actstruct.follow .content .follow-article .fold:hover,
+    .app-dynamic .actstruct.follow .content .follow-article .unfold:hover{
+        border-color: #39a5c5;
+        color: #39a5c5;
+    }
+    .app-dynamic .actstruct.follow .content .follow-article .attach{
+        border: 1px solid #dedede;
+        padding: 3px 10px;
+        border-radius: 4px;
+        background: #ffffff;
+        margin-top: 5px;
+    }
+    .app-dynamic .actstruct.follow .content .follow-article .attach .title{
+        margin:0 0 3px -11px;
+        color: #999;
+        display: block;
+    }
+    .app-dynamic .actstruct.follow .content .follow-article .attach .title::before{
+        content: '';
+        display: inline-block;
+        background: var(--color-main-theme);
+        width: 4px;
+        height: 13px;
+        vertical-align: -10%;
+        margin-right: 5px;
+        border-radius: 1px;
+    }
+    .app-dynamic .actstruct.follow .content .follow-article .attach ul li{
+        display: block;
+        padding-left: 4px;
+    }
+    .app-dynamic .actstruct.follow .content .follow-article .attach ul li strong{
+        color: #737373;
+    }
+    .app-dynamic .actstruct.follow .content .follow-article .attach ul li span{
+        font-size: 12px;
+        margin-left: 5px;
+        color: #999;
+    }
+
+    .app-dynamic .starer .user, .app-dynamic .starer .fun {
+        display: inline-block;
+        box-sizing: border-box;
+        width: 50%;
+    }
+    .app-dynamic .starer .user *, .app-dynamic .starer .fun *{
+        margin: 0 auto;
+    }
+    .app-dynamic .starer .user{
+        padding: 10px 0 10px 15px;
+        text-align: center;
+    }
+    .app-dynamic .starer .user *{
+        display: block;
+    }
+    .app-dynamic .starer .user .avatar{
+        display: block;
+        position: relative;
+        width: 48px;
+        height: 48px;
+    }
+    .app-dynamic .starer .user .username{
+        margin-top: 5px;
+        font-size: 0;
+    }
+    .app-dynamic .starer .user .username .name{
+        display: inline-block;
+        max-width: calc(100% - 22px);
+        font-weight: 700;
+        color: #738190;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        word-break: keep-all;
+        white-space: nowrap;
+    }
+    .app-dynamic .starer .user .username .setbk{
+        text-align: left;
+        display: inline-block;
+        width: 22px;
+        color: #3ca5f1;
+    }
+    .app-dynamic .starer .user .username .setbk::before{
+        vertical-align: -3%;
+    }
+    .app-dynamic .starer .fun {
+        text-align: center;
+        padding: 32px 15px 10px 0;
+    }
+    .app-dynamic .starer .fun *{
+        text-align: center;
+        display: inline-block;
+        box-sizing: border-box;
+        transition: .05s ease-in-out;
+        border-radius: 4px;
+        height: 28px;
+        line-height: 20px;
+    }
+    .app-dynamic .starer .fun .star{
+        color: #fff;
+        padding: 2px 0;
+        width: 68px;
+        background: #489ae0;
+        border: 2px solid #489ae0;
+    }
+    .app-dynamic .starer .fun .star.on{
+        color: #989898;
+        background: #ffffff;
+        border-color: #dadada;
+    }
+    .app-dynamic .starer .fun .star-sp{
+        color: #b1b1b1;
+        padding: 2px 0;
+        width: 28px;
+        border: 2px solid #dadada;
+    }
+    .app-dynamic .starer .fun .star-sp::before{
+        vertical-align: -3%;
+    }
+    .app-dynamic .starer .fun .star-sp.on{
+        color: #e65182;
+        border-color: #e65182;
+    }
+
+    .app-dynamic .starer .status{
+        display: block;
+        width: 100%;
+        text-align: center;
+        margin-top: 5px;
+        padding: 11px 0 10px 0;
+        border-top: 1px solid #ececec;
+        border-radius: 35% 35% 0 0;
+        box-shadow: inset 0 2px 10px rgba(0,0,0,.05);
+    }
+    .app-dynamic .starer .status span{
+        display: inline-block;
+        width: 72px;
+    }
+    .app-dynamic .starer .status span *{
+        display: block;
+        width: 100%;
+        text-align: center;
+        font-weight: 700;
+    }
+    .app-dynamic .starer .status span i{
+        color: #99a2aa;
+        letter-spacing: 6px;
+        text-indent: 3px;
+    }
+    .app-dynamic .starer .status span a{
+        color: #00a1d6;
+        margin-top: 8px;
+    }
+    .app-dynamic .starer .status b{
+        display: inline-block;
+        margin: 5px;
+        width: 1px;
+        height: 30px;
+        background: #dcdcdc;
+    }
+/*endregion*/
+/** end **/
+
+
+
+/*---------------
+|     个人中心   |::app-profile
+|----------------
+|  个人信息设置页面
+-----------------------------------------------------------------------------------------------------------------------*/
+/** home::spacecp **/
+/*region 个人中心*/
+    body {
+        background: #f5f5f8;
+    }
+    .banner{
+        z-index: 0;
+        height:128px;
+        background: #00a0d8;
+    }
+    .app-profile [id*='_ctrl_menu']{
+        max-height: 390px;
+        margin: 1px 0 0 -1px;
+    }
+
+    .app-profile [id*="setting_"] .user-info{
+        min-height: 72px;
+        box-sizing: border-box;
+        padding: 4px 0 0 120px;
+        line-height: 39px;
+    }
+    .app-profile [id*="setting_"] .user-info p{
+        display: inline-block;
+    }
+    .app-profile [id*="setting_"] .user-info .avatar{
+        width: 96px;
+        height: 96px;
+        top: -36px;
+        left: 5px;
+        border-radius: 64px;
+        box-shadow: 0 0 0 4px #e4e4e4;
+        background: #e4e4e4;
+    }
+    .app-profile [id*="setting_"] .user-info .avatar .avatar-main{
+        width: 100%;
+        border-radius: 64px;
+    }
+    .app-profile [id*="setting_"] .user-info .p{
+        display: inline-block;
+    }
+    .app-profile [id*="setting_"] .user-info .name{
+        font-size: 22px;
+        color: #393939;
+    }
+    .app-profile [id*="setting_"] .user-info .email{
+        position: absolute;
+        left: 120px;
+        margin-top: 28px;
+        font-size: 12px;
+        color: #aaaaaa;
+    }
+    .app-profile [id*="setting_"] .user-info .email a{
+        text-align: right;
+        margin-left: 10px;
+        display: inline-block;
+        color: #00a0d8;
+        font-size: 14px;
+        width: 14px;
+        vertical-align: -3%;
+    }
+
+    .app-profile [id*="setting_"] .credit-list{
+
+    }
+    .app-profile [id*="setting_"] .credit-list li{
+    display: inline-block;
+    padding: 0 10px;
+    }
+    .app-profile [id*="setting_"] .credit-list li *{
+    display: inline-block;
+    }
+    .app-profile [id*="setting_"] .credit-list .credit-int{
+    height: 54px;
+    line-height: 54px;
+    margin-top: 6px;
+    }
+    .app-profile [id*="setting_"] .credit-list .credit-int *{
+    font-size: 22px;
+    color: #999999;
+    }
+    .app-profile [id*="setting_"] .credit-list .credit-int i{
+    height: 54px;
+    width: 54px;
+    margin-right: 10px;
+    }
+    .app-profile [id*="setting_"] .credit-list .credit-it{
+    line-height: 34px;
+    margin-top: 8px;
+
+    color: #666666;
+    }
+    .app-profile [id*="setting_"] .credit-list .credit-it i{
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    vertical-align: middle;
+    margin: -3px 3px 0 0;
+    }
+
+    .app-profile [id*="setting_avatar"] .avatar-preview{
+        margin: 0 auto;
+        display: block;
+        width: 570px;
+    }
+    .app-profile [id*="setting_avatar"] .avatar-preview .avt{
+        display: inline-block;
+        position: relative;
+        vertical-align: middle;
+        border-radius: 50%;
+        box-shadow: 0 0 0 6px rgba(29, 37, 39, 0.09);
+        margin: 10px;
+    }
+    .app-profile [id*="setting_avatar"] .avatar-preview .avt#am{
+        height: 144px;
+        width: 144px;
+    }
+    .app-profile [id*="setting_avatar"] .avatar-preview .avt#ab{
+        height: 256px;
+        width: 256px;
+    }
+    .app-profile [id*="setting_avatar"] .avatar-preview .avt#as{
+        height: 96px;
+        width: 96px;
+    }
+    .app-profile [id*="setting_avatar"] .avatar-preview .avt img{
+        border-radius: 50%;
+		width:100%;
+		height:100%;
+    }
+
+    .app-profile [id*="setting_privacy"] .filter{
+        border-radius: 50%;
+    }
+    .app-profile [id*="setting_privacy"] .filter h2{
+        text-align: center;
+        border-bottom: 1px solid #dedede;
+        line-height: 34px;
+        height: 17px;
+        margin: 19px 0;
+    }
+    .app-profile [id*="setting_privacy"] .filter span{
+        background: #fff;
+        padding: 0 10px;
+        color: #a5a5a5;
+    }
+
+    .app-profile [id*="setting_credit"] .input-group{
+        border-radius: 12px;
+        border-color: #e9eaec;
+    }
+    .app-profile [id*="setting_credit"] .input-group *{
+        border-color: #e9eaec !important;
+    }
+    .app-profile [id*="setting_credit"] .input-group span{
+        background: #fafbfc;
+        color: #535d6f;
+    }
+    .app-profile [id*="setting_credit"] .input-group .typec{
+        min-width: 70px !important;
+    }
+
+    .app-profile [id*="setting_usergroup"] .table-container,
+    .app-profile [id*="setting_usergroup"] .table-pm{
+        margin: 24px 0 ;
+    }
+    .app-profile [id*="setting_usergroup"] .table-container{
+        border: 1px solid #e5e9ef;
+    }
+    .app-profile [id*="setting_usergroup"] .table-pm tr td{
+        text-align: center;
+        line-height: 48px !important;
+    }
+    .app-profile [id*="setting_usergroup"] .table-pm tr td:first-of-type{
+        text-align: left;
+        padding-left: 15px;
+        color: #718688;
+        font-weight: 700;
+    }
+    .app-profile [id*="setting_usergroup"] .table-pm tr td img{
+        vertical-align: middle;
+        height: 13px;
+        width: auto;
+    }
+    .app-profile [id*="setting_usergroup"] .table-pm thead{
+        background: #f1f5f7 !important;
+    }
+    .app-profile [id*="setting_usergroup"] .table-pm thead tr td{
+        color: #717480 !important;
+    }
+
+    .app-profile [id*="buy_usergroup"] tbody tr td.gname a.current{
+        position: relative;
+        color: #ef7941;
+    }
+    .app-profile [id*="buy_usergroup"] tbody tr td.gname a.current::before{
+        position: absolute;
+        display: inline-block;
+        width: 16px;
+        height: 18px;
+        margin: 11px 0 10px -24px;
+        line-height: 20px;
+        color: #ef7941;
+        font-size: 16px;
+        text-shadow: 0 0 1px;
+    }
+    .app-profile [id*="buy_usergroup"] tbody tr td.func a{
+        box-sizing: border-box;
+        display: inline-block;
+        margin: 7px 3px 0 0;
+        padding: 0 9px;
+        background: #31b6de;
+        border-radius: 6px;
+        height: 26px;
+        line-height: 24px;
+        font-size: 12px;
+        border: 1px solid #4ed1f9;
+        color: #fff;
+    }
+
+    .app-profile [id*="setting_promotion"] .copyurl{
+        display: block;
+        line-height: 36px;
+        font-size: 0;
+        border: 1px solid #0aafd4;
+        margin: 24px 10px;
+        border-radius: 4px;
+        width: 390px;
+    }
+    .app-profile [id*="setting_promotion"] .copyurl span{
+        display: inline-block;
+        width: calc(100% - 42px);
+        box-sizing: border-box;
+        padding: 0 10px;
+        color: #0aafd4;
+        white-space: nowrap;
+        overflow: hidden;
+        cursor: copy;
+    }
+    .app-profile [id*="setting_promotion"] .copyurl a{
+        display: inline-block;
+        text-align: center;
+        width: 42px;
+        background: #00a0d8;
+        color: #fff;
+    }
+/*endregion*/
 /** end **/
 
 
@@ -8554,7 +8534,6 @@
 |  移动版预览系类
 -----------------------------------------------------------------------------------------------------------------------*/
 /** misc::mobile **/
-
 /*region 移动端PC预览*/
     .mobile-preview{
         position: relative;
@@ -8635,5 +8614,4 @@
 
     }
 /*endregion*/
-
 /** end **/
