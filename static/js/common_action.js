@@ -1,5 +1,5 @@
 /***********\
-    申明表   |
+     申明    |
 \***********/
     var SRGlobal = {
 
@@ -44,32 +44,45 @@
     addEvent(document,'DOMContentLoaded',function () {
 
         nav =  SR('#nav')[0];
-
         banner = SR('.banner')[0];
         banner_on = SR('.banner.off')[0] ? 0 : 1 ;
         uconsole = SR('#console')[0];
-        mas_viewer = SR('.Mas > .mas-viewer')[0];
         bottommenu = SR('#bottommenu')[0];
 
-        addEvent(document,'click',doc_onclick);
-        addEvent(window,'scroll',doc_onscroll);
-        addEvent(mas_viewer,'scroll',mas_onscroll);
+        MasElements = {
+            pare:            SR('.Mas')[0],
+            guide:           SR('.Mas > .mas-guide')[0],
+            guideSwitch:     SR('.Mas > .mas-guide > .mas-guide-switch')[0],
+            viewer:          SR('.Mas > .mas-viewer')[0],
+            viewerHeader:    SR('.Mas > .mas-viewer > .mas-viewer-header')[0],
+            viewerBanner:    SR('.Mas > .mas-viewer > .mas-viewer-header > div > .banner')[0],
+            viewerBannerImg: SR('.Mas > .mas-viewer > .mas-viewer-header > div > .banner > img')[0],
+            BankS:     SR('.Mas > .mas-viewer > .mas-viewer-header  > div > .bank.type-scroll')[0],
+        };
 
-        window.onresize = function () {doc_resize();};
+        addEvent(document,'click',DocAction.click);
+        addEvent(window,'scroll',DocAction.scroll);
+
+
+        window.onresize = function () {
+            DocAction.resize();
+            MasAction.bannerImgResize();
+        };
+
         if(document.addEventListener){ //firefox
-            document.addEventListener('DOMMouseScroll', doc_onwheel, false);
+            document.addEventListener('DOMMouseScroll', DocAction.wheel(), false);
         }
-        window.onMousewheel = document.onMousewheel = doc_onwheel; // IE ,Chrome
 
-        doc_resize();
-        doc_initalize();
+        window.onMousewheel = document.onMousewheel = DocAction.wheel(); // IE ,Chrome
+
+        DocAction.initalize();
+        MasAction.initalize();
 
     });
 
 /***********\
     Expand   |
 \***********/
-
     Object.defineProperty(HTMLElement.prototype, 'Css', {
         get: function() {
             var self = this;
@@ -82,8 +95,12 @@
                 }
             }
             return {
+                top: self.getBoundingClientRect().top + window.scrollY,
+                left: self.getBoundingClientRect().left + window.scrollX,
                 width: self.clientWidth || self.offsetWidth,
                 height: self.clientHeight || self.offsetHeight,
+                scrollTop: self.pageYOffset || self.scrollTop,
+                scrollLeft: self.pageXOffset || self.scrollLeft,
                 boxSizing: parseFloat(calcstyle('boxSizing')),
                 paddingTop: parseFloat(calcstyle('paddingTop')),
                 paddingLeft: parseFloat(calcstyle('paddingLeft')),
@@ -284,6 +301,7 @@
 
     function _Top(e) {return e.getBoundingClientRect().top + window.scrollY;}    //绝对顶高
     function _Left(e) {return  e.getBoundingClientRect().left + window.scrollX;} //绝对左高
+
     function _Scroll_top(obj) { //滚动高度
         e = obj;
         if(e){return  e.pageYOffset || e.documentElement.scrollTop;}
@@ -550,6 +568,7 @@
             return t >= 1 ? (l >= 1 ? (t >= l ? 'tr' : 'lb') : (t >= r ? 'tl' : 'rt')) : (l >= 1 ? (b > l ? 'br' : 'lt') : (b >= r ? 'bl' : 'rt'));
         }
     };
+
     function tooltip_init(obj) {
         var tooltips = obj ? obj.querySelectorAll('.tooltip') : document.querySelectorAll('.tooltip');
         for(var i =0 ; i<tooltips.length; i++){
@@ -1023,212 +1042,227 @@
 /***********\
    页面动作  |页面滚动/点击触发的动作
 \***********/
-    function doc_onscroll() {
-        BodyHeight = document.documentElement.scrollHeight || document.body.scrollHeight;
-        WinHeight = document.documentElement.clientHeight || document.body.clientHeight;
+    var DocAction = {
 
+        initalize: function () {
 
-        var ScrollToBottom = _Scroll_top() + WinHeight >= BodyHeight ? 1 : 0;
-        var dr = _Scroll_dir();
+            /* 页面尺寸初始化 */
+            this.resize();
 
-        //nav 隐藏
-        (function () {
-            if(nav){
-                nav.addClass('trans-ease');
+            /* tooltip初始化 */
+            tooltip_init();
 
-                var nav_height = nav.clientHeight;
-                var banner_height = banner.clientHeight;
-                var nav_editor = document.querySelector('#e_controls');
-
-                if(_Scroll_top() > banner.clientHeight && dr === 'b'){
-                    if(banner_on){nav.addClass('white');}
-                    setTimeout(function(){nav.style.transform ='translateY(-' + (nav_height + 10) +'px)';},0);
-                    if(nav_editor && nav_editor.getBoundingClientRect().top <= nav_height){
-                        nav_editor.addClass('trans-ease');
-                        setTimeout(function(){nav_editor.style.transform ='translateY(-' + nav_height +'px)';},0);
-                    }
-                }
-                if(_Scroll_top() < banner_height || dr === 't'){
-                    nav.style.transform ='translateY(0)';
-                    if(nav_editor){
-                        nav_editor.addClass('trans-ease');
-                        setTimeout(function(){nav_editor.style.transform ='translateY(0)';},0);
-                    }
-                }
-                if(banner_on){
-                    if(_Scroll_top() < banner_height - nav_height){
-                        nav.delClass('white');
-                    } else {
-                        nav.addClass('white');
-                    }
-                }
-                if(ScrollToBottom){
-                    if(!nav_editor && !uconsole){
-                        setTimeout(function(){
-                            nav.delClass('trans-ease');
-                            nav.addClass('trans-ease-slow');
-                            nav.style.transform ='translateY(0)';
-                        },0);
-                    }
-                }
+            /* nav样式初始化 */
+            if(nav && banner_on){
+                _Scroll_top() < banner.clientHeight ? nav.delClass('white') : nav.addClass('white');
             }
-        })();
+        },
 
-        // console 翻滚
-        (function () {
-            if(uconsole){
-                var scrollrate = 1.3;
-                var menu = uconsole.getElementsByClassName('menu')[0];
-                var menu_list = uconsole.getElementsByTagName('ul')[0];
-                var console_title = uconsole.getElementsByClassName('title')[1];
-                function topaction () {
-                    menu.style.transform = 'translate3d(0,0,0)';
-                    menu.style.position = '';
-                    menu.style.top = '';
-                    console_title.style.position = '';
-                    console_title.style.top = '';
-                    console_title.style.transform = 'translate3d(0,0,0)';
-                    uconsole.style.paddingTop = '';
+        scroll: function () {
+
+            BodyHeight = document.documentElement.scrollHeight || document.body.scrollHeight;
+            WinHeight = document.documentElement.clientHeight || document.body.clientHeight;
+
+            var ScrollToBottom = _Scroll_top() + WinHeight >= BodyHeight ? 1 : 0;
+            var dr = _Scroll_dir();
+
+            //nav 隐藏
+            (function () {
+                if(nav){
+                    nav.addClass('trans-ease');
+
+                    var nav_height = nav.clientHeight;
+                    var banner_height = banner.clientHeight;
+                    var nav_editor = document.querySelector('#e_controls');
+
+                    if(_Scroll_top() > banner.clientHeight && dr === 'b'){
+                        if(banner_on){nav.addClass('white');}
+                        setTimeout(function(){nav.style.transform ='translateY(-' + (nav_height + 10) +'px)';},0);
+                        if(nav_editor && nav_editor.getBoundingClientRect().top <= nav_height){
+                            nav_editor.addClass('trans-ease');
+                            setTimeout(function(){nav_editor.style.transform ='translateY(-' + nav_height +'px)';},0);
+                        }
+                    }
+                    if(_Scroll_top() < banner_height || dr === 't'){
+                        nav.style.transform ='translateY(0)';
+                        if(nav_editor){
+                            nav_editor.addClass('trans-ease');
+                            setTimeout(function(){nav_editor.style.transform ='translateY(0)';},0);
+                        }
+                    }
+                    if(banner_on){
+                        if(_Scroll_top() < banner_height - nav_height){
+                            nav.delClass('white');
+                        } else {
+                            nav.addClass('white');
+                        }
+                    }
+                    if(ScrollToBottom){
+                        if(!nav_editor && !uconsole){
+                            setTimeout(function(){
+                                nav.delClass('trans-ease');
+                                nav.addClass('trans-ease-slow');
+                                nav.style.transform ='translateY(0)';
+                            },0);
+                        }
+                    }
                 }
-                if(uconsole.scrollHeight >= WinHeight*scrollrate && WinHeight > 390 ){
-                    uconsole.addClass('trans-ease');
-                    menu_list.style.height = 'auto';
-                    if(_Scroll_top() > _Top(uconsole)){
-                        menu.style.position = 'fixed';
-                        menu.style.top = '0';
-                        console_title.style.position = 'fixed';
-                        console_title.style.top = '0';
-                        uconsole.style.paddingTop = console_title.clientHeight + 'px';
-                        if(dr === 'b'){
-                            menu.style.transform = 'translate3d(0,0,0)';
-                            console_title.style.transform = 'translate3d(0,0,0)';
+            })();
+
+            // console 翻滚
+            (function () {
+                if(uconsole){
+                    var scrollrate = 1.3;
+                    var menu = uconsole.getElementsByClassName('menu')[0];
+                    var menu_list = uconsole.getElementsByTagName('ul')[0];
+                    var console_title = uconsole.getElementsByClassName('title')[1];
+                    function topaction () {
+                        menu.style.transform = 'translate3d(0,0,0)';
+                        menu.style.position = '';
+                        menu.style.top = '';
+                        console_title.style.position = '';
+                        console_title.style.top = '';
+                        console_title.style.transform = 'translate3d(0,0,0)';
+                        uconsole.style.paddingTop = '';
+                    }
+                    if(uconsole.scrollHeight >= WinHeight*scrollrate && WinHeight > 390 ){
+                        uconsole.addClass('trans-ease');
+                        menu_list.style.height = 'auto';
+                        if(_Scroll_top() > _Top(uconsole)){
+                            menu.style.position = 'fixed';
+                            menu.style.top = '0';
+                            console_title.style.position = 'fixed';
+                            console_title.style.top = '0';
+                            uconsole.style.paddingTop = console_title.clientHeight + 'px';
+                            if(dr === 'b'){
+                                menu.style.transform = 'translate3d(0,0,0)';
+                                console_title.style.transform = 'translate3d(0,0,0)';
+                            }
+                            if(dr === 't'){
+                                setTimeout(
+                                    function () {
+                                        menu.style.transform = 'translate3d(0,' + nav.offsetHeight +'px, 0)';
+                                        console_title.style.transform = 'translate3d(0,' + nav.offsetHeight +'px, 0)';
+                                    },1
+                                );
+                            }
+                        } else {
+                            topaction ()
                         }
-                        if(dr === 't'){
-                            setTimeout(
-                                function () {
-                                    menu.style.transform = 'translate3d(0,' + nav.offsetHeight +'px, 0)';
-                                    console_title.style.transform = 'translate3d(0,' + nav.offsetHeight +'px, 0)';
-                                },1
-                            );
+                        if(_Scroll_top() + WinHeight >= BodyHeight - 50 ){
+                            menu_list.style.height = WinHeight - nav.offsetHeight - console_title.offsetHeight - document.body.Css.marginBottom + 'px';
                         }
-                    } else {
+                    }
+                    if(_Scroll_top() <= _Top(uconsole)) {
                         topaction ()
                     }
-                    if(_Scroll_top() + WinHeight >= BodyHeight - 50 ){
-                        menu_list.style.height = WinHeight - nav.offsetHeight - console_title.offsetHeight - document.body.Css.marginBottom + 'px';
-                    }
                 }
-                if(_Scroll_top() <= _Top(uconsole)) {
-                    topaction ()
-                }
-            }
-        })();
+            })();
+        },
 
-        //返回顶部
-        var btn_ScrollToTop = document.querySelector('#ScrollToTop');
-        if(btn_ScrollToTop){
-            if (_Scroll_top() > banner.clientHeight - nav.offsetHeight) {
-                btn_ScrollToTop.addClass('active');
-            } else {
-                btn_ScrollToTop.delClass('active');
+        wheel: function (e) {
+            return  wdir = _Wheel_dir(e);
+        },
+
+        resize: function () {
+
+            SRGlobal.Window.Width = document.documentElement.Css.width;
+            SRGlobal.Window.Height = document.documentElement.Css.height;
+
+            SRGlobal.Window.Guide_Width = isUndefined(MasElements.guide) ? 0 : 72;
+
+            var Global_Style_Tag = 'WL-0';
+
+            if(SRGlobal.Window.Width > 350 + SRGlobal.Window.Guide_Width){
+                Global_Style_Tag = 'WL-3P';
             }
+            if(SRGlobal.Window.Width > 470 + SRGlobal.Window.Guide_Width){
+                Global_Style_Tag = 'WL-4P';
+            }
+            if(SRGlobal.Window.Width > 760){
+                Global_Style_Tag = 'WL-7P';
+            }
+            if(SRGlobal.Window.Width > 1320){
+                Global_Style_Tag = 'WL-13P';
+            }
+            if(SRGlobal.Window.Width > 1910){
+                Global_Style_Tag = 'WL-1K';
+            }
+            if(SRGlobal.Window.Width > 2550){
+                Global_Style_Tag = 'WL-2K';
+            }
+            if(SRGlobal.Window.Width > 4080){
+                Global_Style_Tag = 'WL-4K';
+            }
+
+            if(SRGlobal.Temp.Base_Style !== Global_Style_Tag){
+                SRGlobal.Temp.Base_Style = Global_Style_Tag;
+                document.querySelector('body').delClass("WL-0 WL-3P WL-4P WL-7P WL-13P WL-1K WL-2K WL-2K WL-4K");
+                document.querySelector('body').addClass(Global_Style_Tag);
+            }
+
+            if(nav){
+                nav.delClass('trans-ease-slow trans-ease');
+            }
+            if(document.querySelector('#e_controls')) {
+                document.querySelector('#e_controls').delClass('trans-ease-slow trans-ease');
+            }
+            if(document.querySelector('#console')) {
+                document.querySelector('#console').delClass('trans-ease-slow trans-ease');
+            }
+        },
+
+        click: function (e) { //传入e事件来兼容火狐
+            var x = _Cursor_pos(e).x;
+            var y = _Cursor_pos(e).y;
+            var h = document.documentElement.clientHeight;
+
+            var triggle = getEventobj();
+
+            /* modal 在 body 的委托 */
+            if(triggle.data('type') === 'modal'){
+                triggle.target.modal(triggle.data('action'));
+            }
+
+            console.log(triggle);
         }
-    }
+    };
 
-    function mas_onscroll() {
-        // Mas界面滚动
-        (function () {
-            if(mas_viewer){
-                var mas = mas_viewer.parentElement;
-                var mas_guide = mas.querySelector('.mas-guide');
-                var mas_guide_switch = mas_guide.querySelector('.mas-guide-switch');
+    var MasAction = {
 
-                if(mas_viewer.scrollTop >= mas_viewer.querySelector('.mas-viewer-header').Css.height){
-                    mas_viewer.querySelector('.bank.type-scroll').addClass('active');
-                    mas_guide_switch.addClass('highlight');
+        initalize: function () {
+            this.bannerImgResize();
+            addEvent(MasElements.viewer,'scroll',this.viewerScroll);
+        },
+
+        viewerScroll: function () {
+
+            MasAction.bannerImgResize();
+
+            if(MasElements.viewer && MasElements.viewerBanner.Css.height !== 0){
+                if(MasElements.viewer.scrollTop >= MasElements.viewerHeader.Css.height){
+                    MasElements.BankS.addClass('active');
+                    MasElements.guideSwitch.addClass('highlight');
                 } else {
-                    mas_viewer.querySelector('.bank.type-scroll').delClass('active');
-                    mas_guide_switch.delClass('highlight');
+                    MasElements.BankS.delClass('active');
+                    MasElements.guideSwitch.delClass('highlight');
+                }
+
+                if(MasElements.viewerBanner.Css.height - MasElements.viewer.scrollTop > 0){
+                    MasElements.viewerBannerImg.style.transform = 'translate(-50%, -' + (50 - MasElements.viewer.scrollTop / MasElements.viewerBanner.Css.height * 50) + '%)';
                 }
             }
-        })();
-    }
 
-    function doc_onclick(e) { //传入e事件来兼容火狐
-        var x = _Cursor_pos(e).x;
-        var y = _Cursor_pos(e).y;
-        var h = document.documentElement.clientHeight;
+        },
 
-        var triggle = getEventobj();
+        bannerImgResize: function () {
 
-
-        /* modal 在 body 的委托 */
-        if(triggle.data('type') === 'modal'){
-            triggle.target.modal(triggle.data('action'));
+            if(MasElements.viewerBannerImg.Css.width / MasElements.viewerBannerImg.Css.height >= MasElements.viewerBanner.Css.width / MasElements.viewerBanner.Css.height){
+                MasElements.viewerBannerImg.style.width = "auto";
+                MasElements.viewerBannerImg.style.height = "100%";
+            } else {
+                MasElements.viewerBannerImg.style.width = "100%";
+                MasElements.viewerBannerImg.style.height = "auto";
+            }
         }
-
-        console.log(triggle);
-
-    }
-
-    function doc_onwheel(e) {
-        var wdir = _Wheel_dir(e);
-    }
-    function doc_resize() {
-
-        SRGlobal.Window.Width = SR('body')[0].clientWidth;
-        SRGlobal.Window.Height = SR('body')[0].clientHeight;
-
-        SRGlobal.Window.Guide_Width = isUndefined(SR('.Mas .mas-guide')[0]) ? 0 : 72;
-
-        var Global_Style_Tag = 'WL-0';
-
-        if(SRGlobal.Window.Width > 350 + SRGlobal.Window.Guide_Width){
-            Global_Style_Tag = 'WL-3P';
-        }
-        if(SRGlobal.Window.Width > 470 + SRGlobal.Window.Guide_Width){
-            Global_Style_Tag = 'WL-4P';
-        }
-        if(SRGlobal.Window.Width > 760){
-            Global_Style_Tag = 'WL-7P';
-        }
-        if(SRGlobal.Window.Width > 1320){
-            Global_Style_Tag = 'WL-13P';
-        }
-        if(SRGlobal.Window.Width > 1910){
-            Global_Style_Tag = 'WL-1K';
-        }
-        if(SRGlobal.Window.Width > 2550){
-            Global_Style_Tag = 'WL-2K';
-        }
-        if(SRGlobal.Window.Width > 4080){
-            Global_Style_Tag = 'WL-4K';
-        }
-
-        if(SRGlobal.Temp.Base_Style !== Global_Style_Tag){
-            SRGlobal.Temp.Base_Style = Global_Style_Tag;
-            document.querySelector('body').delClass("WL-0 WL-3P WL-4P WL-7P WL-13P WL-1K WL-2K WL-2K WL-4K");
-            document.querySelector('body').addClass(Global_Style_Tag);
-        }
-
-
-        if(nav){
-            nav.delClass('trans-ease-slow trans-ease');
-        }
-        if(document.querySelector('#e_controls')) {
-            document.querySelector('#e_controls').delClass('trans-ease-slow trans-ease');
-        }
-        if(document.querySelector('#console')) {
-            document.querySelector('#console').delClass('trans-ease-slow trans-ease');
-        }
-    }
-    function doc_initalize() {
-
-        /* tooltip初始化 */
-        tooltip_init();
-
-        /* nav样式初始化 */
-        if(nav && banner_on){
-            _Scroll_top() < banner.clientHeight ? nav.delClass('white') : nav.addClass('white');
-        }
-    }
+    };

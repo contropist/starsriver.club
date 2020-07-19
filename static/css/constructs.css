@@ -2887,12 +2887,12 @@
     }
 
     .Mas.edge .mas-guide{
+        overflow: visible;
         width: var(--width-mas-guide);
         background: #fff;
         border-right: 1px solid var(--color-slightgray);
         --guide-upside-height: calc(100% - var(--guide-downside-height));
         --guide-downside-height: 92px;
-        overflow: visible;
     }
     .Mas.edge .mas-guide .mas-guide-upside{
         position: absolute;
