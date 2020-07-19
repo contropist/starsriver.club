@@ -1,0 +1,108 @@
+<!--{if empty($nestmode)}-->
+    <!--{template common/header}-->
+    <div id="pt" class="bm cl">
+        <div class="z">
+            <a href="./" class="nvhm" title="{lang homepage}">$_G[setting][bbname]</a><em class="direct"></em>
+            <a href="home.php?mod=space&do=friend">{lang friends}</a><em class="direct"></em>
+        </div>
+    </div>
+
+    <div>
+        <!--[nest=nest1]--><div id="nest1" class="area"></div><!--[/nest]-->
+    </div>
+    <div>
+        <div class="mn">
+            <!--[nest=nestcontenttop]--><div id="nestcontenttop" class="area"></div><!--[/nest]-->
+            <div class="bm bw0">
+                <!--{if $space[self]}-->
+                    <h1 class="mt"><img alt="friend" src="{STATICURL}image/feed/friend.gif" class="vm" /> {lang friend_list}</h1>
+                    <ul class="tb cl">
+                        <li{$a_actives[me]}><a href="home.php?mod=space&do=friend">{lang all_friend_list}</a></li>
+                        <!--{if empty($_G['setting']['sessionclose'])}-->
+                        <li{$a_actives[onlinefriend]}><a href="home.php?mod=space&do=friend&view=online&type=friend">{lang online_friend}</a></li>
+                        <li{$a_actives[onlinemember]}><a href="home.php?mod=space&do=friend&view=online&type=member">{lang online_member}</a></li>
+                        <!--{/if}-->
+                        <li{$a_actives[onlinenear]}><a href="home.php?mod=space&do=friend&view=online&type=near">{lang online_near}</a></li>
+                        <li{$a_actives[visitor]}><a href="home.php?mod=space&do=friend&view=visitor">{lang my_visitor}</a></li>
+                        <li{$a_actives[trace]}><a href="home.php?mod=space&do=friend&view=trace">{lang my_trace}</a></li>
+                        <li{$a_actives[blacklist]}><a href="home.php?mod=space&do=friend&view=blacklist">{lang my_blacklist}</a></li>
+                    </ul>
+                    <div class="tbmu cl">
+                        <!--{if $_GET['view']=='blacklist'}-->
+                            {lang blacklist_message}
+                        <!--{elseif $_GET['view']=='me'}-->
+                            <p class="y">
+                                {lang count_member}
+                            <!--{if $maxfriendnum}-->
+                                ({lang max_friend_num})
+                                <!--{if $_G['setting']['magicstatus'] && $_G[setting][magics][friendnum]}-->
+                                    <img src="{STATICURL}image/magic/friendnum.small.gif" alt="friendnum" class="vm" />
+                                    <a id="a_magic_friendnum" href="home.php?mod=magic&mid=friendnum" onmousemove="showTip(this)" tip="{lang expansion_friend_message}" onclick="showWindow('magics', this.href, 'get', 0);return false;">{lang expansion_friend}</a>
+                                <!--{/if}-->
+                            <!--{/if}-->
+                            </p>
+                            <p class="z">
+                                {lang friend_message}
+                            </p>
+                        <!--{elseif $_GET['view']=='online'}-->
+                            <!--{if $_GET['type'] == 'friend'}-->
+                                {lang online_friend_visit}
+                            <!--{elseif $_GET['type']=='near'}-->
+                                {lang near_friend_visit}
+                            <!--{else}-->
+                                {lang view_online_friend}
+                            <!--{/if}-->
+                        <!--{elseif $_GET['view']=='visitor'}-->
+                            {lang visitor_list}
+                        <!--{elseif $_GET['view']=='trace'}-->
+                            {lang trace_list}
+                        <!--{/if}-->
+                    </div>
+
+                    <!--{if $_GET['view']=='blacklist'}-->
+                    <h2 class="mtw xs2">{lang add_blacklist}</h2>
+                    <div class="bm bmn mtm cl">
+                        <form method="post" autocomplete="off" name="blackform" action="home.php?mod=spacecp&ac=friend&op=blacklist&start=$_GET[start]">
+                            <table cellpadding="0" cellspacing="0" class="tfm">
+                                <tr>
+                                    <th>{lang username}</th>
+                                    <td>
+                                        <input type="text" name="username" value="" size="15" class="px vm" />
+                                        <button type="submit" name="blacklistsubmit_btn" id="moodsubmit_btn" value="true" class="pn vm"><em>{lang add}</em></button>
+                                    </td>
+                                </tr>
+                            </table>
+                            <input type="hidden" name="blacklistsubmit" value="true" />
+                            <input type="hidden" name="formhash" value="{FORMHASH}" />
+                        </form>
+                    </div>
+                    <!--{/if}-->
+                <!--{/if}-->
+            </div>
+            <!--[nest=nestcontentbottom]--><div id="nestcontentbottom" class="area"></div><!--[/nest]-->
+        </div>
+
+        <div class="appl">
+            <!--{subtemplate home/space_route_mod_friend_nav}-->
+
+            <div class="drag">
+                <!--[nest=nest2]--><div id="nest2" class="area"></div><!--[/nest]-->
+            </div>
+        </div>
+    </div>
+    <!--{template home/space_trends_mod_friend}-->
+    <div class="wp mtn">
+        <!--[nest=nest3]--><div id="nest3" class="area"></div><!--[/nest]-->
+    </div>
+<!--{else}-->
+		<!--{template home/space_home_header}-->
+        <div class="mas-viewer">
+            <div class="mas-viewer-header">
+                <!--{template home/space_home_userabout}-->
+            </div>
+            <div class="mas-viewer-container">
+                <!--{template home/space_home_mod_friend}-->
+            </div>
+        </div>
+<!--{/if}-->
+<!--{template common/footer}-->

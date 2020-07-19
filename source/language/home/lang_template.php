@@ -418,6 +418,7 @@ $lang = [
     'favorite_forum' => '版块',
     'favorite_group' => '{$_G[setting][navs][3][navname]}',
     'favorite_thread' => '回复',
+    'friend' => '好友',
     'no_favorite_yet' => '你还没有添加任何收藏',
     'select_all' => '全选',
     'click_play' => '点击播放',

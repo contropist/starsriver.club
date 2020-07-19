@@ -538,7 +538,7 @@
         padding: 0 17px;
         height: 32px;
         line-height: 32px;
-        background: #e26;
+        background: var(--color-onnanoko-pink);
         font-weight: 400;
         box-shadow: 0 3px 10px rgba(238, 34, 102, 0.39);
         transition-duration: .2s;
@@ -4499,7 +4499,7 @@
         margin: 0 auto;
     }
     .comment-list .watch-all:hover{
-        color: #e26;
+        color: var(--color-onnanoko-pink);
         border: 1px solid;
         border-radius: 5px;
         padding: 1px;

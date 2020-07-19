@@ -11,6 +11,9 @@
             <li {if $_GET['do'] == 'index'}class="active"{/if}><a href="home.php?mod=space&uid=$space[uid]&do=index"><i class="ft-aperture"></i><span>{lang main_page}</span></a></li>
         <!--{/if}-->
     <!--{/if}-->
+
+    <li {if $_GET['do'] == 'friend'}class="active"{/if}><a href="home.php?mod=space&uid=$space[uid]&do=friend&view=me&from=space"><i class="ft-users"></i><span>{lang friend}</span></a></li>
+
     <!--{if empty($personalnv['banitems']['feed']) && helper_access::check_module('feed')}-->
     <li {if $_GET['do'] == 'home'}class="active"{/if}><a href="home.php?mod=space&uid=$space[uid]&do=home&view=me&from=space"><i class="ft-linkedin"></i><span>{lang feed}</span></a></li>
     <!--{/if}-->
