@@ -1169,7 +1169,7 @@
             SRGlobal.Window.Width = document.documentElement.Css.width;
             SRGlobal.Window.Height = document.documentElement.Css.height;
 
-            SRGlobal.Window.Guide_Width = isUndefined(MasElements.guide) ? 0 : 72;
+            SRGlobal.Window.Guide_Width = isUndefined(MasElements.guide) ? 0 : MasElements.guide.Css.width;
 
             var Global_Style_Tag = 'WL-0';
 
