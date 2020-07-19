@@ -60,21 +60,6 @@
             BankS:     SR('.Mas > .mas-viewer > .mas-viewer-header  > div > .bank.type-scroll')[0],
         };
 
-        addEvent(document,'click',DocAction.click);
-        addEvent(window,'scroll',DocAction.scroll);
-
-
-        window.onresize = function () {
-            DocAction.resize();
-            MasAction.bannerImgResize();
-        };
-
-        if(document.addEventListener){ //firefox
-            document.addEventListener('DOMMouseScroll', DocAction.wheel(), false);
-        }
-
-        window.onMousewheel = document.onMousewheel = DocAction.wheel(); // IE ,Chrome
-
         DocAction.initalize();
         MasAction.initalize();
 
@@ -1046,6 +1031,16 @@
 
         initalize: function () {
 
+            addEvent(document,'click',DocAction.click);
+            addEvent(window,'scroll',DocAction.scroll);
+            addEvent(window,'resize',DocAction.resize);
+            addEvent(window,'mousewheel',DocAction.wheel);
+            addEvent(document,'mousewheel',DocAction.wheel);
+
+            if(document.addEventListener){ //firefox
+                document.addEventListener('DOMMouseScroll', DocAction.wheel(), false);
+            }
+
             /* 页面尺寸初始化 */
             this.resize();
 
@@ -1223,21 +1218,24 @@
             if(triggle.data('type') === 'modal'){
                 triggle.target.modal(triggle.data('action'));
             }
-
-            console.log(triggle);
         }
     };
 
     var MasAction = {
 
         initalize: function () {
-            this.bannerImgResize();
-            addEvent(MasElements.viewer,'scroll',this.viewerScroll);
+
+            addEvent(MasElements.viewer,'scroll',MasAction.viewerScroll);
+            addEvent(window,'resize',MasAction.bannerImgResize);
+
+            if(MasElements.viewerBannerImg){
+                MasElements.viewerBannerImg.onload = function () {
+                    setTimeout(MasAction.bannerImgResize(),10);
+                }
+            }
         },
 
         viewerScroll: function () {
-
-            MasAction.bannerImgResize();
 
             if(MasElements.viewer && MasElements.viewerBanner.Css.height !== 0){
                 if(MasElements.viewer.scrollTop >= MasElements.viewerHeader.Css.height){
@@ -1249,20 +1247,20 @@
                 }
 
                 if(MasElements.viewerBanner.Css.height - MasElements.viewer.scrollTop > 0){
-                    MasElements.viewerBannerImg.style.transform = 'translate(-50%, -' + (50 - MasElements.viewer.scrollTop / MasElements.viewerBanner.Css.height * 50) + '%)';
+                    MasElements.viewerBannerImg.style.transform = 'translate(-50%, -' + (50 - MasElements.viewer.scrollTop / MasElements.viewerBannerImg.Css.height * 50) + '%)';
                 }
             }
-
         },
 
         bannerImgResize: function () {
-
-            if(MasElements.viewerBannerImg.Css.width / MasElements.viewerBannerImg.Css.height >= MasElements.viewerBanner.Css.width / MasElements.viewerBanner.Css.height){
-                MasElements.viewerBannerImg.style.width = "auto";
-                MasElements.viewerBannerImg.style.height = "100%";
-            } else {
-                MasElements.viewerBannerImg.style.width = "100%";
-                MasElements.viewerBannerImg.style.height = "auto";
+            if(MasElements.viewerBannerImg){
+                if(MasElements.viewerBannerImg.naturalWidth / MasElements.viewerBannerImg.naturalHeight >= MasElements.viewerBanner.Css.width / MasElements.viewerBanner.Css.height){
+                    MasElements.viewerBannerImg.style.width = "auto";
+                    MasElements.viewerBannerImg.style.height = "100%";
+                } else {
+                    MasElements.viewerBannerImg.style.width = "100%";
+                    MasElements.viewerBannerImg.style.height = "auto";
+                }
             }
         }
     };
