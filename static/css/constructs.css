@@ -1031,7 +1031,7 @@
     .btn-primary:hover {background: #3b54a0;}
     /* With-Border */
     .btn-web-b    {color:var(--color-main-theme) !important; border:1px solid var(--color-main-theme);}
-    .btn-success-b{color var(--color-mod-success) !important; border:1px solid var(--color-mod-success);}
+    .btn-success-b{color:var(--color-mod-success) !important; border:1px solid var(--color-mod-success);}
     .btn-warning-b{color:var(--color-mod-warning) !important; border:1px solid var(--color-mod-warning);}
     .btn-danger-b {color:var(--color-mod-danger) !important; border:1px solid var(--color-mod-danger);}
     .btn-info-b   {color:var(--color-mod-info) !important; border:1px solid var(--color-mod-info);}
@@ -2548,12 +2548,10 @@
 /*region Common*/
     body {
         opacity: 0;
-        visibility: hidden;
         transition: .15s ease-in-out;
     }
     body[class*='WL-'] {
         opacity: 1;
-        visibility: visible;
     }
     [html-ws] {
         display: block;
@@ -2630,16 +2628,16 @@
         font-size: 24px;
         color: #fff;
         padding: 5px;
-        text-shadow: 0 0 2px #00000033;
-        box-shadow: 0 0 0 2px #ffffffcc, 1px 1px 4px #00000033;
+        text-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+        box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.8), 1px 1px 4px rgba(0, 0, 0, 0.2);
         border-radius: 50%;
         cursor: pointer;
         transition: .3s ease-in-out;
     }
     .Mas .mas-guide .mas-guide-switch.highlight {
         color: #3e3e3e;
-        text-shadow: 0 0 2px #0c0c0c33;
-        box-shadow: 0 0 0 2px #232323cc, 1px 1px 4px #00000033;
+        text-shadow: 0 0 2px rgba(12, 12, 12, 0.2);
+        box-shadow: 0 0 0 2px rgba(35, 35, 35, 0.8), 1px 1px 4px rgba(0, 0, 0, 0.2);
     }
     .Mas .mas-guide.open .mas-guide-switch {
         opacity: 0;
@@ -2668,7 +2666,6 @@
         z-index: 0;
         transition: .1s .03s ease-in-out;
         background-color: #f9f9f9;
-        padding-bottom: 50px;
     }
     body[class*='WL-'] .Mas .mas-guide,
     body[class*='WL-'] .Mas .mas-viewer{
@@ -2835,12 +2832,13 @@
     .WL-0 .Mas.edge{
         --width-mas-guide:0px !important;
     }
+
     .WL-3P .Mas.edge,
     .WL-4P .Mas.edge,
     .WL-7P .Mas.edge{
         --width-mas-guide: 72px;
         --logo-text-display: none;
-        --menu-text-align: center;
+        --menu-text-align: center !important;
         --menu-padding: 10px 0;
         --menu-li-background: none;
         --menu-li-background-active: var(--color-main-theme);
@@ -2864,7 +2862,7 @@
     .WL-1K .Mas.edge,
     .WL-2K .Mas.edge,
     .WL-4K .Mas.edge,
-    .Mas.edge .open{
+    .Mas.edge .mas-guide.open{
         --width-mas-guide: 240px;
         --logo-text-display: inline-block;
         --menu-text-align: left;
@@ -2877,6 +2875,7 @@
         --menu-icon-background-active: var(--color-main-theme);
         --menu-icon-size: 35px;
         --menu-icon-margin: 3px 20px 3px 0;
+        --menu-icon-width: auto;
         --menu-icon-line-height: 35px;
         --menu-text-width: auto;
         --menu-text-line-height: 42px;
@@ -2892,10 +2891,6 @@
     .WL-4K .Mas.edge .mas-guide-switch{
         opacity: 0;
         visibility: hidden;
-    }
-
-    .Mas.edge .mas-guide .mas-guide-switch {
-        margin: 18px 15px;
     }
 
     .Mas.edge .mas-guide{
@@ -2920,6 +2915,10 @@
         height: var(--guide-downside-height);
         overflow: visible;
     }
+    .Mas.edge .mas-guide .mas-guide-switch {
+        margin: 18px 15px;
+    }
+
     .Mas.edge .mas-guide .start,
     .Mas.edge .mas-guide .start a{
         width: 100%;
@@ -3008,6 +3007,7 @@
     .Mas.edge .mas-viewer .mas-viewer-container{
         width: 100%;
         box-sizing: border-box;
+        margin-bottom:30px;
     }
 
     .Mas.edge .mas-viewer .mas-viewer-container table{

@@ -24,6 +24,12 @@
     scrollbar-track-color: #fff;
 }
 
+body,
+.Mas [class*="mas-"]{
+    -ms-overflow-style:none;
+    scrollbar-width: none;
+}
+
 body::-webkit-scrollbar,
 .Mas [class*="mas-"]::-webkit-scrollbar{
     width: 0;
