@@ -1231,7 +1231,8 @@
             if(MasElements.viewerBannerImg){
                 MasElements.viewerBannerImg.onload = function () {
                     setTimeout(MasAction.bannerImgResize(),10);
-                }
+                };
+                setTimeout(MasAction.bannerImgResize(),1);
             }
         },
 
@@ -1253,14 +1254,12 @@
         },
 
         bannerImgResize: function () {
-            if(MasElements.viewerBannerImg){
-                if(MasElements.viewerBannerImg.naturalWidth / MasElements.viewerBannerImg.naturalHeight >= MasElements.viewerBanner.Css.width / MasElements.viewerBanner.Css.height){
-                    MasElements.viewerBannerImg.style.width = "auto";
-                    MasElements.viewerBannerImg.style.height = "100%";
-                } else {
-                    MasElements.viewerBannerImg.style.width = "100%";
-                    MasElements.viewerBannerImg.style.height = "auto";
-                }
+            if(MasElements.viewerBannerImg.naturalWidth / MasElements.viewerBannerImg.naturalHeight >= MasElements.viewerBanner.Css.width / MasElements.viewerBanner.Css.height){
+                MasElements.viewerBannerImg.style.width = "auto";
+                MasElements.viewerBannerImg.style.height = "100%";
+            } else {
+                MasElements.viewerBannerImg.style.width = "100%";
+                MasElements.viewerBannerImg.style.height = "auto";
             }
         }
     };
