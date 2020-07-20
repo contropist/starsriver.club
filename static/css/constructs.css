@@ -898,25 +898,29 @@
         padding: 2px 6px;
     }
 
+    .ccbox,
+    .csbox{
+        line-height: 22px;
+    }
+
     .ccbox label::before,
     .csbox label::before{
         display: inline-block;
-        width:16px;
+        width: 20px;
         vertical-align: -1px;
     }
 
     .ccbox label::before{
-        content: '\e0e1';
-
+        content: '\e554';
     }
     .ccbox input[type="checkbox"]:checked+label::before, .ccbox input[type="radio"]:checked+label::before
-    {content: '\e02d';}
+    {content: '\e553';}
 
     .csbox label::before{
-        content: '\e038';
+        content: '\e557';
     }
     .csbox input[type="checkbox"]:checked+label::before, .csbox input[type="radio"]:checked+label::before
-    {content: '\e02c';}
+    {content: '\e555';}
 
     .ccbox label:hover,
     .csbox label:hover{  color: #43b48c !important;  }
@@ -1008,6 +1012,7 @@
     /* Basic */
     .btn{
         display:block !important;
+        box-sizing: border-box;
         background:none;
         text-align: center;
         transition: .1s ease-in-out;
@@ -3174,7 +3179,7 @@
         line-height: 54px;
         text-align: center;
         border-bottom: 1px solid #e9eaec;
-        color: #858688;
+        color: var(--color-text-dark);
         font-size: 15px;
         text-indent: 4px;
         letter-spacing: 4px;
@@ -3196,7 +3201,7 @@
         margin: 5px 0;
         height: 40px;
         line-height: 36px;
-        color: #727979;
+        color: var(--color-text-dark);
         border-radius: 6px;
         border: 2px solid #fff;
     }
@@ -3307,21 +3312,20 @@
     .plate.cloud .vessel .inputline{
         font-size: 14px;
         line-height: 42px;
-        margin: 10px 0;
+        padding: 15px 0;
         border-bottom: 1px solid #f5f5f8;
-        padding-bottom: 10px;
     }
     .plate.cloud .vessel .inputline *{
         display: inline-block;
         vertical-align: middle;
     }
-    .plate.cloud .vessel .inputline span{
-        color: #6a6a6a;
+    .plate.cloud .vessel .inputline .profile-desc{
+        color: var(--color-text-dark);
         margin: 0 5px;
-        min-width: 80px;
+        width: 100px;
         text-align: right;
     }
-    .plate.cloud .vessel .inputline span .must{
+    .plate.cloud .vessel .inputline .profile-desc .must{
         display: inline-block;
         height: 8px;
         width: 8px;
@@ -3330,7 +3334,7 @@
         vertical-align: baseline;
         margin:1px 5px;
     }
-    .plate.cloud .vessel .inputline span::after{
+    .plate.cloud .vessel .inputline .profile-desc::after{
         content: ' : ';
     }
     .plate.cloud .vessel .inputline .input-simulate,
@@ -3343,9 +3347,17 @@
         line-height: 34px;
         color: #696969;
         padding: 0 10px;
-        margin: 0 5px;
+        margin-right: 5px;
         border: 1px solid #ced7da;
         border-radius: 8px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    .plate.cloud .vessel .inputline .input-simulate.unchangeable{
+        /*width: auto !important;*/
+        background: #f5f5f5;
+        border-color: #f5f5f5;
     }
     .plate.cloud .vessel .inputline .input-simulate[datatype*="smallint"],
     .plate.cloud .vessel .inputline select[datatype*="smallint"],
@@ -3356,14 +3368,6 @@
         line-height: 22px !important;
         padding: 5px 10px;
     }
-    .plate.cloud .vessel .inputline .input-simulate{
-        /*width: auto !important;*/
-        background: #f5f5f5;
-        border-color: #f5f5f5;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-    }
     .plate.cloud .vessel .inputline input:focus,
     .plate.cloud .vessel .inputline textarea:focus{
         border-color: #00a0d8;
@@ -3371,31 +3375,119 @@
     .plate.cloud .vessel .inputline textarea{
         height: 100px;
     }
+    .plate.cloud .vessel .inputline .select-multi{
+        height: auto;
+        overflow: auto;
+        text-overflow: unset;
+        white-space: unset;
+        max-height: unset;
+        padding: 0;
+        border-style: dashed;
+        border-width: 2px;
+    }
+    .plate.cloud .vessel .inputline .select-multi option{
+        display: inline-block;
+        margin: 5px;
+        padding: 5px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        width: 64px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    .plate.cloud .vessel .inputline .img-slot{
+        position: relative;
+        max-height: 120px !important;
+        width: 180px !important;
+        overflow: hidden;
+        border-radius: 8px;
+        line-height: 0;
+        box-shadow: 0 1px 10px rgba(0,0,0,.1);
+    }
+    .plate.cloud .vessel .inputline .img-slot img{
+        width: 100%;
+    }
+    .plate.cloud .vessel .inputline .img-selector{
+        position: relative;
+        width: 180px;
+    }
+    .plate.cloud .vessel .inputline .img-selector .btn{
+        border-radius: 8px;
+        display: inline-block !important;
+        padding: 0 14px;
+        color: #00aeef;
+        border: 2px solid rgba(0,174,239,0.6);
+        box-shadow: 0 0 0 2px rgba(0,174,239,0.13);
+        float: right;
+        margin: 8px 0;
+    }
+    .plate.cloud .vessel .inputline .img-selector .img-size{
+        position: absolute;
+        top: 0;
+        left: calc(100% + 5px);
+        line-height: 25px;
+        padding: 0 5px;
+        border-radius: 6px;
+        white-space: nowrap;
+        background: var(--color-text-info);
+        color: #fff;
+        font-size: 12px;
+    }
+    .plate.cloud .vessel .inputline .check-slot{
+        width: 180px;
+    }
+    .plate.cloud .vessel .inputline .check-slot s{
+        display: block;
+    }
     .plate.cloud .vessel .inputline .input-tip{
+        position: relative;
         color: var(--color-onnanoko-pink);
+        margin-left: 20px;
+        line-height: 20px;
+        cursor: pointer;
+    }
+    .plate.cloud .vessel .inputline .input-tip i{
+        font-size: 24px;
+    }
+    .plate.cloud .vessel .inputline .input-tip .tooltip{
+        margin-left: 10px;
+        transition: .1s ease-in-out;
+    }
+    .plate.cloud .vessel .inputline .input-tip:hover .tooltip{
+        margin: 0;
+        opacity: 1;
+        visibility: visible;
     }
     .plate.cloud .vessel .inputline .message{
-        max-width: calc(100% - 300px);
-        padding-left: 56px;
+        max-width: calc(100% - 320px);
+        padding-left: 20px;
         box-sizing: border-box;
         line-height: 18px;
-        color: #999;
+        color: var(--color-text-gray);
         font-size: 12px;
     }
     .plate.cloud .vessel .inputline .message a{
         color: #00a0d8;
         margin: 0 3px;
     }
+    .plate.cloud .vessel .inputline .message strong{
+        position: relative;
+    }
+    .plate.cloud .vessel .inputline .message .tooltip{
+        padding: 0;
+        border: none;
+        box-shadow: rgba(101,119,134,0.2) 0 0 15px, rgba(101,119,134,0.15) 0 0 3px 1px;
+    }
+    .plate.cloud .vessel .inputline .message .tooltip img{
+        max-width: 720px;
+        max-height: 480px;
+    }
     .plate.cloud .vessel .inputline label[type*="icon"]{
         display: none;
     }
     .plate.cloud .vessel .inputline .radiolist{
         display: inline-block;
-    }
-    .plate.cloud .vessel .inputline .radiolist.r{
-        position: absolute;
-        right: 0;
-        background: #fff;
     }
     .plate.cloud .vessel .inputline .radiolist input[type="radio"]{
         display: none !important;
@@ -3407,21 +3499,20 @@
         line-height: 28px;
         padding: 0 8px;
         border-radius: 6px;
-        color: #999;
+        color: var(--color-text-gray);
         font-size: 12px;
     }
     .plate.cloud .vessel .inputline .radiolist input[type="radio"]:checked + label{
-        background: #0aafd4;
-        border-color: #1baaca;
+        background: #0ca7e2;
+        border-color: #0ca7e2;
         color: #fff;
     }
     .plate.cloud .vessel .inputline .editor{
         position: relative;
-        margin: 0 5px;
         border: 1px solid #ced7da;
         border-radius: 8px;
         overflow: hidden;
-        width: calc(100% - 120px);
+        width: calc(100% - 390px);
     }
     .plate.cloud .vessel .inputline .editor textarea{
         margin: 0;
@@ -3543,7 +3634,7 @@
         display: inline-block;
         box-sizing: border-box;
         position: relative;
-        color: #888;
+        color: var(--color-text-dark);
         font-size: 14px;
         height: 54px;
         line-height: 64px;

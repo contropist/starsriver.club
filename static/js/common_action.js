@@ -456,6 +456,35 @@
         s.initalize();
     }
 
+  /* 图片上传预览组件 2020-07-19 zhangyu 2692284716@qq.com
+  *    通过 “role” 属性来获取对象
+  *    结构：
+  *     ; role="canvas"    : 图形对象 <img>
+  *     ; role="file-elem" : 输入容器 <input type="file">
+  *     ; role="file-info" : 输入容器 <span>
+  */
+    function imgpreview(obj){
+
+        window.URL = window.URL || window.webkitURL;
+
+        var fileShow = obj.querySelector("[role=canvas]"),
+            fileElem = obj.querySelector("[role=file-elem]"),
+            fileInfo = obj.querySelector("[role=file-info]");
+
+        fileElem.onchange = function () {
+            var files = fileElem.files;
+            if (!files.length) {
+                return '';
+            } else {
+                fileShow.src = window.URL.createObjectURL(files[0]);
+                fileShow.onload = function() {
+                    window.URL.revokeObjectURL(this.src);
+                };
+                fileShow.alt = files[0].name + ": " + (files[0].size/1024) + " KB";
+                fileInfo.innerHTML = Math.ceil(files[0].size/1024) + " KB";
+            }
+        }
+    }
   /* tooltip组件 2017-9-27 zhangyu 2692284716@qq.com
   *  通过 tooltip_init(obj); 来初始化，obj如果为空则代表对全局元素进行初始化
   *     使用的是嵌套组合而非全局定位，tooltip节点位于 hover 节点之内,利用 data-*传值 ，时间以毫秒为单位

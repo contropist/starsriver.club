@@ -107,6 +107,7 @@ $lang = array(
 
     'person' => '人',
     'delete' => '删除',
+    'select_file' => '选择文件',
 
     'space_update' => '{actor} 被SHOW了一下',
 
@@ -315,7 +316,7 @@ $lang = array(
     'credit_update_reward_clean'      => '清零',
 
     'profile_unchangeable'        => '此项资料提交后不可修改',
-    'profile_is_verifying'        => '此项资料正在审核中',
+    'profile_is_verifying'        => '此项资料正在审核中...',
     'profile_mypost'              => '我提交的内容',
     'profile_need_verifying'      => '此项资料提交后需要审核',
     'profile_edit'                => '修改',
@@ -346,6 +347,8 @@ $lang = array(
     'follow_specified_group'         => '话题专区',
     'follow_specified_forum'         => '话题专版',
     'filesize_lessthan'              => '文件大小应该小于',
+    'checkbox_max'                   => '最多可勾选 {num} 个选项',
+    'input_must'                     => '必填项',
     'spacecp_message_prompt'         => '(支持 {msg} 代码,最大 1000 字)',
     'card_update_doing'              => '',
     'email_acitve_message'           => '{newemail} 正等待验证中...<br>系统已经向该邮箱发送了一封验证激活邮件，请查收邮件，进行验证激活。如果没有收到验证邮件，你可以更换一个邮箱，或者<a href="home.php?mod=spacecp&ac=profile&op=password&resend=1">重新接收验证邮件</a>',

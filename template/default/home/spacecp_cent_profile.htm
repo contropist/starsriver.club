@@ -46,23 +46,23 @@
 							<input type="hidden" value="{FORMHASH}" name="formhash" />
 							<!--{if !$_G['setting']['connect']['allow'] || !$conisregister}-->
 								<div class="inputline">
-									<span><i class="must"></i>{lang old_password}</span>
+									<span class="profile-desc"><i class="must"></i>{lang old_password}</span>
 									<input type="password" name="oldpassword" id="oldpassword" />
 									<p class="message"></p>
 								</div>
 							<!--{/if}-->
 							<div class="inputline">
-								<span>{lang new_password}</span>
+								<span class="profile-desc">{lang new_password}</span>
 								<input type="password" name="newpassword" id="newpassword" />
 								<p class="message">{lang memcp_profile_passwd_comment}</p>
 							</div>
 							<div class="inputline">
-								<span>{lang new_password_confirm}</span>
+								<span class="profile-desc">{lang new_password_confirm}</span>
 								<input type="password" name="newpassword2" id="newpassword2"/>
 								<p class="message">{lang memcp_profile_passwd_comment}</p>
 							</div>
 							<div class="inputline">
-								<span>{lang email}</span>
+								<span class="profile-desc">{lang email}</span>
 								<input type="text" name="emailnew" id="emailnew" value="$space[email]" />
 								<p class="message">
 									<!--{if $_G['member']['freeze'] == 2}-->
@@ -81,7 +81,7 @@
 
                             <!--{if $_G['member']['freeze'] == 2 || $_G['member']['freeze'] == -1}-->
 							<div class="inputline">
-								<span>{lang freeze_reason}</span>
+								<span class="profile-desc">{lang freeze_reason}</span>
 								<textarea name="freezereson">$space[freezereson]</textarea>
 								<label class="message">
                                     <!--{if $_G['member']['freeze'] == 2}-->{lang freeze_reason_comment}<!--{/if}-->
@@ -92,14 +92,14 @@
 
                             <!--{if ($_G['member']['freeze'] == 2 || $_G['member']['freeze'] == -1) && !empty($space[freezemodremark])}-->
 							<div class="inputline">
-								<span>{lang freeze_remark}</span>
+								<span class="profile-desc">{lang freeze_remark}</span>
 								<textarea name="freezemodremark" disabled="disabled">$space[freezemodremark]</textarea>
 								<label class="message">{lang freeze_remark_comment}</label>
 							</div>
 							<!--{/if}-->
 
 							<div class="inputline">
-								<span>{lang security_question}</span>
+								<span class="profile-desc">{lang security_question}</span>
 								<select name="questionidnew" id="questionidnew">
 									<option value="" selected>{lang memcp_profile_security_keep}</option>
 									<option value="0">{lang security_question_0}</option>
@@ -114,7 +114,7 @@
 								<p class="message">{lang memcp_profile_security_comment}</p>
 							</div>
 							<div class="inputline">
-								<span>{lang security_answer}</span>
+								<span class="profile-desc">{lang security_answer}</span>
 								<input type="text" name="answernew" id="answernew" />
 								<p class="message">{lang memcp_profile_security_answer_comment}</p>
 							</div>
@@ -161,7 +161,7 @@
                                 <!--{loop $settings $key $value}-->
                                     <!--{if $value[available]}-->
                                         <div class="inputline" id="line_$key">
-                                            <span><!--{if $value[required]}--><i class="must"></i><!--{/if}-->$value[title]</span>
+                                            <span class="profile-desc"><!--{if $value[required]}--><i class="must"></i><!--{/if}-->$value[title]</span>
                                             $htmls[$key]
                                             <!--{if $vid}-->
                                                 <input type="hidden" name="privacy[$key]" value="3"/>
@@ -180,14 +180,14 @@
                                 <!--{/loop}-->
                                 <!--{if $allowcstatus && in_array('customstatus', $allowitems)}-->
                                     <div class="inputline" id="line_customstatus">
-                                        <span>{lang permission_basic_status}</span>
+                                        <span class="profile-desc">{lang permission_basic_status}</span>
                                         <input type="text" value="$space[customstatus]" name="customstatus" id="customstatus" />
                                         <p class="message" id="showerror_customstatus"></p>
                                     </div>
                                 <!--{/if}-->
                                 <!--{if $_G['group']['maxsigsize'] && in_array('sightml', $allowitems)}-->
                                     <div class="inputline" id="line_sightml">
-                                        <span>{lang personal_signature}</span>
+                                        <span class="profile-desc">{lang personal_signature}</span>
                                         <div class="editor">
                                             <textarea name="sightml" id="sightmlmessage" onkeydown="ctrlEnter(event, 'profilesubmitbtn');" placeholder="">$space[sightml]</textarea>
                                             <!--{if $_G['group']['allowsigimgcode']}-->
@@ -203,7 +203,7 @@
                                 <!--{if in_array('timeoffset', $allowitems)}-->
                                 <!--{eval $timeoffset = array({lang timezone});}-->
                                     <div class="inputline" id="line_timeoffset">
-                                        <span>{lang time_zone}</span>
+                                        <span class="profile-desc">{lang time_zone}</span>
                                         <select name="timeoffset">
                                             <!--{loop $timeoffset $key $desc}-->
                                             <option value="$key"{if $key==$space[timeoffset]} selected="selected"{/if}>$desc</option>
@@ -233,13 +233,14 @@
 									if(elem) {
 										var debuger = elem.querySelector('.input-tip');
 										if( !debuger){
-											debuger = document.createElement('p');
+											debuger = document.createElement('div');
 											debuger.className = "input-tip";
 											elem.appendChild(debuger);
 										}
 										fieldname = elem.innerHTML;
-										extrainfo = (typeof extrainfo == "string") ? extrainfo : "";
-										debuger.innerHTML = "{lang check_date_item} " + extrainfo;
+										extrainfo = ((typeof extrainfo == "string") && extrainfo.length !== 0) ? ("：" + extrainfo) : "";
+										debuger.innerHTML = "<i class='mt-error_outline'></i><span class='tooltip rt'>{lang check_date_item} " + extrainfo + "</span>";
+										alert('部分内容填写有误，请检查错误项（鼠标移至感叹号可查看具体原因）');
 										$(fieldid).focus();
 									}
 								}

@@ -138,7 +138,7 @@
 								<input type="hidden" name="transfersubmit" value="true" />
 								<input type="hidden" name="handlekey" value="transfercredit" />
 								<div class="inputline">
-									<span>{lang memcp_credits_transfer}</span>
+									<span class="profile-desc">{lang memcp_credits_transfer}</span>
 									<input type="text" name="transferamount" id="transferamount" value="0" datatype="smallint"/>
 									<span style="width:50px; min-width: auto">{$_G[setting][extcredits][$_G[setting][creditstransextra][9]][title]}{lang credits_give}</span>
 									<input type="text" name="to" id="to" value=""/>
@@ -148,11 +148,11 @@
 									</p>
 								</div>
 								<div class="inputline">
-									<span>{lang credits_transfer_message}</span>
+									<span class="profile-desc">{lang credits_transfer_message}</span>
 									<input type="text" name="transfermessage" value=" " size="40" required/>
 								</div>
 								<div class="inputline">
-									<span><i class="must"></i>{lang transfer_login_password}</span>
+									<span class="profile-desc"><i class="must"></i>{lang transfer_login_password}</span>
 									<input type="password" name="password" autocomplete="off"/>
 								</div>
 								<button class="maintheme" type="submit" name="transfersubmit_btn" id="transfersubmit_btn" value="true">{lang memcp_credits_transfer}</button>

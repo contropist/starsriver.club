@@ -204,9 +204,9 @@ EOF;
 			} elseif ($anchor == 'authstr') {
 				$_GET['flag'] = 0;
 			}
-			$intkeys = array('uid', 'verifytype', 'flag', 'verify1', 'verify2', 'verify3', 'verify4', 'verify5', 'verify6', 'verify7', 'verify8', 'verify9', 'verify10', 'verify11', 'verify12', 'verify13', 'verify14', 'verify15');
-			$strkeys = array();
-			$randkeys = array();
+			$intkeys = ['uid', 'verifytype', 'flag', 'verify1', 'verify2', 'verify3', 'verify4', 'verify5', 'verify6', 'verify7', 'verify8', 'verify9', 'verify10', 'verify11', 'verify12', 'verify13', 'verify14', 'verify15'];
+			$strkeys = [];
+			$randkeys = [];
 			$likekeys = array('username');
 			$results = getwheres($intkeys, $strkeys, $randkeys, $likekeys, 'v.');
 			foreach($likekeys as $k) {

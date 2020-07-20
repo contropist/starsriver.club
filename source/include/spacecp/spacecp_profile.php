@@ -138,6 +138,7 @@ if(submitcheck('profilesubmit')) {
 				$value = 'http://'.$value;
 			}
 		}
+
 		if($field['formtype'] == 'file') {
 			if((!empty($_FILES[$key]) && $_FILES[$key]['error'] == 0) || (!empty($space[$key]) && empty($_GET['deletefile'][$key]))) {
 				$value = '1';
@@ -145,23 +146,36 @@ if(submitcheck('profilesubmit')) {
 				$value = '';
 			}
 		}
+
 		if(empty($field)) {
 			continue;
 		} elseif(profile_check($key, $value, $space)) {
 			$setarr[$key] = dhtmlspecialchars(trim($value));
+			if($key == 'field4'){
+                dump($value);
+            }
 		} else {
+            $profile_check_errormsg = '';
 			if($key=='birthprovince') {
 				$key = 'birthcity';
 			} elseif($key=='resideprovince' || $key=='residecommunity'||$key=='residedist') {
 				$key = 'residecity';
 			} elseif($key=='birthyear' || $key=='birthmonth') {
 				$key = 'birthday';
-			}
-			profile_showerror($key);
+			} elseif(in_array($field['formtype'], ['list','checkbox'])) {
+                $profile_check_errormsg = lang('spacecp', 'checkbox_max',['num' => $field['size']]);
+			} else {
+                if($field['required'] && empty($value)){
+                    $profile_check_errormsg = lang('spacecp', 'input_must');
+                }
+            }
+			profile_showerror($key,$profile_check_errormsg);
 		}
+
 		if($field['formtype'] == 'file') {
 			unset($setarr[$key]);
 		}
+
 		if($vid && $verifyconfig['available'] && isset($verifyconfig['field'][$key])) {
 			if(isset($verifyinfo['field'][$key]) && $setarr[$key] !== $space[$key]) {
 				$verifyarr[$key] = $setarr[$key];
@@ -489,7 +503,7 @@ if($operation == 'password') {
 	$showbtn = ($vid && $verify['verify'.$vid] != 1) || empty($vid);
 	if(!empty($verify) && is_array($verify)) {
 		foreach($verify as $key => $flag) {
-			if(in_array($key, array('verify1', 'verify2', 'verify3', 'verify4', 'verify5', 'verify6', 'verify7')) && $flag == 1) {
+			if(in_array($key, ['verify1', 'verify2', 'verify3', 'verify4', 'verify5', 'verify6', 'verify7', 'verify8', 'verify9', 'verify10', 'verify11', 'verify12', 'verify13', 'verify14', 'verify15']) && $flag == 1) {
 				$verifyid = intval(substr($key, -1, 1));
 				if($_G['setting']['verify'][$verifyid]['available']) {
 					foreach($_G['setting']['verify'][$verifyid]['field'] as $field) {

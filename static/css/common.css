@@ -650,7 +650,7 @@
         visibility: hidden;
         border-top: none;
         opacity: 0;
-        box-shadow: 0 3px 3px rgba(0,0,0,0.1);
+        box-shadow: rgba(101,119,134,0.2) 0 15px 15px, rgba(101,119,134,0.15) 0 3px 3px 1px;
         transform: translate3d(0,-5px,0);
         transition: .2s ease-in-out;
     }

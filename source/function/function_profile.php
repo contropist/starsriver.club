@@ -51,7 +51,7 @@ function profile_setting($fieldid, $space=[], $showstatus=false, $ignoreunchanga
 	$field['unchangeable'] = !$ignoreunchangable && $field['unchangeable'] ? 1 : 0;
 	if($fieldid == 'birthday') {
 		if($field['unchangeable'] && !empty($space[$fieldid])) {
-			return '<s class="input-simulate">'.$space['birthyear'].'-'.$space['birthmonth'].'-'.$space['birthday'].'</s>';
+			return '<s class="input-simulate unchangeable">'.$space['birthyear'].'-'.$space['birthmonth'].'-'.$space['birthday'].'</s>';
 		}
 		$birthyeayhtml = '';
 		$nowy = dgmdate($_G['timestamp'], 'Y');
@@ -95,7 +95,7 @@ function profile_setting($fieldid, $space=[], $showstatus=false, $ignoreunchanga
 
 	} elseif($fieldid=='gender') {
 		if($field['unchangeable'] && $space[$fieldid] > 0) {
-			return '<s class="input-simulate">'.lang('space', 'gender_'.intval($space[$fieldid])).'</s>';
+			return '<s class="input-simulate unchangeable">'.lang('space', 'gender_'.intval($space[$fieldid])).'</s>';
 		}
 		$selected = array($space[$fieldid]=>' selected="selected"');
 		$html = '<select name="gender" id="gender">';
@@ -105,18 +105,18 @@ function profile_setting($fieldid, $space=[], $showstatus=false, $ignoreunchanga
 			$html .= '<option value="0"'.($space[$fieldid]=='0' ? ' selected' : '').'>'.lang('space', 'gender_0').'</option>';
 		}
 		$html .= '<option value="1"'.($space[$fieldid]=='1' ? ' selected' : '').'>'.lang('space', 'gender_1').'</option>'
-			.'<option value="2"'.($space[$fieldid]=='2' ? ' selected' : '').'>'.lang('space', 'gender_2').'</option>'
+			    .'<option value="2"'.($space[$fieldid]=='2' ? ' selected' : '').'>'.lang('space', 'gender_2').'</option>'
 			.'</select>'
 			.'<label class="awe-venus-mars" for="gender" type="icon"></label>';
 
 	} elseif($fieldid=='birthcity') {
 		if($field['unchangeable'] && !empty($space[$fieldid])) {
-			return '<s class="input-simulate">'.$space['birthprovince'].'-'.$space['birthcity'].'</s>';
+			return '<s class="input-simulate unchangeable">'.$space['birthprovince'].'-'.$space['birthcity'].'</s>';
 		}
 		$values = array(0,0,0,0);
 		$elems = array('birthprovince', 'birthcity', 'birthdist', 'birthcommunity');
 		if(!empty($space['birthprovince'])) {
-			$html = '<p class="input-simulate pointer" onclick="showdistrict(\'birthdistrictbox\', [\'birthprovince\', \'birthcity\', \'birthdist\', \'birthcommunity\'], 4, \'\', \'birth\'); return false;">'.profile_show('birthcity', $space).'</p>';
+			$html = '<s class="input-simulate pointer" onclick="showdistrict(\'birthdistrictbox\', [\'birthprovince\', \'birthcity\', \'birthdist\', \'birthcommunity\'], 4, \'\', \'birth\'); return false;">'.profile_show('birthcity', $space).'</s>';
 			$html .= '<p id="birthdistrictbox"></p>';
 		} else {
 			$html = '<p id="birthdistrictbox">'.showdistrict($values, $elems, 'birthdistrictbox', 1, 'birth').'</p>';
@@ -124,12 +124,12 @@ function profile_setting($fieldid, $space=[], $showstatus=false, $ignoreunchanga
 
 	} elseif($fieldid=='residecity') {
 		if($field['unchangeable'] && !empty($space[$fieldid])) {
-			return '<s class="input-simulate">'.$space['resideprovince'].'-'.$space['residecity'].'</s>';
+			return '<s class="input-simulate unchangeable">'.$space['resideprovince'].'-'.$space['residecity'].'</s>';
 		}
 		$values = array(0,0,0,0);
 		$elems = array('resideprovince', 'residecity', 'residedist', 'residecommunity');
 		if(!empty($space['resideprovince'])) {
-			$html = '<p class="input-simulate pointer" onclick="showdistrict(\'residedistrictbox\', [\'resideprovince\', \'residecity\', \'residedist\', \'residecommunity\'], 4, \'\', \'reside\'); return false;">'.profile_show('residecity', $space).'</p>';
+			$html = '<s class="input-simulate pointer" onclick="showdistrict(\'residedistrictbox\', [\'resideprovince\', \'residecity\', \'residedist\', \'residecommunity\'], 4, \'\', \'reside\'); return false;">'.profile_show('residecity', $space).'</s>';
 			$html .= '<p id="residedistrictbox"></p>';
 		} else {
 			$html = '<p id="residedistrictbox">'.showdistrict($values, $elems, 'residedistrictbox', 1, 'reside').'</p>';
@@ -138,72 +138,86 @@ function profile_setting($fieldid, $space=[], $showstatus=false, $ignoreunchanga
 		if($field['unchangeable'] && $space[$fieldid]!='') {
 			if($field['formtype']=='file') {
 				$imgurl = getglobal('setting/attachurl').'./profile/'.$space[$fieldid];
-				return '<s class="input-simulate"><a href="'.$imgurl.'" target="_blank"><img src="'.$imgurl.'"  style="max-width: 500px;" /></a></s>';
+				return '<s class="img-slot"><a href="'.$imgurl.'" target="_blank"><img src="'.$imgurl.'"/></a></s>';
 			} else {
-				return '<s class="input-simulate">'.nl2br($space[$fieldid]).'</s>';
+				return '<s class="input-simulate unchangeable">'.nl2br($space[$fieldid]).'</s>';
 			}
 		}
 		if($field['formtype']=='textarea') {
-			$html = "<textarea name=\"$fieldid\" id=\"$fieldid\" class=\"pt\" rows=\"3\" cols=\"40\" tabindex=\"1\">$space[$fieldid]</textarea>";
+			$html = "<textarea name=\"$fieldid\" id=\"$fieldid\" >$space[$fieldid]</textarea>";
 		} elseif($field['formtype']=='select') {
 			$field['choices'] = explode("\n", $field['choices']);
-			$html = "<select name=\"$fieldid\" id=\"$fieldid\" class=\"ps\" tabindex=\"1\">";
+			$html = "<select name='$fieldid' id='$fieldid' >";
 			foreach($field['choices'] as $op) {
-				$html .= "<option value=\"$op\"".($op==$space[$fieldid] ? 'selected="selected"' : '').">$op</option>";
+				$html .= "<option value='$op'".($op==$space[$fieldid] ? 'selected="selected"' : '').">$op</option>";
 			}
 			$html .= '</select>';
 		} elseif($field['formtype']=='list') {
 			$field['choices'] = explode("\n", $field['choices']);
-			$html = "<select name=\"{$fieldid}[]\" id=\"$fieldid\" class=\"ps\" multiple=\"multiplue\" tabindex=\"1\">";
+			$html = "<select class='select-multi' name='{$fieldid}[]' id='$fieldid' multiple='multiplue' >";
 			$space[$fieldid] = explode("\n", $space[$fieldid]);
 			foreach($field['choices'] as $op) {
-				$html .= "<option value=\"$op\"".(in_array($op, $space[$fieldid]) ? 'selected="selected"' : '').">$op</option>";
+				$html .= "<option value='$op'".(in_array($op, $space[$fieldid]) ? 'selected="selected"' : '').">$op</option>";
 			}
 			$html .= '</select>';
 		} elseif($field['formtype']=='checkbox') {
 			$field['choices'] = explode("\n", $field['choices']);
 			$space[$fieldid] = explode("\n", $space[$fieldid]);
+            $html = "<div class='check-slot'>";
 			foreach($field['choices'] as $op) {
-				$html .= ''
-					."<label class=\"\" type=\"icon\"><input type=\"checkbox\" name=\"{$fieldid}[]\" id=\"$fieldid\" value=\"$op\"".(in_array($op, $space[$fieldid]) ? ' checked="checked"' : '')." />"
-					."$op</label>";
+                $idhash = substr(md5($op),0,10);
+				$html .= "<s class='ccbox mager'><input id='$fieldid".$idhash."' type='checkbox' name='{$fieldid}[]' id='$fieldid' value='$op'".(in_array($op, $space[$fieldid]) ? ' checked="checked"' : '')." /><label for='$fieldid".$idhash."'>$op</label></s>";
 			}
+            $html .= "</div>";
 		} elseif($field['formtype']=='radio') {
 			$field['choices'] = explode("\n", $field['choices']);
+            $html = "<div class='check-slot'>";
 			foreach($field['choices'] as $op) {
-				$html .= ''
-						."<label class=\"\" type=\"icon\"><input type=\"radio\" name=\"{$fieldid}\" value=\"$op\" tabindex=\"1\"".($op == $space[$fieldid] ? ' checked="checked"' : '')." />"
-						."$op</label>";
+			    $idhash = substr(md5($op),0,10);
+				$html .= "<s class='csbox mager'><input id='$fieldid".$idhash."' type='radio' name='$fieldid' value='$op' ".($op == $space[$fieldid] ? ' checked="checked"' : '')."/><label for='$fieldid".$idhash."'>$op</label></s>";
 			}
+            $html .= "</div>";
 		} elseif($field['formtype']=='file') {
-			$html = "<input type=\"file\" value=\"\" name=\"$fieldid\" id=\"$fieldid\" tabindex=\"1\" style=\"height:26px;\" /><input type=\"hidden\" name=\"$fieldid\" value=\"$space[$fieldid]\" />";
+			$html = "<div class='img-selector' role='img-selector-container-$fieldid'>";
+            $idhash = substr(md5('delfile'),0,10);
 			if(!empty($space[$fieldid])) {
 				$url = getglobal('setting/attachurl').'./profile/'.$space[$fieldid];
-				$html .= "&nbsp;<label type=\"icon\"><input type=\"checkbox\" tabindex=\"1\" name=\"deletefile[$fieldid]\" id=\"$fieldid\" value=\"yes\" />".lang('spacecp', 'delete')."</label><a href=\"$url\" target=\"_blank\"><img src=\"$url\" width=\"200\" class=\"mtm\" /></a>";
-			}
+                $html .= "<s class='img-slot'><a class='mt-link' href='$url' target='_blank'><img role='canvas' src='$url'/></a></s>";
+                $html .= "<s class='ccbox admin'><input type='checkbox' name='deletefile[$fieldid]' id='$fieldid".$idhash."' value='yes' /><label for='$fieldid".$idhash."'>".lang('spacecp', 'delete')."</label></s>";
+                $html .= "<span class='img-size' role='file-info'></span>";
+			} else {
+                $html .= "<s class='img-slot'><img role='canvas' src='".$_G['style']['imgurl']."/common/no-img/no-img.svg'/></s>";
+                $html .= "<s class='ccbox admin disabled'><input type='checkbox' id='$fieldid".$idhash."' value='yes' /><label for='$fieldid".$idhash."'>".lang('spacecp', 'delete')."</label></s>";
+                $html .= "<span class='img-size' role='file-info'></span>";
+            }
+            $html .= "<label class='btn btn-small' for='$fieldid'>".lang('spacecp', 'select_file')."</label>";
+            $html .= "<input class='hide' type='file'   name='$fieldid' value='' id='$fieldid' role='file-elem'/>";
+            $html .= "<input class='hide' type='hidden' name='$fieldid' value='$space[$fieldid]' />";
+            $html .= "</div>";
+            $html .= "<script>addEvent(document,'DOMContentLoaded',function() { imgpreview(document.querySelector('[role=img-selector-container-$fieldid]')) })</script>";
 		} else {
-			$html = "<input type=\"text\" name=\"$fieldid\" id=\"$fieldid\" class=\"px\" value=\"$space[$fieldid]\" tabindex=\"1\" />";
+			$html = "<input type='text' name='$fieldid' id='$fieldid' value='$space[$fieldid]' />";
 		}
 	}
-	$html .= !$ignoreshowerror ? "<p class=\"input-tip\"></p>" : '';
+	//$html .= !$ignoreshowerror ? "<div class='input-tip'></div>" : '';
+	$html .= "<div class='input-tip'></div>";
+
 	if($showstatus) {
-		$html .= "<p class=\"message\">$value[description]</p>";
+		$html .= "<p class=\"message\">$value[description]";
 		if($space[$fieldid]=='' && $value['unchangeable']) {
-			$html .= lang('spacecp', 'profile_unchangeable');
+			$html .= lang('spacecp', 'profile_unchangeable')."<br />";
 		}
 		if($verifyvalue !== null) {
 			if($field['formtype'] == 'file') {
 				$imgurl = getglobal('setting/attachurl').'./profile/'.$verifyvalue;
-				$verifyvalue = "<img src='$imgurl' alt='$imgurl' style='max-width: 500px;'/>";
+				$verifyvalue = "<img src='$imgurl' alt='$imgurl'/>";
 			}
-			$html .= "<strong>".lang('spacecp', 'profile_is_verifying')." (<a href=\"#\" onclick=\"display('newvalue_$fieldid');return false;\">".lang('spacecp', 'profile_mypost')."</a>)</strong>"
-				."<p id=\"newvalue_$fieldid\" style=\"display:none\">".$verifyvalue."</p>";
+			$html .= "<strong>".lang('spacecp', 'profile_is_verifying')."<span class='tooltip'>".$verifyvalue."</span></strong>";
 		} elseif($field['needverify']) {
 			$html .= lang('spacecp', 'profile_need_verifying');
 		}
 		$html .= '</p>';
 	}
-
 	return $html;
 }
 
@@ -223,7 +237,7 @@ function profile_check($fieldid, &$value, $space=[]) {
 		return false;
 	}
 
-	if($value=='') {
+	if(empty($value)) {
 		if($field['required']) {
 			if(in_array($fieldid, array('birthprovince', 'birthcity', 'birthdist', 'birthcommunity', 'resideprovince', 'residecity', 'residedist', 'residecommunity'))) {
 				if(substr($fieldid, 0, 5) == 'birth') {

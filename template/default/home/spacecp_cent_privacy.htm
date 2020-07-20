@@ -19,7 +19,7 @@
 						<!--{if $operation == 'base'}-->
 							<p class="tool-notice">{lang you_control_see_content}</p>
 							<div class="inputline">
-								<span>{lang friend_list}</span>
+								<span class="profile-desc">{lang friend_list}</span>
 								<div class="radiolist">
 									<input $sels[view][friend][0] name="privacy[view][friend]" id="privacy[view][friend]_0" type="radio" value="0"><label for="privacy[view][friend]_0">{lang open_privacy}</label>
 									<input $sels[view][friend][1] name="privacy[view][friend]" id="privacy[view][friend]_1" type="radio" value="1"><label for="privacy[view][friend]_1">{lang friend_privacy}</label>
@@ -29,7 +29,7 @@
 							</div>
 							<!--{if helper_access::check_module('wall')}-->
 							<div class="inputline">
-								<span>{lang message_board}</span>
+								<span class="profile-desc">{lang message_board}</span>
 								<div class="radiolist">
 									<input $sels[view][wall][0] name="privacy[view][wall]" id="privacy[view][wall]_0" type="radio" value="0"><label for="privacy[view][wall]_0">{lang open_privacy}</label>
 									<input $sels[view][wall][1] name="privacy[view][wall]" id="privacy[view][wall]_1" type="radio" value="1"><label for="privacy[view][wall]_1">{lang friend_privacy}</label>
@@ -40,7 +40,7 @@
 							<!--{/if}-->
 							<!--{if helper_access::check_module('feed')}-->
 							<div class="inputline">
-								<span>{lang personal_feed}</span>
+								<span class="profile-desc">{lang personal_feed}</span>
 								<div class="radiolist">
 									<input $sels[view][home][0] name="privacy[view][home]" id="privacy[view][home]_0" type="radio" value="0"><label for="privacy[view][home]_0">{lang open_privacy}</label>
 									<input $sels[view][home][1] name="privacy[view][home]" id="privacy[view][home]_1" type="radio" value="1"><label for="privacy[view][home]_1">{lang friend_privacy}</label>
@@ -50,7 +50,7 @@
 							<!--{/if}-->
 							<!--{if helper_access::check_module('doing')}-->
 							<div class="inputline">
-								<span>{lang doing}</span>
+								<span class="profile-desc">{lang doing}</span>
 								<div class="radiolist">
 									<input $sels[view][doing][0] name="privacy[view][doing]" id="privacy[view][doing]_0" type="radio" value="0"><label for="privacy[view][doing]_0">{lang open_privacy}</label>
 									<input $sels[view][doing][1] name="privacy[view][doing]" id="privacy[view][doing]_1" type="radio" value="1"><label for="privacy[view][doing]_1">{lang friend_privacy}</label>
@@ -63,7 +63,7 @@
 							<!--{/if}-->
 							<!--{if helper_access::check_module('blog')}-->
 							<div class="inputline">
-								<span>{lang blog}</span>
+								<span class="profile-desc">{lang blog}</span>
 								<div class="radiolist">
 									<input $sels[view][blog][0] name="privacy[view][blog]" id="privacy[view][blog]_0" type="radio" value="0"><label for="privacy[view][blog]_0">{lang open_privacy}</label>
 									<input $sels[view][blog][1] name="privacy[view][blog]" id="privacy[view][blog]_1" type="radio" value="1"><label for="privacy[view][blog]_1">{lang friend_privacy}</label>
@@ -76,7 +76,7 @@
 							<!--{/if}-->
 							<!--{if helper_access::check_module('album')}-->
 							<div class="inputline">
-								<span>{lang album}</span>
+								<span class="profile-desc">{lang album}</span>
 								<div class="radiolist">
 									<input $sels[view][album][0] name="privacy[view][album]" id="privacy[view][album]_0" type="radio" value="0"><label for="privacy[view][album]_0">{lang open_privacy}</label>
 									<input $sels[view][album][1] name="privacy[view][album]" id="privacy[view][album]_1" type="radio" value="1"><label for="privacy[view][album]_1">{lang friend_privacy}</label>
@@ -89,7 +89,7 @@
 							<!--{/if}-->
 							<!--{if helper_access::check_module('share')}-->
 							<div class="inputline">
-								<span>{lang share}</span>
+								<span class="profile-desc">{lang share}</span>
 								<div class="radiolist">
 									<input $sels[view][share][0] name="privacy[view][share]" id="privacy[view][share]_0" type="radio" value="0"><label for="privacy[view][share]_0">{lang open_privacy}</label>
 									<input $sels[view][share][1] name="privacy[view][share]" id="privacy[view][share]_1" type="radio" value="1"><label for="privacy[view][share]_1">{lang friend_privacy}</label>
