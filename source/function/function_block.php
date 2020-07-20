@@ -581,7 +581,7 @@ function block_makeform($blocksetting, $values){
 			$s .= '<input type="'.$type.'" name="'.$varname.'" class="pf" value="'.dhtmlspecialchars($value).'" />';
 		} elseif($type == 'mfile') {
 			$s .= '<label for="'.$settingvar.'way_remote"'.'><input type="radio" name="'.$settingvar.'_chk" id="'.$settingvar.'way_remote" onclick="showpicedit(\''.$settingvar.'\');" checked="checked">'.lang('portalcp', 'remote').'</label>';
-			$s .= '<label for="'.$settingvar.'way_upload"'.'><input type="radio" name="'.$settingvar.'_chk" id="'.$settingvar.'way_upload" onclick="showpicedit(\''.$settingvar.'\');">'.lang('portalcp', 'upload').'</label><br />';
+			$s .= '<label for="'.$settingvar.'way_upload"'.'><input type="radio" name="'.$settingvar.'_chk" id="'.$settingvar.'way_upload" onclick="showpicedit(\''.$settingvar.'\');">'.lang('portalcp', 'upload').'</label><br>';
 			$s .= '<input type="text" name="'.$varname.'" id="'.$settingvar.'_remote" value="'.dhtmlspecialchars($value).'" />';
 			$s .= '<input type="file" name="'.$settingvar.'" id="'.$settingvar.'_upload" class="pf" value="" style="display:none" />';
 		} else {

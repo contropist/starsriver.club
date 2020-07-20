@@ -52,10 +52,10 @@ if($do == 'mod') {
 					$member[$field['fieldid']] = !empty($member[$field['fieldid']]) ? $member[$field['fieldid']] : $fields[$field['fieldid']];
 					if($member[$field['fieldid']]) {
 						$fieldstr = profile_show($field['fieldid'], $member);
-						$str .= $field['title'].':'.$fieldstr."<br/>";
+						$str .= $field['title'].':'.$fieldstr."<br>";
 					}
 				}
-				$str = !empty($str) ? '<br/>'.$str : '';
+				$str = !empty($str) ? '<br>'.$str : '';
 				$member['regdate'] = dgmdate($member['regdate']);
 				$member['submitdate'] = dgmdate($member['submitdate']);
 				$member['moddate'] = $member['moddate'] ? dgmdate($member['moddate']) : $lang['none'];

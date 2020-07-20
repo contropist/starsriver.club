@@ -307,7 +307,7 @@ SEARCH;
 				}
 				if($list) {
 					foreach($list as $bid => $value) {
-						$inpage = empty($nestpage[$bid]) ? cplang('block_page_nopage') : implode('<br/>' ,$nestpage[$bid]);
+						$inpage = empty($nestpage[$bid]) ? cplang('block_page_nopage') : implode('<br>' ,$nestpage[$bid]);
 						$theclass = block_getclass($value['blockclass'], true);
 						showtablerow('', array('class="td25"'), array(
 							"<input type=\"checkbox\" name=\"ids[]\" value=\"$value[bid]\">",
@@ -347,7 +347,7 @@ SEARCH;
 				}
 				if($list) {
 					foreach($list as $bid => $value) {
-						$inpage = empty($nestpage[$bid]) ? cplang('block_page_unused') : implode('<br/>' ,$nestpage[$bid]);
+						$inpage = empty($nestpage[$bid]) ? cplang('block_page_unused') : implode('<br>' ,$nestpage[$bid]);
 						$theclass = block_getclass($value['blockclass'], true);
 						showtablerow('', '', array(
 							$value['name'] ? $value['name'] : cplang('block_name_null'),

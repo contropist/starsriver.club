@@ -98,7 +98,7 @@ if($_GET['suboperation'] == 'creditrulelog') {
 			if(!$havecredit) {
 				continue;
 			}
-			$log['credit'] = implode('<br/>', $credits);
+			$log['credit'] = implode('<br>', $credits);
 			if(in_array($log['operation'], array('RTC', 'RAC', 'STC', 'BTC', 'ACC', 'RCT', 'RCA', 'RCB'))) {
 				$tids[$log['relatedid']] = $log['relatedid'];
 			} elseif(in_array($log['operation'], array('SAC', 'BAC'))) {

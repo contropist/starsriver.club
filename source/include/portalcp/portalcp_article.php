@@ -717,7 +717,7 @@ function portalcp_parse_postattch(&$post) {
 	if($attachs) {
 		$add = '';
 		foreach($attachs as $attachid) {
-			$add .= '<br/>'.'[attach]'.$attachid.'[/attach]';
+			$add .= '<br>'.'[attach]'.$attachid.'[/attach]';
 		}
 		$post['message'] .= $add;
 	}

@@ -15,7 +15,7 @@ if (!defined('IN_DISCUZ')) {
 $lang = array(
 
     'subscribe_Discuz_email' => '填写你的邮件地址，订阅 Discuz! 官方产品动态、安全提醒、官方新闻',
-    'scan_discuz_qrcode'     => '<img src="source/plugin/wechat/image/discuz_qr.jpg" align="left" width="80" /><br />扫描关注Discuz!官方微信<br /><br />获取官方最新动态',
+    'scan_discuz_qrcode'     => '<img src="source/plugin/wechat/image/discuz_qr.jpg" align="left" width="80" /><br>扫描关注Discuz!官方微信<br><br>获取官方最新动态',
     'reglinkname_default'    => '注册',
     'yes'                    => '是',
     'no'                     => '否',

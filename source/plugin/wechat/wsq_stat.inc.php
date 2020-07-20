@@ -25,7 +25,7 @@ if(!$data || $data->code != 0) {
 
 $xa = $uv = $pv = $newthread = $reply = $share = $reflow = [];
 foreach($data->res as $d) {
-    $xa[$d->ftime] = substr($d->ftime, 4, 2).'<br/>'.substr($d->ftime, 6, 2);
+    $xa[$d->ftime] = substr($d->ftime, 4, 2).'<br>'.substr($d->ftime, 6, 2);
     $uv[$d->ftime] = intval($uv[$d->ftime]) + intval($d->uv);
     $pv[$d->ftime] = intval($pv[$d->ftime]) + intval($d->pv);
     $newthread[$d->ftime] = intval($newthread[$d->ftime]) + intval($d->newthread_num);

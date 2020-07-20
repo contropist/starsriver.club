@@ -274,7 +274,7 @@ function getattachexif($aid, $path = '') {
 		);
 		foreach($exif as $key => $value) {
 			if(in_array($key, $keys)) {
-				$return .= "$key : $value<br />";
+				$return .= "$key : $value<br>";
 			}
 		}
 	}

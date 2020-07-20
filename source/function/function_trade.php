@@ -38,7 +38,7 @@ function trade_offline($tradelog, $returndlang = 1, $trade_message = '') {
 	if($returndlang) {
 		for($i = 0, $count = count($tmp);$i < $count;$i++) {
 			$return[$tmp[$i]] = lang('forum/misc', 'trade_offline_'.$tmp[$i]);
-			$trade_message .= isset($language['trade_message_'.$tmp[$i]]) ? lang('forum/misc', 'trade_message_'.$tmp[$i]).'<br />' : '';
+			$trade_message .= isset($language['trade_message_'.$tmp[$i]]) ? lang('forum/misc', 'trade_message_'.$tmp[$i]).'<br>' : '';
 		}
 		return $return;
 	} else {
