@@ -87,7 +87,7 @@ class feedcontrol extends base {
 
 	function _parsetemplate($template) {
 		$template = str_replace(array("\r", "\n"), '', $template);
-		$template = str_replace(array('<br>', '<br>', '<BR>', '<br>'), "\n", $template);
+		$template = str_replace(array('<br>', '<br/>', '<br />', '<BR>', '<BR/>', '<BR />', '<Br>', '<Br/>', '<Br />', '<bR>', '<bR/>', '<bR />'), "\n", $template);
 		$template = str_replace(array('<b>', '<B>'), '[B]', $template);
 		$template = str_replace(array('<i>', '<I>'), '[I]', $template);
 		$template = str_replace(array('<u>', '<U>'), '[U]', $template);
