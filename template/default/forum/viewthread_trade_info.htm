@@ -51,8 +51,8 @@
             <!--{if $trade['transport'] == 2}-->{lang post_trade_transport_customer}<!--{/if}-->
                     <span class="tooltip" data-pos="tl">
                       <!--{if !empty($trade['ordinaryfee']) || !empty($trade['expressfee']) || !empty($trade['emsfee'])}-->
-                        <!--{if !empty($trade['ordinaryfee'])}-->{lang post_trade_transport_mail} ￥$trade[ordinaryfee]<br /><!--{/if}-->
-                        <!--{if !empty($trade['expressfee'])}--> {lang post_trade_transport_express} ￥$trade[expressfee]<br /><!--{/if}-->
+                        <!--{if !empty($trade['ordinaryfee'])}-->{lang post_trade_transport_mail} ￥$trade[ordinaryfee]<br><!--{/if}-->
+                        <!--{if !empty($trade['expressfee'])}--> {lang post_trade_transport_express} ￥$trade[expressfee]<br><!--{/if}-->
                         <!--{if !empty($trade['emsfee'])}--> EMS ￥$trade[emsfee]<!--{/if}-->
                         <!--{elseif $trade['transport'] == 2}-->
                             {lang post_trade_transport_none}
@@ -168,7 +168,7 @@
                     $trade[credit]{$_G['setting']['extcredits'][$_G['setting']['creditstransextra'][5]][unit]}{$_G['setting']['extcredits'][$_G['setting']['creditstransextra'][5]][title]}
                 </span>
                 <!--{/if}-->
-                <br/>
+                <br>
                 <!--{if $trade[price] && $trade['costprice'] > 0 || $_G['setting']['creditstransextra'][5] != -1 && $trade[credit] && $trade['costcredit'] > 0}-->
                 <span class="price-old">
                     <!--{if $trade['costprice'] > 0}-->

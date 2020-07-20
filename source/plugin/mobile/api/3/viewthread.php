@@ -40,7 +40,7 @@ class mobile_api {
 					if(strexists($postlist[$pid]['message'], '[attach]'.$aid.'[/attach]')) {
 						$postlist[$pid]['message'] = str_replace('[attach]'.$aid.'[/attach]', mobileoem_parseimg($postlist[$pid]['attachments'][$aid]['width'], 0, $variable['imagelist'][$aid]), $postlist[$pid]['message']);
 					} else {
-						$postlist[$pid]['message'] .= '<br /><br />'.mobileoem_parseimg($postlist[$pid]['attachments'][$aid]['width'], 0, $variable['imagelist'][$aid]);
+						$postlist[$pid]['message'] .= '<br><br>'.mobileoem_parseimg($postlist[$pid]['attachments'][$aid]['width'], 0, $variable['imagelist'][$aid]);
 					}
 				}
 			}
@@ -52,7 +52,7 @@ class mobile_api {
 						if(strexists($postlist[$pid]['message'], '[attach]'.$aid.'[/attach]')) {
 							$postlist[$pid]['message'] = str_replace('[attach]'.$aid.'[/attach]', $_code, $postlist[$pid]['message']);
 						} else {
-							$postlist[$pid]['message'] .= '<br /><br />'.$_code;
+							$postlist[$pid]['message'] .= '<br><br>'.$_code;
 						}
 					}
 				}

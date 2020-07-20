@@ -156,7 +156,7 @@ if(!$operation) {
 		$descdir .= $subdir;
 		cloudaddons_comparetree($tmpdir, $descdir, $tmpdir, $_GET['key'].'.'.$_GET['type'], 1);
 		if(!empty($_G['treeop']['oldchange']) && empty($_GET['confirmed'])) {
-			cpmsg('cloudaddons_install_files_changed', '', 'form', array('files' => implode('<br />', $_G['treeop']['oldchange'])));
+			cpmsg('cloudaddons_install_files_changed', '', 'form', array('files' => implode('<br>', $_G['treeop']['oldchange'])));
 		}
 		cloudaddons_copytree($tmpdir, $descdir);
 		cloudaddons_savemd5($_GET['key'].'.'.$_GET['type'], $_GET['end'], $_G['treeop']['md5']);

@@ -2,7 +2,7 @@
 <div class="box"><a href="forum.php">{lang return_forum}</a><a href="javascript:history.back();" onclick="javascript:history.back();" title="{lang goback}" >{lang goback}</a></div>
 <div class="bm">
 	<div class="bm_c">
-    <div>{$space[username]} (UID: {$space[uid]}) <!--{if $space[uid] != $_G[uid]}--><a href="home.php?mod=spacecp&ac=pm&touid={$space[uid]}">{lang send_pm}</a><!--{/if}--> <!--{if $_G['group']['allowbanuser']}--><a href="forum.php?mod=modcp&action=member&op=ban&uid={$space[uid]}">{lang ban_member}</a><!--{/if}--> <br />{lang space_visits} <strong>$space[views]</strong></div>
+    <div>{$space[username]} (UID: {$space[uid]}) <!--{if $space[uid] != $_G[uid]}--><a href="home.php?mod=spacecp&ac=pm&touid={$space[uid]}">{lang send_pm}</a><!--{/if}--> <!--{if $_G['group']['allowbanuser']}--><a href="forum.php?mod=modcp&action=member&op=ban&uid={$space[uid]}">{lang ban_member}</a><!--{/if}--> <br>{lang space_visits} <strong>$space[views]</strong></div>
 </div>
 <div class="bm">
 	<p class="bm_h">{lang memcp_profile}</p>
@@ -22,11 +22,11 @@
         <td valign="top">{lang stat_info}: </td>
         <td>
             {lang friends_num} $space[friends]
-            <br />
+            <br>
             {lang doings_num} $space[doings]
-            <br />
+            <br>
             {lang blogs_num} $space[blogs]
-            <br />
+            <br>
             {lang albums_num} $space[albums]
         </td>
    	  </tr>

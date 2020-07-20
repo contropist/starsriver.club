@@ -85,7 +85,7 @@ function securitymessage($subject, $message, $reload = TRUE, $form = FALSE) {
 	$message = $scuritylang[$message] ? $scuritylang[$message] : $message;
 	if($_GET['inajax']) {
 		security_ajaxshowheader();
-		echo '<div id="attackevasive_1" class="popupmenu_option"><b style="font-size: 16px">'.$subject.'</b><br /><br />'.$message.'</div>';
+		echo '<div id="attackevasive_1" class="popupmenu_option"><b style="font-size: 16px">'.$subject.'</b><br><br>'.$message.'</div>';
 		security_ajaxshowfooter();
 	} else {
 		echo '<html>';
@@ -113,9 +113,9 @@ function securitymessage($subject, $message, $reload = TRUE, $form = FALSE) {
 		echo '    <table cellpadding="10" cellspacing="0" border="0" width="80%" align="center" style="font-family: Verdana, Tahoma; color: #666666; font-size: 11px">';
 		echo '    <tr>';
 		echo '      <td valign="middle" align="center" bgcolor="#EBEBEB">';
-		echo '     	<br /><br /> <b style="font-size: 16px">'.$subject.'</b> <br /><br />';
+		echo '     	<br><br> <b style="font-size: 16px">'.$subject.'</b> <br><br>';
 		echo $message;
-		echo '        <br /><br />';
+		echo '        <br><br>';
 		echo '      </td>';
 		echo '    </tr>';
 		echo '    </table>';

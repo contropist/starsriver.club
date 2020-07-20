@@ -25,7 +25,7 @@
 						var aim = e.target || e.srcElement;
 						aim.style.outline = '1px solid blue';
 						if(aim.parentNode.style) aim.parentNode.style.outline = '2px solid orange';
-						$("output").innerHTML = "<span style='color: #666'>&lt;" + aim.parentNode.tagName + " class=\"" + aim.parentNode.className + "\" /&gt;" + "</span><br />&nbsp;&nbsp;&nbsp;&nbsp;&lt;" + aim.tagName + " class=\"" + aim.className + "\" /&gt;";
+						$("output").innerHTML = "<span style='color: #666'>&lt;" + aim.parentNode.tagName + " class=\"" + aim.parentNode.className + "\" /&gt;" + "</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&lt;" + aim.tagName + " class=\"" + aim.className + "\" /&gt;";
 					};
 					document.onmouseout = function() {
 						var e = getEvent();

@@ -148,9 +148,9 @@ function formulaperm($formula) {
 			$i = 0;$_G['forum_usermsg'] = '';
 			foreach($search as $s) {
 				if(in_array($s, array('digestposts', 'posts', 'threads', 'oltime', 'extcredits1', 'extcredits2', 'extcredits3', 'extcredits4', 'extcredits5', 'extcredits6', 'extcredits7', 'extcredits8'))) {
-					$_G['forum_usermsg'] .= strexists($formulatext, $s) ? '<br />&nbsp;&nbsp;&nbsp;'.$replace[$i].': '.(@eval('return intval(getuserprofile(\''.$s.'\'));')) : '';
+					$_G['forum_usermsg'] .= strexists($formulatext, $s) ? '<br>&nbsp;&nbsp;&nbsp;'.$replace[$i].': '.(@eval('return intval(getuserprofile(\''.$s.'\'));')) : '';
 				} elseif(in_array($s, array('regdate', 'regip', 'regday'))) {
-					$_G['forum_usermsg'] .= strexists($formulatext, $s) ? '<br />&nbsp;&nbsp;&nbsp;'.$replace[$i].': '.(@eval('return $memberformula[\''.$s.'\'];')) : '';
+					$_G['forum_usermsg'] .= strexists($formulatext, $s) ? '<br>&nbsp;&nbsp;&nbsp;'.$replace[$i].': '.(@eval('return $memberformula[\''.$s.'\'];')) : '';
 				}
 				$i++;
 			}
@@ -255,9 +255,9 @@ function medalformulaperm($formula, $type) {
 			$i = 0;$_G['forum_usermsg'] = '';
 			foreach($search as $s) {
 				if(in_array($s, array('digestposts', 'posts', 'threads', 'oltime', 'extcredits1', 'extcredits2', 'extcredits3', 'extcredits4', 'extcredits5', 'extcredits6', 'extcredits7', 'extcredits8'))) {
-					$_G['forum_usermsg'] .= strexists($formulatext, $s) ? '<br />&nbsp;&nbsp;&nbsp;'.$replace[$i].': '.(@eval('return intval(getuserprofile(\''.$s.'\'));')) : '';
+					$_G['forum_usermsg'] .= strexists($formulatext, $s) ? '<br>&nbsp;&nbsp;&nbsp;'.$replace[$i].': '.(@eval('return intval(getuserprofile(\''.$s.'\'));')) : '';
 				} elseif(in_array($s, array('regdate', 'regip'))) {
-					$_G['forum_usermsg'] .= strexists($formulatext, $s) ? '<br />&nbsp;&nbsp;&nbsp;'.$replace[$i].': '.(@eval('return $memberformula[\''.$s.'\'];')) : '';
+					$_G['forum_usermsg'] .= strexists($formulatext, $s) ? '<br>&nbsp;&nbsp;&nbsp;'.$replace[$i].': '.(@eval('return $memberformula[\''.$s.'\'];')) : '';
 				}
 				$i++;
 			}

@@ -135,7 +135,7 @@ BLOCKCLASSSEL;
 				$template .= $value['name']. ': <a href="###" onclick="insertunit($(\'jstemplate\'), \'{'.$key.'}\')">{'.$key.'}</a>';
 			}
 		}
-		$template .= '<br />';
+		$template .= '<br>';
 		$template .= cplang('blockstyle_add_loop').': <a href="###" onclick="insertunit($(\'jstemplate\'), \'[loop]\n\n[/loop]\')">[loop]...[/loop]</a>';
 		$template .= cplang('blockstyle_add_order').': <a href="###" onclick="insertunit($(\'jstemplate\'), \'[order=N]\n\n[/order]\')">[order=N]...[/order]</a>';
 		$template .= cplang('blockstyle_add_index').': <a href="###" onclick="insertunit($(\'jstemplate\'), \'[index=N]\n\n[/index]\')">[index=N]...[/index]</a>';
@@ -146,10 +146,10 @@ BLOCKCLASSSEL;
 		}
 		$template .= cplang('blockstyle_add_currentorder').': <a href="###" onclick="insertunit($(\'jstemplate\'), \'{currentorder}\')">{currentorder}</a>';
 		$template .= cplang('blockstyle_add_parity').': <a href="###" onclick="insertunit($(\'jstemplate\'), \'{parity}\')">{parity}</a>';
-		$template .= '</div><br />';
+		$template .= '</div><br>';
 		$template .= '<textarea cols="100" rows="5" id="jstemplate" name="template" style="width: 95%;" onkeyup="textareasize(this)" onkeydown="textareakey(this, event)">'.$thestyle['template'].'</textarea>';
 		$template .= '<input type="hidden" name="preview" value="0" /><input type="hidden" name="stylesubmit" value="1" />';
-		$template .= '<br /><!--input type="button" class="btn" onclick="this.form.preview=\'1\';this.form.submit()" value="'.$lang['preview'].'">&nbsp; &nbsp;--><input type="submit" class="btn" value="'.$lang['submit'].'"></div><br /><br />';
+		$template .= '<br><!--input type="button" class="btn" onclick="this.form.preview=\'1\';this.form.submit()" value="'.$lang['preview'].'">&nbsp; &nbsp;--><input type="submit" class="btn" value="'.$lang['submit'].'"></div><br><br>';
 		echo '<div class="colorbox">';
 		echo '<div class="extcredits">';
 		echo $template;

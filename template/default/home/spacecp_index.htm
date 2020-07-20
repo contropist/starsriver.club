@@ -481,7 +481,7 @@ $blockhtml
                 <tr >
                     <th >{lang cron_bg}</th >
                     <td ><input maxlength="200" name="crontabbj" size="40" type="text" value="$config['crontabbj']" />
-                        <br />{lang com_mode_message}
+                        <br>{lang com_mode_message}
                     </td >
                 </tr >
                 <tr >
@@ -489,7 +489,7 @@ $blockhtml
                     <!--{eval $config['height'] = empty($config['height']) && $config['height'] !== 0 ? 200 : $config['height'];}-->
                     <td >
                         <input class="px p_fre" maxlength="10" name="height" size="10" type="text" value="$config['height']" />px
-                        <br />{lang musicbox_height_message}
+                        <br>{lang musicbox_height_message}
                     </td >
                 </tr >
             </table >
@@ -596,7 +596,7 @@ $blockhtml
                             <tr >
                                 <th >{lang front_cover}</th >
                                 <td ><input maxlength="200" name="cdbj[]" size="40" type="text" value="" />
-                                    <br /> {lang complete_mode_message}
+                                    <br> {lang complete_mode_message}
                                 </td >
                             </tr >
                         </table >
@@ -624,7 +624,7 @@ $blockhtml
         <div class="c nestwin" style="max-height:350px;width:480px;height:auto !important;height:320px;_margin-right:20px;overflow-y:auto;" >
             <table align="center" border="0" cellpadding="2" cellspacing="2" width="100%" >
                 <tr >
-                    <td colspan="2" >{lang album_cover_documents_address}<br />({lang not_play_message})</td >
+                    <td colspan="2" >{lang album_cover_documents_address}<br>({lang not_play_message})</td >
                     <td >
                         <div align="right" >{lang delete_all}
                             <input id="chkall" name="chkall" onclick="checkall(this.form, 'id')" type="checkbox" >

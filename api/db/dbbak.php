@@ -200,7 +200,7 @@ class dbstuff {
 	}
 
 	function halt($message = '', $sql = '') {
-		api_msg('run_sql_error', $message.'<br /><br />'.$sql.'<br /> '.mysql_error());
+		api_msg('run_sql_error', $message.'<br><br>'.$sql.'<br> '.mysql_error());
 	}
 }
 class dbstuffi {
@@ -328,7 +328,7 @@ class dbstuffi {
 	}
 
 	function halt($message = '', $sql = '') {
-		api_msg('run_sql_error', $message.'<br /><br />'.$sql.'<br /> '.$this->link->error());
+		api_msg('run_sql_error', $message.'<br><br>'.$sql.'<br> '.$this->link->error());
 	}
 }
 

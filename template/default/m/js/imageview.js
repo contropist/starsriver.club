@@ -10,9 +10,9 @@ var imageListInit = function(post) {
             var src = TOOLS.attachUrl(post.attachments[post.imagelist[i]].attachment);
         }
         if(post.attachments[post.imagelist[i]].thumb != 0) {
-            ret += '<br /><img class="lazy" data-original="' + src + '.thumb.jpg" file="' + src + '" attach="' + post.attachments[post.imagelist[i]].pid + '" />';
+            ret += '<br><img class="lazy" data-original="' + src + '.thumb.jpg" file="' + src + '" attach="' + post.attachments[post.imagelist[i]].pid + '" />';
         } else {
-            ret += '<br /><img class="lazy" data-original="' + src + '" attach="' + post.attachments[post.imagelist[i]].pid + '" />';
+            ret += '<br><img class="lazy" data-original="' + src + '" attach="' + post.attachments[post.imagelist[i]].pid + '" />';
         }
     }
     return ret;

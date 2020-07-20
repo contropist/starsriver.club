@@ -339,7 +339,7 @@ if($op == 'block') {
 			.'<!--{/loop}-->\n'
 			.'</ul>';
 		$samplecode = dhtmlspecialchars($samplecode);
-		$samplecode = str_replace('\n', '<br />', $samplecode);
+		$samplecode = str_replace('\n', '<br>', $samplecode);
 	}
 
 } elseif($op == 'itemdata') {

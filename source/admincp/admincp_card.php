@@ -258,7 +258,7 @@ EOT;
 		showtips('card_make_tips');
 		showtableheader();
 
-		showsetting('card_make_rule', '', '', '<input type="text" name="rule" class="txt" value="'.($card_log['rule']['rule'] ? $card_log['rule']['rule'] : '').'" onkeyup="javascript:checkcardrule(this);"><br /><span id="cardrule_view" class="tips2" style="display:none;"></span>');
+		showsetting('card_make_rule', '', '', '<input type="text" name="rule" class="txt" value="'.($card_log['rule']['rule'] ? $card_log['rule']['rule'] : '').'" onkeyup="javascript:checkcardrule(this);"><br><span id="cardrule_view" class="tips2" style="display:none;"></span>');
 echo <<<EOT
 	<script type="text/javascript" charset="gbk">
 		function checkcardrule(obj) {
@@ -441,8 +441,8 @@ EOT;
 					dgmdate($result['dateline']),
 					$result['operation'] == 1 ? cplang('card_log_operation_add') : cplang('card_log_operation_task'),
 					$result['username'],
-					implode("<br />", $showrule),
-					implode("<br />", $showinfo),
+					implode("<br>", $showrule),
+					implode("<br>", $showinfo),
 					$result['description']
 				);
 			} elseif ($result['operation'] == 3 || $result['operation'] == 9) {
@@ -453,11 +453,11 @@ EOT;
 					dgmdate($result['dateline']),
 					cplang('card_log_operation_del'),
 					$result['username'],
-					implode("<br />", $showinfo),
+					implode("<br>", $showinfo),
 				) : array(
 					dgmdate($result['dateline']),
 					cplang('card_log_operation_cron'),
-					implode("<br />", $showinfo),
+					implode("<br>", $showinfo),
 				);
 			}
 			showtablerow('', array('class="smallefont"'), $showtablerow);

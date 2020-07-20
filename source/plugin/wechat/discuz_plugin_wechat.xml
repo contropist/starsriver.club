@@ -214,7 +214,7 @@
 					<li>我们允许其他插件接管此消息的控制权，请仔细阅读《<a href="https://open.dismall.net/?!devdoc" target="_blank">Discuz! 技术文库</a>》中的内容</li>
 					]]></item>
 				<item id="discuzqr_tips"><![CDATA[
-					<img src="source/plugin/wechat/image/discuz_qr.jpg" align="left" width="80" /><br />扫描关注Discuz!官方微信<br /><br />获取官方最新动态
+					<img src="source/plugin/wechat/image/discuz_qr.jpg" align="left" width="80" /><br>扫描关注Discuz!官方微信<br><br>获取官方最新动态
 					]]></item>
 
 				<item id="wsq_status_open"><![CDATA[已开通]]></item>
@@ -247,7 +247,7 @@
 				<item id="wechat_responseexts"><![CDATA[扩展嵌入点]]></item>
 				<item id="wechat_devids"><![CDATA[扩展开发者 ID]]></item>
 				<item id="wechat_qrcode"><![CDATA[二维码]]></item>
-				<item id="wechat_qrcode_comment"><![CDATA[请把微信公众平台“帐号信息”中的二维码下载后上传到这里，服务号可忽略此设置<br />{qrcode}]]></item>
+				<item id="wechat_qrcode_comment"><![CDATA[请把微信公众平台“帐号信息”中的二维码下载后上传到这里，服务号可忽略此设置<br>{qrcode}]]></item>
 				<item id="wechat_at_need"><![CDATA[服务号必须填写开发者 ID]]></item>
 				<item id="wechat_at_geterror"><![CDATA[开发者 ID 填写错误或者你的服务器不支持 cURL 的 SSL 模式访问]]></item>
 				<item id="wechat_at_qrgeterror"><![CDATA[获取二维码失败，请确认你的公众号是否拥有“高级接口”服务及其“生成带参数二维码”的内容]]></item>
@@ -278,7 +278,7 @@
 				<item id="wsq_password_reset"><![CDATA[你论坛的独立密码已设置成功。]]></item>
 				<item id="wsq_sitename"><![CDATA[微社区名称]]></item>
 				<item id="wsq_sitelogo"><![CDATA[微社区LOGO]]></item>
-				<item id="wsq_sitelogo_comment"><![CDATA[建议上传 200 x 200 像素的图片<br />{sitelogo}]]></item>
+				<item id="wsq_sitelogo_comment"><![CDATA[建议上传 200 x 200 像素的图片<br>{sitelogo}]]></item>
 				<item id="wsq_sitesummary"><![CDATA[微社区简介]]></item>
 				<item id="wsq_siteurl"><![CDATA[网站 URL]]></item>
 				<item id="wsq_siteurl_comment"><![CDATA[用户通过微信访问你网站时的 URL 地址，此 URL 必须为在公网环境下]]></item>
@@ -321,7 +321,7 @@
 				<item id="wsq_viewapp_local"><![CDATA[本地应用]]></item>
 				<item id="wsq_viewapp_local_comment"><![CDATA[通过 Discuz! 应用中心安装在站长本地的插件应用，查看应用列表请<a href="https://addon.dismall.com/?!wsqapp" class="bold">点击这里</a>]]></item>
 				<item id="wsq_viewapp_online"><![CDATA[线上应用]]></item>
-				<item id="wsq_viewapp_online_comment"><![CDATA[线上应用主要是通过接口调用的方式为站长提供运营组件、全局活动等功能（如刮刮卡，红包等）<br />使用线上应用前需要先在微社区应用平台（<a href="http://mp.wsq.qq.com/bindSite" target="_blank" class="bold">http://mp.wsq.qq.com/bindSite</a>）绑定站点，已绑定的站点请直接管理应用（<a href="http://mp.wsq.qq.com" target="_blank" class="bold">http://mp.wsq.qq.com</a>）]]></item>
+				<item id="wsq_viewapp_online_comment"><![CDATA[线上应用主要是通过接口调用的方式为站长提供运营组件、全局活动等功能（如刮刮卡，红包等）<br>使用线上应用前需要先在微社区应用平台（<a href="http://mp.wsq.qq.com/bindSite" target="_blank" class="bold">http://mp.wsq.qq.com/bindSite</a>）绑定站点，已绑定的站点请直接管理应用（<a href="http://mp.wsq.qq.com" target="_blank" class="bold">http://mp.wsq.qq.com</a>）]]></item>
 				<item id="wsq_viewapp_pubevent"><![CDATA[活动中心]]></item>
 				<item id="wsq_viewapp_na"><![CDATA[目前暂无活动]]></item>
 				<item id="api_wsq"><![CDATA[微社区接口]]></item>
@@ -391,7 +391,7 @@
 				<item id="lang_wechat_logintip"><![CDATA[扫一扫，访问微社区]]></item>
 				<item id="lang_wechat_login"><![CDATA[关注本站微信公众号登录]]></item>
 				<item id="lang_wechat_bind"><![CDATA[微信扫一扫以绑定帐号]]></item>
-				<item id="lang_wechat_threadmessage"><![CDATA[<br /><a onclick="return false" href="plugin.php?id=wechat:qrcode&threadqr={tid}&access=yes&inajax=yes#post_{pid}" onmouseover="ajaxmenu(this, 500, 1, 2, '43', null, 'p_pop', '');return false;" style="font-size:12px;color:#708090;">来自: 微社区</a>]]></item>
+				<item id="lang_wechat_threadmessage"><![CDATA[<br><a onclick="return false" href="plugin.php?id=wechat:qrcode&threadqr={tid}&access=yes&inajax=yes#post_{pid}" onmouseover="ajaxmenu(this, 500, 1, 2, '43', null, 'p_pop', '');return false;" style="font-size:12px;color:#708090;">来自: 微社区</a>]]></item>
 			    <item id="mass_not_exist"><![CDATA[群发消息不存在]]></item>
 				<item id="mass_sent_succ"><![CDATA[群发消息提交成功]]></item>
 				<item id="mass_send_expire"><![CDATA[创建消息时间超过三天，媒体数据已经过期，请重新创建群发消息]]></item>
@@ -480,9 +480,9 @@
         <item id="show_export_title"><![CDATA[用户名,点赞数,楼层数]]></item>
 			</item>
 			<item id="templatelang">
-				<item id="wechat_qrcode_inputcode"><![CDATA[请在扫描关注后输入以下数字码<br />]]></item>
-				<item id="wechat_qrcode_input_cancel"><![CDATA[你已取消本次登录请求，数字码已失效<br />请点击左上角返回微信聊天]]></item>
-				<item id="wechat_qrcode_input_confirm"><![CDATA[即将在 PC 浏览器上登录用户 $member[username]<br />请确认是否本人操作]]></item>
+				<item id="wechat_qrcode_inputcode"><![CDATA[请在扫描关注后输入以下数字码<br>]]></item>
+				<item id="wechat_qrcode_input_cancel"><![CDATA[你已取消本次登录请求，数字码已失效<br>请点击左上角返回微信聊天]]></item>
+				<item id="wechat_qrcode_input_confirm"><![CDATA[即将在 PC 浏览器上登录用户 $member[username]<br>请确认是否本人操作]]></item>
 				<item id="wechat_qrcode_input_confirm_yes"><![CDATA[我确认登录此用户]]></item>
 				<item id="wechat_spacecp_bind_title"><![CDATA[你已将本站帐号 <strong>{$_G[member][username]}</strong> 与微信绑定]]></item>
 				<item id="wechat_spacecp_setpw"><![CDATA[设置独立密码]]></item>
@@ -497,7 +497,7 @@
 				<item id="wechat_bind_comfirm_prompt"><![CDATA[请输入你的论坛登录密码以确认身份]]></item>
 				<item id="quickregister"><![CDATA[立即注册]]></item>
 				<item id="inputyourname"><![CDATA[请输入用户名]]></item>
-				<item id="wsq_indexqr"><![CDATA[用微信扫一扫<br />互动赢积分]]></item>
+				<item id="wsq_indexqr"><![CDATA[用微信扫一扫<br>互动赢积分]]></item>
 				<item id="wsq_threadqr"><![CDATA[用微信扫一扫，互动赢积分]]></item>
 				<item id="wechat_share"><![CDATA[微信]]></item>
 				<item id="wechat_sharetitle"><![CDATA[分享到微信]]></item>

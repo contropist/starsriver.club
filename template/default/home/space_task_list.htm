@@ -47,10 +47,10 @@
 							<p><a href="home.php?mod=task&do=draw&id=$task[taskid]"><img src="{STATICURL}image/task/{if $task[csc] >=100}reward.gif{else}rewardless.gif{/if}"  alt="" /></a></p>
 						<!--{elseif $_GET['item'] == 'done'}-->
 							<p style="white-space:nowrap">{lang task_complete_on} $task[dateline]
-							<!--{if $task['period'] && $task[t]}--><br /><!--{if $task[allowapply]}--><a href="home.php?mod=task&do=apply&id=$task[taskid]">{lang task_applyagain_now}</a><!--{else}-->{$task[t]}{lang task_applyagain}<!--{/if}--><!--{/if}--></p>
+							<!--{if $task['period'] && $task[t]}--><br><!--{if $task[allowapply]}--><a href="home.php?mod=task&do=apply&id=$task[taskid]">{lang task_applyagain_now}</a><!--{else}-->{$task[t]}{lang task_applyagain}<!--{/if}--><!--{/if}--></p>
 						<!--{elseif $_GET['item'] == 'failed'}-->
 							<p style="white-space:nowrap">{lang task_lose_on} $task[dateline]
-							<!--{if $task['period'] && $task[t]}--><br /><!--{if $task[allowapply]}--><a href="home.php?mod=task&do=apply&id=$task[taskid]">{lang task_applyagain_now}</a><!--{else}-->{$task[t]}{lang task_reapply}<!--{/if}--><!--{/if}--></p>
+							<!--{if $task['period'] && $task[t]}--><br><!--{if $task[allowapply]}--><a href="home.php?mod=task&do=apply&id=$task[taskid]">{lang task_applyagain_now}</a><!--{else}-->{$task[t]}{lang task_reapply}<!--{/if}--><!--{/if}--></p>
 						<!--{/if}-->
 					</td>
 				</tr>

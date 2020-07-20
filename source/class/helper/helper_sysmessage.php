@@ -44,8 +44,8 @@ class helper_sysmessage {
 	<tr>
 	<td valign="middle" align="center" bgcolor="#EBEBEB">
 		<b style="font-size: 16px">$title</b>
-		<br /><br /><p style="text-align:left;">$message</p>
-		<br /><br />
+		<br><br><p style="text-align:left;">$message</p>
+		<br><br>
 	</td>
 	</tr>
 	</table>

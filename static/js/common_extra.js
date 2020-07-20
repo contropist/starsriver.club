@@ -1040,7 +1040,7 @@ function _showColorBox(ctrlid, layer, k, bgcolor) {
 		for(var i = 0; i < 40; i++) {
 			str += '<input type="button" style="background-color: ' + coloroptions[i] + '"' + (typeof setEditorTip == 'function' ? ' onmouseover="setEditorTip(\'' + colortexts[i] + '\')" onmouseout="setEditorTip(\'\')"' : '') + ' onclick="'
 			+ (typeof wysiwyg == 'undefined' ? 'seditor_insertunit(\'' + k + '\', \'[' + tag1 + '=' + coloroptions[i] + ']\', \'[/' + tag1 + ']\')' : (ctrlid == editorid + '_tbl_param_4' ? '$(\'' + ctrlid + '\').value=\'' + coloroptions[i] + '\';hideMenu(2)' : 'discuzcode(\'' + tag2 + '\', \'' + coloroptions[i] + '\')'))
-			+ '" title="' + colortexts[i] + '" />' + (i < 39 && (i + 1) % 8 == 0 ? '<br />' : '');
+			+ '" title="' + colortexts[i] + '" />' + (i < 39 && (i + 1) % 8 == 0 ? '<br>' : '');
 		}
 		menu.innerHTML = str;
 		$('append_parent').appendChild(menu);
@@ -1193,7 +1193,7 @@ function _setShortcut() {
 	$('shortcuttip').onclick = function() {
 		var msg = '1、点击"' + '<a class="xi2 xw1" ';
 		msg += 'onclick="this.href = \'forum.php?mod=misc&action=shortcut\';this.click();saveUserdata(\'setshortcut\', 1);"';
-		msg += '>下载桌面快捷</a>' + '"，下载完成后，可移动文件到系统桌面<br />';
+		msg += '>下载桌面快捷</a>' + '"，下载完成后，可移动文件到系统桌面<br>';
 		msg += '2、点击"' + '<a href="forum.php?mod=misc&action=shortcut&type=ico" class="xi2 xw1">';
 		msg += '下载ICO图标</a>' + '"，下载完成后，右击桌面快捷文件->属性->更改图标，选择已下载的ICO图标即可';
 		showDialog(msg, 'notice', '添加桌面快捷');

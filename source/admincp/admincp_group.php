@@ -573,10 +573,10 @@ var rowtypedata = [
 		showsetting('groups_editgroup_visible_all', 'gviewpermnew', $group['gviewperm'], 'radio');
 		showsetting('groups_editgroup_description', 'descriptionnew', $group['description'], 'textarea');
 		if($groupicon) {
-			$groupicon = '<input type="checkbox" class="checkbox" name="deleteicon" value="yes" /> '.$lang['delete'].'<br /><img src="'.$groupicon.'?'.random(6).'" width="48" height="48" />';
+			$groupicon = '<input type="checkbox" class="checkbox" name="deleteicon" value="yes" /> '.$lang['delete'].'<br><img src="'.$groupicon.'?'.random(6).'" width="48" height="48" />';
 		}
 		if($groupbanner) {
-			$groupbanner = '<input type="checkbox" class="checkbox" name="deletebanner" value="yes" /> '.$lang['delete'].'<br /><img src="'.$groupbanner.'?'.random(6).'" />';
+			$groupbanner = '<input type="checkbox" class="checkbox" name="deletebanner" value="yes" /> '.$lang['delete'].'<br><img src="'.$groupbanner.'?'.random(6).'" />';
 		}
 		showsetting('groups_editgroup_icon', 'iconnew', '', 'file', '', 0, $groupicon);
 		showsetting('groups_editgroup_banner', 'bannernew', '', 'file', '', 0, $groupbanner);
@@ -857,7 +857,7 @@ EOT;
 				} else {
 					$grouplevelicon = $_G['setting']['attachurl'].'common/'.$grouplevel['icon'].'?'.random(6);
 				}
-				$groupleveliconhtml = '<label><input type="checkbox" class="checkbox" name="deleteicon[{$grouplevel[levelid]}]" value="yes" /> '.$lang['delete'].'</label><br /><img src="'.$grouplevelicon.'" />';
+				$groupleveliconhtml = '<label><input type="checkbox" class="checkbox" name="deleteicon[{$grouplevel[levelid]}]" value="yes" /> '.$lang['delete'].'</label><br><img src="'.$grouplevelicon.'" />';
 			}
 			showsetting('group_level_icon', 'iconnew', $grouplevel['icon'], 'filetext', '', 0, $groupleveliconhtml);
 

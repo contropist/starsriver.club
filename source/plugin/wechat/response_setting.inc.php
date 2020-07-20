@@ -71,7 +71,7 @@ if(!submitcheck('menusubmit')) {
 			"",
 			"<i>".lang('plugin/wechat', 'subscribe')."</i>",
 			"<textarea class=\"tarea\" name=\"response[subscribe]\" id=\"res_subscribe\" rows=\"5\" cols=\"40\">".dhtmlspecialchars($response['subscribe'])."</textarea>"
-			."<br /><a href=\"javascript:;\" id=\"rsel\" onclick=\"showResource('res_subscribe')\">".lang('plugin/wechat', 'resource_select')."</a>"
+			."<br><a href=\"javascript:;\" id=\"rsel\" onclick=\"showResource('res_subscribe')\">".lang('plugin/wechat', 'resource_select')."</a>"
 		));
 	} else {
 		showtablerow('class="header"', array('', 'class="td23 td28"', '', 'class="td29"'), array(
@@ -90,7 +90,7 @@ if(!submitcheck('menusubmit')) {
 		"",
 		"<i>".lang('plugin/wechat', 'access')."</i>",
 		"<textarea class=\"tarea\" name=\"response[access]\" id=\"res_access\" rows=\"5\" cols=\"40\">".dhtmlspecialchars($response['access'])."</textarea>"
-		."<br /><a href=\"javascript:;\" id=\"rsel\" onclick=\"showResource('res_access')\">".lang('plugin/wechat', 'resource_select')."</a>"
+		."<br><a href=\"javascript:;\" id=\"rsel\" onclick=\"showResource('res_access')\">".lang('plugin/wechat', 'resource_select')."</a>"
 	));
 
 	showtablerow('class="header"', array('', 'class="td23 td28"', '', 'class="td29"'), array(
@@ -102,7 +102,7 @@ if(!submitcheck('menusubmit')) {
 		"",
 		"<i>".lang('plugin/wechat', 'scan')."</i>",
 		"<textarea class=\"tarea\" name=\"response[scan]\" id=\"res_scan\" rows=\"5\" cols=\"40\">".dhtmlspecialchars($response['scan'])."</textarea>"
-		."<br /><a href=\"javascript:;\" id=\"rsel\" onclick=\"showResource('res_scan')\">".lang('plugin/wechat', 'resource_select')."</a>"
+		."<br><a href=\"javascript:;\" id=\"rsel\" onclick=\"showResource('res_scan')\">".lang('plugin/wechat', 'resource_select')."</a>"
 	));
 
 	if($responsehook['receiveMsg::text']['plugin'] == 'wechat' &&
@@ -119,7 +119,7 @@ if(!submitcheck('menusubmit')) {
 				"<input type=\"checkbox\" name=\"response[text][$k][delete]\" value=\"yes\">",
 				"<div class=\"parentnode\"><input type=\"text\" size=\"30\" name=\"response[text][$k][keyword]\" value=\"".dhtmlspecialchars($text['keyword'])."\"></div>",
 				"<textarea class=\"tarea\" name=\"response[text][$k][response]\" rows=\"5\" id=\"res_text_$k\" cols=\"40\">".dhtmlspecialchars($text['response'])."</textarea>"
-				."<br /><a href=\"javascript:;\" id=\"rsel\" onclick=\"showResource('res_text_$k')\">".lang('plugin/wechat', 'resource_select')."</a>"
+				."<br><a href=\"javascript:;\" id=\"rsel\" onclick=\"showResource('res_text_$k')\">".lang('plugin/wechat', 'resource_select')."</a>"
 			));
 		}
 		echo '<tr><td></td><td class="td23 td28"></td><td colspan="2"><div><a href="###" onclick="addrow(this, 0, 0)" class="addtr">'.lang('plugin/wechat', 'response_add_message').'</a></div></td></tr>';

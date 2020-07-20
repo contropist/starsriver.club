@@ -106,11 +106,11 @@ class discuz_error
 		unset($msg, $phperror);
 
 		$errormsg = '<b>'.$title.'</b>';
-		$errormsg .= "[$dberrno]<br /><b>ERR:</b> $dberror<br />";
+		$errormsg .= "[$dberrno]<br><b>ERR:</b> $dberror<br>";
 		if($sql) {
 			$errormsg .= '<b>SQL:</b> '.$sql;
 		}
-		$errormsg .= "<br />";
+		$errormsg .= "<br>";
 		$errormsg .= '<b>PHP:</b> '.$logtrace;
 
 		discuz_error::write_error_log($errormsg);
@@ -404,7 +404,7 @@ EOT;
         $endmsg = lang('error', 'mobile_error_end_message', array('host' => $host));
         echo <<<EOT
 <tr>
-	<td class="help"><br />$endmsg</td>
+	<td class="help"><br>$endmsg</td>
 </tr>
 </table>
 </body>

@@ -64,7 +64,7 @@ echo <<<EOF
 if($('$showid')) {
 	if(!$('v$showid')) {
 		var sectpl = seccheck_tpl['$idhash'] != '' ? seccheck_tpl['$idhash'].replace(/<hash>/g, 'code$idhash') : '';
-		var sectplcode = sectpl != '' ? sectpl.split('<sec>') : Array('<br />',': ','<br />','');
+		var sectplcode = sectpl != '' ? sectpl.split('<sec>') : Array('<br>',': ','<br>','');
 		var string = '<input  placeholder="验证码" name="seccodeverify" id="seccodeverify_$idhash" type="text" autocomplete="off" onblur="checksec(\'code\', \'$idhash\', 0, null, \'$modid\')" /><label class="ft-circle" id="checkseccodeverify_$idhash"></label>' +
 		     '$message';
 		evalscript(string);

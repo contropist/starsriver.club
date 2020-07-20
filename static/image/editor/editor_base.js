@@ -537,7 +537,7 @@ function pageBreak(e, show) {
 		}
 		var insertText = title ? '[title='+title+']': '';
 		setCaret();
-		format("insertHTML", '<br /><strong>##########NextPage'+insertText+'##########</strong><br /><br />');
+		format("insertHTML", '<br><strong>##########NextPage'+insertText+'##########</strong><br><br>');
 		if(parent.showInnerNav && typeof parent.showInnerNav == 'function') {
 			parent.showInnerNav();
 		}

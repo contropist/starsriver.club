@@ -66,7 +66,7 @@ EOF;
 		foreach($resource as $row) {
 			$row = dhtmlspecialchars($row);
 			echo '<table class="left tb2 wxbox">'
-				. '<tr class="header"><th class="partition">'.$row['name'].'<br />'
+				. '<tr class="header"><th class="partition">'.$row['name'].'<br>'
 				. '<div>'
 				. '<span>'
 				. (!$row['type']
@@ -84,7 +84,7 @@ EOF;
 				. '<tr><td class="l2"><div>'.($row['data']['pic'] ? '<img src="'.$row['data']['pic'].'" />' : '').'</div></td></tr>'
 				. '<tr><td class="l3">'.$row['data']['desc'].'</td></tr>'
 				: '<tr><td class="l1">'.lang('plugin/wechat', 'resource_type_m').'</td></tr>'
-				. '<tr><td class="l2">'.lang('plugin/wechat', 'resource_merge_count', array('count' => count($row['data']['mergeids']))).'<br /><a href="'.ADMINSCRIPT.'?'.RSELF.'edit&id='.$row['id'].'">'.lang('plugin/wechat', 'resource_view').'</a></td></tr>'
+				. '<tr><td class="l2">'.lang('plugin/wechat', 'resource_merge_count', array('count' => count($row['data']['mergeids']))).'<br><a href="'.ADMINSCRIPT.'?'.RSELF.'edit&id='.$row['id'].'">'.lang('plugin/wechat', 'resource_view').'</a></td></tr>'
 				. '<tr><td class="l3"></td></tr>')
 				. '</table>';
 		}
@@ -186,7 +186,7 @@ EOF;
 			foreach($resource['data']['mergeids'] as $id => $order) {
 				$row = dhtmlspecialchars($sresource[$id]);
 				echo '<table class="left tb2 wxbox">'
-				. '<tr class="header"><th class="partition">'.$row['name'].'<br />'
+				. '<tr class="header"><th class="partition">'.$row['name'].'<br>'
 				. '<div>'
 				. '<span>'
 				. '<a href="'.ADMINSCRIPT.'?'.RSELF.'edit&id='.$row['id'].'" target="_blank">'.lang('plugin/wechat', 'resource_edit').'</a> '
@@ -238,7 +238,7 @@ EOF;
 				? '<tr><td class="l1" title="'.$row['data']['title'].'">'.$row['data']['title'].'</td></tr>'
 				. '<tr><td class="l2"><div>'.($row['data']['pic'] ? '<img src="'.$row['data']['pic'].'" width="290" />' : '').'</div></td></tr>'
 				: '<tr><td class="l1">'.lang('plugin/wechat', 'resource_type_m').'</td></tr>'
-				. '<tr><td class="l2">'.lang('plugin/wechat', 'resource_merge_count', array('count' => count($row['data']['mergeids']))).'<br /><a onclick="window.open(\''.ADMINSCRIPT.'?'.RSELF.'edit&id='.$row['id'].'\');doane(event)" target="_blank">'.lang('plugin/wechat', 'resource_view').'</a></td></tr>')
+				. '<tr><td class="l2">'.lang('plugin/wechat', 'resource_merge_count', array('count' => count($row['data']['mergeids']))).'<br><a onclick="window.open(\''.ADMINSCRIPT.'?'.RSELF.'edit&id='.$row['id'].'\');doane(event)" target="_blank">'.lang('plugin/wechat', 'resource_view').'</a></td></tr>')
 				. '</table>';
 		}
 		showtablefooter();

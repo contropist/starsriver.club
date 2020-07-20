@@ -49,7 +49,7 @@ var login = {
 			if (loginErr == 1001) {
 				TOOLS.showTips('此QQ帐号尚未绑定，无法登录', true);
 			}else if (loginErr == 2001) {
-				TOOLS.showTips('此微信尚未绑定过账号<br />请用您已注册的账号登录完成绑定', true);
+				TOOLS.showTips('此微信尚未绑定过账号<br>请用您已注册的账号登录完成绑定', true);
 			}
 		}
 		

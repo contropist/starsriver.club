@@ -51,7 +51,7 @@ if(!submitcheck('modsubmit')) {
 
 	$totalcomment = [];
 	foreach(C::t('forum_postcomment')->fetch_all_by_pid_score($postcomment['pid'], 1) as $comment) {
-		if(strexists($comment['comment'], '<br />')) {
+		if(strexists($comment['comment'], '<br>')) {
 			if(preg_match_all("/([^:]+?):\s<i>(\d+)<\/i>/", $comment['comment'], $a)) {
 				foreach($a[1] as $k => $itemk) {
 					$totalcomment[trim($itemk)][] = $a[2][$k];

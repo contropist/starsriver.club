@@ -116,7 +116,7 @@
 								<a href="forum.php?mod=viewthread&tid=$tradelog[tid]&do=tradeinfo&pid=$tradelog[pid]"><!--{if $tradelog['aid']}--><img src="{echo getforumimg($tradelog[aid])}" width="90" /><!--{else}--><img src="{STATICURL}image/common/nophotosmall.gif" /><!--{/if}--></a>
 							</td>
 							<td>
-								<a href="forum.php?mod=trade&orderid=$tradelog[orderid]">$tradelog[subject]</a><br />
+								<a href="forum.php?mod=trade&orderid=$tradelog[orderid]">$tradelog[subject]</a><br>
 								<a href="forum.php?mod=viewthread&tid=$tradelog[tid]&do=tradeinfo&pid=$tradelog[pid]">$tradelog[threadsubject]</a>
 							</td>
 							<td>
@@ -128,7 +128,7 @@
 							</td>
 							<td>
 								<!--{if $tradelog[price] > 0}-->
-									$tradelog[price] {lang trade_units}<br/>
+									$tradelog[price] {lang trade_units}<br>
 								<!--{/if}-->
 								<!--{if $tradelog[credit] > 0}-->
 									{$extcredits[$creditid][title]} $tradelog[credit] {$extcredits[$creditid][unit]}
@@ -151,7 +151,7 @@
 									<!--{elseif ($item == 'buytrades' && $tradelog[ratestatus] == 1) || ($item == 'selltrades' && $tradelog[ratestatus] == 2)}-->
 										{lang eccredit_post_waiting}
 									<!--{else}-->
-										<!--{if ($item == 'buytrades' && $tradelog[ratestatus] == 2) || ($item == 'selltrades' && $tradelog[ratestatus] == 1)}-->{lang eccredit_post_already}<br /><!--{/if}-->
+										<!--{if ($item == 'buytrades' && $tradelog[ratestatus] == 2) || ($item == 'selltrades' && $tradelog[ratestatus] == 1)}-->{lang eccredit_post_already}<br><!--{/if}-->
 										<!--{if $item == 'buytrades'}-->
 											<a href="home.php?mod=spacecp&ac=eccredit&op=rate&orderid=$tradelog[orderid]&type=0" target="_blank">{lang eccredit1}</a>
 										<!--{else}-->
@@ -205,7 +205,7 @@
 		<!--{if $hiddennum}-->
 			<p class="mtm">{lang hide_trade}</p>
 		<!--{/if}-->
-		<!--{if $multi}--><div class="pgs cl">$multi</div><!--{/if}--><br />
+		<!--{if $multi}--><div class="pgs cl">$multi</div><!--{/if}--><br>
 		<!--[nest=nestcontentbottom]--><div id="nestcontentbottom" class="area"></div><!--[/nest]-->
 	</div>
 	<div class="appl">

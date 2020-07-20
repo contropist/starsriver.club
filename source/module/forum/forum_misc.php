@@ -255,7 +255,7 @@ if($_GET['action'] == 'paysucceed') {
 		if($action == 1) {
 			$cic = $matches;
 		} else {
-			return '<i class="cmstarv" style="background-position:20px -'.(intval($matches[1]) * 16).'px">'.sprintf('%1.1f', $matches[1]).'</i>'.($cic++ % 2 ? '<br />' : '');
+			return '<i class="cmstarv" style="background-position:20px -'.(intval($matches[1]) * 16).'px">'.sprintf('%1.1f', $matches[1]).'</i>'.($cic++ % 2 ? '<br>' : '');
 		}
 	}
 

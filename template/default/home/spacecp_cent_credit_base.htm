@@ -90,9 +90,9 @@
 									</td>
 									<td width="300" class="d">
 										{lang memcp_credits_addfunds_rules_ratio} =  <strong>$_G[setting][ec_ratio]</strong> {$_G[setting][extcredits][$_G[setting][creditstrans]][unit]}{$_G[setting][extcredits][$_G[setting][creditstrans]][title]}
-										<!--{if $_G[setting][ec_mincredits]}--><br />{lang memcp_credits_addfunds_rules_min}  <strong>$_G[setting][ec_mincredits]</strong> {$_G[setting][extcredits][$_G[setting][creditstrans]][unit]}{$_G[setting][extcredits][$_G[setting][creditstrans]][title]}<!--{/if}-->
-										<!--{if $_G[setting][ec_maxcredits]}--><br />{lang memcp_credits_addfunds_rules_max}  <strong>$_G[setting][ec_maxcredits]</strong> {$_G[setting][extcredits][$_G[setting][creditstrans]][unit]}{$_G[setting][extcredits][$_G[setting][creditstrans]][title]}<!--{/if}-->
-										<!--{if $_G[setting][ec_maxcreditspermonth]}--><br />{lang memcp_credits_addfunds_rules_month}  <strong>$_G[setting][ec_maxcreditspermonth]</strong> {$_G[setting][extcredits][$_G[setting][creditstrans]][unit]}{$_G[setting][extcredits][$_G[setting][creditstrans]][title]}<!--{/if}-->
+										<!--{if $_G[setting][ec_mincredits]}--><br>{lang memcp_credits_addfunds_rules_min}  <strong>$_G[setting][ec_mincredits]</strong> {$_G[setting][extcredits][$_G[setting][creditstrans]][unit]}{$_G[setting][extcredits][$_G[setting][creditstrans]][title]}<!--{/if}-->
+										<!--{if $_G[setting][ec_maxcredits]}--><br>{lang memcp_credits_addfunds_rules_max}  <strong>$_G[setting][ec_maxcredits]</strong> {$_G[setting][extcredits][$_G[setting][creditstrans]][unit]}{$_G[setting][extcredits][$_G[setting][creditstrans]][title]}<!--{/if}-->
+										<!--{if $_G[setting][ec_maxcreditspermonth]}--><br>{lang memcp_credits_addfunds_rules_month}  <strong>$_G[setting][ec_maxcreditspermonth]</strong> {$_G[setting][extcredits][$_G[setting][creditstrans]][unit]}{$_G[setting][extcredits][$_G[setting][creditstrans]][title]}<!--{/if}-->
 									</td>
 								</tr>
 								<!--{if $_G[setting][card][open]}-->
@@ -143,7 +143,7 @@
 									<span style="width:50px; min-width: auto">{$_G[setting][extcredits][$_G[setting][creditstransextra][9]][title]}{lang credits_give}</span>
 									<input type="text" name="to" id="to" value=""/>
 									<p class="message">
-										{lang memcp_credits_transfer_min_balance} $_G[setting][transfermincredits] {$_G[setting][extcredits][$_G[setting][creditstransextra][9]][unit]}<br />
+										{lang memcp_credits_transfer_min_balance} $_G[setting][transfermincredits] {$_G[setting][extcredits][$_G[setting][creditstransextra][9]][unit]}<br>
 										<!--{if intval($taxpercent) > 0}-->{lang credits_tax} $taxpercent<!--{/if}-->
 									</p>
 								</div>
@@ -213,7 +213,7 @@
 									</td>
 									<td width="300" class="d">
 										<!--{if $_G[setting][exchangemincredits]}-->
-										{lang memcp_credits_exchange_min_balance} $_G[setting][exchangemincredits]<br />
+										{lang memcp_credits_exchange_min_balance} $_G[setting][exchangemincredits]<br>
 										<!--{/if}-->
 										<span id="taxpercent">
 									<!--{if intval($taxpercent) > 0}-->

@@ -86,7 +86,7 @@ if($operation == 'alipay') {
 		showtitle('ec_alipay');
 		showsetting('ec_alipay_account', 'settingsnew[ec_account]', $settings['ec_account'], 'text');
 		showsetting('ec_alipay_check', '', '',
-			'<a href="'.ADMINSCRIPT.'?action=ec&operation=alipay&checktype=credit" target="_blank">'.$lang['ec_alipay_checklink_credit'].'</a><br />'
+			'<a href="'.ADMINSCRIPT.'?action=ec&operation=alipay&checktype=credit" target="_blank">'.$lang['ec_alipay_checklink_credit'].'</a><br>'
 		);
 		showtitle('ec_contract');
 		showsetting('ec_alipay_creditdirectpay', 'settingsnew[ec_creditdirectpay]', $ec_creditdirectpay, 'radio', '', 0, '', ' onclick="changeAliApi(this.value)"');
@@ -211,9 +211,9 @@ EOT;
 		$tenpay_securitycodemask = $settings['ec_tenpay_key'] ? $settings['ec_tenpay_key'][0].'********'.substr($settings['ec_tenpay_key'], -4) : '';
 		showsetting('ec_tenpay_key', 'settingsnew[ec_tenpay_key]', $tenpay_securitycodemask, 'text');
 		showsetting('ec_tenpay_check', '', '',
-			'<a href="'.ADMINSCRIPT.'?action=ec&operation=tenpay&checktype=credit" target="_blank">'.$lang['ec_alipay_checklink_credit'].'</a><br />'.
-			'<a href="'.ADMINSCRIPT.'?action=ec&operation=tenpay&checktype=virtualgoods" target="_blank">'.$lang['ec_alipay_checklink_virtualgoods'].'</a><br />'.
-			'<a href="'.ADMINSCRIPT.'?action=ec&operation=tenpay&checktype=goods" target="_blank">'.$lang['ec_alipay_checklink_goods'].'</a><br />'
+			'<a href="'.ADMINSCRIPT.'?action=ec&operation=tenpay&checktype=credit" target="_blank">'.$lang['ec_alipay_checklink_credit'].'</a><br>'.
+			'<a href="'.ADMINSCRIPT.'?action=ec&operation=tenpay&checktype=virtualgoods" target="_blank">'.$lang['ec_alipay_checklink_virtualgoods'].'</a><br>'.
+			'<a href="'.ADMINSCRIPT.'?action=ec&operation=tenpay&checktype=goods" target="_blank">'.$lang['ec_alipay_checklink_goods'].'</a><br>'
 		);
 		showtablefooter();
 		/*search*/
@@ -316,7 +316,7 @@ EOT;
 				switch($order['status']) {
 					case 1: $order['orderstatus'] = $lang['ec_orders_search_status_pending']; break;
 					case 2: $order['orderstatus'] = '<b>'.$lang['ec_orders_search_status_auto_finished'].'</b>'; break;
-					case 3: $order['orderstatus'] = '<b>'.$lang['ec_orders_search_status_manual_finished'].'</b><br />(<a href="home.php?mod=space&username='.rawurlencode($order['admin']).'" target="_blank">'.$order['admin'].'</a>)'; break;
+					case 3: $order['orderstatus'] = '<b>'.$lang['ec_orders_search_status_manual_finished'].'</b><br>(<a href="home.php?mod=space&username='.rawurlencode($order['admin']).'" target="_blank">'.$order['admin'].'</a>)'; break;
 				}
 				$order['submitdate'] = dgmdate($order['submitdate']);
 				$order['confirmdate'] = $order['confirmdate'] ? dgmdate($order['confirmdate']) : 'N/A';
@@ -326,7 +326,7 @@ EOT;
 				$orderid = '<a href="'.$orderurl[$apitype].$orderid.'" target="_blank">'.$orderid.'</a>';
 				showtablerow('', '', array(
 					"<input type=\"checkbox\" name=\"validate[]\" value=\"$order[orderid]\" ".($order['status'] != 1 ? 'disabled' : '').">",
-					"$order[orderid]<br />$orderid",
+					"$order[orderid]<br>$orderid",
 					$order[orderstatus],
 					"<a href=\"home.php?mod=space&uid=$order[uid]\" target=\"_blank\">$order[username]</a>",
 					"{$_G[setting][extcredits][$_G[setting][creditstrans]]['title']} $order[amount] {$_G[setting][extcredits][$_G[setting][creditstrans]]['unit']}",
@@ -498,7 +498,7 @@ EOT;
 			switch($order['status']) {
 				case 1: $order['orderstatus'] = $lang['ec_orders_search_status_pending']; break;
 				case 2: $order['orderstatus'] = '<b>'.$lang['ec_orders_search_status_auto_finished'].'</b>'; break;
-				case 3: $order['orderstatus'] = '<b>'.$lang['ec_orders_search_status_manual_finished'].'</b><br />(<a href="home.php?mod=space&username='.rawurlencode($order['admin']).'" target="_blank">'.$order['admin'].'</a>)'; break;
+				case 3: $order['orderstatus'] = '<b>'.$lang['ec_orders_search_status_manual_finished'].'</b><br>(<a href="home.php?mod=space&username='.rawurlencode($order['admin']).'" target="_blank">'.$order['admin'].'</a>)'; break;
 			}
 			$order['submitdate'] = dgmdate($order['submitdate']);
 			$order['confirmdate'] = $order['confirmdate'] ? dgmdate($order['confirmdate']) : 'N/A';
@@ -508,7 +508,7 @@ EOT;
 			$orderid = '<a href="'.$orderurl[$apitype].$orderid.'" target="_blank">'.$orderid.'</a>';
 			showtablerow('', '', array(
 				"<input type=\"checkbox\" name=\"validate[]\" value=\"$order[orderid]\" ".($order['status'] != 1 ? 'disabled' : '').">",
-				"$order[orderid]<br />$orderid",
+				"$order[orderid]<br>$orderid",
 				$order['orderstatus'],
 				"$order[email]<br>$order[ip]",
 				$order['amount'],

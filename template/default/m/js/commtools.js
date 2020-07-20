@@ -553,9 +553,9 @@ var TOOLS = {
 					if (typeof errorfunc === 'function') {
 						var siteName = typeof SITE_INFO.siteName !== 'undefined' ? SITE_INFO.siteName : '微社区';
 						if (sys_error === 'mobile_is_closed') {
-							TOOLS.showError('.warp', '您请求的' + siteName + '无法访问<br /><br />该社区未启用手机版');
+							TOOLS.showError('.warp', '您请求的' + siteName + '无法访问<br><br>该社区未启用手机版');
 						} else {
-							TOOLS.showError('.warp', '您请求的' + siteName + '无法访问<br /><br />接口错误(ERR01)');
+							TOOLS.showError('.warp', '您请求的' + siteName + '无法访问<br><br>接口错误(ERR01)');
 						}
 					} else {
 						return;
@@ -590,7 +590,7 @@ var TOOLS = {
 				}
 				if (typeof errorfunc === 'function') {
 					var siteName = typeof SITE_INFO.siteName !== 'undefined' ? SITE_INFO.siteName : '微社区';
-					TOOLS.showError('.warp', '您请求的' + siteName + '无法访问<br /><br />接口错误(ERR02)');
+					TOOLS.showError('.warp', '您请求的' + siteName + '无法访问<br><br>接口错误(ERR02)');
 					TOOLS.hideLoading();
 				}
 			}
@@ -648,7 +648,7 @@ var TOOLS = {
 						re = jQuery.parseJSON(re);
 					} catch (e) {
 						var siteName = typeof SITE_INFO.siteName !== 'undefined' ? SITE_INFO.siteName : '微社区';
-						TOOLS.showError('.warp', '您请求的' + siteName + '无法访问<br /><br />接口错误(ERR03)');
+						TOOLS.showError('.warp', '您请求的' + siteName + '无法访问<br><br>接口错误(ERR03)');
 						TOOLS.hideLoading();
 						return;
 					}
@@ -680,7 +680,7 @@ var TOOLS = {
 								re = jQuery.parseJSON(re);
 							} catch (e) {
 								var siteName = typeof SITE_INFO.siteName !== 'undefined' ? SITE_INFO.siteName : '微社区';
-								TOOLS.showError('.warp', '您请求的' + siteName + '无法访问<br /><br />接口错误(ERR04)');
+								TOOLS.showError('.warp', '您请求的' + siteName + '无法访问<br><br>接口错误(ERR04)');
 								TOOLS.hideLoading();
 								return;
 							}
@@ -738,7 +738,7 @@ var TOOLS = {
 							TOOLS.checkInfo.load();
 						} else {
 							var siteName = typeof SITE_INFO.siteName !== 'undefined' ? SITE_INFO.siteName : '微社区';
-							TOOLS.showError('.warp', '您请求的' + siteName + '无法访问<br /><br />接口错误(ERR05)');
+							TOOLS.showError('.warp', '您请求的' + siteName + '无法访问<br><br>接口错误(ERR05)');
 							TOOLS.hideLoading();
 						}
 					}

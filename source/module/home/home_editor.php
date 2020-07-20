@@ -250,15 +250,15 @@ if (empty($_GET['op'])) {
 							<div id="editFaceBox" class="eMenu" style="display:none;top:35px;left:26px;width:165px;"></div>
 
 							<div id="createUrl" class="eMenu" style="display:none;top:35px;left:26px;width:300px;font-size:12px">
-	<?php echo lang('home/editor', 'editor_prompt_textlink'); ?>:<br/>
+	<?php echo lang('home/editor', 'editor_prompt_textlink'); ?>:<br>
 								<input type="text" id="insertUrl" name="url" value="http://" onfocus="checkURL(this, 1);" onblur="checkURL(this, 0);" class="t_input" style="width: 190px;"> <input type="button" onclick="createLink();" name="createURL" value="<?php echo lang('home/editor', 'editor_ok'); ?>" class="submit" /> <a onclick="fHide($('createUrl'));return false;"><?php echo lang('home/editor', 'editor_cancel'); ?></a>
 							</div>
 							<div id="createImg" class="eMenu" style="display:none;top:35px;left:26px;width:300px;font-size:12px">
-	<?php echo lang('home/editor', 'editor_prompt_imagelink'); ?>:<br/>
+	<?php echo lang('home/editor', 'editor_prompt_imagelink'); ?>:<br>
 								<input type="text" id="imgUrl" name="imgUrl" value="http://" onfocus="checkURL(this, 1);" onblur="checkURL(this, 0);" class="t_input" style="width: 190px;" /> <input type="button" onclick="createImg();" name="createURL" value="<?php echo lang('home/editor', 'editor_ok'); ?>" class="submit" /> <a onclick="fHide($('createImg'));return false;"><?php echo lang('home/editor', 'editor_cancel'); ?></a>
 							</div>
 							<div id="createSwf" class="eMenu" style="display:none;top:35px;left:26px;width:400px;font-size:12px">
-	<?php echo lang('home/editor', 'editor_prompt_videolink'); ?>:<br/>
+	<?php echo lang('home/editor', 'editor_prompt_videolink'); ?>:<br>
 								<select name="vtype" id="vtype">
 									<option value="0"><?php echo lang('home/editor', 'editor_prompt_video_flash'); ?></option>
 									<option value="1"><?php echo lang('home/editor', 'editor_prompt_video_media'); ?></option>
@@ -270,7 +270,7 @@ if (empty($_GET['op'])) {
 								<a onclick="fHide($('createSwf'));return false;"><?php echo lang('home/editor', 'editor_cancel'); ?></a>
 							</div>
 							<div id="createPage" class="eMenu" style="display:none;top:35px;left:26px;width:300px;font-size:12px">
-	<?php echo lang('home/editor', 'editor_prompt_pagetitle'); ?>:<br/>
+	<?php echo lang('home/editor', 'editor_prompt_pagetitle'); ?>:<br>
 								<input type="text" id="pageTitle" name="pageTitle" value="" class="t_input" style="width: 190px;" /> <input type="button" onclick="pageBreak();" name="createURL" value="<?php echo lang('home/editor', 'editor_ok'); ?>" class="submit" /> <a onclick="fHide($('createPage'));return false;"><?php echo lang('home/editor', 'editor_cancel'); ?></a>
 							</div>
 

@@ -85,13 +85,13 @@
                                 <a href="forum.php?mod=viewthread&tid=$post[tid]&page=$page" rel="nofollow" class="xg1">{lang thread_show_all}</a>
                             <!--{/if}-->
                         <!--{/if}-->
-                        <br /><em id="authorposton$post[pid]"><font class="xs0 xg1">$post[dateline]</font></em>
+                        <br><em id="authorposton$post[pid]"><font class="xs0 xg1">$post[dateline]</font></em>
                     <!--{elseif $post['authorid'] && $post['username'] && $post['anonymous']}-->
                         {lang anonymous}
-                        <br /><em id="authorposton$post[pid]"><font class="xs0 xg1">$post[dateline]</font></em>
+                        <br><em id="authorposton$post[pid]"><font class="xs0 xg1">$post[dateline]</font></em>
                     <!--{elseif !$post['authorid'] && !$post['username']}-->
                         {lang guest}
-                        <br /><em id="authorposton$post[pid]"><font class="xs0 xg1">$post[dateline]</font></em>
+                        <br><em id="authorposton$post[pid]"><font class="xs0 xg1">$post[dateline]</font></em>
                     <!--{/if}-->
                 <!--{/if}-->
                 </div>
@@ -133,7 +133,7 @@
                                         <h4>$_G[forum][threadsorts][types][$_G[forum_thread][sortid]]</h4>
                                     <!--{loop $threadsortshow['optionlist'] $option}-->
                                         <!--{if $option['type'] != 'info'}-->
-                                            $option[title]: <!--{if $option['value']}-->$option[value] $option[unit]<!--{else}--><span class="xg1">--</span><!--{/if}--><br />
+                                            $option[title]: <!--{if $option['value']}-->$option[value] $option[unit]<!--{else}--><span class="xg1">--</span><!--{/if}--><br>
                                         <!--{/if}-->
                                     <!--{/loop}-->
                                     </div>

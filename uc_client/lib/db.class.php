@@ -160,13 +160,13 @@ class ucclient_db {
 		} else {
 			$s = '';
 			if($message) {
-				$s = "<b>UCenter info:</b> $message<br />";
+				$s = "<b>UCenter info:</b> $message<br>";
 			}
 			if($sql) {
-				$s .= '<b>SQL:</b>'.htmlspecialchars($sql).'<br />';
+				$s .= '<b>SQL:</b>'.htmlspecialchars($sql).'<br>';
 			}
-			$s .= '<b>Error:</b>'.$error.'<br />';
-			$s .= '<b>Errno:</b>'.$errorno.'<br />';
+			$s .= '<b>Error:</b>'.$error.'<br>';
+			$s .= '<b>Errno:</b>'.$errorno.'<br>';
 			$s = str_replace(UC_DBTABLEPRE, '[Table]', $s);
 			exit($s);
 		}

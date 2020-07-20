@@ -748,7 +748,7 @@ if($operation == 'export') {
 				DB::query("ALTER TABLE `$tablepre$r_table` ".implode(',', $sqls), 'SILENT');
 				if($sqlerror = DB::error()) {
 					$errorcount += count($sqls);
-					$error .= $sqlerror.'<br /><br />';
+					$error .= $sqlerror.'<br><br>';
 				}
 			}
 			$alter = array();
@@ -776,7 +776,7 @@ if($operation == 'export') {
 				DB::query("ALTER TABLE `".DB::table($r_table)."` ".implode(',', $sqls), 'SILENT');
 				if($sqlerror = DB::error()) {
 					$errorcount += count($sqls);
-					$error .= $sqlerror.'<br /><br />';
+					$error .= $sqlerror.'<br><br>';
 				}
 			}
 
@@ -930,7 +930,7 @@ if($operation == 'export') {
 		if($settingsdellist) {
 			$showlist .= "<tr class=\"partition\"><td colspan=\"3\">$lang[dbcheck_setting]</td></tr>";
 			$showlist .= '<tr><td colspan="3">';
-			$showlist .= "<input name=\"setting[del]\" type=\"checkbox\" value=\"1\"> ".implode(', ', $settingsdellist).'<br />';
+			$showlist .= "<input name=\"setting[del]\" type=\"checkbox\" value=\"1\"> ".implode(', ', $settingsdellist).'<br>';
 			$showlist .= '</td></tr>';
 		}
 

@@ -755,7 +755,7 @@ function discuzcode(cmd, arg) {
         return;
     } else if (cmd === 'page') {
         if (wysiwyg) {
-            str = '<br /><p>[page]</p>';
+            str = '<br><p>[page]</p>';
         } else {
             str = '\n\n[page]';
         }
@@ -1077,7 +1077,7 @@ function showEditorMenu(tag, params) {
                 str = '<div class="input-block dl"><span>行数：</span><input type="text" id="' + ctrlid + '_param_1" value="2" /><span>列数：</span><input type="text" id="' + ctrlid + '_param_2" value="2" /></div>'
                     + '<div class="input-block dl"><span>宽度：</span><input type="text" id="' + ctrlid + '_param_3" value="" /><span>颜色：</span><input type="text" id="' + ctrlid + '_param_4"  onclick="showColorBox(this.id, 2)" /></div>'
                     + '<p style="cursor:pointer" onclick="showDialog($(\'tbltips_msg\').innerHTML, \'notice\', \'小提示\', null, 0)">快速书写表格提示<img id="tbltips" class="svgicon small" style="vertical-align:-14% !important;" src="' + IMGURL + '/common/icon/faq.svg"></p>';
-                str += '<div id="tbltips_msg" style="display: none">“[tr=颜色]” 定义行背景<br />“[td=宽度]” 定义列宽<br />“[td=列跨度,行跨度,宽度]” 定义行列跨度<br /><br />快速书写表格范例：<div class=\'xs0\' style=\'margin:0 5px\'>[table]<br />Name:|StarsRiver!<br />Version:|X1<br />[/table]</div>用“|”分隔每一列，表格中如有“|”用“\\|”代替，换行用“\\n”代替。</div>';
+                str += '<div id="tbltips_msg" style="display: none">“[tr=颜色]” 定义行背景<br>“[td=宽度]” 定义列宽<br>“[td=列跨度,行跨度,宽度]” 定义行列跨度<br><br>快速书写表格范例：<div class=\'xs0\' style=\'margin:0 5px\'>[table]<br>Name:|StarsRiver!<br>Version:|X1<br>[/table]</div>用“|”分隔每一列，表格中如有“|”用“\\|”代替，换行用“\\n”代替。</div>';
                 break;
             case 'aud':
                 stitle = '插入音乐';
@@ -1089,7 +1089,7 @@ function showEditorMenu(tag, params) {
                 menuwidth = 360;
                 stitle = '插入视频';
                 str = '<div class="input-block"><span>地址:</span><input placeholder="支持 wmv avi rmvb mov swf flv 等格式" type="text" id="' + ctrlid + '_param_1" /><input type="hidden" id="' + ctrlid + '_param_2"/><input type="hidden" id="' + ctrlid + '_param_3"/></div>'
-                    + '支持优酷、土豆、bilibili 等视频站的视频网址<br />示例：http://server/movie.mp4</p>';
+                    + '支持优酷、土豆、bilibili 等视频站的视频网址<br>示例：http://server/movie.mp4</p>';
                 break;
             case 'fls':
                 stitle = '插入Flash';
@@ -1154,7 +1154,7 @@ function showEditorMenu(tag, params) {
                 str += '<p>宽: <input id="' + ctrlid + '_param_3" size="5" value="" /> &nbsp; 高: <input id="' + ctrlid + '_param_4" size="5" value="" /></p>';
                 str += '<p>停留秒数: <input id="' + ctrlid + '_param_8" size="5" value="" /></p>';
                 str += '<p>载入、消失的效果: </p><p><input id="' + ctrlid + '_param_7" type="radio" name="effect" checked />无 &nbsp; <input id="' + ctrlid + '_param_5" type="radio" name="effect" />淡入淡出 &nbsp; <input id="' + ctrlid + '_param_6" type="radio" name="effect" />展开闭合</p>';
-                str += '<p>支持 swf flv jpg gif png 网址<br />宽高范围: 宽400~1024 高300~640<br />示例: http://server/flash.swf</p>';
+                str += '<p>支持 swf flv jpg gif png 网址<br>宽高范围: 宽400~1024 高300~640<br>示例: http://server/flash.swf</p>';
                 break;
             case 'pasteword':
                 stitle = '从 Word 粘贴内容';
@@ -1165,13 +1165,13 @@ function showEditorMenu(tag, params) {
                 break;
             case 'index':
                 stitle = '创建回复目录';
-                str = '<p>[index]<br />\n\
-					[#<span>页码</span>]<span>标题</span> &nbsp;&nbsp;<span>跳转到指定的页</span><br />\n\
-					<span>*</span>[#<span>tid,pid</span>]<span>标题</span> &nbsp;&nbsp;<span>跳转到指定的回复</span><br />\n\
-					[/index]<br />\n\
-					<br />\n\
-					<span>页码</span> &nbsp;&nbsp;<span>用 [page] 对当前回复分页后的页码</span><br />\n\
-					<span>tid,pid</span> &nbsp;&nbsp;<span>回复的 TID 和 PID</span><br />\n\
+                str = '<p>[index]<br>\n\
+					[#<span>页码</span>]<span>标题</span> &nbsp;&nbsp;<span>跳转到指定的页</span><br>\n\
+					<span>*</span>[#<span>tid,pid</span>]<span>标题</span> &nbsp;&nbsp;<span>跳转到指定的回复</span><br>\n\
+					[/index]<br>\n\
+					<br>\n\
+					<span>页码</span> &nbsp;&nbsp;<span>用 [page] 对当前回复分页后的页码</span><br>\n\
+					<span>tid,pid</span> &nbsp;&nbsp;<span>回复的 TID 和 PID</span><br>\n\
 					<span>*</span> &nbsp;&nbsp;<span>添加行首缩进</span></p>';
                 break;
             default:
@@ -1192,7 +1192,7 @@ function showEditorMenu(tag, params) {
                     var promptlang = custombbcodes[tag]['prompt'].split("\t");
                     for (var i = 1; i <= params; i++) {
                         if (i !== params || !haveSel) {
-                            str += (promptlang[i - 1] ? promptlang[i - 1] : '请输入第 ' + i + ' 个参数:') + '<br /><input type="text" id="' + ctrlid + '_param_' + i + '" style="width: 98%" value="" />' + (i < params ? '<br />' : '');
+                            str += (promptlang[i - 1] ? promptlang[i - 1] : '请输入第 ' + i + ' 个参数:') + '<br><input type="text" id="' + ctrlid + '_param_' + i + '" style="width: 98%" value="" />' + (i < params ? '<br>' : '');
                         }
                     }
                 }
@@ -1296,7 +1296,7 @@ function showEditorMenu(tag, params) {
                 str = $(ctrlid + '_param_1') && $(ctrlid + '_param_1').value ? $(ctrlid + '_param_1').value : (selection ? selection : '');
                 if (wysiwyg) {
                     str = preg_replace(['<', '>'], ['&lt;', '&gt;'], str);
-                    str = str.replace(/\r?\n/g, '<br />');
+                    str = str.replace(/\r?\n/g, '<br>');
                 }
                 str = opentag + str + closetag;
                 insertText(str, strlen(opentag), strlen(closetag), false, sel);
@@ -1398,7 +1398,7 @@ function showEditorMenu(tag, params) {
                 break;
             case 'index':
                 if (wysiwyg) {
-                    str = '[index]<br />[#]<br />[#]<br />[/index]';
+                    str = '[index]<br>[#]<br>[#]<br>[/index]';
                 } else {
                     str = '[index]\n[#]\n[#]\n[/index]';
                 }
@@ -1439,7 +1439,7 @@ function showEditorMenu(tag, params) {
 
 function autoTypeset() {
     var sel;
-    var selection = sel ? (wysiwyg ? sel.htmlText.replace(/<\/?p>/ig, '<br />') : sel.text) : getSel();
+    var selection = sel ? (wysiwyg ? sel.htmlText.replace(/<\/?p>/ig, '<br>') : sel.text) : getSel();
     selection = trim(selection);
     selection = wysiwyg ? selection.replace(/<br( \/)?>(<br( \/)?>)+/ig, '</p>\n<p style="line-height: 30px; text-indent: 2em;">') : selection.replace(/\n\n+/g, '[/p]\n[p=30, 2, left]');
     opentag = wysiwyg ? '<p style="line-height: 30px; text-indent: 2em;">' : '[p=30, 2, left]';

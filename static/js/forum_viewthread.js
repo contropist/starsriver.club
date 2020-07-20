@@ -209,7 +209,7 @@ function fastpostappendreply() {
 	if($('fastpostmessage')) {
 		$('fastpostmessage').value = '';
 	} else {
-		editdoc.body.innerHTML = BROWSER.firefox ? '<br />' : '';
+		editdoc.body.innerHTML = BROWSER.firefox ? '<br>' : '';
 	}
 	if($('fastpostform').seccodehash){
 		updateseccode($('fastpostform').seccodehash.value);

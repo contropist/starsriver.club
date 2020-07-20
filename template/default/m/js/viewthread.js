@@ -740,7 +740,7 @@ var attachListInit = function(post) {
     });
     for(var i in post.attachlist) {
         if(!TOOLS.in_array(post.attachlist[i], skipaid)) {
-            ret += '<br /><b><i class="circle">●</i> ' + '<a href="' + (post.attachments[post.attachlist[i]]['payed'] ? SITE_INFO.siteUrl + 'forum.php?mod=attachment&aid=' + post.attachments[post.attachlist[i]]['aidencode'] : '###') + '">' + post.attachments[post.attachlist[i]]['filename'] + ' (' + post.attachments[post.attachlist[i]]['attachsize'] + ')</a></b>';
+            ret += '<br><b><i class="circle">●</i> ' + '<a href="' + (post.attachments[post.attachlist[i]]['payed'] ? SITE_INFO.siteUrl + 'forum.php?mod=attachment&aid=' + post.attachments[post.attachlist[i]]['aidencode'] : '###') + '">' + post.attachments[post.attachlist[i]]['filename'] + ' (' + post.attachments[post.attachlist[i]]['attachsize'] + ')</a></b>';
         }
     }
     return ret;

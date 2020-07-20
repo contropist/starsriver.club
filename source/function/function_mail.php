@@ -116,7 +116,7 @@ $message = <<<EOT
                 </td>
             </tr>
             <tr>
-                <td style="background: #eee; color: #777; border-top: 1px solid #e6e6e6;padding: 10px 20px; line-height: 28px;">祝你使用愉快！<br />此致: <a style="color: #777; border-bottom: 1px dashed #fff;" href="$siteurl">$bbname</a>管理团队<br />$clientip</td>
+                <td style="background: #eee; color: #777; border-top: 1px solid #e6e6e6;padding: 10px 20px; line-height: 28px;">祝你使用愉快！<br>此致: <a style="color: #777; border-bottom: 1px dashed #fff;" href="$siteurl">$bbname</a>管理团队<br>$clientip</td>
             </tr>
         </tbody>
     </table>

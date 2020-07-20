@@ -774,7 +774,7 @@ var rowtypedata = [
 						} else {
 							$forumicon = $_G['setting']['attachurl'].'common/'.$forum['icon'].'?'.random(6);
 						}
-						$forumiconhtml = '<label><input type="checkbox" class="checkbox" name="deleteicon" value="yes" /> '.$lang['delete'].'</label><br /><img src="'.$forumicon.'" /><br />';
+						$forumiconhtml = '<label><input type="checkbox" class="checkbox" name="deleteicon" value="yes" /> '.$lang['delete'].'</label><br><img src="'.$forumicon.'" /><br>';
 					}
 					showsetting('forums_edit_basic_icon', 'iconnew', $forum['icon'], 'filetext', '', 0, $forumiconhtml);
 					showsetting('forums_edit_basic_icon_width', 'extranew[iconwidth]', $forum['extra']['iconwidth'], 'text');
@@ -785,7 +785,7 @@ var rowtypedata = [
 						} else {
 							$forumbanner = $_G['setting']['attachurl'].'common/'.$forum['banner'].'?'.random(6);
 						}
-						$forumbannerhtml = '<label><input type="checkbox" class="checkbox" name="deletebanner" value="yes" /> '.$lang['delete'].'</label><br /><img src="'.$forumbanner.'" /><br />';
+						$forumbannerhtml = '<label><input type="checkbox" class="checkbox" name="deletebanner" value="yes" /> '.$lang['delete'].'</label><br><img src="'.$forumbanner.'" /><br>';
 					}
 					showsetting('forums_edit_basic_banner', 'bannernew', $forum['banner'], 'filetext', '', 0, $forumbannerhtml);
 				}
@@ -859,7 +859,7 @@ var rowtypedata = [
 				if($_G['setting']['allowreplybg']) {
 					$replybghtml = '';
 					if($forum['replybg']) {
-						$replybghtml = '<label><input type="checkbox" class="checkbox" name="delreplybg" value="yes" /> '.$lang['delete'].'</label><br /><img src="'.$_G['setting']['attachurl'].'common/'.$forum['replybg'].'" width="200px" />';
+						$replybghtml = '<label><input type="checkbox" class="checkbox" name="delreplybg" value="yes" /> '.$lang['delete'].'</label><br><img src="'.$_G['setting']['attachurl'].'common/'.$forum['replybg'].'" width="200px" />';
 					}
 					if($forum['replybg']) {
 						$replybgurl = parse_url($forum['replybg']);
@@ -1135,12 +1135,12 @@ EOT;
 					showtableheader('forums_edit_perm_forum', 'noborder fixpadding');
 					showsubtitle(array(
 						'',
-						'<input class="checkbox" type="checkbox" name="chkall1" onclick="checkAll(\'prefix\', this.form, \'^viewperm\', \'chkall1\')" id="chkall1" /><label for="chkall1"><br />'.cplang('forums_edit_perm_view').'</label>',
-						'<input class="checkbox" type="checkbox" name="chkall2" onclick="checkAll(\'prefix\', this.form, \'^postperm\', \'chkall2\')" id="chkall2" /><label for="chkall2"><br />'.cplang('forums_edit_perm_post').'</label>',
-						'<input class="checkbox" type="checkbox" name="chkall3" onclick="checkAll(\'prefix\', this.form, \'^replyperm\', \'chkall3\')" id="chkall3" /><label for="chkall3"><br />'.cplang('forums_edit_perm_reply').'</label>',
-						'<input class="checkbox" type="checkbox" name="chkall4" onclick="checkAll(\'prefix\', this.form, \'^getattachperm\', \'chkall4\')" id="chkall4" /><label for="chkall4"><br />'.cplang('forums_edit_perm_getattach').'</label>',
-						'<input class="checkbox" type="checkbox" name="chkall5" onclick="checkAll(\'prefix\', this.form, \'^postattachperm\', \'chkall5\')" id="chkall5" /><label for="chkall5"><br />'.cplang('forums_edit_perm_postattach').'</label>',
-						'<input class="checkbox" type="checkbox" name="chkall6" onclick="checkAll(\'prefix\', this.form, \'^postimageperm\', \'chkall6\')" id="chkall6" /><label for="chkall6"><br />'.cplang('forums_edit_perm_postimage').'</label>'
+						'<input class="checkbox" type="checkbox" name="chkall1" onclick="checkAll(\'prefix\', this.form, \'^viewperm\', \'chkall1\')" id="chkall1" /><label for="chkall1"><br>'.cplang('forums_edit_perm_view').'</label>',
+						'<input class="checkbox" type="checkbox" name="chkall2" onclick="checkAll(\'prefix\', this.form, \'^postperm\', \'chkall2\')" id="chkall2" /><label for="chkall2"><br>'.cplang('forums_edit_perm_post').'</label>',
+						'<input class="checkbox" type="checkbox" name="chkall3" onclick="checkAll(\'prefix\', this.form, \'^replyperm\', \'chkall3\')" id="chkall3" /><label for="chkall3"><br>'.cplang('forums_edit_perm_reply').'</label>',
+						'<input class="checkbox" type="checkbox" name="chkall4" onclick="checkAll(\'prefix\', this.form, \'^getattachperm\', \'chkall4\')" id="chkall4" /><label for="chkall4"><br>'.cplang('forums_edit_perm_getattach').'</label>',
+						'<input class="checkbox" type="checkbox" name="chkall5" onclick="checkAll(\'prefix\', this.form, \'^postattachperm\', \'chkall5\')" id="chkall5" /><label for="chkall5"><br>'.cplang('forums_edit_perm_postattach').'</label>',
+						'<input class="checkbox" type="checkbox" name="chkall6" onclick="checkAll(\'prefix\', this.form, \'^postimageperm\', \'chkall6\')" id="chkall6" /><label for="chkall6"><br>'.cplang('forums_edit_perm_postimage').'</label>'
 					));
 
 					$spviewgroup = array();
@@ -1251,7 +1251,7 @@ EOT;
 	<a href="###" onclick="foruminsertunit(' != ')">&nbsp;!=&nbsp;</a>&nbsp;
 	<a href="###" onclick="foruminsertunit(' (', ') ')">&nbsp;(&nbsp;)&nbsp;</a>&nbsp;
 	<a href="###" onclick="foruminsertunit(' and ')">&nbsp;<?php echo cplang('forums_edit_perm_formula_and')?>&nbsp;</a>&nbsp;
-	<a href="###" onclick="foruminsertunit(' or ')">&nbsp;<?php echo cplang('forums_edit_perm_formula_or')?>&nbsp;</a>&nbsp;<br />
+	<a href="###" onclick="foruminsertunit(' or ')">&nbsp;<?php echo cplang('forums_edit_perm_formula_or')?>&nbsp;</a>&nbsp;<br>
 	<?php echo $profilefields;?>
 
 
@@ -1259,7 +1259,7 @@ EOT;
 	</div>
 	<textarea name="formulapermnew" id="formulapermnew" class="marginbot" style="width:80%" rows="3" onkeyup="formulaexp()" onkeydown="textareakey(this, event)"><?php echo dhtmlspecialchars($forum['formulaperm'])?></textarea>
 	<script type="text/JavaScript">formulaexp()</script>
-	<br /><span class="smalltxt"><?php cplang('forums_edit_perm_formula_comment', null, true);?></span>
+	<br><span class="smalltxt"><?php cplang('forums_edit_perm_formula_comment', null, true);?></span>
 	</td></tr>
 	<?php
 
@@ -2134,7 +2134,7 @@ function showforum_moderators($forum) {
 				$mods[] = $forum['inheritedmod'] ? '<b>'.$moderator.'</b>' : $moderator;
 			}
 			$r = '<a href="'.ADMINSCRIPT.'?action=forums&operation=moderators&fid='.$forum['fid'].'" title="'.cplang('forums_moderators_comment').'">'.$r.' &raquo;</a>';
-			$r .= '<div class="dropmenu1" id="mods_'.$forum['fid'].'_menu" style="display: none">'.implode('<br />', $mods).'</div>';
+			$r .= '<div class="dropmenu1" id="mods_'.$forum['fid'].'_menu" style="display: none">'.implode('<br>', $mods).'</div>';
 		} else {
 			$r = '<a href="'.ADMINSCRIPT.'?action=forums&operation=moderators&fid='.$forum['fid'].'" title="'.cplang('forums_moderators_comment').'">'.$r.' &raquo;</a>';
 		}

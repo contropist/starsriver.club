@@ -58,7 +58,7 @@
                 <item id="mobilesign_failed"><![CDATA[已进行过签到]]></item>
 			</item>
 			<item id="templatelang">
-				<item id="mobile_tips"><![CDATA[推荐使用二维码收藏并访问论坛<br />使用二维码收藏论坛的方法：<br />1，装掌上论坛应用后，点击使用二维码收藏论坛。<br />2，将二维码置于相机焦点中即可收藏成功。]]></item>
+				<item id="mobile_tips"><![CDATA[推荐使用二维码收藏并访问论坛<br>使用二维码收藏论坛的方法：<br>1，装掌上论坛应用后，点击使用二维码收藏论坛。<br>2，将二维码置于相机焦点中即可收藏成功。]]></item>
 				<item id="username"><![CDATA[用户名]]></item>
 				<item id="password"><![CDATA[密码]]></item>
 				<item id="password_confirm"><![CDATA[确认密码]]></item>

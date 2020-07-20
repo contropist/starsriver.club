@@ -270,7 +270,7 @@ EOT;
 				if(!preg_match("/^".preg_quote(STATICURL, '/')."/i", $navlogo) && !(($valueparse = parse_url($navlogo)) && isset($valueparse['host']))) {
 					$navlogo = $_G['setting']['attachurl'].'common/'.$nav['logo'].'?'.random(6);
 				}
-				$logohtml = '<br /><label><input type="checkbox" class="checkbox" name="deletelogo" value="yes" /> '.$lang['delete'].'</label><br /><img src="'.$navlogo.'" />';
+				$logohtml = '<br><label><input type="checkbox" class="checkbox" name="deletelogo" value="yes" /> '.$lang['delete'].'</label><br><img src="'.$navlogo.'" />';
 			}
 
 			showformheader("nav&operation=headernav&do=edit&id=$id", 'enctype');
@@ -676,7 +676,7 @@ EOT;
 				if(!preg_match("/^".preg_quote(STATICURL, '/')."/i", $navicon) && !(($valueparse = parse_url($navicon)) && isset($valueparse['host']))) {
 					$navicon = $_G['setting']['attachurl'].'common/'.$nav['icon'].'?'.random(6);
 				}
-				$naviconhtml = '<br /><label><input type="checkbox" class="checkbox" name="deleteicon" value="yes" /> '.$lang['delete'].'</label><br /><img src="'.$navicon.'" width="16" height="16" />';
+				$naviconhtml = '<br><label><input type="checkbox" class="checkbox" name="deleteicon" value="yes" /> '.$lang['delete'].'</label><br><img src="'.$navicon.'" width="16" height="16" />';
 			}
 			shownav('global', 'misc_customnav');
 			showsubmenu('nav_setting_customnav', $navdata);
@@ -884,7 +884,7 @@ EOT;
 				if(!preg_match("/^".preg_quote(STATICURL, '/')."/i", $navicon) && !(($valueparse = parse_url($navicon)) && isset($valueparse['host']))) {
 					$navicon = $_G['setting']['attachurl'].'common/'.$nav['icon'].'?'.random(6);
 				}
-				$naviconhtml = '<br /><label><input type="checkbox" class="checkbox" name="deleteicon" value="yes" /> '.$lang['delete'].'</label><br /><img src="'.$navicon.'" width="40" height="40" />';
+				$naviconhtml = '<br><label><input type="checkbox" class="checkbox" name="deleteicon" value="yes" /> '.$lang['delete'].'</label><br><img src="'.$navicon.'" width="40" height="40" />';
 			}
 			shownav('global', 'misc_customnav');
 			showsubmenu('nav_setting_customnav', $navdata);

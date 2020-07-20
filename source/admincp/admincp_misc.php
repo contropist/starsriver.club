@@ -588,7 +588,7 @@ var rowtypedata = [
 		showtagheader('div', 'list', $anchor == 'list');
 		showformheader("misc&operation=censor&page=$page", '', 'keywordsearch');
 		showtableheader();
-		echo '<br /><br /><form method="post">'. $lang['keywords'].': <input type="text" name="censorkeyword" value="'.$_GET['censorkeyword'].'" /> &nbsp; <select name="censor_search_type"><option value = "">'.cplang("misc_censor_wordtype_search").'</option><option value="0">'.cplang('misc_censor_word_default_typename').'</option>'.($word_type_option_search ? $word_type_option_search : $word_type_option).'</select> &nbsp;<input type="submit" name="censor_search" value="'.$lang[search].'" class="btn" /> </form>';
+		echo '<br><br><form method="post">'. $lang['keywords'].': <input type="text" name="censorkeyword" value="'.$_GET['censorkeyword'].'" /> &nbsp; <select name="censor_search_type"><option value = "">'.cplang("misc_censor_wordtype_search").'</option><option value="0">'.cplang('misc_censor_word_default_typename').'</option>'.($word_type_option_search ? $word_type_option_search : $word_type_option).'</select> &nbsp;<input type="submit" name="censor_search" value="'.$lang[search].'" class="btn" /> </form>';
 		showtablefooter();
 
 		showformheader("misc&operation=censor&page=$page", '', 'listform');
@@ -670,7 +670,7 @@ EOT;
 		showformheader("misc&operation=censor&page=$page", 'fixpadding');
 		showtableheader('', 'fixpadding', 'importform');
 		showtablerow('', 'class="vtop rowform"', "<select name=\"wordtype_select\"><option value='0'>".cplang('misc_censor_word_default_typename')."</option>$word_type_option</select>");
-		showtablerow('', 'class="vtop rowform"', '<br /><textarea name="addcensors" class="tarea" rows="10" onkeyup="textareasize(this)" onkeydown="textareakey(this, event)"></textarea><br /><br />'.mradio('overwrite', array(
+		showtablerow('', 'class="vtop rowform"', '<br><textarea name="addcensors" class="tarea" rows="10" onkeyup="textareasize(this)" onkeydown="textareakey(this, event)"></textarea><br><br>'.mradio('overwrite', array(
 				0 => cplang('misc_censor_batch_add_no_overwrite'),
 				1 => cplang('misc_censor_batch_add_overwrite'),
 				2 => cplang('misc_censor_batch_add_clear')
@@ -1085,13 +1085,13 @@ var rowtypedata = [
 
 				showtablerow('', array('class="td25"', 'class="crons"', 'class="td25"', 'class="td25"', 'class="td23"', 'class="td23"', 'class="td23"', 'class="td25"'), array(
 					"<input type=\"checkbox\" name=\"delete[]\" value=\"$cron[cronid]\" ".($cron['type'] == 'system' ? 'disabled' : '').">",
-					"<input type=\"text\" name=\"namenew[$cron[cronid]]\" size=\"20\" value=\"$cron[name]\"><br /><b>$cron[filename]</b>",
+					"<input type=\"text\" name=\"namenew[$cron[cronid]]\" size=\"20\" value=\"$cron[name]\"><br><b>$cron[filename]</b>",
 					"<input type=\"checkbox\" name=\"availablenew[$cron[cronid]]\" value=\"1\" ".($cron['available'] ? 'checked' : '')." $disabled>",
 					cplang($cron['type'] == 'system' ? 'inbuilt' : ($cron['type'] == 'plugin' ? 'plugin' : 'custom')),
 					$cron[time],
 					$cron[lastrun],
 					$cron[nextrun],
-					"<a href=\"".ADMINSCRIPT."?action=misc&operation=cron&edit=$cron[cronid]\" class=\"act\">$lang[edit]</a><br />".
+					"<a href=\"".ADMINSCRIPT."?action=misc&operation=cron&edit=$cron[cronid]\" class=\"act\">$lang[edit]</a><br>".
 					($cron['run'] ? " <a href=\"".ADMINSCRIPT."?action=misc&operation=cron&run=$cron[cronid]\" class=\"act\">$lang[misc_cron_run]</a>" : " <a href=\"###\" class=\"act\" disabled>$lang[misc_cron_run]</a>")
 				));
 			}

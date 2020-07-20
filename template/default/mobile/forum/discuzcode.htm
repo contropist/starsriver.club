@@ -10,7 +10,7 @@ global $_G;
 function tpl_hide_credits($creditsrequire, $message) {
 }
 <!--{block return}--><div class="locked">{lang post_hide_credits}</div>
-$message<br /><br />
+$message<br><br>
 <!--{/block}-->
 <!--{eval return $return;}-->
 {eval
@@ -150,7 +150,7 @@ $is_archive = $_G['forum_thread']['is_archived'] ? '&fid='.$_G['fid'].'&archivei
 				<a href="forum.php?mod=misc&action=attachpay&aid=$attach[aid]&tid=$attach[tid]" target="_blank">$attach[filename]</a>
 			<!--{/if}-->
 			<em class="xg1">($attach[attachsize])</em>
-			<em class="xg1"><br />({lang downloads}: $attach[downloads], $attach[dateline] {lang upload})
+			<em class="xg1"><br>({lang downloads}: $attach[downloads], $attach[dateline] {lang upload})
 			</em>
 			<!--{if $attach['price']}-->
 				<p class="xg1">{lang price}: $attach[price] {$_G['setting']['extcredits'][$_G['setting']['creditstransextra'][1]][unit]}{$_G['setting']['extcredits'][$_G['setting']['creditstransextra'][1]][title]}&nbsp;<a href="forum.php?mod=misc&action=viewattachpayments&aid=$attach[aid]">[{lang pay_view}]</a>

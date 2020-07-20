@@ -167,7 +167,7 @@ if($operation == 'admin') {
 			array('admin', 'magics&operation=admin', 0),
 			array('nav_magics_confer', 'members&operation=confermagic', 0)
 		));
-		echo '<br />';
+		echo '<br>';
 
 		$eidentifier = explode(':', $magic['identifier']);
 		if(count($eidentifier) > 1 && preg_match('/^[\w\_:]+$/', $magic['identifier'])) {

@@ -28,7 +28,7 @@
 				<!--{if $share['image']}-->
 				<a href="$share[image_link]"><img src="$share[image]" class="tn" style="margin-top: 0;" alt="" /></a>
 				<!--{/if}-->
-				{$share[body_template]}<br />
+				{$share[body_template]}<br>
 				<!--{if 'video' == $share['type']}-->
 				<div class="tn" id="flash_div_$share[sid]">
 					<script>showFlash('{$share['body_data']['host']}', '{$share['body_data']['flashvar']}', '', '{$share['sid']}');</script>

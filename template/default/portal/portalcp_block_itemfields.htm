@@ -39,7 +39,7 @@
 			<textarea name="$fieldname">$itemfields[$fieldname]</textarea>
 		<!--{elseif $field[formtype] == 'pic'}-->
 			<label for="picway_remote"><input type="radio" id="picway_remote" name="picway" onclick="showpicedit()" checked="checked" />{lang remote}</label>
-			<label for="picway_upload"><input type="radio" id="picway_upload" name="picway" onclick="showpicedit()" />{lang upload}</label><br />
+			<label for="picway_upload"><input type="radio" id="picway_upload" name="picway" onclick="showpicedit()" />{lang upload}</label><br>
 			<div id="pic_remote">
 				<input type="text" name="pic" id="oldpicurl" value="$itemfields[oldpic]" style="width: 280px;" />
 				<a onclick="openCropper($('oldpicurl').value);">{lang cut}</a>

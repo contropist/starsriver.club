@@ -70,7 +70,7 @@ if (!submitcheck('addsubmit') && !submitcheck('sendsubmit') && !submitcheck('del
 		showtablerow('', '', array(lang('plugin/wechat', 'mass_type')));
 		showtablerow('', array('', 'class="td23 td28"', '', 'class="td29"'), array(
 		    "<textarea class=\"tarea\" name=\"massmessage\" id=\"res_subscribe\" rows=\"5\" cols=\"40\">$massmessage</textarea>"
-		    . "<br /><a href=\"javascript:;\" id=\"rsel\" onclick=\"showResource('res_subscribe')\">" . lang('plugin/wechat', 'mass_select_media') . "</a>"
+		    . "<br><a href=\"javascript:;\" id=\"rsel\" onclick=\"showResource('res_subscribe')\">" . lang('plugin/wechat', 'mass_select_media') . "</a>"
 		));
 		$select = array('group_id', []);
 		foreach ($groups as $g) {

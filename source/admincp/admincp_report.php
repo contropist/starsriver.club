@@ -26,10 +26,10 @@ if(submitcheck('resolvesubmit')) {
 			$creditchange = '';
 			$opresult = !empty($_GET['creditsvalue'][$id])? $curcredits."\t".intval($_GET['creditsvalue'][$id]) : 'ignore';
 			$uid = $_GET['reportuids'][$id];
-			$msg = !empty($_GET['msg'][$id]) ? '<br />'.dhtmlspecialchars($_GET['msg'][$id]) : '';
+			$msg = !empty($_GET['msg'][$id]) ? '<br>'.dhtmlspecialchars($_GET['msg'][$id]) : '';
 			if(!empty($_GET['creditsvalue'][$id])) {
 				$credittag = $_GET['creditsvalue'][$id] > 0 ? '+' : '';
-				$creditchange = '<br />'.cplang('report_your').$_G['setting']['extcredits'][$curcredits]['title'].'&nbsp;'.$credittag.$_GET['creditsvalue'][$id];
+				$creditchange = '<br>'.cplang('report_your').$_G['setting']['extcredits'][$curcredits]['title'].'&nbsp;'.$credittag.$_GET['creditsvalue'][$id];
 				updatemembercount($uid, array($curcredits => $_GET['creditsvalue'][$id]), true, 'RPC', $id);
 			}
 			if($uid != $_G['uid'] && ($creditchange || $msg)) {
@@ -81,7 +81,7 @@ if($operation == 'newreport') {
 			'<input type="checkbox" class="checkbox" name="reportids[]" value="'.$row['id'].'" />',
 			'<b>'.cplang('report_newreport_url').'</b><a href="'.$row['url'].'" target="_blank">'.$row['url'].'</a><br \><b>'.cplang('report_newreport_time').'</b>'.dgmdate($row['dateline']).'<br><b>'.cplang('report_newreport_message').'</b><br>'.$row['message'],
 			'<a href="home.php?mod=space&uid='.$row['uid'].'">'.$row['username'].'</a><input type="hidden" name="reportuids['.$row['id'].']" value="'.$row['uid'].'">',
-			($report_reward['max'] != $report_reward['min'] ? $_G['setting']['extcredits'][$curcredits]['title'].':&nbsp;<select name="creditsvalue['.$row['id'].']">'.$rewardlist.'</select><br /><br />'.cplang('report_note').':&nbsp;<input type="text" name="msg['.$row['id'].']" value="">' : '')
+			($report_reward['max'] != $report_reward['min'] ? $_G['setting']['extcredits'][$curcredits]['title'].':&nbsp;<select name="creditsvalue['.$row['id'].']">'.$rewardlist.'</select><br><br>'.cplang('report_note').':&nbsp;<input type="text" name="msg['.$row['id'].']" value="">' : '')
 		));
 	}
 	$multipage = multi($reportcount, $lpp, $page, ADMINSCRIPT."?action=report&lpp=$lpp", 0, 3);

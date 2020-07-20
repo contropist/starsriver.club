@@ -85,7 +85,7 @@ function insertAttach(id) {
 		localfile += '&nbsp;<a title="点击这里插入内容中当前光标的位置" onclick="insertAttachimgTag(' + id + ');return false;">[插入]</a>';
 	}
 	inhtml += '<td><strong>' + localfile +'</strong>';
-	inhtml += '</td><td class="d">图片描述<br/><textarea name="pic_title" cols="40" rows="2" ></textarea>';
+	inhtml += '</td><td class="d">图片描述<br><textarea name="pic_title" cols="40" rows="2" ></textarea>';
 	inhtml += '</td><td class="o"><span id="showmsg' + id + '"><a onclick="delAttach(' + id + ');return false;">[删除]</a></span>';
 	inhtml += '</td></tr></table>';
 

@@ -96,7 +96,7 @@ function make_html_category(starttime){
 		if(s) {
 			new make_html_batch('portal.php?mod=list&catid=', s.split(','), make_html_topic, dom);
 		} else {
-			dom.innerHTML = '$lang[makehtml_nofindcategory]<br>$lang[makehtml_startmaketopic]<br /><a href="javascript:void(0);" onclick="\$(\'mk_category\').style.display = \'none\';make_html_topic();">$lang[makehtml_browser_error]</a>';
+			dom.innerHTML = '$lang[makehtml_nofindcategory]<br>$lang[makehtml_startmaketopic]<br><a href="javascript:void(0);" onclick="\$(\'mk_category\').style.display = \'none\';make_html_topic();">$lang[makehtml_browser_error]</a>';
 			setTimeout(function(){\$('mk_category').style.display = 'none'; make_html_topic();}, 1000);
 		}
 	});
@@ -112,7 +112,7 @@ function make_html_topic(starttime){
 		if(s) {
 			new make_html_batch('portal.php?mod=topic&topicid=', s.split(','), make_html_index, dom);
 		} else {
-			dom.innerHTML = '$lang[makehtml_nofindtopic]<br>$lang[makehtml_startmakeindex]<br /><a href="javascript:void(0);" onclick="\$(\'mk_category\').style.display = \'none\';make_html_index();">$lang[makehtml_browser_error]</a>';
+			dom.innerHTML = '$lang[makehtml_nofindtopic]<br>$lang[makehtml_startmakeindex]<br><a href="javascript:void(0);" onclick="\$(\'mk_category\').style.display = \'none\';make_html_index();">$lang[makehtml_browser_error]</a>';
 			setTimeout(function(){\$('mk_category').style.display = 'none'; make_html_index();}, 1000);
 		}
 	});

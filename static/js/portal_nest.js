@@ -866,7 +866,7 @@ drag.extend({
 	},
 	goonnest : function () {
 		if ($('prefile').value == '1') {
-			showDialog('<div style="line-height:28px;">按继续按钮将打开暂存数据并NEST，<br />按删除按钮将删除暂存数据。</div>','confirm','是否继续暂存数据的NEST？', function(){location.replace(location.href+'&preview=yes');}, true, 'spacenest.cancelNEST()', '', '继续', '删除');
+			showDialog('<div style="line-height:28px;">按继续按钮将打开暂存数据并NEST，<br>按删除按钮将删除暂存数据。</div>','confirm','是否继续暂存数据的NEST？', function(){location.replace(location.href+'&preview=yes');}, true, 'spacenest.cancelNEST()', '', '继续', '删除');
 		} else if (location.search.indexOf('preview=yes') > -1) {
 			spacenest.enablePreviewButton();
 		} else {
@@ -956,7 +956,7 @@ spacenest.extend({
 	cancel : function () {
 		saveUserdata('nest_advance_mode', '');
 		if (drag.isClearClose) {
-			showDialog('<div style="line-height:28px;">是否保留暂存数据？<br />按确定按钮将保留暂存数据，按取消按钮将删除暂存数据。</div>','confirm','保留暂存数据', function(){location.href = spacenest.cancelnestUrl();}, true, function(){window.onunload=function(){spacenest.cancelNEST()};location.href = spacenest.cancelnestUrl();});
+			showDialog('<div style="line-height:28px;">是否保留暂存数据？<br>按确定按钮将保留暂存数据，按取消按钮将删除暂存数据。</div>','confirm','保留暂存数据', function(){location.href = spacenest.cancelnestUrl();}, true, function(){window.onunload=function(){spacenest.cancelNEST()};location.href = spacenest.cancelnestUrl();});
 		} else {
 			location.href = this.cancelnestUrl();
 		}

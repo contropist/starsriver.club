@@ -129,7 +129,7 @@ if($_GET['view'] == 'me') {
 	$member = array_merge($member, C::t('common_member_profile')->fetch($uid), C::t('common_member_status')->fetch($uid), C::t('common_member_field_forum')->fetch($uid));
 	$member['avatar'] = '<div class="avatar">'.avatar($member['uid']);
 	if($_G['cache']['usergroups'][$member['groupid']]['groupavatar']) {
-		$member['avatar'] .= '<br /><img src="'.$_G['cache']['usergroups'][$member['groupid']]['groupavatar'].'" border="0" alt="" />';
+		$member['avatar'] .= '<br><img src="'.$_G['cache']['usergroups'][$member['groupid']]['groupavatar'].'" border="0" alt="" />';
 	}
 	$member['avatar'] .= '</div>';
 

@@ -202,7 +202,7 @@ function profile_setting($fieldid, $space=[], $showstatus=false, $ignoreunchanga
 	$html .= "<div class='input-tip'></div>";
 
 	if($showstatus) {
-		$html .= "<p class='message'>".(!empty($field['description']) ? ($field['description']."<br />") : '');
+		$html .= "<p class='message'>".(!empty($field['description']) ? ($field['description']."<br>") : '');
 		if($verifyvalue !== null) {
 			if($field['formtype'] == 'file') {
 				$imgurl = getglobal('setting/attachurl').'./profile/'.$verifyvalue;

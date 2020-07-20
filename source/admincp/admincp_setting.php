@@ -674,7 +674,7 @@ if(!submitcheck('settingsubmit')) {
 		showsetting('setting_styles_viewthread_allow_replybg', 'settingnew[allowreplybg]', $setting['allowreplybg'], 'radio', 0, 1);
 		$replybghtml = '';
 		if($setting['globalreplybg']) {
-			$replybghtml = '<label><input type="checkbox" class="checkbox" name="delglobalreplybg" value="yes" /> '.$lang['delete'].'</label><br /><img src="'.$_G['setting']['attachurl'].'common/'.$setting['globalreplybg'].'" width="200px" />';
+			$replybghtml = '<label><input type="checkbox" class="checkbox" name="delglobalreplybg" value="yes" /> '.$lang['delete'].'</label><br><img src="'.$_G['setting']['attachurl'].'common/'.$setting['globalreplybg'].'" width="200px" />';
 		}
 		if($setting['globalreplybg']) {
 			$replybgurl = parse_url($setting['globalreplybg']);
@@ -1243,7 +1243,7 @@ EOF;
 		showtips('setting_functions_heatthread_tips', 'heatthread_tips', $_GET['anchor'] == 'heatthread');
 		showtableheader('', 'nobottom', 'id="heatthread"'.($_GET['anchor'] != 'heatthread' ? ' style="display: none"' : ''));
 		showsetting('setting_functions_heatthread_period', 'settingnew[heatthread][period]', $setting['heatthread']['period'], 'text');
-		showsetting('setting_functions_heatthread_iconlevels', '', '', '<input name="settingnew[heatthread][iconlevels]" class="txt" type="text" value="'.$setting['heatthread']['iconlevels'].'" /><br />'.$heatthreadicons);
+		showsetting('setting_functions_heatthread_iconlevels', '', '', '<input name="settingnew[heatthread][iconlevels]" class="txt" type="text" value="'.$setting['heatthread']['iconlevels'].'" /><br>'.$heatthreadicons);
 		showtablefooter();
 		/*search*/
 
@@ -1255,7 +1255,7 @@ EOF;
 		showsetting('setting_functions_recommend_subtracttext', 'settingnew[recommendthread][subtracttext]', $setting['recommendthread']['subtracttext'], 'text');
 		showsetting('setting_functions_recommend_daycount', 'settingnew[recommendthread][daycount]', intval($setting['recommendthread']['daycount']), 'text');
 		showsetting('setting_functions_recommend_ownthread', 'settingnew[recommendthread][ownthread]', $setting['recommendthread']['ownthread'], 'radio');
-		showsetting('setting_functions_recommend_iconlevels', '', '', '<input name="settingnew[recommendthread][iconlevels]" class="txt" type="text" value="'.$setting['recommendthread']['iconlevels'].'" /><br />'.$recommendicons);
+		showsetting('setting_functions_recommend_iconlevels', '', '', '<input name="settingnew[recommendthread][iconlevels]" class="txt" type="text" value="'.$setting['recommendthread']['iconlevels'].'" /><br>'.$recommendicons);
 		showtablefooter();
 		/*search*/
 
@@ -1510,7 +1510,7 @@ EOF;
 					<div id="formulapermexp" class="margintop marginbot diffcolor2">$formulapermexp</div>
 					<textarea name="settingnew[creditsformula]" id="creditsformula" class="marginbot" style="width:80%" rows="3" onkeyup="formulaexp()" onkeydown="textareakey(this, event)">$setting[creditsformula]</textarea>
 					<script type="text/JavaScript">formulaexp()</script>
-					<br /><span class="smalltxt">$lang[setting_credits_formula_comment]</span>
+					<br><span class="smalltxt">$lang[setting_credits_formula_comment]</span>
 				</td>
 			</tr>
 EOF;
@@ -1712,7 +1712,7 @@ EOF;
 
 		$seccodecheck = 1;
 		$sechash = 'S'.$_G['sid'];
-		$seccheckhtml = "<span id=\"seccode_c$sechash\"></span><script type=\"text/javascript\">updateseccode('c$sechash', '<br /><sec> <sec> <sec>', 'admin');</script>";
+		$seccheckhtml = "<span id=\"seccode_c$sechash\"></span><script type=\"text/javascript\">updateseccode('c$sechash', '<br><sec> <sec> <sec>', 'admin');</script>";
 
 		$checksc = array();
 		$setting['seccodedata'] = dunserialize($setting['seccodedata']);
@@ -3741,7 +3741,7 @@ function threadprofile_buttons($id, $authorinfoitems) {
 	foreach($authorinfoitems as $k => $name) {
 		if(!is_numeric($k)) {
 			if($i > 11) {
-				$buttons .= '<br />';
+				$buttons .= '<br>';
 				$i = 0;
 			}
 			if(substr($k, 0, 1) == '{') {
@@ -3752,7 +3752,7 @@ function threadprofile_buttons($id, $authorinfoitems) {
 			$buttons .= '<a href="###" onclick="insertunit($(\''.$id.'\'), \''.$code.'\')">'.$name.'</a>';
 			$i++;
 		} else {
-			$buttons .= $name ? '<a onclick="display(\''.$id.'more\')" class="light">'.cplang('more').'</a><div id="'.$id.'more" style="display:none">' : '<br />';
+			$buttons .= $name ? '<a onclick="display(\''.$id.'more\')" class="light">'.cplang('more').'</a><div id="'.$id.'more" style="display:none">' : '<br>';
 			$i = 0;
 		}
 	}

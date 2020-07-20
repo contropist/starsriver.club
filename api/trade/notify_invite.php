@@ -57,7 +57,7 @@ if($notifydata['validator']) {
 			$add_member_subject = $_G['setting']['bbname'].' - '.lang('forum/misc', 'invite_payment');
 			$add_member_message = lang('email', 'invite_payment_email_message', array(
 				'orderid' => $order['orderid'],
-				'codetext' => implode('<br />', $codetext),
+				'codetext' => implode('<br>', $codetext),
 				'siteurl' => $_G['siteurl'],
 				'bbname' => $_G['setting']['bbname'],
 			));

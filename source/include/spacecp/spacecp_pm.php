@@ -427,7 +427,7 @@ if($_GET['op'] == 'checknewpm') {
 		if(empty($cannotappend)) {
 			showmessage('do_success', dreferer(), [], array('showdialog'=>1, 'showmsg' => true, 'closetime' => true, 'locationtime' => 3));
 		} else {
-			showmessage('message_can_not_append_reason', dreferer(), array('cannotappend' => implode('<br />', $cannotappend)), array('showdialog'=>1, 'showmsg' => true, 'closetime' => true, 'locationtime' => 5));
+			showmessage('message_can_not_append_reason', dreferer(), array('cannotappend' => implode('<br>', $cannotappend)), array('showdialog'=>1, 'showmsg' => true, 'closetime' => true, 'locationtime' => 5));
 		}
 	}
 
@@ -493,7 +493,7 @@ if($_GET['op'] == 'checknewpm') {
 	$contents .= "\r\n";
 	foreach($list as $key => $val) {
 		$contents .= $val['author']."\t".dgmdate($val['dateline'])."\r\n";
-		$contents .= str_replace(array('<br>', '<br />', '&nbsp;'), array("\r\n", "\r\n", ' '), $val['message'])."\r\n\r\n";
+		$contents .= str_replace(array('<br>', '<br>', '&nbsp;'), array("\r\n", "\r\n", ' '), $val['message'])."\r\n\r\n";
 	}
 	$contents .= '</body></html>';
 	$contents = nl2br($contents);

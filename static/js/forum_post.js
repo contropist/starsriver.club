@@ -193,7 +193,7 @@ function switchicon(iconid, obj) {
 
 function clearContent() {
 	if(wysiwyg) {
-		editdoc.body.innerHTML = BROWSER.firefox ? '<br />' : '';
+		editdoc.body.innerHTML = BROWSER.firefox ? '<br>' : '';
 	} else {
 		textobj.value = '';
 	}
@@ -238,7 +238,7 @@ function uploadAttach(curId, statusid, prefix, sizelimit) {
 		if(statusid == 0) {
 			UPLOADCOMPLETE++;
 		} else {
-			FAILEDATTACHS += '<br />' + mb_cutstr($(prefix + 'attachnew_' + curId).value.substr($(prefix + 'attachnew_' + curId).value.replace(/\\/g, '/').lastIndexOf('/') + 1), 25) + ': ' + STATUSMSG[statusid] + sizelimit;
+			FAILEDATTACHS += '<br>' + mb_cutstr($(prefix + 'attachnew_' + curId).value.substr($(prefix + 'attachnew_' + curId).value.replace(/\\/g, '/').lastIndexOf('/') + 1), 25) + ': ' + STATUSMSG[statusid] + sizelimit;
 			UPLOADFAILED++;
 		}
 		$(prefix + 'cpdel_' + curId).innerHTML = '<img src="' + IMGDIR + '/check_' + (statusid == 0 ? 'right' : 'error') + '.gif" alt="' + STATUSMSG[statusid] + '" />';
@@ -673,7 +673,7 @@ function insertAllAttachTag() {
 					} else {
 						insertAttachTag(ids[1]);
 					}
-					var txt = wysiwyg ? '\r\n<br/><br/>\r\n' : '\r\n\r\n';
+					var txt = wysiwyg ? '\r\n<br><br>\r\n' : '\r\n\r\n';
 					insertText(txt, strlen(txt), 0);
 				}
 			}

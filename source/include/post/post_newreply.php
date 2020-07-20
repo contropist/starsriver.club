@@ -79,7 +79,7 @@ if($_G['setting']['commentnumber'] && !empty($_GET['comment'])) {
 			}
 		}
 	}
-	$comment = cutstr(($commentscore ? $commentscore.'<br />' : '').censor(trim(dhtmlspecialchars($_GET['message'])), '***'), 200, ' ');
+	$comment = cutstr(($commentscore ? $commentscore.'<br>' : '').censor(trim(dhtmlspecialchars($_GET['message'])), '***'), 200, ' ');
 	if(!$comment) {
 		showmessage('post_sm_isnull');
 	}
@@ -116,7 +116,7 @@ if($_G['setting']['commentnumber'] && !empty($_GET['comment'])) {
 		$totalcomment = [];
 		foreach(C::t('forum_postcomment')->fetch_all_by_pid_score($_GET['pid'], 1) as $comment) {
 			$comment['comment'] = addslashes($comment['comment']);
-			if(strexists($comment['comment'], '<br />')) {
+			if(strexists($comment['comment'], '<br>')) {
 				if(preg_match_all("/([^:]+?):\s<i>(\d+)<\/i>/", $comment['comment'], $a)) {
 					foreach($a[1] as $k => $itemk) {
 						$totalcomment[trim($itemk)][] = $a[2][$k];

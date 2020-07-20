@@ -606,7 +606,7 @@ if($op == 'delete') {
 				foreach(C::t('forum_attachment_n')->fetch_all_by_id('tid:'.$thread['tid'], 'pid', $thread['pid'], 'aid DESC') as $attach) {
 					$attachcode = '[attach]'.$attach['aid'].'[/attach]';
 					if(!strexists($article_content['content'], $attachcode)) {
-						$article_content['content'] .= '<br /><br />'.$attachcode;
+						$article_content['content'] .= '<br><br>'.$attachcode;
 					}
 					if($attach['isimage']) {
 						if($article['pic']) {
@@ -666,7 +666,7 @@ function portalcp_get_postmessage($post, $getauthorall = '') {
 				$value['message'] = preg_replace("/\s?\[quote\][\n\r]*(.+?)[\n\r]*\[\/quote\]\s?/is", '', $value['message']);
 				$value['message'] = discuzcode($value['message'], $value['smileyoff'], $value['bbcodeoff'], $value['htmlon'] & 1, $forum['allowsmilies'], $forum['allowbbcode'], ($forum['allowimgcode'] && $_G['setting']['showimages'] ? 1 : 0), $forum['allowhtml'], 0, 0, $value['authorid'], $forum['allowmediacode'], $value['pid']);
 				portalcp_parse_postattch($value);
-				$_message .= '<br /><br />'.$value['message'];
+				$_message .= '<br><br>'.$value['message'];
 			}
 		}
 	}

@@ -57,7 +57,7 @@
 <form method="post" target="_blank" action="portal.php?mod=portalcp&ac=article&tid=$tid&aid=$aid">
 	<div class="c">
 		<b>$pushcount</b> {lang portalcp_article_message1}<a href="$article_url" target="_blank">({lang view_article})</a>
-		<!--{if $pushedcount}--><br />{lang portalcp_article_message2}<!--{/if}-->
+		<!--{if $pushedcount}--><br>{lang portalcp_article_message2}<!--{/if}-->
 		<div id="pushplus_list">
 		<!--{loop $pids $pid}-->
 		<input type="hidden" name="pushpluspids[]" value="$pid" />

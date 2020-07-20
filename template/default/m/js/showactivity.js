@@ -157,9 +157,9 @@ var imageListInit = function (post) {
 			var src = TOOLS.attachUrl(post.attachments[post.imagelist[i]].attachment);
 		}
 		if (post.attachments[post.imagelist[i]].thumb) {
-			ret += '<br /><img src="' + src + '.thumb.jpg" file="' + src + '" />';
+			ret += '<br><img src="' + src + '.thumb.jpg" file="' + src + '" />';
 		} else {
-			ret += '<br /><img src="' + src + '" />';
+			ret += '<br><img src="' + src + '" />';
 		}
 	}
 	return ret;

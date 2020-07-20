@@ -134,7 +134,7 @@ $lang = array(
     'not_allow_upload_extend'   => '不允许上传{extend}类型的图片',
     'files_can_not_exceed_size' => '{extend}类文件不能超过{size}',
     'get_passwd_subject'        => '取回密码邮件',
-    'get_passwd_message'        => '你只需在提交请求后的三天之内，通过点击下面的链接重置你的密码：<br />\\1<br />(如果上面不是链接形式，请将地址手工粘帖到浏览器地址栏再访问)<br />上面的页面打开后，输入新的密码后提交，之后你即可使用新的密码登录了。',
+    'get_passwd_message'        => '你只需在提交请求后的三天之内，通过点击下面的链接重置你的密码：<br>\\1<br>(如果上面不是链接形式，请将地址手工粘帖到浏览器地址栏再访问)<br>上面的页面打开后，输入新的密码后提交，之后你即可使用新的密码登录了。',
     'file_is_too_big'           => '文件过大',
 
     'take_part_in_the_voting'                  => '{actor} 参与了 {touser} 的{reward}投票 <a href="{url}" target="_blank">{subject}</a>',
