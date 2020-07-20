@@ -3471,8 +3471,27 @@
         color: #00a0d8;
         margin: 0 3px;
     }
-    .plate.cloud .vessel .inputline .message strong{
+    .plate.cloud .vessel .inputline .message em{
         position: relative;
+        font-weight: 700;
+        font-size: 12px;
+        vertical-align: bottom;
+        color: var(--color-onnanoko-pink);
+        border-bottom: 1px dashed;
+    }
+    .plate.cloud .vessel .inputline .message .warning{
+        display: block;
+        font-size: 12px;
+        color: var(--color-onnanoko-pink);
+    }
+    .plate.cloud .vessel .inputline .message .warning::before{
+        content: '';
+        display: inline-block;
+        background: var(--color-onnanoko-pink);
+        width: 5px;
+        height: 3px;
+        vertical-align: middle;
+        margin-right: 4px;
     }
     .plate.cloud .vessel .inputline .message .tooltip{
         padding: 0;

@@ -202,19 +202,19 @@ function profile_setting($fieldid, $space=[], $showstatus=false, $ignoreunchanga
 	$html .= "<div class='input-tip'></div>";
 
 	if($showstatus) {
-		$html .= "<p class=\"message\">$value[description]";
-		if($space[$fieldid]=='' && $value['unchangeable']) {
-			$html .= lang('spacecp', 'profile_unchangeable')."<br />";
-		}
+		$html .= "<p class='message'>".(!empty($field['description']) ? ($field['description']."<br />") : '');
 		if($verifyvalue !== null) {
 			if($field['formtype'] == 'file') {
 				$imgurl = getglobal('setting/attachurl').'./profile/'.$verifyvalue;
 				$verifyvalue = "<img src='$imgurl' alt='$imgurl'/>";
 			}
-			$html .= "<strong>".lang('spacecp', 'profile_is_verifying')."<span class='tooltip'>".$verifyvalue."</span></strong>";
+			$html .= "<em>".lang('spacecp', 'profile_is_verifying')."<span class='tooltip'>".$verifyvalue."</span></em>";
 		} elseif($field['needverify']) {
-			$html .= lang('spacecp', 'profile_need_verifying');
+			$html .= "<span class='warning'>".lang('spacecp', 'profile_need_verifying')."</span>";
 		}
+        if($space[$fieldid]=='' && $field['unchangeable']) {
+            $html .= "<span class='warning'>".lang('spacecp', 'profile_unchangeable')."</span>";
+        }
 		$html .= '</p>';
 	}
 	return $html;

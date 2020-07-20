@@ -315,10 +315,10 @@ $lang = array(
     'admincp_op_credit'               => '后台积分奖惩操作',
     'credit_update_reward_clean'      => '清零',
 
-    'profile_unchangeable'        => '此项资料提交后不可修改',
-    'profile_is_verifying'        => '此项资料正在审核中...',
+    'profile_unchangeable'        => '此项提交后 <em>不可修改</em>',
+    'profile_is_verifying'        => '此项正在审核中...',
     'profile_mypost'              => '我提交的内容',
-    'profile_need_verifying'      => '此项资料提交后需要审核',
+    'profile_need_verifying'      => '此项提交后 <em>需要审核</em>',
     'profile_edit'                => '修改',
     'profile_censor'              => '(含有敏感词汇)',
     'profile_verify_modify_error' => '{verify}已经认证通过不允许修改',

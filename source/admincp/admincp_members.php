@@ -2552,7 +2552,7 @@ EOF;
 				$value['showincard'] = '<input type="checkbox" class="checkbox" name="showincard['.$fieldid.']" '.($value['showincard'] ? 'checked="checked" ' : '').'value="1">';
 				$value['showinregister'] = '<input type="checkbox" class="checkbox" name="showinregister['.$fieldid.']" '.($value['showinregister'] ? 'checked="checked" ' : '').'value="1">';
 				$value['displayorder'] = '<input type="text" name="displayorder['.$fieldid.']" value="'.$value['displayorder'].'" size="5">';
-				$value['edit'] = '<a href="'.ADMINSCRIPT.'?action=members&operation=profile&fieldid='.$fieldid.'" title="" class="act">'.$lang[edit].'</a>';
+				$value['edit'] = '<a href="'.ADMINSCRIPT.'?action=members&operation=profile&fieldid='.$fieldid.'" title="" class="act">'.$lang['edit'].'</a>';
 				showtablerow('', [], $value);
 			}
 			showsubmit('ordersubmit');
