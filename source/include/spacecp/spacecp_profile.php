@@ -151,9 +151,6 @@ if(submitcheck('profilesubmit')) {
 			continue;
 		} elseif(profile_check($key, $value, $space)) {
 			$setarr[$key] = dhtmlspecialchars(trim($value));
-			if($key == 'field4'){
-                dump($value);
-            }
 		} else {
             $profile_check_errormsg = '';
 			if($key=='birthprovince') {
