@@ -1261,12 +1261,11 @@
                 MasElements.viewerBannerImg.onload = function () {
                     setTimeout(MasAction.bannerImgResize(),10);
                 };
-                setTimeout(MasAction.bannerImgResize(),1);
+                setTimeout(MasAction.bannerImgResize(),10);
             }
         },
 
         viewerScroll: function () {
-
             if(MasElements.viewer && MasElements.viewerBanner.Css.height !== 0){
                 if(MasElements.viewer.scrollTop >= MasElements.viewerHeader.Css.height){
                     MasElements.BankS.addClass('active');
