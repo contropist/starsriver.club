@@ -290,6 +290,9 @@ function profile_check($fieldid, &$value, $space=[]) {
         if($field['size'] && (count($arr) > $field['size'])) {
             return false;
         }
+        if($field['required'] && empty($arr)){
+            return false;
+        }
 		$value = implode("\n", $arr);
 
 	} elseif($field['formtype'] == 'radio' || $field['formtype'] == 'select') {

@@ -182,8 +182,19 @@ if (submitcheck('profilesubmit')) {
                 $key = 'residecity';
             } elseif ($key == 'birthyear' || $key == 'birthmonth') {
                 $key = 'birthday';
-            } elseif (in_array($field['formtype'], ['list', 'checkbox'])) {
-                $profile_check_errormsg = lang('spacecp', 'checkbox_max', ['num' => $field['size']]);
+            } elseif ($field['formtype'] == 'list' || $field['formtype'] == 'checkbox') {
+                $arr = [];
+                $field['choices'] = explode("\n", $field['choices']);
+                foreach ($value as $op) {
+                    if(in_array($op, $field['choices'])) {
+                        $arr[] = $op;
+                    }
+                }
+                if ($field['required'] && empty($arr)) {
+                    $profile_check_errormsg = lang('spacecp', 'input_must');
+                } elseif(count($arr) > $field['size']) {
+                    $profile_check_errormsg = lang('spacecp', 'checkbox_max', ['num' => $field['size']]);
+                }
             } else {
                 if ($field['required'] && empty($value)) {
                     $profile_check_errormsg = lang('spacecp', 'input_must');
