@@ -269,6 +269,7 @@ function profile_check($fieldid, &$value, $space=[]) {
 	if($field['choices']) {
 		$field['choices'] = explode("\n", $field['choices']);
 	}
+
 	if($field['formtype'] == 'text' || $field['formtype'] == 'textarea') {
 		$value = getstr($value);
 		if($field['size'] && strlen($value) > $field['size']) {
@@ -286,10 +287,11 @@ function profile_check($fieldid, &$value, $space=[]) {
 				$arr[] = $op;
 			}
 		}
+        if($field['size'] && (count($arr) > $field['size'])) {
+            return false;
+        }
 		$value = implode("\n", $arr);
-		if($field['size'] && count($arr) > $field['size']) {
-			return false;
-		}
+
 	} elseif($field['formtype'] == 'radio' || $field['formtype'] == 'select') {
 		if(!in_array($value, $field['choices'])){
 			return false;
