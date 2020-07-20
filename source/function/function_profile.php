@@ -97,17 +97,14 @@ function profile_setting($fieldid, $space=[], $showstatus=false, $ignoreunchanga
 		if($field['unchangeable'] && $space[$fieldid] > 0) {
 			return '<s class="input-simulate unchangeable">'.lang('space', 'gender_'.intval($space[$fieldid])).'</s>';
 		}
-		$selected = array($space[$fieldid]=>' selected="selected"');
-		$html = '<select name="gender" id="gender">';
-		if($field['unchangeable']) {
-			$html .= '<option value="">'.lang('space', 'gender').'</option>';
-		} else {
-			$html .= '<option value="0"'.($space[$fieldid]=='0' ? ' selected' : '').'>'.lang('space', 'gender_0').'</option>';
+        $html = "<div class='check-slot'>";
+        if(!$field['unchangeable']) {
+            $html .= "<s class='csbox mager'><input id='gender_0' type='radio' name='gender' value='0' ".($space[$fieldid] == '0' ? ' checked="checked"' : '')."/><label for='gender_0'>".lang('space', 'gender_0')."</label></s>";
 		}
-		$html .= '<option value="1"'.($space[$fieldid]=='1' ? ' selected' : '').'>'.lang('space', 'gender_1').'</option>'
-			    .'<option value="2"'.($space[$fieldid]=='2' ? ' selected' : '').'>'.lang('space', 'gender_2').'</option>'
-			.'</select>'
-			.'<label class="awe-venus-mars" for="gender" type="icon"></label>';
+        $html .= "<s class='csbox mager'><input id='gender_1' type='radio' name='gender' value='1' ".($space[$fieldid] == '1' ? ' checked="checked"' : '')."/><label for='gender_1'>".lang('space', 'gender_1')."</label></s>";
+        $html .= "<s class='csbox mager'><input id='gender_2' type='radio' name='gender' value='2' ".($space[$fieldid] == '2' ? ' checked="checked"' : '')."/><label for='gender_2'>".lang('space', 'gender_2')."</label></s>";
+
+        $html .= '</div>';
 
 	} elseif($fieldid=='birthcity') {
 		if($field['unchangeable'] && !empty($space[$fieldid])) {
@@ -155,6 +152,7 @@ function profile_setting($fieldid, $space=[], $showstatus=false, $ignoreunchanga
 		} elseif($field['formtype']=='list') {
 			$field['choices'] = explode("\n", $field['choices']);
 			$html = "<select class='select-multi' name='{$fieldid}[]' id='$fieldid' multiple='multiplue' >";
+            $html .= "<option class='hide' value='list_submit_mark_empty' selected='selected'></option>";
 			$space[$fieldid] = explode("\n", $space[$fieldid]);
 			foreach($field['choices'] as $op) {
 				$html .= "<option value='$op'".(in_array($op, $space[$fieldid]) ? 'selected="selected"' : '').">$op</option>";
@@ -164,9 +162,10 @@ function profile_setting($fieldid, $space=[], $showstatus=false, $ignoreunchanga
 			$field['choices'] = explode("\n", $field['choices']);
 			$space[$fieldid] = explode("\n", $space[$fieldid]);
             $html = "<div class='check-slot'>";
-			foreach($field['choices'] as $op) {
+            $html .= "<s><input type='hidden' name='{$fieldid}[]' value='list_submit_mark_empty' checked='checked'/></s>";
+            foreach($field['choices'] as $op) {
                 $idhash = substr(md5($op),0,10);
-				$html .= "<s class='ccbox mager'><input id='$fieldid".$idhash."' type='checkbox' name='{$fieldid}[]' id='$fieldid' value='$op'".(in_array($op, $space[$fieldid]) ? ' checked="checked"' : '')." /><label for='$fieldid".$idhash."'>$op</label></s>";
+				$html .= "<s class='ccbox mager'><input id='$fieldid".$idhash."' type='checkbox' name='{$fieldid}[]' value='$op'".(in_array($op, $space[$fieldid]) ? ' checked="checked"' : '')." /><label for='$fieldid".$idhash."'>$op</label></s>";
 			}
             $html .= "</div>";
 		} elseif($field['formtype']=='radio') {
@@ -271,7 +270,6 @@ function profile_check($fieldid, &$value, $space=[]) {
 	}
 
 	if($field['formtype'] == 'text' || $field['formtype'] == 'textarea') {
-		$value = getstr($value);
 		if($field['size'] && strlen($value) > $field['size']) {
 			return false;
 		} else {
@@ -280,7 +278,9 @@ function profile_check($fieldid, &$value, $space=[]) {
 				return false;
 			}
 		}
-	} elseif($field['formtype'] == 'checkbox' || $field['formtype'] == 'list') {
+        $value = getstr($value);
+
+    } elseif($field['formtype'] == 'checkbox' || $field['formtype'] == 'list') {
 		$arr = [];
 		foreach ($value as $op) {
 			if(in_array($op, $field['choices'])) {

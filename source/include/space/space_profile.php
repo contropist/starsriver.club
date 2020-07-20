@@ -105,7 +105,7 @@ foreach($_G['cache']['profilesetting'] as $fieldid => $field) {
 			}
 			if($field['formtype'] == 'file' && $val) {
 				$imgurl = getglobal('setting/attachurl').'./profile/'.$val;
-				$val = '<span><a href="'.$imgurl.'" target="_blank"><img src="'.$imgurl.'"  style="max-width: 500px;" /></a></span>';
+				$val = '<span><a class="mt-link" href="'.$imgurl.'" target="_blank"></a></span>';
 			}
 			if($val == '')  $val = '-';
 			$profiles[$fieldid] = array('title'=>$field['title'], 'value'=>$val);

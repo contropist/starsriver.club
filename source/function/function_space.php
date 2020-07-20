@@ -59,7 +59,7 @@ function getblockhtml($blockname,$parameters = []) {
 						}
 						if($field['formtype'] == 'file' && $val) {
 							$imgurl = getglobal('setting/attachurl').'./profile/'.$val;
-							$val = '<span><a href="'.$imgurl.'" target="_blank"><img src="'.$imgurl.'"  style="max-width: 300px;" /></a></span>';
+							$val = '<span><a class="mt-link" href="'.$imgurl.'" target="_blank"></a></span>';
 						}
 						if ($val == '')  $val = '';
 						$html .= '<li><em>'.$field['title'].'</em>'.$val.'</li>';
