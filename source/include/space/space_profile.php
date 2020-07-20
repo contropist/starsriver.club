@@ -91,10 +91,11 @@ if($_G['setting']['verify']['enabled']) {
 }
 foreach($_G['cache']['profilesetting'] as $fieldid => $field) {
 	if(!$field['available'] || in_array($fieldid, array('birthprovince', 'birthdist', 'birthcommunity', 'resideprovince', 'residedist', 'residecommunity'))) {
-			continue;
+	    continue;
 	}
 	if(
-		$field['available'] && (strlen($space[$fieldid]) > 0 || ($fieldid == 'birthcity' && strlen($space['birthprovince']) || $fieldid == 'residecity' && strlen($space['resideprovince']))) &&
+		$field['available'] && (strlen($space[$fieldid]) > 0 ||
+        ($fieldid == 'birthcity' && strlen($space['birthprovince']) || $fieldid == 'residecity' && strlen($space['resideprovince']))) &&
 		($space['self'] || empty($privacy[$fieldid]) || ($isfriend && $privacy[$fieldid] == 1)) &&
 		(!$_G['inajax'] && !$field['invisible'] || $_G['inajax'] && $field['showincard'])
 	) {
