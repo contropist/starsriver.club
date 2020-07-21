@@ -383,6 +383,10 @@
    nav样式   |头部导航栏样式
 \***********/
 
+    [html-header]{
+        --nav-height: 42px;
+    }
+
     nav{
         background: rgba(0,0,0,.3);
 
@@ -416,7 +420,7 @@
         --nav-menu-text-color :#444444;
         --nav-menu-text-color-hover :rgb(37, 143, 250);
     }
-    nav.white{
+    body.scroll-overhaed nav{
         background: #ffffff;
 
         --nav-logo-color:#666666;
@@ -434,8 +438,9 @@
         z-index: 100;
         position: fixed;
         box-sizing: border-box;
-        height: 42px;
         width: 100%;
+        height: var(--nav-height);
+        line-height: var(--nav-height);
         top: 0;
         left: 0;
         font-size: 16px;
@@ -443,12 +448,13 @@
         backdrop-filter: blur(5px);
         box-shadow: 0 0 8px rgba(0,0,0,0.2) !important;
     }
+    nav.sleep {
+        transform: translate(0, calc(-100% - 10px));
+    }
     nav li {
         float: left;
-        line-height: 42px;
         font-weight: 200;
         font-size: 14px;
-        height:42px;
         box-sizing: border-box;
         display: inline-block;
     }
@@ -456,7 +462,7 @@
         display: block;
         font-size: 13px;
         padding: 0 10px;
-        height: 42px;
+        height: var(--nav-height);
         box-sizing: border-box;
         color: var(--nav-li-text-color);
     }
@@ -477,8 +483,7 @@
         display: inline-block;
         font-size: 24px;
         font-weight: 700;
-        line-height: 32px;
-        padding: 5px 20px 5px 0;
+        padding: 0 20px 0 0;
     }
     nav .logo span{
         color: var(--nav-logo-color2);
@@ -568,6 +573,70 @@
         color: #fff;
     }
 
+/**************\
+    banner样式  |导航栏下方的功能栏样式
+\**************/
+    .banner{
+        z-index: 98;
+        position: relative;
+        width: 100%;
+        min-width: 960px;
+        min-height: 120px;
+        max-height: 420px;
+        background-color: #fff;
+        background-size: 20px 20px;
+        background-position: 0 0,10px 10px;
+        background-image: linear-gradient(45deg,#f0f0f0 25%,transparent 0,transparent 75%,#f0f0f0 0),linear-gradient(45deg,#f0f0f0 25%,transparent 0,transparent 75%,#f0f0f0 0) !important;
+    }
+    .banner.off{
+        height: var(--nav-height);
+        min-height: auto !important;
+    }
+    .banner .back-banner {
+        position: relative;
+        max-height: 420px;
+        overflow: hidden;
+    }
+    .banner .back-banner .back {
+        width: 1920px;
+        position: relative;
+        top: 0;
+        left: 50%;
+        transform: translate3d(-50%,0,0);
+    }
+    .banner .back-banner .back.blur-lg {
+        width: 1920px;
+        position: relative;
+        top: 0;
+        left: 50%;
+        transform: translate3d(-50%,0,0) scale(1.1);
+    }
+    .banner .container{
+        position: absolute;
+        box-sizing: border-box;
+        top: 42px;
+        left: 50%;
+        height:calc(100% - 42px);
+        padding: 10px 0;
+        transform: translate3d(-50%,0,0);
+    }
+
+    .banner-tip{
+        width:100%;
+        height:32px;
+        line-height: 32px;
+        background: #fff;
+        text-align: center;
+        color: #fff;
+        border-bottom:4px dotted rgb(201, 201, 201);
+        border-top:4px dotted rgb(201, 201, 201);
+        margin-bottom: 5px;
+    }
+    .banner-tip *{
+        color: #656565;
+    }
+
+
 /* 用户菜单 */
   /*整体样式*/
     .header-us{
@@ -599,11 +668,16 @@
         top:0;
         left:0;
     }
+    .header-us{
+        --avatar-icon-size: 42px;
+    }
     .header-us .head{
         display: inline-block;
         font-size: 0;
-        width:42px;
-        height:42px;
+        width: var(--avatar-icon-size);
+        height:var(--avatar-icon-size);
+        line-height: 20px;
+        margin: calc((var(--nav-height) - var(--avatar-icon-size)) / 2) 0;
         text-align: center;
         position: relative;
     }
@@ -802,17 +876,9 @@
         overflow: visible;
         display: inline-block;
     }
-    .header-us > .menu{
-        position: relative;
-        width:auto;
-        height:42px;
-        overflow: visible;
-        display: inline-block;
-    }
     .header-us > .menu li{
-        display:inline-block;
-        font-size:13px;
-        line-height:42px;
+        display: inline-block;
+        font-size: 13px;
     }
     .header-us > .menu li section{
         position: absolute;
@@ -863,13 +929,13 @@
     .header-us > .menu .sp{
         display: block;
         width: 60px;
-        height:48px;
+        height:calc(var(--nav-height) + 6px);
     }
     .header-us > .menu .sp .icon{
         position: relative;
         display: block;
         width: 60px;
-        height:48px;
+        height:calc(var(--nav-height) + 6px);
         border-radius:0 0 6px 6px;
         color: #fff;
         background: linear-gradient(var(--color-main-theme) 20%, rgb(0,175,157) 100% );
@@ -1079,68 +1145,6 @@
         color: #000 !important;
     }
 
-/**************\
-    banner样式  |导航栏下方的功能栏样式
-\**************/
-    .banner{
-        z-index: 98;
-        position: relative;
-        width: 100%;
-        min-width: 960px;
-        min-height: 120px;
-        max-height: 420px;
-        background-color: #fff;
-        background-size: 20px 20px;
-        background-position: 0 0,10px 10px;
-        background-image: linear-gradient(45deg,#f0f0f0 25%,transparent 0,transparent 75%,#f0f0f0 0),linear-gradient(45deg,#f0f0f0 25%,transparent 0,transparent 75%,#f0f0f0 0) !important;
-    }
-    .banner.off{
-        height: 42px;
-        min-height: auto !important;
-    }
-    .banner .back-banner {
-        position: relative;
-        max-height: 420px;
-        overflow: hidden;
-    }
-    .banner .back-banner .back {
-        width: 1920px;
-        position: relative;
-        top: 0;
-        left: 50%;
-        transform: translate3d(-50%,0,0);
-    }
-    .banner .back-banner .back.blur-lg {
-        width: 1920px;
-        position: relative;
-        top: 0;
-        left: 50%;
-        transform: translate3d(-50%,0,0) scale(1.1);
-    }
-    .banner .container{
-        position: absolute;
-        box-sizing: border-box;
-        top: 42px;
-        left: 50%;
-        height:calc(100% - 42px);
-        padding: 10px 0;
-        transform: translate3d(-50%,0,0);
-    }
-
-    .banner-tip{
-        width:100%;
-        height:32px;
-        line-height: 32px;
-        background: #fff;
-        text-align: center;
-        color: #fff;
-        border-bottom:4px dotted rgb(201, 201, 201);
-        border-top:4px dotted rgb(201, 201, 201);
-        margin-bottom: 5px;
-    }
-    .banner-tip *{
-        color: #656565;
-    }
 /* 搜索框样式 */
     .search{
         right:0;

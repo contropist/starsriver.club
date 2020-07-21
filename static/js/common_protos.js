@@ -12,7 +12,9 @@ Object.defineProperty(HTMLElement.prototype, 'Css', {
 
         return {
             top: self.getBoundingClientRect().top + window.scrollY,
+            bottom: self.getBoundingClientRect().bottom,
             left: self.getBoundingClientRect().left + window.scrollX,
+            right: self.getBoundingClientRect().right,
             width: self.clientWidth || self.offsetWidth,
             height: self.clientHeight || self.offsetHeight,
             scrollTop: self.pageYOffset || self.scrollTop,

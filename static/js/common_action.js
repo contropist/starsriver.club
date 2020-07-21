@@ -39,9 +39,8 @@
         };
 
         body = SR('body')[0];
-        nav = SR('#nav')[0];
-        banner = SR('.banner')[0];
-        banner_on = SR('.banner.off')[0] ? 0 : 1;
+        nav = SR('[html-header] #nav')[0];
+        banner = SR('[html-header] .banner')[0];
         uconsole = SR('#console')[0];
         bottommenu = SR('#bottommenu')[0];
 
@@ -85,9 +84,10 @@
             tooltip_init();
 
             /* nav样式初始化 */
-            if(nav && banner_on){
-                body.scrollTop < banner.clientHeight ? nav.delClass('white') : nav.addClass('white');
+            if(banner){
+                (document.documentElement.scrollTop || document.body.scrollTop || 0) >= (banner.Css.height - nav.Css.height) ? body.addClass('scroll-overhaed') : '';
             }
+
         },
 
         click: function (evt) { //传入e事件来兼容火狐
@@ -182,77 +182,53 @@
                 body.delClass('scroll-tobottom');
             }
 
-            if(banner_on){
-                if(SRGlobal.Window.Scroll.Top > (banner.Css.height - nav.Css.height)){
-                    body.addClass('scroll-overhaed');
-                } else {
-                    body.delClass('scroll-overhaed');
-                }
-            } else {
-                body.addClass('scroll-overhaed');
+            if(banner){
+                SRGlobal.Window.Scroll.Top >= (banner.Css.height - nav.Css.height) ? body.addClass('scroll-overhaed') : body.delClass('scroll-overhaed');
             }
 
-            //nav 隐藏
+            //nav 滚动效果
             (function () {
                 if(nav){
                     nav.addClass('trans-ease');
 
-                    var editor_nav = document.querySelector('#e_controls');
-
                     if(SRGlobal.Window.Scroll.Top > banner.clientHeight && SRGlobal.Window.Scroll.DirY === 'down'){
-                        if(banner_on){nav.addClass('white');}
-                        setTimeout(function(){
-                                nav.style.transform ='translateY(-' + (nav.Css.height + 10) +'px)';
-                            },0
-                        );
-
-                        if(editor_nav && editor_nav.getBoundingClientRect().top <= nav.Css.height){
-                            editor_nav.addClass('trans-ease');
-                            setTimeout(function(){
-                                    editor_nav.style.transform ='translateY(-' + nav.Css.height +'px)';
-                                },0
-                            );
-                        }
+                        nav.addClass('sleep');
+                    } else {
+                        nav.delClass('sleep');
                     }
-
-                    if(SRGlobal.Window.Scroll.Top < banner.Css.height || SRGlobal.Window.Scroll.DirY === 'up'){
-                        nav.style.transform ='translateY(0)';
-                        if(editor_nav){
-                            editor_nav.addClass('trans-ease');
-                            setTimeout(function(){
-                                    editor_nav.style.transform ='translateY(0)';
-                                },0
-                            );
-                        }
-                    }
-
-                    if(banner_on){
-                        if(body.hasClass('scroll-overhaed')){
-                            nav.addClass('white');
-                        } else {
-                            nav.delClass('white');
-                        }
-                    }
-
-                    if(SRGlobal.Window.Scroll.ToBottom){
-                        if(!editor_nav && !uconsole){
-                            setTimeout(function(){
-                                nav.delClass('trans-ease');
-                                nav.addClass('trans-ease-slow');
-                                nav.style.transform ='translateY(0)';
-                            },0);
-                        }
+                    if(SRGlobal.Window.Scroll.ToBottom && !uconsole){
+                        nav.delClass('sleep');
                     }
                 }
             })();
 
-            // console 翻滚
+            // editor nav滚动效果
+            (function () {
+                var editor_nav = document.querySelector('#e_controls');
+
+                if(editor_nav){
+                    editor_nav.addClass('trans-ease');
+                    if(SRGlobal.Window.Scroll.Top > banner.clientHeight && SRGlobal.Window.Scroll.DirY === 'down'){
+                            editor_nav.style.transform ='translateY(-' + nav.Css.height +'px)';
+                    } else {
+                        editor_nav.style.transform ='translateY(0)';
+                    }
+
+                    if(SRGlobal.Window.Scroll.ToBottom){
+                        editor_nav.style.transform ='translateY(0)';
+                    }
+                }
+            })();
+
+            // console 翻滚效果
             (function () {
                 if(uconsole){
                     var scrollrate = 1.3;
-                    var menu = uconsole.getElementsByClassName('menu')[0];
-                    var menu_list = uconsole.getElementsByTagName('ul')[0];
-                    var console_title = uconsole.getElementsByClassName('title')[1];
+                    var menu = uconsole.querySelector('.menu');
+                    var menu_list = uconsole.querySelector('.menu > ul');
+                    var console_title = uconsole.querySelector('.panel > .title');
+                    var console_ctl = uconsole.querySelector('.panel > .panel-container');
+
                     function topaction () {
                         menu.style.transform = 'translate3d(0,0,0)';
                         menu.style.position = '';
@@ -260,37 +236,36 @@
                         console_title.style.position = '';
                         console_title.style.top = '';
                         console_title.style.transform = 'translate3d(0,0,0)';
-                        uconsole.style.paddingTop = '';
+                        console_ctl.style.paddingTop = '0';
                     }
-                    if(uconsole.scrollHeight >= SRGlobal.Window.Width*scrollrate && SRGlobal.Window.Width > 390 ){
-                        uconsole.addClass('trans-ease');
-                        menu_list.style.height = 'auto';
-                        if(body.scrollTop > uconsole.Css.top){
+
+                    if(uconsole.scrollHeight >= SRGlobal.Window.Height*scrollrate && SRGlobal.Window.Height > 390 ){
+
+                        menu_list.style.height = SRGlobal.Window.Height - console_title.Css.height - menu_list.Css.paddingBottom - ((SRGlobal.Window.Height - uconsole.Css.bottom) > 0 ? (SRGlobal.Window.Height - uconsole.Css.bottom) : 0) + 'px';
+
+
+                        if(SRGlobal.Window.Scroll.Top > uconsole.Css.top){
                             menu.style.position = 'fixed';
                             menu.style.top = '0';
                             console_title.style.position = 'fixed';
                             console_title.style.top = '0';
-                            uconsole.style.paddingTop = console_title.clientHeight + 'px';
+                            console_ctl.style.paddingTop = '48px';
+
                             if(SRGlobal.Window.Scroll.DirY === 'down'){
                                 menu.style.transform = 'translate3d(0,0,0)';
                                 console_title.style.transform = 'translate3d(0,0,0)';
                             }
+
                             if(SRGlobal.Window.Scroll.DirY === 'up'){
-                                setTimeout(
-                                    function () {
-                                        menu.style.transform = 'translate3d(0,' + nav.offsetHeight +'px, 0)';
-                                        console_title.style.transform = 'translate3d(0,' + nav.offsetHeight +'px, 0)';
-                                    },1
-                                );
+                                nav.addClass('sleep');
                             }
+
                         } else {
                             topaction ()
                         }
-                        if(body.scrollTop + SRGlobal.Window.Width >= SRGlobal.Window.Scroll.Height - 50 ){
-                            menu_list.style.height = SRGlobal.Window.Width - nav.offsetHeight - console_title.offsetHeight - document.body.Css.marginBottom + 'px';
-                        }
+
                     }
-                    if(body.scrollTop <= uconsole.Css.top) {
+                    if(SRGlobal.Window.Scroll.Top <= uconsole.Css.top) {
                         topaction ()
                     }
                 }
