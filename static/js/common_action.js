@@ -43,6 +43,7 @@
 
     addEvent(document,'DOMContentLoaded',function () {
 
+        body =  SR('body')[0];
         nav =  SR('#nav')[0];
         banner = SR('.banner')[0];
         banner_on = SR('.banner.off')[0] ? 0 : 1 ;
@@ -1268,15 +1269,14 @@
         viewerScroll: function () {
             if(MasElements.viewer && MasElements.viewerBanner.Css.height !== 0){
                 if(MasElements.viewer.scrollTop >= MasElements.viewerHeader.Css.height){
-                    MasElements.BankS.addClass('active');
-                    MasElements.guideSwitch.addClass('highlight');
+                    body.addClass('scroll-overhaed');
                 } else {
-                    MasElements.BankS.delClass('active');
-                    MasElements.guideSwitch.delClass('highlight');
+                    body.delClass('scroll-overhaed');
                 }
 
-                if(MasElements.viewerBanner.Css.height - MasElements.viewer.scrollTop > 0){
-                    MasElements.viewerBannerImg.style.transform = 'translate(-50%, -' + (50 - MasElements.viewer.scrollTop / MasElements.viewerBannerImg.Css.height * 50) + '%)';
+                if(!body.hasClass('scroll-overhaed')){
+                    var trspct = (50 - MasElements.viewer.scrollTop / MasElements.viewerBannerImg.Css.height * 50);
+                    MasElements.viewerBannerImg.style.transform = 'translate(-50%, -' + trspct + '%)';
                 }
             }
         },
