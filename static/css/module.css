@@ -6992,20 +6992,20 @@
 /*endregion*/
 
 /*region 用户空间 */
-    #app_userspace .user-menu{
+    .app-userspace .user-menu{
         cursor: pointer;
         position: relative;
         border-top: 1px solid var(--color-slightgray);
         height: calc(var(--guide-downside-height) - var(--footer-drawer-touch-bar-height));
         --base-module-width:240px;
     }
-    #app_userspace .user-menu .avatar{
+    .app-userspace .user-menu .avatar{
         height: 48px;
         width: 48px;
         position: relative;
         margin: calc(12px);
     }
-    #app_userspace .user-menu .username{
+    .app-userspace .user-menu .username{
         font-size: 16px;
         font-weight: 700;
         color: var(--color-text-gray);
@@ -7014,12 +7014,12 @@
         overflow: hidden;
         text-overflow: ellipsis;
     }
-    #app_userspace .user-menu .thumb{
+    .app-userspace .user-menu .thumb{
         line-height: 72px;
         color: #000;
         font-size: 22px;
     }
-    #app_userspace .user-menu > .menu{
+    .app-userspace .user-menu > .menu{
         position: absolute;
         width: calc(var(--base-module-width) - 40px);
         left: 20px;
@@ -7031,18 +7031,18 @@
         visibility: hidden;
         opacity: 0;
     }
-    #app_userspace .user-menu:hover > .menu{
+    .app-userspace .user-menu:hover > .menu{
         visibility: visible;
         opacity: 1;
         width: var(--base-module-width);
     }
-    #app_userspace .user-menu > .menu > .peak{
+    .app-userspace .user-menu > .menu > .peak{
         position: absolute;
         bottom: 0;
         left: 15px;
     }
-    #app_userspace .user-menu > .menu > .peak::before,
-    #app_userspace .user-menu > .menu > .peak::after{
+    .app-userspace .user-menu > .menu > .peak::before,
+    .app-userspace .user-menu > .menu > .peak::after{
         content: '';
         position: absolute;
         display: block;
@@ -7054,20 +7054,20 @@
         border-left-color: transparent;
         border-style: solid;
     }
-    #app_userspace .user-menu > .menu > .peak::before{
+    .app-userspace .user-menu > .menu > .peak::before{
         border-top-color: #e2e2e2;
         border-width: 10px;
     }
-    #app_userspace .user-menu > .menu > .peak::after{
+    .app-userspace .user-menu > .menu > .peak::after{
         border-top-color: #fff;
         border-width: 9px;
         left: 1px;
     }
-    #app_userspace .user-menu > .menu > .account{
+    .app-userspace .user-menu > .menu > .account{
         width: var(--base-module-width);
         border-bottom: 1px solid var(--color-split-line);
     }
-    #app_userspace .user-menu > .menu > a{
+    .app-userspace .user-menu > .menu > a{
         display: inline-block;
         width: 100%;
         padding: 15px;
@@ -7076,13 +7076,13 @@
         box-sizing: border-box;
         border-top: 1px solid var(--color-split-line);
     }
-    #app_userspace .user-menu > .menu > a:first-of-type{
+    .app-userspace .user-menu > .menu > a:first-of-type{
         border-top: 0;
     }
-    #app_userspace .user-menu > .menu > a:hover{
+    .app-userspace .user-menu > .menu > a:hover{
         background: #e9ecf1;
     }
-    #app_userspace .user-menu > .menu > a em{
+    .app-userspace .user-menu > .menu > a em{
         display: inline-block;
         min-width: 20px;
         height: 20px;
@@ -7097,25 +7097,25 @@
         font-size: 12px;
     }
 
-    .WL-0 #app_userspace{
+    .WL-0 .app-userspace{
         --space-banner-height: 240px;
     }
-    .WL-3P #app_userspace,
-    .WL-4P #app_userspace,
-    .WL-7P #app_userspace{
+    .WL-3P .app-userspace,
+    .WL-4P .app-userspace,
+    .WL-7P .app-userspace{
         --space-banner-height: 240px;
     }
-    .WL-13P #app_userspace,
-    .WL-1K #app_userspace,
-    .WL-2K #app_userspace,
-    .WL-4K #app_userspace{
+    .WL-13P .app-userspace,
+    .WL-1K .app-userspace,
+    .WL-2K .app-userspace,
+    .WL-4K .app-userspace{
         --space-banner-height: 220px;
     }
-    #app_userspace .space-head{
+    .app-userspace .space-head{
         position: relative;
         box-shadow: 0 0 3px rgba(0,0,0,.1);
     }
-    #app_userspace .space-head > .banner{
+    .app-userspace .space-head > .banner{
         position: relative;
         width: 100%;
         min-width: auto;
@@ -7128,26 +7128,26 @@
         background-position: 0 0,10px 10px;
         background-image: linear-gradient(45deg,#f0f0f0 25%,transparent 0,transparent 75%,#f0f0f0 0), linear-gradient(45deg,#f0f0f0 25%,transparent 0,transparent 75%,#f0f0f0 0) !important;
     }
-    #app_userspace .space-head > .banner img{
+    .app-userspace .space-head > .banner img{
         top: 50%;
         left: 50%;
         position: absolute;
         transform: translate(-50%,-50%);
     }
-    #app_userspace .space-head > .cover{
+    .app-userspace .space-head > .cover{
         position: absolute;
         width: 100%;
         top: 0;
         height: var(--space-banner-height);
         z-index: 1;
     }
-    #app_userspace .space-head > .cover .menu{
+    .app-userspace .space-head > .cover .menu{
         position: absolute;
         bottom: 0;
         right: 0;
         padding: 10px;
     }
-    #app_userspace .space-head > .cover .menu .button{
+    .app-userspace .space-head > .cover .menu .button{
         position: relative;
         display: inline-block;
         font-size: 14px;
@@ -7161,13 +7161,13 @@
         margin-left: 10px;
         cursor: pointer;
     }
-    #app_userspace .space-head > .cover .menu .button.active{
+    .app-userspace .space-head > .cover .menu .button.active{
         background: var(--color-heart-pink);
     }
-    #app_userspace .space-head > .cover .menu .button.more{
+    .app-userspace .space-head > .cover .menu .button.more{
         padding: 0 10px;
     }
-    #app_userspace .space-head > .cover .menu .button.more ul{
+    .app-userspace .space-head > .cover .menu .button.more ul{
         position: absolute;
         width: 290px;
         right: 0;
@@ -7183,26 +7183,26 @@
         opacity: 0;
         transition: .1s ease-in-out;
     }
-    #app_userspace .space-head > .cover .menu .button.more:hover ul{
+    .app-userspace .space-head > .cover .menu .button.more:hover ul{
         visibility: visible;
         opacity: 1;
     }
-    #app_userspace .space-head > .cover .menu .button.more ul > li{
+    .app-userspace .space-head > .cover .menu .button.more ul > li{
         width: 100%;
         margin-bottom: 10px;
     }
-    #app_userspace .space-head > .cover .menu .button.more ul li span{
+    .app-userspace .space-head > .cover .menu .button.more ul li span{
         display: inline-block;
         width: 70px;
         font-size: 14px;
         color: var(--color-text-gray);
         line-height: 34px;
     }
-    #app_userspace .space-head > .cover .menu .button.more ul li ol{
+    .app-userspace .space-head > .cover .menu .button.more ul li ol{
         display: inline-block;
         width: 300px;
     }
-    #app_userspace .space-head > .cover .menu .button.more ul li ol li{
+    .app-userspace .space-head > .cover .menu .button.more ul li ol li{
         display: inline-block;
         font-size: 12px;
         padding: 0 5px;
@@ -7212,21 +7212,21 @@
         border-radius: 4px;
         background: #f9f9f9;
     }
-    #app_userspace .space-head > .cover .menu .button.more ul li ol li:hover{
+    .app-userspace .space-head > .cover .menu .button.more ul li ol li:hover{
         background: var(--color-main-theme);
         border-color: var(--color-main-theme);
         box-shadow: 0 0 0 2px var(--color-main-theme-shadow);
         transition: .05s ease-in-out;
     }
-    #app_userspace .space-head > .cover .menu .button.more ul li ol li a{
+    .app-userspace .space-head > .cover .menu .button.more ul li ol li a{
         font-size: 12px;
         color: #666666;
     }
-    #app_userspace .space-head > .cover .menu .button.more ul li ol li:hover a{
+    .app-userspace .space-head > .cover .menu .button.more ul li ol li:hover a{
         font-size: 12px;
         color: #ffffff;
     }
-    #app_userspace .space-head > .bank{
+    .app-userspace .space-head > .bank{
         width: 100%;
         top: 100%;
         padding: 0 20px 14px 20px;
@@ -7234,16 +7234,16 @@
         background: #ffffff;
         box-sizing: border-box;
     }
-    #app_userspace .space-head > .bank .avatar{
+    .app-userspace .space-head > .bank .avatar{
         position: relative;
         width: 100px;
         height: 100px;
         margin-top: -52px;
     }
-    #app_userspace .space-head > .bank .avatar .avatar-main{
+    .app-userspace .space-head > .bank .avatar .avatar-main{
         border: 4px solid #ffffff;
     }
-    #app_userspace .space-head > .bank .username{
+    .app-userspace .space-head > .bank .username{
         display: inline-block;
         position: relative;
         line-height: 26px;
@@ -7254,7 +7254,7 @@
         white-space: nowrap;
         overflow: hidden;
     }
-    #app_userspace .space-head > .bank .username .tag{
+    .app-userspace .space-head > .bank .username .tag{
         position: absolute;
         top: 0;
         left: 11px;
@@ -7262,11 +7262,11 @@
         font-weight: 200;
         color: var(--color-gray);
     }
-    #app_userspace .space-head > .bank .btn-group{
+    .app-userspace .space-head > .bank .btn-group{
         display: inline-block;
         padding: 14px 0 0 10px;
     }
-    #app_userspace .space-head > .bank .btn-group a{
+    .app-userspace .space-head > .bank .btn-group a{
         position: relative;
         width: 36px;
         height: 36px;
@@ -7278,10 +7278,10 @@
         border-radius: 50%;
         margin-right: 5px;
     }
-    #app_userspace .space-head > .bank .btn-group a .tooltip{
+    .app-userspace .space-head > .bank .btn-group a .tooltip{
         left: -10px !important;
     }
-    #app_userspace .space-head > .bank.type-scroll{
+    .app-userspace .space-head > .bank.type-scroll{
         position: fixed;
         z-index: 2;
         top: 0;
@@ -7290,43 +7290,43 @@
         transform: translate(0, -120%);
         transition: .2s ease-in-out;
     }
-    body.scroll-overhaed #app_userspace .space-head > .bank.type-scroll{
+    body.scroll-overhaed .app-userspace .space-head > .bank.type-scroll{
         transform: translate(0, 0);
     }
-    #app_userspace .space-head > .bank.type-scroll .avatar{
+    .app-userspace .space-head > .bank.type-scroll .avatar{
         width: 48px;
         height: 48px;
         margin: 0 0 0 48px;
     }
-    .WL-13P #app_userspace .space-head > .bank.type-scroll .avatar,
-    .WL-1K #app_userspace .space-head > .bank.type-scroll .avatar,
-    .WL-2K #app_userspace .space-head > .bank.type-scroll .avatar,
-    .WL-4K #app_userspace .space-head > .bank.type-scroll .avatar{
+    .WL-13P .app-userspace .space-head > .bank.type-scroll .avatar,
+    .WL-1K .app-userspace .space-head > .bank.type-scroll .avatar,
+    .WL-2K .app-userspace .space-head > .bank.type-scroll .avatar,
+    .WL-4K .app-userspace .space-head > .bank.type-scroll .avatar{
         margin: 0;
     }
-    #app_userspace .space-head > .bank.type-scroll .username{
+    .app-userspace .space-head > .bank.type-scroll .username{
         font-size: 18px;
     }
-    #app_userspace .space-head > .bank.type-scroll .avatar .avatar-main{
+    .app-userspace .space-head > .bank.type-scroll .avatar .avatar-main{
         border: none;
     }
-    #app_userspace .space-head > .bank.type-scroll .btn-group {
+    .app-userspace .space-head > .bank.type-scroll .btn-group {
         display: inline-block;
         padding: 8px 0 0 5px;
     }
 
-    #app_userspace #userspace_profile{
+    .app-userspace #userspace_profile{
         --box-border-color:  rgba(115, 115, 115,  .1);
         --box-padding:  15px;
     }
-    #app_userspace #userspace_profile .panel .box{
+    .app-userspace #userspace_profile .panel .box{
         background: #ffffff;
         border-radius: 5px;
         border: 1px solid var(--box-border-color);
         padding: 0 !important;
         height: 260px;
     }
-    #app_userspace #userspace_profile .panel .box > span{
+    .app-userspace #userspace_profile .panel .box > span{
         display: block;
         font-size: 15px;
         color: var(--color-dark);
@@ -7334,7 +7334,7 @@
         border-bottom: 1px solid var(--box-border-color);
         padding: 0 16px;
     }
-    #app_userspace #userspace_profile .panel .box > span::before{
+    .app-userspace #userspace_profile .panel .box > span::before{
         display: inline-block;
         content: '';
         width: 7px;
@@ -7344,67 +7344,67 @@
         margin: 13px 5px 12px 0;
         border-radius: 3px;
     }
-    #app_userspace #userspace_profile .panel .box > span a{
+    .app-userspace #userspace_profile .panel .box > span a{
         display: inline-block;
         border: none;
         color: var(--color-text-info);
         margin: 0 5px;
         font-size: 18px;
     }
-    #app_userspace #userspace_profile .panel .box > div{
+    .app-userspace #userspace_profile .panel .box > div{
         max-height: 210px;
         overflow: auto;
         box-sizing: border-box;
     }
-    #app_userspace #userspace_profile .panel .box  * {
+    .app-userspace #userspace_profile .panel .box  * {
         font-size: 13px;
     }
-    #app_userspace #userspace_profile .panel .box  a {
+    .app-userspace #userspace_profile .panel .box  a {
         color: var(--color-text-danger);
         border-bottom: 1px dashed;
         vertical-align: middle;
         line-height: 13px;
     }
-    #app_userspace #userspace_profile .panel .box .info-text{
+    .app-userspace #userspace_profile .panel .box .info-text{
         display: inline-block;
         padding: calc(var(--box-padding) / 2) var(--box-padding);
 
     }
-    #app_userspace #userspace_profile .panel .box .info-text li{
+    .app-userspace #userspace_profile .panel .box .info-text li{
         display: block;
         line-height: 24px;
     }
-    #app_userspace #userspace_profile .panel .box .info-text li em{
+    .app-userspace #userspace_profile .panel .box .info-text li em{
         color: var(--color-text-gray);
     }
-    #app_userspace #userspace_profile .panel .box .info-text li s{
+    .app-userspace #userspace_profile .panel .box .info-text li s{
         color: var(--color-text-info);
     }
-    #app_userspace #userspace_profile .panel .box .info-text li .check-mark{
+    .app-userspace #userspace_profile .panel .box .info-text li .check-mark{
         width: 16px;
         height: 16px;
         vertical-align: middle;
     }
-    #app_userspace #userspace_profile .panel .box .info-text li i{
+    .app-userspace #userspace_profile .panel .box .info-text li i{
         color: inherit;
     }
-    #app_userspace #userspace_profile .panel .box .info-mix.medal li{
+    .app-userspace #userspace_profile .panel .box .info-mix.medal li{
         --li-padding-bottom: 10px;
         --li-padding-left: 15px;
         --li-icon-size: 36px;
         padding: var(--li-padding-bottom) var(--li-padding-left);
         position: relative;
     }
-    #app_userspace #userspace_profile .panel .box .info-mix.medal li i{
+    .app-userspace #userspace_profile .panel .box .info-mix.medal li i{
         width: var(--li-icon-size);
         height: var(--li-icon-size);
         text-align: center;
         display: inline-block;
     }
-    #app_userspace #userspace_profile .panel .box .info-mix.medal li em{
+    .app-userspace #userspace_profile .panel .box .info-mix.medal li em{
         color: var(--color-text-info);
     }
-    #app_userspace #userspace_profile .panel .box .info-mix.medal li s{
+    .app-userspace #userspace_profile .panel .box .info-mix.medal li s{
         color: var(--color-text-gray);
         position: absolute;
         bottom: var(--li-padding-bottom);
@@ -7414,7 +7414,7 @@
         overflow: hidden;
         text-overflow: ellipsis;
     }
-    #app_userspace #userspace_profile .panel .box .no-info{
+    .app-userspace #userspace_profile .panel .box .no-info{
         width: 100%;
         text-align: center;
         display: block;
@@ -7422,21 +7422,21 @@
         color: var(--color-gray);
         font-size: 12px;
     }
-    .WL-0 #app_userspace #userspace_profile .panel .box.size-1-0{ width:calc(100% - 2 * var(--default-box-margin-width));}
-    .WL-0 #app_userspace #userspace_profile .panel .box.size-2-0{ width:calc(100% - 2 * var(--default-box-margin-width));}
-    .WL-0 #app_userspace #userspace_profile .panel .box.size-4-0{ width:calc(100% - 2 * var(--default-box-margin-width));}
-    .WL-3P #app_userspace #userspace_profile .panel .box.size-1-0{ width:calc(50% - 2 * var(--default-box-margin-width));}
-    .WL-3P #app_userspace #userspace_profile .panel .box.size-2-0{ width:calc(100% - 2 * var(--default-box-margin-width));}
-    .WL-3P #app_userspace #userspace_profile .panel .box.size-4-0{ width:calc(100% - 2 * var(--default-box-margin-width));}
-    .WL-4P #app_userspace #userspace_profile .panel .box.size-1-0{ width:calc(50% - 2 * var(--default-box-margin-width));}
-    .WL-4P #app_userspace #userspace_profile .panel .box.size-2-0{ width:calc(50% - 2 * var(--default-box-margin-width));}
-    .WL-4P #app_userspace #userspace_profile .panel .box.size-4-0{ width:calc(100% - 2 * var(--default-box-margin-width));}
-    .WL-7P #app_userspace #userspace_profile .panel .box.size-1-0{ width:calc(25% - 2 * var(--default-box-margin-width));}
-    .WL-7P #app_userspace #userspace_profile .panel .box.size-2-0{ width:calc(50% - 2 * var(--default-box-margin-width));}
-    .WL-7P #app_userspace #userspace_profile .panel .box.size-4-0{ width:calc(100% - 2 * var(--default-box-margin-width));}
-    .WL-13P #app_userspace #userspace_profile .panel .box.size-1-0{ width:calc(33.3333333% - 2 * var(--default-box-margin-width));}
-    .WL-13P #app_userspace #userspace_profile .panel .box.size-2-0{ width:calc(33.3333333% - 2 * var(--default-box-margin-width));}
-    .WL-13P #app_userspace #userspace_profile .panel .box.size-4-0{ width:calc(66.6666666% - 2 * var(--default-box-margin-width));}
+    .WL-0 .app-userspace #userspace_profile .panel .box.size-1-0{ width:calc(100% - 2 * var(--default-box-margin-width));}
+    .WL-0 .app-userspace #userspace_profile .panel .box.size-2-0{ width:calc(100% - 2 * var(--default-box-margin-width));}
+    .WL-0 .app-userspace #userspace_profile .panel .box.size-4-0{ width:calc(100% - 2 * var(--default-box-margin-width));}
+    .WL-3P .app-userspace #userspace_profile .panel .box.size-1-0{ width:calc(50% - 2 * var(--default-box-margin-width));}
+    .WL-3P .app-userspace #userspace_profile .panel .box.size-2-0{ width:calc(100% - 2 * var(--default-box-margin-width));}
+    .WL-3P .app-userspace #userspace_profile .panel .box.size-4-0{ width:calc(100% - 2 * var(--default-box-margin-width));}
+    .WL-4P .app-userspace #userspace_profile .panel .box.size-1-0{ width:calc(50% - 2 * var(--default-box-margin-width));}
+    .WL-4P .app-userspace #userspace_profile .panel .box.size-2-0{ width:calc(50% - 2 * var(--default-box-margin-width));}
+    .WL-4P .app-userspace #userspace_profile .panel .box.size-4-0{ width:calc(100% - 2 * var(--default-box-margin-width));}
+    .WL-7P .app-userspace #userspace_profile .panel .box.size-1-0{ width:calc(25% - 2 * var(--default-box-margin-width));}
+    .WL-7P .app-userspace #userspace_profile .panel .box.size-2-0{ width:calc(50% - 2 * var(--default-box-margin-width));}
+    .WL-7P .app-userspace #userspace_profile .panel .box.size-4-0{ width:calc(100% - 2 * var(--default-box-margin-width));}
+    .WL-13P .app-userspace #userspace_profile .panel .box.size-1-0{ width:calc(33.3333333% - 2 * var(--default-box-margin-width));}
+    .WL-13P .app-userspace #userspace_profile .panel .box.size-2-0{ width:calc(33.3333333% - 2 * var(--default-box-margin-width));}
+    .WL-13P .app-userspace #userspace_profile .panel .box.size-4-0{ width:calc(66.6666666% - 2 * var(--default-box-margin-width));}
 
     @media screen and (max-width:1240px) {
         .app-dynamic .album-list li{width: calc(100% / 2 - 7.5px) !important;}
@@ -8286,7 +8286,7 @@
     .banner{
         z-index: 0;
         height:128px;
-        background: #00a0d8;
+        background: #00a0d8 !important;
     }
     .app-profile [id*='_ctrl_menu']{
         max-height: 390px;
@@ -8448,7 +8448,7 @@
     }
     .app-profile [id*="setting_usergroup"] .table-pm tr td{
         text-align: center;
-        line-height: 48px !important;
+        line-height: 26px !important;
     }
     .app-profile [id*="setting_usergroup"] .table-pm tr td:first-of-type{
         text-align: left;
@@ -8468,6 +8468,9 @@
         color: #717480 !important;
     }
 
+    .app-profile [id*="buy_usergroup"] tbody tr td{
+        line-height: 26px;
+    }
     .app-profile [id*="buy_usergroup"] tbody tr td.gname a.current{
         position: relative;
         color: #ef7941;
@@ -8486,7 +8489,7 @@
     .app-profile [id*="buy_usergroup"] tbody tr td.func a{
         box-sizing: border-box;
         display: inline-block;
-        margin: 7px 3px 0 0;
+        margin: 0 3px 0 0;
         padding: 0 9px;
         background: #31b6de;
         border-radius: 6px;

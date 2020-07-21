@@ -1,13 +1,11 @@
 <!--{if empty($nestmode)}-->
     <!--{template home/space_trends_header}-->
-    <div class="plate layout-0">
-        <!--[nest=nest1]--><div id="nest1" class="area"></div><!--[/nest]-->
-    </div>
     <div class="plate layout-3-type2 app-dynamic soft">
         <section>
             <!--{subtemplate home/space_trends_side_left}-->
         </section>
         <section>
+            <!--[nest=nest1]--><div id="nest1" class="area"></div><!--[/nest]-->
             <!--{if $space['uid'] && $space[self]}-->
                 <!--{template home/space_status}-->
             <!--{/if}-->
@@ -21,7 +19,7 @@
                         <a class="$actives[me]" href="home.php?mod=space&do=home&view=me">{lang my_feed}</a>
                         <!--{hook/space_trends_navlink}-->
                         <!--{if $_G['setting']['magicstatus'] && $_G['setting']['magics']['thunder']}-->
-                        <a id="a_magic_thunder" href="home.php?mod=magic&mid=thunder" onclick="showWindow('magics', this.href, 'get', 0)">{$_G[setting][magics][thunder]}</a>
+                            <a id="a_magic_thunder" href="home.php?mod=magic&mid=thunder" onclick="showWindow('magics', this.href, 'get', 0)">{$_G[setting][magics][thunder]}</a>
                         <!--{/if}-->
                     <!--{/if}-->
                 </div>
@@ -59,17 +57,15 @@
     <div class="mas-viewer">
         <div class="mas-viewer-header">
             <!--{template home/space_home_userabout}-->
-            <!--[nest=nest1]--><div id="nest1" class="area"></div><!--[/nest]-->
         </div>
         <div class="mas-viewer-container">
-            <!--[nest=nestcontenttop]--><div class="area" id="nestcontenttop"></div><!--[/nest]-->
             <!--{subtemplate home/space_home_mod_feed_list}-->
         </div>
     </div>
 <!--{/if}-->
 <script type="text/javascript">
     function filter_more(id) {
-        if($('feed_filter_div_'+id).style.display == '') {
+        if($('feed_filter_div_'+id).style.display === '') {
             $('feed_filter_div_'+id).style.display = 'none';
             $('feed_filter_notice_'+id).style.display = '';
         } else {

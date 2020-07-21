@@ -1,13 +1,11 @@
 <!--{if empty($nestmode)}-->
     <!--{template home/space_trends_header}-->
-	<div class="plate layout-0">
-		<!--[nest=nestcontenttop]--><div id="nestcontenttop" class="area"></div><!--[/nest]-->
-	</div>
     <div class="plate layout-3-type2 app-dynamic soft">
         <section>
             <!--{subtemplate home/space_trends_side_left}-->
         </section>
         <section>
+            <!--[nest=nestcontenttop]--><div id="nestcontenttop" class="area"></div><!--[/nest]-->
             <!--{if helper_access::check_module('share') && $space[self]}-->
                 <!--{template home/space_trends_mod_share_form}-->
             <!--{/if}-->

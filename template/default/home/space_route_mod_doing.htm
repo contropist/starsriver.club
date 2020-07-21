@@ -1,13 +1,11 @@
 <!--{if empty($nestmode)}-->
     <!--{template home/space_trends_header}-->
-	<div class="plate layout-0">
-		<!--[nest=nestcontenttop]--><div id="nestcontenttop" class="area"></div><!--[/nest]-->
-	</div>
     <div class="plate layout-3-type2 app-dynamic soft">
         <section>
             <!--{subtemplate home/space_trends_side_left}-->
         </section>
         <section>
+            <!--[nest=nestcontenttop]--><div id="nestcontenttop" class="area"></div><!--[/nest]-->
             <!--{hook/space_doing_top}-->
             <!--{if $space[self] && helper_access::check_module('doing')}-->
                 <!--{template home/space_trends_mod_doing_deliverer}-->
@@ -37,7 +35,6 @@
             <!--{template home/space_home_userabout}-->
         </div>
         <div class="mas-viewer-container">
-            <!--[nest=nestcontenttop]--><div id="nestcontenttop" class="area"></div><!--[/nest]-->
             <!--{if $space[self] && helper_access::check_module('doing')}-->
                 <!--{template home/space_trends_mod_doing_deliverer}-->
             <!--{/if}-->
