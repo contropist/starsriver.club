@@ -75,7 +75,6 @@ jQuery(document).ready(function () {
         },
         stop: function () {
             forceSelectorInsideAvatar();
-
         },
     });
     var ruller = '';
@@ -136,7 +135,12 @@ function getAvatarDimension() {
     var selectorDiv = getSelectorDimention();
     if (aw > cw) al = (cw - aw) / (cw - selectorDiv.width) * selectorDiv.left;
     if (ah > ch) at = (ch - ah) / (ch - selectorDiv.height) * selectorDiv.top;
-    return {left: Math.floor(al), top: Math.floor(at), width: Math.floor(aw), height: Math.floor(ah)};
+    return {
+        left: Math.floor(al),
+        top: Math.floor(at),
+        width: Math.floor(aw),
+        height: Math.floor(ah)
+    };
 }
 
 function getSelectorDimention() {
@@ -198,11 +202,16 @@ function refreshAvatarCanvas(uiposition) {
 function forceSelectorInsideAvatar() {
     var imageDiv = getAvatarDimension();
     var selectorDiv = getSelectorDimention();
-    if (selectorDiv.width > selectorDiv.height) selector.width(selectorDiv.height);
-    if (selectorDiv.height > selectorDiv.width) selector.height(selectorDiv.width);
+    if (selectorDiv.width !== selectorDiv.height) {
+        var size = Math.min(selectorDiv.height, selectorDiv.width);
+        selector.width(size);
+        selector.height(size);
+    }
+
     /* aspectRatio */
     if (selectorDiv.width > imageDiv.width) selector.width(imageDiv.width - 2);
     if (selectorDiv.height > imageDiv.height) selector.height(imageDiv.height - 2);
+
     /* aspectRatio End */
     if (selectorDiv.left < imageDiv.left) selector.css('left', imageDiv.left);
     if (selectorDiv.top < imageDiv.top) selector.css('top', imageDiv.top);
