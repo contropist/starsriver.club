@@ -180,7 +180,18 @@ function refreshAvatarCanvas(uiposition) {
         selectedarea.style.transform = tmp.t;
 
     } else {
-        ctx.drawImage(img, (selectorDiv.left - imageDiv.left) * iw / imageDiv.width, (selectorDiv.top - imageDiv.top) * ih / imageDiv.height, (selectorDiv.width + 2) * iw / imageDiv.width, (selectorDiv.height + 2) * ih / imageDiv.height, selectorDiv.left, selectorDiv.top, selectorDiv.width + 2, selectorDiv.height + 2);
+        var ctmp = {
+            x: (selectorDiv.left - imageDiv.left) * iw / imageDiv.width,
+            y: (selectorDiv.top - imageDiv.top) * ih / imageDiv.height,
+            w: (selectorDiv.width + 2) * iw / imageDiv.width,
+            h: (selectorDiv.height + 2) * ih / imageDiv.height,
+
+            sl: selectorDiv.left,
+            st: selectorDiv.top,
+            sw: selectorDiv.width + 2,
+            sh: selectorDiv.height + 2,
+        };
+        ctx.drawImage(img, ctmp.x, ctmp.y, ctmp.w, ctmp.h, ctmp.sl, ctmp.st, ctmp.sw, ctmp.sh);
     }
 }
 
