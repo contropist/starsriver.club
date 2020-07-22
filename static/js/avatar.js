@@ -1,6 +1,7 @@
 var defaultsize = 150,
     minenlarge = 20,
     maxenlarge = 200,
+    sliderverticle = 1,
 
     form = jQuery('#avatarform'),
     avatarcreator = jQuery('#avatarcreator'),
@@ -11,7 +12,7 @@ var defaultsize = 150,
     avatarimage = jQuery('#avatarimage'),
     canvas = jQuery('#avatarcanvas'),
     selector = jQuery('#selector'),
-    slider = jQuery('#slider'),
+    slidehander = jQuery('#slider'),
     saver = jQuery('#saver');
 
 var selectareaw = avatarcreator.width(),
@@ -27,15 +28,11 @@ canvas.attr('height', selectareah);
 selector.width(defaultsize);
 selector.height(defaultsize);
 
-form.attr('target', 'uploadframe');
-avatarfile.attr('onchange', uploadAvatarDone);
-
 $('avatarform').target = 'uploadframe';
 $('avatarfile').onchange = uploadAvatarDone;
 
 window.addEventListener('message', receiveMessage, false);
 
-sliderverticle = 1;
 if (form.hasClass('horizon')) {
     sliderverticle = 0;
 }
@@ -49,7 +46,7 @@ jQuery(document).ready(function () {
             },
             stop: function () {
                 forceSelectorInsideAvatar();
-            },
+            }
         })
         .resizable({
             containment: "parent",
@@ -60,34 +57,21 @@ jQuery(document).ready(function () {
                 refreshAvatarCanvas(ui.position);
             },
             stop: function () {
-                for (var i = 0; i < 2; i++) {
-                    setTimeout(function () {
-                        forceSelectorInsideAvatar();
-                    }, 128 + 128 * i);
-                }
-            },
+                forceSelectorInsideAvatar();
+            }
         });
-    slider.slider({
+
+    slidehander.slider({
         min: minenlarge,
         max: maxenlarge,
         orientation: sliderverticle ? "vertical" : '',
         value: 50,
         step: 3,
         slide: function (event, ui) {
-            for (var i = 0; i < 2; i++) {
-                setTimeout(function () {
-                    forceSelectorInsideAvatar();
-                }, 128 + 128 * i);
-            }
-        },
-        stop: function () {
-            for (var i = 0; i < 2; i++) {
-                setTimeout(function () {
-                    forceSelectorInsideAvatar();
-                }, 128 + 128 * i);
-            }
-        },
+            forceSelectorInsideAvatar();
+        }
     });
+
     var ruller = '';
     var rrate = 3;
     for (var i = 0; i < (maxenlarge - minenlarge) / rrate + 1; i++) {
@@ -95,7 +79,8 @@ jQuery(document).ready(function () {
         if (0 === i % 12) content = '<i>' + (sliderverticle ? (maxenlarge - i * rrate) : i * rrate + minenlarge) + '</i>';
         ruller += '<li>' + content + '</li>'
     }
-    slider.append('<ul class="ui-slider-pointers">' + ruller + '</ul>');
+
+    slidehander.append('<ul class="ui-slider-pointers">' + ruller + '</ul>');
 });
 
 
@@ -113,14 +98,14 @@ function uploadAvatarDone() {
             selector.height(defaultsize);
             $('avatarimage').src = e.target.result;
             $('selectedarea').src = e.target.result;
-            slider.slider('value', 50);
+            slidehander.slider('value', 50);
         };
         fr.readAsDataURL(this.files[0]);
     }
 }
 
 function getAvatarDimension() {
-    var factor = slider.slider('option', 'value');
+    var factor = slidehander.slider('option', 'value');
     var cw = avataradjuster.width();
     var ch = avataradjuster.height();
     var iw = avatarimage.width();
@@ -146,62 +131,93 @@ function getAvatarDimension() {
     var selectorDiv = getSelectorDimention();
     if (aw > cw) al = (cw - aw) / (cw - selectorDiv.width) * selectorDiv.left;
     if (ah > ch) at = (ch - ah) / (ch - selectorDiv.height) * selectorDiv.top;
-    return {left: Math.floor(al), top: Math.floor(at), width: Math.floor(aw), height: Math.floor(ah)};
+    return {
+        left: Math.floor(al),
+        top: Math.floor(at),
+        width: Math.floor(aw),
+        height: Math.floor(ah)
+    };
 }
 
 function getSelectorDimention() {
     return {
-        left: selector.position().left,
-        top: selector.position().top,
+        left: Math.ceil(selector.position().left),
+        top: Math.ceil(selector.position().top),
         width: selector.width(),
         height: selector.height(),
     };
 }
 
 function refreshAvatarCanvas(uiposition) {
-    var imageDiv = getAvatarDimension();
-    var selectorDiv = getSelectorDimention();
+
     var img = $('avatarimage');
+    var iw = avatarimage.width();
+    var ih = avatarimage.height();
+
     var canvas = $('avatarcanvas');
-    var selectedarea = $('selectedarea');
     var cw = canvas.width;
     var ch = canvas.height;
     var ctx = canvas.getContext('2d');
-    var iw = avatarimage.width();
-    var ih = avatarimage.height();
+
+    var imageDiv = getAvatarDimension();
+    var selectorDiv = getSelectorDimention();
+
     if (uiposition) {
         selectorDiv.left = uiposition.left;
         selectorDiv.top = uiposition.top;
     }
-    ctx.fillStyle = "rgba(0,0,0,0.5)";
+
     ctx.clearRect(0, 0, cw, ch);
     ctx.drawImage(img, 0, 0, iw, ih, imageDiv.left, imageDiv.top, imageDiv.width, imageDiv.height);
+
+    ctx.fillStyle = "rgba(0,0,0,0.5)";
     ctx.fillRect(0, 0, cw, ch);
+
+    var selectedarea = $('selectedarea');
+
     if (avataradjuster.data('avatartype') === 'round') {
 
-        var tmp = {
+        var stmp = {
             w: imageDiv.width + 'px',
             h: imageDiv.height + 'px',
-            t: 'translate(' + (imageDiv.left - selectorDiv.left - 1) + 'px, ' + (imageDiv.top - selectorDiv.top - 1) + 'px)',
+            t: 'translate3d(' + (imageDiv.left - selectorDiv.left - 1) + 'px, ' + (imageDiv.top - selectorDiv.top - 1) + 'px, 0)',
         };
 
-        selectedarea.style.width = tmp.w;
-        selectedarea.style.height = tmp.h;
-        selectedarea.style.transform = tmp.t;
+        selectedarea.style.width = stmp.w;
+        selectedarea.style.height = stmp.h;
+        selectedarea.style.transform = stmp.t;
 
     } else {
-        ctx.drawImage(img, (selectorDiv.left - imageDiv.left) * iw / imageDiv.width, (selectorDiv.top - imageDiv.top) * ih / imageDiv.height, (selectorDiv.width + 2) * iw / imageDiv.width, (selectorDiv.height + 2) * ih / imageDiv.height, selectorDiv.left, selectorDiv.top, selectorDiv.width + 2, selectorDiv.height + 2);
+
+        var ctmp = {
+            x: (selectorDiv.left - imageDiv.left) * iw / imageDiv.width,
+            y: (selectorDiv.top - imageDiv.top) * ih / imageDiv.height,
+            w: (selectorDiv.width + 2) * iw / imageDiv.width,
+            h: (selectorDiv.height + 2) * ih / imageDiv.height,
+
+            sl: selectorDiv.left,
+            st: selectorDiv.top,
+            sw: selectorDiv.width + 2,
+            sh: selectorDiv.height + 2,
+        };
+        ctx.drawImage(img, ctmp.x, ctmp.y, ctmp.w, ctmp.h, ctmp.sl, ctmp.st, ctmp.sw, ctmp.sh);
     }
 }
 
 function forceSelectorInsideAvatar() {
     var imageDiv = getAvatarDimension();
     var selectorDiv = getSelectorDimention();
-    if (selectorDiv.width > selectorDiv.height) selector.width(selectorDiv.height);
-    if (selectorDiv.height > selectorDiv.width) selector.height(selectorDiv.width);
+
+    if (selectorDiv.width !== selectorDiv.height) {
+        var size = Math.min(selectorDiv.height, selectorDiv.width);
+        selector.width(size);
+        selector.height(size);
+    }
+
     /* aspectRatio */
     if (selectorDiv.width > imageDiv.width) selector.width(imageDiv.width - 2);
     if (selectorDiv.height > imageDiv.height) selector.height(imageDiv.height - 2);
+
     /* aspectRatio End */
     if (selectorDiv.left < imageDiv.left) selector.css('left', imageDiv.left);
     if (selectorDiv.top < imageDiv.top) selector.css('top', imageDiv.top);
