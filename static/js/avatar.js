@@ -1,20 +1,20 @@
 var selectareaw = 320,
-	selectareah = 320,
-	defaultsize = 150,
-	minenlarge = 20,
-	maxenlarge = 200,
+    selectareah = 320,
+    defaultsize = 150,
+    minenlarge = 20,
+    maxenlarge = 200,
 
-	form = jQuery('#avatarform'),
-	avatarcreator = jQuery('#avatarcreator'),
-	fileselector = jQuery('#fileselector'),
-	filereselector = jQuery('#filereselector'),
-	avataradjuster = jQuery('#avataradjuster'),
-	avatarfile = jQuery('#avatarfile'),
-	avatarimage = jQuery('#avatarimage'),
-	canvas = jQuery('#avatarcanvas'),
-	selector = jQuery('#selector'),
-	slider = jQuery('#slider'),
-	saver = jQuery('#saver');
+    form = jQuery('#avatarform'),
+    avatarcreator = jQuery('#avatarcreator'),
+    fileselector = jQuery('#fileselector'),
+    filereselector = jQuery('#filereselector'),
+    avataradjuster = jQuery('#avataradjuster'),
+    avatarfile = jQuery('#avatarfile'),
+    avatarimage = jQuery('#avatarimage'),
+    canvas = jQuery('#avatarcanvas'),
+    selector = jQuery('#selector'),
+    slider = jQuery('#slider'),
+    saver = jQuery('#saver');
 
 avatarcreator.width(selectareaw);
 avatarcreator.height(selectareah);
@@ -28,16 +28,16 @@ canvas.attr('height', selectareah);
 selector.width(defaultsize);
 selector.height(defaultsize);
 
-form.attr('target','uploadframe');
-avatarfile.attr('onchange',uploadAvatarDone);
+form.attr('target', 'uploadframe');
+avatarfile.attr('onchange', uploadAvatarDone);
 
-$('avatarform').target ='uploadframe';
+$('avatarform').target = 'uploadframe';
 $('avatarfile').onchange = uploadAvatarDone;
 
 window.addEventListener('message', receiveMessage, false);
 
 sliderverticle = 1;
-if(form.hasClass('horizon')){
+if (form.hasClass('horizon')) {
     sliderverticle = 0;
 }
 
@@ -50,7 +50,7 @@ jQuery(document).ready(function () {
             },
             stop: function () {
                 forceSelectorInsideAvatar();
-            }
+            },
         })
         .resizable({
             containment: "parent",
@@ -61,12 +61,12 @@ jQuery(document).ready(function () {
                 refreshAvatarCanvas(ui.position);
             },
             stop: function () {
-                for (var i = 0 ; i < 2; i++){
+                for (var i = 0; i < 2; i++) {
                     setTimeout(function () {
                         forceSelectorInsideAvatar();
-                    },128 + 128*i);
+                    }, 128 + 128 * i);
                 }
-            }
+            },
         });
     slider.slider({
         min: minenlarge,
@@ -75,40 +75,39 @@ jQuery(document).ready(function () {
         value: 50,
         step: 3,
         slide: function (event, ui) {
-            for (var i = 0 ; i < 2; i++){
+            for (var i = 0; i < 2; i++) {
                 setTimeout(function () {
                     forceSelectorInsideAvatar();
-                },128 + 128*i);
+                }, 128 + 128 * i);
             }
         },
         stop: function () {
-            for (var i = 0 ; i < 2; i++){
+            for (var i = 0; i < 2; i++) {
                 setTimeout(function () {
                     forceSelectorInsideAvatar();
-                },128 + 128*i);
+                }, 128 + 128 * i);
             }
-        }
+        },
     });
     var ruller = '';
     var rrate = 3;
-    for(var i = 0; i < (maxenlarge - minenlarge)/rrate + 1; i++){
+    for (var i = 0; i < (maxenlarge - minenlarge) / rrate + 1; i++) {
         var content = '';
-        if(0 === i%12) content = '<i>' + (sliderverticle ? (maxenlarge  - i*rrate ) : i*rrate + minenlarge) +'</i>';
-        ruller += '<li>'+content+'</li>'
+        if (0 === i % 12) content = '<i>' + (sliderverticle ? (maxenlarge - i * rrate) : i * rrate + minenlarge) + '</i>';
+        ruller += '<li>' + content + '</li>'
     }
-    slider.append('<ul class="ui-slider-pointers">'+ ruller + '</ul>');
+    slider.append('<ul class="ui-slider-pointers">' + ruller + '</ul>');
 });
-
 
 
 function uploadAvatarDone() {
     if (this.files && this.files[0]) {
         var fr = new FileReader();
-        fr.onload = function(e) {
+        fr.onload = function (e) {
             fileselector.hide();
             filereselector.show();
             avataradjuster.show();
-            saver.attr('disabled',false);
+            saver.attr('disabled', false);
             selector.css('left', (selectareaw - defaultsize) / 2);
             selector.css('top', (selectareah - defaultsize) / 2);
             selector.width(defaultsize);
@@ -136,8 +135,11 @@ function getAvatarDimension() {
     var minr = Math.max(minw / iw, minh / ih);
     var midr = Math.max(midw / iw, midh / ih);
     var maxr = Math.max(maxw / iw, maxh / ih);
-    r = (midr * (100 - factor) + maxr * (factor - 50)) / 50;
-    if (factor <= 50) {r = (minr * (50 - factor) + midr * factor) / 50;}
+    if (factor <= 50) {
+        r = (minr * (50 - factor) + midr * factor) / 50;
+    } else {
+        r = (midr * (100 - factor) + maxr * (factor - 50)) / 50;
+    }
     var aw = r * iw;
     var ah = r * ih;
     var al = (cw - aw) / 2;
@@ -153,7 +155,7 @@ function getSelectorDimention() {
         left: selector.position().left,
         top: selector.position().top,
         width: selector.width(),
-        height: selector.height()
+        height: selector.height(),
     };
 }
 
@@ -176,7 +178,7 @@ function refreshAvatarCanvas(uiposition) {
     ctx.clearRect(0, 0, cw, ch);
     ctx.drawImage(img, 0, 0, iw, ih, imageDiv.left, imageDiv.top, imageDiv.width, imageDiv.height);
     ctx.fillRect(0, 0, cw, ch);
-    if(avataradjuster.data('avatartype') === 'round'){
+    if (avataradjuster.data('avatartype') === 'round') {
         selectedarea.style = 'width:' + imageDiv.width + 'px; height:' + imageDiv.height + 'px; transform: translate3d(' + (imageDiv.left - selectorDiv.left - 1) + 'px, ' + (imageDiv.top - selectorDiv.top - 1) + 'px, 0)';
     } else {
         ctx.drawImage(img, (selectorDiv.left - imageDiv.left) * iw / imageDiv.width, (selectorDiv.top - imageDiv.top) * ih / imageDiv.height, (selectorDiv.width + 2) * iw / imageDiv.width, (selectorDiv.height + 2) * ih / imageDiv.height, selectorDiv.left, selectorDiv.top, selectorDiv.width + 2, selectorDiv.height + 2);
@@ -204,36 +206,36 @@ function saveAvatar() {
     var canvas = document.createElement('canvas');
     var selectorDiv = getSelectorDimention();
     var imageDiv = getAvatarDimension();
-	var imgwidth  = avatarimage.width();
+    var imgwidth = avatarimage.width();
     var imgheight = avatarimage.height();
-	
+
     var pct = {
-		left: (selectorDiv.left - imageDiv.left) / imageDiv.width,
-		top: (selectorDiv.top - imageDiv.top) / imageDiv.height,
-		width: selectorDiv.width / imageDiv.width,
-		height: selectorDiv.height / imageDiv.height
-	};
+        left: (selectorDiv.left - imageDiv.left) / imageDiv.width,
+        top: (selectorDiv.top - imageDiv.top) / imageDiv.height,
+        width: selectorDiv.width / imageDiv.width,
+        height: selectorDiv.height / imageDiv.height,
+    };
 
     var sx = pct.left * imgwidth;
     var sy = pct.top * imgheight;
     var sw = pct.width * imgwidth;
     var sh = pct.height * imgheight;
-	
-    var size = [256,144,96];
-    for(var i = 0 ; i < size.length; i++){
+
+    var size = [256, 144, 96];
+    for (var i = 0; i < size.length; i++) {
         var r = 1;
-        if(sw > size[i] || sh > size[i]){
-            r = Math.max(sw/size[i], sh/size[i])
+        if (sw > size[i] || sh > size[i]) {
+            r = Math.max(sw / size[i], sh / size[i])
         }
-        canvas.width = sw/r;
-        canvas.height = sh/r;
-        canvas.getContext("2d").drawImage(img, sx, sy, sw, sh, 0, 0, sw/r, sh/r);
+        canvas.width = sw / r;
+        canvas.height = sh / r;
+        canvas.getContext("2d").drawImage(img, sx, sy, sw, sh, 0, 0, sw / r, sh / r);
         var dataURL = canvas.toDataURL("image/png");
-        jQuery('#avatar' + (i+1)).val(dataURL.substr(dataURL.indexOf(",") + 1));
+        jQuery('#avatar' + (i + 1)).val(dataURL.substr(dataURL.indexOf(",") + 1));
     }
 
-    form.attr('action',avatarUploadData[avatarUploadData.indexOf('src')+1].replace('images/camera.swf?inajax=1', 'index.php?m=user&a=rectavatar&base64=yes'));
-    form.attr('target','rectframe');
+    form.attr('action', avatarUploadData[avatarUploadData.indexOf('src') + 1].replace('images/camera.swf?inajax=1', 'index.php?m=user&a=rectavatar&base64=yes'));
+    form.attr('target', 'rectframe');
 }
 
 
@@ -241,12 +243,12 @@ function receiveMessage(event) {
     var msgdata = event.data;
     if (!msgdata) {
         alert('网络似乎似乎出差了( ᖛ ̫ ᖛ )，如果多次出现该消息，请联系管理员寻求帮助');
-    } else if (typeof(msgdata) !== 'string') {
+    } else if (typeof (msgdata) !== 'string') {
         alert('服务器顺着网线扔过来一个错误(。≖ˇェˇ≖。)，如果多次出现该消息，请联系管理员寻求帮助');
     } else if (msgdata === 'success') {
         alert('上传成功');
         location.reload();
-    } else if(res === 'failure') {
+    } else if (res === 'failure') {
         alert('上传失败');
     } else {
         alert('上传被终止，请检查你的网络。当多次出现该消息，请联系管理员寻求帮助\'');
