@@ -7290,7 +7290,7 @@
         transform: translate(0, -120%);
         transition: .2s ease-in-out;
     }
-    body.scroll-overhaed .app-userspace .space-head > .bank.type-scroll{
+    .scroll-overhaed .app-userspace .space-head > .bank.type-scroll{
         transform: translate(0, 0);
     }
     .app-userspace .space-head > .bank.type-scroll .avatar{

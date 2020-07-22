@@ -38,7 +38,12 @@
             }
         };
 
-        body = SR('body')[0];
+        loader = {
+            pare : SR('render[role="loader"]'),
+            hook : SR('#loader_hook')[0]
+        };
+
+        body = SR('render[role="body"]')[0];
         nav = SR('[html-header] #nav')[0];
         banner = SR('[html-header] .banner')[0];
         uconsole = SR('#console')[0];
@@ -77,17 +82,37 @@
                 document.addEventListener('DOMMouseScroll', DocAction.wheel(), false);
             }
 
-            /* 页面尺寸初始化 */
-            this.resize();
+            function inni() {
 
-            /* tooltip初始化 */
-            tooltip_init();
+                while (1){
 
-            /* nav样式初始化 */
-            if(banner){
-                (document.documentElement.scrollTop || document.body.scrollTop || 0) >= (banner.Css.height - nav.Css.height) ? body.addClass('scroll-overhaed') : '';
+                    if(loader.hook.complete){
+                        setTimeout(function () {
+                            /* 页面尺寸初始化 */
+                            DocAction.resize();
+
+                            /* tooltip初始化 */
+                            tooltip_init();
+
+                            /* nav样式初始化 */
+                            if(banner){
+                                (document.documentElement.scrollTop || document.body.scrollTop || 0) >= (banner.Css.height - nav.Css.height) ? body.addClass('scroll-overhaed') : '';
+                            }
+
+                            /* 清除loader遮罩 */
+                            for(var self of loader.pare){
+                                self.parentElement.removeChild(self);
+                            }
+
+                        },1);
+
+                        break;
+                    }
+                }
             }
 
+            loader.hook.onload = inni();
+            loader.hook.src = loader.hook.data('src');
         },
 
         click: function (evt) { //传入e事件来兼容火狐

@@ -1,0 +1,132 @@
+    </layout:html>
+    <layout:html html-footer>
+        <!--{template common/footer_btmenus}-->
+        <!--{template common/footer_drawer}-->
+        <div class="audio green" id="audio"></div>
+        <link href="{$_G['setting']['csspath']}/musicplayer.css" rel="stylesheet" type="text/css">
+        <script src="{LIBURL}/js/plugins/musicplayer/musicplayer.js"></script>
+    </layout:html>
+    <layout:js css-onload>
+        <link rel="stylesheet" href='{FONTURL}/Awesome.css' />
+        <link rel="stylesheet" href='{FONTURL}/Icomoon.css' />
+        <link rel="stylesheet" href='{FONTURL}/Feather.css' />
+        <link rel="stylesheet" href='{FONTURL}/Material.css' />
+        <link rel="stylesheet" href='{FONTURL}/Collection.css' />
+        <link rel="stylesheet" href='{FONTURL}/Bit.css' />
+        <link rel="stylesheet" href='{FONTURL}/Discuz-Editor.css' />
+    </layout:js>
+    <layout:js js-onload>
+        <script>
+            checkBlind();
+        </script>
+    </layout:js>
+    <layout:js js-data>
+        <!--{if empty($topic) || ($topic[usefooter])}-->
+        <!--{eval $focusid = getfocus_rand($_G[basescript]);}-->
+            <!--{if $focusid !== null}-->
+            <!--{eval $focus = $_G['cache']['focus']['data'][$focusid];}-->
+            <!--{eval $focusnum = count($_G['setting']['focus'][$_G[basescript]]);}-->
+            <div class="focus" id="sitefocus">
+                <a onclick="setcookie('nofocus_$_G[basescript]', 1, $_G['cache']['focus']['cookie']*3600);$('sitefocus').style.display='none'" class="r" title="{lang close}">{lang close}</a>
+                <h2>
+                    <!--{if $_G['cache']['focus']['title']}-->{$_G['cache']['focus']['title']}<!--{else}-->{langfocus_hottopics}<!--{/if}-->
+                    <span id="focus_ctrl" class="fctrl"><img src="{STATICURL}image/common/pic_nv_prev.gif" alt="{lang footer_previous}" title="{lang footer_previous}" id="focusprev" class="cur1" onclick="showfocus('prev');"/> <em><span id="focuscur"></span>/$focusnum</em> <img src="{STATICURL}image/common/pic_nv_next.gif" alt="{lang footer_next}" title="{lang footer_next}" id="focusnext" class="cur1" onclick="showfocus('next')"/></span>
+                </h2>
+                <div id="focus_con">
+                </div>
+            </div>
+            <!--{eval $focusi = 0;}-->
+            <!--{loop $_G['setting']['focus'][$_G[basescript]] $id}-->
+                <div class="bm_c" style="display: none" id="focus_$focusi">
+                    <dl class="xld cl bbda">
+                        <dt><a href="{$_G['cache']['focus']['data'][$id]['url']}" target="_blank">$_G['cache']['focus']['data'][$id]['subject']</a></dt>
+                        <!--{if $_G['cache']['focus']['data'][$id][image]}-->
+                        <dd class="m"><a href="{$_G['cache']['focus']['data'][$id]['url']}" target="_blank"><img src="{$_G['cache']['focus']['data'][$id]['image']}" alt="$_G['cache']['focus']['data'][$id]['subject']"/></a></dd>
+                        <!--{/if}-->
+                        <dd>$_G['cache']['focus']['data'][$id]['summary']</dd>
+                    </dl>
+                    <p class="ptn cl"><a href="{$_G['cache']['focus']['data'][$id]['url']}" class="xi2 y" target="_blank">{langfocus_show} &raquo;</a></p>
+                </div>
+                <!--{eval $focusi ++;}-->
+            <!--{/loop}-->
+            <script type="text/javascript">
+                var focusnum = $focusnum;
+                if (focusnum < 2) {
+                    $('focus_ctrl').style.display = 'none';
+                }
+                if (!$('focuscur').innerHTML) {
+                    var randomnum = parseInt(Math.round(Math.random() * focusnum));
+                    $('focuscur').innerHTML = Math.max(1, randomnum);
+                }
+                showfocus();
+                var focusautoshow = window.setInterval('showfocus(\'next\', 1);', 5000);
+            </script>
+        <!--{/if}-->
+
+        <!--{if !$_G['setting']['bbclosed'] && !$_G['member']['freeze'] && !$_G['member']['groupexpiry']}-->
+            <!--{if $_G[uid] && !isset($_G['cookie']['checkpm'])}-->
+                <script type="text/javascript" src="home.php?mod=spacecp&ac=pm&op=checknewpm&rand=$_G[timestamp]"></script>
+            <!--{/if}-->
+            <!--{if $_G[uid] && helper_access::check_module('follow') && !isset($_G['cookie']['checkfollow'])}-->
+                <script type="text/javascript" src="home.php?mod=spacecp&ac=follow&op=checkfeed&rand=$_G[timestamp]"></script>
+            <!--{/if}-->
+            <!--{if !isset($_G['cookie']['sendmail'])}-->
+                <script type="text/javascript" src="home.php?mod=misc&ac=sendmail&rand=$_G[timestamp]"></script>
+            <!--{/if}-->
+        <!--{/if}-->
+
+        <!--{if $_G['uid'] && $_G['member']['allowadmincp'] == 1 && empty($_G['cookie']['pluginnotice'])}-->
+            <div class="fwin focus" id="plugin_notice"></div>
+            <script type="text/javascript">pluginNotice();</script>
+        <!--{/if}-->
+
+        <!--{if !$_G['setting']['bbclosed'] && !$_G['member']['freeze'] && !$_G['member']['groupexpiry'] && $_G['setting']['disableipnotice'] != 1 && $_G['uid'] && !empty($_G['cookie']['lip'])}-->
+            <div class="fwin focus" id="ip_notice"></div>
+            <script type="text/javascript">ipNotice();</script>
+        <!--{/if}-->
+
+
+        <!--{if ($_G[member][newpm] || $_G[member][newprompt]) && empty($_G['cookie']['ignore_notice'])}-->
+            <script type="text/javascript" src="{$_G[setting][jspath]}html5notification.js?{VERHASH}"></script>
+            <script type="text/javascript">
+                var h5n = new Html5notification();
+                if (h5n.issupport()) {
+                    <!--{if $_G[member][newpm] && $_GET[do] != 'pm'}-->
+                    h5n.shownotification('pm', '$_G[siteurl]home.php?mod=space&do=pm', '<!--{avatar($_G[uid],small,true)}-->', '{lang newpm_subject}', '{lang newpm_notice_info}');
+                    <!--{/if}-->
+                    <!--{if $_G[member][newprompt] && $_GET[do] != 'notice'}-->
+                    <!--{loop $_G['member']['category_num'] $key $val}-->
+                    <!--{eval $noticetitle = lang('template', 'notice_'.$key);}-->
+                    h5n.shownotification('notice_$key', '$_G[siteurl]home.php?mod=space&do=notice&view=$key', '<!--{avatar($_G[uid],small,true)}-->', '$noticetitle ($val)', '{lang newnotice_notice_info}');
+                    <!--{/loop}-->
+                    <!--{/if}-->
+                }
+            </script>
+        <!--{/if}-->
+
+        <!--{if isset($_G['makehtml'])}-->
+            <script type="text/javascript" src="{$_G[setting][jspath]}html2dynamic.js?{VERHASH}"></script>
+            <script type="text/javascript">var html_lostmodify = {TIMESTAMP};htmlGetUserStatus();<!--{if isset($_G['htmlcheckupdate'])}-->htmlCheckUpdate();<!--{/if}--></script>
+        <!--{/if}-->
+
+        <!--{if $_G['setting']['statcode']}-->$_G['setting']['statcode']<!--{/if}-->
+            <!--{if $_G['uid'] && $_G['group']['allowinvisible']}-->
+            <script type="text/javascript">
+                var invisiblestatus = '<!--{if $_G['session']['invisible']}-->{lang login_invisible_mode}<!--{else}-->{lang login_normal_mode}<!--{/if}-->';
+                var loginstatusobj = $('loginstatusid');
+                if (loginstatusobj !== undefined && loginstatusobj !== null) loginstatusobj.innerHTML = invisiblestatus;
+            </script>
+            <!--{/if}-->
+        <!--{/if}-->
+        <!--{hook/global_footer}-->
+        <!--{eval output();}-->
+        <!--{eval updatesession();}-->
+    </layout:js>
+</render>
+<render role="loader" id="loader-footer">
+    <layout:html html-buffer>
+        <img id="loader_hook" class="hide" data-src="{IMGURL}/common/hook.svg" />
+    </layout:html>
+</render>
+</body>
+</html>

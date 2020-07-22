@@ -77,7 +77,7 @@ class discuz_ftp
 				if(!$this->ftp_chdir($dirname)) {
 					$this->set_error(FTP_ERR_CHDIR);
 				}
-				$this->ftp_put('index.htm', getglobal('setting/attachdir').'/index.htm', FTP_BINARY);
+				$this->ftp_put('index'.$_G['config']['output']['tpl_suffix'], getglobal('setting/attachdir').'/index'.$_G['config']['output']['tpl_suffix'], FTP_BINARY);
 			} else {
 				$this->set_error(FTP_ERR_MKDIR);
 			}

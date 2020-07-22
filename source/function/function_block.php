@@ -160,7 +160,7 @@ function block_fetch_content($bid, $isjscall=false, $forceupdate=false) {
 
 	$hidediv = $isjscall || $block['blocktype'];
 
-	$_cache_key = 'blockcache_'.($isjscall ? 'js' : 'htm').'_'.$bid;
+	$_cache_key = 'blockcache_'.($isjscall ? 'js' : 'html').'_'.$bid;
 	if($allowmem && empty($block['hidedisplay']) && empty($block['nocache']) && ($str = memory('get', $_cache_key)) !== false) {
 
 	} else {

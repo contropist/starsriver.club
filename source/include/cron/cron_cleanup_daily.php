@@ -43,7 +43,7 @@ if($_G['setting']['cachethreadon']) {
 	removedir($_G['setting']['cachethreaddir'], TRUE);
 }
 removedir($_G['setting']['attachdir'].'image', TRUE);
-@touch($_G['setting']['attachdir'].'image/index.htm');
+@touch($_G['setting']['attachdir'].'image/index'.$_G['config']['output']['tpl_suffix']);
 
 C::t('forum_attachment_unused')->clear();
 

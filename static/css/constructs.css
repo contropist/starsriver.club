@@ -2547,17 +2547,35 @@
 |   Layout  |
 |------------
 |  The Layout Bootstrape For View
-|  This Just Sized The Block Size
 -----------------------------------------------------------------------------------------------------------------------*/
 
 /*region Common*/
-    body {
-        opacity: 0;
-        transition: .15s ease-in-out;
+    body{
+        --loading-trans-animation: .15s ease-in-out;
     }
-    body[class*='WL-'] {
+
+    [role="body"] {
+        display: block;
+        opacity: 0;
+        transition: var(--loading-trans-animation);
+        pointer-events: none;
+    }
+    [role="body"][class*='WL-'] {
+        pointer-events: auto;
         opacity: 1;
     }
+    [role="loader"] {
+        opacity: 1;
+        visibility: visible;
+        transition: var(--loading-trans-animation);
+        pointer-events: none;
+    }
+    [role="loader"][class*='Fin'] {
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+    }
+
     [html-ws] {
         display: block;
         margin: 0;
@@ -2581,6 +2599,31 @@
         height: 0;
         width: 0;
     }
+    [html-cache], [html-buffer]{
+        display: none;
+        visibility: hidden;
+        pointer-events: none;
+    }
+    [html-logo]{
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        position: fixed;
+        opacity: 1;
+        visibility: visible;
+        background: #f9f9f9;
+        z-index: 999;
+        transform: var(--loading-trans-animation);
+    }
+    [html-logo] img{
+        width: 128px;
+        top: 50%;
+        left: 50%;
+        position: absolute;
+        transform: translate(-50%, -80%);
+    }
+
     .container{
         position: relative;
         margin: 0 auto;
@@ -2639,7 +2682,7 @@
         cursor: pointer;
         transition: .3s ease-in-out;
     }
-    body.scroll-overhaed .Mas .mas-guide .mas-guide-switch {
+    .scroll-overhaed .Mas .mas-guide .mas-guide-switch {
         color: #3e3e3e;
         text-shadow: 0 0 2px rgba(12, 12, 12, 0.2);
         box-shadow: 0 0 0 2px rgba(35, 35, 35, 0.8), 1px 1px 4px rgba(0, 0, 0, 0.2);
@@ -2672,10 +2715,10 @@
         transition: .1s .03s ease-in-out;
         background-color: #f9f9f9;
     }
-    body[class*='WL-'] .Mas .mas-guide,
-    body[class*='WL-'] .Mas .mas-viewer{
+    [class*='WL-'] .Mas .mas-guide,
+    [class*='WL-'] .Mas .mas-viewer{
         opacity: 1 !important;
-        transition: .2s ease-in-out;
+        transition: .15s ease-in-out;
     }
 /*endregion*/
 

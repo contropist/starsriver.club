@@ -470,11 +470,11 @@ if($_GET['op'] == 'checknewpm') {
 	if(count($list) == 0) {
 		showmessage('pm_emport_banned_export');
 	}
-	$filename = lang('space', 'export_pm').'.html';
+	$filename = lang('space', 'export_pm').$_G['config']['output']['tpl_suffix'];
 	if($touid) {
 		if($touser = uc_get_user($touid, 1)) {
 			$tousername = $touser[1];
-			$filename = $touser[1].'.html';
+			$filename = $touser[1].$_G['config']['output']['tpl_suffix'];
 		}
 	}
 	$contents = '<!DOCTYPE html>';

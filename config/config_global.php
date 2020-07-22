@@ -59,6 +59,7 @@ $_config = [
     // ---------  CONFIG OUTPUT  --------- //
     'output'          => [
         'charset'         => 'utf-8',
+        'tpl_suffix'      => '.html',
         'forceheader'     => 1,
         'gzip'            => '0',
         'tplrefresh'      => 1,

@@ -136,8 +136,8 @@ SEARCH;
 			$nesttitle = cplang($nesturl['flag'] ? 'nesttemplate_share' : 'nesttemplate_alone');
 			showtablerow('', array('class=""', 'class=""', 'class="td28"'), array(
 					"<a href=\"$nesturl[url]\" title=\"$nesttitle\" target=\"_blank\">$value[name]</a>",
-					'<span title="'.cplang('nesttemplate_path').'./data/nest/'.$value['targettplname'].'.htm">'.$value['targettplname'].'</span>',
-					'<span title="'.cplang('nesttemplate_path').$_G['style']['tpldir'].'/'.$value['primaltplname'].'.htm">'.$value['primaltplname'].'</span>',
+					'<span title="'.cplang('nesttemplate_path').'./data/nest/'.$value['targettplname'].$_G['config']['output']['tpl_suffix'].'">'.$value['targettplname'].'</span>',
+					'<span title="'.cplang('nesttemplate_path').$_G['style']['tpldir'].'/'.$value['primaltplname'].$_G['config']['output']['tpl_suffix'].'">'.$value['primaltplname'].'</span>',
 					"<a href=\"home.php?mod=space&uid=$value[uid]&do=profile\" target=\"_blank\">$value[username]</a>",
 					$value[dateline],
 					'<a href="'.ADMINSCRIPT.'?action=nesttemplate&operation=edit&targettplname='.$value['targettplname'].'&tpldirectory='.$value['tpldirectory'].'">'.cplang('edit').'</a> '.
@@ -169,8 +169,8 @@ SEARCH;
 		showtitle('edit');
 
 		showsetting('nesttemplate_name', 'name', $nestdata['name'],'text');
-		showsetting('nesttemplate_targettplname', '', '',cplang('nesttemplate_path').'./data/nest/'.$nestdata['targettplname'].'.htm');
-		showsetting('nesttemplate_primaltplname', '', '',cplang('nesttemplate_path').$_G['style']['tpldir'].'/'.$nestdata['primaltplname'].'.htm');
+		showsetting('nesttemplate_targettplname', '', '',cplang('nesttemplate_path').'./data/nest/'.$nestdata['targettplname'].$_G['config']['output']['tpl_suffix']);
+		showsetting('nesttemplate_primaltplname', '', '',cplang('nesttemplate_path').$_G['style']['tpldir'].'/'.$nestdata['primaltplname'].$_G['config']['output']['tpl_suffix']);
 		showsetting('nesttemplate_username', '', '',$nestdata['username']);
 		showsetting('nesttemplate_dateline', '', '',$nestdata['dateline'] ? dgmdate($nestdata['dateline']) : '');
 

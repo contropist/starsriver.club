@@ -416,7 +416,7 @@ function sethtml(id) {
 		btn.className = 'htmlbtn c current';
 	}
 	btn.onclick = function() {
-		$(id + '_c_frame').src = 'static/image/admincp/getcolor.htm?||sethtml_color';
+		$(id + '_c_frame').src = 'static/image/admincp/getcolor.html?||sethtml_color';
 		showMenu({'ctrlid' : id + '_c'});
 		sethtml_id = id;
 	};

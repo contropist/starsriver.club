@@ -49,8 +49,8 @@ foreach($alltemplate = C::t('common_template')->range() as $template) {
 	if(($dir = dir(DISCUZ_ROOT.$template['directory'].'/portal/'))) {
 		while(false !== ($file = $dir->read())) {
 			$file = strtolower($file);
-			if (fileext($file) == 'htm' && substr($file, 0, 13) == 'portal_topic_') {
-				$tpls[$template['directory'].':portal/'.str_replace('.htm','',$file)] = getprimaltplname($template['directory'].':portal/'.$file);
+			if (fileext($file) == 'html' && substr($file, 0, 13) == 'portal_topic_') {
+				$tpls[$template['directory'].':portal/'.str_replace($_G['config']['output']['tpl_suffix'],'',$file)] = getprimaltplname($template['directory'].':portal/'.$file);
 			}
 		}
 	}

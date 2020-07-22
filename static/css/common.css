@@ -420,7 +420,7 @@
         --nav-menu-text-color :#444444;
         --nav-menu-text-color-hover :rgb(37, 143, 250);
     }
-    body.scroll-overhaed nav{
+    .scroll-overhaed nav{
         background: #ffffff;
 
         --nav-logo-color:#666666;

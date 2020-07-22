@@ -154,11 +154,11 @@ function save_nest_data($tpldirectory, $primaltplname, $targettplname, $data, $d
 		$tpldirectory = getnesttpldir($targettplname);
 	}
 	$isextphp = false;
-	$file = $tpldirectory.'/'.$primaltplname.'.htm';
+	$file = $tpldirectory.'/'.$primaltplname.$_G['config']['output']['tpl_suffix'];
 	if (!file_exists($file)) {
 		$file = $tpldirectory.'/'.$primaltplname.'.php';
 		if (!file_exists($file)) {
-			$file = './template/default/'.$primaltplname.'.htm';
+			$file = './template/default/'.$primaltplname.$_G['config']['output']['tpl_suffix'];
 		} else {
 			$isextphp = true;
 		}
@@ -189,10 +189,10 @@ function save_nest_data($tpldirectory, $primaltplname, $targettplname, $data, $d
 	if($flag) {
 		$targettplname = $targettplname.'_nest_preview';
 	} else {
-		@unlink('./data/nest/'.$tpldirectory.'/'.$targettplname.'_nest_preview.htm');
+		@unlink('./data/nest/'.$tpldirectory.'/'.$targettplname.'_nest_preview'.$_G['config']['output']['tpl_suffix']);
 	}
 
-	$tplfile =DISCUZ_ROOT.'./data/nest/'.$tpldirectory.'/'.$targettplname.'.htm';
+	$tplfile =DISCUZ_ROOT.'./data/nest/'.$tpldirectory.'/'.$targettplname.$_G['config']['output']['tpl_suffix'];
 	$tplpath = dirname($tplfile);
 	if (!is_dir($tplpath)) {
 		dmkdir($tplpath);
@@ -661,12 +661,12 @@ function checkprimaltpl($template) {
 	if(strpos($tpldirectory, '..') !== false || strpos($tpldirectory, "\0") !== false || ($tpldirectoryarr[0] != 'template' && $tpldirectoryarr[0] != 'source')) {
 		return 'nest_tpldirectory_invalid';
 	}
-	$primaltplname = (!$tpldirectory ? DISCUZ_ROOT.$_G['cache']['style_default']['tpldir'] : $tpldirectory).'/'.$template.'.htm';
+	$primaltplname = (!$tpldirectory ? DISCUZ_ROOT.$_G['cache']['style_default']['tpldir'] : $tpldirectory).'/'.$template.$_G['config']['output']['tpl_suffix'];
 	if (!file_exists($primaltplname)) {
-		$primaltplname = DISCUZ_ROOT.'./template/default/'.$template.'.htm';
+		$primaltplname = DISCUZ_ROOT.'./template/default/'.$template.$_G['config']['output']['tpl_suffix'];
 	}
 	$pathinfos = pathinfo($primaltplname);
-	if(strtolower($pathinfos['extension']) != 'htm') {
+	if(strtolower($pathinfos['extension']) != 'html') {
 		return 'nest_template_extension_invalid';
 	}
 	if (!is_file($primaltplname)) {
@@ -900,8 +900,8 @@ function updatetopic($topic = ''){
 
 	if($primaltplname && empty($topic['primaltplname'])) {
 		$tpldirectory = ($tpldirectory ? $tpldirectory : $_G['cache']['style_default']['tpldir']);
-		$content = file_get_contents(DISCUZ_ROOT.$tpldirectory.'/'.$primaltplname.'.htm');
-		$tplfile = DISCUZ_ROOT.'./data/nest/'.$tpldirectory.'/portal/portal_topic_content_'.$topicid.'.htm';
+		$content = file_get_contents(DISCUZ_ROOT.$tpldirectory.'/'.$primaltplname.$_G['config']['output']['tpl_suffix']);
+		$tplfile = DISCUZ_ROOT.'./data/nest/'.$tpldirectory.'/portal/portal_topic_content_'.$topicid.$_G['config']['output']['tpl_suffix'];
 		$tplpath = dirname($tplfile);
 		if (!is_dir($tplpath)) {
 			dmkdir($tplpath);

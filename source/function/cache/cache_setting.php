@@ -398,7 +398,7 @@ function build_cache_setting() {
 	if($data['cacheindexlife']) {
 		$cachedir = DISCUZ_ROOT.'./'.$data['cachethreaddir'];
 		$tidmd5 = substr(md5(0), 3);
-		@unlink($cachedir.'/'.$tidmd5[0].'/'.$tidmd5[1].'/'.$tidmd5[2].'/0.htm');
+		@unlink($cachedir.'/'.$tidmd5[0].'/'.$tidmd5[1].'/'.$tidmd5[2].'/0'.$_G['config']['output']['tpl_suffix']);
 	}
 
 	$reginputbwords = array('username', 'password', 'password2', 'email');

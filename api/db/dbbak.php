@@ -507,7 +507,7 @@ if($get['method'] == 'export') {
 			auto_next($get, $dumpfile);
 		}
 	} else {
-		@touch(ROOT_PATH.$get['sqlpath'].'/index.htm');
+		@touch(ROOT_PATH.$get['sqlpath'].'/index'.$_G['config']['output']['tpl_suffix']);
 		api_msg('explor_success', 'explor_success');
 	}
 

@@ -1,0 +1,31 @@
+<!--{template common/header_common}-->
+<!--{eval $_G[cookie][extstyle] = false;}-->
+	<script type="text/javascript" src="{$_G[setting][jspath]}home.js?{VERHASH}"></script>
+	<link id="style_css" rel="stylesheet" type="text/css" href="{STATICURL}space/{if $space[theme]}$space[theme]{else}t1{/if}/style.css?{VERHASH}">
+	<style id="nest_style">$space[spacecss]</style>
+</head>
+
+<body>
+<!--{template common/header_loader}-->
+<render role="body">
+    <layout:html html-cache></layout:html>
+    <layout:html html-accessory style="width: 100%">
+        <div class="cover">
+            <div id="ajaxwaitid"></div>
+            <div id="append_parent"></div>
+        </div>
+        <div class="nest-drawer-space">
+            <!--{template common/header_nestmod}-->
+        </div>
+    </layout:html>
+    <layout:html html-ws class="Mas edge app-userspace">
+        <script>
+            jQuery(document).ready(function () {
+                menu_initialize('.app-userspace > .mas-guide > .mas-guide-switch','.app-userspace > .mas-guide',[document,window]);
+            })
+        </script>
+        <div class="mas-guide" data-protect>
+            <!--{template home/space_home_header_guide}-->
+            <div class="mas-guide-switch ft-arrow-right"></div>
+        </div>
+        <div class="mas-cover"></div>

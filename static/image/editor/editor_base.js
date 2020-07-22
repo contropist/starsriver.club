@@ -312,7 +312,7 @@ function fDisplayColorBoard(e){
 		var e = window.event;
 	}
 	if(gIEVer<=5.01 && gIsIE){
-		var arr = showModalDialog("ColorSelect.htm", "", "font-family:Verdana; font-size:12; status:no; dialogWidth:21em; dialogHeight:21em");
+		var arr = showModalDialog("ColorSelect.html", "", "font-family:Verdana; font-size:12; status:no; dialogWidth:21em; dialogHeight:21em");
 		if (arr != null) return arr;
 		return;
 	}

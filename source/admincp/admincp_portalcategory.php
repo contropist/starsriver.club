@@ -913,7 +913,7 @@ function delportalcategoryfolder($catid) {
 
 	$dir = getportalcategoryfulldir($catid);
 	if(!empty($dir)) {
-		unlink(DISCUZ_ROOT.$dir.'index.html');
+		unlink(DISCUZ_ROOT.$dir.'index'.$_G['config']['output']['tpl_suffix']);
 		unlink(DISCUZ_ROOT.$dir.'index.php');
 		rmdir(DISCUZ_ROOT.$dir);
 		$updatearr[] = $catid;
@@ -939,7 +939,7 @@ function delportalcategorysubfolder($catid) {
 
 	$dir = getportalcategoryfulldir($catid);
 	if(!empty($dir)) {
-		unlink(DISCUZ_ROOT.$dir.'index.html');
+		unlink(DISCUZ_ROOT.$dir.'index'.$_G['config']['output']['tpl_suffix']);
 		unlink(DISCUZ_ROOT.$dir.'index.php');
 		rmdir(DISCUZ_ROOT.$dir);
 		$updatearr[] = $catid;
@@ -962,13 +962,13 @@ function remakecategoryfile($categorys) {
 
 function showportalprimaltemplate($pritplname, $type) {
 	include_once libfile('function/portalcp');
-	$tpls = array('./template/default:portal/'.$type=>getprimaltplname('portal/'.$type.'.htm'));
+	$tpls = array('./template/default:portal/'.$type=>getprimaltplname('portal/'.$type.$_G['config']['output']['tpl_suffix']));
 	foreach($alltemplate = C::t('common_template')->range() as $template) {
 		if(($dir = dir(DISCUZ_ROOT.$template['directory'].'/portal/'))) {
 			while(false !== ($file = $dir->read())) {
 				$file = strtolower($file);
-				if (fileext($file) == 'htm' && substr($file, 0, strlen($type)+1) == $type.'_') {
-					$key = $template['directory'].':portal/'.str_replace('.htm','',$file);
+				if (fileext($file) == 'html' && substr($file, 0, strlen($type)+1) == $type.'_') {
+					$key = $template['directory'].':portal/'.str_replace($_G['config']['output']['tpl_suffix'],'',$file);
 					$tpls[$key] = getprimaltplname($template['directory'].':portal/'.$file);
 				}
 			}
@@ -1006,7 +1006,7 @@ function showportalprimaltemplate($pritplname, $type) {
 	if(empty($pritplname)) {
 		showsetting('portalcategory_'.$type.'primaltplname', '', '', $catetplselect);
 	} else {
-		$tplname = getprimaltplname($pritplname.'.htm');
+		$tplname = getprimaltplname($pritplname.$_G['config']['output']['tpl_suffix']);
 		$html = '<span id="'.$type.'value" '.$pritplvalue.'> '.$tplname.'<a onclick="$(\''.$type.'select\').parentNode.style.display=\'\';$(\''.$type.'value\').style.display=\'none\';"> '.cplang('modify').'</a></span>';
 		showsetting('portalcategory_'.$type.'primaltplname', '', '', $catetplselect.$html);
 	}
@@ -1047,14 +1047,14 @@ function remakenesttemplate($primaltplname, $targettplname, $nesttplname, $olddi
 		C::t('common_nest_data')->insert($nestarr);
 	}
 	if(empty($nestcontent)) {
-		$file = $tpldirectory.'/'.$primaltplname.'.htm';
+		$file = $tpldirectory.'/'.$primaltplname.$_G['config']['output']['tpl_suffix'];
 		if (!file_exists($file)) {
-			$file = './template/default/'.$primaltplname.'.htm';
+			$file = './template/default/'.$primaltplname.$_G['config']['output']['tpl_suffix'];
 		}
 		$content = @file_get_contents(DISCUZ_ROOT.$file);
 		if(!$content) $content = '';
 		$content = preg_replace("/\<\!\-\-\[name\](.+?)\[\/name\]\-\-\>/i", '', $content);
-		file_put_contents(DISCUZ_ROOT.'./data/nest/'.$tpldirectory.'/'.$targettplname.'.htm', $content);
+		file_put_contents(DISCUZ_ROOT.'./data/nest/'.$tpldirectory.'/'.$targettplname.$_G['config']['output']['tpl_suffix'], $content);
 	} else {
 		updatenesttemplate($targettplname, $tpldirectory);
 	}

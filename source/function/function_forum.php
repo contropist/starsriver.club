@@ -421,9 +421,9 @@ function loadforum($fid = null, $tid = null) {
 	}
 	if(!empty($_GET['archiver'])) {//X1.5的Archiver兼容
 		if($fid) {
-			dheader('location: archiver/?fid-'.$fid.'.html');
+			dheader('location: archiver/?fid-'.$fid.$_G['config']['output']['tpl_suffix']);
 		} elseif($tid) {
-			dheader('location: archiver/?tid-'.$tid.'.html');
+			dheader('location: archiver/?tid-'.$tid.$_G['config']['output']['tpl_suffix']);
 		} else {
 			dheader('location: archiver/');
 		}

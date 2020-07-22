@@ -118,13 +118,13 @@ if (submitcheck('uploadsubmit')) {
 	}
 
 	if($optype == 'cancelnest') {
-		@unlink(DISCUZ_ROOT.'./data/nest/'.$tpldirectory.'/'.$targettplname.'_nest_preview.htm');
-		if($targettplname == $template) @unlink(DISCUZ_ROOT.'./data/nest/'.$tpldirectory.'/'.$targettplname.'_'.$clonefile.'_nest_preview.htm');
+		@unlink(DISCUZ_ROOT.'./data/nest/'.$tpldirectory.'/'.$targettplname.'_nest_preview'.$_G['config']['output']['tpl_suffix']);
+		if($targettplname == $template) @unlink(DISCUZ_ROOT.'./data/nest/'.$tpldirectory.'/'.$targettplname.'_'.$clonefile.'_nest_preview'.$_G['config']['output']['tpl_suffix']);
 		showmessage('do_success');
 	}
 
 	if ($recover == '1') {
-		$file = './data/nest/'.$tpldirectory.'/'.$targettplname.'.htm';
+		$file = './data/nest/'.$tpldirectory.'/'.$targettplname.$_G['config']['output']['tpl_suffix'];
 		if (is_file($file.'.bak')) {
 			copy ($file.'.bak', $file);
 		} else {
@@ -156,7 +156,7 @@ if (submitcheck('uploadsubmit')) {
 
 		if ($r && $optype != 'savecache') {
 			if (!$iscategory && !$istopic && empty($savemod) && !empty($clonefile)) {
-				$delfile = DISCUZ_ROOT.'./data/nest/'.$tpldirectory.'/'.$template.'_'.$clonefile.'.htm';
+				$delfile = DISCUZ_ROOT.'./data/nest/'.$tpldirectory.'/'.$template.'_'.$clonefile.$_G['config']['output']['tpl_suffix'];
 				if (file_exists($delfile)) {
 					unlink($delfile);
 					@unlink($delfile.'.bak');
