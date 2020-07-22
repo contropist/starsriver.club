@@ -14,9 +14,11 @@ if(!defined('IN_DISCUZ') || !defined('IN_DISCUZ')) {
 require_once libfile('function/portalcp');
 
 cpheader();
+
 $operation = in_array($operation, array('delete', 'move', 'perm', 'add', 'edit')) ? $operation : 'list';
 
 loadcache('portalcategory');
+
 $portalcategory = $_G['cache']['portalcategory'];
 
 if($operation == 'list') {
@@ -899,7 +901,10 @@ function getportalcategoryfulldir($catid) {
 
 function delportalcategoryfolder($catid) {
 	if(empty($catid)) return FALSE;
-	$updatearr = array();
+
+    global $_G;
+
+    $updatearr = array();
 	$portalcategory = getglobal('cache/portalcategory');
 	$children = $portalcategory[$catid]['children'];
 	if($children) {
@@ -925,6 +930,9 @@ function delportalcategoryfolder($catid) {
 
 function delportalcategorysubfolder($catid) {
 	if(empty($catid)) return FALSE;
+
+    global $_G;
+
 	$updatearr = array();
 	$portalcategory = getglobal('cache/portalcategory');
 	$children = $portalcategory[$catid]['children'];
@@ -961,14 +969,19 @@ function remakecategoryfile($categorys) {
 }
 
 function showportalprimaltemplate($pritplname, $type) {
+    global $_G;
+
 	include_once libfile('function/portalcp');
-	$tpls = array('./template/default:portal/'.$type=>getprimaltplname('portal/'.$type.$_G['config']['output']['tpl_suffix']));
+
+    $tpl_suffix = $_G['config']['output']['tpl_suffix'];
+
+	$tpls = array('./template/default:portal/'.$type=>getprimaltplname('portal/'.$type.$tpl_suffix));
 	foreach($alltemplate = C::t('common_template')->range() as $template) {
 		if(($dir = dir(DISCUZ_ROOT.$template['directory'].'/portal/'))) {
 			while(false !== ($file = $dir->read())) {
 				$file = strtolower($file);
 				if (fileext($file) == 'html' && substr($file, 0, strlen($type)+1) == $type.'_') {
-					$key = $template['directory'].':portal/'.str_replace($_G['config']['output']['tpl_suffix'],'',$file);
+					$key = $template['directory'].':portal/'.str_replace($tpl_suffix,'',$file);
 					$tpls[$key] = getprimaltplname($template['directory'].':portal/'.$file);
 				}
 			}
@@ -1006,7 +1019,7 @@ function showportalprimaltemplate($pritplname, $type) {
 	if(empty($pritplname)) {
 		showsetting('portalcategory_'.$type.'primaltplname', '', '', $catetplselect);
 	} else {
-		$tplname = getprimaltplname($pritplname.$_G['config']['output']['tpl_suffix']);
+		$tplname = getprimaltplname($pritplname.$tpl_suffix);
 		$html = '<span id="'.$type.'value" '.$pritplvalue.'> '.$tplname.'<a onclick="$(\''.$type.'select\').parentNode.style.display=\'\';$(\''.$type.'value\').style.display=\'none\';"> '.cplang('modify').'</a></span>';
 		showsetting('portalcategory_'.$type.'primaltplname', '', '', $catetplselect.$html);
 	}
@@ -1014,6 +1027,7 @@ function showportalprimaltemplate($pritplname, $type) {
 
 function remakenesttemplate($primaltplname, $targettplname, $nesttplname, $olddirectory){
 	global $_G;
+
 	if(empty($targettplname)) return false;
 	$tpldirectory = '';
 	if(strpos($primaltplname, ':') !== false) {
@@ -1047,14 +1061,17 @@ function remakenesttemplate($primaltplname, $targettplname, $nesttplname, $olddi
 		C::t('common_nest_data')->insert($nestarr);
 	}
 	if(empty($nestcontent)) {
-		$file = $tpldirectory.'/'.$primaltplname.$_G['config']['output']['tpl_suffix'];
+
+        $tpl_suffix = $_G['config']['output']['tpl_suffix'];
+
+		$file = $tpldirectory.'/'.$primaltplname.$tpl_suffix;
 		if (!file_exists($file)) {
-			$file = './template/default/'.$primaltplname.$_G['config']['output']['tpl_suffix'];
+			$file = './template/default/'.$primaltplname.$tpl_suffix;
 		}
 		$content = @file_get_contents(DISCUZ_ROOT.$file);
 		if(!$content) $content = '';
 		$content = preg_replace("/\<\!\-\-\[name\](.+?)\[\/name\]\-\-\>/i", '', $content);
-		file_put_contents(DISCUZ_ROOT.'./data/nest/'.$tpldirectory.'/'.$targettplname.$_G['config']['output']['tpl_suffix'], $content);
+		file_put_contents(DISCUZ_ROOT.'./data/nest/'.$tpldirectory.'/'.$targettplname.$tpl_suffix, $content);
 	} else {
 		updatenesttemplate($targettplname, $tpldirectory);
 	}

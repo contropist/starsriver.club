@@ -11,6 +11,8 @@ if(!defined('IN_DISCUZ')) {
 	exit('Access Denied');
 }
 
+global $_G;
+
 $pmid = empty($_GET['pmid'])?0:floatval($_GET['pmid']);
 $uid = empty($_GET['uid'])?0:intval($_GET['uid']);
 $plid = empty($_GET['plid'])?0:intval($_GET['plid']);
@@ -470,11 +472,14 @@ if($_GET['op'] == 'checknewpm') {
 	if(count($list) == 0) {
 		showmessage('pm_emport_banned_export');
 	}
-	$filename = lang('space', 'export_pm').$_G['config']['output']['tpl_suffix'];
+
+    $tpl_suffix = $_G['config']['output']['tpl_suffix'];
+
+	$filename = lang('space', 'export_pm').$tpl_suffix;
 	if($touid) {
 		if($touser = uc_get_user($touid, 1)) {
 			$tousername = $touser[1];
-			$filename = $touser[1].$_G['config']['output']['tpl_suffix'];
+			$filename = $touser[1].$tpl_suffix;
 		}
 	}
 	$contents = '<!DOCTYPE html>';

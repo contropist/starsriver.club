@@ -510,9 +510,11 @@ function checktplrefresh($maintpl, $subtpl, $timecompare, $templateid, $cachefil
 function template($file, $templateid = 0, $tpldir = '', $gettplfile = 0, $primaltpl='') {
 	global $_G;
 
+	$tpl_suffix = $_G['config']['output']['tpl_suffix'];
+
 	if($_G['setting']['plugins']['func'][HOOKTYPE]['template']) {
 		$param = func_get_args();
-		$hookreturn = hookscript('template', 'global', 'funcs', array('param' => $param, 'caller' => 'template'), 'template');
+		$hookreturn = hookscript('template', 'global', 'funcs', ['param' => $param, 'caller' => 'template'], 'template');
 		if($hookreturn) {
 			return $hookreturn;
 		}
@@ -547,12 +549,12 @@ function template($file, $templateid = 0, $tpldir = '', $gettplfile = 0, $primal
 				$nesttemplatename = &$_G['cache']['nesttemplatename'];
 			}
 			$tplsavemod = 0;
-			if(isset($nesttemplatename[$file]) && file_exists($nestpath.$file.$_G['config']['output']['tpl_suffix']) && ($tplsavemod = 1) || empty($_G['forum']['styleid']) && ($file = $primaltpl ? $primaltpl : $oldfile) && isset($nesttemplatename[$file]) && file_exists($nestpath.$file.$_G['config']['output']['tpl_suffix'])) {
+			if(isset($nesttemplatename[$file]) && file_exists($nestpath.$file.$tpl_suffix) && ($tplsavemod = 1) || empty($_G['forum']['styleid']) && ($file = $primaltpl ? $primaltpl : $oldfile) && isset($nesttemplatename[$file]) && file_exists($nestpath.$file.$tpl_suffix)) {
 				$tpldir = 'data/nest/'.$_G['style']['tpldirectory'].'/';
 				!$gettplfile && $_G['style']['tplsavemod'] = $tplsavemod;
 				$curtplname = $file;
 				if(isset($_GET['nest']) && $_GET['nest'] == 'yes' || isset($_GET['nest']) && $_GET['preview'] == 'yes') { //NEST模式或预览模式下做以下判断
-					$flag = file_exists($nestpath.$file.$preend.$_G['config']['output']['tpl_suffix']);
+					$flag = file_exists($nestpath.$file.$preend.$tpl_suffix);
 					if($_GET['preview'] == 'yes') {
 						$file .= $flag ? $preend : '';
 					} else {
@@ -564,9 +566,9 @@ function template($file, $templateid = 0, $tpldir = '', $gettplfile = 0, $primal
 				$file = $primaltpl ? $primaltpl : $oldfile;
 			}
 			$tplrefresh = $_G['config']['output']['tplrefresh'];
-			if($innest && ($tplrefresh ==1 || ($tplrefresh > 1 && !($_G['timestamp'] % $tplrefresh))) && filemtime($nestpath.$file.$_G['config']['output']['tpl_suffix']) < filemtime(DISCUZ_ROOT.$_G['style']['tpldirectory'].'/'.($primaltpl ? $primaltpl : $oldfile).$_G['config']['output']['tpl_suffix'])) {
+			if($innest && ($tplrefresh ==1 || ($tplrefresh > 1 && !($_G['timestamp'] % $tplrefresh))) && filemtime($nestpath.$file.$tpl_suffix) < filemtime(DISCUZ_ROOT.$_G['style']['tpldirectory'].'/'.($primaltpl ? $primaltpl : $oldfile).$tpl_suffix)) {
 				if (!updatenesttemplate($file, $_G['style']['tpldirectory'])) {
-					unlink($nestpath.$file.$_G['config']['output']['tpl_suffix']);
+					unlink($nestpath.$file.$tpl_suffix);
 					$tpldir = '';
 				}
 			}
@@ -597,24 +599,24 @@ function template($file, $templateid = 0, $tpldir = '', $gettplfile = 0, $primal
 	if(!$tpldir) {
 		$tpldir = './template/default';
 	}
-	$tplfile = $tpldir.'/'.$file.$_G['config']['output']['tpl_suffix'];
+	$tplfile = $tpldir.'/'.$file.$tpl_suffix;
 
 	$file == 'common/header' && defined('CURMODULE') && CURMODULE && $file = 'common/header_'.$_G['basescript'].'_'.CURMODULE;
 
 	if(defined('IN_MOBILE') && !defined('TPL_DEFAULT')) {
 		if(strpos($tpldir, 'plugin')) {
-			if(!file_exists(DISCUZ_ROOT.$tpldir.'/'.$file.$_G['config']['output']['tpl_suffix']) && !file_exists(DISCUZ_ROOT.$tpldir.'/'.$file.'.php')) {
+			if(!file_exists(DISCUZ_ROOT.$tpldir.'/'.$file.$tpl_suffix) && !file_exists(DISCUZ_ROOT.$tpldir.'/'.$file.'.php')) {
 				$url = $_SERVER['REQUEST_URI'].(strexists($_SERVER['REQUEST_URI'], '?') ? '&' : '?').'mobile=no';
 				showmessage('mobile_template_no_found', '', array('url' => $url));
 			} else {
-				$mobiletplfile = $tpldir.'/'.$file.$_G['config']['output']['tpl_suffix'];
+				$mobiletplfile = $tpldir.'/'.$file.$tpl_suffix;
 			}
 		}
-		!$mobiletplfile && $mobiletplfile = $file.$_G['config']['output']['tpl_suffix'];
+		!$mobiletplfile && $mobiletplfile = $file.$tpl_suffix;
 		if(strpos($tpldir, 'plugin') && (file_exists(DISCUZ_ROOT.$mobiletplfile) || file_exists(substr(DISCUZ_ROOT.$mobiletplfile, 0, -4).'.php'))) {
 			$tplfile = $mobiletplfile;
 		} elseif(!file_exists(DISCUZ_ROOT.TPLDIR.'/'.$mobiletplfile) && !file_exists(substr(DISCUZ_ROOT.TPLDIR.'/'.$mobiletplfile, 0, -4).'.php')) {
-			$mobiletplfile = './template/default/'.$file.$_G['config']['output']['tpl_suffix'];
+			$mobiletplfile = './template/default/'.$file.$tpl_suffix;
 			if(!file_exists(DISCUZ_ROOT.$mobiletplfile) && !$_G['forcemobilemessage']) {
 				$tplfile = str_replace($_G['mobiletpl'][IN_MOBILE].'/', '', $tplfile);
 				$file = str_replace($_G['mobiletpl'][IN_MOBILE].'/', '', $file);
@@ -629,8 +631,8 @@ function template($file, $templateid = 0, $tpldir = '', $gettplfile = 0, $primal
 
 	$cachefile = './data/template/'.(defined('STYLEID') ? STYLEID.'_' : '_').$templateid.'_'.str_replace('/', '_', $file).'.tpl.php';
 	if($templateid != 1 && !file_exists(DISCUZ_ROOT.$tplfile) && !file_exists(substr(DISCUZ_ROOT.$tplfile, 0, -4).'.php')
-			&& !file_exists(DISCUZ_ROOT.($tplfile = $tpldir.$filebak.$_G['config']['output']['tpl_suffix']))) {
-		$tplfile = './template/default/'.$filebak.$_G['config']['output']['tpl_suffix'];
+			&& !file_exists(DISCUZ_ROOT.($tplfile = $tpldir.$filebak.$tpl_suffix))) {
+		$tplfile = './template/default/'.$filebak.$tpl_suffix;
 	}
 
 	if($gettplfile) {
@@ -1501,17 +1503,24 @@ function stripsearchkey($string) {
 }
 
 function dmkdir($dir, $mode = 0777, $makeindex = TRUE){
+
+    global $_G;
+
+    $tpl_suffix = $_G['config']['output']['tpl_suffix'];
+
 	if(!is_dir($dir)) {
 		dmkdir(dirname($dir), $mode, $makeindex);
 		@mkdir($dir, $mode);
 		if(!empty($makeindex)) {
-			@touch($dir.'/index'.$_G['config']['output']['tpl_suffix']); @chmod($dir.'/index'.$_G['config']['output']['tpl_suffix'], 0777);
+			@touch($dir.'/index'.$tpl_suffix);
+			@chmod($dir.'/index'.$tpl_suffix, 0777);
 		}
 	}
 	return true;
 }
 
 function dreferer($default = '') {
+
 	global $_G;
 
 	$default = empty($default) && $_ENV['curapp'] ? $_ENV['curapp'].'.php' : '';

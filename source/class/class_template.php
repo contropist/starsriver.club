@@ -21,7 +21,12 @@ class template {
 	var $file = '';
 
 	function parse_template($tplfile, $templateid, $tpldir, $file, $cachefile) {
-		$basefile = basename(DISCUZ_ROOT.$tplfile, $_G['config']['output']['tpl_suffix']);
+
+	    global $_G;
+
+        $tpl_suffix = $_G['config']['output']['tpl_suffix'];
+
+		$basefile = basename(DISCUZ_ROOT.$tplfile, $tpl_suffix);
 		$file == 'common/header' && defined('CURMODULE') && CURMODULE && $file = 'common/header_'.CURMODULE;
 		$this->file = $file;
 
@@ -32,7 +37,7 @@ class template {
 			$template = $this->getphptemplate(@fread($fp, filesize($filename)));
 			fclose($fp);
 		} else {
-			$tpl = $tpldir.'/'.$file.$_G['config']['output']['tpl_suffix'];
+			$tpl = $tpldir.'/'.$file.$tpl_suffix;
 			$tplfile = $tplfile != $tpl ? $tpl.', '.$tplfile : $tplfile;
 			$this->error('template_notfound', $tplfile);
 		}

@@ -129,6 +129,8 @@ if($operation == 'export') {
 
 		DB::query('SET SQL_QUOTE_SHOW_CREATE=0', 'SILENT');
 
+        $tpl_suffix = $_G['config']['output']['tpl_suffix'];
+
 		if(!$_GET['filename'] || !preg_match('/^[\w\_]+$/', $_GET['filename'])) {
 			cpmsg('database_export_filename_invalid', '', 'error');
 		}
@@ -270,7 +272,7 @@ if($operation == 'export') {
 					}
 					unset($sqldump, $zip, $content);
 					fclose($fp);
-					@touch('./data/'.$backupdir.'/index'.$_G['config']['output']['tpl_suffix']);
+					@touch('./data/'.$backupdir.'/index'.$tpl_suffix);
 					$filename = $zipfilename;
 					C::t('common_cache')->insert(array(
 						'cachekey' => 'db_export',
@@ -279,7 +281,7 @@ if($operation == 'export') {
 					), false, true);
 					cpmsg('database_export_zip_succeed', '', 'succeed', array('filename' => $filename));
 				} else {
-					@touch('./data/'.$backupdir.'/index'.$_G['config']['output']['tpl_suffix']);
+					@touch('./data/'.$backupdir.'/index'.$tpl_suffix);
 					for($i = 1; $i <= $volume; $i++) {
 						$filename = sprintf($_GET['usezip'] == 2 ? $backupfilename."-%s".'.zip' : $dumpfile, $i);
 						$filelist .= "<li><a href=\"$filename\">$filename</a></li>\n";
@@ -328,7 +330,7 @@ if($operation == 'export') {
 					fclose($fp);
 					@unlink($dumpfile); 
 					$tablesstr=escapeshellarg($tablesstr);
-					@touch('./data/'.$backupdir.'/index'.$_G['config']['output']['tpl_suffix']);
+					@touch('./data/'.$backupdir.'/index'.$tpl_suffix);
 					$filename = $backupfilename.'.zip';
 					unset($sqldump, $zip, $content);
 					C::t('common_cache')->insert(array(
@@ -343,7 +345,7 @@ if($operation == 'export') {
 						@fwrite($fp, $idstring."# <?php exit();?>\n ".$setnames."\n #");
 						fclose($fp);
 					}
-					@touch('./data/'.$backupdir.'/index'.$_G['config']['output']['tpl_suffix']);
+					@touch('./data/'.$backupdir.'/index'.$tpl_suffix);
 					$filename = $backupfilename.'.sql';
 					C::t('common_cache')->insert(array(
 						'cachekey' => 'db_export',

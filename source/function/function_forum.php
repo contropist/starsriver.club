@@ -420,10 +420,13 @@ function loadforum($fid = null, $tid = null) {
 		return null;
 	}
 	if(!empty($_GET['archiver'])) {//X1.5的Archiver兼容
+
+        $tpl_suffix = $_G['config']['output']['tpl_suffix'];
+
 		if($fid) {
-			dheader('location: archiver/?fid-'.$fid.$_G['config']['output']['tpl_suffix']);
+			dheader('location: archiver/?fid-'.$fid.$tpl_suffix);
 		} elseif($tid) {
-			dheader('location: archiver/?tid-'.$tid.$_G['config']['output']['tpl_suffix']);
+			dheader('location: archiver/?tid-'.$tid.$tpl_suffix);
 		} else {
 			dheader('location: archiver/');
 		}

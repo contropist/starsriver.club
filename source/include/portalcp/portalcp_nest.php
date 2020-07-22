@@ -11,7 +11,9 @@ if(!defined('IN_DISCUZ')) {
 	exit('Access Denied');
 }
 
-$op = in_array($_GET['op'], array('style', 'nest', 'image', 'export', 'import', 'blockclass')) ? $_GET['op'] : '';
+global $_G;
+
+$op = in_array($_GET['op'], ['style', 'nest', 'image', 'export', 'import', 'blockclass']) ? $_GET['op'] : '';
 
 
 if (submitcheck('uploadsubmit')) {
@@ -76,6 +78,8 @@ if (submitcheck('uploadsubmit')) {
 
 	require_once libfile('function/portalcp');
 
+	$tpl_suffix = $_G['config']['output']['tpl_suffix'];
+
 	$tpldirectory = getstr($_POST['tpldirectory'], 80);
 	$template = getstr($_POST['template'], 50);
 	if(dsign($tpldirectory.$template) !== $_POST['nestsign']) {
@@ -118,13 +122,13 @@ if (submitcheck('uploadsubmit')) {
 	}
 
 	if($optype == 'cancelnest') {
-		@unlink(DISCUZ_ROOT.'./data/nest/'.$tpldirectory.'/'.$targettplname.'_nest_preview'.$_G['config']['output']['tpl_suffix']);
-		if($targettplname == $template) @unlink(DISCUZ_ROOT.'./data/nest/'.$tpldirectory.'/'.$targettplname.'_'.$clonefile.'_nest_preview'.$_G['config']['output']['tpl_suffix']);
+		@unlink(DISCUZ_ROOT.'./data/nest/'.$tpldirectory.'/'.$targettplname.'_nest_preview'.$tpl_suffix);
+		if($targettplname == $template) @unlink(DISCUZ_ROOT.'./data/nest/'.$tpldirectory.'/'.$targettplname.'_'.$clonefile.'_nest_preview'.$tpl_suffix);
 		showmessage('do_success');
 	}
 
 	if ($recover == '1') {
-		$file = './data/nest/'.$tpldirectory.'/'.$targettplname.$_G['config']['output']['tpl_suffix'];
+		$file = './data/nest/'.$tpldirectory.'/'.$targettplname.$tpl_suffix;
 		if (is_file($file.'.bak')) {
 			copy ($file.'.bak', $file);
 		} else {
@@ -156,7 +160,7 @@ if (submitcheck('uploadsubmit')) {
 
 		if ($r && $optype != 'savecache') {
 			if (!$iscategory && !$istopic && empty($savemod) && !empty($clonefile)) {
-				$delfile = DISCUZ_ROOT.'./data/nest/'.$tpldirectory.'/'.$template.'_'.$clonefile.$_G['config']['output']['tpl_suffix'];
+				$delfile = DISCUZ_ROOT.'./data/nest/'.$tpldirectory.'/'.$template.'_'.$clonefile.$tpl_suffix;
 				if (file_exists($delfile)) {
 					unlink($delfile);
 					@unlink($delfile.'.bak');
@@ -380,7 +384,9 @@ function topic_upload_show($topicid) {
 
 function tpl_checkperm($tpl) {
 	global $_G;
+
 	list($file,$id) = explode(':', $tpl);
+
 	if ($file == 'portal/portal_topic_content') {
 		$topicid = max(0,intval($id));
 		$topic = C::t('portal_topic')->fetch($topicid);
@@ -398,23 +404,25 @@ function tpl_checkperm($tpl) {
 
 function category_checkperm($category) {
 	global $_G;
+
 	if(empty($category)) {
 		showmessage('topic_not_exist');
 	}
 
 	if($_G['group']['allownest']) return true;
 
-	if(!$_G['group']['allownest'] && (!$_G['group']['allowaddtopic'] || $_G['uid'] != $topic['uid'])) {
+	if(!$_G['group']['allownest'] && (!$_G['group']['allowaddtopic'] || $_G['uid'] != $category['uid'])) {
 		showmessage('topic_edit_nopermission');
 	}
-
 }
 
 function topic_checkperm($topic) {
 	global $_G;
+
 	if(empty($topic)) {
 		showmessage('topic_not_exist');
 	}
+
 	if(!$_G['group']['allowmanagetopic'] && (!$_G['group']['allowaddtopic'] || $_G['uid'] != $topic['uid'])) {
 		showmessage('topic_edit_nopermission');
 	}

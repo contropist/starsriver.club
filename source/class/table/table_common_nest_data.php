@@ -26,11 +26,16 @@ class table_common_nest_data extends discuz_table
 	}
 
 	public function delete($targettplname, $tpldirectory = null) {
+
+	    global $_G;
+
+        $tpl_suffix = $_G['config']['output']['tpl_suffix'];
+
 		foreach($this->fetch_all($targettplname, $tpldirectory) as $value) {
 			$file = ($value['tpldirectory'] ? $value['tpldirectory'].'/' : '').$value['targettplname'];
-			@unlink(DISCUZ_ROOT.'./data/nest/'.$file.$_G['config']['output']['tpl_suffix']);
-			@unlink(DISCUZ_ROOT.'./data/nest/'.$file.$_G['config']['output']['tpl_suffix'].'.bak');
-			@unlink(DISCUZ_ROOT.'./data/nest/'.$file.'_nest_preview'.$_G['config']['output']['tpl_suffix']);
+			@unlink(DISCUZ_ROOT.'./data/nest/'.$file.$tpl_suffix);
+			@unlink(DISCUZ_ROOT.'./data/nest/'.$file.$tpl_suffix.'.bak');
+			@unlink(DISCUZ_ROOT.'./data/nest/'.$file.'_nest_preview'.$tpl_suffix);
 		}
 		return DB::delete($this->_table, DB::field('targettplname', $targettplname).($tpldirectory !== null ? ' AND '.DB::field('tpldirectory', $tpldirectory) : ''));
 	}
