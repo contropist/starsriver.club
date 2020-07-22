@@ -11,6 +11,8 @@
         width: 360px;
     }
     #avatarcreator{
+        width: 320px;
+        height: 320px;
         position: relative;
         box-shadow: 0 0 0 1px rgba(146, 146, 146, 0.16);
     }

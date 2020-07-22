@@ -23,10 +23,10 @@
 		<button id="saver" disabled onclick="saveAvatar();">{lang confirms}</button>
 		<div id="slider"></div>
 	</div>
+    <iframe hide name="uploadframe" id="uploadframe"></iframe>
+    <iframe hide name="rectframe" id="rectframe"></iframe>
 </form>
 <script type="text/javascript">
     avatarUploadData = "{echo implode(',', $uc_avatarflash);}".split(',');
 </script>
 <script src="{$_G[setting][jspath]}avatar.js?{VERHASH}"></script>
-<iframe hide name="uploadframe" id="uploadframe"></iframe>
-<iframe hide name="rectframe" id="rectframe"></iframe>

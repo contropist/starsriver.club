@@ -1,6 +1,4 @@
-var selectareaw = 320,
-    selectareah = 320,
-    defaultsize = 150,
+var defaultsize = 150,
     minenlarge = 20,
     maxenlarge = 200,
 
@@ -16,8 +14,9 @@ var selectareaw = 320,
     slider = jQuery('#slider'),
     saver = jQuery('#saver');
 
-avatarcreator.width(selectareaw);
-avatarcreator.height(selectareah);
+var selectareaw = avatarcreator.width(),
+    selectareah = avatarcreator.height();
+
 avatarfile.width(selectareaw);
 avatarfile.height(selectareah);
 avataradjuster.width(selectareaw);
@@ -179,7 +178,17 @@ function refreshAvatarCanvas(uiposition) {
     ctx.drawImage(img, 0, 0, iw, ih, imageDiv.left, imageDiv.top, imageDiv.width, imageDiv.height);
     ctx.fillRect(0, 0, cw, ch);
     if (avataradjuster.data('avatartype') === 'round') {
-        selectedarea.style = 'width:' + imageDiv.width + 'px; height:' + imageDiv.height + 'px; transform: translate3d(' + (imageDiv.left - selectorDiv.left - 1) + 'px, ' + (imageDiv.top - selectorDiv.top - 1) + 'px, 0)';
+
+        var tmp = {
+            w: imageDiv.width + 'px',
+            h: imageDiv.height + 'px',
+            t: 'translate(' + (imageDiv.left - selectorDiv.left - 1) + 'px, ' + (imageDiv.top - selectorDiv.top - 1) + 'px)',
+        };
+
+        selectedarea.style.width = tmp.w;
+        selectedarea.style.height = tmp.h;
+        selectedarea.style.transform = tmp.t;
+
     } else {
         ctx.drawImage(img, (selectorDiv.left - imageDiv.left) * iw / imageDiv.width, (selectorDiv.top - imageDiv.top) * ih / imageDiv.height, (selectorDiv.width + 2) * iw / imageDiv.width, (selectorDiv.height + 2) * ih / imageDiv.height, selectorDiv.left, selectorDiv.top, selectorDiv.width + 2, selectorDiv.height + 2);
     }
