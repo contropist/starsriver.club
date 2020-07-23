@@ -12,7 +12,7 @@
         width:420px;
         height:240px;
         overflow: hidden;
-        background: rgba(0,0,0,.05);
+        background: var(--color-back-default);
     }
     .category-gridblock{
         position: relative;
@@ -27,7 +27,7 @@
         width: 165px;
         height: 114px;
         margin: 0 0 12px 15px;
-        background: #efefef;
+        background: var(--color-back-default);
         overflow: hidden;
     }
     .category-gridblock li a{
@@ -128,7 +128,7 @@
     .category-guide_side{
         width:270px;
         height:270px;
-        background: #efefef;
+        background: var(--color-back-default);
         overflow: hidden;
     }
     .online{

@@ -1848,8 +1848,10 @@
         overflow: visible;
     }
     [id^="slider_"] .track li {
-        cursor: pointer;
+        position: relative;
         display: inline-block;
+        cursor: pointer;
+        height: 100%;
     }
     [id^="slider_"] .track li img{
         width: 100% !important;
@@ -1857,16 +1859,11 @@
     }
     [id^="slider_"] .track .pacman{
         position: absolute;
-        bottom: 40px;
-        left:40px;
-    }
-    [id^="slider_"] .track .pct{
-        color: #fff;
-        font-size: 16px;
-        font-weight: 900;
-        position: absolute;
-        bottom: 54.5px;
-        left:125px;
+        width: 83px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-10%, calc(-50% - 10px));
+        --entity-color: #cccccc;
     }
     [id^="slider_"] .title{
         position: absolute;

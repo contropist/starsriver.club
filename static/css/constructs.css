@@ -1999,6 +1999,7 @@
 
 /*region Base*/
     :root{
+        --color-back-default: #f5f5f9;
         --color-main-theme: #39c5bb;
         --color-main-theme-dark: #269e96;
         --color-main-theme-shadow: rgba(57, 197, 187, 0.2);
@@ -2258,45 +2259,50 @@
         75% {  opacity: 0.7; }
         100% {  transform: translate(-100px, -6.25px); }
     }
-    .pacman {  position: relative; }
+    .pacman {
+        position: relative;
+        --entity-color: #fff;
+    }
     .pacman > p:nth-child(2) {
-        -webkit-animation: pacman-balls 1s -0.99s infinite linear;
-        animation: pacman-balls 1s -0.99s infinite linear; }
+        animation: pacman-balls 1s -0.99s infinite linear;
+    }
     .pacman > p:nth-child(3) {
-        -webkit-animation: pacman-balls 1s -0.66s infinite linear;
-        animation: pacman-balls 1s -0.66s infinite linear; }
+        animation: pacman-balls 1s -0.66s infinite linear;
+    }
     .pacman > p:nth-child(4) {
-        -webkit-animation: pacman-balls 1s -0.33s infinite linear;
-        animation: pacman-balls 1s -0.33s infinite linear; }
+        animation: pacman-balls 1s -0.33s infinite linear;
+    }
     .pacman > p:nth-child(5) {
-        -webkit-animation: pacman-balls 1s 0s infinite linear;
-        animation: pacman-balls 1s 0s infinite linear; }
+        animation: pacman-balls 1s 0s infinite linear;
+    }
     .pacman > p:first-of-type {
         width: 0;
         height: 0;
-        border: 25px solid #fff;
+        border: 25px solid var(--entity-color);
         border-right: 25px solid transparent;
         border-radius: 25px;
         -webkit-animation: rotate_pacman_half_up 0.5s 0s infinite;
         animation: rotate_pacman_half_up 0.5s 0s infinite;
         position: relative !important;
-        left: -30px; }
+        left: -30px;
+    }
     .pacman > p:nth-child(2) {
         width: 0;
         height: 0;
-        border: 25px solid #fff;
+        border: 25px solid var(--entity-color);
         border-right: 25px solid transparent;
         border-radius: 25px;
         -webkit-animation: rotate_pacman_half_down 0.5s 0s infinite;
         animation: rotate_pacman_half_down 0.5s 0s infinite;
         margin-top: -50px;
         position: relative !important;
-        left: -30px; }
+        left: -30px;
+    }
     .pacman > p:nth-child(3),
     .pacman > p:nth-child(4),
     .pacman > p:nth-child(5),
     .pacman > p:nth-child(6) {
-        background-color: #fff;
+        background-color: var(--entity-color);
         border-radius: 100%;
         margin: 2px;
         width: 10px;
@@ -2305,7 +2311,8 @@
         -webkit-transform: translate(0, -6.25px);
         transform: translate(0, -6.25px);
         top: 25px;
-        left: 70px; }
+        left: 70px;
+    }
 /*endregion*/
 
 /*region Hover Animation*/

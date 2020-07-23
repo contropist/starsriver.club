@@ -319,9 +319,9 @@
 
             if(MasElements.viewerBannerImg){
                 MasElements.viewerBannerImg.onload = function () {
-                    setTimeout(MasAction.bannerImgResize(),10);
+                    MasAction.bannerImgResize();
                 };
-                setTimeout(MasAction.bannerImgResize(),10);
+                MasElements.viewerBannerImg.src = MasElements.viewerBannerImg.data('src');
             }
         },
 

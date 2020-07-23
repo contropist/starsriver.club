@@ -128,21 +128,27 @@
                 track.style.width = s.imgData.length * 100 + '%';
 
                 for (let i = 1; i < s.imgnum; i++) {
+                    let link = document.createElement('li');
+                    link.style.width = 100 / s.imgnum + '%';
+                    link.innerHTML = loader;
+
                     s.imgs[i] = new Image();
                     s.imgs[i].alt = s.imgData[i][2];
-                    s.imgs[i].src = s.imgData[i][0];
+                    s.imgs[i].onload = function(){
+                        link.innerHTML = '';
+                        link.appendChild(s.imgs[i]);
+                        link.link(s.imgData[i][1]);
+                    };
+
+                    setTimeout(function () {
+                        s.imgs[i].src = s.imgData[i][0];
+                    },10);
 
                     let thumb = document.createElement('i');
                     thumb.index = i;
                     thumb.style.background = s.slideSwitchbgColor;
                     thumb.onclick = function () {s.switchImg(this);};
                     thumbs[i] = thumb;
-
-                    let link = document.createElement('li');
-                    link.style.width = 100 / s.imgnum + '%';
-                    //link.innerHTML = loader;
-                    link.appendChild(s.imgs[i]);
-                    link.link(s.imgData[i][1]);
 
                     thumber.appendChild(thumb);
                     track.appendChild(link);
@@ -210,7 +216,7 @@
             shadow = document.createElement('div'),
             title = document.createElement('div'),
             track = document.createElement('ul'),
-            loader = isUndefined(IMGDIR) ? '' : '<span><div class="pacman"><p></p><p></p><p></p><p></p><p></p></div>' + '<span class="pct">0%</span></span>';
+            loader = '<div class="pacman"><p></p><p></p><p></p><p></p><p></p></div>';
 
         slider.id = 'slider_' + s.rid;
         thumber.className = 'thumbs trans-ease-slow';
