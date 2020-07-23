@@ -1915,7 +1915,7 @@
         position: absolute;
         content: '';
         display: block;
-        background-image: url(//static.starscdn.com/repository/bbs.starsriver/img/common/icon/pacman.svg);
+        background-image: url({IMGURL}/common/icon/pacman.svg);
         background-size: 18px 18px;
         width: 18px;
         height: 18px;
