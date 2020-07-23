@@ -6,18 +6,14 @@
         <section class="col-1">
             <div class="category_gridbox px4-radius">
                 <script type="text/javascript">
-                    var slideSpeed, slideSwitchbgColor, slideSwitchHiColor;
-                    var slideImgs = [];
-                    var slideImgLinks = [];
-                    var slideImgTexts = [];
-                    <!--{eval $k = 1;}-->
-                    <!--{loop $grids['slide'] $stid $svalue}-->
-                    slideImgs[<!--{echo $k}-->] = '$svalue[image]';
-                    slideImgLinks[<!--{echo $k}-->] = '{$svalue[url]}';
-                    slideImgTexts[<!--{echo $k}-->] = '$svalue[subject]';
-                    <!--{eval $k++;}-->
-                    <!--{/loop}-->
-                    imgslider();
+                    let imgs = {
+                        slideImgs: [
+                            <!--{loop $grids['slide'] $stid $svalue}-->
+                            ['{$svalue[image]}', '{$svalue[url]}', '{$svalue[subject]}'],
+                            <!--{/loop}-->
+                        ]
+                    };
+                    imgslider(imgs);
                 </script>
             </div>
         </section>

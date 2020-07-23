@@ -100,7 +100,7 @@
                             }
 
                             /* 清除loader遮罩 */
-                            for(var self of loader.pare){
+                            for(let self of loader.pare){
                                 self.parentElement.removeChild(self);
                             }
 
@@ -134,9 +134,9 @@
             SRGlobal.Window.Height = document.documentElement.clientHeight || document.body.clientHeight;
             SRGlobal.Window.Width = document.documentElement.clientWidth || document.body.clientWidth;
 
-            var MasGuideWidth = isUndefined(MasElements.guide) ? 0 : MasElements.guide.Css.width;
+            let MasGuideWidth = isUndefined(MasElements.guide) ? 0 : MasElements.guide.Css.width,
 
-            var windowSize = 'WL-0';
+                windowSize = 'WL-0';
 
             if(SRGlobal.Window.Width > 350 + MasGuideWidth){
                 windowSize = 'WL-3P';
@@ -229,7 +229,7 @@
 
             // editor nav滚动效果
             (function () {
-                var editor_nav = document.querySelector('#e_controls');
+                let editor_nav = document.querySelector('#e_controls');
 
                 if(editor_nav){
                     editor_nav.addClass('trans-ease');
@@ -248,11 +248,11 @@
             // console 翻滚效果
             (function () {
                 if(uconsole){
-                    var scrollrate = 1.3;
-                    var menu = uconsole.querySelector('.menu');
-                    var menu_list = uconsole.querySelector('.menu > ul');
-                    var console_title = uconsole.querySelector('.panel > .title');
-                    var console_ctl = uconsole.querySelector('.panel > .panel-container');
+                    let scrollrate = 1.3,
+                        menu = uconsole.querySelector('.menu'),
+                        menu_list = uconsole.querySelector('.menu > ul'),
+                        console_title = uconsole.querySelector('.panel > .title'),
+                        console_ctl = uconsole.querySelector('.panel > .panel-container');
 
                     function topaction () {
                         menu.style.transform = 'translate3d(0,0,0)';
@@ -298,7 +298,7 @@
         },
 
         wheel: function (evt) {
-            var e = evt || window.event;
+            let e = evt || window.event;
             if (e.wheelDelta) {  //判断浏览器IE，谷歌滑轮事件
                 if (e.wheelDelta > 0) {SRGlobal.Wheel.Dir="up"}
                 if (e.wheelDelta < 0) {SRGlobal.Wheel.Dir="down"}
@@ -334,7 +334,7 @@
                 }
 
                 if(!body.hasClass('scroll-overhaed')){
-                    var trspct = (50 - MasElements.viewer.scrollTop / MasElements.viewerBannerImg.Css.height * 50);
+                    let trspct = (50 - MasElements.viewer.scrollTop / MasElements.viewerBannerImg.Css.height * 50);
                     MasElements.viewerBannerImg.style.transform = 'translate(-50%, -' + trspct + '%)';
                 }
             }

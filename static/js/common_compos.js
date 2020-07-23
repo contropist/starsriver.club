@@ -28,7 +28,7 @@
         if(document.all) return window.event;
         func = getEvent.caller;
         while(func !== null) {
-            var arg = func.arguments[0];
+            let arg = func.arguments[0];
             if (arg) {
                 if((arg.constructor  === Event || arg.constructor === MouseEvent) || (typeof(arg) === "object" && arg.preventDefault && arg.stopPropagation)) {
                     return arg;
@@ -50,12 +50,12 @@
     }
 
     function stopBubble() {
-        var oEvent = arguments.callee.caller.arguments[0] || event;
+        let oEvent = arguments.callee.caller.arguments[0] || event;
         oEvent.cancelBubble = true;
     }
 
     function inArray(cn,array){
-        for(var i = 0; i < array.length; i++){
+        for(let i = 0; i < array.length; i++){
             if(cn === array[i]) return 1;
         }
     }
@@ -66,8 +66,8 @@
 
     /*远程图像转换 */ // 解决跨域图像后期处理问题
     function Base64Image(img) {
-        var canvas = document.createElement("canvas");
-        var ctx = canvas.getContext("2d");
+        let canvas = document.createElement("canvas"),
+            ctx = canvas.getContext("2d");
         canvas.width = img.width;
         canvas.height = img.height;
         ctx.drawImage( img, 0, 0 );
@@ -76,7 +76,7 @@
 
     /* 生成随机字符串 */ //（是否仅大写字母+数字，是否随机长度，固定长度/最短，最长）
     function Rand_str(onlym, randomFlag, min, max){
-        var arr , range = min;
+        let arr = [], str = '', range = min;
         if(onlym){
             arr = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
         } else {
@@ -84,8 +84,7 @@
         if(randomFlag){
             range = Math.round(Math.random() * (max-min)) + min;
         }
-        var str = '';
-        for(var i=0; i<range; i++){
+        for(let i=0; i<range; i++){
             str += arr[Math.round(Math.random() * (arr.length-1))];
         }
         return str;
@@ -107,31 +106,27 @@
     /* slider幻灯组件 2017-10-17 zhangyu 2692284716@qq.com
      *    这里使用了图片幻灯组件,可以同时加载多个播放组件
      *    可以配置播放速度，thumb 颜色
-     *     ; var slideSpeed = 6000
-     *     ; var slideSwitchbgColor = '#fff'
-     *     ; var slideSwitchHiColor = 'rgba(0,205,225,1)'
-     *    需要预先载入图片资源 利用框架循环如下
-     *     ; var slideImgs = []
-     *     ; var slideImgLinks = []
-     *     ; var slideImgTexts = []
-     *     ; //循环开始
-     *     ;   slideImgs[<!--{echo $k}-->] = '$svalue[image]'
-     *     ;   slideImgLinks[<!--{echo $k}-->] = '{$svalue[url]}'
-     *     ;   slideImgTexts[<!--{echo $k}-->] = '$svalue[subject]'
-     *     ; //循环结束
+     *      arr = {
+     *          slideSpeed:,
+     *          slideSwitchbgColor:,
+     *          slideSwitchHiColor:,
+     *          imgs: [
+     *              ...
+     *              ['imgurl','linkurl','descirp'],
+     *              ['imgurl','linkurl','descirp'],
+     *              ...
+     *          ]
+     *      }
      */
-    function imgslider() {
-        if (isUndefined(sliderun)) {var sliderun = 1;}
-        var s = {
+    function imgslider(arr) {
+        let s = {
             rid :Rand_str(true, false, 7),
-            imgLoad : [],
-            imgs : isUndefined(slideImgs) ? null : slideImgs,
-            imgnum : isUndefined(slideImgs) ? 0 : slideImgs.length,
-            imgLinks : isUndefined(slideImgLinks) ? null : slideImgLinks,
-            imgTexts : isUndefined(slideImgTexts) ? null : slideImgTexts,
-            slideSpeed : isUndefined(slideSpeed) ? 6000 : slideSpeed,
-            slideSwitchbgColor : isUndefined(slideSwitchbgColor) ? '#ffffff' : slideSwitchbgColor,
-            slideSwitchHiColor : isUndefined(slideSwitchHiColor) ? '#00CDE1' : slideSwitchHiColor,
+            img : [],
+            imgs : isUndefined(arr.slideImgs) ? null : arr.slideImgs,
+            imgnum : isUndefined(arr.slideImgs) ? 0 : arr.slideImgs.length,
+            slideSpeed : isUndefined(arr.slideSpeed) ? 5000 : arr.slideSpeed,
+            slideSwitchbgColor : isUndefined(arr.slideSwitchbgColor) ? '#ffffff' : arr.slideSwitchbgColor,
+            slideSwitchHiColor : isUndefined(arr.slideSwitchHiColor) ? '#00CDE1' : arr.slideSwitchHiColor,
             currentImg : 0,
             prevImg : 0,
             imgLoaded : 0,
@@ -149,11 +144,11 @@
         document.write('<i class="thumbs trans-ease-quick pxa-radius-a"></i>');
         document.write('</div>');
 
-        var slider = document.getElementById('slider_' + s.rid);
-        var loader = slider.getElementsByClassName('pct')[0];
-        var current_title = slider.getElementsByClassName('threadtitle')[0];
-        var img_panel = slider.getElementsByClassName('img-panel')[0];
-        var thumb_list = slider.getElementsByClassName('thumbs')[0];
+        let slider = document.getElementById('slider_' + s.rid),
+            loader = slider.getElementsByClassName('pct')[0],
+            current_title = slider.getElementsByClassName('threadtitle')[0],
+            img_panel = slider.getElementsByClassName('img-panel')[0],
+            thumb_list = slider.getElementsByClassName('thumbs')[0];
 
         s.initalize = function () {
             img_panel.innerHTML = '';
@@ -161,26 +156,28 @@
             img_panel.onmousedown = function () {
 
             };
-            for (i = 1; i < s.imgnum; i++) {
-                thumb = document.createElement('a');
+            for (let i = 1; i < s.imgnum; i++) {
+                let thumb = document.createElement('a');
                 thumb.i = i;
                 thumb.id = 'thumb_' + i + s.rid;
                 thumb.style.background = s.slideSwitchbgColor;
                 thumb.onclick = function () {s.switchImg(this);};
                 thumb_list.appendChild(thumb);
-                s.imgLoad[i] = new Image();
-                s.imgLoad[i].src = s.imgs[i];
-                s.imgLoad[i].title = s.imgTexts[i];
+
+                s.img[i] = new Image();
+                s.img[i].src = s.imgs[i][0];
+                s.img[i].title = s.imgs[i][2];
                 s.imgLoaded++;
-                link = document.createElement('li');
-                link.title = s.imgTexts[i];
+
+                let link = document.createElement('li');
+                link.title = s.imgs[i][2];
                 link.style.width = 100 / s.imgnum + '%';
-                addLink(link, s.imgLinks[i]);
-                link.innerHTML = '<img src="' + s.imgs[i] + '">';
+                addLink(link, s.imgs[i][1]);
+                link.innerHTML = '<img src="' + s.imgs[i][0] + '">';
                 img_panel.appendChild(link);
             }
             if (s.imgLoaded < s.imgnum - 1) {
-                loader.innerHTML = (parseInt(s.imgLoad.length / s.imgnum * 100)) + '%';
+                loader.innerHTML = (parseInt(s.img.length / s.imgnum * 100)) + '%';
                 setTimeout(function () {s.loadCheck();}, 100);
             } else {
                 s.switchImg();
@@ -192,11 +189,11 @@
             img_panel.style.transform ='translate3d(' + s.pos + '%, 0, 0)';
             document.getElementById('thumb_' + s.currentImg + s.rid).style.backgroundColor = s.slideSwitchHiColor;
             current_title.style.opacity = 0;
-            setTimeout(function () {current_title.innerHTML = s.imgLoad[s.currentImg].title;}, 100);
+            setTimeout(function () {current_title.innerHTML = s.img[s.currentImg].title;}, 100);
             setTimeout(function () {current_title.style.opacity = 1;}, 200);
         };
         s.switchImg = function (obj) {
-            var i = obj ? obj.i : '';
+            let i = obj ? obj.i : '';
             if (!i) {
                 s.currentImg++;
                 s.currentImg = s.currentImg < s.imgnum ? s.currentImg : 1;
@@ -230,12 +227,12 @@
 
         window.URL = window.URL || window.webkitURL;
 
-        var fileShow = obj.querySelector("[role=canvas]"),
+        let fileShow = obj.querySelector("[role=canvas]"),
             fileElem = obj.querySelector("[role=file-elem]"),
             fileInfo = obj.querySelector("[role=file-info]");
 
         fileElem.onchange = function () {
-            var files = fileElem.files;
+            let files = fileElem.files;
             if (!files.length) {
                 return '';
             } else {
@@ -271,8 +268,8 @@
         },
 
         show: function () {
-            var cut = getEventobj();
-            var tg = cut.getElementsByClassName('tooltip')[0];
+            let cut = getEventobj(),
+                tg = cut.getElementsByClassName('tooltip')[0];
             tooltip.styleinit(tg,'1');
             setTimeout(function () {
                 tg.style.visibility = 'visible';
@@ -282,9 +279,9 @@
             },0);
         },
         hide: function () {
-            var cut = getEventobj();
-            var tg = cut.getElementsByClassName('tooltip')[0];
-            var lly = tooltip.styleget(tg)['du'];
+            let cut = getEventobj(),
+                tg = cut.getElementsByClassName('tooltip')[0],
+                lly = tooltip.styleget(tg)['du'];
             tooltip.styleinit(tg,'2');
             setTimeout(function () {
                 tg.style.visibility = 'hidden';
@@ -293,9 +290,12 @@
             setTimeout(function () {tooltip.styleinit(tg,'1');},lly);
         },
         styleinit: function (target,p) {
-            var sty = tooltip.styleget(target);
-            var skew = 10;
+            let sty = tooltip.styleget(target),
+                skew = 10,
+                rate;
+
             lock_size(target,'','auto');
+
             if(sty['pos'] === 'auto'){
                 target.className = 'tooltip ' + this.pos(target);
                 sty['pos'] = this.pos(target);
@@ -328,28 +328,28 @@
             target.style.transitionDuration = sty['du'] > 500 ? 500 + 'ms' : sty['du'] +'ms';
         },
         styleget: function (e) {
-            var pos    = _Data(e,'data-pos') ? _Data(e,'data-pos') : 'auto';
-            var animal = _Data(e,'data-animal') ? _Data(e,'data-animal') : '';
-            var dly    = _Data(e,'data-delay') ? _Data(e,'data-delay') : '0';
-            var du     = _Data(e,'data-du') ? _Data(e,'data-du') : '100';
-            var ignore = _Data(e,'data-ignore') ? 1 : null;
+            let pos = _Data(e, 'data-pos') ? _Data(e, 'data-pos') : 'auto',
+                animal = _Data(e, 'data-animal') ? _Data(e, 'data-animal') : '',
+                dly = _Data(e, 'data-delay') ? _Data(e, 'data-delay') : '0',
+                du = _Data(e, 'data-du') ? _Data(e, 'data-du') : '100',
+                ignore = _Data(e, 'data-ignore') ? 1 : null;
             return {'pos':pos, 'animal': animal, 'delay': dly, 'du': du}
         },
         pos: function (e) {
             e = e.parentNode;
-            var h = document.documentElement.clientHeight;
-            var w = document.documentElement.clientWidth;
-            var pos = e.getBoundingClientRect();
-            var top = (pos.top + pos.bottom)/2;
-            var left = (pos.right + pos.left)/2;
-            var l = left/w*2, t = top/h*2 ,r = 2-l, b = 2-t;
+            let h = document.documentElement.clientHeight,
+                w = document.documentElement.clientWidth,
+                pos = e.getBoundingClientRect(),
+                top = (pos.top + pos.bottom) / 2,
+                left = (pos.right + pos.left) / 2,
+                l = left / w * 2, t = top / h * 2, r = 2 - l, b = 2 - t;
             return t >= 1 ? (l >= 1 ? (t >= l ? 'tr' : 'lb') : (t >= r ? 'tl' : 'rt')) : (l >= 1 ? (b > l ? 'br' : 'lt') : (b >= r ? 'bl' : 'rt'));
         }
     };
 
     function tooltip_init(obj) {
-        var tooltips = obj ? obj.querySelectorAll('.tooltip') : document.querySelectorAll('.tooltip');
-        for(var i =0 ; i<tooltips.length; i++){
+        let tooltips = obj ? obj.querySelectorAll('.tooltip') : document.querySelectorAll('.tooltip');
+        for(let i =0 ; i<tooltips.length; i++){
             if (!_Data(tooltips[i],'data-ignore')){
                 tooltip.addaction(tooltips[i]);
             }
@@ -368,12 +368,13 @@
      *     fh    : 折叠后高度
      */
     function fold(tag,h,onetime){
-        var fh = h ? h : '0' ;
-        var tg = document.querySelectorAll(tag);
+        let fh = h ? h : '0' ,
+            tg = document.querySelectorAll(tag);
+
         if(tg){
-            for (var i = 0; i< tg.length; i++){
+            for (let i = 0; i< tg.length; i++){
                 if( tg[i].scrollHeight > fh ){
-                    var fd = document.createElement('a');
+                    let fd = document.createElement('a');
                     fd.className = 'unfold';
                     fd.setAttribute('data-foldbtn','');
                     fd.onclick = function () {folder( tag ,fh ,onetime);};
@@ -386,7 +387,7 @@
     }
 
     function folder(tag,h,onetime) {
-        var  trigger = getEventobj(),
+        let trigger = getEventobj(),
             tg = trigger.parentNode.querySelector(tag),
             rh = tg.scrollHeight + tg.offsetHeight - tg.clientHeight, //真实高度
             sh = tg.offsetHeight, //可视高度
@@ -427,10 +428,10 @@
      *     io     : 子列元素的 data-order 属性
      */
     function swaterfall(plateid, source, iclass, col) {
-        var plate = document.querySelector(plateid);
+        col = col ? col : 3;
+        let plate = document.querySelector(plateid),
+            p = document.querySelector(source);
         plate.style.width = '100%';
-        var p = document.querySelector(source);
-        var col = col ? col : 3 ;
         if (col === 2) {
             plate.addClass('plate layout-2-type4')
         } else if (col === 3) {
@@ -438,23 +439,23 @@
         } else if (col === 4) {
             plate.addClass('plate layout-4-type1')
         }
-        for (var n = 0; n < col; n++) {
+        for (let n = 0; n < col; n++) {
             document.write('<section class="col-' + (n + 1) + '"></section>');
         }
-        wf_minh = function () {
-            var rh = plate.getElementsByTagName('section');
-            var ci = rh[0];
-            for (var m = 0; m < col; m++) {
+
+        f_minh = function () {
+            let rh = plate.getElementsByTagName('section'),
+                ci = rh[0];
+            for (let m = 0; m < col; m++) {
                 ci = rh[m].parentNode === plate ? (rh[m].clientHeight < ci.clientHeight ? rh[m] : ci) : ci;
             }
             return ci;
         };
         wf_load = function () {
-
-            var s = p.getElementsByTagName('li');
-            for (var i = 0; i < s.length; i++) {
+            let s = p.getElementsByTagName('li');
+            for (let i = 0; i < s.length; i++) {
                 if(s[i].parentNode === p){
-                    var id = s[i].id ?  s[i].id : plateid + '_' + (i + 1) ;
+                    let id = s[i].id ?  s[i].id : plateid + '_' + (i + 1) ;
                     wf_minh().innerHTML += '<div class="' + iclass + '" id="'+ id + '" data-order="' + (i + 1) + '">' + s[i].innerHTML + '</div>'
                 }
             }
@@ -466,7 +467,7 @@
 
     /* alert组件 */
     function alert_hide(e) {
-        var alerter = e.parentNode;
+        let alerter = e.parentNode;
         fade_out(alerter,'left','400','0');
     }
 
@@ -488,7 +489,7 @@
      * </div>
      * */
     function tab_initialize(tab,act) {
-        var t = {
+        let t = {
             active: 'active',
             obj : document.querySelector('#' + tab),
             pos:0,
@@ -503,7 +504,7 @@
         t.body.style.width = 100 * t.wp +'%';
 
         t.clear = function () {
-            for(var i = 0; i <t.wp ; i++){
+            for(let i = 0; i <t.wp ; i++){
                 t.navitems[i].delClass(t.active)
             }
         };
@@ -516,14 +517,14 @@
 
         t.trigger = function () {
             t.clear();
-            var self = getEventobj();
+            let self = getEventobj();
             t.scroll(self.getAttribute('data-tabthumb'));
             self.addClass(t.active);
         };
 
         t.init = function () {
-            var firstactive;
-            for(var i=0; i<t.wp; i++){
+            let firstactive;
+            for(let i=0; i<t.wp; i++){
                 addEvent(t.navitems[i], act ? act : 'mouseenter',t.trigger);
                 t.navitems[i].setAttribute('data-tabthumb',i);
                 t.bodyitems[i].style.width = 100/t.wp + '%';
@@ -547,7 +548,7 @@
      * 将自动为nav组件添加 span.foo作为滑动线，样式通过使用.foo来修改
      * */
     function nav_initialize(e) {
-        var n = {
+        let n = {
             pos: 0,
 
             activename: 'active',
@@ -569,8 +570,8 @@
             },
 
             backbone: function () {
-                var that = n;
-                for (var i = 0; i < that.navitems.length; i++) {
+                let that = n;
+                for (let i = 0; i < that.navitems.length; i++) {
                     if (that.navitems[i].classList.contains(that.activename)) {
                         that.move(that.navitems[i]);
                     }
@@ -583,7 +584,7 @@
                 this.foo.addClass('foo trans-rush');
 
                 addEvent(this.nav, 'mouseleave', this.backbone);
-                for (var i = 0; i < this.navitems.length; i++) {
+                for (let i = 0; i < this.navitems.length; i++) {
                     addEvent(this.navitems[i], 'mouseenter', this.active);
                 }
             }
@@ -600,7 +601,7 @@
      *   fuc触发操作[默认为click]
      * */
     function menu_initialize(tg,obj,closer,fuc) {
-        var m = {
+        let m = {
             fuc: fuc ? fuc : 'click',
             io: document.querySelector(tg),
             obj: document.querySelector(obj),
@@ -638,12 +639,12 @@
                     this.bind(this.obj, this.pt)
                 }
                 if (this.solid) {
-                    for (var j = 0; j < this.solid.length; j++) {
-                        this.bind(this.solid[j], this.pt)
+                    for (let i = 0; i < this.solid.length; i++) {
+                        this.bind(this.solid[i], this.pt)
                     }
                 }
                 if (Object.prototype.toString.call(closer) === '[object Array]') {
-                    for (var i = 0; i < closer.length; i++) {
+                    for (let i = 0; i < closer.length; i++) {
                         this.bind(closer[i], this.close)
                     }
                 } else {
@@ -656,9 +657,9 @@
 
     // 显示相关的inputbox
     function showInputBox(obj) {
-        var inputs = obj.children;
-        for (var i = 0; i < inputs.length; i++) {
-            var bx = document.querySelector('#' + inputs[i].id + '_inputbox');
+        let inputs = obj.children;
+        for (let i = 0; i < inputs.length; i++) {
+            let bx = document.querySelector('#' + inputs[i].id + '_inputbox');
             if (bx) {
                 if (inputs[i].checked) {
                     bx.style.display = '';
@@ -671,8 +672,8 @@
 
     // 初始化页面特定内容的dislpay方式
     function item_display(tag,stat) {
-        var tg = document.querySelectorAll(tag);
-        for (var i = 0; i< tg.length; i++){
+        let tg = document.querySelectorAll(tag);
+        for (let i = 0; i< tg.length; i++){
             tg[i].style.display = stat;
         }
     }
@@ -692,8 +693,8 @@
 
     // 强制居中
     function _Center(parent,obj,stopw) {
-        var dyw= parent.clientWidth;
-        var ow = obj.scrollWidth;
+        let dyw= parent.clientWidth,
+            ow = obj.scrollWidth;
         if(dyw > stopw){
             obj.style.marginLeft = (dyw - ow)/2 + 'px';
         } else {
@@ -706,7 +707,7 @@
      \***********/
     function fade_out(obj,dir,du,dly) {
         if(!obj) {return 0}
-        var st = obj.Css;
+        let st = obj.Css;
         obj.style.opacity = '0';
         obj.style.overflow = 'hidden';
         obj.style.transition = (dly ? dly : 0) + 'ms';
@@ -735,7 +736,7 @@
     }
 
     function fade_in(obj,dir,du,dly) {
-        var st = obj.Css;
+        let st = obj.Css;
         obj.style.height = 0;
         obj.style.minHeight = '0';
         obj.style.opacity = '0';
