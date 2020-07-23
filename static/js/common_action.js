@@ -318,8 +318,10 @@
             addEvent(window,'resize',MasAction.bannerImgResize);
 
             if(MasElements.viewerBannerImg){
+                MasElements.viewerBannerImg.style.display = 'none';
                 MasElements.viewerBannerImg.onload = function () {
                     MasAction.bannerImgResize();
+                    MasElements.viewerBannerImg.style.display = '';
                 };
                 MasElements.viewerBannerImg.src = MasElements.viewerBannerImg.data('src');
             }
