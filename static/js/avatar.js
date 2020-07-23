@@ -2,36 +2,38 @@ var defaultsize = 150,
     minenlarge = 20,
     maxenlarge = 200,
 
-    form = jQuery('#avatarform'),
+    form = $('avatarform'),
+    avatarfile = $('avatarfile'),
+    avatarimage = $('avatarimage'),
+    canvas = $('avatarcanvas'),
+
     avatarcreator = jQuery('#avatarcreator'),
-    fileselector = jQuery('#fileselector'),
+    fileselector   = jQuery('#fileselector'),
     filereselector = jQuery('#filereselector'),
     avataradjuster = jQuery('#avataradjuster'),
-    avatarfile = jQuery('#avatarfile'),
-    avatarimage = jQuery('#avatarimage'),
-    canvas = jQuery('#avatarcanvas'),
     selector = jQuery('#selector'),
-    slider = jQuery('#slider'),
+    slidehander = jQuery('#slider'),
     saver = jQuery('#saver');
 
 var selectareaw = avatarcreator.width(),
-    selectareah = avatarcreator.height();
+    selectareah = avatarcreator.height(),
+    imgNatureWidth,
+    imgNatureHeight;
 
-avatarfile.width(selectareaw);
-avatarfile.height(selectareah);
 avataradjuster.width(selectareaw);
 avataradjuster.height(selectareah);
-canvas.attr('width', selectareaw);
-canvas.attr('height', selectareah);
+canvas.width = selectareaw;
+canvas.height = selectareah;
 
 selector.width(defaultsize);
 selector.height(defaultsize);
 
-form.attr('target', 'uploadframe');
-avatarfile.attr('onchange', uploadAvatarDone);
-
-$('avatarform').target = 'uploadframe';
-$('avatarfile').onchange = uploadAvatarDone;
+avatarfile.onchange = uploadAvatarDone;
+avatarimage.onload = function(){
+    imgNatureWidth = avatarimage.naturalWidth;
+    imgNatureHeight = avatarimage.naturalHeight;
+    forceSelectorInsideAvatar();
+};
 
 window.addEventListener('message', receiveMessage, false);
 
@@ -61,22 +63,22 @@ jQuery(document).ready(function () {
             },
             stop: function () {
                 forceSelectorInsideAvatar();
-
             },
         });
-    slider.slider({
+    slidehander.slider({
         min: minenlarge,
         max: maxenlarge,
         orientation: sliderverticle ? "vertical" : '',
         value: 50,
-        step: 3,
-        slide: function (event, ui) {
+        step: 1,
+        slide: function () {
             forceSelectorInsideAvatar();
         },
         stop: function () {
             forceSelectorInsideAvatar();
         },
     });
+
     var ruller = '';
     var rrate = 3;
     for (var i = 0; i < (maxenlarge - minenlarge) / rrate + 1; i++) {
@@ -84,7 +86,7 @@ jQuery(document).ready(function () {
         if (0 === i % 12) content = '<i>' + (sliderverticle ? (maxenlarge - i * rrate) : i * rrate + minenlarge) + '</i>';
         ruller += '<li>' + content + '</li>'
     }
-    slider.append('<ul class="ui-slider-pointers">' + ruller + '</ul>');
+    slidehander.append('<ul class="ui-slider-pointers">' + ruller + '</ul>');
 });
 
 
@@ -100,46 +102,43 @@ function uploadAvatarDone() {
             selector.css('top', (selectareah - defaultsize) / 2);
             selector.width(defaultsize);
             selector.height(defaultsize);
-            $('avatarimage').src = e.target.result;
-            $('selectedarea').src = e.target.result;
-            slider.slider('value', 50);
+            avatarimage.src = e.target.result;
+            slidehander.slider('value', 50);
         };
         fr.readAsDataURL(this.files[0]);
     }
 }
 
 function getAvatarDimension() {
-    var factor = slider.slider('option', 'value');
+    var factor = slidehander.slider('option', 'value');
     var cw = avataradjuster.width();
     var ch = avataradjuster.height();
-    var iw = avatarimage.width();
-    var ih = avatarimage.height();
     var minw = 96;
     var minh = 96;
-    var midw = Math.min(Math.max(iw, 96), cw);
-    var midh = Math.min(Math.max(ih, 96), ch);
-    var maxw = Math.max(Math.max(iw, 96), cw);
-    var maxh = Math.max(Math.max(ih, 96), ch);
-    var minr = Math.max(minw / iw, minh / ih);
-    var midr = Math.max(midw / iw, midh / ih);
-    var maxr = Math.max(maxw / iw, maxh / ih);
+    var midw = Math.min(Math.max(imgNatureWidth, 96), cw);
+    var midh = Math.min(Math.max(imgNatureHeight, 96), ch);
+    var maxw = Math.max(Math.max(imgNatureWidth, 96), cw);
+    var maxh = Math.max(Math.max(imgNatureHeight, 96), ch);
+    var minr = Math.max(minw / imgNatureWidth, minh / imgNatureHeight);
+    var midr = Math.max(midw / imgNatureWidth, midh / imgNatureHeight);
+    var maxr = Math.max(maxw / imgNatureWidth, maxh / imgNatureHeight);
     if (factor <= 50) {
         r = (minr * (50 - factor) + midr * factor) / 50;
     } else {
         r = (midr * (100 - factor) + maxr * (factor - 50)) / 50;
     }
-    var aw = r * iw;
-    var ah = r * ih;
+    var aw = Math.floor(r * imgNatureWidth);
+    var ah = Math.floor(r * imgNatureHeight);
     var al = (cw - aw) / 2;
     var at = (ch - ah) / 2;
     var selectorDiv = getSelectorDimention();
-    if (aw > cw) al = (cw - aw) / (cw - selectorDiv.width) * selectorDiv.left;
-    if (ah > ch) at = (ch - ah) / (ch - selectorDiv.height) * selectorDiv.top;
+    if (aw > cw) al = Math.floor((cw - aw) / (cw - selectorDiv.width) * selectorDiv.left);
+    if (ah > ch) at = Math.floor((ch - ah) / (ch - selectorDiv.height) * selectorDiv.top);
     return {
-        left: Math.floor(al),
-        top: Math.floor(at),
-        width: Math.floor(aw),
-        height: Math.floor(ah)
+        left: al,
+        top: at,
+        width: aw,
+        height: ah
     };
 }
 
@@ -153,19 +152,13 @@ function getSelectorDimention() {
 }
 
 function refreshAvatarCanvas(uiposition) {
+
     var imageDiv = getAvatarDimension();
     var selectorDiv = getSelectorDimention();
 
-    var canvas = $('avatarcanvas');
     var cw = canvas.width;
     var ch = canvas.height;
     var ctx = canvas.getContext('2d');
-
-    var img = $('avatarimage');
-    var iw = avatarimage.width();
-    var ih = avatarimage.height();
-
-    var selectedarea = $('selectedarea');
 
     if (uiposition) {
         selectorDiv.left = uiposition.left;
@@ -173,8 +166,7 @@ function refreshAvatarCanvas(uiposition) {
     }
 
     ctx.clearRect(0, 0, cw, ch);
-    ctx.drawImage(img, 0, 0, iw, ih, imageDiv.left, imageDiv.top, imageDiv.width, imageDiv.height);
-
+    ctx.drawImage(avatarimage, 0, 0, imgNatureWidth, imgNatureHeight, imageDiv.left, imageDiv.top, imageDiv.width, imageDiv.height);
     ctx.fillStyle = "rgba(0,0,0,0.5)";
     ctx.fillRect(0, 0, cw, ch);
 
@@ -186,23 +178,23 @@ function refreshAvatarCanvas(uiposition) {
             t: 'translate(' + (imageDiv.left - selectorDiv.left - 1) + 'px, ' + (imageDiv.top - selectorDiv.top - 1) + 'px)',
         };
 
-        selectedarea.style.width = tmp.w;
-        selectedarea.style.height = tmp.h;
-        selectedarea.style.transform = tmp.t;
+        avatarimage.style.width = tmp.w;
+        avatarimage.style.height = tmp.h;
+        avatarimage.style.transform = tmp.t;
 
     } else {
         var ctmp = {
-            x: (selectorDiv.left - imageDiv.left) * iw / imageDiv.width,
-            y: (selectorDiv.top - imageDiv.top) * ih / imageDiv.height,
-            w: (selectorDiv.width + 2) * iw / imageDiv.width,
-            h: (selectorDiv.height + 2) * ih / imageDiv.height,
+            x: (selectorDiv.left - imageDiv.left) * imgNatureWidth / imageDiv.width,
+            y: (selectorDiv.top - imageDiv.top) * imgNatureHeight / imageDiv.height,
+            w: (selectorDiv.width + 2) * imgNatureWidth / imageDiv.width,
+            h: (selectorDiv.height + 2) * imgNatureHeight / imageDiv.height,
 
             sl: selectorDiv.left,
             st: selectorDiv.top,
             sw: selectorDiv.width + 2,
             sh: selectorDiv.height + 2,
         };
-        ctx.drawImage(img, ctmp.x, ctmp.y, ctmp.w, ctmp.h, ctmp.sl, ctmp.st, ctmp.sw, ctmp.sh);
+        ctx.drawImage(avatarimage, ctmp.x, ctmp.y, ctmp.w, ctmp.h, ctmp.sl, ctmp.st, ctmp.sw, ctmp.sh);
     }
 }
 
@@ -228,12 +220,9 @@ function forceSelectorInsideAvatar() {
 }
 
 function saveAvatar() {
-    var img = $('avatarimage');
-    var canvas = document.createElement('canvas');
+    var tocanvas = document.createElement('canvas');
     var selectorDiv = getSelectorDimention();
     var imageDiv = getAvatarDimension();
-    var imgwidth = avatarimage.width();
-    var imgheight = avatarimage.height();
 
     var pct = {
         left: (selectorDiv.left - imageDiv.left) / imageDiv.width,
@@ -242,10 +231,10 @@ function saveAvatar() {
         height: selectorDiv.height / imageDiv.height,
     };
 
-    var sx = pct.left * imgwidth;
-    var sy = pct.top * imgheight;
-    var sw = pct.width * imgwidth;
-    var sh = pct.height * imgheight;
+    var sx = Math.floor(pct.left * imgNatureWidth);
+    var sy = Math.floor(pct.top * imgNatureHeight);
+    var sw = Math.floor(pct.width * imgNatureWidth);
+    var sh = Math.floor(pct.height * imgNatureHeight);
 
     var size = [256, 144, 96];
     for (var i = 0; i < size.length; i++) {
@@ -253,15 +242,15 @@ function saveAvatar() {
         if (sw > size[i] || sh > size[i]) {
             r = Math.max(sw / size[i], sh / size[i])
         }
-        canvas.width = sw / r;
-        canvas.height = sh / r;
-        canvas.getContext("2d").drawImage(img, sx, sy, sw, sh, 0, 0, sw / r, sh / r);
-        var dataURL = canvas.toDataURL("image/png");
+        tocanvas.width = Math.floor(sw / r);
+        tocanvas.height = Math.floor(sh / r);
+        tocanvas.getContext("2d").drawImage(avatarimage, sx, sy, sw, sh, 0, 0, Math.floor(sw / r), Math.floor(sh / r));
+        var dataURL = tocanvas.toDataURL("image/png");
         jQuery('#avatar' + (i + 1)).val(dataURL.substr(dataURL.indexOf(",") + 1));
     }
 
-    form.attr('action', avatarUploadData[avatarUploadData.indexOf('src') + 1].replace('images/camera.swf?inajax=1', 'index.php?m=user&a=rectavatar&base64=yes'));
-    form.attr('target', 'rectframe');
+    form.action = avatarUploadData[avatarUploadData.indexOf('src') + 1].replace('images/camera.swf?inajax=1', 'index.php?m=user&a=rectavatar&base64=yes');
+    form.target = 'rectframe';
 }
 
 

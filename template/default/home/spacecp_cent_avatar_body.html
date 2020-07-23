@@ -1,6 +1,5 @@
 <link rel="stylesheet" href="{$_G[setting][csspath]}avatar.css?{VERHASH}" />
 <form id="avatarform" class="horizon" enctype="multipart/form-data" method="post" autocomplete="off" >
-    <img id="avatarimage" onload="forceSelectorInsideAvatar();" src="" />
 	<input type="hidden" id="avatar1" name="avatar1" />
 	<input type="hidden" id="avatar2" name="avatar2" />
 	<input type="hidden" id="avatar3" name="avatar3" />
@@ -10,7 +9,7 @@
 		<div id="avataradjuster" data-avatartype="round" style="display: none">
 			<canvas id="avatarcanvas"></canvas>
 			<div id="selector">
-				<div class="area"><img id="selectedarea" onload="forceSelectorInsideAvatar();" src="" /></div>
+				<div class="area"><img id="avatarimage" src="" /></div>
 			</div>
 		</div>
 		<label id="fileselector" for="avatarfile">
