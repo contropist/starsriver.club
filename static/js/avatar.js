@@ -26,6 +26,7 @@ jQuery(function () {
     canvas.width = cvsWidth;
     canvas.height = cvsHeight;
 
+    saver.onclick = saveAvatar;
     avatarfile.onchange = uploadAvatarDone;
     avatarimage.onload = function () {
         imgNatureWidth = avatarimage.naturalWidth;
