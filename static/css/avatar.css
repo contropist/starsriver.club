@@ -49,6 +49,11 @@
         display: block;
         color: #aaa;
     }
+    #avataradjuster {
+        width: 100%;
+        height: 100%;
+    }
+
     #avataradjuster #selector {
         cursor: move;
         position: absolute;
@@ -217,7 +222,7 @@
     #avatarform.horizon #slider {
         top: 100%;
         left: 0;
-        width: 100.1%;
+        width: 100%;
         height: 39px;
     }
     #avatarform.horizon #slider .ui-slider-handle{
