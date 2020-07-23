@@ -155,22 +155,29 @@ function getSelectorDimention() {
 function refreshAvatarCanvas(uiposition) {
     var imageDiv = getAvatarDimension();
     var selectorDiv = getSelectorDimention();
-    var img = $('avatarimage');
+
     var canvas = $('avatarcanvas');
-    var selectedarea = $('selectedarea');
     var cw = canvas.width;
     var ch = canvas.height;
     var ctx = canvas.getContext('2d');
+
+    var img = $('avatarimage');
     var iw = avatarimage.width();
     var ih = avatarimage.height();
+
+    var selectedarea = $('selectedarea');
+
     if (uiposition) {
         selectorDiv.left = uiposition.left;
         selectorDiv.top = uiposition.top;
     }
-    ctx.fillStyle = "rgba(0,0,0,0.5)";
+
     ctx.clearRect(0, 0, cw, ch);
     ctx.drawImage(img, 0, 0, iw, ih, imageDiv.left, imageDiv.top, imageDiv.width, imageDiv.height);
+
+    ctx.fillStyle = "rgba(0,0,0,0.5)";
     ctx.fillRect(0, 0, cw, ch);
+
     if (avataradjuster.data('avatartype') === 'round') {
 
         var tmp = {
