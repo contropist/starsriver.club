@@ -83,6 +83,17 @@ Object.defineProperty(HTMLElement.prototype, 'trgClass', {
     },
 });
 
+Object.defineProperty(HTMLElement.prototype, 'link', {
+    get: function () {
+        var self = this;
+        return function (arg) {
+            self.addEventListener('click',function () {
+                window.open(arg)
+            },false)
+        }
+    },
+});
+
 Object.defineProperty(HTMLElement.prototype, 'data', {
     get: function () {
         var self = this;

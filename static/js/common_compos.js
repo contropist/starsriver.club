@@ -43,12 +43,6 @@
         return getEvent().srcElement || getEvent().target;
     }
 
-    function addLink(e,link) {
-        e.onclick = function () {
-            window.open(link);
-        }
-    }
-
     function stopBubble() {
         let oEvent = arguments.callee.caller.arguments[0] || event;
         oEvent.cancelBubble = true;
@@ -118,101 +112,112 @@
      *          ]
      *      }
      */
-    function imgslider(arr) {
+    function imgslider(arr, ctn) {
         let s = {
-            rid :Rand_str(true, false, 7),
-            img : [],
-            imgs : isUndefined(arr.slideImgs) ? null : arr.slideImgs,
-            imgnum : isUndefined(arr.slideImgs) ? 0 : arr.slideImgs.length,
-            slideSpeed : isUndefined(arr.slideSpeed) ? 5000 : arr.slideSpeed,
-            slideSwitchbgColor : isUndefined(arr.slideSwitchbgColor) ? '#ffffff' : arr.slideSwitchbgColor,
-            slideSwitchHiColor : isUndefined(arr.slideSwitchHiColor) ? '#00CDE1' : arr.slideSwitchHiColor,
-            currentImg : 0,
-            prevImg : 0,
-            imgLoaded : 0,
-            st : null,
-            pos : 0,
-        };
-        if (!s.imgnum) {return;}
+            rid: Rand_str(true, false, 7),
+            imgs: [],
+            imgData: isUndefined(arr.slideImgs) ? null : arr.slideImgs,
+            imgnum: isUndefined(arr.slideImgs) ? 0 : arr.slideImgs.length,
+            slideSpeed: isUndefined(arr.slideSpeed) ? 5000 : arr.slideSpeed,
+            currentImg: 0,
+            prevImg: 0,
+            imgLoaded: 0,
+            sliderEvent: null,
 
-        document.write('<div id="slider_' + s.rid + '">');
-        document.write('<ul class="img-panel trans-ease-slow">');
-        document.write(typeof IMGDIR !== 'undefined' ? '' : '<div class="pacman"><p></p><p></p><p></p><p></p><p></p></div>' + '<span class="pct">0%</span>');
-        document.write('</ul>');
-        document.write('<i class="shadow"></i>');
-        document.write('<i class="threadtitle trans-ease"></i>');
-        document.write('<i class="thumbs trans-ease-quick pxa-radius-a"></i>');
-        document.write('</div>');
+            initalize: function () {
+                track.style.width = s.imgData.length * 100 + '%';
 
-        let slider = document.getElementById('slider_' + s.rid),
-            loader = slider.getElementsByClassName('pct')[0],
-            current_title = slider.getElementsByClassName('threadtitle')[0],
-            img_panel = slider.getElementsByClassName('img-panel')[0],
-            thumb_list = slider.getElementsByClassName('thumbs')[0];
+                for (let i = 1; i < s.imgnum; i++) {
+                    s.imgs[i] = new Image();
+                    s.imgs[i].alt = s.imgData[i][2];
+                    s.imgs[i].src = s.imgData[i][0];
 
-        s.initalize = function () {
-            img_panel.innerHTML = '';
-            img_panel.style.width = s.imgs.length * 100 + '%';
-            img_panel.onmousedown = function () {
+                    let thumb = document.createElement('i');
+                    thumb.index = i;
+                    thumb.style.background = s.slideSwitchbgColor;
+                    thumb.onclick = function () {s.switchImg(this);};
+                    thumbs[i] = thumb;
 
-            };
-            for (let i = 1; i < s.imgnum; i++) {
-                let thumb = document.createElement('a');
-                thumb.i = i;
-                thumb.id = 'thumb_' + i + s.rid;
-                thumb.style.background = s.slideSwitchbgColor;
-                thumb.onclick = function () {s.switchImg(this);};
-                thumb_list.appendChild(thumb);
+                    let link = document.createElement('li');
+                    link.style.width = 100 / s.imgnum + '%';
+                    //link.innerHTML = loader;
+                    link.appendChild(s.imgs[i]);
+                    link.link(s.imgData[i][1]);
 
-                s.img[i] = new Image();
-                s.img[i].src = s.imgs[i][0];
-                s.img[i].title = s.imgs[i][2];
-                s.imgLoaded++;
+                    thumber.appendChild(thumb);
+                    track.appendChild(link);
+                    s.imgLoaded += 1;
+                }
 
-                let link = document.createElement('li');
-                link.title = s.imgs[i][2];
-                link.style.width = 100 / s.imgnum + '%';
-                addLink(link, s.imgs[i][1]);
-                link.innerHTML = '<img src="' + s.imgs[i][0] + '">';
-                img_panel.appendChild(link);
-            }
-            if (s.imgLoaded < s.imgnum - 1) {
-                loader.innerHTML = (parseInt(s.img.length / s.imgnum * 100)) + '%';
-                setTimeout(function () {s.loadCheck();}, 100);
-            } else {
+                slider.appendChild(track);
+                slider.appendChild(shadow);
+                slider.appendChild(thumber);
+                slider.appendChild(title);
+                SR(ctn)[0].appendChild(slider);
+
                 s.switchImg();
-            }
+            },
+
+            moveArea: function () {
+                track.style.transform = 'translate3d(-' + (s.currentImg - 1) * 100 / s.imgnum + '%, 0, 0)';
+                title.style.opacity = 0;
+
+                for(let num in thumbs){
+                    thumbs[num].className = '';
+                }
+                thumbs[s.currentImg].className = 'active';
+
+                setTimeout(function () {
+                    title.innerHTML = s.imgs[s.currentImg].alt;
+                }, 100);
+                setTimeout(function () {
+                    title.style.opacity = 1;
+                }, 200);
+            },
+
+            switchImg: function (obj) {
+                let index = obj ? obj.index : '';
+
+                if (!index) {
+                    s.currentImg++;
+                    s.currentImg = s.currentImg < s.imgnum ? s.currentImg : 1;
+                } else {
+                    s.currentImg = index;
+                }
+
+                if (s.prevImg) {
+                    thumbs[s.prevImg].style.backgroundColor = s.slideSwitchbgColor;
+                }
+
+                s.prevImg = s.currentImg;
+                s.moveArea();
+                s.interval();
+            },
+
+            interval: function () {
+                clearInterval(s.sliderEvent);
+                s.sliderEvent = setInterval(function () {
+                    s.switchImg();
+                }, s.slideSpeed);
+            },
         };
 
-        s.moveArea = function () {
-            s.pos = - (s.currentImg - 1) * 100 / s.imgnum;
-            img_panel.style.transform ='translate3d(' + s.pos + '%, 0, 0)';
-            document.getElementById('thumb_' + s.currentImg + s.rid).style.backgroundColor = s.slideSwitchHiColor;
-            current_title.style.opacity = 0;
-            setTimeout(function () {current_title.innerHTML = s.img[s.currentImg].title;}, 100);
-            setTimeout(function () {current_title.style.opacity = 1;}, 200);
-        };
-        s.switchImg = function (obj) {
-            let i = obj ? obj.i : '';
-            if (!i) {
-                s.currentImg++;
-                s.currentImg = s.currentImg < s.imgnum ? s.currentImg : 1;
-            } else {
-                s.currentImg = i;
-            }
-            if (s.prevImg) {
-                document.getElementById('thumb_' + s.prevImg + s.rid).style.backgroundColor = s.slideSwitchbgColor;
-            }
-            s.prevImg = s.currentImg;
-            s.moveArea();
-            s.interval();
-        };
-        s.interval = function () {
-            clearInterval(s.st);
-            s.st = setInterval(function () {
-                s.switchImg();
-            }, s.slideSpeed);
-        };
+        if (!s.imgnum) return;
+
+        let thumbs = [],
+            thumber = document.createElement('div'),
+            slider = document.createElement('div'),
+            shadow = document.createElement('div'),
+            title = document.createElement('div'),
+            track = document.createElement('ul'),
+            loader = isUndefined(IMGDIR) ? '' : '<span><div class="pacman"><p></p><p></p><p></p><p></p><p></p></div>' + '<span class="pct">0%</span></span>';
+
+        slider.id = 'slider_' + s.rid;
+        thumber.className = 'thumbs trans-ease-slow';
+        track.className = 'track trans-ease-slow';
+        title.className = 'title trans-ease';
+        shadow.className = 'shadow';
+
         s.initalize();
     }
 
