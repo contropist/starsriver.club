@@ -1183,7 +1183,7 @@ function _createPalette(colorid, id, func) {
 	}
 	func = !func ? '' : '|' + func;
 	var url = /(?:https?:)?\/\//.test(STATICURL) ? STATICURL : SITEURL+STATICURL;
-	window.frames["c"+colorid+"_frame"].location.href = url+"image/admincp/getcolor.htm?c"+colorid+"|"+id+func;
+	window.frames["c"+colorid+"_frame"].location.href = url+"image/admincp/getcolor"+ tpl_suffix +"?c"+colorid+"|"+id+func;
 	showMenu({'ctrlid':'c'+colorid});
 	var iframeid = "c"+colorid+"_menu";
 	_attachEvent(window, 'scroll', function(){hideMenu(iframeid);});

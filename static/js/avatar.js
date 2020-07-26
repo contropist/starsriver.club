@@ -169,60 +169,60 @@ jQuery(function () {
             selectorDiv.top = uiposition.top;
         }
 
+        let drawData = {
+            il: (selectorDiv.left - imageDiv.left) * imgNatureWidth / imageDiv.width,
+            it: (selectorDiv.top - imageDiv.top) * imgNatureHeight / imageDiv.height,
+            iw: (selectorDiv.width + 2) * imgNatureWidth / imageDiv.width,
+            ih: (selectorDiv.height + 2) * imgNatureHeight / imageDiv.height,
+
+            cl: selectorDiv.left,
+            ct: selectorDiv.top,
+            cw: selectorDiv.width + 2,
+            ch: selectorDiv.height + 2,
+
+            r: selectorDiv.width / 2 + 1
+        };
+
         ctx.clearRect(0, 0, cvsWidth, cvsHeight);
         ctx.drawImage(avatarimage, 0, 0, imgNatureWidth, imgNatureHeight, imageDiv.left, imageDiv.top, imageDiv.width, imageDiv.height);
         ctx.fillStyle = "rgba(0,0,0,0.5)";
         ctx.fillRect(0, 0, cvsWidth, cvsHeight);
 
         if (avataradjuster.data('avatartype') === 'round') {
-
-            let tmp = {
-                w: imageDiv.width + 'px',
-                h: imageDiv.height + 'px',
-                t: 'translate(' + (imageDiv.left - selectorDiv.left - 1) + 'px, ' + (imageDiv.top - selectorDiv.top - 1) + 'px)',
-            };
-
-            avatarimage.style.width = tmp.w;
-            avatarimage.style.height = tmp.h;
-            avatarimage.style.transform = tmp.t;
-
+            ctx.save();
+            ctx.beginPath();
+            ctx.arc(drawData.cl + drawData.r, drawData.ct + drawData.r, drawData.r, 0, 2 * Math.PI, false);
+            ctx.closePath();
+            ctx.clip();
+            ctx.drawImage(avatarimage, drawData.il, drawData.it, drawData.iw, drawData.ih, drawData.cl, drawData.ct, drawData.cw, drawData.ch);
+            ctx.restore();
         } else {
-            let ctmp = {
-                x: (selectorDiv.left - imageDiv.left) * imgNatureWidth / imageDiv.width,
-                y: (selectorDiv.top - imageDiv.top) * imgNatureHeight / imageDiv.height,
-                w: (selectorDiv.width + 2) * imgNatureWidth / imageDiv.width,
-                h: (selectorDiv.height + 2) * imgNatureHeight / imageDiv.height,
-
-                sl: selectorDiv.left,
-                st: selectorDiv.top,
-                sw: selectorDiv.width + 2,
-                sh: selectorDiv.height + 2,
-            };
-            ctx.drawImage(avatarimage, ctmp.x, ctmp.y, ctmp.w, ctmp.h, ctmp.sl, ctmp.st, ctmp.sw, ctmp.sh);
+            ctx.drawImage(avatarimage, drawData.il, drawData.it, drawData.iw, drawData.ih, drawData.cl, drawData.ct, drawData.cw, drawData.ch);
         }
     }
 
     function forceSelectorInsideAvatar() {
-        let imageDiv = getAvatarDimension(),
-            selectorDiv = getSelectorDimention();
+        for(let i = 0; i < 2; i++){
+            setTimeout(function () {
+                let imageDiv = getAvatarDimension(),
+                    selectorDiv = getSelectorDimention();
 
-        if (selectorDiv.width !== selectorDiv.height) {
-            let size = Math.min(selectorDiv.height, selectorDiv.width);
-            selector.width(size);
-            selector.height(size);
+                if (selectorDiv.width !== selectorDiv.height) {
+                    let size = Math.min(selectorDiv.height, selectorDiv.width);
+                    selector.width(size);
+                    selector.height(size);
+                }
+                /* aspectRatio */
+                if (selectorDiv.width > imageDiv.width) selector.width(imageDiv.width - 2);
+                if (selectorDiv.height > imageDiv.height) selector.height(imageDiv.height - 2);
+                /* aspectRatio End */
+                if (selectorDiv.left < imageDiv.left) selector.css('left', imageDiv.left);
+                if (selectorDiv.top < imageDiv.top) selector.css('top', imageDiv.top);
+                if (selectorDiv.left + selectorDiv.width > imageDiv.left + imageDiv.width - 2) selector.css('left', imageDiv.left + imageDiv.width - selectorDiv.width - 2);
+                if (selectorDiv.top + selectorDiv.height > imageDiv.top + imageDiv.height - 2) selector.css('top', imageDiv.top + imageDiv.height - selectorDiv.height - 2);
+                refreshAvatarCanvas();
+            },i * 3)
         }
-
-        /* aspectRatio */
-        if (selectorDiv.width > imageDiv.width) selector.width(imageDiv.width - 2);
-        if (selectorDiv.height > imageDiv.height) selector.height(imageDiv.height - 2);
-
-        /* aspectRatio End */
-        if (selectorDiv.left < imageDiv.left) selector.css('left', imageDiv.left);
-        if (selectorDiv.top < imageDiv.top) selector.css('top', imageDiv.top);
-        if (selectorDiv.left + selectorDiv.width > imageDiv.left + imageDiv.width - 2) selector.css('left', imageDiv.left + imageDiv.width - selectorDiv.width - 2);
-        if (selectorDiv.top + selectorDiv.height > imageDiv.top + imageDiv.height - 2) selector.css('top', imageDiv.top + imageDiv.height - selectorDiv.height - 2);
-
-        refreshAvatarCanvas();
     }
 
     function saveAvatar() {
