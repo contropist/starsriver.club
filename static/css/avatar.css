@@ -1,21 +1,15 @@
 /* Avatar */
     #avatarform {
         margin: 20px auto;
-    }
-    #avatarform.vertical{
-        height: 430px;
-        width: 360px;
-    }
-    #avatarform.horizon{
-        height: 360px;
-        width: 360px;
+        height: 400px;
+        width: 400px;
     }
     #avatarimage{
         display: none;
     }
     #avatarcreator{
-        width: 320px;
-        height: 320px;
+        width: 360px;
+        height: 360px;
         position: relative;
         box-shadow: 0 0 0 1px rgba(146, 146, 146, 0.16);
     }
@@ -195,12 +189,12 @@
         width: 12px;
     }
     #avatarform.vertical #saver{
-        top: calc(100% + 18px) !important;
-        left: 236px !important;
+        top: 0 !important;
+        left: calc(100% + 64px) !important;
     }
     #avatarform.vertical #filereselector{
-        top: calc(100% + 18px) !important;
-        left: 125px !important;
+        top: 64px !important;
+        left: calc(100% + 64px) !important;
     }
 
     /* horizon */
