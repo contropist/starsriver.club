@@ -162,6 +162,10 @@
 			<div class="vessel" id="setting_usergroup">
 				<!--{hook/spacecp_usergroup_top}-->
 				<!--{template home/spacecp_cent_usergroup_header}-->
+                <!--{if $_G['setting']['verify']['enabled']}-->
+                    <p class="v-tip"><!--{echo implode('、', $verifyicon)}-->{lang usergroup_right_message3}</p>
+                    <hr>
+                <!--{/if}-->
 				<div class="withedge">
 					<table class="dc wb rb table-pm">
 						<thead>
@@ -200,9 +204,6 @@
 						<!--{/loop}-->
 						</tbody>
 					</table>
-					<!--{if $_G['setting']['verify']['enabled']}-->
-					<!--{echo implode('', $verifyicon)}--> {lang usergroup_right_message3}
-					<!--{/if}-->
 					<!--{hook/spacecp_usergroup_bottom}-->
 				</div>
 			</div>
