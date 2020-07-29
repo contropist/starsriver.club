@@ -2624,7 +2624,7 @@
         z-index: 999;
         transform: var(--loading-trans-animation);
     }
-    [html-logo] img{
+    [html-logo] svg{
         width: 128px;
         top: 50%;
         left: 50%;
