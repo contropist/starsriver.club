@@ -7324,9 +7324,14 @@
     .app-userspace #userspace_profile .panel .box{
         background: #ffffff;
         border-radius: 5px;
-        border: 1px solid var(--box-border-color);
+        border: none;
         padding: 0 !important;
         height: 260px;
+        box-shadow: 0 0 0 1px var(--box-border-color);
+        transition: .1s ease-in-out;
+    }
+    .app-userspace #userspace_profile .panel .box:hover{
+        box-shadow: 0 2px 8px 1px rgba(0,0,0,.1);
     }
     .app-userspace #userspace_profile .panel .box > span{
         display: block;
