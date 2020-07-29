@@ -2629,7 +2629,17 @@
         top: 50%;
         left: 50%;
         position: absolute;
-        transform: translate(-50%, -80%);
+        transform: translate(-50%,-120%);
+    }
+    [html-logo] p{
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-58px,0);
+        color: #cecece;
+        font-size: 16px;
+        font-weight: 700;
+        font-style: oblique;
     }
 
     .container{

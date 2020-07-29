@@ -598,14 +598,14 @@
         overflow: hidden;
     }
     .banner .back-banner .back {
-        width: 1920px;
+        width: 100%;
+        min-width: 1920px;
         position: relative;
         top: 0;
         left: 50%;
         transform: translate3d(-50%,0,0);
     }
     .banner .back-banner .back.blur-lg {
-        width: 1920px;
         position: relative;
         top: 0;
         left: 50%;
