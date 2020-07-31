@@ -7407,6 +7407,10 @@
         height: var(--li-icon-size);
         text-align: center;
         display: inline-block;
+        margin-right: 5px;
+    }
+    .app-userspace #userspace_profile > .panel > .panel-container > .box .info-mix.medal li i img{
+        width: var(--li-icon-size);
     }
     .app-userspace #userspace_profile > .panel > .panel-container > .box .info-mix.medal li em{
         color: var(--color-text-info);
@@ -7415,7 +7419,7 @@
         color: var(--color-text-gray);
         position: absolute;
         bottom: var(--li-padding-bottom);
-        left: calc(var(--li-padding-left) + var(--li-icon-size) + 5px);
+        left: calc(var(--li-padding-left) + var(--li-icon-size) + 10px);
         white-space: nowrap;
         width: calc(100% - 2 * var(--li-padding-left) - var(--li-icon-size));
         overflow: hidden;
