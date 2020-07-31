@@ -90,13 +90,6 @@ function ckstart($start, $perpage) {
 	}
 }
 
-
-function get_my_app() {
-}
-
-function get_my_userapp() {
-}
-
 function getspace($uid) {
 	return getuserbyuid($uid);
 }

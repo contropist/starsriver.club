@@ -16,12 +16,12 @@
 
 <style id="diy_style" type="text/css"></style>
 <div class="wp">
-	<!--[diy=diy1]--><div id="diy1" class="area"></div><!--[/diy]-->
+	<!--[nest=nest1]--><div id="diy1" class="area"></div><!--[/diy]-->
 </div>
 
 <div id="ct" class="ct2_a wp cl">
 	<div class="mn">
-		<!--[diy=diycontenttop]--><div id="diycontenttop" class="area"></div><!--[/diy]-->
+		<!--[nest=nestcontenttop]--><div id="diycontenttop" class="area"></div><!--[/diy]-->
 		<div class="bm bw0">
 		<!--{if (!$_G['uid'] && !$space[uid]) || $space[self]}-->
 			<h1 class="mt"><img alt="trade" src="{IMGDIR}/tradesmall.gif" class="vm" /> {lang trade}</h1>
@@ -178,7 +178,7 @@
             <!--{subtemplate home/space_home_thread_nav}-->
 
             <div class="drag">
-                <!--[diy=diy2]--><div id="diy2" class="area"></div><!--[/diy]-->
+                <!--[nest=nest2]--><div id="diy2" class="area"></div><!--[/diy]-->
             </div>
 
         </div>
@@ -190,5 +190,5 @@
     </div>
     <!--{/if}-->
 </div>
-
+<!--{/if}-->
 <!--{template common/footer}-->
