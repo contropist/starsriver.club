@@ -7320,21 +7320,20 @@
 
     .app-userspace #userspace_profile{
         --box-border-color:  rgba(115, 115, 115,  .1);
-        --box-padding:  15px;
+        --box-padding:  25px;
     }
-    .app-userspace #userspace_profile .panel .box{
+    .app-userspace #userspace_profile > .panel > .panel-container > .box{
         background: #ffffff;
         border-radius: 5px;
         border: none;
         padding: 0 !important;
-        height: 260px;
+        height: 280px;
         box-shadow: 0 0 0 1px var(--box-border-color);
-        transition: .1s ease-in-out;
     }
-    .app-userspace #userspace_profile .panel .box:hover{
+    .app-userspace #userspace_profile > .panel > .panel-container > .box:hover{
         box-shadow: 0 2px 8px rgba(0,0,0,.1);
     }
-    .app-userspace #userspace_profile .panel .box > span{
+    .app-userspace #userspace_profile > .panel > .panel-container > .box > span{
         display: block;
         font-size: 15px;
         color: var(--color-dark);
@@ -7342,7 +7341,7 @@
         border-bottom: 1px solid var(--box-border-color);
         padding: 0 16px;
     }
-    .app-userspace #userspace_profile .panel .box > span::before{
+    .app-userspace #userspace_profile > .panel > .panel-container > .box > span::before{
         display: inline-block;
         content: '';
         width: 7px;
@@ -7352,67 +7351,67 @@
         margin: 13px 5px 12px 0;
         border-radius: 3px;
     }
-    .app-userspace #userspace_profile .panel .box > span a{
+    .app-userspace #userspace_profile > .panel > .panel-container > .box > span a{
         display: inline-block;
         border: none;
         color: var(--color-text-info);
         margin: 0 5px;
         font-size: 18px;
     }
-    .app-userspace #userspace_profile .panel .box > div{
-        max-height: 210px;
+    .app-userspace #userspace_profile > .panel > .panel-container > .box > div{
+        max-height: 230px;
         overflow: auto;
         box-sizing: border-box;
     }
-    .app-userspace #userspace_profile .panel .box  * {
+    .app-userspace #userspace_profile > .panel > .panel-container > .box > [class^="info-"] {
         font-size: 13px;
     }
-    .app-userspace #userspace_profile .panel .box  a {
+    .app-userspace #userspace_profile > .panel > .panel-container > .box a {
         color: var(--color-text-danger);
         border-bottom: 1px dashed;
         vertical-align: middle;
         line-height: 13px;
     }
-    .app-userspace #userspace_profile .panel .box .info-text{
+    .app-userspace #userspace_profile > .panel > .panel-container > .box .info-text{
         display: inline-block;
         padding: calc(var(--box-padding) / 2) var(--box-padding);
-
     }
-    .app-userspace #userspace_profile .panel .box .info-text li{
+    .app-userspace #userspace_profile > .panel > .panel-container > .box .info-text li{
         display: block;
         line-height: 24px;
     }
-    .app-userspace #userspace_profile .panel .box .info-text li em{
+    .app-userspace #userspace_profile > .panel > .panel-container > .box .info-text li em{
         color: var(--color-text-gray);
     }
-    .app-userspace #userspace_profile .panel .box .info-text li s{
+    .app-userspace #userspace_profile > .panel > .panel-container > .box .info-text li s{
         color: var(--color-text-info);
     }
-    .app-userspace #userspace_profile .panel .box .info-text li .check-mark{
+    .app-userspace #userspace_profile > .panel > .panel-container > .box .info-text li .check-mark{
         width: 16px;
         height: 16px;
         vertical-align: middle;
     }
-    .app-userspace #userspace_profile .panel .box .info-text li i{
+    .app-userspace #userspace_profile > .panel > .panel-container > .box .info-text li i{
         color: inherit;
     }
-    .app-userspace #userspace_profile .panel .box .info-mix.medal li{
+
+    .app-userspace #userspace_profile > .panel > .panel-container > .box .info-mix.medal li{
         --li-padding-bottom: 10px;
         --li-padding-left: 15px;
         --li-icon-size: 36px;
         padding: var(--li-padding-bottom) var(--li-padding-left);
         position: relative;
     }
-    .app-userspace #userspace_profile .panel .box .info-mix.medal li i{
+    .app-userspace #userspace_profile > .panel > .panel-container > .box .info-mix.medal li i{
         width: var(--li-icon-size);
         height: var(--li-icon-size);
         text-align: center;
         display: inline-block;
     }
-    .app-userspace #userspace_profile .panel .box .info-mix.medal li em{
+    .app-userspace #userspace_profile > .panel > .panel-container > .box .info-mix.medal li em{
         color: var(--color-text-info);
     }
-    .app-userspace #userspace_profile .panel .box .info-mix.medal li s{
+    .app-userspace #userspace_profile > .panel > .panel-container > .box .info-mix.medal li s{
         color: var(--color-text-gray);
         position: absolute;
         bottom: var(--li-padding-bottom);
@@ -7422,7 +7421,61 @@
         overflow: hidden;
         text-overflow: ellipsis;
     }
-    .app-userspace #userspace_profile .panel .box .no-info{
+
+    .app-userspace #userspace_profile > .panel > .panel-container > .box .info-mix.credit li{
+        --li-icon-size: 48px;
+
+        position: relative;
+        padding: 0;
+        text-align: center;
+    }
+    .app-userspace #userspace_profile > .panel > .panel-container > .box .info-mix.credit li i{
+        display: block;
+        margin: auto;
+        position: relative;
+        width: var(--li-icon-size);
+        height: var(--li-icon-size);
+        line-height: var(--li-icon-size);
+        color: #fff;
+        font-size: 24px;
+        text-align: center;
+        background: var(--color-file-yel);
+        border-radius: 50%;
+    }
+    .app-userspace #userspace_profile > .panel > .panel-container > .box .info-mix.credit li i::before{
+        position: relative;
+        z-index: 1;
+    }
+    .app-userspace #userspace_profile > .panel > .panel-container > .box .info-mix.credit li i::after{
+        content: '';
+        display: block;
+        position: absolute;
+        z-index: 0;
+        width: 100%;
+        height: 50%;
+        background: rgba(0,0,0,.1);
+        transform: rotate(-45deg);
+        bottom: 0;
+        right: 0;
+        border-radius: 0 0 calc(var(--li-icon-size) / 2) calc(var(--li-icon-size) / 2) ;
+        transform-origin: calc(var(--li-icon-size) / 2)  0;
+    }
+    .app-userspace #userspace_profile > .panel > .panel-container > .box .info-mix.credit li em{
+        display: block;
+        font-size: 12px;
+        color: var(--color-text-gray);
+        margin: 8px 0 3px 0;
+    }
+    .app-userspace #userspace_profile > .panel > .panel-container > .box .info-mix.credit li s{
+        display: block;
+        overflow: hidden;
+        font-size: 13px;
+        color: var(--color-sky-blue);
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+
+    .app-userspace #userspace_profile > .panel > .panel-container > .box .no-info{
         width: 100%;
         text-align: center;
         display: block;
@@ -7430,21 +7483,23 @@
         color: var(--color-gray);
         font-size: 12px;
     }
-    .WL-0 .app-userspace #userspace_profile .panel .box.size-1-0{ width:calc(100% - 2 * var(--default-box-margin-width));}
-    .WL-0 .app-userspace #userspace_profile .panel .box.size-2-0{ width:calc(100% - 2 * var(--default-box-margin-width));}
-    .WL-0 .app-userspace #userspace_profile .panel .box.size-4-0{ width:calc(100% - 2 * var(--default-box-margin-width));}
-    .WL-3P .app-userspace #userspace_profile .panel .box.size-1-0{ width:calc(50% - 2 * var(--default-box-margin-width));}
-    .WL-3P .app-userspace #userspace_profile .panel .box.size-2-0{ width:calc(100% - 2 * var(--default-box-margin-width));}
-    .WL-3P .app-userspace #userspace_profile .panel .box.size-4-0{ width:calc(100% - 2 * var(--default-box-margin-width));}
-    .WL-4P .app-userspace #userspace_profile .panel .box.size-1-0{ width:calc(50% - 2 * var(--default-box-margin-width));}
-    .WL-4P .app-userspace #userspace_profile .panel .box.size-2-0{ width:calc(50% - 2 * var(--default-box-margin-width));}
-    .WL-4P .app-userspace #userspace_profile .panel .box.size-4-0{ width:calc(100% - 2 * var(--default-box-margin-width));}
-    .WL-7P .app-userspace #userspace_profile .panel .box.size-1-0{ width:calc(25% - 2 * var(--default-box-margin-width));}
-    .WL-7P .app-userspace #userspace_profile .panel .box.size-2-0{ width:calc(50% - 2 * var(--default-box-margin-width));}
-    .WL-7P .app-userspace #userspace_profile .panel .box.size-4-0{ width:calc(100% - 2 * var(--default-box-margin-width));}
-    .WL-13P .app-userspace #userspace_profile .panel .box.size-1-0{ width:calc(33.3333333% - 2 * var(--default-box-margin-width));}
-    .WL-13P .app-userspace #userspace_profile .panel .box.size-2-0{ width:calc(33.3333333% - 2 * var(--default-box-margin-width));}
-    .WL-13P .app-userspace #userspace_profile .panel .box.size-4-0{ width:calc(66.6666666% - 2 * var(--default-box-margin-width));}
+
+    .WL-0 .app-userspace #userspace_profile > .panel > .panel-container > .box.size-1-0{ width:calc(100% - 2 * var(--default-box-margin-width));}
+    .WL-0 .app-userspace #userspace_profile > .panel > .panel-container > .box.size-2-0{ width:calc(100% - 2 * var(--default-box-margin-width));}
+    .WL-0 .app-userspace #userspace_profile > .panel > .panel-container > .box.size-4-0{ width:calc(100% - 2 * var(--default-box-margin-width));}
+    .WL-3P .app-userspace #userspace_profile > .panel > .panel-container > .box.size-1-0{ width:calc(50% - 2 * var(--default-box-margin-width));}
+    .WL-3P .app-userspace #userspace_profile > .panel > .panel-container > .box.size-2-0{ width:calc(100% - 2 * var(--default-box-margin-width));}
+    .WL-3P .app-userspace #userspace_profile > .panel > .panel-container > .box.size-4-0{ width:calc(100% - 2 * var(--default-box-margin-width));}
+    .WL-4P .app-userspace #userspace_profile > .panel > .panel-container > .box.size-1-0{ width:calc(50% - 2 * var(--default-box-margin-width));}
+    .WL-4P .app-userspace #userspace_profile > .panel > .panel-container > .box.size-2-0{ width:calc(50% - 2 * var(--default-box-margin-width));}
+    .WL-4P .app-userspace #userspace_profile > .panel > .panel-container > .box.size-4-0{ width:calc(100% - 2 * var(--default-box-margin-width));}
+    .WL-4P .app-userspace #userspace_profile > .panel > .panel-container > .box .box.size-2-1{ width:calc(50% - 2 * var(--default-box-margin-width));}
+    .WL-7P .app-userspace #userspace_profile > .panel > .panel-container > .box.size-1-0{ width:calc(25% - 2 * var(--default-box-margin-width));}
+    .WL-7P .app-userspace #userspace_profile > .panel > .panel-container > .box.size-2-0{ width:calc(50% - 2 * var(--default-box-margin-width));}
+    .WL-7P .app-userspace #userspace_profile > .panel > .panel-container > .box.size-4-0{ width:calc(100% - 2 * var(--default-box-margin-width));}
+    .WL-13P .app-userspace #userspace_profile > .panel > .panel-container > .box.size-1-0{ width:calc(33.3333333% - 2 * var(--default-box-margin-width));}
+    .WL-13P .app-userspace #userspace_profile > .panel > .panel-container > .box.size-2-0{ width:calc(33.3333333% - 2 * var(--default-box-margin-width));}
+    .WL-13P .app-userspace #userspace_profile > .panel > .panel-container > .box.size-4-0{ width:calc(66.6666666% - 2 * var(--default-box-margin-width));}
 
     @media screen and (max-width:1240px) {
         .app-dynamic .album-list li{width: calc(100% / 2 - 7.5px) !important;}

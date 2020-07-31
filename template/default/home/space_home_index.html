@@ -5,35 +5,29 @@
         <!--{template home/space_home_userabout}-->
     </div>
     <div class="mas-viewer-container" id="nestpage" >
-        <div class="frame cl" id="frame1" noedit="1" >
-            <div class="z column" id="frame1_left" style="width:{$widths[0]}px" >
-                <!--{if empty($leftlist)}-->
-                <div class="move-span temp" id="left_temp" ></div >
-                <!--{/if}-->
-                <!--{loop $leftlist $key $value}-->
-                <!--{if !empty($key)}-->
-                <div class="block move-span" id="$key" >
-                    $value
-                </div >
-                <!--{/if}-->
-                <!--{/loop}-->
+            <!--{if empty($leftlist)}-->
+            <div class="move-span temp" id="left_temp" ></div >
+            <!--{/if}-->
+            <!--{loop $leftlist $key $value}-->
+            <!--{if !empty($key)}-->
+            <div class="block move-span" id="$key" >
+                $value
             </div >
+            <!--{/if}-->
+            <!--{/loop}-->
 
-            <div class="z column" id="frame1_center" style="width:{$widths[1]}px" >
-                <!--{if empty($centerlist)}-->
-                <div class="move-span temp" id="center_temp" ></div >
-                <!--{/if}-->
-                <!--{loop $centerlist $key $value}-->
-                <!--{if !empty($key)}-->
-                <div class="block move-span" id="$key" >
-                    $value
-                </div >
-                <!--{/if}-->
-                <!--{/loop}-->
+            <!--{if empty($centerlist)}-->
+            <div class="move-span temp" id="center_temp" ></div >
+            <!--{/if}-->
+            <!--{loop $centerlist $key $value}-->
+            <!--{if !empty($key)}-->
+            <div class="block move-span" id="$key" >
+                $value
             </div >
+            <!--{/if}-->
+            <!--{/loop}-->
 
             <!--{if (strlen($usernest['currentlayout']) > 3) }-->
-            <div class="z column" id="frame1_right" style="width:{$widths[2]}px" >
                 <!--{if empty($rightlist)}-->
                 <div class="move-span temp" id="right_temp" ></div >
                 <!--{/if}-->
@@ -44,9 +38,7 @@
                 </div >
                 <!--{/if}-->
                 <!--{/loop}-->
-            </div >
             <!--{/if}-->
-        </div >
     </div >
 </div >
 <script type="text/javascript">

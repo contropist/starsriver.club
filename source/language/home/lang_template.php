@@ -801,6 +801,7 @@ $lang = [
     'second_domain' => '二级域名',
     'spacenote' => '最新记录',
     'stat_info' => '统计信息',
+    'credit_info' => '用户资产',
     'view_certification_photos' => '查看认证照片',
     'friend_reward' => '好友发布的悬赏',
     'has_been_resolved' => '已解决',

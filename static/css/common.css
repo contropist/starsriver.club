@@ -4389,7 +4389,7 @@
         color: #999;
     }
     .comment-list .sender .subline .cancel:hover{
-        background: #d7514a;
+        background: var(--color-onnanoko-pink);
         color: #fff;
     }
     .comment-list .sender .subline .submit{
