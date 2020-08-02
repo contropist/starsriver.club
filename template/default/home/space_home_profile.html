@@ -73,7 +73,9 @@
                         <!--{if $groupcount}-->
                         <ul class="info-text">
                             <!--{loop $usergrouplist $key $value}-->
-                            <li><s><a style="color:var(--color-main-theme-dark);" href="forum.php?mod=group&fid={$value['fid']}" target="_blank">$value['name']</a></s></li>
+                            <li>
+                                <s><a style="color:var(--color-main-theme-dark);" href="forum.php?mod=group&fid={$value['fid']}" target="_blank">$value['name']</a></s>
+                            </li>
                             <!--{/loop}-->
                         </ul>
                         <!--{else}-->
