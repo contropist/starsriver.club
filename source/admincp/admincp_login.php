@@ -87,6 +87,7 @@ function html_login_form() {
             <img class="layout1" src="{$_G['config']['output']['imgurl']}/illusion/website-template-005.svg" />
         </div>
         <form method="post" autocomplete="off" name="login" id="loginform" action="$extra">
+            <p class="formhead">StarsRiver</p>
             <input type="hidden" name="sid" value="$sid"><input type="hidden" name="frames" value="yes">
             $loginuser
             <input placeholder="管理员密码" name="admin_password" tabindex="1" type="password" class="txt" autocomplete="off" />

@@ -32,9 +32,15 @@
     top: 50%;
     transform: translate(-39%, -50%);
     background: #ffffff;
-    padding: 42px;
+    padding: 42px 42px 54px 42px;
     border-radius: 18px;
     box-shadow: 0 3px 15px rgba(101,119,134,0.3) , 0 0 30px #fff;
+}
+.login form .formhead {
+    font-size: 22px;
+    font-weight: 700;
+    color: #39c5bb;
+    margin-top: 0;
 }
 
 .login form .administratorname,
