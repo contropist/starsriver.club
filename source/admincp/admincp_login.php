@@ -52,7 +52,7 @@ function html_login_header($form = true) {
 <meta charset="$charset" />
 <meta name="renderer" content="webkit" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<title>Discuz.bbs管理中心</title>
+<title>StarsRiver 管理中心 - 登录</title>
 <link rel="stylesheet" href="static/image/admincp/src/css/login.css?{$_G[style][verhash]}" type="text/css" media="all" />
 </head>
 <body>
@@ -82,28 +82,27 @@ function html_login_form() {
 	$extra = ADMINSCRIPT.'?'.(getgpc('action') && getgpc('frames') ? 'frames=yes&' : '').$_SERVER['QUERY_STRING'];
 	$forcesecques = '<option value="0">'.($_G['config']['admincp']['forcesecques'] || $_G['group']['forcesecques'] ? $lang['forcesecques'] : $lang['security_question_0']).'</option>';
 	echo <<<EOT
-	<div class="loginpage">
-	    <div class="part">
-	        123
-	    </div>
-	    <div class="part login">
-            <form method="post" autocomplete="off" name="login" id="loginform" action="$extra"><input type="hidden" name="sid" value="$sid"><input type="hidden" name="frames" value="yes">
-                $loginuser
-                <input placeholder="管理员密码" name="admin_password" tabindex="1" type="password" class="txt" autocomplete="off" />
-                <select id="questionid" name="admin_questionid" tabindex="2">
-                    $forcesecques
-                    <option value="1">$lang[security_question_1]</option>
-                    <option value="2">$lang[security_question_2]</option>
-                    <option value="3">$lang[security_question_3]</option>
-                    <option value="4">$lang[security_question_4]</option>
-                    <option value="5">$lang[security_question_5]</option>
-                    <option value="6">$lang[security_question_6]</option>
-                    <option value="7">$lang[security_question_7]</option>
-                </select>
-                <input placeholder="回答验证" name="admin_answer" tabindex="3" type="text" class="txt" autocomplete="off" />
-                <button name="submit" tabindex="3" />登 陆</button>
-            </form>
+	<div class="login">
+        <div class="background">
+            <img class="layout1" src="{$_G['config']['output']['imgurl']}/illusion/website-template-005.svg" />
         </div>
+        <form method="post" autocomplete="off" name="login" id="loginform" action="$extra">
+            <input type="hidden" name="sid" value="$sid"><input type="hidden" name="frames" value="yes">
+            $loginuser
+            <input placeholder="管理员密码" name="admin_password" tabindex="1" type="password" class="txt" autocomplete="off" />
+            <select id="questionid" name="admin_questionid" tabindex="2">
+                $forcesecques
+                <option value="1">$lang[security_question_1]</option>
+                <option value="2">$lang[security_question_2]</option>
+                <option value="3">$lang[security_question_3]</option>
+                <option value="4">$lang[security_question_4]</option>
+                <option value="5">$lang[security_question_5]</option>
+                <option value="6">$lang[security_question_6]</option>
+                <option value="7">$lang[security_question_7]</option>
+            </select>
+            <input placeholder="回答验证" name="admin_answer" tabindex="3" type="text" class="txt" autocomplete="off" />
+            <button name="submit" tabindex="3" />登 陆</button>
+        </form>
     </div>
 EOT;
 		echo '<script type="text/JavaScript">document.getElementById(\'loginform\').admin_'.($isguest ? 'username' : 'password').'.focus();</script>';

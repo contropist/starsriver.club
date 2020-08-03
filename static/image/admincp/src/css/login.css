@@ -1,88 +1,87 @@
-.loginpage{
+*{
+    outline: none;
+}
+
+.login{
     display: block;
-    padding-top: 30px;
-    border-top: 3px solid rgba(0,150,210,.5);
     position: absolute;
-    width:800px;
-    height:300px;
     font-size: 16px !important;
     top:calc(50% - 250px);
     left:calc(50% - 400px);
     -webkit-appearance: none;
     -moz-appearance: none;
 }
-.loginpage .part{
-    position: relative;
-    display: block;
-    width:400px;
-    float: left;
-    height:300px;
-    box-sizing: border-box;
+.login .background .layout0 {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
 }
-.loginpage .part *{
-    font-weight: 400!important;
-    font-size: 16px !important;
+.login .background .layout1 {
+    position: fixed;
+    height: 100%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-60%, -50%);
+}
+
+.login form {
+    position: fixed;
+    right: 0;
+    top: 50%;
+    transform: translate(-39%, -50%);
+    background: #ffffff;
+    padding: 42px;
+    border-radius: 18px;
+    box-shadow: 0 3px 15px rgba(101,119,134,0.3) , 0 0 30px #fff;
+}
+
+.login form .administratorname,
+.login form input[type='text'],
+.login form input[type='password'],
+.login form select{
+    width: 240px;
+    height: 45px;
+    display: block;
+    box-sizing: border-box;
+    line-height: 45px;
+    margin-bottom: 20px;
+    text-align: left;
+    padding: 0 10px;
+    border-radius: 6px;
+    border: 0;
+    box-shadow:inset 0 0 0 50px #fff, 0 0 0 2px #eaeaea;
+    transition: .1s ease-in-out;
     color: #999;
 }
-.loginpage .login{
-    padding: 0 50px;
-    border-left:2px solid rgba(0,0,0,.05) ;
+.login form .administratorname{
+    box-shadow: inset 0 0 0 50px #f3f3f3, 0 0 0 2px #eaeaea !important;
+    color: #999;
+    pointer-events: none;
 }
-.loginpage input[type='text'],
-.loginpage input[type='password'],
-.loginpage select{
-    width:300px;
-    height:40px;
-    display: block;
-    box-sizing: border-box;
-    background: #fff;
-    color: rgba(0,0,0,.4);
-    transition: .5s ease;
-    margin-top: 14px;
-    padding-left: 10px;
-    border:1px solid rgba(0,0,0,.1);
-    border-left: 5px solid rgba(0,0,0,.1);
+
+.login form input[type='text']:hover,
+.login form input[type='password']:hover,
+.login form select:hover{
+    box-shadow:inset 0 0 0 50px #fff, 0 0 0 2px rgba(57, 197, 187, 0.8), 0 0 0 4px rgba(57, 197, 187, 0.15);
 }
-.loginpage input[type='text']:hover,
-.loginpage input[type='password']:hover,
-.loginpage select:hover{
-    color:rgba(0,142,160,.8);
-    border:1px solid rgba(0,142,160,.8);
-    border-left: 5px solid rgba(0,142,160,.8);
-}
-.loginpage input[type='text']:focus,
-.loginpage input[type='password']:focus,
-.loginpage select:focus{
-    color: rgba(0,142,160,.8);
-    border:1px solid rgba(0,142,160,.8);
-    border-left: 5px solid rgba(0,142,160,.8);
-}
-.loginpage button{
+
+.login button{
     cursor: pointer;
-    margin-top: 14px;
-    width:300px;
+    width:240px;
     height:40px;
     box-sizing: border-box;
     float: left;
-    font-size: 18px !important;
+    font-size: 15px !important;
     color: #fff !important;
-    border:1px solid rgba(0,180,205,1);
-    background: rgba(0,180,205,1);
+    border: none;
+    background: #39c5bb;
+    border-radius: 6px;
+    transition: .1s ease-in-out;
+    box-shadow:0 0 0 2px rgba(57, 197, 187, 1);
 }
-.loginpage button:hover{
-    background: rgba(0,160,185,1);
+.login form button:hover{
+    box-shadow:0 0 0 2px rgb(50, 170, 162), 0 0 0 4px rgba(57, 197, 187, 0.3);
 }
-.loginpage .administratorname{
-    width:300px;
-    height:40px;
-    display: block;
-    box-sizing: border-box;
-    background: rgba(0,0,0,.05);
-    border:1px solid rgba(0,0,0,.05);
-    border-left: 5px solid rgba(0,0,0,.1);
-    line-height: 30px;
-    transition: .5s ease;
-    margin-top: 14px;
-    text-align: left;
-    padding:5px  10px;
-}
+
