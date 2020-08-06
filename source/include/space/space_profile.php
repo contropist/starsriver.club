@@ -28,12 +28,11 @@ $space['group']['icon'] = g_icon($space['groupid'], 1);
 $encodeusername = rawurlencode($space['username']);
 
 if($space['extgroupids']) {
-	$newgroup = [];
     $e_ids = explode("\t", $space['extgroupids']);
+    $space['extgroupids'] = '';
 	foreach ($e_ids as $e_id) {
-		$newgroup[] = $_G['cache']['usergroups'][$e_id]['grouptitle'];
+        $space['extgroupids'] .= "<p class='tag'>".$_G['cache']['usergroups'][$e_id]['grouptitle']."</p>";
 	}
-	$space['extgroupids'] = implode(',', $newgroup);
 }
 
 $space['regdate'] = dgmdate($space['regdate']);

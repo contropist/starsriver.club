@@ -7320,7 +7320,7 @@
 
     .app-userspace #userspace_profile{
         --box-border-color:  rgba(115, 115, 115,  .1);
-        --box-padding:  25px;
+        --box-padding:  20px;
     }
     .app-userspace #userspace_profile > .panel > .panel-container > .box{
         background: #ffffff;
@@ -7374,9 +7374,12 @@
     }
     .app-userspace #userspace_profile > .panel > .panel-container > .box .info-text{
         display: inline-block;
+        box-sizing: border-box;
+        width: 100%;
         padding: calc(var(--box-padding) / 2) var(--box-padding);
     }
     .app-userspace #userspace_profile > .panel > .panel-container > .box .info-text li{
+        --li-icon-size: 24px;
         display: block;
         line-height: 24px;
     }
@@ -7386,13 +7389,34 @@
     .app-userspace #userspace_profile > .panel > .panel-container > .box .info-text li s{
         color: var(--color-text-info);
     }
+    .app-userspace #userspace_profile > .panel > .panel-container > .box .info-text li s .tag{
+        display: inline-block;
+        background: var(--color-mod-info);
+        color: #fff;
+        margin: 0 5px 5px 0;
+        border-radius: 4px;
+        padding: 0 5px;
+        font-size: 12px;
+    }
+    .app-userspace #userspace_profile > .panel > .panel-container > .box .info-text li s .tag *{
+        color: #fff !important;
+    }
     .app-userspace #userspace_profile > .panel > .panel-container > .box .info-text li .check-mark{
         width: 16px;
         height: 16px;
         vertical-align: middle;
     }
     .app-userspace #userspace_profile > .panel > .panel-container > .box .info-text li i{
+        display: inline-block;
         color: inherit;
+        margin-right: 5px;
+        text-align: center;
+        width: var(--li-icon-size);
+        height: var(--li-icon-size);
+    }
+    .app-userspace #userspace_profile > .panel > .panel-container > .box .info-text li i img{
+        width: var(--li-icon-size);
+        height: var(--li-icon-size);
     }
 
     .app-userspace #userspace_profile > .panel > .panel-container > .box .info-mix.medal li{
