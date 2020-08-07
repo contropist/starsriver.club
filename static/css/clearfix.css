@@ -176,4 +176,9 @@ a, button, .btn, select{
     overflow: hidden;
     text-overflow: ellipsis;
 }
+.nowrap{
+    white-space: nowrap;
+    word-break: keep-all;
+    overflow: hidden;
+}
 /*endregion*/
