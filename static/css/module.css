@@ -7437,10 +7437,11 @@
         width: var(--li-icon-size);
     }
     .app-userspace #userspace_profile > .panel > .panel-container > .box .info-mix.medal li em{
-        color: var(--color-text-info);
+        color: #5b6d60;
     }
     .app-userspace #userspace_profile > .panel > .panel-container > .box .info-mix.medal li s{
         font-size: 12px;
+        font-weight: 100;
         color: var(--color-text-gray);
         position: absolute;
         bottom: var(--li-padding-bottom);
@@ -7607,6 +7608,43 @@
         white-space: nowrap;
         text-overflow: ellipsis;
         overflow: hidden;
+    }
+
+    .app-userspace #userspace_profile > .panel > .panel-container > .box .info-mix.linkonly{
+        padding: 10px;
+        font-size: 0;
+    }
+    .app-userspace #userspace_profile > .panel > .panel-container > .box .info-mix.linkonly li{
+        overflow: hidden;
+        border-radius: 4px;
+        line-height: 30px;
+        width: calc(50% - 10px);
+        display: inline-block;
+        margin: 4px 5px;
+    }
+    .app-userspace #userspace_profile > .panel > .panel-container > .box .info-mix.linkonly li s{
+        display: inline-block;
+        background: var(--color-lightgray);
+        width: 100%;
+        font-size: 13px;
+        text-align: center;
+        padding: 0 10px;
+        box-sizing: border-box;
+    }
+    .app-userspace #userspace_profile > .panel > .panel-container > .box .info-mix.linkonly li s a{
+        width: 100%;
+        color: var(--color-text-dark);
+        border: none;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        line-height: 30px;
+    }
+    .app-userspace #userspace_profile > .panel > .panel-container > .box .info-mix.linkonly li:hover{
+        box-shadow: 0 0 0 2px var(--color-slightgray);
+    }
+    .app-userspace #userspace_profile > .panel > .panel-container > .box .info-mix.linkonly li:hover a{
+        color: var(--color-text-default);
     }
 
     .app-userspace #userspace_profile > .panel > .panel-container > .box .no-info{

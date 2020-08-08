@@ -71,10 +71,10 @@
                     <span>{lang joined_group}</span>
                     <div>
                         <!--{if $groupcount}-->
-                        <ul class="info-text">
+                        <ul class="info-mix linkonly">
                             <!--{loop $usergrouplist $key $value}-->
                             <li>
-                                <s><a style="color:var(--color-main-theme-dark);" href="forum.php?mod=group&fid={$value['fid']}" target="_blank">$value['name']</a></s>
+                                <s><a href="forum.php?mod=group&fid={$value['fid']}" target="_blank">$value['name']</a></s>
                             </li>
                             <!--{/loop}-->
                         </ul>
@@ -87,9 +87,9 @@
                     <span>{lang manage_forums}</span>
                     <div>
                         <!--{if $count}-->
-                        <ul class="info-text">
+                        <ul class="info-mix linkonly">
                             <!--{loop $manage_forum $key $value}-->
-                            <li><s><a style="color:var(--color-main-theme-dark);" href="forum.php?mod=forumdisplay&fid=$key" target="_blank">$value</a></s></li>
+                            <li><s><a href="forum.php?mod=forumdisplay&fid=$key" target="_blank">$value</a></s></li>
                             <!--{/loop}-->
                         </ul>
                         <!--{else}-->
