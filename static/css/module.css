@@ -7319,19 +7319,16 @@
     }
 
     .app-userspace #userspace_profile{
-        --box-border-color:  rgba(115, 115, 115,  .1);
+        --box-border-color:  rgba(115, 115, 115,  .12);
         --box-padding:  20px;
     }
     .app-userspace #userspace_profile > .panel > .panel-container > .box{
         background: #ffffff;
-        border-radius: 5px;
+        border-radius: 8px;
         border: none;
         padding: 0 !important;
         height: 280px;
         box-shadow: 0 0 0 1px var(--box-border-color);
-    }
-    .app-userspace #userspace_profile > .panel > .panel-container > .box:hover{
-        box-shadow: 0 2px 8px rgba(0,0,0,.1);
     }
     .app-userspace #userspace_profile > .panel > .panel-container > .box > span{
         display: block;
@@ -7359,7 +7356,7 @@
         font-size: 18px;
     }
     .app-userspace #userspace_profile > .panel > .panel-container > .box > div{
-        max-height: 230px;
+        max-height: 240px;
         overflow: auto;
         box-sizing: border-box;
     }
@@ -7376,7 +7373,7 @@
         display: inline-block;
         box-sizing: border-box;
         width: 100%;
-        padding: calc(var(--box-padding) / 2) var(--box-padding);
+        padding: calc(var(--box-padding) / 2) calc(var(--box-padding) / 2 + 2px) ;
     }
     .app-userspace #userspace_profile > .panel > .panel-container > .box .info-text li{
         --li-icon-size: 24px;
@@ -7388,18 +7385,6 @@
     }
     .app-userspace #userspace_profile > .panel > .panel-container > .box .info-text li s{
         color: var(--color-text-info);
-    }
-    .app-userspace #userspace_profile > .panel > .panel-container > .box .info-text li s .tag{
-        display: inline-block;
-        background: var(--color-mod-info);
-        color: #fff;
-        margin: 0 5px 5px 0;
-        border-radius: 4px;
-        padding: 0 5px;
-        font-size: 12px;
-    }
-    .app-userspace #userspace_profile > .panel > .panel-container > .box .info-text li s .tag *{
-        color: #fff !important;
     }
     .app-userspace #userspace_profile > .panel > .panel-container > .box .info-text li .check-mark{
         width: 16px;
@@ -7500,7 +7485,7 @@
         display: block;
         overflow: hidden;
         font-size: 13px;
-        color: var(--color-sky-blue);
+        color: var(--color-text-info);
         white-space: nowrap;
         text-overflow: ellipsis;
     }
@@ -7645,6 +7630,38 @@
     }
     .app-userspace #userspace_profile > .panel > .panel-container > .box .info-mix.linkonly li:hover a{
         color: var(--color-text-default);
+    }
+
+    .app-userspace #userspace_profile > .panel > .panel-container > .box .info-mix.profile{
+        border-bottom: 1px solid var(--box-border-color);
+    }
+    .app-userspace #userspace_profile > .panel > .panel-container > .box .info-mix.profile td{
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
+    .app-userspace #userspace_profile > .panel > .panel-container > .box .info-mix.profile td:nth-of-type(1){
+        border-right: 1px solid var(--box-border-color);
+        padding-left: 15px;
+        padding-right: 15px;
+        text-align: right;
+    }
+    .app-userspace #userspace_profile > .panel > .panel-container > .box .info-mix.profile td:nth-of-type(2){
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+    .app-userspace #userspace_profile > .panel > .panel-container > .box .info-mix.profile .tag{
+        width: auto;
+        display: inline-block;
+        background: var(--color-mod-danger);
+        color: #fff;
+        margin: 0 5px 0 0;
+        border-radius: 4px;
+        padding: 0 5px;
+        font-size: 12px;
+    }
+    .app-userspace #userspace_profile > .panel > .panel-container > .box .info-mix.profile .tag *{
+        color: #fff !important;
     }
 
     .app-userspace #userspace_profile > .panel > .panel-container > .box .no-info{

@@ -10,42 +10,71 @@
                 <li class="box size-2-0" id="space_basic_info">
                     <span>{lang basic_info}</span>
                     <div>
-                        <ul class="info-text">
+                        <table class="dc info-mix profile">
+                            <!--{eval $friendinfo = 'friend_info_'.$space['uid'].'_'.$_G[uid];}-->
+
+                            <tbody>
                             <!--{if $space[adminid]}-->
-                            <li><em>{lang management_team}：</em><s style="color:{$space[admingroup][color]}"><a href="home.php?mod=spacecp&ac=usergroup&gid=$space[adminid]" target="_blank">{$space[admingroup][grouptitle]} {$space[admingroup][icon]}</a></s></li>
+                                <tr>
+                                    <td width="30%">{lang management_team}</td>
+                                    <td width="70%"><a style="color:{$space[admingroup][color]}" href="home.php?mod=spacecp&ac=usergroup&gid=$space[adminid]" target="_blank">{$space[admingroup][grouptitle]} {$space[admingroup][icon]}</a></td>
+                                </tr>
                             <!--{/if}-->
 
-                            <li>
-                                <em>{lang usergroup}：</em>
-                                <s {if $upgradecredit !== false} onmouseover="showTip(this)" tip="{lang credits} $space[credits], {lang thread_groupupgrade} $upgradecredit {lang credits}"{/if}>
-                                    <a href="home.php?mod=spacecp&ac=usergroup&gid=$space[groupid]" target="_blank">{$space[group][grouptitle]} {$space[group][icon]}</a>
-                                    <!--{if !empty($space['groupexpiry'])}-->({lang group_useful_life}<!--{date($space[groupexpiry], 'Y-m-d H:i')}-->)<!--{/if}-->
-                                </s>
-                            </li>
+                                <tr>
+                                    <td width="30%">{lang usergroup}</td>
+                                    <td width="70%">
+                                        <s {if $upgradecredit !== false} onmouseover="showTip(this)" tip="{lang credits} $space[credits], {lang thread_groupupgrade} $upgradecredit {lang credits}"{/if}>
+                                            <a href="home.php?mod=spacecp&ac=usergroup&gid=$space[groupid]" target="_blank">{$space[group][grouptitle]} {$space[group][icon]}</a>
+                                            <!--{if !empty($space['groupexpiry'])}-->({lang group_useful_life}<!--{date($space[groupexpiry], 'Y-m-d H:i')}-->)<!--{/if}-->
+                                        </s>
+                                    </td>
+                                </tr>
 
                             <!--{if $space[extgroupids]}-->
-                            <li><em>{lang group_expiry_type_ext}：</em><s>$space[extgroupids]</s></li>
+                                <tr>
+                                    <td width="30%">{lang group_expiry_type_ext}</td>
+                                    <td width="70%">$space[extgroupids]</td>
+                                </tr>
                             <!--{/if}-->
 
-                            <li><em>{lang permission_basic_status}：</em><s><!--{if $space[customstatus]}-->$space[customstatus]<!--{else}-->--<!--{/if}--></s></li>
-                            <li><em>{lang user}UID：</em><s>{$space[uid]}</s></li>
-
-                            <!--{eval $friendinfo = 'friend_info_'.$space['uid'].'_'.$_G[uid];}-->
-                            <li><em>{lang friend_note}：</em><s><!--{if $_G[$friendinfo][note]}-->$_G[$friendinfo][note]<!--{else}-->--<!--{/if}--></s></li>
-                            <li><em>{lang spacenote}：</em><s class="ellipsis" style="display: inline-block; max-width: 200px"><!--{if $space[spacenote]}-->$space[spacenote]<!--{else}-->--<!--{/if}--></s></li>
-                            <li><em>{lang personal_signature}：</em><s class="ellipsis" style="display: inline-block; max-width: 200px"><!--{if $space[group][maxsigsize] && $space[sightml]}-->$space[sightml]<!--{else}-->--<!--{/if}--></s></li>
-                            <li><em>{lang email}：</em><s><!--{if in_array($_G[adminid], array(1, 2))}-->$space[email]<!--{else}-->--<!--{/if}--></s></li>
-
-                            <li>
-                                <em>{lang second_domain}</em>：
-                                <!--{if $_G['setting']['allowspacedomain'] && $_G['setting']['domain']['root']['home'] && checkperm('domainlength') && !empty($space['domain'])}-->
-                                    <!--{eval $spaceurl = $_G['scheme'].'://'.$space['domain'].'.'.$_G['setting']['domain']['root']['home'];}-->
-                                    <s><a href="$spaceurl" onclick="setCopy('$spaceurl', '{lang copy_space_address}');return false;">$spaceurl</a></s>
-                                <!--{else}-->
-                                    <s>--</s>
-                                <!--{/if}-->
-                            </li>
-                        </ul>
+                                <tr>
+                                    <td width="30%">{lang permission_basic_status}</td>
+                                    <td width="70%"><!--{if $space[customstatus]}-->$space[customstatus]<!--{else}-->--<!--{/if}--></td>
+                                </tr>
+                                <tr>
+                                    <td width="30%">{lang user}UID</td>
+                                    <td width="70%">{lang user}UID</td>
+                                </tr>
+                                <tr>
+                                    <td width="30%">{lang friend_note}</td>
+                                    <td width="70%"><!--{if $_G[$friendinfo][note]}-->$_G[$friendinfo][note]<!--{else}-->--<!--{/if}--></td>
+                                </tr>
+                                <tr>
+                                    <td width="30%">{lang spacenote}</td>
+                                    <td width="70%"><!--{if $space[spacenote]}-->$space[spacenote]<!--{else}-->--<!--{/if}--></td>
+                                </tr>
+                                <tr>
+                                    <td width="30%">{lang personal_signature}</td>
+                                    <td width="70%"><!--{if $space[group][maxsigsize] && $space[sightml]}-->$space[sightml]<!--{else}-->--<!--{/if}--></td>
+                                </tr>
+                                <tr>
+                                    <td width="30%">{lang email}</td>
+                                    <td width="70%"><!--{if in_array($_G[adminid], array(1, 2))}-->$space[email]<!--{else}-->--<!--{/if}--></td>
+                                </tr>
+                                <tr>
+                                    <td width="30%">{lang second_domain}</td>
+                                    <td width="70%">
+                                        <!--{if $_G['setting']['allowspacedomain'] && $_G['setting']['domain']['root']['home'] && checkperm('domainlength') && !empty($space['domain'])}-->
+                                        <!--{eval $spaceurl = $_G['scheme'].'://'.$space['domain'].'.'.$_G['setting']['domain']['root']['home'];}-->
+                                            <a href="$spaceurl" onclick="setCopy('$spaceurl', '{lang copy_space_address}');return false;">$spaceurl</a>
+                                        <!--{else}-->
+                                            --
+                                        <!--{/if}-->
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </li>
                 <li class="box size-2-0" id="space_credit_info">
@@ -71,15 +100,15 @@
                     <span>{lang joined_group}</span>
                     <div>
                         <!--{if $groupcount}-->
-                        <ul class="info-mix linkonly">
-                            <!--{loop $usergrouplist $key $value}-->
-                            <li>
-                                <s><a href="forum.php?mod=group&fid={$value['fid']}" target="_blank">$value['name']</a></s>
-                            </li>
-                            <!--{/loop}-->
-                        </ul>
+                            <ul class="info-mix linkonly">
+                                <!--{loop $usergrouplist $key $value}-->
+                                <li>
+                                    <s><a href="forum.php?mod=group&fid={$value['fid']}" target="_blank">$value['name']</a></s>
+                                </li>
+                                <!--{/loop}-->
+                            </ul>
                         <!--{else}-->
-                        <i class="no-info">{lang no_record}</i>
+                            <i class="no-info">{lang no_record}</i>
                         <!--{/if}-->
                     </div>
                 </li>
@@ -87,13 +116,13 @@
                     <span>{lang manage_forums}</span>
                     <div>
                         <!--{if $count}-->
-                        <ul class="info-mix linkonly">
-                            <!--{loop $manage_forum $key $value}-->
-                            <li><s><a href="forum.php?mod=forumdisplay&fid=$key" target="_blank">$value</a></s></li>
-                            <!--{/loop}-->
-                        </ul>
+                            <ul class="info-mix linkonly">
+                                <!--{loop $manage_forum $key $value}-->
+                                    <li><s><a href="forum.php?mod=forumdisplay&fid=$key" target="_blank">$value</a></s></li>
+                                <!--{/loop}-->
+                            </ul>
                         <!--{else}-->
-                        <i class="no-info">{lang no_record}</i>
+                            <i class="no-info">{lang no_record}</i>
                         <!--{/if}-->
                     </div>
                 </li>
@@ -101,76 +130,81 @@
                     <span>{lang medals}<a href="home.php?mod=medal" class="mt-link"></a></span>
                     <div>
                         <!--{if $space['medals']}-->
-                        <ul class="info-mix medal">
-                            <!--{loop $space['medals'] $medal}-->
-                            <li>
-                                <i><img src="{STATICURL}/image/common/$medal[image]" alt="{$medal[name]}：{$medal[description]}"/></i>
-                                <em>$medal[name]</em>
-                                <s>$medal[description]</s>
-                            </li>
-                            <!--{/loop}-->
-                        </ul>
+                            <ul class="info-mix medal">
+                                <!--{loop $space['medals'] $medal}-->
+                                <li>
+                                    <i><img src="{STATICURL}/image/common/$medal[image]" alt="{$medal[name]}：{$medal[description]}"/></i>
+                                    <em>$medal[name]</em>
+                                    <s>$medal[description]</s>
+                                </li>
+                                <!--{/loop}-->
+                            </ul>
                         <!--{else}-->
-                        <i class="no-info">{lang no_record}</i>
+                            <i class="no-info">{lang no_record}</i>
                         <!--{/if}-->
                     </div>
                 </li>
                 <li class="box size-2-0" id="space_profile_info">
                     <span>{lang body_info}</span>
                     <div>
-                        <ul class="info-text">
+                        <table class="dc info-mix profile">
+                            <tbody>
                             <!--{loop $profiles $value}-->
-                            <li><em>$value[title]：</em><s>$value[value]</s></li>
+                                <tr>
+                                    <td width="30%">$value[title]</td>
+                                    <td width="70%">$value[value]</td>
+                                </tr>
                             <!--{/loop}-->
-                        </ul>
+                            </tbody>
+                        </table>
                     </div>
                 </li>
                 <li class="box size-4-0" id="space_crime_record">
                     <span>{lang crime_record}</span>
                     <div>
                         <!--{if $clist}-->
-                        <table class="dc">
-                            <thead>
-                            <tr>
-                                <td width="15%">{lang crime_action}</td>
-                                <td width="25%">{lang crime_dateline}</td>
-                                <td>{lang crime_reason}</td>
-                                <td width="15%">{lang crime_operator}</td>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <!--{loop $clist $crime}-->
-                            <tr>
-                                <td>
-                                    <!--{if $crime[action] == 'crime_delpost'}-->
-                                    {lang crime_delpost}
-                                    <!--{elseif $crime[action] == 'crime_warnpost'}-->
-                                    {lang crime_warnpost}
-                                    <!--{elseif $crime[action] == 'crime_banpost'}-->
-                                    {lang crime_banpost}
-                                    <!--{elseif $crime[action] == 'crime_banspeak'}-->
-                                    {lang crime_banspeak}
-                                    <!--{elseif $crime[action] == 'crime_banvisit'}-->
-                                    {lang crime_banvisit}
-                                    <!--{elseif $crime[action] == 'crime_banstatus'}-->
-                                    {lang crime_banstatus}
-                                    <!--{elseif $crime[action] == 'crime_avatar'}-->
-                                    {lang crime_avatar}
-                                    <!--{elseif $crime[action] == 'crime_sightml'}-->
-                                    {lang crime_sightml}
-                                    <!--{elseif $crime[action] == 'crime_customstatus'}-->
-                                    {lang crime_customstatus}
-                                    <!--{/if}-->
-                                </td>
-                                <td><!--{date($crime[dateline])}--></td>
-                                <td>$crime[reason]</td>
-                                <td><a href="home.php?mod=space&uid=$crime[operatorid]" target="_blank">$crime[operator]</a></td>
-                            </tr>
-                            <!--{/loop}-->
-                            </tbody>
-                        </table>
+                            <table class="dc">
+                                <thead>
+                                <tr>
+                                    <td width="15%">{lang crime_action}</td>
+                                    <td width="25%">{lang crime_dateline}</td>
+                                    <td>{lang crime_reason}</td>
+                                    <td width="15%">{lang crime_operator}</td>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <!--{loop $clist $crime}-->
+                                    <tr>
+                                        <td>
+                                            <!--{if $crime[action] == 'crime_delpost'}-->
+                                                {lang crime_delpost}
+                                            <!--{elseif $crime[action] == 'crime_warnpost'}-->
+                                                {lang crime_warnpost}
+                                            <!--{elseif $crime[action] == 'crime_banpost'}-->
+                                                {lang crime_banpost}
+                                            <!--{elseif $crime[action] == 'crime_banspeak'}-->
+                                                {lang crime_banspeak}
+                                            <!--{elseif $crime[action] == 'crime_banvisit'}-->
+                                                {lang crime_banvisit}
+                                            <!--{elseif $crime[action] == 'crime_banstatus'}-->
+                                                {lang crime_banstatus}
+                                            <!--{elseif $crime[action] == 'crime_avatar'}-->
+                                                {lang crime_avatar}
+                                            <!--{elseif $crime[action] == 'crime_sightml'}-->
+                                                {lang crime_sightml}
+                                            <!--{elseif $crime[action] == 'crime_customstatus'}-->
+                                                {lang crime_customstatus}
+                                            <!--{/if}-->
+                                        </td>
+                                        <td><!--{date($crime[dateline])}--></td>
+                                        <td>$crime[reason]</td>
+                                        <td><a href="home.php?mod=space&uid=$crime[operatorid]" target="_blank">$crime[operator]</a></td>
+                                    </tr>
+                                <!--{/loop}-->
+                                </tbody>
+                            </table>
                         <!--{else}-->
-                        <i class="no-info">{lang no_record}</i>
+                            <i class="no-info">{lang no_record}</i>
                         <!--{/if}-->
                     </div>
                 </li>
