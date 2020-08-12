@@ -10,7 +10,7 @@
 @-ms-viewport{width:device-width}
 @-o-viewport{width:device-width}
 @viewport{width:device-width}
-::-webkit-scrollbar {  width: 4px; height: 4px;  background: transparent;  }
+::-webkit-scrollbar {  width: 2px; height: 2px;  background: transparent;  }
 ::-webkit-scrollbar-thumb{  background: #e6e6e6;  border-radius: 6px;  }
 ::-webkit-scrollbar-track{  background: transparent;  }
 * {

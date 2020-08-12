@@ -2356,14 +2356,14 @@
     }
 
     /* Secondary */
-    .secondary， ul.secondary li a{
+    .secondary， ul.secondary li {
         position: relative;
         overflow: hidden;
     }
-    .secondary:hover, ul.secondary li a:hover{
+    .secondary:hover, ul.secondary li:hover{
         cursor: pointer;
     }
-    .secondary::before, ul.secondary li a::before{
+    .secondary::before, ul.secondary li::before{
         content: '';
         position: absolute;
         display: inline-block;
@@ -2377,7 +2377,7 @@
         transform: scale(.6, .8);
         transition: .15s cubic-bezier(.175,.885,.32,1) !important;
     }
-    .secondary:hover::before, ul.secondary li a:hover::before{
+    .secondary:hover::before, ul.secondary li:hover::before{
         opacity: 1;
         transition: .3s cubic-bezier(.175,.885,.32,1) !important;
         transform: scale(1);

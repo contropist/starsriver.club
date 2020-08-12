@@ -7490,6 +7490,45 @@
         text-overflow: ellipsis;
     }
 
+    .app-userspace #userspace_profile > .panel > .panel-container > .box .info-mix.credit2{
+        --li-icon-size: 18px;
+        --li-lh: 24px;
+        font-size: 0;
+        padding: 10px 0;
+        border-top: 2px dotted var(--box-border-color);
+        margin: 0 24px;
+        cursor: default;
+    }
+    .app-userspace #userspace_profile > .panel > .panel-container > .box .info-mix.credit2 li{
+        display: inline-block;
+        box-sizing: border-box;
+        position: relative;
+        padding: 5px 10px;
+        line-height: var(--li-lh);
+        width: 50%;
+        white-space: nowrap;
+        overflow: hidden;
+        cursor: default;
+        border-radius: 8px;
+        text-overflow: ellipsis;
+    }
+    .app-userspace #userspace_profile > .panel > .panel-container > .box .info-mix.credit2 li i{
+        line-height: var(--li-icon-size);
+        margin-right: 5px;
+    }
+    .app-userspace #userspace_profile > .panel > .panel-container > .box .info-mix.credit2 li i img{
+        width: var(--li-icon-size);
+    }
+    .app-userspace #userspace_profile > .panel > .panel-container > .box .info-mix.credit2 li em{
+        color: var(--color-text-gray);
+    }
+    .app-userspace #userspace_profile > .panel > .panel-container > .box .info-mix.credit2 li s{
+        overflow: hidden;
+        color: var(--color-text-info);
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+
     .app-userspace #userspace_profile > .panel > .panel-container > .box .info-mix.verify{
         text-align: center;
     }
