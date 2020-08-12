@@ -82,6 +82,10 @@ $message = <<<EOT
             line-height: 24px;
             border: 6px solid #fff;
         }
+        .starsriver_mail_content_para_method a{
+            width: 450px;
+            display: block;
+        }
         .starsriver_mail_content_para_warning{
             background: #f7dcdc;
             color: #c1654a;
@@ -93,7 +97,7 @@ $message = <<<EOT
     <table class="starsriver_mail" align="center">
         <tbody style="background:#fff; border: 1px solid #e6e6e6">
             <tr>
-                <td style="background: var(--color-main-theme); color: #fff; padding: 16px;">
+                <td style="background: #39c5bb; color: #fff; padding: 16px;">
                     <table>
                         <tbody>
                             <tr>
