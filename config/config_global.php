@@ -64,7 +64,6 @@ $_config = [
         'gzip'            => '0',
         'tplrefresh'      => 1,
         'language'        => 'zh_cn',
-        'mobile'          => false,
         'staticurl'       => 'static/',
         'liburl'          => '//static.starscdn.com/repository/common',
         'fonturl'         => '//static.starscdn.com/repository/common/fonts',
