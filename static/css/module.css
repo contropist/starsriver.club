@@ -7328,6 +7328,7 @@
     .app-userspace .space-head > .bank.type-scroll .btn-group {
         display: inline-block;
         padding: 8px 0 0 5px;
+        display: none;
     }
 
     /*region #userspace_profile*/
@@ -8075,7 +8076,7 @@
         @media screen and (max-width:1000px) {
             .app-userspace #userspace_wall .wall .comments{
                 width: 100% !important;
-                margin-bottom: 130px;
+                margin-bottom: 80px;
             }
 
             .app-userspace #userspace_wall .wall .commentform{
@@ -8085,13 +8086,24 @@
                 margin: 0;
                 right: 0;
                 bottom: 20px;
-                box-shadow: 0 -50px 25px rgba(0,0,0,.1);
+                box-shadow: 0 0 10px var(--color-slightgray);
+            }
+            .app-userspace #userspace_wall .wall .commentform .menu{
+                top: calc(100% - 60px);
+                left: 15px;
+                bottom: auto;
+            }
+            .app-userspace #userspace_wall .wall .commentform .decrater-a,
+            .app-userspace #userspace_wall .wall .commentform .decrater-b,
+            .app-userspace #userspace_wall .wall .commentform .tool{
+                display: none;
             }
             .app-userspace #userspace_wall .wall .commentform textarea{
                 height: 42px;
             }
             .app-userspace #userspace_wall .wall .commentform button{
-                width: calc(100% - 60px)!important;
+                width: calc(100% - 160px)!important;
+                margin-left: 100px;
             }
             .app-userspace #userspace_wall .wall .commentform .post-res{
                 text-align: center;
@@ -8100,9 +8112,12 @@
                 width: 100% !important;
                 bottom: 20px;
             }
+            .WL-0 .app-userspace #userspace_wall .wall .commentform .menu{
+                left: 64px;
+            }
             .WL-0 .app-userspace #userspace_wall .wall .commentform button{
-                width: calc(100% - 120px)!important;
-                margin-left: 60px;
+                width: calc(100% - 200px)!important;
+                margin-left: 136px;
             }
         }
     /*endregion*/
