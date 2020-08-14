@@ -64,6 +64,26 @@
                 function succeedhandle_qcwall_{$space[uid]}(url, msg, values) {
                     wall_add(values['cid']);
                 }
+
+                addEvent(document,'DOMContentLoaded',function () {
+                    let postform = SR('#quickcommentform_{$space[uid]}')[0];
+
+                    positionfix = function (){
+                        if(SRGlobal.Window.Width > 1000){
+                            if(body.hasClass('scroll-overhaed')){
+                                postform.style = 'position: fixed !important; right: 8px; top:'+ (MasElements.Bank.Css.height + 8) + 'px;';
+                            } else {
+                                postform.style = '';
+                            }
+                        }
+                    };
+
+                    if(postform){
+                        addEvent(MasElements.viewer,'scroll',positionfix);
+                    }
+                });
+
+
             </script>
         </div>
     </div>

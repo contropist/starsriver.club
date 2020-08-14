@@ -8,7 +8,7 @@
             Debugmod : false,
 
             Window:{
-                Width: document.documentElement.clientHeight || document.body.clientHeight,
+                Width: document.documentElement.clientWidth || document.body.clientWidth,
                 Height: document.documentElement.clientHeight || document.body.clientHeight,
                 Scroll:{
                     DirX:'',
@@ -57,6 +57,7 @@
             viewerHeader:    SR('.Mas > .mas-viewer > .mas-viewer-header')[0],
             viewerBanner:    SR('.Mas > .mas-viewer > .mas-viewer-header > div > .banner')[0],
             viewerBannerImg: SR('.Mas > .mas-viewer > .mas-viewer-header > div > .banner > img')[0],
+            Bank:            SR('.Mas > .mas-viewer > .mas-viewer-header  > div > .bank')[0],
             BankS:           SR('.Mas > .mas-viewer > .mas-viewer-header  > div > .bank.type-scroll')[0],
         };
 
@@ -316,7 +317,7 @@
 
         viewerScroll: function () {
             if(MasElements.viewer && MasElements.viewerBanner.Css.height !== 0){
-                if(MasElements.viewer.scrollTop >= MasElements.viewerHeader.Css.height){
+                if(MasElements.viewer.scrollTop >= MasElements.viewerHeader.Css.height - MasElements.Bank.Css.height){
                     body.addClass('scroll-overhaed');
                 } else {
                     body.delClass('scroll-overhaed');

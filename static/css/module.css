@@ -7793,15 +7793,15 @@
             position: absolute;
             right: 0;
             display: inline-block;
-            background: #fff;
             width: var(--wall-commentform-width);
             margin: 50px var(--box-margin) var(--box-margin) var(--box-margin);
+            z-index: 1;
         }
         .app-userspace #userspace_wall .wall .commentform .menu{
             position: absolute;
             bottom: 100%;
             left: 0;
-            margin: 5px 20px;
+            margin: 0 20px;
             line-height: 32px;
         }
         .app-userspace #userspace_wall .wall .commentform .menu a{
@@ -7850,6 +7850,8 @@
             color: var(--color-text-gray);
         }
         .app-userspace #userspace_wall .wall .comments{
+            z-index: 0;
+            position: relative;
             display: inline-block;
             width: calc(100% - 16px - var(--wall-commentform-width));
         }
@@ -8072,10 +8074,34 @@
         @media screen and (max-width:1000px) {
             .app-userspace #userspace_wall .wall .comments{
                 width: 100% !important;
+                margin-bottom: 130px;
             }
+
             .app-userspace #userspace_wall .wall .commentform{
-                position: relative !important;
-                width: calc(100% - 2 * var(--box-margin)) !important;
+                --box-radius: 0;
+                position: fixed !important;
+                width: calc(100% - 71px) !important;
+                margin: 0;
+                right: 0;
+                bottom: 20px;
+                box-shadow: 0 -50px 25px rgba(0,0,0,.1);
+            }
+            .app-userspace #userspace_wall .wall .commentform textarea{
+                height: 42px;
+            }
+            .app-userspace #userspace_wall .wall .commentform button{
+                width: calc(100% - 60px)!important;
+            }
+            .app-userspace #userspace_wall .wall .commentform .post-res{
+                text-align: center;
+            }
+            .WL-0 .app-userspace #userspace_wall .wall .commentform{
+                width: 100% !important;
+                bottom: 20px;
+            }
+            .WL-0 .app-userspace #userspace_wall .wall .commentform button{
+                width: calc(100% - 120px)!important;
+                margin-left: 60px;
             }
         }
     /*endregion*/
