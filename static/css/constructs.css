@@ -1191,6 +1191,34 @@
         opacity: 1;
         transform: rotate(0);
     }
+
+    /* Shadow btn */
+    .btn-shadow{
+        display: inline-block;
+        width: 100%;
+        color: #fff;
+        margin-top: 15px;
+        border-radius: 8px;
+        background: var(--color-main-theme);
+        box-shadow: 0 0 0 2px var(--color-main-theme-shadow);
+        border: 2px solid var(--color-main-theme);
+        font-size: 14px;
+        line-height: 34px;
+        height: auto;
+    }
+    .btn-shadow:hover{
+        display: inline-block;
+        width: 100%;
+        color: #fff;
+        margin-top: 15px;
+        border-radius: 8px;
+        background: var(--color-main-theme);
+        box-shadow: 0 0 0 2px var(--color-main-theme-shadow);
+        border: 2px solid var(--color-main-theme-dark);
+        font-size: 14px;
+        line-height: 34px;
+        height: auto;
+    }
 /*endregion*/
 
 /*region Drop hover menu*/
@@ -2003,13 +2031,14 @@
         --color-back-default: #f5f5f9;
         --color-main-theme: #39c5bb;
         --color-main-theme-dark: #269e96;
-        --color-main-theme-shadow: rgba(57, 197, 187, 0.2);
-        --color-main-theme-opacity: rgba(57, 197, 187, 0.41);
+        --color-main-theme-shadow: #d7f3f1;
+        --color-main-theme-opacity: #ade7e3;
         --color-orange: #f26c4f;
         --color-dark: #393939;
-        --color-gray: #AAAAAA;
-        --color-lightgray: rgba(0,0,0,.05);
-        --color-slightgray: rgba(0,0,0,.1);
+        --color-gray: #aaaaaa;
+        --color-vlightgray: rgb(250 250 250);
+        --color-lightgray: rgb(242 242 242);
+        --color-slightgray: rgb(229 229 229);
         --color-heart-pink: #FF4E66;
         --color-charry-pink: #FF7F8F;
         --color-onnanoko-pink: #ee2266;
@@ -2082,6 +2111,12 @@
 /*endregion*/
 
 /*region hi-color*/
+    [class^='hi-'] a{
+        border-bottom: 1px dashed;
+    }
+    [class^='hi-'].with-border{
+        border: 1px solid;
+    }
     /* Normal */
     .hi-success { color: var(--color-mod-success) !important; background: #ddf4df !important; border-color:#d7eed9 !important;}
     .hi-warning { color: var(--color-mod-warning) !important; background: #fff0d5 !important; border-color:#f4e5cb !important;}
@@ -2107,13 +2142,20 @@
     .hi-cute    hr { border-top-color:#e8b8c8 !important; }
     .hi-disabled hr{ border-top-color:#aaaaaa !important; }
     /* Dark Style */
-    .hi-success-dark, .hi-success-dark, .hi-warning-dark, .hi-danger-dark, .hi-info-dark, .hi-primary-dark *, .hi-success-dark *, .hi-success-dark *, .hi-warning-dark *, .hi-danger-dark *, .hi-info-dark *, .hi-primary-dark *, .hi-cute-dark *{  color:#fff;  }
+    .hi-success-dark, .hi-success-dark *,
+    .hi-warning-dark, .hi-warning-dark *,
+    .hi-danger-dark,  .hi-danger-dark *,
+    .hi-info-dark,    .hi-info-dark *,
+    .hi-cute-dark,    .hi-cute-dark *,
+    .hi-primary-dark, .hi-primary-dark *{
+        color:#fff;
+    }
     .hi-success-dark  { background: var(--color-mod-success) !important; border-color: rgba(255,255,255,.3) !important;}
     .hi-warning-dark  { background: #f1a325 !important; border-color: rgba(255,255,255,.3) !important;}
     .hi-danger-dark   { background: #ea644a !important; border-color: rgba(255,255,255,.3) !important;}
     .hi-info-dark     { background: var(--color-mod-info) !important; border-color: rgba(255,255,255,.3) !important;}
     .hi-primary-dark  { background: var(--color-text-primary) !important; border-color: rgba(255,255,255,.3) !important;}
-    .hi-cute-dark     { background: #f5578b !important; border-color: rgba(220,13, 117,.3) !important;}
+    .hi-cute-dark     { background: #ff709f !important; border-color: rgba(220,13, 117,.3) !important;}
     /* Dark Hr Style */
     .hi-success-dark hr,
     .hi-warning-dark hr,
@@ -2429,6 +2471,7 @@
         cursor: pointer;
     }
     .wave::before, ul.wave li::before{
+        z-index: 0;
         content: '';
         position: absolute;
         display: inline-block;
@@ -3073,7 +3116,7 @@
     .Mas.edge .mas-viewer .mas-viewer-container{
         width: 100%;
         box-sizing: border-box;
-        margin-bottom:30px;
+        margin-bottom:90px;
     }
 
     .Mas.edge .mas-viewer .mas-viewer-container table{

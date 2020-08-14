@@ -39,7 +39,7 @@ function add_comment($message, $id, $idtype, $cid = 0) {
 	if($cid) {
 		$comment = C::t('home_comment')->fetch_by_id_idtype($id, $idtype, $cid);
 		if($comment && $comment['authorid'] != $_G['uid']) {
-			$comment['message'] = preg_replace("/\<div class=\"quote\"\>\<blockquote\>.*?\<\/blockquote\>\<\/div\>/is", '', $comment['message']);
+			$comment['message'] = preg_replace("/\<blockquote\>.*?\<\/blockquote\>/is", '', $comment['message']);
 			$comment['message'] = $bbcode->html2bbcode($comment['message']);
 			$message = ("<blockquote>".$comment['author'].": ".getstr($comment['message'], 150, 0, 0, 2, 1).'</blockquote>').$message;
 			if($comment['idtype'] == 'uid') {

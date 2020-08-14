@@ -554,13 +554,24 @@ function showFace(showid, target, dropstr) {
 	} else {
 		var faceDiv = document.createElement("div");
 		faceDiv.id = showid+'_menu';
-		faceDiv.className = 'p_pop facel';
+		faceDiv.className = 'p_pop face-menu';
 		faceDiv.style.position = 'absolute';
 		faceDiv.style.zIndex = 1001;
+
+		faceName = [
+		    'angry','anguished','astonished','blush','bowtie','cold_sweat','confounded','confused','cry',
+            'disappointed','disappointed_relieved','dizzy_face','expressionless','fearful','flushed','frowning','full_moon_with_face','ghost',
+            'grimacing','grin','grinning','heart_eyes','hushed','imp','innocent','joy','kissing',
+            'kissing_1','kissing_2','kissing_3','last_quarter','laughing','mask','neutral_face','no_mouth','open_mouth',
+            'pensive','persevere','rage','relaxed','relieved','scream','sleeping','sleepy','smile',
+            'smiley','smiling_imp','smirk','sob','stuckout_1','stuckout_2','stuckout_3','sunglasses','sweat',
+            'sweat_smile','tired_face','triumph','trollface','unamused','weary','wink','worried','yum'
+        ];
+
 		var faceul = document.createElement("ul");
-		for(i=1; i<31; i++) {
+		for(i=0; i<faceName.length; i++) {
 			var faceli = document.createElement("li");
-			faceli.innerHTML = '<img src="' + STATICURL + 'image/smiley/comcom/'+i+'.gif" onclick="insertFace(\''+showid+'\','+i+', \''+ target +'\', \''+dropstr+'\')" style="cursor:pointer; position:relative;" />';
+			faceli.innerHTML = '<img src="' + IMGURL + '/expression/emoji/face/'+faceName[i]+'.png" onclick="insertFace(\''+showid+'\',\''+faceName[i]+'\', \''+ target +'\', \''+dropstr+'\')" style="cursor:pointer; position:relative;" />';
 			faceul.appendChild(faceli);
 		}
 		faceDiv.appendChild(faceul);

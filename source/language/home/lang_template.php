@@ -1545,7 +1545,7 @@ $lang = [
     'fill_profile' => '完善帐号',
     'bind_profile' => '绑定帐号',
     'connect_fill_profile_to_view' => '<a href="member.php?mod=connect" target="_blank">完善帐号</a>/<a href="member.php?mod=connect&ac=bind" target="_blank">绑定帐号</a>',
-    'connect_fill_profile_to_comment' => '你需要<a href="member.php?mod=connect">完善帐号</a> 或 <a href="member.php?mod=connect&ac=bind">绑定帐号</a> 后才可以留言',
+    'connect_fill_profile_to_comment' => '你需要 <a href="member.php?mod=connect">完善帐号</a> 或 <a href="member.php?mod=connect&ac=bind">绑定帐号</a> 后才可以留言',
     'save_to_album' => '保存到画廊',
     'usergroup_expired' => '你当前的用户组已经到期，请续费或切换到其他用户组',
 

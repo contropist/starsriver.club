@@ -38,12 +38,12 @@ class bbcode {
 			$this->search_exp = array(
 				"/\s*\[quote\][\n\r]*(.+?)[\n\r]*\[\/quote\]\s*/is",
 				"/\[url\]\s*(https?:\/\/|ftp:\/\/|gopher:\/\/|news:\/\/|telnet:\/\/|rtsp:\/\/|mms:\/\/|callto:\/\/|ed2k:\/\/){1}([^\[\"']+?)\s*\[\/url\]/i",
-				"/\[em:([0-9]+):\]/i",
+				"/\[em:([a-zA-Z0-9_]+):\]/i",
 			);
 			$this->replace_exp = array(
 				"<blockquote>\\1</blockquote>",
 				"<a href=\"\\1\\2\" target=\"_blank\">\\1\\2</a>",
-				" <img src=\"".STATICURL."image/smiley/comcom/\\1.gif\" class=\"vm\"> "
+				"<img src=\"".IMGURL."/expression/emoji/face/\\1.png\" class=\"emoji-face\"> "
 			);
 			$this->replace_exp[] = '$this->bb_img(\'\\1\')';
 			$this->search_str = array('[b]', '[/b]','[i]', '[/i]', '[u]', '[/u]');

@@ -6,13 +6,37 @@
 -----------------------------------------------------------------------------------------------------------------------*/
 
 /*region Scroll Fix*/
-@-webkit-viewport{width:device-width}
-@-ms-viewport{width:device-width}
-@-o-viewport{width:device-width}
-@viewport{width:device-width}
-::-webkit-scrollbar {  width: 2px; height: 2px;  background: transparent;  }
-::-webkit-scrollbar-thumb{  background: #e6e6e6;  border-radius: 6px;  }
-::-webkit-scrollbar-track{  background: transparent;  }
+@-webkit-viewport {
+    width: device-width
+}
+
+@-ms-viewport {
+    width: device-width
+}
+
+@-o-viewport {
+    width: device-width
+}
+
+@viewport {
+    width: device-width
+}
+
+::-webkit-scrollbar {
+    width: 2px;
+    height: 2px;
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #e6e6e6;
+    border-radius: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
 * {
     scrollbar-arrow: hidden;
     scrollbar-arrow-color: #fff;
@@ -25,22 +49,22 @@
 }
 
 body,
-.Mas [class*="mas-"]{
-    -ms-overflow-style:none;
+.Mas [class*="mas-"] {
+    -ms-overflow-style: none;
     scrollbar-width: none;
 }
 
 body::-webkit-scrollbar,
-.Mas [class*="mas-"]::-webkit-scrollbar{
+.Mas [class*="mas-"]::-webkit-scrollbar {
     width: 0;
 }
-/*endregion*/
 
+/*endregion*/
 
 
 /*region Clean*/
 * {
-    font-family: "Microsoft YaHei","Material","Feather","Awesome","Icomoon","Discuz-Editor" !important;
+    font-family: "Microsoft YaHei", "Material", "Feather", "Awesome", "Icomoon", "Discuz-Editor" !important;
     margin: 0;
     padding: 0;
     font-size: 14px;
@@ -48,32 +72,69 @@ body::-webkit-scrollbar,
     text-decoration: none !important;
     outline: none !important;
     vertical-align: top;
-    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
+
 body {
     overflow-x: hidden;
     background: #fff;
     -webkit-font-smoothing: subpixel-antialiased;
     margin-bottom: 50px;
 }
+
 a {
     color: #393939;
     text-decoration: none;
     display: inline-block;
     text-overflow: ellipsis !important;
 }
-a img {border: none;}
-li {  list-style: none;  }
-em, cite, i {  font-style: normal;}
-h1 {font-size: 14px !important;}
-h2 {font-size: 17px !important;}
-h3 {font-size: 20px !important;}
-h4 {font-size: 24px !important;}
-h5 {font-size: 28px !important;}
-h6 {font-size: 32px !important;}
-strong{  font-weight: 700;  }
-img{ border-radius: 3px; }
-hr{
+
+a img {
+    border: none;
+}
+
+li {
+    list-style: none;
+}
+
+em, cite, i {
+    font-style: normal;
+}
+
+h1 {
+    font-size: 14px !important;
+}
+
+h2 {
+    font-size: 17px !important;
+}
+
+h3 {
+    font-size: 20px !important;
+}
+
+h4 {
+    font-size: 24px !important;
+}
+
+h5 {
+    font-size: 28px !important;
+}
+
+h6 {
+    font-size: 32px !important;
+}
+
+strong {
+    font-weight: 700;
+}
+
+img {
+    border-radius: 3px;
+    image-rendering: -webkit-optimize-contrast;
+}
+
+hr {
     border: 0;
     background: none;
     border-bottom: 1px solid #e9e9e9;
@@ -81,36 +142,48 @@ hr{
     margin: 9px 5px 8px 5px;
     line-height: 0;
 }
-label {cursor: pointer;}
-select::-ms-expand{display: none !important}
-select{
+
+label {
+    cursor: pointer;
+}
+
+select::-ms-expand {
+    display: none !important
+}
+
+select {
     -webkit-appearance: none !important;
     -moz-appearance: none !important;
 }
+
 input[type="password"],
-input[type="text"]{
+input[type="text"] {
     padding: 0 10px;
     box-sizing: border-box;
-    height:32px;
-    line-height:32px;
-    border:none;
+    height: 32px;
+    line-height: 32px;
+    border: none;
 }
+
 ::-ms-clear,
-::-webkit-clear-button{
+::-webkit-clear-button {
     display: none !important;
 }
-input:disabled{
+
+input:disabled {
     color: #888;
     border-color: #ddd !important;
 }
-button , input[type="submit"]{
+
+button, input[type="submit"] {
     cursor: pointer !important;
     box-sizing: border-box;
-    height:32px;
+    height: 32px;
     line-height: 30px;
-    padding:0 10px;
-    border:none;
+    padding: 0 10px;
+    border: none;
 }
+
 button:disabled,
 input[type="submit"].disabled {
     border-color: #ddd !important;
@@ -119,66 +192,107 @@ input[type="submit"].disabled {
     cursor: default !important;
     opacity: .5;
 }
+
 textarea {
     resize: none;
     border: 1px solid #ccc;
-    color:#999;
+    color: #999;
     padding: 10px;
     overflow: auto;
     display: inline-block;
     box-sizing: border-box;
 }
-textarea:focus{
-    color:#333;
+
+textarea:focus {
+    color: #333;
 }
+
 script {
     display: none !important;
 }
-textarea:disabled{  background: #f4f4f4;  }
-::selection {  background: #b3d4fc;  }
-a, button, .btn, select{
+
+textarea:disabled {
+    background: #f4f4f4;
+}
+
+::selection {
+    background: #b3d4fc;
+}
+
+a, button, .btn, select {
     cursor: pointer;
 }
+
 [hide], .hide,
 [hidden], .hidden,
-[template], .template, template{display: none !important;}
-.title{  cursor: default;  }
-.pointer{cursor: pointer !important}
-.dpointer{cursor: default !important}
-.f{ width: 100%;}
-.l {float: left !important;}
-.r {float: right !important;}
-.clear-objgap{
+[template], .template, template {
+    display: none !important;
+}
+
+.title {
+    cursor: default;
+}
+
+.pointer {
+    cursor: pointer !important
+}
+
+.dpointer {
+    cursor: default !important
+}
+
+.f {
+    width: 100%;
+}
+
+.l {
+    float: left !important;
+}
+
+.r {
+    float: right !important;
+}
+
+.clear-objgap {
     font-size: 0;
 }
-.autowidth{
+
+.autowidth {
     width: auto !important;
 }
-.fullwidth{
+
+.fullwidth {
     width: 100% !important;
 }
-.block-element{
+
+.block-element {
     display: block !important;
 }
-.hideoverflow{
+
+.hideoverflow {
     overflow: hidden !important;
 }
-*:-webkit-autofill{
+
+*:-webkit-autofill {
     background: #fff !important;
 }
-.disabled, *:disabled{
+
+.disabled, *:disabled {
     pointer-events: none !important;
     opacity: .39;
 }
-.ellipsis{
+
+.ellipsis {
     white-space: nowrap;
     word-break: keep-all;
     overflow: hidden;
     text-overflow: ellipsis;
 }
-.nowrap{
+
+.nowrap {
     white-space: nowrap;
     word-break: keep-all;
     overflow: hidden;
 }
+
 /*endregion*/

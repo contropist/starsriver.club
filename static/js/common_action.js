@@ -78,40 +78,28 @@
             addEvent(window,  'mousewheel',DocAction.wheel);
             addEvent(document,'mousewheel',DocAction.wheel);
 
-            if(document.addEventListener){ //firefox
+            if(document.addEventListener) { //firefox
                 document.addEventListener('DOMMouseScroll', DocAction.wheel(), false);
             }
 
-            function inni() {
+            loader.hook.onload = function () {
+                /* 页面尺寸初始化 */
+                DocAction.resize();
 
-                while (1){
+                /* tooltip初始化 */
+                tooltip_init();
 
-                    if(loader.hook.complete){
-                        setTimeout(function () {
-                            /* 页面尺寸初始化 */
-                            DocAction.resize();
-
-                            /* tooltip初始化 */
-                            tooltip_init();
-
-                            /* nav样式初始化 */
-                            if(banner){
-                                (document.documentElement.scrollTop || document.body.scrollTop || 0) >= (banner.Css.height - nav.Css.height) ? body.addClass('scroll-overhaed') : '';
-                            }
-
-                            /* 清除loader遮罩 */
-                            for(let self of loader.pare){
-                                self.parentElement.removeChild(self);
-                            }
-
-                        },1);
-
-                        break;
-                    }
+                /* nav样式初始化 */
+                if(banner){
+                    (document.documentElement.scrollTop || document.body.scrollTop || 0) >= (banner.Css.height - nav.Css.height) ? body.addClass('scroll-overhaed') : '';
                 }
-            }
 
-            loader.hook.onload = inni();
+                /* 清除loader遮罩 */
+                for(let self of loader.pare){
+                    self.parentElement.removeChild(self);
+                }
+            };
+
             loader.hook.src = loader.hook.data('src');
         },
 
@@ -134,7 +122,7 @@
             SRGlobal.Window.Height = document.documentElement.clientHeight || document.body.clientHeight;
             SRGlobal.Window.Width = document.documentElement.clientWidth || document.body.clientWidth;
 
-            let MasGuideWidth = isUndefined(MasElements.guide) ? 0 : MasElements.guide.Css.width,
+            let MasGuideWidth = isUndefined(MasElements.guide) ? 0 : 72,
 
                 windowSize = 'WL-0';
 
@@ -178,7 +166,6 @@
         },
 
         scroll: function () {
-
             SRGlobal.Window.Scroll.Height = document.documentElement.scrollHeight || document.body.scrollHeight;
             SRGlobal.Window.Scroll.Width = document.documentElement.scrollWidth || document.body.scrollWidth;
             SRGlobal.Window.Scroll.Top = document.documentElement.scrollTop || document.body.scrollTop || 0;
@@ -268,7 +255,6 @@
 
                         menu_list.style.height = SRGlobal.Window.Height - console_title.Css.height - menu_list.Css.paddingBottom - ((SRGlobal.Window.Height - uconsole.Css.bottom) > 0 ? (SRGlobal.Window.Height - uconsole.Css.bottom) : 0) + 'px';
 
-
                         if(SRGlobal.Window.Scroll.Top > uconsole.Css.top){
                             menu.style.position = 'fixed';
                             menu.style.top = '0';
@@ -286,12 +272,13 @@
                             }
 
                         } else {
-                            topaction ()
+                            topaction();
                         }
 
                     }
+
                     if(SRGlobal.Window.Scroll.Top <= uconsole.Css.top) {
-                        topaction ()
+                        topaction();
                     }
                 }
             })();
