@@ -7954,6 +7954,7 @@
             bottom: 100%;
             left: 12px;
             width: calc(100% - 130px);
+            white-space: nowrap;
             margin-bottom: 8px;
             background: var(--color-vlightgray);
             border-radius: 50px;
