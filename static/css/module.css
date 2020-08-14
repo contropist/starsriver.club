@@ -7000,7 +7000,7 @@
     }
     .app-userspace [class^="hi-"]{
         box-sizing: border-box;
-        width: 100%;
+        width: calc(100% - 16px);
         padding: 10px 15px;
         margin: 8px;
         border-radius: 4px;
@@ -7996,7 +7996,7 @@
             height: 24px;
             line-height: 24px;
         }
-        .app-userspace #userspace_wall .wall .decrater-c .card-btm .date{
+        .app-userspace #userspace_wall .wall li .decrater-c .card-btm .date{
             z-index: 0;
             font-size: 13px;
             color: var(--color-text-gray);
