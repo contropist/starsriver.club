@@ -84,9 +84,6 @@
             }
 
             loader.hook.onload = function () {
-                /* 页面尺寸初始化 */
-                DocAction.resize();
-
                 /* tooltip初始化 */
                 tooltip_init();
 
@@ -94,6 +91,10 @@
                 if(banner){
                     (document.documentElement.scrollTop || document.body.scrollTop || 0) >= (banner.Css.height - nav.Css.height) ? body.addClass('scroll-overhaed') : '';
                 }
+
+                /* 页面尺寸初始化 */
+                DocAction.resize();
+
 
                 /* 清除loader遮罩 */
                 for(let self of loader.pare){

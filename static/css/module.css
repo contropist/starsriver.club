@@ -8107,8 +8107,6 @@
         }
     /*endregion*/
 
-
-
     @media screen and (max-width:1240px) {
         .app-dynamic .album-list li{width: calc(100% / 2 - 7.5px) !important;}
         .app-dynamic .album-list li:nth-of-type(2n + 1) {margin:0 7.5px 15px 0 !important;}

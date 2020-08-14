@@ -30,7 +30,7 @@ class discuz_application extends discuz_base{
 	var $init_session = true;
 	var $init_cron = true;
 	var $init_misc = true;
-	var $init_mobile = true;
+	var $init_mobile = false;
 
 	var $initated = false;
 
