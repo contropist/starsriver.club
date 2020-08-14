@@ -34,7 +34,7 @@
             },
 
             Temp: {
-                windowSize:'WL-0'
+                windowSize:''
             }
         };
 
@@ -152,7 +152,7 @@
 
             if(SRGlobal.Temp.windowSize !== windowSize){
                 SRGlobal.Temp.windowSize = windowSize;
-                body.delClass("WL-0 WL-3P WL-4P WL-7P WL-13P WL-1K WL-2K WL-2K WL-4K");
+                body.delClass("WL-0 WL-3P WL-4P WL-7P WL-13P WL-1K WL-2K WL-4K");
                 body.addClass(windowSize);
             }
 
