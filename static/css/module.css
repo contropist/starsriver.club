@@ -7268,6 +7268,10 @@
         max-width: 219px;
         white-space: nowrap;
         overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    .WL-0 .app-userspace .space-head > .bank .username{
+        max-width: 115px;
     }
     .app-userspace .space-head > .bank .username .tag{
         position: absolute;
@@ -7328,6 +7332,9 @@
     .app-userspace .space-head > .bank.type-scroll .btn-group {
         display: inline-block;
         padding: 8px 0 0 5px;
+    }
+    .WL-0 .app-userspace .space-head > .bank.type-scroll .btn-group,
+    .WL-3P .app-userspace .space-head > .bank.type-scroll .btn-group {
         display: none;
     }
 
@@ -7845,6 +7852,9 @@
         }
         .app-userspace #userspace_wall .wall .commentform textarea:focus{
             background: #fff;
+        }
+        .app-userspace #userspace_wall .wall .commentform button{
+            white-space: nowrap;
         }
         .app-userspace #userspace_wall .wall .commentform .post-res{
             padding-top: 10px;
