@@ -1530,7 +1530,7 @@
         height:100px;
         background: #fff;
         position: absolute;
-        right: calc(100% + 10px);
+        right: -20px;
         top: -20px;
         padding: 10px;
         box-sizing: content-box;
@@ -1540,7 +1540,6 @@
         visibility: hidden;
         overflow: visible;
         opacity: 0;
-        transform: translate3d(10px, 0, 0);
     }
     #footer-drawer .link-icon-r span img{
         width:100%;
