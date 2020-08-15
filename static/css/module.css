@@ -8096,11 +8096,11 @@
                 margin: 0;
                 right: 0;
                 bottom: 20px;
-                box-shadow: 0 0 10px var(--color-slightgray);
+                box-shadow: 0 0 5px rgba(0,0,0,.2);
             }
             .app-userspace #userspace_wall .wall .commentform .menu{
                 top: calc(100% - 60px);
-                left: 15px;
+                left: 0;
                 bottom: auto;
             }
             .app-userspace #userspace_wall .wall .commentform .decrater-a,
@@ -8110,10 +8110,11 @@
             }
             .app-userspace #userspace_wall .wall .commentform textarea{
                 height: 42px;
+                border-radius: 8px;
             }
             .app-userspace #userspace_wall .wall .commentform button{
-                width: calc(100% - 160px)!important;
-                margin-left: 100px;
+                width: calc(100% - 140px)!important;
+                margin-left: 72px;
             }
             .app-userspace #userspace_wall .wall .commentform .post-res{
                 text-align: center;
@@ -8121,13 +8122,6 @@
             .WL-0 .app-userspace #userspace_wall .wall .commentform{
                 width: 100% !important;
                 bottom: 20px;
-            }
-            .WL-0 .app-userspace #userspace_wall .wall .commentform .menu{
-                left: 64px;
-            }
-            .WL-0 .app-userspace #userspace_wall .wall .commentform button{
-                width: calc(100% - 200px)!important;
-                margin-left: 136px;
             }
         }
     /*endregion*/

@@ -2940,6 +2940,10 @@
 /*region Mas::edge*/
     .WL-0 .Mas.edge{
         --width-mas-guide:0px !important;
+        --mas-guide-downside-display: hidden !important;
+        --mas-guide-downside-opacity: 0 !important;
+        --mas-guide-switch-display: visible !important;
+        --mas-guide-switch-opacity: 1 !important;
     }
 
     .WL-3P .Mas.edge,
@@ -2964,6 +2968,8 @@
         --menu-text-color: var(--color-text-gray);
         --menu-text-color-active: #fff;
         --menu-text-weight: 400;
+        --mas-guide-downside-display: visible;
+        --mas-guide-downside-opacity: 1;
     }
 
     .WL-0 .Mas.edge,
@@ -2992,14 +2998,10 @@
         --menu-text-color: var(--color-text-default);
         --menu-text-color-active: var(--color-main-theme-dark);
         --menu-text-weight: 700;
-    }
-
-    .WL-13P .Mas.edge .mas-guide-switch,
-    .WL-1K .Mas.edge .mas-guide-switch,
-    .WL-2K .Mas.edge .mas-guide-switch,
-    .WL-4K .Mas.edge .mas-guide-switch{
-        opacity: 0;
-        visibility: hidden;
+        --mas-guide-downside-display: visible;
+        --mas-guide-downside-opacity: 1;
+        --mas-guide-switch-display: hidden;
+        --mas-guide-switch-opacity: 0;
     }
 
     .Mas.edge .mas-guide{
@@ -3023,9 +3025,14 @@
         width: 100%;
         height: var(--guide-downside-height);
         overflow: visible;
+        visibility: var(--mas-guide-downside-display);
+        opacity: var(--mas-guide-downside-opacity);
+        transition: .1s ease-in-out;
     }
     .Mas.edge .mas-guide .mas-guide-switch {
         margin: 18px 15px;
+        visibility: var(--mas-guide-switch-display);
+        opacity: var(--mas-guide-switch-opacity);
     }
 
     .Mas.edge .mas-guide .start,
