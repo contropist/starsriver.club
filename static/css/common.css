@@ -4521,9 +4521,7 @@
     特效样式   |文字特效
 \************/
 .magicflicker {
-    background: -webkit-linear-gradient(-45deg, #bb0000, #ff00d4, #cc00ff, #2900bb, #0075ff, #007b70, #13b300, #6e9c00, #d69800, #ff4f00);
-    color: transparent;
-    -webkit-background-clip: text;
+    background: linear-gradient(-18deg,#ffe0e0,#ffc4f5,#f4c5ff,#d9cfff,#d1e6ff,#bff6ff,#beffc2,#e5f5a7,#fff6e4,#ffe0d2) !important;
 }
 
 /************\

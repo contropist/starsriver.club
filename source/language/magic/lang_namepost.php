@@ -19,10 +19,10 @@ $lang = array
 	'namepost_num' => '拥有个数: {magicnum}',
 	'namepost_info' => '指定要显身的回复人，请输入回复的 ID',
 	'namepost_info_nonexistence' => '参数错误，不能在此使用本道具。',
-	'namepost_succeed' => '匿名的用户是 <a title="{username}" href="space.php?uid={uid}" target="_blank"><b>{username}</b></a>',
+	'namepost_succeed' => '匿名用户为 <a title="{username}" href="space.php?uid={uid}" target="_blank">{username}</a>',
 	'namepost_info_noperm' => '对不起，文章所在版块不允许使用本道具',
 	'namepost_info_user_noperm' => '对不起，你不能对此人使用本道具',
-	'magic_namepost_succeed' => '匿名的用户是',
+	'magic_namepost_succeed' => '匿名用户为',
 );
 
 ?>

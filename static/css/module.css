@@ -7978,10 +7978,12 @@
         }
         .app-userspace #userspace_wall .wall li .decrater-c .card-tag .username{
             line-height: 28px;
-            color: var(--color-text-gray);
-            width: calc(100% - 34px);;
+            color: var(--color-text-dark);
+            width: calc(100% - 34px);
             overflow: hidden;
             white-space: nowrap;
+            font-weight: 700;
+            opacity: .7;
         }
         .app-userspace #userspace_wall .wall li .decrater-c .card-message{
             padding: 10px 5px 0 5px;
