@@ -59,12 +59,39 @@
             viewerBannerImg: SR('.Mas > .mas-viewer > .mas-viewer-header > div > .banner > img')[0],
             Bank:            SR('.Mas > .mas-viewer > .mas-viewer-header  > div > .bank')[0],
             BankS:           SR('.Mas > .mas-viewer > .mas-viewer-header  > div > .bank.type-scroll')[0],
+            MasViewerScroll: {
+                Top: 0,
+                Left: 0
+            }
         };
+
+
 
         DocAction.initalize();
         MasAction.initalize();
-
     });
+
+    var Misc = {
+        WinScrollDirRefresh: function (tmp, obj){
+            tmp.Top = obj.scrollTop;
+            tmp.Left = obj.scrollLeft;
+
+            if(tmp.Top > tmp.BeforeTop){
+                SRGlobal.Window.Scroll.DirY = 'down';
+            } else if(tmp.Top < tmp.BeforeTop){
+                SRGlobal.Window.Scroll.DirY = 'up';
+            }
+
+            if(tmp.Left > tmp.BeforeLeft){
+                SRGlobal.Window.Scroll.DirX = 'right';
+            } else if(tmp.Left < tmp.BeforeLeft){
+                SRGlobal.Window.Scroll.DirX = 'left';
+            }
+
+            setTimeout(tmp.BeforeTop = tmp.Top , 0);
+            setTimeout(tmp.BeforeLeft = tmp.Left , 0);
+        }
+    };
 
 /***********\
    页面动作  |页面滚动/点击触发的动作
@@ -168,26 +195,11 @@
         },
 
         scroll: function () {
+
+            Misc.WinScrollDirRefresh(SRGlobal.Window.Scroll, document.documentElement);
+
             SRGlobal.Window.Scroll.Height = document.documentElement.scrollHeight || document.body.scrollHeight;
             SRGlobal.Window.Scroll.Width = document.documentElement.scrollWidth || document.body.scrollWidth;
-            SRGlobal.Window.Scroll.Top = document.documentElement.scrollTop || document.body.scrollTop || 0;
-            SRGlobal.Window.Scroll.Left = document.documentElement.scrollLeft || document.body.scrollLeft || 0;
-
-            if(SRGlobal.Window.Scroll.Top > SRGlobal.Window.Scroll.BeforeTop){
-                SRGlobal.Window.Scroll.DirY = 'down'
-            } else if(SRGlobal.Window.Scroll.Top < SRGlobal.Window.Scroll.BeforeTop){
-                SRGlobal.Window.Scroll.DirY = 'up'
-            }
-
-            if(SRGlobal.Window.Scroll.Left > SRGlobal.Window.Scroll.BeforeLeft){
-                SRGlobal.Window.Scroll.DirX = 'right'
-            } else if(SRGlobal.Window.Scroll.Left < SRGlobal.Window.Scroll.BeforeLeft){
-                SRGlobal.Window.Scroll.DirX = 'left'
-            }
-
-            setTimeout(SRGlobal.Window.Scroll.BeforeTop = SRGlobal.Window.Scroll.Top , 0);
-            setTimeout(SRGlobal.Window.Scroll.BeforeLeft = SRGlobal.Window.Scroll.Left , 0);
-
             SRGlobal.Window.Scroll.ToBottom = SRGlobal.Window.Scroll.Top + SRGlobal.Window.Height >= SRGlobal.Window.Scroll.Height ? 1 : 0;
 
             if(SRGlobal.Window.Scroll.ToBottom){
@@ -205,7 +217,7 @@
                 if(nav){
                     nav.addClass('trans-ease');
 
-                    if(SRGlobal.Window.Scroll.Top > banner.clientHeight && SRGlobal.Wheel.Dir === 'down'){
+                    if(SRGlobal.Window.Scroll.Top > banner.clientHeight && SRGlobal.Window.Scroll.DirY === 'down'){
                         nav.addClass('sleep');
                     } else {
                         nav.delClass('sleep');
@@ -222,8 +234,8 @@
 
                 if(editor_nav){
                     editor_nav.addClass('trans-ease');
-                    if(SRGlobal.Window.Scroll.Top > banner.clientHeight && SRGlobal.Wheel.Dir === 'down'){
-                            editor_nav.style.transform ='translateY(-' + nav.Css.height +'px)';
+                    if(SRGlobal.Window.Scroll.Top > banner.clientHeight && SRGlobal.Window.Scroll.DirY === 'down'){
+                        editor_nav.style.transform ='translateY(-' + nav.Css.height +'px)';
                     } else {
                         editor_nav.style.transform ='translateY(0)';
                     }
@@ -264,12 +276,12 @@
                             console_title.style.top = '0';
                             console_ctl.style.paddingTop = '48px';
 
-                            if(SRGlobal.Wheel.Dir === 'down'){
+                            if(SRGlobal.Window.Scroll.DirY === 'down'){
                                 menu.style.transform = 'translate3d(0,0,0)';
                                 console_title.style.transform = 'translate3d(0,0,0)';
                             }
 
-                            if(SRGlobal.Wheel.Dir === 'up'){
+                            if(SRGlobal.Window.Scroll.DirY === 'up'){
                                 nav.addClass('sleep');
                             }
 
@@ -317,15 +329,18 @@
         },
 
         viewerScroll: function () {
+
+            Misc.WinScrollDirRefresh(MasElements.MasViewerScroll, MasElements.viewer);
+
             if(MasElements.viewer && MasElements.viewerBanner.Css.height !== 0){
-                if(MasElements.viewer.scrollTop >= MasElements.viewerHeader.Css.height - MasElements.Bank.Css.height){
+                if(MasElements.MasViewerScroll.Top >= MasElements.viewerHeader.Css.height - MasElements.Bank.Css.height){
                     body.addClass('scroll-overhaed');
                 } else {
                     body.delClass('scroll-overhaed');
                 }
 
                 if(!body.hasClass('scroll-overhaed')){
-                    let trspct = (50 - MasElements.viewer.scrollTop / MasElements.viewerBannerImg.Css.height * 50);
+                    let trspct = (1 - MasElements.MasViewerScroll.Top / MasElements.viewerBannerImg.Css.height) * 50;
                     MasElements.viewerBannerImg.style.transform = 'translate(-50%, -' + trspct + '%)';
                 }
             }
