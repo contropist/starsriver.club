@@ -75,6 +75,12 @@
                             } else {
                                 postform.style = '';
                             }
+                        } else {
+                            if(SRGlobal.Wheel.Dir === 'down'){
+                                postform.addClass('sleep');
+                            } else if(SRGlobal.Wheel.Dir === 'up') {
+                                postform.delClass('sleep');
+                            }
                         }
                     };
 

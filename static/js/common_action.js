@@ -205,7 +205,7 @@
                 if(nav){
                     nav.addClass('trans-ease');
 
-                    if(SRGlobal.Window.Scroll.Top > banner.clientHeight && SRGlobal.Window.Scroll.DirY === 'down'){
+                    if(SRGlobal.Window.Scroll.Top > banner.clientHeight && SRGlobal.Wheel.Dir === 'down'){
                         nav.addClass('sleep');
                     } else {
                         nav.delClass('sleep');
@@ -222,7 +222,7 @@
 
                 if(editor_nav){
                     editor_nav.addClass('trans-ease');
-                    if(SRGlobal.Window.Scroll.Top > banner.clientHeight && SRGlobal.Window.Scroll.DirY === 'down'){
+                    if(SRGlobal.Window.Scroll.Top > banner.clientHeight && SRGlobal.Wheel.Dir === 'down'){
                             editor_nav.style.transform ='translateY(-' + nav.Css.height +'px)';
                     } else {
                         editor_nav.style.transform ='translateY(0)';
@@ -264,12 +264,12 @@
                             console_title.style.top = '0';
                             console_ctl.style.paddingTop = '48px';
 
-                            if(SRGlobal.Window.Scroll.DirY === 'down'){
+                            if(SRGlobal.Wheel.Dir === 'down'){
                                 menu.style.transform = 'translate3d(0,0,0)';
                                 console_title.style.transform = 'translate3d(0,0,0)';
                             }
 
-                            if(SRGlobal.Window.Scroll.DirY === 'up'){
+                            if(SRGlobal.Wheel.Dir === 'up'){
                                 nav.addClass('sleep');
                             }
 
