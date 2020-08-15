@@ -7309,7 +7309,7 @@
         transform: translate(0, -120px);
         transition: .2s ease-in-out;
     }
-    .scroll-overhaed .app-userspace .space-head > .bank.type-scroll{
+    .scroll-overhead .app-userspace .space-head > .bank.type-scroll{
         transform: translate(0, 0);
     }
     .app-userspace .space-head > .bank.type-scroll .avatar{
@@ -7798,12 +7798,12 @@
             border: 1px solid var(--box-border-color);
         }
         .app-userspace #userspace_wall .wall .commentform{
+            z-index: 1;
             position: absolute;
             right: 0;
             display: inline-block;
             width: var(--wall-commentform-width);
             margin: 50px var(--box-margin) var(--box-margin) var(--box-margin);
-            z-index: 1;
         }
         .app-userspace #userspace_wall .wall .commentform .menu{
             position: absolute;

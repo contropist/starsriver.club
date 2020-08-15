@@ -116,7 +116,7 @@
 
                 /* nav样式初始化 */
                 if(banner){
-                    (document.documentElement.scrollTop || document.body.scrollTop || 0) >= (banner.Css.height - nav.Css.height) ? body.addClass('scroll-overhaed') : '';
+                    (document.documentElement.scrollTop || document.body.scrollTop || 0) >= (banner.Css.height - nav.Css.height) ? body.addClass('scroll-overhead') : '';
                 }
 
                 /* 页面尺寸初始化 */
@@ -209,7 +209,7 @@
             }
 
             if(banner){
-                SRGlobal.Window.Scroll.Top >= (banner.Css.height - nav.Css.height) ? body.addClass('scroll-overhaed') : body.delClass('scroll-overhaed');
+                SRGlobal.Window.Scroll.Top >= (banner.Css.height - nav.Css.height) ? body.addClass('scroll-overhead') : body.delClass('scroll-overhead');
             }
 
             //nav 滚动效果
@@ -334,12 +334,12 @@
 
             if(MasElements.viewer && MasElements.viewerBanner.Css.height !== 0){
                 if(MasElements.MasViewerScroll.Top >= MasElements.viewerHeader.Css.height - MasElements.Bank.Css.height){
-                    body.addClass('scroll-overhaed');
+                    body.addClass('scroll-overhead');
                 } else {
-                    body.delClass('scroll-overhaed');
+                    body.delClass('scroll-overhead');
                 }
 
-                if(!body.hasClass('scroll-overhaed')){
+                if(!body.hasClass('scroll-overhead')){
                     let trspct = (1 - MasElements.MasViewerScroll.Top / MasElements.viewerBannerImg.Css.height) * 50;
                     MasElements.viewerBannerImg.style.transform = 'translate(-50%, -' + trspct + '%)';
                 }

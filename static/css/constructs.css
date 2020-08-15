@@ -2743,7 +2743,7 @@
         cursor: pointer;
         transition: .3s ease-in-out;
     }
-    .scroll-overhaed .Mas .mas-guide .mas-guide-switch {
+    .scroll-overhead .Mas .mas-guide .mas-guide-switch {
         color: #3e3e3e;
         text-shadow: 0 0 2px rgba(12, 12, 12, 0.2);
         box-shadow: 0 0 0 2px rgba(35, 35, 35, 0.8), 1px 1px 4px rgba(0, 0, 0, 0.2);
