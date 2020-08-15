@@ -7306,7 +7306,7 @@
         top: 0;
         box-shadow: 0 0 5px rgba(0,0,0,.2);
         padding: 11px 20px;
-        transform: translate(0, -120%);
+        transform: translate(0, -120px);
         transition: .2s ease-in-out;
     }
     .scroll-overhaed .app-userspace .space-head > .bank.type-scroll{
@@ -8096,10 +8096,11 @@
                 right: 0;
                 bottom: 20px;
                 box-shadow: 0 0 5px rgba(0,0,0,.2);
+                transform: translate3d(0, 0, 0);
                 transition: .2s ease-in-out;
             }
             .app-userspace #userspace_wall .wall .commentform.sleep{
-                transform: translateY(100%);
+                transform: translate3d(0, 150px, 0);
                 box-shadow: 0 0 0 rgba(0,0,0,.2);
             }
             .app-userspace #userspace_wall .wall .commentform .menu{
