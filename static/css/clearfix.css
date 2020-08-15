@@ -295,4 +295,11 @@ a, button, .btn, select {
     overflow: hidden;
 }
 
+.overflow-layer {
+    overflow-x: auto !important;
+    overflow-y: visible !important;
+    display: inline-block !important;
+    width: 100%;
+}
+
 /*endregion*/

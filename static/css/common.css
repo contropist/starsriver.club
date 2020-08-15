@@ -1354,7 +1354,7 @@
 
 
     :root{
-        --footer-drawer-height:280px;
+        --footer-drawer-height:283px;
         --footer-drawer-touch-bar-height:20px;
     }
 
@@ -1523,39 +1523,29 @@
         text-shadow: 0 0 10px rgba(0,0,0,.4);
     }
     #footer-drawer .link-icon-r span{
+        z-index: 1;
         display: block;
-        box-sizing: content-box;
         cursor: pointer;
-        width:130px;
-        height:130px;
+        width:100px;
+        height:100px;
         background: #fff;
         position: absolute;
-        left:calc(50% - 80px);
-        bottom:calc(100% + 20px);
-        padding: 15px;
+        right: calc(100% + 10px);
+        top: -20px;
+        padding: 10px;
+        box-sizing: content-box;
         box-shadow: 0 4px 32px rgba(0,0,0,0.2);
+        border-radius: 8px;
         transition: .15s ease-in-out !important;
         visibility: hidden;
         overflow: visible;
         opacity: 0;
-        transform: translate3d(0, 10px, 0);
-    }
-    #footer-drawer .link-icon-r span::before{
-        content:'';
-        display: block;
-        z-index: 20;
-        width:0;
-        height:0;
-        position: absolute;
-        bottom: -10px;
-        left: calc(50% - 16px);
-        border:16px solid transparent;
-        border-top:16px solid rgba(255,255,255,1);
-        border-bottom:0 solid transparent;
+        transform: translate3d(10px, 0, 0);
     }
     #footer-drawer .link-icon-r span img{
         width:100%;
         height:100%;
+        border-radius: 6px;
     }
     #footer-drawer .link-icon-r:hover span {
         transform: translate3d(0, 0, 0);

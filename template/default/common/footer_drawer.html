@@ -1,47 +1,49 @@
 <div id="footer-drawer" class="trans-ease-slow">
-    <div class="container trans-ease-quick trans-nodelay">
-        <div class="part links">
-            <span>StarsRiver</span>
-            <a href="{lang link_about_us}">{lang f_aboutus}</a>
-            <a href="{lang link_contact_us}">{lang f_contactus}</a>
-            <a href="{lang link_join_us}">{lang f_joinus}</a>
-            <a href="{lang link_friends_linking}">{lang f_friendl}</a>
-            <a href="{lang link_offical_verity}">{lang f_officalver}</a>
-            <a href="{lang link_starsriver_shops}">{lang f_srshop}</a>
+    <div class="overflow-layer">
+        <div class="container trans-ease-quick trans-nodelay">
+            <div class="part links">
+                <span>StarsRiver</span>
+                <a href="{lang link_about_us}">{lang f_aboutus}</a>
+                <a href="{lang link_contact_us}">{lang f_contactus}</a>
+                <a href="{lang link_join_us}">{lang f_joinus}</a>
+                <a href="{lang link_friends_linking}">{lang f_friendl}</a>
+                <a href="{lang link_offical_verity}">{lang f_officalver}</a>
+                <a href="{lang link_starsriver_shops}">{lang f_srshop}</a>
+            </div>
+            <div class="part links">
+                <span>{lang f_overpass}</span>
+                <a href="{lang link_help}">{lang f_helpcenter}</a>
+                <a href="{lang link_fedback}">{lang f_fedback}</a>
+                <a href="{lang_link_appeal}">{lang f_appeal}</a>
+                <a href="{lang link_offical_forum}">{lang f_oforum}</a>
+                <a href="{lang link_active_page}">{lang f_activepage}</a>
+                <a href="{lang link_dalao}">{lang f_dalao}</a>
+            </div>
+            <div class="part">
+                <a class="link-icon-r weibo-bc awe-weibo" href="{lang link_url_offical_weibo}"><span><img src="{IMGURL}/common/qrc/offical_qq.png"></span></a>
+                <a class="link-icon-r wechat-bc awe-wechat" href="{lang link_url_offical_wechat}"><span><img src="{IMGURL}/common/qrc/offical_wechat.png"></span></a>
+                <a class="link-icon-r qq-bc awe-qq" href="{lang link_url_offical_qq}"><span><img src="{IMGURL}/common/qrc/offical_weibo.png"></span></a>
+            </div>
         </div>
-        <div class="part links">
-            <span>{lang f_overpass}</span>
-            <a href="{lang link_help}">{lang f_helpcenter}</a>
-            <a href="{lang link_fedback}">{lang f_fedback}</a>
-            <a href="{lang_link_appeal}">{lang f_appeal}</a>
-            <a href="{lang link_offical_forum}">{lang f_oforum}</a>
-            <a href="{lang link_active_page}">{lang f_activepage}</a>
-            <a href="{lang link_dalao}">{lang f_dalao}</a>
-        </div>
-        <div class="part">
-            <a class="link-icon-r weibo-bc awe-weibo" href="{lang link_url_offical_weibo}"><span><img src="{IMGURL}/common/qrc/offical_qq.png"></span></a>
-            <a class="link-icon-r wechat-bc awe-wechat" href="{lang link_url_offical_wechat}"><span><img src="{IMGURL}/common/qrc/offical_wechat.png"></span></a>
-            <a class="link-icon-r qq-bc awe-qq" href="{lang link_url_offical_qq}"><span><img src="{IMGURL}/common/qrc/offical_weibo.png"></span></a>
-        </div>
-    </div>
-    <div class="container trans-ease-quick trans-nodelay">
-        <div class="link-icon">
-            <div class="cop">{lang f_coper}</div>
-            <div class="coper" href="'.$cop_link.'"><img src="{IMGURL}/common/logo/Vip_cop.png"></div>
-        </div>
-        <div class="part wide Licence">
-            <p>{lang __RATPPAM}<i>{lang lc__RATPPAM}</i></p>
-            <p>{lang __IICPF}<i><!--{if $_G['setting']['icp']}--><a href="http://beian.miit.gov.cn/" target="_blank">$_G['setting']['icp']</a><!--{/if}--></i></p>
-            <p>{lang __NM}<i>{lang lc__NM}</i></p>
-            <p>{lang Licence_loc}{lang __IPCLICENCE}<i>{lang lc__IPCLICENCE}</i></p>
-            <p>{lang __IBC}<i>{lang lc__IBC}</i></p>
-            <p>QQ<i><!--{if $_G['setting']['site_qq']}--><a href="http://wpa.qq.com/msgrd?V=3&Uin=$_G['setting']['site_qq']&Site=$_G['setting']['bbname']&Menu=yes&from=starsriver" target="_blank" title="QQ"><img src="{STATICURL}image/common/site_qq.jpg" alt="QQ"/></a><!--{/if}--></i></p>
-            <!--{hook/global_footerlink}-->
-        </div>
-        <div class="part trans-ease-quick trans-nodelay">
-            <p class="tip_off"><i class="awe-envelope text-danger"></i>{lang tipoffemail}<a>{lang var_tip_off_email}</a></p>
-            <p class="tip_off"><i class="icon-phone text-danger"></i>{lang tipoffphone}<a>{lang var_tip_off_phone}</a></p>
-            <p class="tip_off"><a  href="http://www.12377.cn/"><i><img src="{LIBURL}/img/www_icon/www.12377.cn.png"></i>{lang CNN_tipoff}</a></p>
+        <div class="container trans-ease-quick trans-nodelay">
+            <div class="link-icon">
+                <div class="cop">{lang f_coper}</div>
+                <div class="coper" href="'.$cop_link.'"><img src="{IMGURL}/common/logo/Vip_cop.png"></div>
+            </div>
+            <div class="part wide Licence">
+                <p>{lang __RATPPAM}<i>{lang lc__RATPPAM}</i></p>
+                <p>{lang __IICPF}<i><!--{if $_G['setting']['icp']}--><a href="http://beian.miit.gov.cn/" target="_blank">$_G['setting']['icp']</a><!--{/if}--></i></p>
+                <p>{lang __NM}<i>{lang lc__NM}</i></p>
+                <p>{lang Licence_loc}{lang __IPCLICENCE}<i>{lang lc__IPCLICENCE}</i></p>
+                <p>{lang __IBC}<i>{lang lc__IBC}</i></p>
+                <p>QQ<i><!--{if $_G['setting']['site_qq']}--><a href="http://wpa.qq.com/msgrd?V=3&Uin=$_G['setting']['site_qq']&Site=$_G['setting']['bbname']&Menu=yes&from=starsriver" target="_blank" title="QQ"><img src="{STATICURL}image/common/site_qq.jpg" alt="QQ"/></a><!--{/if}--></i></p>
+                <!--{hook/global_footerlink}-->
+            </div>
+            <div class="part trans-ease-quick trans-nodelay">
+                <p class="tip_off"><i class="awe-envelope text-danger"></i>{lang tipoffemail}<a>{lang var_tip_off_email}</a></p>
+                <p class="tip_off"><i class="icon-phone text-danger"></i>{lang tipoffphone}<a>{lang var_tip_off_phone}</a></p>
+                <p class="tip_off"><a  href="http://www.12377.cn/"><i><img src="{LIBURL}/img/www_icon/www.12377.cn.png"></i>{lang CNN_tipoff}</a></p>
+            </div>
         </div>
     </div>
 </div>
