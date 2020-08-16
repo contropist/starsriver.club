@@ -7128,7 +7128,7 @@
     }
     .app-userspace .space-head{
         position: relative;
-        box-shadow: 0 0 3px rgba(0,0,0,.1);
+        box-shadow: 0 0 5px rgba(0,0,0,.1);
     }
     .app-userspace .space-head > .banner{
         position: relative;
@@ -7339,13 +7339,17 @@
     }
 
     /*region #userspace_profile*/
+        .app-userspace #userspace_profile > .panel{
+            --default-box-margin-width: 8px;
+        }
         .app-userspace #userspace_profile > .panel > .panel-container > .box{
             background: #ffffff;
             border-radius: 8px;
             border: none;
             padding: 0 !important;
             height: 280px;
-            box-shadow: 0 0 0 1px var(--box-border-color);
+            box-shadow: 0 1px 3px rgba(0,0,0,.15);
+            overflow: hidden;
         }
         .app-userspace #userspace_profile > .panel > .panel-container > .box > span{
             display: block;
@@ -7373,7 +7377,7 @@
             font-size: 18px;
         }
         .app-userspace #userspace_profile > .panel > .panel-container > .box > div{
-            max-height: 240px;
+            max-height: 242px;
             overflow: auto;
             box-sizing: border-box;
         }
@@ -7732,6 +7736,15 @@
         }
         .app-userspace #userspace_profile > .panel > .panel-container > .box .info-mix.profile .tag *{
             color: #fff !important;
+        }
+
+        .app-userspace #userspace_profile > .panel > .panel-container > .box .info-mix.banlog{
+            border-bottom: 1px solid var(--box-border-color);
+        }
+        .app-userspace #userspace_profile > .panel > .panel-container > .box .info-mix.banlog td{
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
         }
 
         .app-userspace #userspace_profile > .panel > .panel-container > .box .no-info{
