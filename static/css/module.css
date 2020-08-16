@@ -7552,7 +7552,6 @@
         .app-userspace #userspace_profile > .panel > .panel-container > .box .info-mix.credit2 li i img{
             width: var(--li-icon-size);
             margin-top: 2px;
-            float: left;
         }
         .app-userspace #userspace_profile > .panel > .panel-container > .box .info-mix.credit2 li em{
             color: var(--color-text-gray);
