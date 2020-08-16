@@ -9064,38 +9064,37 @@
 
     }
     .app-profile [id*="setting_"] .credit-list li{
-    display: inline-block;
-    padding: 0 10px;
+        display: inline-block;
+        padding: 0 10px;
     }
     .app-profile [id*="setting_"] .credit-list li *{
-    display: inline-block;
+        display: inline-block;
     }
     .app-profile [id*="setting_"] .credit-list .credit-int{
-    height: 54px;
-    line-height: 54px;
-    margin-top: 6px;
+        height: 54px;
+        line-height: 54px;
+        margin-top: 6px;
     }
     .app-profile [id*="setting_"] .credit-list .credit-int *{
-    font-size: 22px;
-    color: #999999;
+        font-size: 22px;
+        color: #999999;
     }
     .app-profile [id*="setting_"] .credit-list .credit-int i{
-    height: 54px;
-    width: 54px;
-    margin-right: 10px;
+        height: 54px;
+        width: 54px;
+        margin-right: 10px;
     }
     .app-profile [id*="setting_"] .credit-list .credit-it{
-    line-height: 34px;
-    margin-top: 8px;
-
-    color: #666666;
+        line-height: 34px;
+        margin-top: 8px;
+        color: #666666;
     }
     .app-profile [id*="setting_"] .credit-list .credit-it i{
-    width: 20px;
-    height: 20px;
-    line-height: 20px;
-    vertical-align: middle;
-    margin: -3px 3px 0 0;
+        width: 20px;
+        height: 20px;
+        line-height: 20px;
+        vertical-align: top;
+        margin: 6px 3px 0 0;
     }
 
     .app-profile [id*="setting_avatar"] .avatar-preview{
