@@ -46,6 +46,7 @@ if (!in_array($do, array(
 ))) {
     $_G['mnid'] = 'mn_common';
 }
+
 if (empty($_G['uid']) && in_array($_GET['do'], array(
         'thread',
         'trade',
@@ -71,37 +72,21 @@ if ($_GET['username']) {
     $member['self'] = $uid == $_G['uid'] ? 1 : 0;
 }
 
-if ($_GET['view'] == 'admin') {
-    $_GET['do'] = $do;
-}
-if (empty($uid) || in_array($do, array('notice','pm')))
+if (empty($uid) || in_array($do, array('notice','pm'))){
     $uid = $_G['uid'];
+}
 
-if (empty($_GET['do']) && !isset($_GET['nest'])) {
-    if ($_G['adminid'] == 1) {
-        if ($_G['setting']['allowquickviewprofile']) {
-            if (!$_G['inajax'])
-                dheader("Location:home.php?mod=space&uid=$uid&do=profile");
-        }
-    }
-    if (helper_access::check_module('follow')) {
-        $do = $_GET['do'] = 'follow';
-    } else {
-        $do = $_GET['do'] = !$_G['setting']['homepagestyle'] ? 'profile' : 'index';
-    }
-} elseif (empty($_GET['do']) && isset($_GET['nest']) && !empty($_G['setting']['homepagestyle'])) {
-    $_GET['do'] = 'index';
+if (empty($_GET['do'])) {
+    $do = 'index';
 }
 
 if ($_GET['do'] == 'follow') {
     if ($uid != $_G['uid']) {
-        $_GET['do'] = 'view';
+        $do = 'view';
         $_GET['uid'] = $uid;
     }
     require_once libfile('home/follow', 'module');
     exit;
-} elseif (empty($_GET['do']) && !$_G['inajax'] && !helper_access::check_module('follow')) {
-    $do = 'profile';
 }
 
 if ($uid && empty($member)) {
@@ -143,10 +128,6 @@ if (empty($space)) {
         showmessage('space_has_been_locked');
     }
 
-    if (in_array($space['groupid'], array(4, 5, 6)) && ($_G['adminid'] != 1 && $space['uid'] != $_G['uid'])) {
-        $_GET['do'] = $do = 'profile';
-    }
-
     $encodeusername = rawurlencode($space['username']);
 
     if ($do != 'profile' && $do != 'index' && !ckprivacy($do, 'view')) {
@@ -163,6 +144,7 @@ if (empty($space)) {
 $nestmode = 0;
 
 list($seccodecheck, $secqaacheck) = seccheck('publish');
+
 if ($do != 'index') {
     $_G['disabledwidthauto'] = 0;
 }

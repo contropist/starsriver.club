@@ -7113,18 +7113,18 @@
     }
 
     .WL-0 .app-userspace{
-        --space-banner-height: 240px;
+        --space-banner-height: 180px;
     }
     .WL-3P .app-userspace,
     .WL-4P .app-userspace,
     .WL-7P .app-userspace{
-        --space-banner-height: 240px;
+        --space-banner-height: 220px;
     }
     .WL-13P .app-userspace,
     .WL-1K .app-userspace,
     .WL-2K .app-userspace,
     .WL-4K .app-userspace{
-        --space-banner-height: 220px;
+        --space-banner-height: 260px;
     }
     .app-userspace .space-head{
         position: relative;
@@ -8107,7 +8107,7 @@
                 margin: 0;
                 right: 0;
                 bottom: 20px;
-                box-shadow: 0 0 5px rgba(0,0,0,.2);
+                box-shadow: 0 0 15px rgba(0,0,0,.3);
                 transform: translate3d(0, 0, 0);
                 transition: .2s ease-in-out;
             }
