@@ -7971,6 +7971,11 @@
             border-radius: 50px;
             box-shadow: 0 0 0 2px var(--color-lightgray);
         }
+        .app-userspace #userspace_wall .wall li .decrater-c .card-tag.magicflicker{
+            background-image: url('{IMGURL}/magic/flicker-bg0.jpg') !important;
+            background-size: 101% !important;
+            background-position: center !important;
+        }
         .app-userspace #userspace_wall .wall li .decrater-c .card-tag .avatar{
             position: relative;
             width: 28px;
@@ -7984,6 +7989,11 @@
             white-space: nowrap;
             font-weight: 700;
             opacity: .7;
+        }
+        .app-userspace #userspace_wall .wall li .decrater-c .card-tag.magicflicker .username{
+            color: #fff;
+            text-shadow: 0 0 7px #000;
+            opacity: 1;
         }
         .app-userspace #userspace_wall .wall li .decrater-c .card-message{
             padding: 10px 5px 0 5px;

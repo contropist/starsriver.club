@@ -76,6 +76,9 @@
             tmp.Top = obj.scrollTop;
             tmp.Left = obj.scrollLeft;
 
+            SRGlobal.Window.Scroll.Top = tmp.Top;
+            SRGlobal.Window.Scroll.Left = tmp.Left;
+
             if(tmp.Top > tmp.BeforeTop){
                 SRGlobal.Window.Scroll.DirY = 'down';
             } else if(tmp.Top < tmp.BeforeTop){
