@@ -3017,6 +3017,10 @@
         --mas-guide-switch-opacity: 0;
     }
 
+    .WD-V .Mas.edge{
+        --menu-text-display: inline-block !important;
+    }
+
     .Mas.edge .mas-guide{
         overflow: visible;
         width: var(--width-mas-guide);
