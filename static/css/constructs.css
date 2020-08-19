@@ -2978,6 +2978,7 @@
         --menu-text-font-size: 12px;
         --menu-text-color: var(--color-text-gray);
         --menu-text-color-active: #fff;
+        --menu-text-display: none;
         --menu-text-weight: 400;
         --mas-guide-downside-display: visible;
         --mas-guide-downside-opacity: 1;
@@ -3009,6 +3010,7 @@
         --menu-text-color: var(--color-text-default);
         --menu-text-color-active: var(--color-main-theme-dark);
         --menu-text-weight: 700;
+        --menu-text-display: inline-block;
         --mas-guide-downside-display: visible;
         --mas-guide-downside-opacity: 1;
         --mas-guide-switch-display: hidden;
@@ -3114,11 +3116,12 @@
         background: var(--menu-icon-background-active);
     }
     .Mas.edge .mas-guide .nav-vertical li a span{
-        display: inline-block;
+        display: var(--menu-text-display);
         width: var(--menu-text-width);
         line-height: var(--menu-text-line-height);
         font-size: var(--menu-text-font-size);
         color: var(--menu-text-color);
+        white-space: nowrap;
     }
     .Mas.edge .mas-guide .nav-vertical li.active a span{
         color: var(--menu-text-color-active);
