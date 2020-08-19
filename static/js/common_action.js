@@ -155,9 +155,9 @@
             SRGlobal.Window.Width = document.documentElement.clientWidth || document.body.clientWidth;
 
             if(SRGlobal.Window.Height >= SRGlobal.Window.Width){
-                body.addClass(WD-V);
+                body.addClass('WD-V');
             } else {
-                body.delClass(WD-V);
+                body.delClass('WD-V');
             }
 
             let MasGuideWidth = isUndefined(MasElements.guide) ? 0 : 72,
