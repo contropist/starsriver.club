@@ -9061,10 +9061,14 @@
     body {
         background: #f5f5f8;
     }
-    .banner{
+    [html-header] .banner{
         z-index: 0;
-        height:128px;
+        overflow: visible !important;
+    }
+    [html-header] .banner .back-banner{
+        height: 128px;
         background: #00a0d8 !important;
+        overflow: visible !important;
     }
     .app-profile [id*='_ctrl_menu']{
         max-height: 390px;
