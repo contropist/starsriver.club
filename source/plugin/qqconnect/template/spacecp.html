@@ -69,7 +69,7 @@
 		<input type="hidden" name="author" id="author" value="" />
 		<input type="hidden" name="sh_type" id="sh_type" value="$_GET['sh_type']" />
 	</form>
-	<script type="text/javascript" reload="1">
+	<script reload="1">
 		var connect_share_url = '$_GET[share_url]';
 		var threadInfo = connect_get_thread();
 		var connect_thread_url = threadInfo.thread_url;
@@ -317,7 +317,7 @@
 		<input type="hidden" name="author" id="author" value="" />
 		<input type="hidden" name="sh_type" id="sh_type" value="2" />
 	</form>
-	<script type="text/javascript" reload="1">
+	<script reload="1">
 		var connect_share_url = '$_GET[share_url]';
 		var threadInfo = connect_get_thread();
 		var connect_thread_url = threadInfo.thread_url;
@@ -512,8 +512,7 @@
 
 <!--{elseif $_GET['pluginop'] == 'new'}-->
 <!--{template common/header}-->
-<script type="text/javascript" reload="1">
-
+<script reload="1">
 	var code = "{$code}";
 	var message = "{$message}";
 	var dialog_id = "{$dialog_id}";

@@ -1,5 +1,5 @@
 <!--{if empty($ajax_edit)}-->
-	<li class="reply-item" id="comment_$value[cid]_li" title="{if checkperm('managecomment')}IP: $value[ip]{/if}">
+	<li class="reply-item" id="comment_$value[cid]_li">
 <!--{/if}-->
         <s class="decrater-a"></s>
         <s class="decrater-b"></s>
@@ -20,15 +20,15 @@
                 <!--{/if}-->
             </div>
 
-            <div class="card-tag {if $value[magicflicker]}magicflicker{/if}">
+            <a class="card-tag {if $value[magicflicker]}magicflicker{/if}" title="{if checkperm('managecomment')}IP: $value[ip]{/if}" {if $value[author]} href="home.php?mod=space&uid=$value[authorid]" c="1"{/if}>
                 <!--{if $value[author]}-->
-                    <a class="avatar" href="home.php?mod=space&uid=$value[authorid]" c="1"><!--{avatar($value[authorid],small)}--></a>
-                    <a class="username" href="home.php?mod=space&uid=$value[authorid]">{$value[author]}</a>
+                    <span class="avatar"><!--{avatar($value[authorid],small)}--></span>
+                    <span class="username">{$value[author]}</span>
                 <!--{else}-->
-                    <a class="avatar"><img class="avatar-main" src="{STATICURL}image/magic/hidden.gif"/></a>
-                    <a class="username">$_G[setting][anonymoustext]</a>
+                    <span class="avatar"><img class="avatar-main" src="{STATICURL}image/magic/hidden.gif"/></span>
+                    <span class="username">$_G[setting][anonymoustext]</span>
                 <!--{/if}-->
-            </div>
+            </a>
 
             <div class="card-message" id="comment_$value[cid]">
                 <!--{if $value[status] == 1}--><i class="msg-tip">{lang moderate_need}</i><!--{/if}-->

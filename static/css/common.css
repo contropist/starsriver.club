@@ -576,28 +576,25 @@
 /**************\
     banner样式  |导航栏下方的功能栏样式
 \**************/
-    .banner{
-        z-index: 98;
+    [html-header] .banner{
+        z-index: 0;
         position: relative;
         width: 100%;
         min-width: 960px;
         min-height: 120px;
         max-height: 420px;
-        background-color: #fff;
-        background-size: 20px 20px;
-        background-position: 0 0,10px 10px;
-        background-image: linear-gradient(45deg,#f0f0f0 25%,transparent 0,transparent 75%,#f0f0f0 0),linear-gradient(45deg,#f0f0f0 25%,transparent 0,transparent 75%,#f0f0f0 0) !important;
     }
-    .banner.off{
+
+    [html-header] .banner.off{
         height: var(--nav-height);
         min-height: auto !important;
     }
-    .banner .back-banner {
+    [html-header] .banner .back-banner {
         position: relative;
         max-height: 420px;
         overflow: hidden;
     }
-    .banner .back-banner .back {
+    [html-header] .banner .back-banner .back {
         width: 100%;
         min-width: 1920px;
         position: relative;
@@ -605,13 +602,13 @@
         left: 50%;
         transform: translate3d(-50%,0,0);
     }
-    .banner .back-banner .back.blur-lg {
+    [html-header] .banner .back-banner .back.blur-lg {
         position: relative;
         top: 0;
         left: 50%;
         transform: translate3d(-50%,0,0) scale(1.3);
     }
-    .banner .container{
+    [html-header] .banner .container{
         position: absolute;
         box-sizing: border-box;
         top: 42px;
@@ -621,7 +618,7 @@
         transform: translate3d(-50%,0,0);
     }
 
-    .banner-tip{
+    [html-header] .banner-tip{
         width:100%;
         height:32px;
         line-height: 32px;
@@ -632,7 +629,7 @@
         border-top:4px dotted rgb(201, 201, 201);
         margin-bottom: 5px;
     }
-    .banner-tip *{
+    [html-header] .banner-tip *{
         color: #656565;
     }
 
@@ -1005,7 +1002,6 @@
     }
     #maintheme-menu .theme-list li .preview{
         top: 0;
-
         color: #999;
     }
     #maintheme-menu .theme-list li .info{
@@ -1015,134 +1011,168 @@
         background: #fff;
     }
 
-  /*用户卡样式*/
-    .card {
-        padding: 0;
-        overflow: hidden;
-        width: 256px !important;
+/* 用户名片 */
+    .user-carte{
+        --uc-avatar-size: 54px;
+        --uc-banner-height: 120px;
+
+        display: block;
+        width: 360px;
+        margin: 5px;
         background: #fff;
-        box-shadow:0 0 3px rgba(0,0,0,.2);
         border-radius: 10px;
+        overflow: hidden;
+        box-shadow: rgba(101,119,134,0.3) 0 0 20px, rgba(101,119,134,0.15) 0 0 3px 1px;
     }
-    .card_gender_0 {
-        background: #fff ;
+    .user-carte *{
+        box-sizing: border-box;
     }
-    .card_gender_1 {
-        background: #fff ;
+    .user-carte .card-header{
+        display: inline-block;
+        width: 100%;
     }
-    .card_gender_2 {
-        background: #fff ;
+    .user-carte .card-header .banner{
+        position: relative;
+        width: 100%;
+        height: var(--uc-banner-height);
     }
-    .card .p_opt {
-        padding: 0;
+    .user-carte .card-header .banner img{
+        position: absolute;
+        width: 100%;
+        top: 50%;
+        transform: translate3d(0,-50%, 0);
     }
-    .card .avatar .avatar-main{
-        width: 54px;
-        height: 54px;
-        border:1px solid rgb(216, 216, 216);
+    .user-carte .card-header .utag{
+        display: inline-block;
+        height: 32px;
+        line-height: 32px;
+        padding-left: 15px;
     }
-    .card .avatar{
+    .user-carte .card-header .utag .avatar{
         position: relative;
         display: inline-block;
-        width: 54px;
-        height: 54px;
+        width: var(--uc-avatar-size);
+        height: var(--uc-avatar-size);
+        margin-top: calc(5px - var(--uc-avatar-size) / 2);
     }
-    .card .c {
+    .user-carte .card-header .utag .avatar .avatar-main{
+        box-shadow: 0 0 0 3px #ffffff;
+    }
+    .user-carte .card-header .utag .username{
         display: inline-block;
-        width: calc(100% - 59px);
-        text-align: left;
-        vertical-align: bottom;
-        padding: 10px 0 0 10px;
-        box-sizing: border-box;
-        min-height:58px;
-        max-height: 68px;
-        overflow: hidden;
-    }
-    .card_mn{
-        padding: 10px;
-    }
-    .card .username , .card .username:hover{
-        font-size: 16px;
-        color: #595959;
-        background: none;
-    }
-    .card .say, .card .say:hover{
-        font-size: 13px;
-        color: #a5a5a5;
-        background: none !important;
-    }
-    .card .icon-online,.card .icon-online:hover{
-        color: #3fd0e3;
-        cursor: pointer;
         font-size: 14px;
-        background: none;
+        font-weight: 700;
+        color: var(--color-text-dark);
+        padding-left: 5px;
     }
-    .card form .pn{
-        float: right;
+    .user-carte .card-header .utag .status{
         display: inline-block;
-        text-align: center;
-        font-size: 10px;
-        width:15px;
-        height:15px;
-        color:#8b8b8b !important;
-        border: 1px solid #8b8b8b;
-        background: none;
-        border-radius:9px;
-        vertical-align:middle;
+        width: 24px;
     }
-    .card form .pn.n{
-        width:14px;
-        height:14px;
-        margin: 3px 2px ;
-        color: #b92f20 !important;
-        border-color: #b92f20;
-        line-height: 14px;
+    .user-carte .card-header .utag .status img{
+        width: 16px;
+        height: 16px;
+        margin: 8px 0;
     }
-    .card form .pn.y{
-        width:15px;
-        height:15px;
-        margin: 3px 2px ;
-        color: #17c21e !important;
-        border-color: #17c21e;
-        line-height: 15px;
+    .user-carte .card-container{
+        width: 100%;
+        padding: 0 15px 0 70px;
+        box-sizing: border-box;
     }
-    .card_msg {
-        float: left;
-        width: calc(100% - 42px);
-        height: 18px;
-        border: none;
-        overflow: hidden;
-        font-size: 13px;
-        color: #df7436;
-        border-bottom: 1px solid #DF7436;
-        margin-top: 2px;
+    .user-carte .card-container .carte-verifys{
+        position: relative;
+        padding: 0 5px;
+        line-height: 20px;
     }
-    .card a:hover {
-        padding: 0 !important;
-        color: #888;
+    .user-carte .card-container .carte-verifys a{
+        font-size: 12px;
+        color: var(--color-text-dark);
     }
-    .card .o {
-        clear: both;
-        width: calc(100% + 3px);
-        overflow: hidden;
+    .user-carte .card-container .carte-verifys a::after{
+        content: '/';
+        color: var(--color-text-gray);
+        padding: 0 5px;
+    }
+    .user-carte .card-container .carte-verifys a:last-of-type::after{
+        display: none;
+    }
+    .user-carte .card-container .carte-verifys a img{
+        width: 20px;
+        height: 20px;
+        margin-right: 5px;
+    }
+    .user-carte .card-container .doing{
         margin-top: 5px;
     }
-    .card .o a {
-        float: left;
-        width: calc(50% - 1px);
-        height: 36px;
-        margin-bottom:-1px;
-        text-align: center;
-        display: inline-block !important;
-        border: 1px solid #eaeaea;
-        border-left:none;
-        font-size: 12px;
-        line-height: 36px;
-        color: #888 !important;
+    .user-carte .card-container .doing form{
+        position: relative;
     }
-    .card .o a:hover{
-        background: rgba(0,0,0,.02) !important;
-        color: #000 !important;
+    .user-carte .card-container .doing span {
+        transition: .25s ease-in-out;
+    }
+    .user-carte .card-container .doing span,
+    .user-carte .card-container .doing form textarea{
+        display: inline-block;
+        width: 100%;
+        font-size: 13px;
+        color: var(--color-text-gray);
+        padding: 6px 10px;
+        border: none;
+        border-radius: 6px;
+        word-break: break-word;
+    }
+    .user-carte .card-container .doing span.editable:hover,
+    .user-carte .card-container .doing form textarea{
+        box-shadow: 0 1px 12px rgba(0,0,0,.15);
+        color: var(--color-text-dark);
+    }
+    .user-carte .card-container .doing form textarea:focus{
+        color: #000;
+        background: #fff;
+    }
+    .user-carte .contect{
+        text-align: center;
+        margin-top: 10px;
+        font-size: 0;
+        padding: 10px 15px;
+    }
+    .user-carte .contect a{
+        display: inline-block;
+        margin: 0 5px 10px 5px;
+        text-align: center;
+        width: 80px;
+        font-size: 13px;
+        border: 1px solid #ddd;
+        line-height: 25px;
+        border-radius: 4px;
+        background: #f9f9f9;
+        transition: .1s ease-in-out;
+    }
+    .user-carte .contect a:hover{
+        color: #fff;
+        background: var(--color-main-theme);
+        border-color: var(--color-main-theme);
+        box-shadow: 0 0 0 2px var(--color-main-theme-shadow);
+    }
+    .user-carte .contect a.before{
+        color: #fff;
+        background: var(--color-sky-blue);
+        border-color: #fff;
+        box-shadow: 0 0 0 2px #fff;
+    }
+    .user-carte .contect a.after{
+        color: #fff;
+        background: var(--color-charry-pink);
+        border-color: #fff;
+        box-shadow: 0 0 0 2px #fff;
+    }
+    .user-carte .contect a.before:hover{
+        box-shadow: 0 0 0 2px rgba(0,174,239,.2);
+        border-color: rgba(0,174,239,.2);
+    }
+    .user-carte .contect a.after:hover{
+        box-shadow: 0 0 0 2px rgba(255,127,143,.25);
+        border-color: rgba(255,127,143,.25);
     }
 
 /* 搜索框样式 */
@@ -1271,7 +1301,7 @@
         display: inline-block;
         position: absolute;
         font-size: 16px;
-        padding: .5px 13px;
+        padding: 1px 13px;
         top:0;
         left:0;
     }
@@ -1353,15 +1383,13 @@
     #bottommenu .ctm .nestnav{ background: #25B7D9; }
 
 
-    :root{
-        --footer-drawer-height:283px;
-        --footer-drawer-touch-bar-height:20px;
-    }
-
     #footer-drawer *{
         overflow: visible
     }
     #footer-drawer{
+        --footer-drawer-height:283px;
+        --footer-drawer-touch-bar-height:20px;
+
         z-index: 100;
         position:fixed;
         left:0;
@@ -1628,7 +1656,6 @@
         padding: 8px;
         color: #fff;
         font-size: 16px;
-        line-height: 20px;
         text-indent: 20px;
         letter-spacing: 20px;
         margin: 7px 0 7px 10px;
@@ -2453,7 +2480,7 @@
     .p_pop{
         min-width: 64px;
         max-height: 320px;
-        box-shadow: 0 1px 4px rgba(0,0,0,.2);
+        box-shadow: 0 3px 7px rgba(0,0,0,.2);
         margin-top: 2px;
         border-radius: 6px;
         overflow-x: hidden;
@@ -2475,12 +2502,6 @@
         line-height: 36px;
         padding: 0 18px;
 
-    }
-    .p_pop a:hover,
-    .p_pop a.a,
-    #sctype_menu .sca {
-        color: #fff;
-        background: #00AEEF;
     }
 
   /* 翻页样式 */
@@ -2972,6 +2993,8 @@
         bottom: 0;
         left: 0;
         background: #fff;
+        border-radius: 0 0 10px 10px;
+        overflow: hidden;
     }
     .talk textarea{
         border:0 !important;
@@ -3791,7 +3814,7 @@
     .fwin .img-list .imgdeleted{
         display: inline-block;
         position: relative;
-        margin:3.5px;
+        margin: 4px;
         padding: 0;
         height:120px;
         overflow: hidden;

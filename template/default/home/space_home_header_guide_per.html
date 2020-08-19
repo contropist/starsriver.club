@@ -2,7 +2,7 @@
     <!--{eval $personalnv['banitems'] = array(); $personalnv['nvhidden'] = 0;}-->
 <!--{/if}-->
 <!--{eval $nvclass = !empty($personalnv['nvhidden']) ? ' class="mininv"' : '';}-->
-<ul class="nav-vertical" $nvclass>
+<ul class="nav-vertical">
 <!--{if empty($personalnv['nvhidden'])}-->
     <!--{if empty($personalnv['banitems']['index'])}-->
         <!--{if $_G['adminid'] == 1 && $_G['setting']['allowquickviewprofile'] == 1}-->

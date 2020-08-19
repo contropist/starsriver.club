@@ -563,6 +563,7 @@ $lang = array (
     'comprehensive' => '综合',
     'thread_in' => '插入',
     'notmust' => '选填',
+    'should_write_that' => '这人很怠惰呢(ノ｀Д´)ノ ',
     'coloregg' => '彩蛋<script></script>',
     'explorer_too_old_ie' => '为了您的安全，SR酱决定以后将不再支持 IE9 及以下版本的浏览器<br>你可以 <span>更新</span> 或 <span>更换</span> 浏览器来体验我们的服务 (○’ω’○)',
 

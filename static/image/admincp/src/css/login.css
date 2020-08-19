@@ -1,16 +1,73 @@
-*{
-    outline: none;
+/*----------
+|   Basic  |
+|-----------
+|  This Is A Simple Bootstrap Write For WebPages Of StarsRiver
+|  This Is Not A Free Soft Coded For StarsRiver Writed By ZhangYu CopyRight 2017-2050
+-----------------------------------------------------------------------------------------------------------------------*/
+
+/*region Scroll Fix*/
+@-webkit-viewport {
+    width: device-width
 }
 
-.login{
-    display: block;
-    position: absolute;
-    font-size: 16px !important;
-    top:calc(50% - 250px);
-    left:calc(50% - 400px);
-    -webkit-appearance: none;
-    -moz-appearance: none;
+@-ms-viewport {
+    width: device-width
 }
+
+@-o-viewport {
+    width: device-width
+}
+
+@viewport {
+    width: device-width
+}
+
+::-webkit-scrollbar {
+    width: 2px;
+    height: 0;
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #e6e6e6;
+    border-radius: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+* {
+    scrollbar-arrow: hidden;
+    scrollbar-arrow-color: #fff;
+    scrollbar-face-color: #e6e6e6;
+    scrollbar-darkshadow-color: #fff;
+    scrollbar-highlight-color: #fff;
+    scrollbar-3dlight-color: #fff;
+    scrollbar-shadow-color: #fff;
+    scrollbar-track-color: #fff;
+}
+
+* {
+    font-family: Muli, Helvetica, Arial, sans-serif, Material, Feather, Awesome, Icomoon, Discuz-Editor !important;
+    margin: 0;
+    padding: 0;
+    font-size: 14px;
+    font-weight: 400;
+    text-decoration: none !important;
+    outline: none !important;
+    vertical-align: top;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+body {
+    overflow-x: hidden;
+    background: #fff;
+    -webkit-font-smoothing: subpixel-antialiased;
+    margin-bottom: 50px;
+}
+
+
 .login .background .layout0 {
     position: fixed;
     top: 0;
@@ -89,5 +146,22 @@
 }
 .login form button:hover{
     box-shadow:0 0 0 2px rgb(50, 170, 162), 0 0 0 4px rgba(57, 197, 187, 0.3);
+}
+
+@media screen and (max-width:576px) {
+    .login form {
+        display: inline-block;
+        position: fixed;
+        right: 50%;
+        top: 50%;
+        transform: translate(50%, -50%);
+        background: #ffffff;
+        padding: 42px 42px 54px 42px;
+        border-radius: 18px;
+        box-shadow: 0 3px 15px rgba(101,119,134,0.3), 0 0 30px #fff;
+    }
+    .login .background .layout1 {
+         transform: translate(-50%, -50%);
+     }
 }
 

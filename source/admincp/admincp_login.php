@@ -52,8 +52,12 @@ function html_login_header($form = true) {
 <meta charset="$charset" />
 <meta name="renderer" content="webkit" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#fff">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 <title>StarsRiver 管理中心 - 登录</title>
-<link rel="stylesheet" href="static/image/admincp/src/css/login.css?{$_G[style][verhash]}" type="text/css" media="all" />
+<link rel="stylesheet" href="static/image/admincp/src/css/login.css" type="text/css" media="all" />
 </head>
 <body>
 EOT;

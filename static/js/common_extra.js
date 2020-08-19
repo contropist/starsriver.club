@@ -1099,7 +1099,7 @@ function _showCreditmenu() {
 		menu.id = 'extcreditmenu_menu';
 		menu.style.display = 'none';
 		menu.className = 'p_pop';
-		menu.innerHTML = '<div class="p_opt"><img src="'+ IMGDIR + '/loading.gif" width="16" height="16" class="vm" /> 请稍候...</div>';
+		menu.innerHTML = '<img class="loading" src="'+ IMGDIR + '/loading.gif" /> 请稍候...';
 		$('append_parent').appendChild(menu);
 		ajaxget($('extcreditmenu').href, 'extcreditmenu_menu', 'ajaxwaitid');
 	}
@@ -1112,7 +1112,7 @@ function _showUpgradeinfo() {
 		menu.id = 'g_upmine_menu';
 		menu.style.display = 'none';
 		menu.className = 'p_pop';
-		menu.innerHTML = '<div class="p_opt"><img src="'+ IMGDIR + '/loading.gif" width="16" height="16" class="vm" /> 请稍候...</div>';
+		menu.innerHTML = '<img class="loading" src="'+ IMGDIR + '/loading.gif"/> 请稍候...';
 		$('append_parent').appendChild(menu);
 		ajaxget('home.php?mod=spacecp&ac=usergroup&showextgroups=1', 'g_upmine_menu', 'ajaxwaitid');
 	}

@@ -55,10 +55,10 @@
     }
 
 /***********\
-  功能模块   | 解决跨域图像后期处理问题
+  功能模块   |
 \***********/
 
-    /*远程图像转换 */ // 解决跨域图像后期处理问题
+    /* 远程图像转换 */ // 解决跨域图像后期处理问题
     function Base64Image(img) {
         let canvas = document.createElement("canvas"),
             ctx = canvas.getContext("2d");
@@ -679,6 +679,12 @@
                 }
             }
         }
+    }
+
+    // 自动设高
+    function autoheight(e, def){
+        e.style.height = def ? def + 'px' : '1px';
+        e.style.height = (e.scrollHeight) + 'px';
     }
 
     // 初始化页面特定内容的dislpay方式

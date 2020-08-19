@@ -91,8 +91,8 @@
                 SRGlobal.Window.Scroll.DirX = 'left';
             }
 
-            setTimeout(tmp.BeforeTop = tmp.Top , 0);
-            setTimeout(tmp.BeforeLeft = tmp.Left , 0);
+            tmp.BeforeTop = tmp.Top;
+            tmp.BeforeLeft = tmp.Left;
         }
     };
 

@@ -4,6 +4,41 @@
         <img data-src="http://ib001.starsriver.net:1080/images/2020/06/08/61038970_p0.jpg">
     </div>
     <div class="cover">
+        <div class="spaceinfo" id="spaceinfoshow">
+            <!--{eval space_merge($space, 'field_home'); $space[domainurl] = space_domain($space);getusernestdata($space);$personalnv = isset($_G['blockposition']['nv']) ? $_G['blockposition']['nv'] : '';}-->
+            <!--{eval $allowupdatedoing = $space['uid'] == $_G['uid'] && checkperm('allowdoing');}-->
+            <span class="space-desc" id="spacedescription" >$space[spacedescription]</span>
+            <span class="space-note {if $allowupdatedoing}editable{/if}" {if $allowupdatedoing}id="show_spacenote_$space[uid]" onclick="cardUpdatedoing('spacenote_$space[uid]',1)"{/if}><!--{if $space[spacenote]}-->$space[spacenote]<!--{else}-->{lang should_write_that}<!--{/if}--></span>
+            <!--{if helper_access::check_module('doing') && $allowupdatedoing}-->
+                <form id="form_spacenote_$space[uid]" method="post" action="home.php?mod=spacecp&ac=doing&inajax=1" onsubmit="return false;" style="display:none">
+                    <input type="hidden" name="addsubmit" value="true" />
+                    <input type="hidden" name="fromcard" value="1" />
+                    <input type="hidden" name="formhash" value="{FORMHASH}" />
+                    <textarea name="message" oninput="autoheight(this)" onblur="cardSubmitdoing('spacenote_$space[uid]')" onsubmit="return false;"><!--{echo strip_tags($space[spacenote])}--></textarea>
+                </form>
+                <script type="text/javascript">
+                    function cardUpdatedoing(scdoing,type) {
+                        if(scdoing){
+                            if(type){
+                                SR('#show_' + scdoing)[0].style.display = 'none';
+                                SR('#form_' + scdoing)[0].style.display = '';
+                                autoheight(SR('#form_' + scdoing + '> textarea')[0], SR('#show_' + scdoing)[0].Css.height);
+                                SR('#form_' + scdoing + '> textarea')[0].focus();
+                            } else {
+                                SR('#show_' + scdoing)[0].style.display = '';
+                                SR('#form_' + scdoing)[0].style.display = 'none';
+                            }
+                        }
+                    }
+                    function cardSubmitdoing(scdoing) {
+                        ajaxpost('form_' + scdoing, 'show_' + scdoing);
+                        SR('#show_' + scdoing)[0].innerHTML = SR('#form_' + scdoing + '> textarea')[0].value !== '' ? SR('#form_' + scdoing + '> textarea')[0].value : '{lang should_write_that}';
+                        SR('#show_' + scdoing)[0].style.display = '';
+                        SR('#form_' + scdoing)[0].style.display = 'none';
+                    }
+                </script>
+            <!--{/if}-->
+        </div>
         <div class="menu">
             <!--{if helper_access::check_module('follow') && $space[uid] != $_G[uid]}-->
                 <!--{eval $follow = 0;}-->
@@ -49,32 +84,25 @@
                             <span>{lang content_manage} :</span>
                             <ol>
                                 <li><a href="forum.php?mod=modcp&action=thread&op=post&searchsubmit=1&do=search&users=$encodeusername" target="_blank">{lang manage_post}</a></li>
-
                                 <!--{if helper_access::check_module('doing')}-->
                                     <li><a href="webcontroller.php?action=doing&searchsubmit=1&detail=1&search=true&fromumanage=1&users=$encodeusername" target="_blank">{lang manage_doing}</a></li>
                                 <!--{/if}-->
-
                                 <!--{if helper_access::check_module('blog')}-->
                                     <li><a href="webcontroller.php?action=blog&searchsubmit=1&detail=1&search=true&fromumanage=1&uid=$space[uid]" target="_blank">{lang manage_blog}</a></li>
                                 <!--{/if}-->
-
                                 <!--{if helper_access::check_module('feed')}-->
                                     <li><a href="webcontroller.php?action=feed&searchsubmit=1&detail=1&fromumanage=1&uid=$space[uid]" target="_blank">{lang manage_feed}</a></li>
                                 <!--{/if}-->
-
                                 <!--{if helper_access::check_module('album')}-->
                                     <li><a href="webcontroller.php?action=album&searchsubmit=1&detail=1&search=true&fromumanage=1&uid=$space[uid]" target="_blank">{lang manage_album}</a></li>
                                     <li><a href="webcontroller.php?action=pic&searchsubmit=1&detail=1&search=true&fromumanage=1&users=$encodeusername" target="_blank">{lang manage_pic}</a></li>
                                 <!--{/if}-->
-
                                 <!--{if helper_access::check_module('wall')}-->
                                     <li><a href="webcontroller.php?action=comment&searchsubmit=1&detail=1&fromumanage=1&authorid=$space[uid]" target="_blank">{lang manage_comment}</a></li>
                                 <!--{/if}-->
-
                                 <!--{if helper_access::check_module('share')}-->
                                     <li><a href="webcontroller.php?action=share&searchsubmit=1&detail=1&search=true&fromumanage=1&uid=$space[uid]" target="_blank">{lang manage_share}</a></li>
                                 <!--{/if}-->
-
                                 <!--{if helper_access::check_module('group')}-->
                                     <li><a href="webcontroller.php?action=threads&operation=group&searchsubmit=1&detail=1&search=true&fromumanage=1&users=$encodeusername" target="_blank">{lang manage_group_threads}</a></li>
                                     <li><a href="webcontroller.php?action=prune&searchsubmit=1&detail=1&operation=group&fromumanage=1&users=$encodeusername" target="_blank">{lang manage_group_prune}</a></li>
@@ -93,54 +121,28 @@
         <div class="btn-group">
             <!--{if $space[uid] == $_G[uid]}-->
                 <!--{if $_G[setting][homepagestyle]}-->
-                    <a class="bit-build" href="home.php?mod=space&do=index&nest=yes">
-                        <span class="tooltip" data-pos="tl">{lang nest_space}</span>
-                    </a>
+                    <a class="bit-build" href="home.php?mod=space&do=index&nest=yes"><span class="tooltip" data-pos="tl">{lang nest_space}</span></a>
                 <!--{/if}-->
-
                 <!--{if helper_access::check_module('wall')}-->
-                    <a class="icon-mail2" href="home.php?mod=space&do=wall">
-                        <span class="tooltip" data-pos="tl">{lang view_message}</span>
-                    </a>
+                    <a class="icon-mail2" href="home.php?mod=space&do=wall"><span class="tooltip" data-pos="tl">{lang view_message}</span></a>
                 <!--{/if}-->
-
-                <a class="icon-camera" href="home.php?mod=spacecp&ac=avatar">
-                    <span class="tooltip" data-pos="tl">{lang edit_avatar}</span>
-                </a>
-                <a class="icon-profile" href="home.php?mod=spacecp&ac=profile">
-                    <span class="tooltip" data-pos="tl">{lang update_profile}</span>
-                </a>
+                <a class="icon-camera" href="home.php?mod=spacecp&ac=avatar"><span class="tooltip" data-pos="tl">{lang edit_avatar}</span></a>
+                <a class="icon-profile" href="home.php?mod=spacecp&ac=profile"><span class="tooltip" data-pos="tl">{lang update_profile}</span></a>
             <!--{else}-->
                 <!--{eval require_once libfile('function/friend');$isfriend=friend_check($space[uid]);}-->
-
                 <!--{if !$isfriend}-->
-                    <a class="icon-user-plus" style="background: var(--color-hat-green)"  href="home.php?mod=spacecp&ac=friend&op=add&uid=$space[uid]&handlekey=addfriendhk_{$space[uid]}" id="a_friend_li_{$space[uid]}" onclick="showWindow(this.id, this.href, 'get', 0);">
-                        <span class="tooltip" data-pos="tl">{lang add_friend}</span>
-                    </a>
+                    <a class="icon-user-plus" style="background: var(--color-hat-green)"  href="home.php?mod=spacecp&ac=friend&op=add&uid=$space[uid]&handlekey=addfriendhk_{$space[uid]}" id="a_friend_li_{$space[uid]}" onclick="showWindow(this.id, this.href, 'get', 0);"><span class="tooltip" data-pos="tl">{lang add_friend}</span></a>
                 <!--{else}-->
-                    <a class="icon-user-minus" style="background: var(--color-heart-pink)" href="home.php?mod=spacecp&ac=friend&op=ignore&uid=$space[uid]&handlekey=ignorefriendhk_{$space[uid]}" id="a_ignore_{$space[uid]}" onclick="showWindow(this.id, this.href, 'get', 0);">
-                        <span class="tooltip" data-pos="tl">{lang ignore_friend}</span>
-                    </a>
+                    <a class="icon-user-minus" style="background: var(--color-heart-pink)" href="home.php?mod=spacecp&ac=friend&op=ignore&uid=$space[uid]&handlekey=ignorefriendhk_{$space[uid]}" id="a_ignore_{$space[uid]}" onclick="showWindow(this.id, this.href, 'get', 0);"><span class="tooltip" data-pos="tl">{lang ignore_friend}</span></a>
                 <!--{/if}-->
-
                 <!--{if helper_access::check_module('follow')}-->
-                    <a class="icon-newspaper" href="home.php?mod=follow&uid=$space[uid]&do=view">
-                        <span class="tooltip" data-pos="tl">{lang follow_view_feed}</span>
-                    </a>
+                    <a class="icon-newspaper" href="home.php?mod=follow&uid=$space[uid]&do=view"><span class="tooltip" data-pos="tl">{lang follow_view_feed}</span></a>
                 <!--{/if}-->
-
                 <!--{if helper_access::check_module('wall')}-->
-                    <a class="icon-mail2" href="home.php?mod=space&uid=$space[uid]&do=wall">
-                        <span class="tooltip" data-pos="tl">{lang connect_me}</span>
-                    </a>
+                    <a class="icon-mail2" href="home.php?mod=space&uid=$space[uid]&do=wall"><span class="tooltip" data-pos="tl">{lang connect_me}</span></a>
                 <!--{/if}-->
-
-                <a class="icon-wink2" href="home.php?mod=spacecp&ac=poke&op=send&uid=$space[uid]&handlekey=propokehk_{$space[uid]}" id="a_poke_{$space[uid]}" onclick="showWindow(this.id, this.href, 'get', 0);">
-                    <span class="tooltip" data-pos="tl">{lang say_hi}</span>
-                </a>
-                <a class="icon-bubbles3" href="home.php?mod=spacecp&ac=pm&op=showmsg&handlekey=showmsg_$space[uid]&touid=$space[uid]&pmid=0&daterange=2" id="a_sendpm_$space[uid]" onclick="showWindow('showMsgBox', this.href, 'get', 0)">
-                    <span class="tooltip" data-pos="tl">{lang send_pm}</span>
-                </a>
+                <a class="icon-wink2" href="home.php?mod=spacecp&ac=poke&op=send&uid=$space[uid]&handlekey=propokehk_{$space[uid]}" id="a_poke_{$space[uid]}" onclick="showWindow(this.id, this.href, 'get', 0);"><span class="tooltip" data-pos="tl">{lang say_hi}</span></a>
+                <a class="icon-bubbles3" href="home.php?mod=spacecp&ac=pm&op=showmsg&handlekey=showmsg_$space[uid]&touid=$space[uid]&pmid=0&daterange=2" id="a_sendpm_$space[uid]" onclick="showWindow('showMsgBox', this.href, 'get', 0)"><span class="tooltip" data-pos="tl">{lang send_pm}</span></a>
             <!--{/if}-->
         </div>
     </div>
@@ -149,55 +151,29 @@
         <span class="username">$space[username]<i class="tag">UID: $space[uid]</i></span>
         <div class="btn-group">
             <!--{if $space[uid] == $_G[uid]}-->
-            <!--{if $_G[setting][homepagestyle]}-->
-            <a class="bit-build" href="home.php?mod=space&do=index&nest=yes">
-                <span class="tooltip" data-pos="bl">{lang nest_space}</span>
-            </a>
-            <!--{/if}-->
-
-            <!--{if helper_access::check_module('wall')}-->
-            <a class="icon-mail2" href="home.php?mod=space&do=wall">
-                <span class="tooltip" data-pos="bl">{lang view_message}</span>
-            </a>
-            <!--{/if}-->
-
-            <a class="icon-camera" href="home.php?mod=spacecp&ac=avatar">
-                <span class="tooltip" data-pos="bl">{lang edit_avatar}</span>
-            </a>
-            <a class="icon-profile" href="home.php?mod=spacecp&ac=profile">
-                <span class="tooltip" data-pos="bl">{lang update_profile}</span>
-            </a>
+                <!--{if $_G[setting][homepagestyle]}-->
+                    <a class="bit-build" href="home.php?mod=space&do=index&nest=yes"><span class="tooltip" data-pos="bl">{lang nest_space}</span></a>
+                <!--{/if}-->
+                <!--{if helper_access::check_module('wall')}-->
+                    <a class="icon-mail2" href="home.php?mod=space&do=wall"><span class="tooltip" data-pos="bl">{lang view_message}</span></a>
+                <!--{/if}-->
+                <a class="icon-camera" href="home.php?mod=spacecp&ac=avatar"><span class="tooltip" data-pos="bl">{lang edit_avatar}</span></a>
+                <a class="icon-profile" href="home.php?mod=spacecp&ac=profile"><span class="tooltip" data-pos="bl">{lang update_profile}</span></a>
             <!--{else}-->
-            <!--{eval require_once libfile('function/friend');$isfriend=friend_check($space[uid]);}-->
-
-            <!--{if !$isfriend}-->
-            <a class="icon-user-plus" style="background: var(--color-hat-green)"  href="home.php?mod=spacecp&ac=friend&op=add&uid=$space[uid]&handlekey=addfriendhk_{$space[uid]}" id="a_friend_li_{$space[uid]}" onclick="showWindow(this.id, this.href, 'get', 0);">
-                <span class="tooltip" data-pos="bl">{lang add_friend}</span>
-            </a>
-            <!--{else}-->
-            <a class="icon-user-minus" style="background: var(--color-heart-pink)" href="home.php?mod=spacecp&ac=friend&op=ignore&uid=$space[uid]&handlekey=ignorefriendhk_{$space[uid]}" id="a_ignore_{$space[uid]}" onclick="showWindow(this.id, this.href, 'get', 0);">
-                <span class="tooltip" data-pos="bl">{lang ignore_friend}</span>
-            </a>
-            <!--{/if}-->
-
-            <!--{if helper_access::check_module('follow')}-->
-            <a class="icon-newspaper" href="home.php?mod=follow&uid=$space[uid]&do=view">
-                <span class="tooltip" data-pos="bl">{lang follow_view_feed}</span>
-            </a>
-            <!--{/if}-->
-
-            <!--{if helper_access::check_module('wall')}-->
-            <a class="icon-mail2" href="home.php?mod=space&uid=$space[uid]&do=wall">
-                <span class="tooltip" data-pos="bl">{lang connect_me}</span>
-            </a>
-            <!--{/if}-->
-
-            <a class="icon-wink2" href="home.php?mod=spacecp&ac=poke&op=send&uid=$space[uid]&handlekey=propokehk_{$space[uid]}" id="a_poke_{$space[uid]}" onclick="showWindow(this.id, this.href, 'get', 0);">
-                <span class="tooltip" data-pos="bl">{lang say_hi}</span>
-            </a>
-            <a class="icon-bubbles3" href="home.php?mod=spacecp&ac=pm&op=showmsg&handlekey=showmsg_$space[uid]&touid=$space[uid]&pmid=0&daterange=2" id="a_sendpm_$space[uid]" onclick="showWindow('showMsgBox', this.href, 'get', 0)">
-                <span class="tooltip" data-pos="bl">{lang send_pm}</span>
-            </a>
+                <!--{eval require_once libfile('function/friend');$isfriend=friend_check($space[uid]);}-->
+                <!--{if !$isfriend}-->
+                    <a class="icon-user-plus" style="background: var(--color-hat-green)"  href="home.php?mod=spacecp&ac=friend&op=add&uid=$space[uid]&handlekey=addfriendhk_{$space[uid]}" id="a_friend_li_{$space[uid]}" onclick="showWindow(this.id, this.href, 'get', 0);"><span class="tooltip" data-pos="bl">{lang add_friend}</span></a>
+                <!--{else}-->
+                    <a class="icon-user-minus" style="background: var(--color-heart-pink)" href="home.php?mod=spacecp&ac=friend&op=ignore&uid=$space[uid]&handlekey=ignorefriendhk_{$space[uid]}" id="a_ignore_{$space[uid]}" onclick="showWindow(this.id, this.href, 'get', 0);"><span class="tooltip" data-pos="bl">{lang ignore_friend}</span></a>
+                <!--{/if}-->
+                <!--{if helper_access::check_module('follow')}-->
+                    <a class="icon-newspaper" href="home.php?mod=follow&uid=$space[uid]&do=view"><span class="tooltip" data-pos="bl">{lang follow_view_feed}</span></a>
+                <!--{/if}-->
+                <!--{if helper_access::check_module('wall')}-->
+                    <a class="icon-mail2" href="home.php?mod=space&uid=$space[uid]&do=wall"><span class="tooltip" data-pos="bl">{lang connect_me}</span></a>
+                <!--{/if}-->
+                <a class="icon-wink2" href="home.php?mod=spacecp&ac=poke&op=send&uid=$space[uid]&handlekey=propokehk_{$space[uid]}" id="a_poke_{$space[uid]}" onclick="showWindow(this.id, this.href, 'get', 0);"><span class="tooltip" data-pos="bl">{lang say_hi}</span></a>
+                <a class="icon-bubbles3" href="home.php?mod=spacecp&ac=pm&op=showmsg&handlekey=showmsg_$space[uid]&touid=$space[uid]&pmid=0&daterange=2" id="a_sendpm_$space[uid]" onclick="showWindow('showMsgBox', this.href, 'get', 0)"><span class="tooltip" data-pos="bl">{lang send_pm}</span></a>
             <!--{/if}-->
         </div>
     </div>

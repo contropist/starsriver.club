@@ -1,6 +1,9 @@
 <!--{template common/header}-->
 <script type="text/javascript" src="{$_G['setting']['jspath']}forum_viewthread.js?{VERHASH}"></script>
-<script type="text/javascript">zoomstatus = parseInt($_G['setting']['zoomstatus']);var imagemaxwidth = '{$_G['setting']['imagemaxwidth']}';</script>
+<script>
+    zoomstatus = parseInt($_G['setting']['zoomstatus']);
+    var imagemaxwidth = '{$_G['setting']['imagemaxwidth']}';
+</script>
 <div>
 	<div class="mn">
 		<div class="bm bw0">
@@ -31,7 +34,7 @@
 		</div>
 	</div>
 </div>
-<script type="text/javascript">
+<script>
 <!--{if !empty($annid)}-->
 	toggle_collapse('announce$annid', 1, 1);
 <!--{/if}-->

@@ -2039,7 +2039,7 @@
         --color-vlightgray: rgb(250 250 250);
         --color-lightgray: rgb(242 242 242);
         --color-slightgray: rgb(229 229 229);
-        --color-heart-pink: #FF4E66;
+        --color-heart-pink: #ff4e66;
         --color-charry-pink: #FF7F8F;
         --color-onnanoko-pink: #ee2266;
         --color-hat-green: #00C789;
@@ -2051,9 +2051,10 @@
         --color-text-danger: var(--color-mod-danger);
         --color-text-info: var(--color-mod-info);
         --color-text-primary: #4162b4;
-        --color-text-gray: #727272;
         --color-text-default: #030303;
         --color-text-dark: #445a59;
+        --color-text-gray: #727272;
+        --color-text-lightgray: #727272;
 
         --color-mod-success : #38b03f;
         --color-mod-warning : #E1804C;
@@ -2603,6 +2604,7 @@
 /*region Common*/
     body{
         --loading-trans-animation: .15s ease-in-out;
+        --wap-width: 1140px;
     }
 
     [role="body"] {
@@ -2637,7 +2639,7 @@
     [html-wrapper] {
         display: block;
         margin: 6px auto;
-        width: 1140px;
+        width: var(--wap-width);
         font-size: 0;
         box-sizing: border-box;
     }
@@ -2688,19 +2690,31 @@
     .container{
         position: relative;
         margin: 0 auto;
-        width: 1140px;
+        width: var(--wap-width);
         height:auto;
         display: block;
         font-size: 0;
     }
     .plate{
-        width: 1140px;
+        width: var(--wap-width);
     }
+
+    [class*='banner']{
+        position: relative;
+        width: 100%;
+        overflow: hidden;
+        background-color: #fff;
+        background-size: 20px 20px;
+        background-position: 0 0,10px 10px;
+        background-image: linear-gradient(45deg,#f0f0f0 25%,transparent 0,transparent 75%,#f0f0f0 0),linear-gradient(45deg,#f0f0f0 25%,transparent 0,transparent 75%,#f0f0f0 0) !important;
+    }
+    [class*='banner'] img{
+        image-rendering: auto !important;
+    }
+
     @media screen and (max-width: 1240px){
-        [html-wrapper],
-        .container,
-        .plate{
-            width:960px;
+        body{
+            --wap-width: 960px;
         }
     }
 /*endregion*/
@@ -3101,9 +3115,13 @@
         width: calc(100% - var(--width-mas-guide));
     }
     .Mas.edge .mas-viewer .mas-viewer-header{
+        position: relative;
+        z-index: 1;
         width: 100%;
     }
     .Mas.edge .mas-viewer .mas-viewer-container{
+        position: relative;
+        z-index: 0;
         width: 100%;
         box-sizing: border-box;
         margin-bottom:90px;

@@ -30,7 +30,13 @@ if(helper_access::check_module('doing')) {
 		$message = getstr($_POST['message'], 200, 0, 0, 1);
 		$message = preg_replace("/\<br.*?\>/i", ' ', $message);
 		if(strlen($message) < 1) {
-			showmessage('should_write_that');
+            $setarr = array('recentnote'=>$message, 'spacenote'=>$message);
+            $credit = $experience = 0;
+            $extrasql = array('doings' => 1);
+            updatecreditbyaction('doing', 0, $extrasql);
+            C::t('common_member_field_home')->update($_G['uid'], $setarr);
+
+            showmessage('should_write_that');
 		}
 
 		$message = censor($message, NULL, TRUE);

@@ -72,12 +72,12 @@ function _ajaxpost(formid, showid, waitid, showidclass, submitbtn, recall) {
 				}
 			}
 		}
-		if(s != '' && s.indexOf('ajaxerror') != -1) {
+		if(s != '' && s.indexOf('ajaxerror') !== -1) {
 			evalscript(s);
 			evaled = true;
 		}
 		if(showidclass) {
-			if(showidclass != 'onerror') {
+			if(showidclass !== 'onerror') {
 				$(showid).className = showidclass;
 			} else {
 				showError(s);
@@ -149,12 +149,12 @@ function _ajaxmenu(ctrlObj, timeout, cache, duration, pos, recall, idclass, cont
 	}
 	var menuid = ctrlid + '_menu';
 	var menu = $(menuid);
-	if(isUndefined(timeout)) timeout = 3000;
+	if(isUndefined(timeout)) timeout = 500;
 	if(isUndefined(cache)) cache = 1;
 	if(isUndefined(pos)) pos = '43';
 	if(isUndefined(duration)) duration = timeout > 0 ? 0 : 3;
-	if(isUndefined(idclass)) idclass = 'p_pop';
-	if(isUndefined(contentclass)) contentclass = 'p_opt';
+	if(isUndefined(idclass)) idclass = 'dialog';
+	if(isUndefined(contentclass)) contentclass = '';
 	var func = function() {
 		showMenu({'ctrlid':ctrlObj.id,'menuid':menuid,'duration':duration,'timeout':timeout,'pos':pos,'cache':cache,'layer':2});
 		if(typeof recall == 'function') {
@@ -205,7 +205,7 @@ function _appendscript(src, text, reload, charset) {
 				JSLOADED[src] = 1;
 			};
 			scriptNode.onreadystatechange = function () {
-				if((scriptNode.readyState == 'loaded' || scriptNode.readyState == 'complete') && !scriptNode.onloadDone) {
+				if((scriptNode.readyState === 'loaded' || scriptNode.readyState === 'complete') && !scriptNode.onloadDone) {
 					scriptNode.onloadDone = true;
 					JSLOADED[src] = 1;
 				}

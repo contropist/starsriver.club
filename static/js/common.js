@@ -1712,22 +1712,29 @@ function showForummenu(fid) {
 }
 
 function cardInit() {
-	var cardShow = function (obj) {
-		pos = obj.getAttribute('c') == '1' ? '43' : obj.getAttribute('c');
-		USERCARDST = setTimeout(function() {ajaxmenu(obj, 500, 1, 2, pos, null, 'p_pop card');}, 250);
+	let cardShow = function (obj) {
+		pos = obj.getAttribute('c') === '1' ? '43' : obj.getAttribute('c');
+		USERCARDST = setTimeout(
+		    function() {
+		        ajaxmenu(obj, 10, 1, 2, pos, null, '');}, 0);
 	};
-	var cardids = {};
-	var a = document.body.getElementsByTagName('a');
-	for(var i = 0;i < a.length;i++){
-		if(a[i].getAttribute('c')) {
-			var href = a[i].getAttribute('href', 1);
-			if(typeof cardids[href] == 'undefined') {
-				cardids[href] = Math.round(Math.random()*10000);
-			}
-			a[i].setAttribute('mid', 'card_' + cardids[href]);
-			a[i].onmouseover = function() {cardShow(this)};
-			a[i].onmouseout = function() {clearTimeout(USERCARDST);};
-		}
+	let cardids = {},
+        a = SR('[c="1"]');
+
+	for(let i = 0;i < a.length;i++){
+        let href = a[i].getAttribute('href', 1);
+        if(typeof cardids[href] == 'undefined') {
+            cardids[href] = Math.round(Math.random()*10000);
+        }
+        a[i].setAttribute('mid', 'card_' + cardids[href]);
+
+        a[i].onmouseenter = function() {
+            cardShow(this)
+        };
+
+        a[i].onmouseleave = function() {
+            clearTimeout(USERCARDST);
+        };
 	}
 }
 
