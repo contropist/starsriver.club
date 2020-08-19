@@ -240,7 +240,7 @@ $lang = array(
         'RPR',
         'RPZ',
         'FCP',
-        'BGC'
+        'BGR'
     ),
     'logs_credit_update_TRC'          => '任务奖励',
     'logs_credit_update_RTC'          => '悬赏文章',

@@ -1403,12 +1403,19 @@
         margin-top: 4px;
     }
 
-    .tool .tooltip{
+    .tool .tooltip.lt{
         transform : scale(0.2,1);
         transition: 150ms cubic-bezier(1,0, 0, 1);
         padding: 0 !important;
         right:calc(100% + 4px) !important;
         top:0;
+    }
+    .tool .tooltip.bl{
+        transform : scale(0.2,1);
+        transition: 150ms cubic-bezier(1,0,0,1);
+        padding: 0 !important;
+        left: 0;
+        top: 90%;
     }
     .tool:hover .tooltip{
         transform : scale(1);

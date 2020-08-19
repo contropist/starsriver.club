@@ -8,7 +8,7 @@
             <div class="tool">
                 <!--{if $value[authorid]==$_G[uid] || $value[uid]==$_G[uid] || checkperm('managecomment')}-->
                     <div class="dots"><i class="dot"></i><i class="dot"></i><i class="dot"></i></div>
-                    <span class="tooltip lt" data-ignore='1'>
+                    <span class="tooltip bl" data-ignore='1'>
                         <!--{if $value[authorid]==$_G[uid]}-->
                             <a href="home.php?mod=spacecp&ac=comment&op=edit&cid=$value[cid]&handlekey=editcommenthk_{$value[cid]}" id="c_$value[cid]_edit" onclick="showWindow(this.id, this.href, 'get', 0);">{lang edit}</a>
                         <!--{/if}-->
