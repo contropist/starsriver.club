@@ -1,5 +1,6 @@
 pages:
   stage: deploy
+  dependencies: []
   script:
     - rm -rf /var/www/html/starsriver/\[SR\]\ club.starsriver/api
     - rm -rf /var/www/html/starsriver/\[SR\]\ club.starsriver/archiver
@@ -20,7 +21,8 @@ pages:
     - cp *.php /var/www/html/starsriver/\[SR\]\ club.starsriver
     - cp *.xml /var/www/html/starsriver/\[SR\]\ club.starsriver
     - cp .htaccess /var/www/html/starsriver/\[SR\]\ club.starsriver
-    
-    - sudo chmod -R 777 /var/www/html/starsriver/\[SR\]\ club.starsriver
+
   only:
     - master
+    
+
