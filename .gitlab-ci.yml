@@ -1,5 +1,5 @@
 first:
-  stage: clean
+  stage: .pre
   script:
     - rm -rf /var/www/html/starsriver/\[SR\]\ club.starsriver/api
     - rm -rf /var/www/html/starsriver/\[SR\]\ club.starsriver/archiver
