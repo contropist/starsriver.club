@@ -1,6 +1,5 @@
-pages:
-  stage: deploy
-  dependencies: []
+first:
+  stage: clean
   script:
     - rm -rf /var/www/html/starsriver/\[SR\]\ club.starsriver/api
     - rm -rf /var/www/html/starsriver/\[SR\]\ club.starsriver/archiver
@@ -9,7 +8,12 @@ pages:
     - rm -rf /var/www/html/starsriver/\[SR\]\ club.starsriver/template
     - rm -rf /var/www/html/starsriver/\[SR\]\ club.starsriver/uc_client
     - rm -rf /var/www/html/starsriver/\[SR\]\ club.starsriver/*.php
+  only:
+    - master
     
+second:
+  stage: deploy
+  script:
     - cp -r api /var/www/html/starsriver/\[SR\]\ club.starsriver
     - cp -r archiver /var/www/html/starsriver/\[SR\]\ club.starsriver
     - cp -r source /var/www/html/starsriver/\[SR\]\ club.starsriver
@@ -20,5 +24,3 @@ pages:
 
   only:
     - master
-    
-
