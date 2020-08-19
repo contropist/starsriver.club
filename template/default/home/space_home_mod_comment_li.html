@@ -23,7 +23,7 @@
             <a class="card-tag {if $value[magicflicker]}magicflicker{/if}" title="{if checkperm('managecomment')}IP: $value[ip]{/if}" {if $value[author]}href="home.php?mod=space&uid=$value[authorid]" c="1"{/if}>
                 <!--{if $value[author]}-->
                     <s class="avatar"><!--{avatar($value[authorid],small)}--></s>
-                    <s class="username">{$value[author]}</s>
+                    <s class="username" href="home.php?mod=space&uid=$value[authorid]">{$value[author]}</s>
                 <!--{else}-->
                     <s class="avatar"><img class="avatar-main" src="{STATICURL}image/magic/hidden.gif"/></s>
                     <s class="username">$_G[setting][anonymoustext]</s>
