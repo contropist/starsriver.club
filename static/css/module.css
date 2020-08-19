@@ -7429,8 +7429,11 @@
         }
         .app-userspace #userspace_profile > .panel > .panel-container > .box > div{
             max-height: 242px;
-            overflow: auto;
+            overflow: hidden;
             box-sizing: border-box;
+        }
+        .app-userspace #userspace_profile > .panel > .panel-container > .box > div:hover{
+            overflow: auto;
         }
         .app-userspace #userspace_profile > .panel > .panel-container > .box > [class^="info-"] {
             font-size: 13px;

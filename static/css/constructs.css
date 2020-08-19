@@ -1417,6 +1417,13 @@
         left: 0;
         top: 90%;
     }
+    .tool .tooltip.br{
+        transform : scale(0.2,1);
+        transition: 150ms cubic-bezier(1,0,0,1);
+        padding: 0 !important;
+        right: 0;
+        top: 90%;
+    }
     .tool:hover .tooltip{
         transform : scale(1);
         opacity: 1;
