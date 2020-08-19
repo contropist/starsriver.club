@@ -4,7 +4,7 @@
     <div class="mas-viewer-header">
         <!--{template home/space_home_userabout}-->
     </div>
-    <div class="mas-viewer-container" id="nestpage" >
+    <div class="mas-viewer-container hide" id="nestpage" >
             <!--{if empty($leftlist)}-->
             <div class="move-span temp" id="left_temp" ></div >
             <!--{/if}-->
@@ -41,18 +41,4 @@
             <!--{/if}-->
     </div >
 </div >
-<script type="text/javascript">
-    function succeedhandle_followmod(url, msg, values) {
-        var fObj = SR('#followmod')[0];
-        if(values['type'] === 'add') {
-            fObj.innerHTML = '{lang follow_added}';
-            fObj.addClass('active');
-            fObj.href = 'home.php?mod=spacecp&ac=follow&op=del&fuid='+values['fuid'];
-        } else if(values['type'] === 'del') {
-            fObj.innerHTML = '{lang follow_add}TA';
-            fObj.delClass('active');
-            fObj.href = 'home.php?mod=spacecp&ac=follow&op=add&hash={FORMHASH}&fuid='+values['fuid'];
-        }
-    }
-</script>
 <!--{template common/footer}-->
