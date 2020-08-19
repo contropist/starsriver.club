@@ -9,8 +9,6 @@ pages:
     - rm -rf /var/www/html/starsriver/\[SR\]\ club.starsriver/template
     - rm -rf /var/www/html/starsriver/\[SR\]\ club.starsriver/uc_client
     - rm -rf /var/www/html/starsriver/\[SR\]\ club.starsriver/*.php
-    - rm -rf /var/www/html/starsriver/\[SR\]\ club.starsriver/*.xml
-    - rm -rf /var/www/html/starsriver/\[SR\]\ club.starsriver/.htaccess
     
     - cp -r api /var/www/html/starsriver/\[SR\]\ club.starsriver
     - cp -r archiver /var/www/html/starsriver/\[SR\]\ club.starsriver
@@ -19,8 +17,6 @@ pages:
     - cp -r template /var/www/html/starsriver/\[SR\]\ club.starsriver
     - cp -r uc_client /var/www/html/starsriver/\[SR\]\ club.starsriver
     - cp *.php /var/www/html/starsriver/\[SR\]\ club.starsriver
-    - cp *.xml /var/www/html/starsriver/\[SR\]\ club.starsriver
-    - cp .htaccess /var/www/html/starsriver/\[SR\]\ club.starsriver
 
   only:
     - master
