@@ -21,6 +21,6 @@ pages:
     - cp *.xml /var/www/html/starsriver/\[SR\]\ club.starsriver
     - cp .htaccess /var/www/html/starsriver/\[SR\]\ club.starsriver
     
-    - chmod -R 777 /var/www/html/starsriver/\[SR\]\ club.starsriver
+    - sudo chmod -R 777 /var/www/html/starsriver/\[SR\]\ club.starsriver
   only:
     - master
