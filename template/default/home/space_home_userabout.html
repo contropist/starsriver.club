@@ -31,9 +31,9 @@
                         }
                     }
                     function cardSubmitdoing(scdoing) {
-                        ajaxpost('form_' + scdoing, 'show_' + scdoing);
                         if(SR('#show_' + scdoing)[0].innerHTML !== SR('#form_' + scdoing + '> textarea')[0].value){
                             SR('#show_' + scdoing)[0].innerHTML = SR('#form_' + scdoing + '> textarea')[0].value !== '' ? SR('#form_' + scdoing + '> textarea')[0].value : '{lang should_write_that}';
+                            ajaxpost('form_' + scdoing, 'show_' + scdoing);
                         }
                         SR('#show_' + scdoing)[0].style.display = '';
                         SR('#form_' + scdoing)[0].style.display = 'none';
