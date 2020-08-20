@@ -7389,6 +7389,403 @@
         display: none;
     }
 
+    /*region @timeline*/
+        .app-userspace .timeline{
+
+        }
+        .app-userspace .timeline ul{
+
+        }
+        .app-userspace .timeline ul li{
+
+        }
+    /*endregion*/
+
+    /*region #userspace_wall*/
+        #comment_face_menu{
+            width: 270px;
+            --face-size: 22px;
+        }
+        #comment_face_menu li{
+            width: var(--face-size);
+            height: var(--face-size);
+            margin: 4px;
+            display: inline-block;
+        }
+        #comment_face_menu li img{
+            width: 100%;;
+        }
+
+        .app-userspace #userspace_wall{
+            --wall-commentform-width: 310px;
+            --box-border-color: rgba(135, 135, 171, 0.20);
+            --box-margin: 8px;
+            --box-radius: 10px
+        }
+        .app-userspace #userspace_wall .wall{
+            font-size: 0;
+            display: block;
+            width: calc(100% - 16px);;
+            margin: 8px;
+            position: relative;
+        }
+        .app-userspace #userspace_wall .wall .pg{
+            margin: 8px;
+            padding: 15px;
+            background: #fff;
+            box-sizing: content-box;
+            border-radius: 5px;
+            border: 1px solid var(--box-border-color);
+        }
+        .app-userspace #userspace_wall .wall .commentform{
+            z-index: 1;
+            position: absolute;
+            right: 0;
+            display: inline-block;
+            width: var(--wall-commentform-width);
+            margin: 50px var(--box-margin) var(--box-margin) var(--box-margin);
+        }
+        .app-userspace #userspace_wall .wall .commentform .menu{
+            position: absolute;
+            bottom: 100%;
+            left: 0;
+            margin: 0 20px;
+            line-height: 32px;
+        }
+        .app-userspace #userspace_wall .wall .commentform .menu a{
+            margin-right: 10px;
+        }
+        .app-userspace #userspace_wall .wall .commentform .menu a i{
+            font-size: 16px;
+            color: var(--color-text-gray);
+        }
+        .app-userspace #userspace_wall .wall .commentform .menu a:hover i{
+            color: var(--color-main-theme);
+        }
+        .app-userspace #userspace_wall .wall .commentform .nop{
+            display: inline-block;
+            width: 100%;
+            border-radius: var(--box-radius);
+            border: 1px solid var(--box-border-color);
+            background: var(--color-vlightgray);
+            padding: 15px;
+            box-sizing: border-box;
+            line-height: 26px;
+            color: var(--color-gray);
+            margin-top: 15px;
+        }
+        .app-userspace #userspace_wall .wall .commentform .nop a{
+            border-bottom: 1px dashed;
+            color: var(--color-main-theme);
+        }
+        .app-userspace #userspace_wall .wall .commentform textarea{
+            display: inline-block;
+            width: 100%;
+            border-radius: var(--box-radius);
+            border: 1px solid var(--box-border-color);
+            background: var(--color-vlightgray);
+            margin-top: 15px;
+        }
+        .app-userspace #userspace_wall .wall .commentform textarea:hover,
+        .app-userspace #userspace_wall .wall .commentform textarea:focus{
+            border-color: var(--color-sky-blue);
+        }
+        .app-userspace #userspace_wall .wall .commentform textarea:focus{
+            background: #fff;
+        }
+        .app-userspace #userspace_wall .wall .commentform button{
+            white-space: nowrap;
+        }
+        .app-userspace #userspace_wall .wall .commentform .post-res{
+            padding-top: 10px;
+            color: var(--color-text-gray);
+        }
+        .app-userspace #userspace_wall .wall .comments{
+            z-index: 0;
+            position: relative;
+            display: inline-block;
+            width: calc(100% - 16px - var(--wall-commentform-width));
+        }
+        .app-userspace #userspace_wall .wall .comments .comments-list{
+            font-size: 0;
+        }
+        .app-userspace #userspace_wall .wall .comments .comments-list li{
+            position: relative;
+            display: inline-block;
+            width: calc(100% / var(--box-col) - var(--box-margin) * 2);
+            margin: 50px var(--box-margin) var(--box-margin) var(--box-margin);
+            text-align: left;
+        }
+        .app-userspace #userspace_wall .wall .decrater-b{
+            position: absolute;
+            display: inline-block;
+            left: 0;
+            bottom: 100%;
+            width: calc(100% - 130px);
+            height: 46px;
+            background: #ffffff;
+            border-radius: var(--box-radius) 0 0 0;
+            border-width: 1px;
+            border-bottom: 0;
+            border-right: 0;
+            border-style: solid;
+            border-color: var(--box-border-color);
+        }
+        .app-userspace #userspace_wall .wall .decrater-b::after{
+            content: '';
+            position: absolute;
+            display: inline-block;
+            left: 100%;
+            bottom: 0;
+            width: 50px;
+            height: 44px;
+            background: #ffffff;
+            transform-origin: bottom left;
+            transform: scale(1.1,1.3) perspective(.5em) rotateX(2.2deg);
+            border-radius: 0 var(--box-radius) 0 0;
+            border-width: 1px;
+            border-bottom: 0;
+            border-left: 0;
+            border-style: solid;
+            border-color: var(--box-border-color);
+        }
+        .app-userspace #userspace_wall .wall .decrater-a{
+            position: absolute;
+            display: inline-block;
+            right: 0;
+            bottom: 100%;
+            width: 50%;
+            height: 36px;
+            background: #ffffff;
+            border-radius: 0 var(--box-radius) 0 0;
+            border-width: 1px;
+            border-style: solid;
+            border-color: var(--box-border-color);
+        }
+        .app-userspace #userspace_wall .wall .decrater-c{
+            position: relative;
+            background: #ffffff;
+            width: 100%;
+            height: 100%;
+            border-radius: 0 0 var(--box-radius) var(--box-radius);
+            border-width: 1px;
+            border-top: 0;
+            border-style: solid;
+            border-color: var(--box-border-color);
+            padding: 0 15px 15px 15px;
+            box-sizing: border-box;
+        }
+        .app-userspace #userspace_wall .wall .decrater-c .tool{
+            position: absolute;
+            width: 56px;
+            height: 12px;
+            cursor: pointer;
+            bottom: 100%;
+            right: 8px;
+            padding: 10px 0;
+        }
+        .app-userspace #userspace_wall .wall .decrater-c .tool .dots{
+            width: 56px;
+            height: 12px;
+            left: 0;
+        }
+        .app-userspace #userspace_wall .wall .decrater-c .tool .dots .dot{
+            width: 10px;
+            height: 10px;
+            display: inline-block;
+            margin-left: 5px;
+            margin-top: 0 !important;
+            border-radius: 2px;
+            background: #f9f9f9;
+            border: 1px solid var(--box-border-color);
+        }
+
+        .app-userspace #userspace_wall .wall li .decrater-c .card-tag{
+            display: inline-block;
+            position: absolute;
+            bottom: 100%;
+            left: 12px;
+            width: calc(100% - 130px);
+            white-space: nowrap;
+            margin-bottom: 8px;
+            background: var(--color-vlightgray);
+            border-radius: 50px;
+            box-shadow: 0 0 0 2px var(--color-lightgray);
+        }
+        .app-userspace #userspace_wall .wall li .decrater-c .card-tag.magicflicker{
+            background-image: url('{IMGURL}/magic/flicker-bg0.jpg') !important;
+            background-size: 101% !important;
+            background-position: center !important;
+        }
+        .app-userspace #userspace_wall .wall li .decrater-c .card-tag .avatar{
+            position: relative;
+            width: 28px;
+            height: 28px;
+        }
+        .app-userspace #userspace_wall .wall li .decrater-c .card-tag .username{
+            display: inline-block;
+            line-height: 28px;
+            color: var(--color-text-dark);
+            width: calc(100% - 34px);
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            font-weight: 700;
+            opacity: .7;
+        }
+        .app-userspace #userspace_wall .wall li .decrater-c .card-tag.magicflicker .username{
+            color: #fff;
+            text-shadow: 0 0 7px #000;
+            opacity: 1;
+        }
+        .app-userspace #userspace_wall .wall li .decrater-c .card-message{
+            padding: 10px 5px 0 5px;
+            border-top: 2px dotted var(--box-border-color);
+            color: var(--color-text-dark);
+            overflow: auto;
+            word-break: break-word;
+            height: 80px;
+            line-height: 20px;
+        }
+        .app-userspace #userspace_wall .wall li .decrater-c .card-message .msg-tip{
+            display: inline-block;
+            background: var(--color-charry-pink);
+            color: #fff;
+            padding: 0 5px;
+            border-radius: 5px;
+            font-size: 12px;
+        }
+        .app-userspace #userspace_wall .wall li .decrater-c .card-message .emoji-face{
+            width: 20px;
+        }
+        .app-userspace #userspace_wall .wall li .decrater-c .card-btm{
+            padding: 10px 5px 0 5px;
+            border-top: 2px dotted var(--box-border-color);
+            box-sizing: content-box;
+            height: 24px;
+            line-height: 24px;
+        }
+        .app-userspace #userspace_wall .wall li .decrater-c .card-btm .date{
+            z-index: 0;
+            font-size: 13px;
+            color: var(--color-text-gray);
+            opacity: .7;
+            cursor: default;
+            position: absolute;
+            white-space: nowrap;
+            max-width: 60%;
+            overflow: hidden;
+        }
+        .app-userspace #userspace_wall .wall li .decrater-c .card-btm .reply{
+            font-size: 12px;
+            display: inline-block;
+            background: var(--color-miku-green);
+            color: #fff;
+            padding: 0 5px;
+            border-radius: 3px;
+        }
+        .app-userspace #userspace_wall .wall li .decrater-c .card-btm .reply::before{
+            margin-right: 3px;
+        }
+
+        .app-userspace #userspace_wall .wall li .decrater-c .card-btm .props{
+            z-index: 1;
+            position: relative;
+            display: inline-block;
+            float: right;
+            margin-left: 9px;
+            font-size: 12px;
+            color: var(--color-text-gray);
+            background: var(--color-vlightgray);
+            padding: 0 5px;
+            border-radius: 5px;
+            box-shadow: 0 0 0 2px var(--color-lightgray);
+            opacity: 0;
+            transition: .1s ease-in-out;
+        }
+        .app-userspace #userspace_wall .wall li:hover .decrater-c .card-btm .props{
+            opacity: 1;
+        }
+        .app-userspace #userspace_wall .wall li .decrater-c .card-btm .props:hover{
+            color: #000000;
+            background: var(--color-lightgray);
+            box-shadow: 0 0 0 2px var(--color-slightgray);
+        }
+        .app-userspace #userspace_wall .wall li .decrater-c .card-btm .props img{
+            vertical-align: middle;
+            width: 16px;
+            height: 16px;
+            margin-right: 5px;
+        }
+
+        .WL-0 .app-userspace #userspace_wall,
+        .WL-3P .app-userspace #userspace_wall,
+        .WL-4P .app-userspace #userspace_wall{
+            --box-col: 1;
+        }
+        .WL-7P .app-userspace #userspace_wall{
+            --box-col: 2;
+        }
+        .WL-13P .app-userspace #userspace_wall{
+            --box-col: 3;
+        }
+        .WL-1K .app-userspace #userspace_wall{
+            --box-col: 4;
+        }
+        .WL-2K .app-userspace #userspace_wall{
+            --box-col: 6;
+        }
+        .WL-4K .app-userspace #userspace_wall{
+            --box-col: 8;
+        }
+        @media screen and (max-width:1000px) {
+            .app-userspace #userspace_wall .wall .comments{
+                width: 100% !important;
+            }
+
+            .app-userspace #userspace_wall .wall .commentform{
+                --box-radius: 0;
+                position: fixed !important;
+                width: calc(100% - 71px) !important;
+                margin: 0;
+                right: 0;
+                bottom: 20px;
+                box-shadow: 0 0 15px rgba(0,0,0,.3);
+                transform: translate3d(0, 0, 0);
+                transition: .2s ease-in-out;
+            }
+            .app-userspace #userspace_wall .wall .commentform.sleep{
+                transform: translate3d(0, 150px, 0);
+                box-shadow: 0 0 0 rgba(0,0,0,.2);
+            }
+            .app-userspace #userspace_wall .wall .commentform .menu{
+                top: calc(100% - 60px);
+                left: 0;
+                bottom: auto;
+            }
+            .app-userspace #userspace_wall .wall .commentform .decrater-a,
+            .app-userspace #userspace_wall .wall .commentform .decrater-b,
+            .app-userspace #userspace_wall .wall .commentform .tool{
+                display: none;
+            }
+            .app-userspace #userspace_wall .wall .commentform textarea{
+                height: 42px;
+                border-radius: 8px;
+            }
+            .app-userspace #userspace_wall .wall .commentform button{
+                width: calc(100% - 140px)!important;
+                margin-left: 72px;
+            }
+            .app-userspace #userspace_wall .wall .commentform .post-res{
+                text-align: center;
+            }
+            .WL-0 .app-userspace #userspace_wall .wall .commentform{
+                width: 100% !important;
+                bottom: 20px;
+            }
+        }
+    /*endregion*/
+
     /*region #userspace_profile*/
         .app-userspace #userspace_profile > .panel{
             --default-box-margin-width: 8px;
@@ -7829,391 +8226,6 @@
         .WL-13P .app-userspace #userspace_profile > .panel > .panel-container > .box.size-1-0{ width:calc(33.3333333% - 2 * var(--default-box-margin-width));}
         .WL-13P .app-userspace #userspace_profile > .panel > .panel-container > .box.size-2-0{ width:calc(33.3333333% - 2 * var(--default-box-margin-width));}
         .WL-13P .app-userspace #userspace_profile > .panel > .panel-container > .box.size-4-0{ width:calc(66.6666666% - 2 * var(--default-box-margin-width));}
-    /*endregion*/
-
-    /*region userspace_wall*/
-        #comment_face_menu{
-            width: 270px;
-            --face-size: 22px;
-        }
-        #comment_face_menu li{
-            width: var(--face-size);
-            height: var(--face-size);
-            margin: 4px;
-            display: inline-block;
-        }
-        #comment_face_menu li img{
-            width: 100%;;
-        }
-
-        .app-userspace #userspace_wall{
-            --wall-commentform-width: 310px;
-            --box-border-color: rgba(135, 135, 171, 0.20);
-            --box-margin: 8px;
-            --box-radius: 10px
-        }
-        .app-userspace #userspace_wall .wall{
-            font-size: 0;
-            display: block;
-            width: calc(100% - 16px);;
-            margin: 8px;
-            position: relative;
-        }
-        .app-userspace #userspace_wall .wall .pg{
-            margin: 8px;
-            padding: 15px;
-            background: #fff;
-            box-sizing: content-box;
-            border-radius: 5px;
-            border: 1px solid var(--box-border-color);
-        }
-        .app-userspace #userspace_wall .wall .commentform{
-            z-index: 1;
-            position: absolute;
-            right: 0;
-            display: inline-block;
-            width: var(--wall-commentform-width);
-            margin: 50px var(--box-margin) var(--box-margin) var(--box-margin);
-        }
-        .app-userspace #userspace_wall .wall .commentform .menu{
-            position: absolute;
-            bottom: 100%;
-            left: 0;
-            margin: 0 20px;
-            line-height: 32px;
-        }
-        .app-userspace #userspace_wall .wall .commentform .menu a{
-            margin-right: 10px;
-        }
-        .app-userspace #userspace_wall .wall .commentform .menu a i{
-            font-size: 16px;
-            color: var(--color-text-gray);
-        }
-        .app-userspace #userspace_wall .wall .commentform .menu a:hover i{
-            color: var(--color-main-theme);
-        }
-        .app-userspace #userspace_wall .wall .commentform .nop{
-            display: inline-block;
-            width: 100%;
-            border-radius: var(--box-radius);
-            border: 1px solid var(--box-border-color);
-            background: var(--color-vlightgray);
-            padding: 15px;
-            box-sizing: border-box;
-            line-height: 26px;
-            color: var(--color-gray);
-            margin-top: 15px;
-        }
-        .app-userspace #userspace_wall .wall .commentform .nop a{
-            border-bottom: 1px dashed;
-            color: var(--color-main-theme);
-        }
-        .app-userspace #userspace_wall .wall .commentform textarea{
-            display: inline-block;
-            width: 100%;
-            border-radius: var(--box-radius);
-            border: 1px solid var(--box-border-color);
-            background: var(--color-vlightgray);
-            margin-top: 15px;
-        }
-        .app-userspace #userspace_wall .wall .commentform textarea:hover,
-        .app-userspace #userspace_wall .wall .commentform textarea:focus{
-            border-color: var(--color-sky-blue);
-        }
-        .app-userspace #userspace_wall .wall .commentform textarea:focus{
-            background: #fff;
-        }
-        .app-userspace #userspace_wall .wall .commentform button{
-            white-space: nowrap;
-        }
-        .app-userspace #userspace_wall .wall .commentform .post-res{
-            padding-top: 10px;
-            color: var(--color-text-gray);
-        }
-        .app-userspace #userspace_wall .wall .comments{
-            z-index: 0;
-            position: relative;
-            display: inline-block;
-            width: calc(100% - 16px - var(--wall-commentform-width));
-        }
-        .app-userspace #userspace_wall .wall .comments .comments-list{
-            font-size: 0;
-        }
-        .app-userspace #userspace_wall .wall .comments .comments-list li{
-            position: relative;
-            display: inline-block;
-            width: calc(100% / var(--box-col) - var(--box-margin) * 2);
-            margin: 50px var(--box-margin) var(--box-margin) var(--box-margin);
-            text-align: left;
-        }
-        .app-userspace #userspace_wall .wall .decrater-b{
-            position: absolute;
-            display: inline-block;
-            left: 0;
-            bottom: 100%;
-            width: calc(100% - 130px);
-            height: 46px;
-            background: #ffffff;
-            border-radius: var(--box-radius) 0 0 0;
-            border-width: 1px;
-            border-bottom: 0;
-            border-right: 0;
-            border-style: solid;
-            border-color: var(--box-border-color);
-        }
-        .app-userspace #userspace_wall .wall .decrater-b::after{
-            content: '';
-            position: absolute;
-            display: inline-block;
-            left: 100%;
-            bottom: 0;
-            width: 50px;
-            height: 44px;
-            background: #ffffff;
-            transform-origin: bottom left;
-            transform: scale(1.1,1.3) perspective(.5em) rotateX(2.2deg);
-            border-radius: 0 var(--box-radius) 0 0;
-            border-width: 1px;
-            border-bottom: 0;
-            border-left: 0;
-            border-style: solid;
-            border-color: var(--box-border-color);
-        }
-        .app-userspace #userspace_wall .wall .decrater-a{
-            position: absolute;
-            display: inline-block;
-            right: 0;
-            bottom: 100%;
-            width: 50%;
-            height: 36px;
-            background: #ffffff;
-            border-radius: 0 var(--box-radius) 0 0;
-            border-width: 1px;
-            border-style: solid;
-            border-color: var(--box-border-color);
-        }
-        .app-userspace #userspace_wall .wall .decrater-c{
-            position: relative;
-            background: #ffffff;
-            width: 100%;
-            height: 100%;
-            border-radius: 0 0 var(--box-radius) var(--box-radius);
-            border-width: 1px;
-            border-top: 0;
-            border-style: solid;
-            border-color: var(--box-border-color);
-            padding: 0 15px 15px 15px;
-            box-sizing: border-box;
-        }
-        .app-userspace #userspace_wall .wall .decrater-c .tool{
-            position: absolute;
-            width: 56px;
-            height: 12px;
-            cursor: pointer;
-            bottom: 100%;
-            right: 8px;
-            padding: 10px 0;
-        }
-        .app-userspace #userspace_wall .wall .decrater-c .tool .dots{
-            width: 56px;
-            height: 12px;
-            left: 0;
-        }
-        .app-userspace #userspace_wall .wall .decrater-c .tool .dots .dot{
-            width: 10px;
-            height: 10px;
-            display: inline-block;
-            margin-left: 5px;
-            margin-top: 0 !important;
-            border-radius: 2px;
-            background: #f9f9f9;
-            border: 1px solid var(--box-border-color);
-        }
-
-        .app-userspace #userspace_wall .wall li .decrater-c .card-tag{
-            display: inline-block;
-            position: absolute;
-            bottom: 100%;
-            left: 12px;
-            width: calc(100% - 130px);
-            white-space: nowrap;
-            margin-bottom: 8px;
-            background: var(--color-vlightgray);
-            border-radius: 50px;
-            box-shadow: 0 0 0 2px var(--color-lightgray);
-        }
-        .app-userspace #userspace_wall .wall li .decrater-c .card-tag.magicflicker{
-            background-image: url('{IMGURL}/magic/flicker-bg0.jpg') !important;
-            background-size: 101% !important;
-            background-position: center !important;
-        }
-        .app-userspace #userspace_wall .wall li .decrater-c .card-tag .avatar{
-            position: relative;
-            width: 28px;
-            height: 28px;
-        }
-        .app-userspace #userspace_wall .wall li .decrater-c .card-tag .username{
-            display: inline-block;
-            line-height: 28px;
-            color: var(--color-text-dark);
-            width: calc(100% - 34px);
-            overflow: hidden;
-            white-space: nowrap;
-            text-overflow: ellipsis;
-            font-weight: 700;
-            opacity: .7;
-        }
-        .app-userspace #userspace_wall .wall li .decrater-c .card-tag.magicflicker .username{
-            color: #fff;
-            text-shadow: 0 0 7px #000;
-            opacity: 1;
-        }
-        .app-userspace #userspace_wall .wall li .decrater-c .card-message{
-            padding: 10px 5px 0 5px;
-            border-top: 2px dotted var(--box-border-color);
-            color: var(--color-text-dark);
-            overflow: auto;
-            word-break: break-word;
-            height: 80px;
-            line-height: 20px;
-        }
-        .app-userspace #userspace_wall .wall li .decrater-c .card-message .msg-tip{
-            display: inline-block;
-            background: var(--color-charry-pink);
-            color: #fff;
-            padding: 0 5px;
-            border-radius: 5px;
-            font-size: 12px;
-        }
-        .app-userspace #userspace_wall .wall li .decrater-c .card-message .emoji-face{
-            width: 20px;
-        }
-        .app-userspace #userspace_wall .wall li .decrater-c .card-btm{
-            padding: 10px 5px 0 5px;
-            border-top: 2px dotted var(--box-border-color);
-            box-sizing: content-box;
-            height: 24px;
-            line-height: 24px;
-        }
-        .app-userspace #userspace_wall .wall li .decrater-c .card-btm .date{
-            z-index: 0;
-            font-size: 13px;
-            color: var(--color-text-gray);
-            opacity: .7;
-            cursor: default;
-            position: absolute;
-            white-space: nowrap;
-            max-width: 60%;
-            overflow: hidden;
-        }
-        .app-userspace #userspace_wall .wall li .decrater-c .card-btm .reply{
-            font-size: 12px;
-            display: inline-block;
-            background: var(--color-miku-green);
-            color: #fff;
-            padding: 0 5px;
-            border-radius: 3px;
-        }
-        .app-userspace #userspace_wall .wall li .decrater-c .card-btm .reply::before{
-            margin-right: 3px;
-        }
-
-        .app-userspace #userspace_wall .wall li .decrater-c .card-btm .props{
-            z-index: 1;
-            position: relative;
-            display: inline-block;
-            float: right;
-            margin-left: 9px;
-            font-size: 12px;
-            color: var(--color-text-gray);
-            background: var(--color-vlightgray);
-            padding: 0 5px;
-            border-radius: 5px;
-            box-shadow: 0 0 0 2px var(--color-lightgray);
-            opacity: 0;
-            transition: .1s ease-in-out;
-        }
-        .app-userspace #userspace_wall .wall li:hover .decrater-c .card-btm .props{
-            opacity: 1;
-        }
-        .app-userspace #userspace_wall .wall li .decrater-c .card-btm .props:hover{
-            color: #000000;
-            background: var(--color-lightgray);
-            box-shadow: 0 0 0 2px var(--color-slightgray);
-        }
-        .app-userspace #userspace_wall .wall li .decrater-c .card-btm .props img{
-            vertical-align: middle;
-            width: 16px;
-            height: 16px;
-            margin-right: 5px;
-        }
-
-        .WL-0 .app-userspace #userspace_wall,
-        .WL-3P .app-userspace #userspace_wall,
-        .WL-4P .app-userspace #userspace_wall{
-            --box-col: 1;
-        }
-        .WL-7P .app-userspace #userspace_wall{
-            --box-col: 2;
-        }
-        .WL-13P .app-userspace #userspace_wall{
-            --box-col: 3;
-        }
-        .WL-1K .app-userspace #userspace_wall{
-            --box-col: 4;
-        }
-        .WL-2K .app-userspace #userspace_wall{
-            --box-col: 6;
-        }
-        .WL-4K .app-userspace #userspace_wall{
-            --box-col: 8;
-        }
-        @media screen and (max-width:1000px) {
-            .app-userspace #userspace_wall .wall .comments{
-                width: 100% !important;
-            }
-
-            .app-userspace #userspace_wall .wall .commentform{
-                --box-radius: 0;
-                position: fixed !important;
-                width: calc(100% - 71px) !important;
-                margin: 0;
-                right: 0;
-                bottom: 20px;
-                box-shadow: 0 0 15px rgba(0,0,0,.3);
-                transform: translate3d(0, 0, 0);
-                transition: .2s ease-in-out;
-            }
-            .app-userspace #userspace_wall .wall .commentform.sleep{
-                transform: translate3d(0, 150px, 0);
-                box-shadow: 0 0 0 rgba(0,0,0,.2);
-            }
-            .app-userspace #userspace_wall .wall .commentform .menu{
-                top: calc(100% - 60px);
-                left: 0;
-                bottom: auto;
-            }
-            .app-userspace #userspace_wall .wall .commentform .decrater-a,
-            .app-userspace #userspace_wall .wall .commentform .decrater-b,
-            .app-userspace #userspace_wall .wall .commentform .tool{
-                display: none;
-            }
-            .app-userspace #userspace_wall .wall .commentform textarea{
-                height: 42px;
-                border-radius: 8px;
-            }
-            .app-userspace #userspace_wall .wall .commentform button{
-                width: calc(100% - 140px)!important;
-                margin-left: 72px;
-            }
-            .app-userspace #userspace_wall .wall .commentform .post-res{
-                text-align: center;
-            }
-            .WL-0 .app-userspace #userspace_wall .wall .commentform{
-                width: 100% !important;
-                bottom: 20px;
-            }
-        }
     /*endregion*/
 
     @media screen and (max-width:1240px) {
