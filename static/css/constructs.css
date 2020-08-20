@@ -2887,7 +2887,7 @@
         --default-box-margin-width: 8px;
     }
     .panel.no-gap{
-        --default-box-margin-width: 0 !important;
+        --default-box-margin-width: 0px !important;
     }
     .panel > .title{
         font-weight: 700;

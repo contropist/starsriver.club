@@ -467,7 +467,7 @@
             for (let i = 0; i < s.length; i++) {
                 if(s[i].parentNode === p){
                     let id = s[i].id ?  s[i].id : plateid + '_' + (i + 1) ;
-                    wf_minh().innerHTML += '<div class="' + iclass + '" id="'+ id + '" data-order="' + (i + 1) + '">' + s[i].innerHTML + '</div>'
+                    f_minh().innerHTML += '<div class="' + iclass + '" id="'+ id + '" data-order="' + (i + 1) + '">' + s[i].innerHTML + '</div>'
                 }
             }
             p.innerHTML = '';
