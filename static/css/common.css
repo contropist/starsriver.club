@@ -4347,8 +4347,11 @@
     }
     .flow-comment-list .height-limited{
         max-height:440px;
-        overflow: auto;
+        overflow: hidden;
         border-top: 1px solid #eee;
+    }
+    .flow-comment-list:hover .height-limited{
+        overflow: auto;
     }
     .flow-comment-list .sender{
         display: block;
