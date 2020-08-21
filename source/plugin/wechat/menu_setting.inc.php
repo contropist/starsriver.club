@@ -61,7 +61,7 @@ if(!submitcheck('menusubmit') && !submitcheck('pubsubmit')) {
 	echo '<tr><td></td><td class="td23 td28"></td><td colspan="2"><div><a href="###" onclick="addrow(this, 0, 0)" class="addtr">'.lang('plugin/wechat', 'wsq_menu_button').'</a></div></td></tr>';
 
 	echo <<<EOT
-<script type="text/JavaScript">
+<script>
 var rowtypedata = [
 [[1,''], [1,'<input name="newbutton[displayorder][]" value="" size="3" type="text" class="txt">', 'td23 td28'], [1, '<input name="newbutton[name][]" value="" size="30" type="text" class="txt">'], [1, '<input name="newbutton[keyurl][]" value="" size="30" type="text" class="txt">', 'td29']],
 [[1,''], [1,'<input name="newsub_button[{1}][displayorder][]" value="" size="3" type="text" class="txt">', 'td23 td28'], [1, '<div class=\"node\"><input name="newsub_button[{1}][name][]" value="" size="30" type="text" class="txt"></div>'], [1, '<input name="newsub_button[{1}][keyurl][]" value="" size="30" type="text" class="txt">', 'td29']],

@@ -145,7 +145,7 @@ if($operation == 'headernav') {
 			$applist = str_replace("'", "\'", $applist);
 
 			echo <<<EOT
-<script type="text/JavaScript">
+<script>
 	var rowtypedata = [
 		[[1, '', 'td25'], [1,'<input name="newdisplayorder[]" value="" size="3" type="text" class="txt">', 'td25'], [1, '<input name="newname[]" value="" size="15" type="text" class="txt">'],[1,'<select name="newsubtype[]"><option value="0">$lang[misc_customnav_subtype_menu]</option><option value="1">$lang[misc_customnav_subtype_sub]</option></select>'],[5, '<input name="newurl[]" value="" size="15" type="text" class="txt"> $applist <input type="hidden" name="newparentid[]" value="0" />']],
 		[[1, '', 'td25'], [1,'<input name="newdisplayorder[]" value="" size="3" type="text" class="txt">', 'td25'], [1, '<div class=\"board\"><input name="newname[]" value="" size="15" type="text" class="txt"></div>'], [1,'',''], [5, '<input name="newurl[]" value="" size="15" type="text" class="txt"> $applist <input type="hidden" name="newparentid[]" value="{1}" />']]
@@ -411,7 +411,7 @@ EOT;
 			showformfooter();
 
 			echo <<<EOT
-<script type="text/JavaScript">
+<script>
 	var rowtypedata = [
 		[[1, '', 'td25'], [1,'<input name="newdisplayorder[]" value="" size="3" type="text" class="txt">', 'td25'], [1, '<input name="newname[]" value="" size="15" type="text" class="txt">'], [4, '<input name="newurl[]" value="" size="15" type="text" class="txt">']],
 	];
@@ -596,7 +596,7 @@ EOT;
 			showformfooter();
 
 			echo <<<EOT
-<script type="text/JavaScript">
+<script>
 	var rowtypedata = [
 		[[1, '', 'td25'], [1,'<input name="newdisplayorder[]" value="" size="3" type="text" class="txt">', 'td25'], [1, '<input name="newname[]" value="" size="15" type="text" class="txt">'], [4, '<input name="newurl[]" value="" size="15" type="text" class="txt">']],
 		[[1, '', 'td25'], [1,'<input name="newdisplayorder[]" value="" size="3" type="text" class="txt">', 'td25'], [1, '<input name="newname[]" value="{hr}" type="hidden">$lang[nav_spacenav_hr]'], [4, '<input name="newurl[]" value="" type="hidden">']],
@@ -805,7 +805,7 @@ EOT;
 			showformfooter();
 
 			echo <<<EOT
-<script type="text/JavaScript">
+<script>
 	var rowtypedata = [
 		[[1, '', 'td25'], [1,'<input name="newdisplayorder[]" value="" size="3" type="text" class="txt">', 'td25'], [1, '<input name="newname[]" value="" size="15" type="text" class="txt">'], [4, '<input name="newurl[]" value="" size="15" type="text" class="txt">']],
 	];
@@ -995,7 +995,7 @@ EOT;
 			showformfooter();
 
 			echo <<<EOT
-<script type="text/JavaScript">
+<script>
 	var rowtypedata = [
 		[[1, '', 'td25'], [1,'<input name="newdisplayorder[]" value="" size="3" type="text" class="txt">', 'td25'], [1, '<input name="newname[]" value="" size="15" type="text" class="txt">'], [1, '<select name="newsubtype[]"><option value="0">$lang[setting_styles_global_topnavtype_0]</option><option value="1">$lang[setting_styles_global_topnavtype_1]</option></select>'], [4, '<input name="newurl[]" value="" size="15" type="text" class="txt">']],
 	];

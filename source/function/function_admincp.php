@@ -189,7 +189,7 @@ function shownav($header = '', $menu = '', $nav = '') {
 	}
 	$addtomenu = '<a class="custommenu-add" target="main" title="'.cplang('custommenu_addto').'" href="'.ADMINSCRIPT.'?action=misc&operation=custommenu&do=add&title='.rawurlencode($ctitle).'&url='.rawurlencode(cpurl()).'">+</a>';
 	$dtitle = str_replace("'", "\'", cplang('admincp_title').' - '.str_replace('&nbsp;&raquo;&nbsp;', ' - ', $title));
-	echo '<script type="text/JavaScript">parent.document.title = \''.$dtitle.'\';if(parent.$(\'admincpnav\')) parent.$(\'admincpnav\').innerHTML=\''.$title.$addtomenu.'\';</script>';
+	echo '<script>parent.document.title = \''.$dtitle.'\';if(parent.$(\'admincpnav\')) parent.$(\'admincpnav\').innerHTML=\''.$title.$addtomenu.'\';</script>';
 }
 
 function showmenu($key, $menus, $return = 0) {
@@ -228,7 +228,7 @@ function showmenu($key, $menus, $return = 0) {
 function updatemenu($key) {
 	@include DISCUZ_ROOT.'./source/admincp/admincp_menu.php';
 	$s = showmenu($key, $menu[$key], 1);
-	echo '<script type="text/JavaScript">parent.$(\'menu_'.$key.'\').innerHTML = \''.str_replace("'", "\'", $s).'\';parent.initCpMenus(\'leftmenu\');parent.initCpMap();</script>';
+	echo '<script>parent.$(\'menu_'.$key.'\').innerHTML = \''.str_replace("'", "\'", $s).'\';parent.initCpMenus(\'leftmenu\');parent.initCpMap();</script>';
 }
 
 function cpmsg_error($message, $url = '', $extra = '', $halt = TRUE) {
@@ -268,7 +268,7 @@ function cpmsg($message, $url = '', $type = '', $values = [], $extra = '', $halt
 			"</p></form><br>";
 	} elseif($type == 'loadingform') {
 		$message = "<form method=\"post\" action=\"$url\" id=\"loadingform\"><input type=\"hidden\" name=\"formhash\" value=\"".FORMHASH."\"><br>$message$extra<img src=\"static/image/admincp/src/img/ajax_loader.gif\" class=\"marginbot\" /><br>".
-			'<p class="marginbot"><a href="###" onclick="$(\'loadingform\').submit();" class="lightlink">'.cplang('message_redirect').'</a></p></form><br><script type="text/JavaScript">setTimeout("$(\'loadingform\').submit();", 2000);</script>';
+			'<p class="marginbot"><a href="###" onclick="$(\'loadingform\').submit();" class="lightlink">'.cplang('message_redirect').'</a></p></form><br><script>setTimeout("$(\'loadingform\').submit();", 2000);</script>';
 	} else {
 		$message .= $extra.($type == 'loading' ? '<img src="static/image/admincp/src/img/ajax_loader.gif" class="marginbot" />' : '');
 		if($url) {
@@ -319,7 +319,7 @@ function cpheader() {
         <meta http-equiv="Content-Type" content="text/html; charset=$charset">
         <link rel="stylesheet" href="{$_G['config']['output']['fonturl']}/Feather.css">
         <link rel="stylesheet" href="static/image/admincp/src/css/admincp.css?{$_G['style']['verhash']}" type="text/css" media="all" />
-        <script type="text/JavaScript">
+        <script>
 var admincpfilename = '$basescript', 
     IMGDIR = '$IMGDIR', 
     IMGURL = '$IMGURL', 
@@ -333,7 +333,7 @@ var admincpfilename = '$basescript',
         </script>
         <script src="{$_G['setting']['jspath']}common.js?{$_G['style']['verhash']}" type="text/javascript"></script>
         <script src="{$_G['setting']['jspath']}admincp.js?{$_G['style']['verhash']}" type="text/javascript"></script>
-        <script type="text/javascript">
+        <script>
             if(ISFRAME && !parent.document.getElementById('leftmenu') && !parent.parent.document.getElementById('leftmenu')) {
                 redirect(admincpfilename + '?frames=yes&' + document.URL.substr(document.URL.indexOf(admincpfilename) + admincpfilename.length + 1));
             }
@@ -405,7 +405,7 @@ function showsubmenuanchors($title, $menus = [], $right = '') {
 		return;
 	}
 	echo <<<EOT
-<script type="text/JavaScript">var currentAnchor = '$GLOBALS[anchor]';</script>
+<script>var currentAnchor = '$GLOBALS[anchor]';</script>
 EOT;
 	$s = $right.'<span class="title">'.cplang($title).'</span>';
 	$s .= '<ul class="child-nav" id="submenu">';
@@ -491,7 +491,7 @@ function showmultititle($nofloat = 0) {
 			echo '<tr><td class="tbm"><div>'.$rows.'</div></td></tr>';
 		} else {
 			echo '<div id="multititle" class="tbm" style="width:'.($i * 270).'px;display:none">'.$rows.'</div>';
-			echo '<script type="text/javascript">floatbottom(\'multititle\');</script>';
+			echo '<script>floatbottom(\'multititle\');</script>';
 		}
 	}
 }
@@ -597,7 +597,7 @@ function showsetting($setname, $varname, $value, $type = 'radio', $disabled = ''
 		$s .= '<input name="'.$varname.'" value="'.dhtmlspecialchars($value).'" type="'.$type.'" class="txt" '.$check['disabled'].' '.$extra.' />';
 	} elseif($type == 'htmltext') {
 		$id .= 'html'.random(2);
-		$s .= '<div id="'.$id.'">'.$value.'</div><input id="'.$id.'_v" name="'.$varname.'" value="'.dhtmlspecialchars($value).'" type="hidden" /><script type="text/javascript">sethtml(\''.$id.'\')</script>';
+		$s .= '<div id="'.$id.'">'.$value.'</div><input id="'.$id.'_v" name="'.$varname.'" value="'.dhtmlspecialchars($value).'" type="hidden" /><script>sethtml(\''.$id.'\')</script>';
 	} elseif($type == 'file') {
 		$s .= '<input name="'.$varname.'" value="" type="file" class="txt uploadbtn marginbot" '.$check['disabled'].' '.$extra.' />';
 	} elseif($type == 'filetext') {
@@ -861,7 +861,7 @@ function cpfooter() {
 	echo "\n</div>";
 	if(!empty($_GET['highlight'])) {
 		$kws = explode(' ', $_GET['highlight']);
-		echo '<script type="text/JavaScript">';
+		echo '<script>';
 		foreach($kws as $kw) {
 			$kw = addslashes($kw);
 			echo 'parsetag(\''.dhtmlspecialchars($kw, ENT_QUOTES).'\');';
@@ -1420,21 +1420,21 @@ function make_submit($name = '', $value = 'submit', $before = '', $after = '', $
     $str .= $name ? '<input type="submit" class="btn" id="submit_'.$name.'" name="'.$name.'" title="'.($entersubmit ? cplang('submit_tips') : '').'" value="'.cplang($value).'" />' : '';
     $after = $after == 'more_options' ? '<input class="checkbox" type="checkbox" value="1" onclick="$(\'advanceoption\').style.display = $(\'advanceoption\').style.display == \'none\' ? \'\' : \'none\'; this.value = this.value == 1 ? 0 : 1; this.checked = this.value == 1 ? false : true" id="btn_more" /><label for="btn_more">'.cplang('more_options').'</label>' : $after;
     $str = $after ? $str.(($before && $before != 'del') || $name ? ' &nbsp;' : '').$after : $str;
-    return $str.($name && $entersubmit ? '<script type="text/JavaScript">_attachEvent(document.documentElement, \'keydown\', function (e) { entersubmit(e, \''.$name.'\'); });</script>' : '');
+    return $str.($name && $entersubmit ? '<script>_attachEvent(document.documentElement, \'keydown\', function (e) { entersubmit(e, \''.$name.'\'); });</script>' : '');
 }
 
 function make_formfooter() {
     global $_G;
     $html = '';
     if(!empty($_G['setting_JS'])) {
-        $html .= '<script type="text/JavaScript">'.$_G['setting_JS'].'</script>';
+        $html .= '<script>'.$_G['setting_JS'].'</script>';
     }
 
     updatesession();
 
     $html .=  '</form>'."\n";
     if($scrolltop = intval(getgpc('scrolltop'))) {
-        $html .=  '<script type="text/JavaScript">_attachEvent(window, \'load\', function () { scroll(0,'.$scrolltop.') }, document);</script>';
+        $html .=  '<script>_attachEvent(window, \'load\', function () { scroll(0,'.$scrolltop.') }, document);</script>';
     }
     return $html;
 }

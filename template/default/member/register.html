@@ -1,5 +1,5 @@
 <!--{template common/header}-->
-<script type="text/javascript">
+<script>
 	var strongpw = [];
 	<!--{if $_G['setting']['strongpw']}-->
 		<!--{loop $_G['setting']['strongpw'] $key $val}-->
@@ -40,7 +40,7 @@
                 <i id="tip_{$this->setting['reginput']['email']}" class="p_tip">{lang register_email_tips}</i>
                 <kbd id="chk_{$this->setting['reginput']['email']}" class="p_chk"></kbd>
                             {lang register_validate_email_tips}
-                <script type="text/javascript">
+                <script>
                     function succeedhandle_sendregister(url, msg, values) {
                         showDialog(msg, 'notice');
                     }
@@ -170,7 +170,7 @@
             <button onclick="$('agreebbrule').checked = true;hideMenu('fwin_dialog', 'dialog');{if $this->setting['sitemessage'][register] && ($bbrules && $bbrulesforce)}showRegprompt();{/if}"><span>{lang agree}</span></button>
             <button onclick="location.href='$_G[siteurl]'"><span>{lang disagree}</span></button>
         </div>
-        <script type="text/javascript">
+        <script>
     var ignoreEmail = <!--{if $_G['setting']['forgeemail']}-->true<!--{else}-->false<!--{/if}-->;
     <!--{if $bbrules && $bbrulesforce}-->
         showBBRule();

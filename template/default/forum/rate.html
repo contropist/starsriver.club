@@ -35,7 +35,7 @@
                     <p class="common-tip"><i class="ft-comment-square"></i>{lang user_operation_explain}：</p>
                     <ul id="reasonselect" >$selectreason</ul>
                 </div>
-				<script type="text/javascript" reload="1">
+				<script reload="1">
 					var reasonSelectOption = $('reasonselect').getElementsByTagName('li');
 					if (reasonSelectOption) {
 						for (i=0; i<reasonSelectOption.length; i++) {
@@ -121,7 +121,7 @@
 </form>
 <!--{/if}-->
 
-<script type="text/javascript" reload="1">
+<script reload="1">
 function succeedhandle_rate(locationhref) {
 	<!--{if !empty($_GET['from'])}-->
 		location.href = locationhref;

@@ -56,7 +56,7 @@ if(!submitcheck('doingsubmit')) {
 	/*search*/
 	echo <<<EOT
 <script type="text/javascript" src="static/js/calendar.js"></script>
-<script type="text/JavaScript">
+<script>
 function page(number) {
 	$('doingforum').page.value=number;
 	$('doingforum').searchsubmit.click();
@@ -91,7 +91,7 @@ EOT;
 	$cpmsg = cplang('doing_succeed', array('deletecount' => $deletecount));
 
 ?>
-<script type="text/JavaScript">alert('<?php echo $cpmsg;?>');parent.$('doingforum').searchsubmit.click();</script>
+<script>alert('<?php echo $cpmsg;?>');parent.$('doingforum').searchsubmit.click();</script>
 <?php
 
 }

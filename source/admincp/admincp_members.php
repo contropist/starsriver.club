@@ -64,7 +64,7 @@ if($operation == 'search') {
 		showsearchform('search');
 		if($_GET['more']) {
 			print <<<EOF
-		<script type="text/javascript">
+		<script>
 			$('btn_more').click();
 		</script>
 
@@ -1468,7 +1468,7 @@ EOF;
 		showformfooter();
 		$basescript = ADMINSCRIPT;
 		print <<<EOF
-			<script type="text/javascript">
+			<script>
 				var oldbanusername = '$member[username]';
 				function showcrimebtn(obj) {
 					if(oldbanusername == obj.value) {
@@ -2543,7 +2543,7 @@ EOF;
 			$tdstyle = array('class="td22"', 'class="td28" width="100"', 'class="td28" width="100"', 'class="td28" width="100"', 'class="td28" width="100"', 'class="td28"', 'class="td28"');
 			showsubtitle(array('members_profile_edit_name', 'members_profile_edit_display_order', 'members_profile_edit_available', 'members_profile_edit_profile_view', 'members_profile_edit_card_view', 'members_profile_edit_reg_view', ''), 'header tbm', $tdstyle);
 			showtablefooter();
-			echo '<script type="text/javascript">floatbottom(\'profiletable_header\');</script>';
+			echo '<script>floatbottom(\'profiletable_header\');</script>';
 			showtableheader('members_profile', 'nobottom', 'id="porfiletable"');
 			showsubtitle(array('members_profile_edit_name', 'members_profile_edit_display_order', 'members_profile_edit_available', 'members_profile_edit_profile_view', 'members_profile_edit_card_view', 'members_profile_edit_reg_view', ''), 'header', $tdstyle);
 			foreach($list as $fieldid => $value) {

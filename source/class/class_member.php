@@ -24,7 +24,7 @@ class logging_ctl {
 			return;
 		}
 		$auth = authcode($_GET['username']."\t".$_GET['password']."\t".($questionexist ? 1 : 0), 'ENCODE', $_G['config']['security']['authkey']);
-		$js = '<script type="text/javascript">showWindow(\'login\', \'member.php?mod=logging&action=login&auth='.rawurlencode($auth).'&referer='.rawurlencode(dreferer()).(!empty($_GET['cookietime']) ? '&cookietime=1' : '').'\')</script>';
+		$js = '<script>showWindow(\'login\', \'member.php?mod=logging&action=login&auth='.rawurlencode($auth).'&referer='.rawurlencode(dreferer()).(!empty($_GET['cookietime']) ? '&cookietime=1' : '').'\')</script>';
 		showmessage('location_login', '', array('type' => 1), array('extrajs' => $js));
 	}
 
@@ -207,7 +207,7 @@ class logging_ctl {
 						if(defined('IN_MOBILE')) {
 							showmessage('login_seccheck2', $location);
 						} else {
-							$js = '<script type="text/javascript">location.href=\''.$location.'\'</script>';
+							$js = '<script>location.href=\''.$location.'\'</script>';
 							showmessage('login_seccheck2', '', array('type' => 1), array('extrajs' => $js));
 						}
 					}
@@ -267,7 +267,7 @@ class logging_ctl {
 							showmessage('location_login_succeed', $location, [],
 								array(
 									'showid' => 'succeedmessage',
-									'extrajs' => '<script type="text/javascript">'.
+									'extrajs' => '<script>'.
 										'setTimeout("window.location.href =\''.$href.'\';", 3000);'.
 										'$(\'succeedmessage_href\').href = \''.$href.'\';'.
 										'$(\'main_message\').style.display = \'none\';'.
@@ -683,7 +683,7 @@ class register_ctl {
 					$showid = !in_array($field['fieldid'], array('birthyear', 'birthmonth')) ? $field['fieldid'] : 'birthday';
 					showmessage($field['title'].lang('message', 'profile_illegal'), '', [], array(
 						'showid' => 'chk_'.$showid,
-						'extrajs' => $field['title'].lang('message', 'profile_illegal').($field['formtype'] == 'text' ? '<script type="text/javascript">'.
+						'extrajs' => $field['title'].lang('message', 'profile_illegal').($field['formtype'] == 'text' ? '<script>'.
 							'$(\'registerform\').'.$field['fieldid'].'.className = \'px er\';'.
 							'$(\'registerform\').'.$field['fieldid'].'.onblur = function () { if(this.value != \'\') {this.className = \'px\';$(\'chk_'.$showid.'\').innerHTML = \'\';}}'.
 							'</script>' : '')
@@ -924,7 +924,7 @@ class register_ctl {
 			$href = str_replace("'", "\'", $url_forward);
 			$extra = array(
 				'showid' => 'succeedmessage',
-				'extrajs' => '<script type="text/javascript">'.
+				'extrajs' => '<script>'.
 					'setTimeout("window.location.href =\''.$href.'\';", '.$refreshtime.');'.
 					'$(\'succeedmessage_href\').href = \''.$href.'\';'.
 					'$(\'main_message\').style.display = \'none\';'.

@@ -477,7 +477,7 @@ function get_index_page_guest_cache() {
         readfile($indexcache['filename']);
         $updatetime = dgmdate($filemtime, 'Y-m-d H:i:s');
         $gzip = $_G['gzipcompress'] ? ', Gzip On' : '';
-        echo '<script type="text/javascript">$("debuginfo") ? $("debuginfo").innerHTML = ", Updated at '.$updatetime.', Processed in '.sprintf("%0.6f", microtime(TRUE) - $start_time).' second(s)'.$gzip.'." : "";</script>';
+        echo '<script>$("debuginfo") ? $("debuginfo").innerHTML = ", Updated at '.$updatetime.', Processed in '.sprintf("%0.6f", microtime(TRUE) - $start_time).' second(s)'.$gzip.'." : "";</script>';
         ob_end_flush();
 		exit();
 	}

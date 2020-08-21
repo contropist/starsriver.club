@@ -61,7 +61,7 @@ if($operation == 'all') {
 	echo '<tr><td colspan="15"><div class="fixsel"><a href="javascript:void(0);" class="btn_big" id="submit_portal_html">'.$lang['makehtml_createall'].'</a></div></td></tr>', $result;
 	$adminscript = ADMINSCRIPT;
 	echo <<<EOT
-<script type="text/JavaScript">
+<script>
 var form = document.forms['cpform'];
 form.onsubmit = function(){return false;};
 _attachEvent($('submit_portal_html'), 'click', function(){
@@ -148,7 +148,7 @@ EOT;
 	echo '<tr><td colspan="15"><div class="fixsel"><a href="javascript:void(0);" class="btn_big" id="submit_portal_html">'.$lang['makehtml_createindex'].'</a></div></td></tr>', $result;
 	$adminscript = ADMINSCRIPT;
 	echo <<<EOT
-<script type="text/JavaScript">
+<script>
 var form = document.forms['cpform'];
 form.onsubmit = function(){return false;};
 _attachEvent($('submit_portal_html'), 'click', function(){
@@ -187,7 +187,7 @@ EOT;
 	echo '<tr><td colspan="15"><div class="fixsel"><a href="javascript:void(0);" class="btn_big" id="submit_portal_html">'.$lang['makehtml_createcategory'].'</a></div></td></tr>', $result;
 	$adminscript = ADMINSCRIPT;
 	echo <<<EOT
-<script type="text/JavaScript">
+<script>
 var form = document.forms['cpform'];
 form.onsubmit = function(){return false;};
 _attachEvent($('submit_portal_html'), 'click', function(){
@@ -264,7 +264,7 @@ EOT;
 	echo '<tr><td colspan="15"><div class="fixsel"><a href="javascript:void(0);" class="btn_big" id="submit_portal_html">'.$lang['makehtml_createarticle'].'</a></div></td></tr>', $result;
 	$adminscript = ADMINSCRIPT;
 	echo <<<EOT
-<script type="text/JavaScript">
+<script>
 var form = document.forms['cpform'];
 form.onsubmit = function(){return false;};
 _attachEvent($('submit_portal_html'), 'click', function(){
@@ -349,7 +349,7 @@ EOT;
 	echo '<tr><td colspan="15"><div class="fixsel"><a href="javascript:void(0);" class="btn_big" id="submit_portal_html">'.$lang['makehtml_createtopic'].'</a></div></td></tr>', $result;
 	$adminscript = ADMINSCRIPT;
 	echo <<<EOT
-<script type="text/JavaScript">
+<script>
 var form = document.forms['cpform'];
 form.onsubmit = function(){return false;};
 _attachEvent($('submit_portal_html'), 'click', function(){

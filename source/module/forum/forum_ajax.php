@@ -475,7 +475,7 @@ if($_GET['action'] == 'checkusername') {
 	}
 	$_GET['message'] = addcslashes($_GET['message'], '/"\'');
 	print <<<EOF
-		<script type="text/javascript">
+		<script>
 			parent.ATTACHORIMAGE = 1;
 			parent.updateDownImageList('$_GET[message]');
 		</script>

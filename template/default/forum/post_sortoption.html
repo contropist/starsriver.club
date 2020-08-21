@@ -80,7 +80,7 @@
 							<a href="$option[value][url]" target="_blank"><img class="spimg" src="$option[value][url]" alt="" /></a>
 						<!--{/if}-->
 						</div>
-						<script type="text/javascript" reload="1">
+						<script reload="1">
 							function sortaid_{$option[identifier]}_upload(aid, url) {
 								$('sortaid_{$option[identifier]}_url').value = url;
 								updatesortattach(aid, url, '{$_G['setting']['attachurl']}forum', '{$option[identifier]}');
@@ -93,7 +93,7 @@
 					<!--{if $option[type] == 'select'}-->
 						<!--{loop $option['value'] $selectedkey $selectedvalue}-->
 							<!--{if $selectedkey}-->
-								<script type="text/javascript">
+								<script>
 									changeselectthreadsort('$selectedkey', $optionid, 'update');
 								</script>
 							<!--{else}-->
@@ -161,7 +161,7 @@
 	</table>
 <!--{/if}-->
 
-<script type="text/javascript" reload="1">
+<script reload="1">
 	var CHECKALLSORT = false;
 
 	function warning(obj, msg) {

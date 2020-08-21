@@ -125,7 +125,7 @@ if(!submitcheck('menusubmit')) {
 		echo '<tr><td></td><td class="td23 td28"></td><td colspan="2"><div><a href="###" onclick="addrow(this, 0, 0)" class="addtr">'.lang('plugin/wechat', 'response_add_message').'</a></div></td></tr>';
 
 		echo <<<EOT
-<script type="text/JavaScript">
+<script>
 var rowtypedata = [
 [[1,''], [1, '<input name="newresponse[keyword][]" value="" size="30" type="text" class="txt">'], [1, '<textarea class="tarea" name="newresponse[response][]" rows="5" cols="40"></textarea>', 'td29']],
 ];

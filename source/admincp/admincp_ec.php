@@ -100,7 +100,7 @@ if($operation == 'alipay') {
 		showtablefooter();
 		showformfooter();
 		echo <<<EOT
-<script type="text/JavaScript">
+<script>
 function changeAliApi(type) {
 	var apiUrl = 'https://b.alipay.com/order/pidKey.htm?pid=2088501719138773&product=';
 	if(type == 1) {

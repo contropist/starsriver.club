@@ -126,7 +126,7 @@
 							</div>
 							<input type="hidden" name="passwordsubmit" value="true" />
 						</form>
-						<script type="text/javascript">
+						<script>
 							var strongpw = [];
 							<!--{if $_G['setting']['strongpw']}-->
 							<!--{loop $_G['setting']['strongpw'] $key $val}-->
@@ -198,7 +198,7 @@
                                     </div>
                                     <div id="signhtmlpreview"></div>
                                     <script type="text/javascript" src="{$_G[setting][jspath]}bbcode.js?{VERHASH}"></script>
-                                    <script type="text/javascript">var forumallowhtml = 0,allowhtml = 0,allowsmilies = 0,allowbbcode = parseInt('{$_G[group][allowsigbbcode]}'),allowimgcode = parseInt('{$_G[group][allowsigimgcode]}');var DISCUZCODE = [];DISCUZCODE['num'] = '-1';DISCUZCODE['html'] = [];</script>
+                                    <script>var forumallowhtml = 0,allowhtml = 0,allowsmilies = 0,allowbbcode = parseInt('{$_G[group][allowsigbbcode]}'),allowimgcode = parseInt('{$_G[group][allowsigimgcode]}');var DISCUZCODE = [];DISCUZCODE['num'] = '-1';DISCUZCODE['html'] = [];</script>
                                 <!--{/if}-->
                                 <!--{if in_array('timeoffset', $allowitems)}-->
                                 <!--{eval $timeoffset = array({lang timezone});}-->
@@ -227,7 +227,7 @@
                                 <!--{/if}-->
 								<!--{hook/spacecp_profile_bottom}-->
 							</form>
-							<script type="text/javascript">
+							<script>
 								function show_error(fieldid, extrainfo) {
 									var elem = $('line_'+fieldid);
 									if(elem) {

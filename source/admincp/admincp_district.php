@@ -132,7 +132,7 @@ if(submitcheck('editsubmit')) {
 	showsubmit('editsubmit', 'submit');
 	$adminurl = ADMINSCRIPT.'?action=district';
 echo <<<SCRIPT
-<script type="text/javascript">
+<script>
 var rowtypedata = [
 	[[1,'', ''],[1,'<input type="text" class="txt" name="districtnew_order[]" value="0" />', 'td25'],[2,'<input type="text" class="txt" name="districtnew[]" value="" />', '']],
 ];

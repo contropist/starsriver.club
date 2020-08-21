@@ -252,7 +252,7 @@ if($operation == 'admin') {
 			}
 		}
 		if($newvers) {
-			echo '<script type="text/javascript">'.$newvers.'</script>';
+			echo '<script>'.$newvers.'</script>';
 		}
 
 	} else {
@@ -470,7 +470,7 @@ if($operation == 'admin') {
 		));
 
 ?>
-<script type="text/JavaScript">
+<script>
 function imgpre_onload(obj) {
 	if(!obj.complete) {
 		setTimeout(function() {imgpre_resize(obj)}, 100);

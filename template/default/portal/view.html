@@ -2,7 +2,7 @@
 <!--[name]{lang portalcategory_viewtplname}[/name]-->
 
 <script type="text/javascript" src="{$_G['setting']['jspath']}forum_viewthread.js?{VERHASH}"></script>
-<script type="text/javascript">zoomstatus = parseInt($_G['setting']['zoomstatus']), imagemaxwidth = '{$_G['setting']['imagemaxwidth']}', aimgcount = [];</script>
+<script>zoomstatus = parseInt($_G['setting']['zoomstatus']), imagemaxwidth = '{$_G['setting']['imagemaxwidth']}', aimgcount = [];</script>
 <div id="pt" class="bm cl">
 	<div class="z">
 		<a href="./" class="nvhm" title="{lang homepage}">$_G[setting][bbname]</a><em class="direct"></em>
@@ -90,7 +90,7 @@
 
 			</div>
 			<!--{if !empty($aimgs[$content[pid]])}-->
-				<script type="text/javascript" reload="1">aimgcount[{$content[pid]}] = [<!--{echo implode(',', $aimgs[$content[pid]]);}-->];attachimgshow($content[pid]);</script>
+				<script reload="1">aimgcount[{$content[pid]}] = [<!--{echo implode(',', $aimgs[$content[pid]]);}-->];attachimgshow($content[pid]);</script>
 			<!--{/if}-->
 
 			<!--{if !empty($_G['setting']['pluginhooks']['view_share_method'])}-->
@@ -208,7 +208,7 @@
 </div>
 
 <!--{if $_G['relatedlinks']}-->
-	<script type="text/javascript">
+	<script>
 		var relatedlink = [];
 		<!--{loop $_G['relatedlinks'] $key $link}-->
 		relatedlink[$key] = {'sname':'$link[name]', 'surl':'$link[url]'};

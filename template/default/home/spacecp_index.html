@@ -51,7 +51,7 @@
 </ul >
 <div class="z" id="nestimg_next" >$multi</div >
 <!--{if $albumlist[$albumid]['friend']}-->
-<script type="text/javascript" >showDialog('{lang the_album_pic}{$friendsname[$albumlist[$albumid][friend]]}', 'alert');</script >
+<script>showDialog('{lang the_album_pic}{$friendsname[$albumlist[$albumid][friend]]}', 'alert');</script>
 <!--{/if}-->
 <!--{elseif $_GET['op'] == 'nest'}-->
 <dl class="nest" >
@@ -314,7 +314,7 @@ $blockhtml
     )
 
     }
-</script >
+</script>
 <!--{elseif $_GET['op'] == 'edit'}-->
 <div class="header" >
     <span class="title-tip" id="return_$_GET[handlekey]" >{lang editing_module}</span >
@@ -374,15 +374,15 @@ $blockhtml
                                 <textarea cols="40" id="contentmessage" name="content" onkeydown="ctrlEnter(event, 'blocksubmitbtn');" rows="3" style="width: 100%;" >$para[content]</textarea >
                             </div >
                         </div >
-                        <script src="{$_G[setting][jspath]}bbcode.js?{VERHASH}" type="text/javascript" ></script >
-                        <script type="text/javascript" >var forumallowhtml = 0,
+                        <script src="{$_G[setting][jspath]}bbcode.js?{VERHASH}" type="text/javascript" ></script>
+                        <script>var forumallowhtml = 0,
                             allowhtml = parseInt('{$_G[group][allowspacenesthtml]}'), allowsmilies = 0,
                             allowbbcode = parseInt('{$_G[group][allowspacenestbbcode]}'),
                             allowimgcode = parseInt('{$_G[group][allowspacenestimgcode]}');
                         var DISCUZCODE = [];
                         DISCUZCODE['num'] = '-1';
                         DISCUZCODE['html'] = [];
-                        </script >
+                        </script>
                     </td >
                 </tr >
                 <!--{elseif in_array($blockname, array('personalinfo'))}-->
@@ -504,7 +504,7 @@ $blockhtml
 </div >
 
 <div id="musicadd_content" style="display:$addshow;" >
-    <script type="text/javascript" >
+    <script>
         function addMenu() {
             newnode = $("tb_menu_new").rows[0].cloneNode(true);
             tags = newnode.getElementsByTagName('input');
@@ -566,7 +566,7 @@ $blockhtml
                 }
             }
         }
-    </script >
+    </script>
 
     <form action="home.php?mod=spacecp&ac=index&blockname=$blockname" autocomplete="off" id="musicaddform" method="post" name="musicaddform" onsubmit="spacenest.delIframe();ajaxpost('musicaddform','return_$_GET[handlekey]','return_$_GET[handlekey]','onerror');" >
         <div class="c nestwin" style="max-height:260px;width:480px;height:auto !important;height:260px;_margin-right:20px;overflow-y:auto;" >
@@ -717,14 +717,14 @@ $blockhtml
     )
 
     }
-</script >
+</script>
 <!--{elseif $_GET['op'] == 'savespaceinfo'}-->
 
 <!--{eval $space[domainurl] = space_domain($space);}-->
 <strong id="spacename" ><!--{if $space[spacename]}-->$space[spacename]<!--{else}--> $space[username]{lang somebody_space}<!--{/if}--></strong >
 <a class="xs0 xw0" href="$space[domainurl]" id="domainurl" onclick="setCopy('$space[domainurl]', '{lang copy_space_address}');return false;" >$space[domainurl]</a >
 <span class="xw0" id="spacedescription" >$space[spacedescription]</span >
-<script reload="1" type="text/javascript" >spacenest.initSpaceInfo();</script >
+<script reload="1">spacenest.initSpaceInfo();</script>
 
 <!--{elseif $_GET['op'] == 'getspaceinfo'}-->
 

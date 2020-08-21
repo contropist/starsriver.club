@@ -5,7 +5,7 @@
 	$Id: google.js 23838 2011-08-11 06:51:58Z monkey $
 */
 
-document.writeln('<script type="text/javascript">');
+document.writeln('<script>');
 document.writeln('function validate_google(theform) {');
 document.writeln('	if(theform.site.value == 1) {');
 document.writeln('		theform.q.value = \'site:' + google_host + ' \' + theform.q.value;');

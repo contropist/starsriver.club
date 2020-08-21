@@ -34,7 +34,7 @@
 <!--{/if}-->
 
 <!--{if $_G['inajax'] && in_array($op, array('block', 'data', 'style', 'moreurl'))}-->
-	<script type="text/javascript" reload="1">
+	<script reload="1">
 	function succeedhandle_$_GET[handlekey] (url, message, values) {
 		<!--{if $_GET[from]=='cp'}-->
 		location.reload();
@@ -109,7 +109,7 @@
 						<th width="80">{lang block_id}
 
 							<input type="text" id="name" name="name" value="$block[name]" />
-							<script type="text/javascript">document.forms['blockformsetting']['name'].focus();</script>
+							<script>document.forms['blockformsetting']['name'].focus();</script>
 
 
 
@@ -309,7 +309,7 @@
 			</div>
 		<!--{/if}-->
 	</form>
-	<script type="text/javascript" reload="1">
+	<script reload="1">
 	var formoldvalue = {'checkbox':[], 'text':[]};
 	var inputs = $('blockformdata').getElementsByTagName('table')[0].getElementsByTagName('input');
 	for(var i = 0; i < inputs.length; i++){
@@ -574,7 +574,7 @@
 			<!--{if $_G[inajax]}--><button type="button" onclick="hideWindow('$_GET[handlekey]');return false;"><strong>{lang cancel}</strong></button><!--{/if}-->
 		</div>
 	</form>
-	<script type="text/javascript" reload="1">
+	<script reload="1">
 		if (typeof ctitlepb_frame == 'object' && !BROWSER.ie) {delete ctitlepb_frame;}
 		if (typeof csummarypb_frame == 'object' && !BROWSER.ie) {delete csummarypb_frame;}
 		function succeedhandle_$_GET['handlekey'] (url, message, values) {
@@ -632,7 +632,7 @@
 			<button type="submit" class="pn pnc"><strong>{lang passed}</strong></button>
 		</div>
 	</form>
-	<script type="text/javascript" reload="1">
+	<script reload="1">
 		function succeedhandle_$_GET['handlekey'] (url, message, values) {
 			hideWindow('$_GET[handlekey]');
 			location.reload();
@@ -671,7 +671,7 @@
 			<button type="submit" class="pn pnc"><strong>{lang submit}</strong></button>
 		</div>
 	</form>
-	<script type="text/javascript" reload="1">
+	<script reload="1">
 		function succeedhandle_$_GET['handlekey'] (url, message, values) {
 			hideWindow('$_GET[handlekey]');
 			location.reload();
@@ -688,12 +688,12 @@
 	</div></div></div>
 	<!--{/if}-->
 <!--{elseif $op == 'convert'}-->
-	<script type="text/javascript" reload="1">
+	<script reload="1">
 		showWindow('showblock', 'portal.php?mod=portalcp&ac=block&op=block<!--{if $_GET[from]}-->&from=$_GET[from]<!--{/if}-->&bid='+$bid+'&tpl='+document.nestform.template.value, 'get', -1);
 		drag.blockForceUpdate('portal_block_$bid');
 	</script>
 <!--{elseif $op == 'favorite'}-->
-	<script type="text/javascript">
+	<script>
 		$('bfav_$bid').parentNode.onmouseover = '';
 		$('bfav_$bid').parentNode.onmouseout = '';
 	</script>

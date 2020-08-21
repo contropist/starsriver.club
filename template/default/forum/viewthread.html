@@ -1,10 +1,10 @@
 <!--{template common/header}-->
-	<script type="text/javascript">var fid = parseInt('$_G[fid]'), tid = parseInt('$_G[tid]');</script>
+	<script>var fid = parseInt('$_G[fid]'), tid = parseInt('$_G[tid]');</script>
 <!--{if $modmenu['thread'] || $modmenu['post']}-->
 	<script type="text/javascript" src="{$_G['setting']['jspath']}forum_moderate.js?{VERHASH}"></script>
 <!--{/if}-->
 	<script type="text/javascript" src="{$_G['setting']['jspath']}forum_viewthread.js?{VERHASH}"></script>
-	<script type="text/javascript">zoomstatus = parseInt($_G['setting']['zoomstatus']);var imagemaxwidth = '{$_G['setting']['imagemaxwidth']}';var aimgcount = [];</script>
+	<script>zoomstatus = parseInt($_G['setting']['zoomstatus']);var imagemaxwidth = '{$_G['setting']['imagemaxwidth']}';var aimgcount = [];</script>
 <!--[nest=nestnavtop]--><div id="nestnavtop" class="area"></div><!--[/nest]-->
 <!--{hook/viewthread_top}-->
 <!--{ad/text/wp a_t}-->
@@ -228,11 +228,11 @@
 	<!--{/if}-->
 
 	<!--{if !IS_ROBOT && !empty($_G[setting][lazyload])}-->
-		<script type="text/javascript">new lazyload();</script>
+		<script>new lazyload();</script>
 	<!--{/if}-->
 
 	<!--{if !IS_ROBOT && $_G['setting']['threadmaxpages'] > 1}-->
-		<script type="text/javascript">document.onkeyup = function(e){keyPageScroll(e, <!--{if $page > 1}-->1<!--{else}-->0<!--{/if}-->, <!--{if $page < $_G['setting']['threadmaxpages'] && $page < $_G['page_next']}-->1<!--{else}-->0<!--{/if}-->, 'forum.php?mod=viewthread&tid=$_G[tid]<!--{if $_GET[authorid]}-->&authorid=$_GET[authorid]<!--{/if}-->', $page);}</script>
+		<script>document.onkeyup = function(e){keyPageScroll(e, <!--{if $page > 1}-->1<!--{else}-->0<!--{/if}-->, <!--{if $page < $_G['setting']['threadmaxpages'] && $page < $_G['page_next']}-->1<!--{else}-->0<!--{/if}-->, 'forum.php?mod=viewthread&tid=$_G[tid]<!--{if $_GET[authorid]}-->&authorid=$_GET[authorid]<!--{/if}-->', $page);}</script>
 	<!--{/if}-->
 </div>
 
@@ -240,7 +240,7 @@
 <!--[nest=nest3]--><div id="nest3" class="area"></div><!--[/nest]-->
 
 <!--{if $_G['relatedlinks'] || $_GET['highlight']}-->
-	<script type="text/javascript">
+	<script>
 		var relatedlink = [];
 		<!--{loop $_G['relatedlinks'] $key $link}-->
 		relatedlink[$key] = {'sname':'$link[name]', 'surl':'$link[url]'};
@@ -255,9 +255,9 @@
 <!--{/if}-->
 
 <!--{if !empty($_G['cookie']['clearUserdata']) && $_G['cookie']['clearUserdata'] == 'forum'}-->
-	<script type="text/javascript">saveUserdata('forum_'+ discuz_uid, '')</script>
+	<script>saveUserdata('forum_'+ discuz_uid, '')</script>
 <!--{/if}-->
-<script type="text/javascript">
+<script>
 <!--{if $_G['forum']['picstyle'] && ($_G['forum']['ismoderator'] || $_G['uid'] == $_G['thread']['authorid'])}-->
 function showsetcover(obj) {
 	if(obj.parentNode.id == 'postmessage_$_G[forum_firstpid]') {

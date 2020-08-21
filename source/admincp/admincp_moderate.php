@@ -75,7 +75,7 @@ if($operation == 'members') {
 	$modreasonoptions = '<option value="">'.$lang['none'].'</option><option value="">--------</option>'.modreasonselect(1);
 
 	echo <<<EOT
-<script type="text/JavaScript">
+<script>
 	var cookiepre = "{$_G[config][cookie][cookiepre]}";
 	function mod_setbg(tid, value) {
 		$('mod_' + tid + '_row1').className = 'mod_' + value;
@@ -280,7 +280,7 @@ echo '<iframe name="fasthandle" style="display: none;"></iframe>';
 
 function callback_js($id) {
 	$js = <<<EOT
-<script type="text/javascript">
+<script>
 	mod_remove_row('$id');
 </script>
 EOT;

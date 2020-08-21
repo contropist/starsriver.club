@@ -116,6 +116,8 @@ class template {
 		$template = preg_replace("/\<\?(\s{1})/is", "<?php\\1", $template);
 		$template = preg_replace("/\<\?\=(.+?)\?\>/is", "<?php echo \\1;?>", $template);
 
+		$template = preg_replace("/\>[\n\r\t\s]*\</is", "><", $template);
+
 		flock($fp, 2);
 		fwrite($fp, $template);
 		fclose($fp);

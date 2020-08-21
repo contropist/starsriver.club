@@ -117,7 +117,7 @@ if($operation == 'updatecache') {
 function jsinsertunit() {
 
 ?>
-<script type="text/JavaScript">
+<script>
 function isUndefined(variable) {
 	return typeof variable == 'undefined' ? true : false;
 }

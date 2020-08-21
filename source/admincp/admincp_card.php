@@ -232,7 +232,7 @@ if($operation == 'set') {
 		));
 	}
 	echo <<<EOT
-<script type="text/JavaScript">
+<script>
 	var rowtypedata = [
 		[[1,''], [1,'<input type="text" class="txt" size="30" name="newtype[]">']],
 	];

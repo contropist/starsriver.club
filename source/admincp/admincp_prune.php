@@ -61,7 +61,7 @@ if(!submitcheck('prunesubmit')) {
 	showtips('prune_tips');
 	echo <<<EOT
 <script type="text/javascript" src="static/js/calendar.js"></script>
-<script type="text/JavaScript">
+<script>
 function page(number) {
 	$('pruneforum').page.value=number;
 	$('pruneforum').searchsubmit.click();
@@ -150,7 +150,7 @@ EOT;
 	$cpmsg = cplang('prune_succeed', array('deletedthreads' => $deletedthreads, 'deletedposts' => $deletedposts));
 
 ?>
-<script type="text/JavaScript">alert('<?php echo $cpmsg;?>');parent.$('pruneforum').searchsubmit.click();</script>
+<script>alert('<?php echo $cpmsg;?>');parent.$('pruneforum').searchsubmit.click();</script>
 <?php
 
 }

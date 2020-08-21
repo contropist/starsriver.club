@@ -103,7 +103,7 @@ if(!submitcheck('deletesubmit')) {
 				'</div></div>';
 
 		echo <<<EOT
-<script type="text/JavaScript">
+<script>
 	function page(number) {
 		$('attachmentforum').page.value=number;
 		$('attachmentforum').searchsubmit.click();

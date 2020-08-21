@@ -126,7 +126,7 @@ function dshowmessage($message, $url_forward = '', $values = [], $extraparam = [
 	$url_forward_js = addslashes(str_replace('\\', '%27', $url_forward));
 	if($param['location'] && !empty($_G['inajax'])) {
 		include template('common/header_ajax');
-		echo '<script type="text/javascript" reload="1">window.location.href=\''.$url_forward_js.'\';</script>';
+		echo '<script reload="1">window.location.href=\''.$url_forward_js.'\';</script>';
 		include template('common/footer_ajax');
 		dexit();
 	}
@@ -232,7 +232,7 @@ function dshowmessage($message, $url_forward = '', $values = [], $extraparam = [
 	if(!$extra && $param['timeout'] && !defined('IN_MOBILE')) {
 		$extra .= 'setTimeout("window.location.href =\''.$url_forward_js.'\';", '.$refreshtime.');';
 	}
-	$show_message .= $extra ? '<script type="text/javascript" reload="1">'.$extra.$st.'</script>' : '';
+	$show_message .= $extra ? '<script reload="1">'.$extra.$st.'</script>' : '';
 	$show_message .= $param['extrajs'] ? $param['extrajs'] : '';
 	include template('common/showmessage');
 

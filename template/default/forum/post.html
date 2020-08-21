@@ -1,7 +1,7 @@
 <!--{template common/header}-->
 <div class="plate layout-0">
     <section class="shadow-3D crumb">
-        <script type="text/javascript">
+        <script>
             var allowpostattach = parseInt('{$_G['group']['allowpostattach']}');
             var allowpostimg = parseInt('$allowpostimg');
             var pid = parseInt('$pid');
@@ -33,7 +33,7 @@
         <!--{/if}-->
         <script type="text/javascript" src="{$_G['setting']['jspath']}forum_post.js?{VERHASH}"></script>
         <!--{if $isfirstpost && $sortid}-->
-            <script type="text/javascript">var forum_optionlist = <!--{if $forum_optionlist}-->'$forum_optionlist'<!--{else}-->''<!--{/if}-->;</script>
+            <script>var forum_optionlist = <!--{if $forum_optionlist}-->'$forum_optionlist'<!--{else}-->''<!--{/if}-->;</script>
             <script type="text/javascript" src="{$_G['setting']['jspath']}threadsort.js?{VERHASH}"></script>
         <!--{/if}-->
         <!--{block activeposttype}-->
@@ -230,7 +230,7 @@
         <!--{if $allowuploadtoday || $special == 1}-->
             <!--{if empty($_G['setting']['pluginhooks']['post_upload_extend'])}-->
                 <!--{subtemplate common/upload}-->
-                <script type="text/javascript">
+                <script>
                 <!--{if $allowpostimg}-->
                     var imgUpload = new SWFUpload({
                         upload_url: "{$_G[siteurl]}misc.php?mod=swfupload&action=swfupload&operation=upload&fid=$_G[fid]",
@@ -326,7 +326,7 @@
                 <!--{hook/post_upload_extend}-->
             <!--{/if}-->
         <!--{/if}-->
-        <script type="text/javascript">
+        <script>
             var editorsubmit = $('postsubmit');
             var editorform = $('postform');
             <!--{if $isfirstpost && !empty($_G[forum][threadtypes][types])}-->

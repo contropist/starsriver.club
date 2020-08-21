@@ -16,7 +16,7 @@
 			<button class="btn-square fullwidth" style="border: none;"  type="submit" name="deletesubmitbtn" value="true">{lang determine}</button>
 		</div>
 		<!--{if $_GET[type]!='view'}-->
-		<script type="text/javascript">function succeedhandle_$_GET[handlekey](url, msg, values) {share_delete(values['sid']);}</script>
+		<script>function succeedhandle_$_GET[handlekey](url, msg, values) {share_delete(values['sid']);}</script>
 		<!--{/if}-->
 	</form>
 <!--{elseif $_GET['op']=='link'}-->
@@ -42,7 +42,7 @@
 			<!--{if $secqaacheck || $seccodecheck}--><!--{subtemplate common/seccheck}--><!--{/if}-->
 		</div>
 		<!--{if $_G[inajax]}-->
-		<script type="text/javascript">function succeedhandle_$_GET['handlekey'](url, message, values) {showCreditPrompt();}</script>
+		<script>function succeedhandle_$_GET['handlekey'](url, message, values) {showCreditPrompt();}</script>
 		<!--{/if}-->
 	</form>
 <!--{elseif $_GET['op'] == 'edithot'}-->
@@ -93,7 +93,7 @@
 				<label for="iscomment"><!--{if $type == 'thread'}-->{lang post_add_inonetime}<!--{else}-->{lang comment_add_inonetime}<!--{/if}--></label>
 			<!--{/if}-->
 		</div>
-		<script type="text/javascript">
+		<script>
             function succeedhandle_$_GET['handlekey'] (url, message, values) {
                 if(values['cid'] && $('comment_ul') && !$('replynum_'+values['id'])) {
                     comment_add(values['cid']);

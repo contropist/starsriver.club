@@ -90,7 +90,7 @@ if(!submitcheck('blogsubmit')) {
 	/*search*/
 	echo <<<EOT
 <script type="text/javascript" src="static/js/calendar.js"></script>
-<script type="text/JavaScript">
+<script>
 function page(number) {
 	$('blogforum').page.value=number;
 	$('blogforum').searchsubmit.click();
@@ -158,7 +158,7 @@ EOT;
 		}
 	}
 ?>
-<script type="text/JavaScript">alert('<?php echo $cpmsg;?>');parent.$('blogforum').searchsubmit.click();</script>
+<script>alert('<?php echo $cpmsg;?>');parent.$('blogforum').searchsubmit.click();</script>
 <?php
 
 }

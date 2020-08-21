@@ -12,7 +12,7 @@
 					<div id="loadingfeed"><a onclick="loadmore();return false;">{lang follow_more}</a></div>
 				<!--{/if}-->
 				<iframe id="downloadframe" name="downloadframe" width="0" height="0" marginwidth="0" frameborder="0" src="about:blank"></iframe>
-				<script type="text/javascript">
+				<script>
                     function succeedhandle_attachpay(url, msg, values) {
                         hideWindow('attachpay');
                         window.location.href = url;
@@ -42,7 +42,7 @@
 			<!--{/if}-->
 		<!--{/if}-->
 		<!--{if count($list['feed']) > 19 && ($archiver || $primary)}-->
-			<script type="text/javascript">
+			<script>
 				var scrollY = 0;
 				var page = 2;
 				var feedInfo = {scrollY: 0, archiver: $archiver, primary: $primary, query: true, scrollNum:1};
@@ -105,7 +105,7 @@
 		<!--{/if}-->
 	<!--{/if}-->
 
-	<script type="text/javascript">
+	<script>
 		var boxflag = {};
 		var parentReplyId = '';
 		function quickreply(fid, tid, feedid) {
@@ -258,12 +258,12 @@
 			<button style="margin: -50px 0 20px 430px;" onclick="hideMenu()"><span>{lang follow_i_know}</span></button>
 		</div>
 	</div>
-	<script type="text/javascript">
+	<script>
 		showMenu({'ctrlid':'nv','pos':'13','cover':'1'});
 	</script>
 <!--{/if}-->
 
-<script type="text/javascript">
+<script>
 	function succeedhandle_followmod(url, msg, values) {
 		var numObj = $('followernum_'+values['fuid']);
 		if(numObj) {followernum = parseInt(numObj.innerHTML);}

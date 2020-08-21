@@ -142,7 +142,7 @@ if($_GET['op'] == 'delete') {
 				break;
 			case 'forum':
 				C::t('forum_forum')->update_forum_counter($id, 0, 0, 0, 0, 1);
-				$extrajs = '<script type="text/javascript">$("number_favorite_num").innerHTML = parseInt($("number_favorite_num").innerHTML)+1;$("number_favorite").style.display="";</script>';
+				$extrajs = '<script>$("number_favorite_num").innerHTML = parseInt($("number_favorite_num").innerHTML)+1;$("number_favorite").style.display="";</script>';
 				dsetcookie('nofavfid', '', -1);
 				break;
 			case 'blog':

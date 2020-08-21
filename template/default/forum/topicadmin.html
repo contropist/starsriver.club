@@ -142,7 +142,7 @@
                                     </select>
                                 </div>
                                 <img id="selectimg" src="" style="display:block; width: 100%; height: auto"/>
-                                <script type="text/javascript" reload="1">
+                                <script reload="1">
                                     var imgk = [];
                                     <!--{loop $imgattach $imginfo}-->
                                         <!--{eval $a = '\"\'\t\\""\\\''."\\\\";$k = getforumimg($imginfo['aid'], 1, 120, 80);}-->
@@ -278,7 +278,7 @@
 	</form>
 </div>
 <script type="text/javascript" src="{$_G[setting][jspath]}calendar.js?{VERHASH}" reload="1"></script>
-<script type="text/javascript" reload="1">
+<script reload="1">
 	function succeedhandle_mods(locationhref) {
 		hideWindow('mods');
 		<!--{if !empty($_GET[from])}-->

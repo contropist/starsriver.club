@@ -3,7 +3,7 @@
 		<div class="vessel withedge">
 			<script type="text/javascript" src="{$_G[setting][jspath]}forum.js?{VERHASH}"></script>
 			<script type="text/javascript" src="{$_G[setting][jspath]}forum_moderate.js?{VERHASH}"></script>
-			<script type="text/javascript">
+			<script>
 				var postminchars = parseInt('$_G['setting']['minpostsize']');
 				var postmaxchars = parseInt('$_G['setting']['maxpostsize']');
 				var disablepostctrl = parseInt('{$_G['group']['disablepostctrl']}');
@@ -30,7 +30,7 @@
 					<div class="toolbar" id="flw_bar" >
 						<!--{eval $seditor = array('fastpost', array('smilies', 'at'), 0, '<span id="spanButtonPlaceholder">{lang upload}</span>');}-->
 						<!--{subtemplate common/seditor}-->
-						<script type="text/javascript">
+						<script>
                             var editorid = '';
                             var ATTACHNUM = {'imageused':0,'imageunused':0,'attachused':0,'attachunused':0}, ATTACHUNUSEDAID = [], IMGUNUSEDAID = [];
 						</script>
@@ -62,7 +62,7 @@
 					<div id="attachlist" ></div>
 					<!--{if empty($_G['setting']['pluginhooks']['follow_upload_extend'])}-->
 						<!--{subtemplate common/upload}-->
-						<script type="text/javascript">
+						<script>
 							var upload = new SWFUpload({
 								// Backend Settings
 								upload_url: "{$_G[siteurl]}misc.php?mod=swfupload&action=swfupload&operation=upload&fid={$dmfid}",
@@ -116,7 +116,7 @@
 				</div>
 
 			</form>
-			<script type="text/javascript">
+			<script>
                 var nofollowfeed = <!--{if !empty($list['feed'])}-->0<!--{else}-->1<!--{/if}-->;
                 var userdatakey = cookiepre+'fastpost{$_G[uid]}';
                 function showSyncInfo(flag) {

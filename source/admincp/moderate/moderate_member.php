@@ -77,7 +77,7 @@ if($do == 'mod') {
 		$moderate_members_bad_reason = cplang('moderate_members_bad_reason');
 		$moderate_members_succeed = cplang('moderate_members_succeed');
 		echo <<<EOT
-<script type="text/javascript">
+<script>
 function set_bg(operation, uid) {
 	if(operation == 'invalidate') {
 		$('mod_uid_' + uid).className = "mod_invalidate";

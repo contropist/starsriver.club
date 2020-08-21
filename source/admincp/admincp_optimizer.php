@@ -100,7 +100,7 @@ if($operation == 'optimize_unit') {
 	C::t('common_optimizer')->update($check_record_time_key, $_G['timestamp']);
 
 	include template('common/header_ajax');
-	echo '<script type="text/javascript">updatecheckstatus(\''.$type.'\', \''.$checkstatus['lang'].'\', \''.$checkstatus['status'].'\', \''.$checkstatus['type'].'\', \''.$checkstatus['extraurl'].'\');</script>';
+	echo '<script>updatecheckstatus(\''.$type.'\', \''.$checkstatus['lang'].'\', \''.$checkstatus['status'].'\', \''.$checkstatus['type'].'\', \''.$checkstatus['extraurl'].'\');</script>';
 	include template('common/footer_ajax');
 	exit;
 
@@ -186,7 +186,7 @@ if($operation == 'optimize_unit') {
 		$adminscipt = ADMINSCRIPT;
 		$C = '$C';
 		print <<<END
-			<script type="text/javascript">
+			<script>
 				var checkpercent = 0;
 				var checknum = 0;
 				var optimize_num = 0;
@@ -305,7 +305,7 @@ END;
 		foreach($optimizer_option as $option) {
 			echo '<tr class="hover" id="progress_'.$option.'_tr">';
 			echo '<td width="200"><div id="progress_'.$option.'_unit">'.$lang['optimizer_check_unit_'.$option].'</td>';
-			echo '<td width="350"><div id="progress_'.$option.'">'.$lang['founder_optimizer_checking'].'...</div></td><script type="text/javascript">ajaxget(\''.ADMINSCRIPT.'?action=optimizer&operation=check_unit&type='.$option.'&anchor='.$_GET['anchor'].'\', \'progress_'.$option.'\', \'\', \'\', \'\', updatecheckpercent)</script>';
+			echo '<td width="350"><div id="progress_'.$option.'">'.$lang['founder_optimizer_checking'].'...</div></td><script>ajaxget(\''.ADMINSCRIPT.'?action=optimizer&operation=check_unit&type='.$option.'&anchor='.$_GET['anchor'].'\', \'progress_'.$option.'\', \'\', \'\', \'\', updatecheckpercent)</script>';
 			echo '<td><div id="progress_'.$option.'_status"></div></td>';
 			echo '</tr>';
 		}

@@ -588,7 +588,7 @@ function profile_showerror($key, $extrainfo = '') {
 }
 
 function profile_showsuccess($message = '') {
-    echo '<script type="text/javascript">';
+    echo '<script>';
     echo "  parent.show_success('$message');";
     echo '</script>';
     exit();

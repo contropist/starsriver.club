@@ -29,7 +29,7 @@
 						<p class="alert_btnleft"><a href="$url_forward">{lang attach_forward}</a></p>
 					<!--{/if}-->
 				<!--{elseif $allowreturn}-->
-				<script type="text/javascript">
+				<script>
 					if(history.length > (BROWSER.ie ? 0 : 1)) {
 						document.write('<p class="alert_btnleft"><a href="javascript:history.back()">{lang message_go_back}</a></p>');
 					} else {
@@ -40,7 +40,7 @@
 			</div>
 			<!--{if $param[login]}-->
 				<div id="messagelogin"></div>
-				<script type="text/javascript">ajaxget('member.php?mod=logging&action=login&infloat=yes&frommessage', 'messagelogin');</script>
+				<script>ajaxget('member.php?mod=logging&action=login&infloat=yes&frommessage', 'messagelogin');</script>
 			<!--{/if}-->
 		</div>
 <!--{elseif $param[msgtype] == 2}-->
@@ -61,7 +61,7 @@
 				<!--{/if}-->
 			<!--{elseif !$param['closetime'] && !$param['locationtime']}-->
 				<button class="btn-square fullwidth" style="border: none;"  type="button" id="closebtn" onclick="hideWindow('$_GET['handlekey']');">{lang confirms}</button>
-                <script type="text/javascript" reload="1">if($('closebtn')) {$('closebtn').focus();}</script>
+                <script reload="1">if($('closebtn')) {$('closebtn').focus();}</script>
 			<!--{/if}-->
 		</div>
 <!--{else}-->$show_message<!--{/if}-->

@@ -72,7 +72,7 @@
 					</div>
 				</form>
 			<!--{/if}-->
-			<script type="text/javascript">
+			<script>
 				function succeedhandle_$_GET[handlekey](url, msg, values) {
 					if($('pmlist_'+values['plid'])) {$('pmlist_'+values['plid']).style.display = 'none';}
 					if($('gpmlist_'+values['gpmid'])) {$('gpmlist_'+values['gpmid']).style.display = 'none';}
@@ -196,7 +196,7 @@
 								<!--{/loop}-->
 							<!--{/loop}-->
 						</ul>
-						<script type="text/javascript">var refresh = true; var refreshHandle = -1;</script>
+						<script>var refresh = true; var refreshHandle = -1;</script>
 						<form class="talk" id="pmform_{$touid}" name="pmform_{$touid}" method="post" autocomplete="off" action="home.php?mod=spacecp&ac=pm&op=send&touid=$touid" onsubmit="this.message.value = parseurl(this.message.value);{if $_G[inajax]}ajaxpost(this.id,  'return_$_GET[handlekey]');refreshMsg();{/if}">
 							<input type="hidden" name="pmsubmit" value="true" />
 							<input type="hidden" name="touid" value="$touid" />
@@ -214,11 +214,11 @@
 							<textarea name="message" id="pmmessage" onkeydown="ctrlEnter(event, 'pmsubmit_btn');" autofocus></textarea>
 							<button class="trans-outback" type="submit" id="pmsubmit_btn">{lang send}</button>
 							<input type="hidden" name="messageappend" id="messageappend" value="$messageappend" />
-							<script type="text/javascript">$('pmmessage').focus();</script>
+							<script>$('pmmessage').focus();</script>
 						</form>
-						<script type="text/javascript">var forumallowhtml = 0,allowhtml = 0,allowsmilies = true,allowbbcode = parseInt('{$_G[group][allowsigbbcode]}'),allowimgcode = parseInt('{$_G[group][allowsigimgcode]}');var DISCUZCODE = [];DISCUZCODE['num'] = '-1';DISCUZCODE['html'] = [];</script>
+						<script>var forumallowhtml = 0,allowhtml = 0,allowsmilies = true,allowbbcode = parseInt('{$_G[group][allowsigbbcode]}'),allowimgcode = parseInt('{$_G[group][allowsigimgcode]}');var DISCUZCODE = [];DISCUZCODE['num'] = '-1';DISCUZCODE['html'] = [];</script>
 						<script type="text/javascript" src="{$_G[setting][jspath]}bbcode.js?{VERHASH}"></script>
-						<script type="text/javascript">
+						<script>
 							var msgListObj = $('msglist');
 							msgListObj.scrollTop = msgListObj.scrollHeight;
 							function succeedhandle_$_GET[handlekey](url, msg, values) {
@@ -296,7 +296,7 @@
 						<div class="common-tip"><i class="ft-clipboard heart-pink"></i>{lang content}：<!--{subtemplate common/seditor}--></div>
 						<textarea name="message" id="sendmessage" onkeydown="ctrlEnter(event, 'pmsubmit_btn');" placeholder="{lang reply_rule}"></textarea>
 					</div>
-					<script type="text/javascript">
+					<script>
                         var fs_$funckey = new friendSelector({
 							searchId:'username',
 							showId:'friends',

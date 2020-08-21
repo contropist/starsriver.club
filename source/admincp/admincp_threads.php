@@ -58,7 +58,7 @@ if((!$operation && !$optype) || ($operation == 'group' && empty($optype))) {
 
 	echo <<<EOT
 <script src="static/js/calendar.js"></script>
-<script type="text/JavaScript">
+<script>
 	function page(number) {
 		$('threadforum').page.value=number;
 		$('threadforum').searchsubmit.click();
@@ -615,7 +615,7 @@ EOT;
 
 	$_GET['tids'] && deletethreadcaches($_GET['tids']);
 	$cpmsg = $cpmsg ? "alert('$cpmsg');" : '';
-	echo '<script type="text/JavaScript">'.$cpmsg.'if(parent.$(\'threadforum\')) parent.$(\'threadforum\').searchsubmit.click();</script>';
+	echo '<script>'.$cpmsg.'if(parent.$(\'threadforum\')) parent.$(\'threadforum\').searchsubmit.click();</script>';
 }
 
 function delete_position($select) {

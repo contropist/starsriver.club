@@ -30,7 +30,7 @@ if(!$operation) {
 		showsubtitle(array('', 'display_order', 'available', 'name', 'description', 'medals_image', 'medals_type', ''));
 
 ?>
-<script type="text/JavaScript">
+<script>
 	var rowtypedata = [
 		[
 			[1,'', 'td25'],
@@ -282,7 +282,7 @@ if(!$operation) {
 			$formulareplace .= '\'<u>'.$lang['setting_credits_formula_digestposts'].'</u>\',\'<u>'.$lang['setting_credits_formula_posts'].'</u>\',\'<u>'.$lang['setting_credits_formula_oltime'].'</u>\',\'<u>'.$lang['setting_credits_formula_pageviews'].'</u>\'';
 
 ?>
-<script type="text/JavaScript">
+<script>
 	function medalsinsertunit(text, textend) {
 		insertunit($('formulapermnew'), text, textend);
 		formulaexp();
@@ -348,7 +348,7 @@ if(!$operation) {
 <textarea name="formulapermnew" id="formulapermnew" style="width: 80%" rows="3" onkeyup="formulaexp()" onkeydown="textareakey(this, event)"><?php echo dhtmlspecialchars($medal['permission']);?></textarea>
 <br><span class="smalltxt"><?php echo $lang['medals_permformula'];?></span>
 <br><?php echo $lang['creditwizard_current_formula_notice'];?>
-<script type="text/JavaScript">formulaexp()</script>
+<script>formulaexp()</script>
 </td></tr>
 <?php
 			showsubmit('medaleditsubmit');

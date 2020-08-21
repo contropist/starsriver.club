@@ -94,7 +94,7 @@ class mobileplugin_vaptcha_forum extends mobileplugin_vaptcha {
             }
             $validatePass = $this->vaptcha->Validate($challenge, $token);
             if (!$validatePass) {
-                showmessage('<script type="text/javascript" reload="1">refreshVaptcha();</script>');    
+                showmessage('<script reload="1">refreshVaptcha();</script>');    
             } else {
                 $post_count = $_G['cookie']['pc_size_c'];
                 $post_count = ($post_count + 1);

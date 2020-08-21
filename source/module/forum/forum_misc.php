@@ -1792,7 +1792,7 @@ if($_GET['action'] == 'votepoll' && submitcheck('pollsubmit', 1)) {
 
 	$hotreply[$_GET['do']]++;
 
-	showmessage('thread_poll_succeed', '', [], array('msgtype' => 3, 'extrajs' => '<script type="text/javascript">postreviewupdate('.$post['pid'].', '.$typeid.');</script>'));
+	showmessage('thread_poll_succeed', '', [], array('msgtype' => 3, 'extrajs' => '<script>postreviewupdate('.$post['pid'].', '.$typeid.');</script>'));
 } elseif($_GET['action'] == 'hidden') {
 	if($_GET['formhash'] != FORMHASH) {
 		showmessage('undefined_action', NULL);
@@ -1820,7 +1820,7 @@ if($_GET['action'] == 'votepoll' && submitcheck('pollsubmit', 1)) {
 		$thide[] = $_GET['tid'];
 	}
 	dsetcookie('thide', implode('|', $thide), 2592000);
-	showmessage('thread_hidden_success', dreferer(), [], array('showdialog' => true, 'closetime' => true, 'extrajs' => '<script type="text/javascript" reload="1">$(\'normalthread_'.$_GET['tid'].'\').style.display = \'none\'</script>'));
+	showmessage('thread_hidden_success', dreferer(), [], array('showdialog' => true, 'closetime' => true, 'extrajs' => '<script reload="1">$(\'normalthread_'.$_GET['tid'].'\').style.display = \'none\'</script>'));
 } elseif($_GET['action'] == 'hiderecover') {
 	if($_GET['formhash'] != FORMHASH) {
 		showmessage('undefined_action', NULL);

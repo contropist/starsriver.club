@@ -38,7 +38,7 @@ if(submitcheck('rbsubmit')) {
 	if($operation == 'search') {
 		$cpmsg = cplang('recyclebinpost_succeed', array('postsdel' => $postsdel, 'postsundel' => $postsundel));
 ?>
-<script type="text/JavaScript">alert('<?php echo $cpmsg;?>');parent.$('rbsearchform').searchsubmit.click();</script>
+<script>alert('<?php echo $cpmsg;?>');parent.$('rbsearchform').searchsubmit.click();</script>
 <?php
 	} else {
 		cpmsg('recyclebinpost_succeed', 'action=recyclebinpost&operation='.$operation, 'succeed', array('postsdel' => $postsdel, 'postsundel' => $postsundel));
@@ -112,7 +112,7 @@ if(!$operation) {
 	/*search={"nav_recyclebinpost":"action=recyclebinpost","search":"action=recyclebinpost&operation=search"}*/
 	echo <<<EOT
 <script type="text/javascript" src="static/js/calendar.js"></script>
-<script type="text/JavaScript">
+<script>
 function page(number) {
 	$('rbsearchform').page.value=number;
 	$('rbsearchform').searchsubmit.click();

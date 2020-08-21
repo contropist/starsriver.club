@@ -7392,11 +7392,54 @@
     /*region @timeline*/
         .app-userspace .timeline{
 
+            --left-width: 200px;
+
+            display: inline-block;
+            width: 720px;
         }
-        .app-userspace .timeline ul{
+        .app-userspace .timeline .node{
+            position: relative;
+            display: inline-block;
+            width: calc(100% - var(--left-width));
+            margin-left: var(--left-width);
+            border-left: 3px solid #c8d1de;
+        }
+        .app-userspace .timeline .node .left{
+            position: absolute;
+            top: 0;
+            right: 100%;
+            width: var(--left-width);
+            text-align: right;
 
         }
-        .app-userspace .timeline ul li{
+        .app-userspace .timeline .node .left .time-A{
+
+        }
+        .app-userspace .timeline .node .left .time-B{
+
+        }
+        .app-userspace .timeline .node .left .ip{
+
+        }
+        .app-userspace .timeline .node .left .username{
+
+        }
+        .app-userspace .timeline .node .right{
+            position: relative;
+            background: #fff;
+            padding: 15px;
+            margin: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,.1);
+            border-radius: 4px;
+
+        }
+    /*endregion*/
+
+    /*region #userspace_doing*/
+        .app-userspace #userspace_doing{
+            padding: 15px;
+        }
+        .app-userspace #userspace_doing .vessel{
 
         }
     /*endregion*/

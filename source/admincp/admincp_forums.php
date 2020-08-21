@@ -27,7 +27,7 @@ if($operation == 'admin') {
 		$forums = str_replace("'", "\'", forumselect(false, 0, 0, 1));
 
 ?>
-<script type="text/JavaScript">
+<script>
 var forumselect = '<?php echo $forums;?>';
 var rowtypedata = [
 	[[1, ''], [1,'<input type="text" class="txt" name="newcatorder[]" value="0" />', 'td25'], [5, '<div><input name="newcat[]" value="<?php cplang('forums_admin_add_category_name', null, true);?>" size="20" type="text" class="txt" /><a class="deleterow" onClick="deleterow(this)"><?php cplang('delete', null, true);?></a></div>']],
@@ -1006,7 +1006,7 @@ var rowtypedata = [
 
 					showtablefooter();
 					print <<<EOF
-					<script type="text/javascript">
+					<script>
 						function modifystate(custom) {
 							var trObj = custom.parentNode.parentNode;
 							var inputsObj = trObj.getElementsByTagName('input');
@@ -1029,7 +1029,7 @@ EOF;
 					$lang_forums_edit_threadtypes_use_cols = cplang('forums_edit_threadtypes_use_cols');
 					$lang_forums_edit_threadtypes_use_choice = cplang('forums_edit_threadtypes_use_choice');
 					echo <<<EOT
-	<script type="text/JavaScript">
+	<script>
 		var rowtypedata = [
 			[
 				[1,'', 'td25'],
@@ -1182,7 +1182,7 @@ EOT;
 					$formulareplace .= '\'<u>'.cplang('setting_credits_formula_digestposts').'</u>\',\'<u>'.cplang('setting_credits_formula_posts').'</u>\'';
 
 	?>
-	<script type="text/JavaScript">
+	<script>
 		function foruminsertunit(text, textend) {
 			insertunit($('formulapermnew'), text, textend);
 			formulaexp();
@@ -1258,7 +1258,7 @@ EOT;
 	<div id="formulapermexp" class="margintop marginbot diffcolor2"><?php echo $formulapermexp?></div>
 	</div>
 	<textarea name="formulapermnew" id="formulapermnew" class="marginbot" style="width:80%" rows="3" onkeyup="formulaexp()" onkeydown="textareakey(this, event)"><?php echo dhtmlspecialchars($forum['formulaperm'])?></textarea>
-	<script type="text/JavaScript">formulaexp()</script>
+	<script>formulaexp()</script>
 	<br><span class="smalltxt"><?php cplang('forums_edit_perm_formula_comment', null, true);?></span>
 	</td></tr>
 	<?php
@@ -2103,7 +2103,7 @@ function showforum(&$forum, $type = '', $last = '', $toggle = false) {
 		if($last == 'lastboard') {
 			$return = '</tbody><tr><td></td><td colspan="4"><div class="lastboard"><a href="###" onclick="addrow(this, 1, '.$forum['fid'].')" class="addtr">'.cplang('forums_admin_add_forum').'</a></div></td><td>&nbsp;</td></tr>';
 		} elseif($last == 'lastchildboard' && $type) {
-			$return = '<script type="text/JavaScript">$(\'cb_'.$type.'\').className = \'lastchildboard\';</script>';
+			$return = '<script>$(\'cb_'.$type.'\').className = \'lastchildboard\';</script>';
 		} elseif($last == 'last') {
 			$return = '</tbody><tr><td></td><td colspan="4"><div><a href="###" onclick="addrow(this, 0)" class="addtr">'.cplang('forums_admin_add_category').'</a></div></td>'.
 				'<td class="bold"><a onclick="if(getmultiids()) location.href=\''.ADMINSCRIPT.'?action=forums&operation=edit&multi=\' + getmultiids();return false;">'.cplang('multiedit').'</a></td>'.

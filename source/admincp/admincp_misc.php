@@ -76,7 +76,7 @@ if($operation == 'onlinelist') {
 	if(!submitcheck('linksubmit')) {
 
 ?>
-<script type="text/JavaScript">
+<script>
 var rowtypedata = [
 	[
 		[1,'', 'td25'],
@@ -177,7 +177,7 @@ var rowtypedata = [
 	if(!submitcheck('linksubmit')) {
 
 ?>
-<script type="text/JavaScript">
+<script>
 var rowtypedata = [
 	[
 		[1,'', 'td25'],
@@ -205,7 +205,7 @@ var rowtypedata = [
 		showtableheader('', '', 'id="relatedlink_header"');
 		showsubtitle(array('', 'misc_relatedlink_edit_name', 'misc_relatedlink_edit_url', 'misc_relatedlink_extent_article', 'misc_relatedlink_extent_forum', 'misc_relatedlink_extent_group', 'misc_relatedlink_extent_blog'), 'header tbm', $tdstyle);
 		showtablefooter();
-		echo '<script type="text/javascript">floatbottom(\'relatedlink_header\');</script>';
+		echo '<script>floatbottom(\'relatedlink_header\');</script>';
 		showtableheader();
 		showsubtitle(array('', 'misc_relatedlink_edit_name', 'misc_relatedlink_edit_url', '<label><input class="checkbox" type="checkbox" name="articleall" onclick="checkAll(\'prefix\', this.form, \'article\', \'articleall\')">'.cplang('misc_relatedlink_extent_article').'</label>', '<label><input class="checkbox" type="checkbox" name="forumall" onclick="checkAll(\'prefix\', this.form, \'forum\', \'forumall\')">'.cplang('misc_relatedlink_extent_forum').'</label>', '<label><input class="checkbox" type="checkbox" name="groupall" onclick="checkAll(\'prefix\', this.form, \'group\', \'groupall\')">'.cplang('misc_relatedlink_extent_group').'</label>', '<label><input class="checkbox" type="checkbox" name="blogall" onclick="checkAll(\'prefix\', this.form, \'blog\', \'blogall\')">'.cplang('misc_relatedlink_extent_blog').'</label>'), 'header', $tdstyle);
 
@@ -640,7 +640,7 @@ var rowtypedata = [
 		$misc_censor_word_newtypename = cplang('misc_censor_word_newtypename');
 		$misc_censor_word_default_typename = cplang('misc_censor_word_default_typename');
 		echo <<<EOT
-<script type="text/JavaScript">
+<script>
 	var rowtypedata = [
 		[
 			[1,''],
@@ -973,7 +973,7 @@ EOT;
 		}
 
 ?>
-<script type="text/JavaScript">
+<script>
 var rowtypedata = [
 	[
 		[1,'', 'td25'],
@@ -1556,7 +1556,7 @@ var rowtypedata = [
 			        'body' => '
                         <div class="input-table">
                             <table>
-                                <script type="text/JavaScript">
+                                <script>
                                     var rowtypedata = [
                                         [
                                             [1,\'\'],

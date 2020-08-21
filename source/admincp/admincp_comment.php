@@ -50,7 +50,7 @@ if(empty($operation)) {
 		showtips('comment_tips');
 		echo <<<EOT
 	<script type="text/javascript" src="static/js/calendar.js"></script>
-	<script type="text/JavaScript">
+	<script>
 	function page(number) {
 		$('commentforum').page.value=number;
 		$('commentforum').searchsubmit.click();
@@ -92,7 +92,7 @@ EOT;
 		$cpmsg = cplang('comment_succeed', array('deletecount' => $deletecount));
 
 	?>
-	<script type="text/JavaScript">alert('<?php echo $cpmsg;?>');parent.$('commentforum').searchsubmit.click();</script>
+	<script>alert('<?php echo $cpmsg;?>');parent.$('commentforum').searchsubmit.click();</script>
 	<?php
 
 	}
@@ -235,7 +235,7 @@ if($operation == 'article' || $operation == 'topic') {
 		showtips('comment_'.$operation.'_tips');
 		echo <<<EOT
 	<script type="text/javascript" src="static/js/calendar.js"></script>
-	<script type="text/JavaScript">
+	<script>
 	function page(number) {
 		$('articleforum').page.value=number;
 		$('articleforum').searchsubmit.click();
@@ -275,7 +275,7 @@ EOT;
 		$cpmsg = cplang('comment_article_delete');
 
 	?>
-	<script type="text/JavaScript">alert('<?php echo $cpmsg;?>');parent.$('articleforum').searchsubmit.click();</script>
+	<script>alert('<?php echo $cpmsg;?>');parent.$('articleforum').searchsubmit.click();</script>
 	<?php
 	}
 

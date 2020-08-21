@@ -46,7 +46,7 @@ if(submitcheck('buysubmit')) {
 			'ip' => $_G['clientip'],
 		));
 		include template('common/header_ajax');
-		echo '<form id="payform" action="'.$requesturl.'" method="post"></form><script type="text/javascript" reload="1">$(\'payform\').submit();</script>';
+		echo '<form id="payform" action="'.$requesturl.'" method="post"></form><script reload="1">$(\'payform\').submit();</script>';
 		include template('common/footer_ajax');
 		dexit();
 	} else {

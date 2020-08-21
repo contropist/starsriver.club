@@ -26,7 +26,7 @@
 		</div>
 	</form>
 	<!--{/if}-->
-	<script type="text/javascript" reload="1">
+	<script reload="1">
 		function succeedhandle_$_GET[handlekey](url, msg, values) {
 		    var bkn = $('$_GET[handlekey]');
 		    if(values['bkname']){
@@ -61,7 +61,7 @@
 				<button type="submit" name="relaysubmit_btn" id="relaysubmit_btn" class="pn pnc" value="true"><strong>{lang determine}</strong></button>
 			</p>
 		</form>
-		<script type="text/javascript">
+		<script>
 			$('note_{$tid}').focus();
 			function succeedhandle_$_GET['handlekey'](url, message, param) {
 				<!--{if $fastpost}-->
@@ -97,7 +97,7 @@
 				</span>
 			</div>
 		</form>
-		<script type="text/javascript">
+		<script>
 			$('note_{$tid}').focus();
 			function succeedhandle_$_GET['handlekey'](url, message, values) {
 				$('relaybox_$_GET[feedid]').style.display = 'none';
@@ -126,7 +126,7 @@
 			<button type="submit" name="btnsubmit" value="true" class="pn pnc"><strong>{lang determine}</strong></button>
 		</p>
 	</form>
-	<script type="text/javascript">
+	<script>
 		function succeedhandle_{$_GET[handlekey]}(url, msg, values) {
 			$('feed_li_'+values.feedid).style.display = 'none';
 		}

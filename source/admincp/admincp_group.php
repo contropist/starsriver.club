@@ -84,7 +84,7 @@ if($operation == 'setting') {
 		showsubmenu('nav_group_type');
 	if(!submitcheck('editsubmit')) {
 ?>
-<script type="text/JavaScript">
+<script>
 var rowtypedata = [
 	[[1,'<input type="text" class="txt" name="newcatorder[]" value="0" />', 'td25'], [3, '<input name="newcat[]" value="<?php echo $lang[groups_type_level_1];?>" size="20" type="text" class="txt" /> <?php echo cplang('groups_type_show_rows');?><input type="text" name="newforumcolumns[]" value="0" class="txt" style="width: 30px;" />']],
 	[[1,'<input type="text" class="txt" name="neworder[{1}][]" value="0" />', 'td25'], [3, '<div class="board"><input name="newforum[{1}][]" value="<?php echo $lang[groups_type_sub_new];?>" size="20" type="text" class="txt" /><?php echo cplang('groups_type_show_rows');?><input type="text" name="newforumcolumns[{1}][]" value="0" class="txt" style="width: 30px;" /></div>']],
@@ -722,7 +722,7 @@ var rowtypedata = [
 				), TRUE);
 			}
 echo <<<EOT
-<script type="text/JavaScript">
+<script>
 var rowtypedata = [
 	[
 		[1,'', 'td25'],
@@ -1074,7 +1074,7 @@ function showgroup(&$forum, $type = '', $last = '') {
 		if($last == 'lastboard') {
 			$return = '<tr><td></td><td colspan="3"><div class="lastboard"><a href="###" onclick="addrow(this, 1, '.$forum['fid'].')" class="addtr">'.cplang('groups_type_sub_new').'</a></div></td></tr>';
 		} elseif($last == 'lastchildboard' && $type) {
-			$return = '<script type="text/JavaScript">$(\'cb_'.$type.'\').className = \'lastchildboard\';</script>';
+			$return = '<script>$(\'cb_'.$type.'\').className = \'lastchildboard\';</script>';
 		} elseif($last == 'last') {
 			$return = '<tr><td colspan="3"><div><a href="###" onclick="addrow(this, 0)" class="addtr">'.cplang('groups_type_level_1_add').'</a></div></td></tr>';
 		}

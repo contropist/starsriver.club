@@ -74,7 +74,7 @@
 
 			<p class="mtm mbw">
 				<!--{if $member['alipay']}--><a href="https://www.alipay.com/trade/i_credit.do?email=$member[alipay]" target="_blank"><img src="{STATICURL}image/common/alipaysmall.gif" alt="{lang payto_creditinfo}" class="vm" /></a>&nbsp;&nbsp;<!--{/if}-->
-				<!--{if $member['taobao']}--><script type="text/javascript">document.write('<a target="_blank" href="http://amos1.taobao.com/msg.ww?v=2&uid='+encodeURIComponent('$member[taobaoas]')+'&s=2"><img src="http://amos1.taobao.com/online.ww?v=2&uid='+encodeURIComponent('$member[taobaoas]')+'&s=1" alt="{lang taobao}" class="vm" /></a>&nbsp;');</script>&nbsp;&nbsp;<!--{/if}-->
+				<!--{if $member['taobao']}--><script>document.write('<a target="_blank" href="http://amos1.taobao.com/msg.ww?v=2&uid='+encodeURIComponent('$member[taobaoas]')+'&s=2"><img src="http://amos1.taobao.com/online.ww?v=2&uid='+encodeURIComponent('$member[taobaoas]')+'&s=1" alt="{lang taobao}" class="vm" /></a>&nbsp;');</script>&nbsp;&nbsp;<!--{/if}-->
 				{lang eccredit_buyerpercent}: $sellerpercent%;&nbsp;&nbsp;
 				{lang eccredit_sellerpercent}: $buyerpercent%;&nbsp;&nbsp;
 				{lang regdate}: $member[regdate]
@@ -167,7 +167,7 @@
 			</table>
 			<div id="ajaxrate"></div>
 			<!--{if $_G['uid']}-->
-				<script type="text/javascript">ajaxget('home.php?mod=spacecp&ac=eccredit&op=list&uid=$uid', 'ajaxrate');var explainmenu='ajax_explain_menu';</script>
+				<script>ajaxget('home.php?mod=spacecp&ac=eccredit&op=list&uid=$uid', 'ajaxrate');var explainmenu='ajax_explain_menu';</script>
 			<!--{/if}-->
 
 			</div>

@@ -1,4 +1,4 @@
-<script type="text/javascript">
+<script>
 	var forum_optionlist = <!--{if $forum_optionlist}-->'$forum_optionlist'<!--{else}-->''<!--{/if}-->;
 </script>
 <script type="text/javascript" src="{$_G['setting']['jspath']}threadsort.js?{VERHASH}"></script>
@@ -13,7 +13,7 @@
 	                    <span id="select_$option[identifier]">
 	                    <!--{if $option[type] == 'select'}-->
 	                        <!--{if $_GET[searchoption][$optionid][value]}-->
-	                            <script type="text/javascript">
+	                            <script>
 	                                changeselectthreadsort('$_GET[searchoption][$optionid][value]', $optionid, 'search');
 	                            </script>
 	                        <!--{else}-->

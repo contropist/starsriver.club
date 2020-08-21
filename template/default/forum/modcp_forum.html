@@ -19,7 +19,7 @@
 <ol class="panel-container">
 <!--{if $_G[fid] && $_G['forum']['ismoderator']}-->
 	<!--{if $op == 'editforum'}-->
-		<script type="text/javascript">
+		<script>
 			var allowbbcode = allowimgcode = 1;
 			var allowhtml = forumallowhtml = allowsmilies = 0;
 		</script>
@@ -103,7 +103,7 @@
 	<!--{/if}-->
 <!--{/if}-->
 </ol>
-<script type="text/javascript" reload="1">
+<script reload="1">
 	simulateSelect('fid');
 </script>
 <script type="text/javascript" src="{$_G[setting][jspath]}calendar.js?{VERHASH}"></script>

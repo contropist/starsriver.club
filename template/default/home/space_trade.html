@@ -100,7 +100,7 @@
 								<option value="$key" {if $filter == $key} selected="selected"{/if}>$langstr</option>
 								<!--{/loop}-->
 							</select>
-							<script type="text/javascript">
+							<script>
 								function filterTrade(value) {
 									window.location = 'home.php?mod=space&do=trade&view=tradelog&type=$viewtype&filter='+value;
 								}
@@ -222,7 +222,7 @@
 	<!--[nest=nest3]--><div id="nest3" class="area"></div><!--[/nest]-->
 </div>
 
-<script type="text/javascript">
+<script>
 function fuidgoto(fuid) {
 	var parameter = fuid != '' ? '&fuid='+fuid : '';
 	window.location.href = 'home.php?mod=space&do=trade&view=we'+parameter;

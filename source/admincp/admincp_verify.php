@@ -141,7 +141,7 @@ echo <<<EOF
 			</form>
 			<iframe id="frame_profile" name="frame_profile" style="display: none"></iframe>
 			<script type="text/javascript" src="static/js/calendar.js"></script>
-			<script type="text/javascript">
+			<script>
 				function showreason(vid, flag) {
 					var reasonobj = $('reason_'+vid);
 					if(reasonobj) {

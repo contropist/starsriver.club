@@ -197,7 +197,7 @@ if(!$operation) {
 			}
 
 			echo <<<EOT
-<script type="text/JavaScript">
+<script>
 	function addsmileycodes(smiliesnum, pre) {
 		smiliesnum = parseInt(smiliesnum);
 		if(smiliesnum > 1) {

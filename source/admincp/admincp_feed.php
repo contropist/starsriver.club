@@ -179,7 +179,7 @@ EOF;
 
 		echo <<<EOT
 	<script type="text/javascript" src="static/js/calendar.js"></script>
-	<script type="text/JavaScript">
+	<script>
 	function page(number) {
 		$('feedforum').page.value=number;
 		$('feedforum').searchsubmit.click();
@@ -217,7 +217,7 @@ EOT;
 		$cpmsg = cplang('feed_succeed', array('deletecount' => $deletecount));
 
 	?>
-	<script type="text/JavaScript">alert('<?php echo $cpmsg;?>');parent.$('feedforum').searchsubmit.click();</script>
+	<script>alert('<?php echo $cpmsg;?>');parent.$('feedforum').searchsubmit.click();</script>
 	<?php
 
 	}

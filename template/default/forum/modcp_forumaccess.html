@@ -4,7 +4,7 @@
 </div>
 <ol class="panel-container">
 	<!--{if $modforums['fids']}-->
-		<script type="text/javascript">
+		<script>
 		function chkallaccess(obj) {
 			$('new_post').checked
 				= $('new_post').disabled
@@ -96,7 +96,7 @@
                     </li>
                 </ol>
             </div>
-			<script type="text/javascript">
+			<script>
 			<!--{if !empty($deleteaccess)}-->
 				var obj = $('deleteaccess');
 				obj.checked = true;
@@ -162,7 +162,7 @@
         <!--{if !empty($list[pagelink])}--><div class="pg type-3">$list[pagelink]</div><!--{/if}-->
     </li>
 </ol>
-<script type="text/javascript">
+<script>
     simulateSelect('fid');
     simulateSelect('fid2');
 </script>

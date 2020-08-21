@@ -55,7 +55,7 @@ if(!submitcheck('sharesubmit')) {
 	/*search*/
 	echo <<<EOT
 <script type="text/javascript" src="static/js/calendar.js"></script>
-<script type="text/JavaScript">
+<script>
 function page(number) {
 	$('shareforum').page.value=number;
 	$('shareforum').searchsubmit.click();
@@ -94,7 +94,7 @@ EOT;
 	$cpmsg = cplang('share_succeed', array('deletecount' => $deletecount));
 
 ?>
-<script type="text/JavaScript">alert('<?php echo $cpmsg;?>');parent.$('shareforum').searchsubmit.click();</script>
+<script>alert('<?php echo $cpmsg;?>');parent.$('shareforum').searchsubmit.click();</script>
 <?php
 
 }

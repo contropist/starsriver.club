@@ -41,7 +41,7 @@ if($operation == 'list') {
 		showtableheader('', '', 'id="portalcategory_header" style="min-width:900px;*width:900px;"');
 		showsubtitle(array('', '', 'portalcategory_name', 'portalcategory_articles', 'portalcategory_allowpublish', 'portalcategory_allowcomment', 'portalcategory_is_closed', 'setindex', 'operation', 'portalcategory_article_op'), 'header tbm', $tdstyle);
 		showtablefooter();
-		echo '<script type="text/javascript">floatbottom(\'portalcategory_header\');</script>';
+		echo '<script>floatbottom(\'portalcategory_header\');</script>';
 		showtableheader('', '', 'style="min-width:900px;*width:900px;"');
 		showsubtitle(array('', '', 'portalcategory_name', 'portalcategory_articles', 'portalcategory_allowpublish', 'portalcategory_allowcomment', 'portalcategory_is_closed', 'setindex', 'operation', 'portalcategory_article_op'), 'header', $tdstyle);
 		foreach ($portalcategory as $key=>$value) {
@@ -60,7 +60,7 @@ if($operation == 'list') {
 			$langs[$key] = cplang($key);
 		}
 		echo <<<SCRIPT
-<script type="text/Javascript">
+<script>
 var rowtypedata = [
 	[[1,'', ''], [4, '<div class="parentboard"><input type="text" class="txt" value="$lang[portalcategory_addcategory]" name="newname[{1}][]"/></div>']],
 	[[1,'<input type="text" class="txt" name="neworder[{1}][]" value="0" />', 'td25'], [4, '<div class="board"><input type="text" class="txt" value="$lang[portalcategory_addsubcategory]" name="newname[{1}][]"/>  <input type="checkbox" name="newinheritance[{1}][]" value="1" checked>$lang[portalcategory_inheritance]</div>']],

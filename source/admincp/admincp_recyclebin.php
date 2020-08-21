@@ -135,7 +135,7 @@ if(!$operation) {
 		/*search={"nav_recyclebin":"action=recyclebin","search":"action=recyclebin&operation=search"}*/
 		echo <<<EOT
 <script type="text/javascript" src="static/js/calendar.js"></script>
-<script type="text/JavaScript">
+<script>
 function page(number) {
 	$('rbsearchform').page.value=number;
 	$('rbsearchform').searchsubmit.click();
@@ -194,7 +194,7 @@ EOT;
 			$multi = preg_replace("/href=\"".ADMINSCRIPT."\?action=recyclebin&amp;page=(\d+)\"/", "href=\"javascript:page(\\1)\"", $multi);
 			$multi = str_replace("window.location='".ADMINSCRIPT."?action=recyclebin&amp;page='+this.value", "page(this.value)", $multi);
 
-			echo '<script type="text/JavaScript">var replyreload;function attachimg() {}</script>';
+			echo '<script>var replyreload;function attachimg() {}</script>';
 			showtagheader('div', 'threadlist', $searchsubmit);
 			showformheader('recyclebin&operation=search&frame=no', 'target="rbframe"', 'rbform');
 			showtableheader(cplang('recyclebin_result').' '.$threadcount.' <a href="#" onclick="$(\'threadlist\').style.display=\'none\';$(\'threadsearch\').style.display=\'\';" class="act lightlink normal">'.cplang('research').'</a>', 'fixpadding');
@@ -266,7 +266,7 @@ EOT;
 		}
 
 ?>
-<script type="text/JavaScript">alert('<?php echo $cpmsg;?>');parent.$('rbsearchform').searchsubmit.click();</script>
+<script>alert('<?php echo $cpmsg;?>');parent.$('rbsearchform').searchsubmit.click();</script>
 <?php
 
 	}

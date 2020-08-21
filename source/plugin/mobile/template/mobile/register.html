@@ -33,7 +33,7 @@
 </head>
 <body>
 <!--{if $isconnect}-->
-<script type="text/javascript">
+<script>
 <!--
 function settab(m,n){
 	var tli=document.getElementById("tb"+m).getElementsByTagName("li");
@@ -142,7 +142,7 @@ function settab(m,n){
 				<span id="seccode"></span>
 				<a onClick="updateseccode()">{lang mobile:change_seccode}</a>
 				<input type="text" class="txt" name="seccodeverify" />
-				<script type="text/javascript">
+				<script>
 				var updateseccode = function () {document.getElementById('seccode').innerHTML = '<img id="seccode" src="$_G[siteurl]api/mobile/index.php?module=seccode&sechash=$sechash&mobile=no&version={if empty($_GET['secversion'])}1{else}$_GET['secversion']{/if}&random=' + Math.random() + '" />';}
 				updateseccode();
 				</script>

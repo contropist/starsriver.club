@@ -123,7 +123,7 @@ if($operation == 'perm') {
 				showtablefooter();
 				showformfooter();
 				if(!empty($_GET['switch'])) {
-					echo '<script type="text/javascript">showMenu({\'ctrlid\':\'cpgselect\',\'pos\':\'34\'});</script>';
+					echo '<script>showMenu({\'ctrlid\':\'cpgselect\',\'pos\':\'34\'});</script>';
 				}
 
 			} else {
@@ -443,7 +443,7 @@ function showpermstyle() {
 .vtop .right, .item .right{ padding: 0 10px; line-height: 22px; background: url('static/image/admincp/src/img/bg_repno.gif') no-repeat -286px -145px; font-weight: normal;margin-right:10px; }
 .vtop a:hover.right, .item a:hover.right { text-decoration:none; }
 </style>
-<script type="text/JavaScript">
+<script>
 function permcheckall(obj, perms, t) {
 	var t = !t ? 0 : t;
 	var checkboxs = $(perms).getElementsByTagName('INPUT');

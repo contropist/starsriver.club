@@ -972,7 +972,7 @@ if($operation == 'export') {
 	} elseif($step == 3) {
 		showtips('dbcheck_tips');
 		echo <<<EOT
-<script type="text/JavaScript">
+<script>
 	function setrepaircheck(obj, form, table) {
 		eval('var rem = /^' + table + '\\\\|.+?\\\\|modify$/;');
 		eval('var rea = /^' + table + '\\\\|.+?\\\\|add$/;');

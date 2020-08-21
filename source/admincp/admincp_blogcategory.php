@@ -55,7 +55,7 @@ if($operation == 'list') {
 			$langs[$key] = cplang($key);
 		}
 		echo <<<SCRIPT
-<script type="text/JavaScript">
+<script>
 var rowtypedata = [
 	[[1,'<input type="text" class="txt" name="neworder[{1}][]" value="0" />', 'td25'], [3, '<div class="parentboard"><input type="text" class="txt" value="$lang[blogcategory_addcategory]" name="newname[{1}][]"/></div>']],
 	[[1,'<input type="text" class="txt" name="neworder[{1}][]" value="0" />', 'td25'], [3, '<div class="board"><input type="text" class="txt" value="$lang[blogcategory_addsubcategory]" name="newname[{1}][]"/></div>']],

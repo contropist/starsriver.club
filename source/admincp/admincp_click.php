@@ -39,7 +39,7 @@ if(empty($operation)) {
 			cplang('click_edit_type'),
 		));
 		print <<<EOF
-<script type="text/JavaScript">
+<script>
 	var rowtypedata = [
 		[
 			[1,'', 'td25'],

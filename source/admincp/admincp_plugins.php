@@ -1082,7 +1082,7 @@ if(!$operation) {
 		foreach($moduleids as $moduleid) {
 			$shideinit .= 'shide($("s_'.$moduleid.'"), \''.$moduleid.'\');';
 		}
-		echo '<script type="text/JavaScript">
+		echo '<script>
 			function shide(obj, id) {
 				v = obj.options[obj.selectedIndex].getAttribute("h");
 				$("m_" + id).style.display = v.substr(0,1) == "1" ? "" : "none";

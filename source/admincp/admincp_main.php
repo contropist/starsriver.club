@@ -106,7 +106,7 @@ EOT;
             <div class="cfixbd"></div>
         </div>
         <div class="script" hide>
-            <script type="text/JavaScript">
+            <script>
                 var cookiepre = '{$_G['config']['cookie']['cookiepre']}', 
                     cookiedomain = '{$_G['config']['cookie']['cookiedomain']}', 
                     cookiepath = '{$_G['config']['cookie']['cookiepath']}',

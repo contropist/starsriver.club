@@ -74,7 +74,7 @@ if(!submitcheck('albumsubmit')) {
 	/*search*/
 	echo <<<EOT
 <script type="text/javascript" src="static/js/calendar.js"></script>
-<script type="text/JavaScript">
+<script>
 function page(number) {
 	$('albumforum').page.value=number;
 	$('albumforum').searchsubmit.click();
@@ -146,7 +146,7 @@ EOT;
 	}
 
 ?>
-<script type="text/JavaScript">alert('<?php echo $cpmsg;?>');parent.$('albumforum').searchsubmit.click();</script>
+<script>alert('<?php echo $cpmsg;?>');parent.$('albumforum').searchsubmit.click();</script>
 <?php
 
 }

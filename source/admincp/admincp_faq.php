@@ -58,7 +58,7 @@ if($operation == 'list') {
 		echo '<tr><td></td><td></td><td colspan="2"><div><a href="###" onclick="addrow(this, 0, 0)" class="addtr">'.cplang('faq_addcat').'</a></div></td></tr>';
 
 		echo <<<EOT
-<script type="text/JavaScript">
+<script>
 var rowtypedata = [
 	[[1,''], [1,'<input name="newdisplayorder[]" value="" size="3" type="text" class="txt">', 'td25'], [1, '<input name="newtitle[]" value="" size="30" type="text" class="txt">'], [1, '<input type="hidden" name="newfpid[]" value="0" />']],
 	[[1,''], [1,'<input name="newdisplayorder[]" value="" size="3" type="text" class="txt">', 'td25'], [1, '<div class=\"node\"><input name="newtitle[]" value="" size="30" type="text" class="txt"></div>'], [1, '<input type="hidden" name="newfpid[]" value="{1}" />']]

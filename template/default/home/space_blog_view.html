@@ -200,7 +200,7 @@
 							</p>
 							<input type="hidden" name="formhash" value="{FORMHASH}" />
 						</form>
-						<script type="text/javascript">
+						<script>
 							function succeedhandle_qcblog_$id(url, msg, values) {
 								if(values['cid']) {
 									comment_add(values['cid']);
@@ -219,7 +219,7 @@
 						</script>
 						<!--{/if}-->
 			
-						<script type="text/javascript">
+						<script>
 						function addFriendCall(){
 							var el = $('friendinput');
 							if(!el || el.value == "")	return;
@@ -251,7 +251,7 @@
 	</div>
 
 <!--{if $_G['relatedlinks']}-->
-	<script type="text/javascript">
+	<script>
 		var relatedlink = [];
 		<!--{loop $_G['relatedlinks'] $key $link}-->
 		relatedlink[$key] = {'sname':'$link[name]', 'surl':'$link[url]'};
@@ -261,7 +261,7 @@
 <!--{/if}-->
 
 <!--{if !empty($_G['cookie']['clearUserdata']) && $_G['cookie']['clearUserdata'] == 'home'}-->
-	<script type="text/javascript">saveUserdata('home', '')</script>
+	<script>saveUserdata('home', '')</script>
 <!--{/if}-->
 
 <!--{template common/footer}-->

@@ -140,7 +140,7 @@ if($operation == 'manage') {
 	}
 echo <<<EOT
 <script src="static/js/calendar.js"></script>
-<script type="text/JavaScript">
+<script>
 	function page(number) {
 		$('threadform').page.value=number;
 		$('threadform').threadsplit_move_search.click();

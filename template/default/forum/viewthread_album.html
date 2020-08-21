@@ -2,7 +2,7 @@
 <style>
 	#hd,#comment { display:none;}
 </style>
-<script type="text/javascript">
+<script>
 	var albumback = 0;
 	function changealbumback() {
 		if(albumback == 0){
@@ -18,13 +18,13 @@
 		}
 	}
 </script>
-<script type="text/javascript">var fid = parseInt('$_G[fid]'), tid = parseInt('$_G[tid]');</script>
+<script>var fid = parseInt('$_G[fid]'), tid = parseInt('$_G[tid]');</script>
 <!--{if $_G['forum']['ismoderator']}-->
 	<script type="text/javascript" src="{$_G['setting']['jspath']}forum_moderate.js?{VERHASH}"></script>
 <!--{/if}-->
 
 <script type="text/javascript" src="{$_G['setting']['jspath']}forum_viewthread.js?{VERHASH}"></script>
-<script type="text/javascript">zoomstatus = parseInt($_G['setting']['zoomstatus']);var imagemaxwidth = '{$_G['setting']['imagemaxwidth']}';var aimgcount = [];</script>
+<script>zoomstatus = parseInt($_G['setting']['zoomstatus']);var imagemaxwidth = '{$_G['setting']['imagemaxwidth']}';var aimgcount = [];</script>
 
 
 <div>
@@ -69,7 +69,7 @@
 								</div>
 							</div>
 							<!--{if !empty($imglist)}-->
-							<script type="text/javascript" reload="1">
+							<script reload="1">
 								var imagewidth = 110;
 								var curnum = 0;
 								var imagecount = '<!--{echo count($imglist[aid]);}-->';
@@ -297,7 +297,7 @@
 <!--{hook/viewthread_bottom}-->
 
 <!--{if !IS_ROBOT && !empty($_G[setting][lazyload])}-->
-	<script type="text/javascript">
+	<script>
 	new lazyload();
 	</script>
 <!--{/if}-->

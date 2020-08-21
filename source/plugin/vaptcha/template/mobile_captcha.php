@@ -14,7 +14,7 @@ function get_captcha($form,$button, $script = '') {
     $lang = Helper::config('lang');
     $vid = Helper::config('vid');
 $result = <<<HTML
-<script type="text/javascript">
+<script>
     (function() {
         var v = document.createElement('script');
         v.src = 'https://cdn.vaptcha.com/v2.js';

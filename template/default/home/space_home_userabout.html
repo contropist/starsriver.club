@@ -16,7 +16,7 @@
                     <input type="hidden" name="formhash" value="{FORMHASH}" />
                     <textarea name="message" oninput="autoheight(this)" onblur="cardSubmitdoing('spacenote_$space[uid]')" onsubmit="return false;"><!--{echo strip_tags($space[spacenote])}--></textarea>
                 </form>
-                <script type="text/javascript">
+                <script>
                     function cardUpdatedoing(scdoing,type) {
                         if(scdoing){
                             if(type){
@@ -50,7 +50,7 @@
                 <!--{else}-->
                     <a id="followmod" class="button active" onclick="showWindow(this.id, this.href, 'get');" href="home.php?mod=spacecp&ac=follow&op=del&fuid=$space[uid]">{lang follow_added}</a>
                 <!--{/if}-->
-                <script type="text/javascript">
+                <script>
                     function succeedhandle_followmod(url, msg, values) {
                         var fObj = SR('#followmod')[0];
                         if(values['type'] === 'add') {

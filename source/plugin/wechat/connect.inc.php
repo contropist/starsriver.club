@@ -78,7 +78,7 @@ if($op == 'init') {
 	if(!isset($params['receive'])) {		
 		require_once DISCUZ_ROOT.'/source/plugin/qqconnect/lib/Util.php';
 		$utilService = new Cloud_Service_Util();
-		echo '<script type="text/javascript">setTimeout("window.location.href=\'plugin.php?receive=yes&'.str_replace("'", "\'", $utilService->httpBuildQuery($_GET, '', '&')).'\'", 1)</script>';
+		echo '<script>setTimeout("window.location.href=\'plugin.php?receive=yes&'.str_replace("'", "\'", $utilService->httpBuildQuery($_GET, '', '&')).'\'", 1)</script>';
 		exit;
 	}
 

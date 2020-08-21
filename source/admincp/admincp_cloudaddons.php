@@ -30,7 +30,7 @@ if(!$operation) {
 		$extra .= '&'.addslashes($_GET['extra']);
 	}
 	$url = cloudaddons_url($extra);
-	echo '<script type="text/javascript">location.href=\''.$url.'\';</script>';
+	echo '<script>location.href=\''.$url.'\';</script>';
 
 } elseif($operation == 'download') {
 	$step = intval($_GET['step']);

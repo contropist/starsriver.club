@@ -1,4 +1,4 @@
-<script type="text/javascript">
+<script>
 varname = location.search.substr(1);
 var varnames = varname.split('|');
 varname = varnames[0];
@@ -58,7 +58,7 @@ body { margin:0px;background-color:#333; }
 <body onmousedown="setvalue(document.getElementById('colorhex'))" scrolling="no">
 <div id="h"><em id="p"></em><em id="pv"></em><em class="trans" onmouseover="v('transparent')" style="background-image:url('transcolor.gif')"></em></div>
 <div id="colors"></div>
-<script type="text/javascript">
+<script>
 showcolors();
 try {document.getElementById('box').style.backgroundColor = cvalue;} catch(e) {}
 </script>

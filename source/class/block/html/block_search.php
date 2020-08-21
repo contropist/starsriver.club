@@ -89,7 +89,7 @@ class block_search extends commonblock_html {
 					</form>
 				</div>
 				<ul id="search_type_menu" class="p_pop" style="display: none;">$slist</ul>
-				<script type="text/javascript">initSearchmenu('scbar');</script>
+				<script>initSearchmenu('scbar');</script>
 EOT;
 		}
 		return array('html' => $html, 'data' => null);

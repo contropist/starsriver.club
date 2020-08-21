@@ -1454,7 +1454,7 @@ EOF;
 
 		showtableheader('setting_credits');
 ?>
-<script type="text/JavaScript">
+<script>
 	function isUndefined(variable) {
 		return typeof variable == 'undefined' ? true : false;
 	}
@@ -1509,7 +1509,7 @@ EOF;
 					</div>
 					<div id="formulapermexp" class="margintop marginbot diffcolor2">$formulapermexp</div>
 					<textarea name="settingnew[creditsformula]" id="creditsformula" class="marginbot" style="width:80%" rows="3" onkeyup="formulaexp()" onkeydown="textareakey(this, event)">$setting[creditsformula]</textarea>
-					<script type="text/JavaScript">formulaexp()</script>
+					<script>formulaexp()</script>
 					<br><span class="smalltxt">$lang[setting_credits_formula_comment]</span>
 				</td>
 			</tr>
@@ -1568,7 +1568,7 @@ EOF;
 
 		echo <<<EOF
 		<tr><td colspan="2" style="border-top:0px dotted #DEEFFB;">
-		<script type="text/JavaScript">
+		<script>
 			var rowtypedata = [];
 			function setrowtypedata(sendtype) {
 				if(sendtype) {
@@ -1824,7 +1824,7 @@ EOF;
 
 
 		echo <<<EOT
-<script type="text/JavaScript">
+<script>
 	var rowtypedata = [
 		[[1,''], [1,'<input name="newquestion[]" type="text" class="txt">','td26'], [1, '<input name="newanswer[]" type="text" class="txt">']],
 	];
@@ -3657,7 +3657,7 @@ function showdetial(&$forum, $varname, $type = '', $last = '', $toggle = false) 
 		if($last == 'lastboard') {
 			$return = '</tbody>';
 		} elseif($last == 'lastchildboard' && $type) {
-			$return = '<script type="text/JavaScript">$(\'cb_'.$type.'\').className = \'lastchildboard\';</script>';
+			$return = '<script>$(\'cb_'.$type.'\').className = \'lastchildboard\';</script>';
 		} elseif($last == 'last') {
 			$return = '</tbody>';
 		}

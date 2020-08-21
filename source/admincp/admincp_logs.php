@@ -598,7 +598,7 @@ SEARCH;
 	));
 
 echo <<<EOD
-<script type="text/javascript">
+<script>
 function togglecplog(k) {
 	var cplogobj = $('cplog_'+k);
 	if(cplogobj.style.display == 'none') {

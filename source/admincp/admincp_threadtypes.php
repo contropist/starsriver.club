@@ -60,7 +60,7 @@ if(!$operation) {
 		}
 
 ?>
-<script type="text/JavaScript">
+<script>
 var rowtypedata = [
 	[
 		[1, '', 'td25'],
@@ -224,7 +224,7 @@ var rowtypedata = [
 		}
 
 		echo <<<EOT
-<script type="text/JavaScript">
+<script>
 	var rowtypedata = [
 		[
 			[1, '', 'td25'],
@@ -562,7 +562,7 @@ EOT;
 
 <input type="submit" class="btn" name="sortdetailsubmit" value="<?php echo $lang['submit'];?>">
 </form>
-<script type="text/JavaScript">
+<script>
 	var optionids = new Array();
 	<?php echo $jsoptionids;?>
 
@@ -600,8 +600,8 @@ EOT;
 		});
 	}
 </script>
-<script type="text/JavaScript">ajaxget('<?php echo ADMINSCRIPT;?>?action=threadtypes&operation=classlist', 'classlist');</script>
-<script type="text/JavaScript">ajaxget('<?php echo ADMINSCRIPT;?>?action=threadtypes&operation=optionlist&sortid=<?php echo $_GET['sortid'];?>', 'optionlist', '', '', '', checkedbox);</script>
+<script>ajaxget('<?php echo ADMINSCRIPT;?>?action=threadtypes&operation=classlist', 'classlist');</script>
+<script>ajaxget('<?php echo ADMINSCRIPT;?>?action=threadtypes&operation=optionlist&sortid=<?php echo $_GET['sortid'];?>', 'optionlist', '', '', '', checkedbox);</script>
 <?php
 
 	} else {
@@ -780,7 +780,7 @@ EOT;
 			));
 
 		showformheader("threadtypes&operation=sorttemplate&sortid={$_GET['sortid']}");
-		echo '<script type="text/JavaScript">var currentAnchor = \'ltype\';</script>'.
+		echo '<script>var currentAnchor = \'ltype\';</script>'.
 			'<div class="itemtitle" style="width:100%;margin-bottom:5px;"><ul class="tab1" id="submenu">'.
 			'<li id="nav_ttype" onclick="showanchor(this)" class="current"><a href="#"><span>'.$lang['threadtype_template_viewthread'].'</span></a></li>'.
 			'<li id="nav_stype" onclick="showanchor(this)"><a href="#"><span>'.$lang['threadtype_template_forumdisplay'].'</span></a></li>'.

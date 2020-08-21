@@ -46,7 +46,7 @@ function gettypetemplate($option, $optionvalue, $optionid) {
 				$showoption[$option['identifier']]['value'] .= '</select></span>';
 			} else {
 				foreach($optionvalue['value'] as $selectedkey => $selectedvalue) {
-					$showoption[$option['identifier']]['value'] = '<span id="select_'.$option['identifier'].'"><script type="text/javascript">changeselectthreadsort(\''.$selectedkey.'\', '.$optionid.');</script></span>';
+					$showoption[$option['identifier']]['value'] = '<span id="select_'.$option['identifier'].'"><script>changeselectthreadsort(\''.$selectedkey.'\', '.$optionid.');</script></span>';
 				}
 			}
 		} elseif($option['type'] == 'radio') {

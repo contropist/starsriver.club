@@ -28,7 +28,7 @@ if(!empty($_GET['preview'])) {
 <meta charset="<?php echo CHARSET;?>" />
 <meta name="renderer" content="webkit" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<script type="text/javascript">var IMGDIR = '<?php echo $_G['style']['imgdir']; ?>', cookiepre = '<?php echo $_G['config']['cookie']['cookiepre'];?>', cookiedomain = '<?php echo $_G['config']['cookie']['cookiedomain'];?>', cookiepath = '<?php echo $_G['config']['cookie']['cookiepath'];?>';</script>
+<script>var IMGDIR = '<?php echo $_G['style']['imgdir']; ?>', cookiepre = '<?php echo $_G['config']['cookie']['cookiepre'];?>', cookiedomain = '<?php echo $_G['config']['cookie']['cookiedomain'];?>', cookiepath = '<?php echo $_G['config']['cookie']['cookiepath'];?>';</script>
 <script type="text/javascript" src="static/js/common.js"></script>
 <link rel="stylesheet" type="text/css" href="data/cache/style_<?php echo $_G['setting']['styleid'];?>_common.css" />
 </head>
@@ -385,7 +385,7 @@ if($operation == 'ad') {
 		echo '<tr><td colspan="2" id="flashsizepreviewtd" style="border:0"><div id="flashsizepreview" style="display:none;border:1px dotted gray"></div></td></tr>';
 		showtablefooter();
 		showformfooter();
-		echo '<script type="text/JavaScript">
+		echo '<script>
 		function setsize(v, o) {
 			if(v) {
 				var size = v.split(\'x\');

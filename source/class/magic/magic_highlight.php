@@ -115,7 +115,7 @@ echo <<<EOF
 		<input type="text" id="highlight_color_show" class="crl readonly="readonly"" />
 		<a id="highlight_color_ctrl" class="dpbtn" onclick="showHighLightColor('highlight_color')">^</a>
 	</div>
-	<script type="text/javascript" reload="1">
+	<script reload="1">
 		function showHighLightColor(hlid) {
 			var showid = hlid + '_show';
 			if(!$(showid + '_menu')) {

@@ -105,7 +105,7 @@
                         <!--{/loop}-->
                     </select>
                 </p>
-                <script type="text/javascript" reload="1">
+                <script reload="1">
                     if($('threadstamp')) {
                         var oldthreadstamp = $('threadstamp').innerHTML;
                     }
@@ -134,7 +134,7 @@
                     </select>
                 </p>
                 <p style="height:24px; line-height: 24px" id="stamplistprev"></p>
-                <script type="text/javascript" reload="1">
+                <script reload="1">
                     var stampurls = [];
                     <!--{loop $_G['cache']['stamps'] $stampid $stamp}-->
                     stampurls[$stampid] = '$stamp[url]';
@@ -186,7 +186,7 @@
 		</div>
 	</form>
 </div>
-<script type="text/javascript" reload="1">
+<script reload="1">
 function succeedhandle_mods(locationhref) {
 	<!--{if $_GET[action] == 'delcomment'}-->
 		ajaxget('forum.php?mod=misc&action=commentmore&tid=$_G[tid]&pid=$pid', 'comment_$pid');

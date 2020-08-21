@@ -1229,13 +1229,13 @@ function viewthread_procpost($post, $lastvisit, $ordertype, $maxposition = 0) {
 						$post['message'] = preg_replace("/\s?\[page\]\s?/is", '', $post['message']);
 					}
 					if($_GET['cp'] != 'all' && strpos($post['message'], '[/index]') === FALSE && empty($_GET['threadindex']) && !$messageindex) {
-						$_G['forum_posthtml']['footer'][$post['pid']] .= '<div id="threadpage"></div><script type="text/javascript" reload="1">show_threadpage('.$post['pid'].', '.$cp.', '.count($messagearray).', '.($_GET['from'] == 'preview' ? '1' : '0').');</script>';
+						$_G['forum_posthtml']['footer'][$post['pid']] .= '<div id="threadpage"></div><script reload="1">show_threadpage('.$post['pid'].', '.$cp.', '.count($messagearray).', '.($_GET['from'] == 'preview' ? '1' : '0').');</script>';
 					}
 				}
 			}
 		}
 		if(!empty($_GET['threadindex'])) {
-			$_G['forum_posthtml']['header'][$post['pid']] .= '<div id="threadindex"></div><script type="text/javascript" reload="1">show_threadindex(0, '.($_GET['from'] == 'preview' ? '1' : '0').');</script>';
+			$_G['forum_posthtml']['header'][$post['pid']] .= '<div id="threadindex"></div><script reload="1">show_threadindex(0, '.($_GET['from'] == 'preview' ? '1' : '0').');</script>';
 		}
 		if(!$imgcontent) {
 			$post['message'] = discuzcode($post['message'], $post['smileyoff'], $post['bbcodeoff'], $post['htmlon'] & 1, $_G['forum']['allowsmilies'], $forum_allowbbcode, ($_G['forum']['allowimgcode'] && $_G['setting']['showimages'] ? 1 : 0), $_G['forum']['allowhtml'], ($_G['forum']['jammer'] && $post['authorid'] != $_G['uid'] ? 1 : 0), 0, $post['authorid'], $_G['cache']['usergroups'][$post['groupid']]['allowmediacode'] && $_G['forum']['allowmediacode'], $post['pid'], $_G['setting']['lazyload'], $post['dbdateline'], $post['first']);
@@ -1309,7 +1309,7 @@ function viewthread_loadcache() {
 
             $updatetime = dgmdate($filemtime, 'Y-m-d H:i:s');
             $gzip = $_G['gzipcompress'] ? ', Gzip On' : '';
-            echo '<script type="text/javascript">$("debuginfo") ? $("debuginfo").innerHTML = ", Updated at '.$updatetime.', Processed in '.sprintf("%0.6f", microtime(TRUE) - $start_time).' second(s)'.$gzip.'." : "";</script></body></html>';
+            echo '<script>$("debuginfo") ? $("debuginfo").innerHTML = ", Updated at '.$updatetime.', Processed in '.sprintf("%0.6f", microtime(TRUE) - $start_time).' second(s)'.$gzip.'." : "";</script></body></html>';
             ob_end_flush();
             exit();
 		}
@@ -1607,7 +1607,7 @@ function parseindex($nodes, $pid) {
 	$nodes = dhtmlspecialchars($nodes);
 	$nodes = preg_replace('/(\**?)\[#(\d+)\](.+?)[\r\n]/', "<a page=\"\\2\" sub=\"\\1\">\\3</a>", $nodes);
 	$nodes = preg_replace('/(\**?)\[#(\d+),(\d+)\](.+?)[\r\n]/', "<a tid=\"\\2\" pid=\"\\3\" sub=\"\\1\">\\4</a>", $nodes);
-	$_G['forum_posthtml']['header'][$pid] .= '<div id="threadindex">'.$nodes.'</div><script type="text/javascript" reload="1">show_threadindex('.$pid.', '.($_GET['from'] == 'preview' ? '1' : '0').')</script>';
+	$_G['forum_posthtml']['header'][$pid] .= '<div id="threadindex">'.$nodes.'</div><script reload="1">show_threadindex('.$pid.', '.($_GET['from'] == 'preview' ? '1' : '0').')</script>';
 	return '';
 }
 
@@ -1634,7 +1634,7 @@ function parsebegin($linkaddr, $imgflashurl, $w = 0, $h = 0, $type = 0, $s = 0) 
 			break;
 		case 'flv':
 			$content = '<span id="'.$randomid.'" style="position:absolute;"></span>'.
-				'<script type="text/javascript" reload="1">$(\''.$randomid.'\').innerHTML='.
+				'<script reload="1">$(\''.$randomid.'\').innerHTML='.
 				'AC_FL_RunContent(\'width\', \''.$w.'\', \'height\', \''.$h.'\', '.
 				'\'allowNetworking\', \'internal\', \'allowScriptAccess\', \'never\', '.
 				'\'src\', \''.STATICURL.'image/common/flvplayer.swf\', '.
@@ -1643,7 +1643,7 @@ function parsebegin($linkaddr, $imgflashurl, $w = 0, $h = 0, $type = 0, $s = 0) 
 			break;
 		case 'swf':
 			$content = '<span id="'.$randomid.'" style="position:absolute;"></span>'.
-				'<script type="text/javascript" reload="1">$(\''.$randomid.'\').innerHTML='.
+				'<script reload="1">$(\''.$randomid.'\').innerHTML='.
 				'AC_FL_RunContent(\'width\', \''.$w.'\', \'height\', \''.$h.'\', '.
 				'\'allowNetworking\', \'internal\', \'allowScriptAccess\', \'never\', '.
 				'\'src\', encodeURI(\''.$imgflashurl.'\'), \'quality\', \'high\', \'bgcolor\', \'#ffffff\', '.
@@ -1658,7 +1658,7 @@ function parsebegin($linkaddr, $imgflashurl, $w = 0, $h = 0, $type = 0, $s = 0) 
 				'<div class="flb beginidin"><span><div id="begincloseid" class="flbc" title="'.lang('core', 'close').'">'.lang('core', 'close').'</div></span></div>'.
 				$content.'<div class="beginidimg" style=" width:'.$w.'px;height:'.$h.'px;">'.
 				'<a href="'.$linkaddr.'" target="_blank" style="display: block; width:'.$w.'px; height:'.$h.'px;"></a></div></div>'.
-				'<script type="text/javascript">threadbegindisplay(1, '.$w.', '.$h.', '.$s.');</script>';
+				'<script>threadbegindisplay(1, '.$w.', '.$h.', '.$s.');</script>';
 		} else {
 			$content = '<div id="threadbeginid">'.
 				'<div class="flb beginidin">
@@ -1667,7 +1667,7 @@ function parsebegin($linkaddr, $imgflashurl, $w = 0, $h = 0, $type = 0, $s = 0) 
 				$content.'<div class="beginidimg" style=" width:'.$w.'px; height:'.$h.'px;">'.
 				'<a href="'.$linkaddr.'" target="_blank" style="display: block; width:'.$w.'px; height:'.$h.'px;"></a></div>
 				</div>'.
-				'<script type="text/javascript">threadbegindisplay('.$type.', '.$w.', '.$h.', '.$s.');</script>';
+				'<script>threadbegindisplay('.$type.', '.$w.', '.$h.', '.$s.');</script>';
 		}
 	}
 	$begincontent = $content;

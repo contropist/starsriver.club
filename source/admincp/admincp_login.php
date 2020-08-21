@@ -110,7 +110,7 @@ function html_login_form() {
         </form>
     </div>
 EOT;
-		echo '<script type="text/JavaScript">document.getElementById(\'loginform\').admin_'.($isguest ? 'username' : 'password').'.focus();</script>';
+		echo '<script>document.getElementById(\'loginform\').admin_'.($isguest ? 'username' : 'password').'.focus();</script>';
 }
 
 ?>

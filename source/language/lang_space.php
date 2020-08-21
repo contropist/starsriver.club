@@ -145,7 +145,7 @@ $lang = array(
 							<input type="hidden" name="handlekey" value="commentwall_{uid}" />
 							<span id="return_commentwall_{uid}"></span>
 							<input type="hidden" name="formhash" value="{FORMHASH}" />
-						</form>' . ($_G['uid'] ? '<script type="text/javascript">
+						</form>' . ($_G['uid'] ? '<script>
 							function succeedhandle_commentwall_{uid}(url, msg, values) {
 								wall_add(values[\'cid\']);
 							}

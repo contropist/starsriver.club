@@ -67,7 +67,7 @@
 													<td class="frame_y frame_middle_left"></td>
 													<td class="frame_middle_middle">
 														<!--{/if}--><a href="home.php?mod=space&uid=$pic[uid]&do=$do&picid=$nextid&goto=down#pic_block"><img src="$pic[pic]" id="pic" alt="" /></a>
-														<script type="text/javascript">
+														<script>
 															function createElem(e){
 																var obj = document.createElement(e);
 																obj.style.position = 'absolute';
@@ -265,7 +265,7 @@
 						</div>
 
 
-						<script type="text/javascript">
+						<script>
 							function succeedhandle_qcpic_{$picid}(url, msg, values) {
 								if(values['cid']) {
 									comment_add(values['cid']);
@@ -283,7 +283,7 @@
 							}
 						</script>
 
-						<script type="text/javascript">
+						<script>
 							var interval = 5000;
 							var timerId = -1;
 							var derId = -1;

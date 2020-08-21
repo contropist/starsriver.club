@@ -441,7 +441,7 @@ function showcategoryrow($key, $type = '', $last = '') {
 		if($last == 'lastboard') {
 			$return = '<tr><td></td><td colspan="3"><div class="lastboard"><a href="###" onclick="addrow(this, 1, '.$forum['fid'].')" class="addtr">'.$lang['forums_admin_add_forum'].'</a></div></td></tr>';
 		} elseif($last == 'lastchildboard' && $type) {
-			$return = '<script type="text/JavaScript">$(\'cb_'.$type.'\').className = \'lastchildboard\';</script>';
+			$return = '<script>$(\'cb_'.$type.'\').className = \'lastchildboard\';</script>';
 		} elseif($last == 'last') {
 			$return = '<tr><td></td><td colspan="3"><div><a href="###" onclick="addrow(this, 0)" class="addtr">'.$lang['forums_admin_add_category'].'</a></div></td></tr>';
 		}

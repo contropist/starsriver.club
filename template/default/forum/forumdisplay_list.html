@@ -43,7 +43,7 @@
 				<!--{/loop}-->
 			<!--{/if}-->
 			<!--{hook/forumdisplay_filter_extra}-->
-			<script type="text/javascript">showTypes('thread_types');</script>
+			<script>showTypes('thread_types');</script>
 			<!--{/if}-->
 		</div>
 	</div>
@@ -70,7 +70,7 @@
 
 	<div class="thread-list">
 		<!--{if empty($_G['forum']['picstyle']) || $_G['cookie']['forumdefstyle']}-->
-			<script type="text/javascript">
+			<script>
 				var lasttime = $_G['timestamp'];
 				var listcolspan= '{if !$_GET['archiveid'] && $_G['forum']['ismoderator']}6{else}5{/if}';
 			</script>
@@ -292,7 +292,7 @@
 								</ul>
 							<div id="tmppic" style="display: none;"></div>
 							<script type="text/javascript" src="{$_G[setting][jspath]}redef.js?{VERHASH}"></script>
-							<script type="text/javascript" reload="1">
+							<script reload="1">
 								var wf = {};
 								_attachEvent(window, "load", function () {
 									if($("waterfall")) {wf = waterfall();}

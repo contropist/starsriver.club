@@ -30,7 +30,7 @@
 
 	<!--{if $multi}--><div class="pgs">$multi</div><!--{/if}-->
 
-	<script type="text/javascript">
+	<script>
 		function succeedhandle_$_GET['handlekey'] (url, message, values) {
 			feedcomment_add(values['cid'], $feedid);
 			hideWindow('$_GET['handlekey']');
@@ -94,7 +94,7 @@
 		</p>
 	</form>
 	<!--{/if}-->
-	<script type="text/javascript">
+	<script>
 		function succeedhandle_$_GET[handlekey](url, msg, values) {
 			var obj = $('feed_'+ values['feedid'] +'_li');
 			obj.style.display = "none";

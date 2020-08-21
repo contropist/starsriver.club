@@ -344,7 +344,7 @@ if ($operation == 'filecheck') {
             $result .= '</tbody>';
         }
         if ($diffnum > 20) {
-            $result .= '<script type="text/javascript">hide_all_hook(\'dir_\', \'tbody\');</script>';
+            $result .= '<script>hide_all_hook(\'dir_\', \'tbody\');</script>';
         }
         if ($diffnum) {
             showformheader('forums');

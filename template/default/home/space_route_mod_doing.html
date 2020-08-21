@@ -18,7 +18,9 @@
                     <a class="$actives[me]" href="home.php?mod=space&do=$do&view=me">{lang doing_view_me}</a>
                 </div>
             </div>
+
             <!--{subtemplate home/space_trends_mod_doing_list}-->
+
             <!--[nest=nest1]--><div id="nest1" class="area"></div><!--[/nest]-->
             <!--[nest=nest2]--><div id="nest2" class="area"></div><!--[/nest]-->
             <!--[nest=nest3]--><div id="nest3" class="area"></div><!--[/nest]-->
@@ -34,9 +36,9 @@
         <div class="mas-viewer-header">
             <!--{template home/space_home_userabout}-->
         </div>
-        <div class="mas-viewer-container">
+        <div class="mas-viewer-container" id="userspace_doing">
             <!--{if $space[self] && helper_access::check_module('doing')}-->
-                <!--{template home/space_trends_mod_doing_deliverer}-->
+                <!--{template home/space_home_mod_doing_deliverer}-->
             <!--{/if}-->
             <!--{template home/space_home_mod_doing_list}-->
         </div>

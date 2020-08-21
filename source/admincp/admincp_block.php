@@ -273,7 +273,7 @@ if($operation=='perm') {
 					</table>
 				</div>
 			</form>
-			<script type="text/javascript">
+			<script>
 			function addjscall() {
 				var blockclass = $('blockclass').value;
 				if(blockclass) {

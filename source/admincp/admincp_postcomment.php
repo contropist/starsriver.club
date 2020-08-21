@@ -58,7 +58,7 @@ if(!submitcheck('postcommentsubmit')) {
 	/*search*/
 	echo <<<EOT
 <script type="text/javascript" src="static/js/calendar.js"></script>
-<script type="text/JavaScript">
+<script>
 function page(number) {
 	$('postcommentforum').page.value=number;
 	$('postcommentforum').searchsubmit.click();
@@ -97,7 +97,7 @@ EOT;
 	$cpmsg = cplang('postcomment_delete');
 
 ?>
-<script type="text/JavaScript">alert('<?php echo $cpmsg;?>');parent.$('postcommentforum').searchsubmit.click();</script>
+<script>alert('<?php echo $cpmsg;?>');parent.$('postcommentforum').searchsubmit.click();</script>
 <?php
 }
 

@@ -39,7 +39,7 @@
                             <li class="{$fuid_actives[$value[fuid]]}"><a onclick="fuidgoto($value[fuid])">$value[fusername]</a></li>
                         <!--{/loop}-->
                     </ul>
-                    <script type="text/javascript">
+                    <script>
                         fold('#userlist',94,false);
                         function fuidgoto(fuid) {
                             var parameter = fuid != '' ? '&fuid='+fuid : '';

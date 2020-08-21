@@ -95,7 +95,7 @@ if(!$operation) {
 		}
 
 		echo <<<EOT
-<script type="text/JavaScript">
+<script>
 var rowtypedata = [
 	[
 		[1,'', 'td25'],

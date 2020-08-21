@@ -46,7 +46,7 @@ global $_G;
 }
 <!--{block return}-->
 	<iframe id="connectlike" allowtransparency="true" scrolling="no" border="0" width="280" height="25" frameborder="0"></iframe>
-	<script type="text/javascript">_attachEvent(window, 'load', function () { $('connectlike').src = 'api/connect/like.php';}, document);</script>
+	<script>_attachEvent(window, 'load', function () { $('connectlike').src = 'api/connect/like.php';}, document);</script>
 <!--{/block}-->
 <!--{eval return $return;}-->
 {eval
@@ -68,7 +68,7 @@ function tpl_viewthread_bottom($jsurl) {
 global $_G;
 }
 <!--{block return}-->
-	<script type="text/javascript">
+	<script>
 		var connect_qzone_share_url = '{$_G[connect][qzone_share_url]}';
 		var connect_weibo_share_url = '{$_G[connect][weibo_share_url]}';
 		var connect_thread_info = {
@@ -98,7 +98,7 @@ global $_G;
 		</div>
 	<!--{/if}-->
 	<!--{if $jsurl}-->
-		<script type="text/javascript">_attachEvent(window, 'load', function () { appendscript('{$jsurl}', '', 1, 'utf-8') }, document);</script>
+		<script>_attachEvent(window, 'load', function () { appendscript('{$jsurl}', '', 1, 'utf-8') }, document);</script>
 	<!--{/if}-->
 <!--{/block}-->
 <!--{eval return $return;}-->
@@ -249,7 +249,7 @@ $js2 = str_replace(array("'", "\r", "\n"), array("\'", '', ''), $js2);
 		.loggingbox .tb a { background:#F6F6F6; padding:0 20px; }
 		.loggingbox .tb .a a { background:#FFF; }
 	</style>
-	<script type="text/javascript">
+	<script>
 		<!--{if $_G['setting']['regconnect']}-->
 			$('reginfo_a').parentNode.className = '';
 			$('{$_G['setting']['reginput']['password']}').parentNode.parentNode.parentNode.parentNode.parentNode.style.display = 'none';
@@ -317,7 +317,7 @@ function tpl_spacecp_profile_bottom() {
 	global $_G;
 }
 <!--{block return}-->
-	<script type="text/javascript">
+	<script>
 	function connect_handle_get_weibosign(response, ajax) {
 		// 返回值形如: errCode=XX&result=XX
 		if (typeof(response) == "string" && response.indexOf("&") > 0) {

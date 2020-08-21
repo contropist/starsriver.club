@@ -77,7 +77,7 @@ if(!submitcheck('picsubmit')) {
 	/*search*/
 	echo <<<EOT
 <script type="text/javascript" src="static/js/calendar.js"></script>
-<script type="text/JavaScript">
+<script>
 function page(number) {
 	$('picforum').page.value=number;
 	$('picforum').searchsubmit.click();
@@ -115,7 +115,7 @@ EOT;
 	$cpmsg = cplang('pic_succeed', array('deletecount' => $deletecount));
 
 ?>
-<script type="text/JavaScript">alert('<?php echo $cpmsg;?>');parent.$('picforum').searchsubmit.click();</script>
+<script>alert('<?php echo $cpmsg;?>');parent.$('picforum').searchsubmit.click();</script>
 <?php
 
 }
