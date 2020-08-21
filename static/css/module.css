@@ -7428,12 +7428,12 @@
             --node-left-element-position: relative;
             --node-left-element-aligh: left;
 
-            --timeA-fontsize: 26px;
+            --timeA-fontsize: 20px;
             --timeA-width: 200px;
             --timeA-before-rightdrag: calc(100% - 10px);
             --timeA-after-leftdrag: -34px;
 
-            --timeB-fontsize: 24px;
+            --timeB-fontsize: 18px;
             --timeB-padding: 0 0px;
             --timeB-after-leftdrag: -28px;
 

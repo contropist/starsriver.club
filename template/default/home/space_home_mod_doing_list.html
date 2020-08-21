@@ -92,18 +92,26 @@
                         }
                     }
                 };
+
+            if(page) page.addClass('sleep');
+            if(postform) postform.addClass('sleep');
+
             addEvent(MasElements.viewer,'scroll',positionfix);
 
             let Ts = SR('.time-A'),
+                Th = Ts[0].Css.height + Ts[0].Css.marginBottom + Ts[0].parentNode.Css.paddingTop;
                 TsOn = function (){
                     for (let i=0 ; i <Ts.length; i++){
                         if(Ts[i].parentNode.Css.top < 72 && (isUndefined(Ts[i+1]) || Ts[i+1].parentNode.Css.top > 72)){
                             Ts[i].style = 'position: fixed; top: 82px;';
+                            Ts[i].parentNode.style = 'padding-top:' + Th + 'px;';
                         } else {
                             Ts[i].style = '';
+                            Ts[i].parentNode.style = '';
                         }
                     }
                 };
+
             addEvent(MasElements.viewer,'scroll',TsOn);
         });
     </script>

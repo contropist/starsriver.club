@@ -4204,6 +4204,19 @@
 		cursor:pointer;
     }
 
+    .flow-deliver{
+        --submit-width: 80px;
+        --float-right-margin: 0 0 0 15px;
+        --smilies-padding: 0 10px;
+        --smilies-marging: 0 10px 0 0;
+    }
+    .WL-0 .flow-deliver,
+    .WL-3P .flow-deliver{
+        --submit-width: 60px;
+        --float-right-margin: 0 0 0 8px;
+        --smilies-padding: 0 5px;
+        --smilies-marging: 0 5px 0 0;
+    }
     .flow-deliver .menu{
         width: 100%;
         line-height: 32px;
@@ -4258,10 +4271,10 @@
         line-height: 36px;
     }
     .flow-deliver .subline > *{
-        margin:0 15px 0 0;
+        margin: var(--smilies-marging);
     }
     .flow-deliver .subline > *.r{
-        margin:0 0 0 15px;
+        margin: var(--float-right-margin);
     }
     .flow-deliver .subline label{
         color: #89a;
@@ -4273,8 +4286,8 @@
     .flow-deliver .subline .smilies{
         border-radius: 10px;
         background: #e5e9ef;
-        margin-right: 8px;
-        padding: 0 10px;
+        margin: var(--smilies-marging);
+        padding: var(--smilies-padding);
         border: 1px solid #e5e9ef;
         color: #6d7782;
         cursor: pointer;
@@ -4288,7 +4301,7 @@
     .flow-deliver .subline .submit{
         float: right;
         height: 36px;
-        width: 80px;
+        width: var(--submit-width);
         border-radius: 5px;
         background: #7cbbfb;
         color: #fff;
