@@ -4394,8 +4394,8 @@
     .flow-comment-list .sender .subline .smilies{
         border-radius: 5px;
         background: #f3f3f3;
-        margin-right: 5px;
-        padding: 0 10px;
+        margin: 5px;
+        padding: var(--smilies-padding);
         border: 1px solid #dedede;
         color: #888;
         cursor: pointer;
@@ -4425,7 +4425,7 @@
     .flow-comment-list .sender .subline .submit{
         border-radius: 5px;
         background: #7cbbfb;
-        width: 80px;
+        width: var(--submit-width);
         color: #fff;
     }
     .flow-comment-list .sender .subline .submit:hover{
