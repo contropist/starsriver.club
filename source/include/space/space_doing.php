@@ -11,7 +11,7 @@ if(!defined('IN_DISCUZ')) {
 	exit('Access Denied');
 }
 
-$perpage = 20;
+$perpage = 50;
 $perpage = mob_perpage($perpage);
 
 $page = empty($_GET['page'])?0:intval($_GET['page']);

@@ -8,7 +8,9 @@
             <!--[nest=nestcontenttop]--><div id="nestcontenttop" class="area"></div><!--[/nest]-->
             <!--{hook/space_doing_top}-->
             <!--{if $space[self] && helper_access::check_module('doing')}-->
-                <!--{template home/space_trends_mod_doing_deliverer}-->
+            <div class="vessel withedge">
+                <!--{template home/space_route_mod_doing_deliverer}-->
+            </div>
             <!--{/if}-->
             <!--{hook/space_doing_bottom}-->
             <div class="vessel">
@@ -18,9 +20,7 @@
                     <a class="$actives[me]" href="home.php?mod=space&do=$do&view=me">{lang doing_view_me}</a>
                 </div>
             </div>
-
             <!--{subtemplate home/space_trends_mod_doing_list}-->
-
             <!--[nest=nest1]--><div id="nest1" class="area"></div><!--[/nest]-->
             <!--[nest=nest2]--><div id="nest2" class="area"></div><!--[/nest]-->
             <!--[nest=nest3]--><div id="nest3" class="area"></div><!--[/nest]-->
@@ -37,9 +37,6 @@
             <!--{template home/space_home_userabout}-->
         </div>
         <div class="mas-viewer-container" id="userspace_doing">
-            <!--{if $space[self] && helper_access::check_module('doing')}-->
-                <!--{template home/space_home_mod_doing_deliverer}-->
-            <!--{/if}-->
             <!--{template home/space_home_mod_doing_list}-->
         </div>
     </div>

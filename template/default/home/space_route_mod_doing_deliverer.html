@@ -1,0 +1,23 @@
+<form class="flow-deliver" id="doing_deliver" method="post" autocomplete="off" action="home.php?mod=spacecp&ac=doing&view=$_GET[view]" onsubmit="if($('message').value == msgstr){return false;}">
+    <input type="hidden" name="addsubmit" value="true" />
+    <input type="hidden" name="refer" value="$theurl" />
+    <input type="hidden" name="topicid" value="$topicid" />
+    <input type="hidden" name="formhash" value="{FORMHASH}" />
+
+    <textarea name="message" id="message" onkeyup="strLenCalc(this, 'maxlimit')" onkeydown="ctrlEnter(event, 'add');" placeholder="$defaultstr"></textarea>
+
+    <div class="subline">
+        <i class="smilies" onclick="emoticons(this.id, 'message');">( ͡° ͜ʖ ͡°)</i>
+        <div class="ccbox">
+            <input type="checkbox" name="to_signhtml" id="updatesign" value="1" />
+            <label for="updatesign">{lang doing_update_personal_signature}</label>
+        </div>
+        <button class="submit r" type="submit" name="add" id="add">{lang publish}</button>
+        <!--{if $_G['group']['maxsigsize']}-->
+        <span class="context-maxlength r">
+            {lang doing_maxlimit_char}
+        </span>
+        <!--{/if}-->
+    </div>
+    <div id="return_doing"></div>
+</form>

@@ -29,8 +29,8 @@
                     <!--{else}-->
                         <div class="nop">{lang login_to_wall} <a href="member.php?mod=logging&action=login" onclick="showWindow('login', this.href)">{lang login}</a> | <a href="member.php?mod={$_G[setting][regname]}">$_G['setting']['reglinkname']</a></div>
                     <!--{/if}-->
-                    <button class="btn-shadow" type="submit" name="commentsubmit_btn"value="true" id="commentsubmit_btn"><strong>{lang leave_comments}</strong></button>
                     <div class="post-res" id="return_qcwall_{$space[uid]}"></div>
+                    <button class="btn-shadow" type="submit" name="commentsubmit_btn"value="true" id="commentsubmit_btn"><strong>{lang leave_comments}</strong></button>
                 </div>
 
                 <input type="hidden" name="formhash" value="{FORMHASH}" />
@@ -66,9 +66,8 @@
                 }
 
                 addEvent(document,'DOMContentLoaded',function () {
-                    let postform = SR('#quickcommentform_{$space[uid]}')[0];
-
-                    positionfix = function (){
+                    let postform = SR('#quickcommentform_{$space[uid]}')[0],
+                        positionfix = function (){
                         if(SRGlobal.Window.Width > 1000){
                             if(body.hasClass('scroll-overhead')){
                                 postform.style = 'position: fixed !important; right: 8px; top:'+ (MasElements.Bank.Css.height + 16) + 'px;';
@@ -76,6 +75,7 @@
                                 postform.style = '';
                             }
                         } else {
+                            postform.style = '';
                             if(SRGlobal.Window.Scroll.DirY === 'down'){
                                 postform.addClass('sleep');
                             } else if(SRGlobal.Window.Scroll.DirY === 'up') {

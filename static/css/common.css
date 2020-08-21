@@ -1013,7 +1013,7 @@
 
 /* 用户名片 */
     .user-carte{
-        --uc-avatar-size: 54px;
+        --uc-avatar-size: 60px;
         --uc-banner-height: 120px;
 
         display: block;
@@ -1063,7 +1063,7 @@
         font-size: 14px;
         font-weight: 700;
         color: var(--color-text-dark);
-        padding-left: 5px;
+        padding-left: 6px;
     }
     .user-carte .card-header .utag .status{
         display: inline-block;
@@ -1271,7 +1271,7 @@
         z-index: 98;
         position:fixed;
         right:20px;
-        bottom:45px;
+        bottom:39px;
         width:40px;
         height:40px;
         overflow: visible;
@@ -1382,13 +1382,15 @@
     #bottommenu .ctm .help{ background: #60a3ea; }
     #bottommenu .ctm .nestnav{ background: #25B7D9; }
 
-
+    :root{
+        --footer-drawer-height:283px;
+        --footer-drawer-touch-bar-height:20px;
+    }
     #footer-drawer *{
         overflow: visible
     }
     #footer-drawer{
-        --footer-drawer-height:283px;
-        --footer-drawer-touch-bar-height:20px;
+
 
         z-index: 100;
         position:fixed;
@@ -4172,9 +4174,9 @@
    }
 
 
-/**************\
-    评论区样式   |评论区
-\**************/
+/******************\
+    空间评论区样式   |评论区
+\******************/
     .emoticons{
         box-sizing: border-box;
         padding: 10px;
@@ -4202,15 +4204,15 @@
 		cursor:pointer;
     }
 
-    .deliver .menu{
+    .flow-deliver .menu{
         width: 100%;
         line-height: 32px;
     }
-    .deliver .menu a{
+    .flow-deliver .menu a{
         padding: 0 3px;
         color: #6b7c90;
     }
-    .deliver textarea{
+    .flow-deliver textarea{
         width: 100%;
         height: 80px;
         color: #6d7782;
@@ -4218,8 +4220,8 @@
         border-radius: 8px;
         background: #e5e9ef;
     }
-    .deliver .extro,
-    .deliver #checklen{
+    .flow-deliver .extro,
+    .flow-deliver #checklen{
         display: inline-block;
         width: 100%;
         box-sizing: border-box;
@@ -4229,46 +4231,46 @@
         border-radius: 8px;
         line-height: 30px;
     }
-    .deliver #checklen{
+    .flow-deliver #checklen{
         width: 32px;
         text-align: center;
         color: #789;
         border-radius: 16px;
     }
-    .deliver #subject .extro{
+    .flow-deliver #subject .extro{
         margin-right: 5px;
         width: calc(100% - 37px);
     }
-    .deliver .extro:active,
-    .deliver .extro:focus,
-    .deliver textarea:hover,
-    .deliver textarea:focus{
+    .flow-deliver .extro:active,
+    .flow-deliver .extro:focus,
+    .flow-deliver textarea:hover,
+    .flow-deliver textarea:focus{
         border-color: #148fef;
         background: #fff;
         color: #323235;
     }
-    .deliver .subline{
+    .flow-deliver .subline{
         margin-top: 15px;
     }
-    .deliver .subline *{
+    .flow-deliver .subline *{
         display: inline-block;
         height: 36px;
         line-height: 36px;
     }
-    .deliver .subline > *{
+    .flow-deliver .subline > *{
         margin:0 15px 0 0;
     }
-    .deliver .subline > *.r{
+    .flow-deliver .subline > *.r{
         margin:0 0 0 15px;
     }
-    .deliver .subline label{
+    .flow-deliver .subline label{
         color: #89a;
     }
-    .deliver .subline .str{
+    .flow-deliver .subline .str{
         font-size: 12px;
         color: #999;
     }
-    .deliver .subline .smilies{
+    .flow-deliver .subline .smilies{
         border-radius: 10px;
         background: #e5e9ef;
         margin-right: 8px;
@@ -4278,12 +4280,12 @@
         cursor: pointer;
         font-size: 13px;
     }
-    .deliver .subline .smilies:hover{
+    .flow-deliver .subline .smilies:hover{
         background: #fff;
         border-color: #067eec;
         color: #067eec;
     }
-    .deliver .subline .submit{
+    .flow-deliver .subline .submit{
         float: right;
         height: 36px;
         width: 80px;
@@ -4291,32 +4293,32 @@
         background: #7cbbfb;
         color: #fff;
     }
-    .deliver .subline .submit:hover {
+    .flow-deliver .subline .submit:hover {
         background: #3e93ea;
     }
-    .deliver .subline .context-maxlength {
+    .flow-deliver .subline .context-maxlength {
         float: right;
     }
-    .deliver .subline .context-maxlength i{
+    .flow-deliver .subline .context-maxlength i{
         color: #789;
         font-weight: 700;
     }
-    .deliver .subline [id*='seccode_']{
+    .flow-deliver .subline [id*='seccode_']{
         border-radius: 8px;
         margin: -1px 0 0 0;
     }
-    .deliver .subline .toolbar a{
+    .flow-deliver .subline .toolbar a{
         position: relative;
         font-size: 20px;
         color: #b3b3b3;
         margin: 0 3px;
     }
-    .deliver .subline .toolbar a object{
+    .flow-deliver .subline .toolbar a object{
         position: absolute;
         top: 0;
         left: 0;
     }
-    .deliver .subline select{
+    .flow-deliver .subline select{
         display: inline-block;
         box-sizing: border-box;
         border: 1px solid #e5e9ef;
@@ -4326,54 +4328,54 @@
         padding: 0 10px;
     }
 
-    .vessel .comment-list{
+    .vessel .flow-comment-list{
         width: calc(100% + 30px);
         margin-left: -40px;
     }
-    .comment-list .height-limited{
+    .flow-comment-list .height-limited{
         max-height:440px;
         overflow: auto;
         border-top: 1px solid #eee;
     }
-    .comment-list .sender{
+    .flow-comment-list .sender{
         display: block;
         width: 100%;
         margin: 10px 0;
     }
-    .comment-list .sender .msg{
+    .flow-comment-list .sender .msg{
         display: block;
         width: 100%;
         height: 64px;
         border: 1px solid #148fef;
         border-radius: 5px;
     }
-    .comment-list .sender .tipline {
+    .flow-comment-list .sender .tipline {
         margin-top: 10px;
     }
-    .comment-list .sender .tipline .str{
+    .flow-comment-list .sender .tipline .str{
         font-size: 12px;
         color: #999;
     }
-    .comment-list .sender .subline{
+    .flow-comment-list .sender .subline{
         width: 100%;
         height: 32px;
         margin-top: 8px;
         line-height: 32px;
     }
-    .comment-list .sender .subline > *{
+    .flow-comment-list .sender .subline > *{
         display: inline-block;
         line-height: inherit;
         height: inherit;
         box-sizing: border-box;
     }
-    .comment-list .sender .subline [id^='seccode_']{
+    .flow-comment-list .sender .subline [id^='seccode_']{
         border-radius: 5px;
         margin-right: 5px;
     }
-    .comment-list .sender .subline label{
+    .flow-comment-list .sender .subline label{
         color: #89a;
     }
-    .comment-list .sender .subline .smilies{
+    .flow-comment-list .sender .subline .smilies{
         border-radius: 5px;
         background: #f3f3f3;
         margin-right: 5px;
@@ -4383,66 +4385,66 @@
         cursor: pointer;
         font-size: 13px;
     }
-    .comment-list .sender .subline .smilies:hover{
+    .flow-comment-list .sender .subline .smilies:hover{
         background: #fff;
         border-color: #067eec;
         color: #067eec;
     }
-    .comment-list .sender .subline .limite{
+    .flow-comment-list .sender .subline .limite{
         color: #789;
         font-weight: 700;
         margin-right: 10px;
     }
-    .comment-list .sender .subline .cancel{
+    .flow-comment-list .sender .subline .cancel{
         border-radius: 5px;
         background: #d7d7d7;
         margin-right: 5px;
         font-size: 25px;
         color: #999;
     }
-    .comment-list .sender .subline .cancel:hover{
+    .flow-comment-list .sender .subline .cancel:hover{
         background: var(--color-onnanoko-pink);
         color: #fff;
     }
-    .comment-list .sender .subline .submit{
+    .flow-comment-list .sender .subline .submit{
         border-radius: 5px;
         background: #7cbbfb;
         width: 80px;
         color: #fff;
     }
-    .comment-list .sender .subline .submit:hover{
+    .flow-comment-list .sender .subline .submit:hover{
         background: #3e93ea;
     }
 
-    .comment-list ol{
+    .flow-comment-list ol{
         width: 100%;
         margin-top: 10px;
         padding-top: 10px;
      }
-    .comment-list ol .reply-item{
+    .flow-comment-list ol .reply-item{
         display: block;
         position: relative;
         box-sizing: border-box;
         margin-left: 64px;
         padding:10px 0;
     }
-    .comment-list ol .reply-item .avatar{
+    .flow-comment-list ol .reply-item .avatar{
         width: 36px !important;
         height: 36px !important;
         left: -52px !important;
         top: 8px !important;
     }
-    .comment-list ol .reply-item .username{
+    .flow-comment-list ol .reply-item .username{
         font-weight: 700;
         color: #6d757a;
         padding-right: 10px;
     }
-    .comment-list ol .reply-item .message{
+    .flow-comment-list ol .reply-item .message{
         display: block;
         padding-top: 6px;
         word-break: break-all;
     }
-    .comment-list ol .reply-item .message .msg-tip{
+    .flow-comment-list ol .reply-item .message .msg-tip{
         border-radius: 5px;
         display: inline-block;
         background: #fb5f93;
@@ -4451,56 +4453,57 @@
         padding: 2px 4px;
         font-weight: 200;
     }
-    .comment-list ol .reply-item .info{
-         padding-top: 6px;
-     }
-    .comment-list ol .reply-item .info .str{
+    .flow-comment-list ol .reply-item .info{
+        padding-top: 6px;
+        line-height: 14px;
+    }
+    .flow-comment-list ol .reply-item .info .str{
         font-size: 12px;
         margin-right: 10px;
         color:#aba8a8;
     }
-    .comment-list ol .reply-item .info .reply{
+    .flow-comment-list ol .reply-item .info .reply{
         font-size: 12px;
         margin-right: 10px;
         color:#aba8a8;
     }
 
-    .comment-list ol .reply-item.lv2{
+    .flow-comment-list ol .reply-item.lv2{
         margin-left: 92px;
         padding:2px 0 5px 0;
         border-top: none;
     }
-    .comment-list ol .reply-item.lv2 .avatar{
+    .flow-comment-list ol .reply-item.lv2 .avatar{
         width: 32px !important;
         height: 32px !important;
         left: -42px !important;
         top: 0 !important;
     }
-    .comment-list ol .reply-item.lv2 .message{
+    .flow-comment-list ol .reply-item.lv2 .message{
         display: inline-block;
         padding: 0;
     }
 
-    .comment-list ol .reply-item.lv3{
+    .flow-comment-list ol .reply-item.lv3{
         margin-left: 120px;
         padding:0;
         border-top: none;
     }
-    .comment-list ol .reply-item.lv3 .avatar{
+    .flow-comment-list ol .reply-item.lv3 .avatar{
         width: 24px !important;
         height: 24px !important;
         left: -36px !important;
         top: 0 !important;
     }
-    .comment-list ol .reply-item.lv3 .message{
+    .flow-comment-list ol .reply-item.lv3 .message{
         display: inline-block;
         padding: 0;
         font-size: 13px;
         color: #393939;
     }
 
-    .comment-list ol .reply-item.lv2::before,
-    .comment-list ol .reply-item.lv3::before{
+    .flow-comment-list ol .reply-item.lv2::before,
+    .flow-comment-list ol .reply-item.lv3::before{
         content: '';
         display: block;
         position: absolute;
@@ -4509,21 +4512,21 @@
         background: rgba(0,0,0,.03);
         top: 0;
     }
-    .comment-list ol .reply-item.lv2::before{
+    .flow-comment-list ol .reply-item.lv2::before{
         left: -64px;
     }
-    .comment-list ol .reply-item.lv3::before{
+    .flow-comment-list ol .reply-item.lv3::before{
         left: -92px;
     }
-    .comment-list ol .reply-item.lv2 .tool,
-    .comment-list ol .reply-item.lv3 .tool{
+    .flow-comment-list ol .reply-item.lv2 .tool,
+    .flow-comment-list ol .reply-item.lv3 .tool{
         visibility: hidden;
     }
-    .comment-list ol .reply-item.lv2:hover .tool,
-    .comment-list ol .reply-item.lv3:hover .tool{
+    .flow-comment-list ol .reply-item.lv2:hover .tool,
+    .flow-comment-list ol .reply-item.lv3:hover .tool{
         visibility: visible;
     }
-    .comment-list .watch-all{
+    .flow-comment-list .watch-all{
         color: #bcbcbc;
         border: 1px solid;
         border-radius: 5px;
@@ -4531,7 +4534,7 @@
         width: 90px;
         margin: 0 auto;
     }
-    .comment-list .watch-all:hover{
+    .flow-comment-list .watch-all:hover{
         color: var(--color-onnanoko-pink);
         border: 1px solid;
         border-radius: 5px;

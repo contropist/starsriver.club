@@ -31,15 +31,15 @@
 				</div>
 				<div class="footer">
 					<!--{if helper_access::check_module('doing')}-->
-					<a class="icon mt-textsms reply" onclick="docomment_form($doid, 0, '$key');"><span></span></a>
+					<a class="icon mt-textsms reply" onclick="docomment_form($doid, 0, '$key');"></a>
 					<!--{/if}-->
 				</div>
-				<div class="comment-list">
+				<div class="flow-comment-list">
 					<!--{eval $list = $clist[$doid];}-->
 					<div id="{$key}_$doid">
 						<div id="{$key}_form_{$doid}_0"></div>
 						<!--{if $clist[$doid]}-->
-						<!--{template home/space_trends_mod_doing_comments}-->
+						<!--{template home/space_route_mod_doing_comments}-->
 						<!--{/if}-->
 					</div>
 				</div>

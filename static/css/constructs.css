@@ -1408,7 +1408,7 @@
         transition: 150ms cubic-bezier(1,0, 0, 1);
         padding: 0 !important;
         right:calc(100% + 4px) !important;
-        top:0;
+        top:-5px;
     }
     .tool .tooltip.bl{
         transform : scale(0.2,1);
@@ -2068,7 +2068,7 @@
         --color-text-default: #030303;
         --color-text-dark: #445a59;
         --color-text-gray: #727272;
-        --color-text-lightgray: #727272;
+        --color-text-lightgray: #a5a5a5;
 
         --color-mod-success : #38b03f;
         --color-mod-warning : #E1804C;
