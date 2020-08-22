@@ -73,20 +73,21 @@
         addEvent(document,'DOMContentLoaded',function () {
             let postform = SR('#doing_deliver')[0],
                 page = SR('#pager_doing')[0],
+                scrltem = 0,
                 positionfix = function (){
                     if(SRGlobal.Window.Width > 1470){
                         if(body.hasClass('scroll-overhead')){
-                            postform.style = 'position: fixed !important; left: ' + (MasElements.guide.Css.width + 761) + 'px; top:'+ (MasElements.Bank.Css.height + 16) + 'px;';
+                            postform.style = 'position: fixed !important; left: ' + (MasElements.guide.Css.width + 761) + 'px; top:'+ (MasElements.Bank.Css.height + 32) + 'px;';
                         } else {
                             postform.style = '';
                         }
                     } else {
                         postform.style = '';
                         if(SRGlobal.Window.Scroll.DirY === 'down'){
+                            scrltem = SRGlobal.Window.Scroll.Top;
                             if(page) page.addClass('sleep');
                             if(postform) postform.addClass('sleep');
-
-                        } else if(SRGlobal.Window.Scroll.DirY === 'up') {
+                        } else if(SRGlobal.Window.Scroll.DirY === 'up' &&  scrltem - SRGlobal.Window.Scroll.Top > 200) {
                             if(page) page.delClass('sleep');
                             if(postform) postform.delClass('sleep');
                         }

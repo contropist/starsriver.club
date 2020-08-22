@@ -67,6 +67,7 @@
 
                 addEvent(document,'DOMContentLoaded',function () {
                     let postform = SR('#quickcommentform_{$space[uid]}')[0],
+                        scrltem = 0,
                         positionfix = function (){
                         if(SRGlobal.Window.Width > 1000){
                             if(body.hasClass('scroll-overhead')){
@@ -77,8 +78,9 @@
                         } else {
                             postform.style = '';
                             if(SRGlobal.Window.Scroll.DirY === 'down'){
+                                scrltem = SRGlobal.Window.Scroll.Top;
                                 postform.addClass('sleep');
-                            } else if(SRGlobal.Window.Scroll.DirY === 'up') {
+                            } else if(SRGlobal.Window.Scroll.DirY === 'up' && scrltem - SRGlobal.Window.Scroll.Top > 200) {
                                 postform.delClass('sleep');
                             }
                         }
