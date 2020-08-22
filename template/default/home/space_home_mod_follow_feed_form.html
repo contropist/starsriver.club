@@ -10,7 +10,7 @@
 			</script>
 			<!--{eval $dmfid = $_G['setting']['followforumid'] && !empty($defaultforum) ? $_G['setting']['followforumid'] : 0;}-->
 
-			<form class="deliver" method="post" id="fastpostform" action="home.php?mod=spacecp&ac=follow&op=newthread&topicsubmit=yes&infloat=yes&handlekey=fastnewpost&inajax=1" onsubmit="return fastpostvalidate(this);">
+			<form class="flow-deliver" method="post" id="fastpostform" action="home.php?mod=spacecp&ac=follow&op=newthread&topicsubmit=yes&infloat=yes&handlekey=fastnewpost&inajax=1" onsubmit="return fastpostvalidate(this);">
 				<input type="hidden" name="formhash" value="{FORMHASH}" />
 				<input type="hidden" name="usesig" value="$usesigcheck" />
 				<input type="hidden" name="adddynamic" value="1" />

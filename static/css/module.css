@@ -6469,7 +6469,7 @@
         border-radius: 6px;
         padding: 0 8px;
         margin: 3px;
-		line-height:19px;
+		line-height:20px;
         font-size: 12px;
     }
     .app-dynamic .side-box .header > .more:hover{
@@ -7415,6 +7415,7 @@
 
             --timeA-fontsize: 26px;
             --timeA-width: calc(var(--node-left-element-width) - 26px);
+            --timeA-shadow: 6px 4px 13px rgba(120, 144, 177, .25);
             --timeA-before-rightdrag: -6px;
             --timeA-after-leftdrag: calc(100% + 12px);
 
@@ -7440,6 +7441,7 @@
 
             --timeA-fontsize: 20px;
             --timeA-width: 200px;
+            --timeA-shadow: -6px 4px 13px rgba(120, 144, 177, .25);
             --timeA-before-rightdrag: calc(100% - 10px);
             --timeA-after-leftdrag: -34px;
 
@@ -7522,7 +7524,7 @@
             padding: 10px 15px;
             background: #fff;
             border-radius: 4px;
-            box-shadow: 6px 4px 13px rgba(120, 144, 177, .25);
+            box-shadow: var(--timeA-shadow);
             color: #7890b1;
             font-family: bahnschrift !important;
             font-size: var(--timeA-fontsize);

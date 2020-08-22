@@ -479,11 +479,12 @@
     }
     nav .logo,
     nav .logo span{
-        color: var(--nav-logo-color);
         display: inline-block;
-        font-size: 24px;
-        font-weight: 700;
         padding: 0 20px 0 0;
+        color: var(--nav-logo-color);
+        font-family: Organo !important;
+        font-size: 28px;
+        font-weight: 700;
     }
     nav .logo span{
         color: var(--nav-logo-color2);
