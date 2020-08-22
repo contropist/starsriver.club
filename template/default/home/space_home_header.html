@@ -20,7 +20,7 @@
     </layout:html>
     <layout:html html-ws class="Mas edge app-userspace">
         <script>
-            jQuery(document).ready(function () {
+            addEvent(document,'DOMContentLoaded',function () {
                 menu_initialize('.app-userspace > .mas-guide > .mas-guide-switch','.app-userspace > .mas-guide',[document,window]);
             })
         </script>

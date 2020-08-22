@@ -3,7 +3,7 @@
 <!--{/if}-->
 <!--{if $dolist}-->
 	<!--{if $pricount}-->
-		<p class="vessel alert hi-warning">{lang hide_doing}</p>
+		<p class="vessel alert hi-warning" style="margin: 0 0 0 -15px; width: calc(100% + 30px);">{lang hide_doing}</p>
 	<!--{/if}-->
     <ul class="timeline">
         <!--{eval $doday = '';}-->
@@ -63,62 +63,85 @@
             </li>
         <!--{/loop}-->
     </ul>
-
-    <!--{if $multi}-->
-        <div class="page" id="pager_doing">$multi</div>
-    <!--{elseif $_GET[highlight]}-->
-        <a href="home.php?mod=space&do=doing&view=me">{lang viewmore}</a>
-    <!--{/if}-->
-    <script>
-        addEvent(document,'DOMContentLoaded',function () {
-            let postform = SR('#doing_deliver')[0],
-                page = SR('#pager_doing')[0],
-                scrltem = 0,
-                positionfix = function (){
-                    if(SRGlobal.Window.Width > 1470){
-                        if(body.hasClass('scroll-overhead')){
-                            postform.style = 'position: fixed !important; left: ' + (MasElements.guide.Css.width + 761) + 'px; top:'+ (MasElements.Bank.Css.height + 32) + 'px;';
-                        } else {
-                            postform.style = '';
-                        }
+    <div class="page" id="pager_doing">
+        <!--{if $multi}-->
+            $multi
+        <!--{elseif $_GET[highlight]}-->
+            <a class="viewmore" href="home.php?mod=space&do=doing&view=me">{lang viewmore}</a>
+        <!--{else}-->
+            <p class="nomore">{lang nomore}</p>
+        <!--{/if}-->
+    </div>
+<!--{else}-->
+    <ul class="timeline">
+        <li class="node">
+        <div class="n-left">
+            <i class="time-A">? / ? / ?</i>
+            <i class="time-B">? : ?</i>
+            <div class="user-tag">
+                <a class="avatar"><!--{avatar(0,'small')}--></a>
+                <a class="username">————</a>
+            </div>
+        </div>
+        <div class="n-right">
+            <div class="s-top">
+                <i class="title">{lang nomore}</i>
+            </div>
+            <div class="s-center">
+                <div class="message">{lang global_nothing}</div>
+            </div>
+        </div>
+        </li>
+    </ul>
+    <div class="page" id="pager_doing">
+        <p class="nomore">{lang nomore}</p>
+    </div>
+<!--{/if}-->
+<script>
+    addEvent(document,'DOMContentLoaded',function () {
+        let postform = SR('#doing_deliver')[0],
+            page = SR('#pager_doing')[0],
+            scrltem = 0,
+            positionfix = function (){
+                if(SRGlobal.Window.Width > 1470){
+                    if(body.hasClass('scroll-overhead')){
+                        postform.style = 'position: fixed !important; left: ' + (MasElements.guide.Css.width + 761) + 'px; top:'+ (MasElements.Bank.Css.height + 32) + 'px;';
                     } else {
                         postform.style = '';
-                        if(SRGlobal.Window.Scroll.DirY === 'down'){
-                            scrltem = SRGlobal.Window.Scroll.Top;
-                            if(page) page.addClass('sleep');
-                            if(postform) postform.addClass('sleep');
-                        } else if(SRGlobal.Window.Scroll.DirY === 'up' &&  scrltem - SRGlobal.Window.Scroll.Top > 390) {
-                            if(page) page.delClass('sleep');
-                            if(postform) postform.delClass('sleep');
-                        }
                     }
-                };
-
+                } else {
+                    postform.style = '';
+                    if(SRGlobal.Window.Scroll.DirY === 'down'){
+                        scrltem = SRGlobal.Window.Scroll.Top;
+                        if(page) page.addClass('sleep');
+                        if(postform) postform.addClass('sleep');
+                    } else if(SRGlobal.Window.Scroll.DirY === 'up' &&  scrltem - SRGlobal.Window.Scroll.Top > Math.min(390, MasElements.viewer.scrollHeight - SRGlobal.Window.Height - 20)) {
+                        if(page) page.delClass('sleep');
+                        if(postform) postform.delClass('sleep');
+                    }
+                }
+            },
+            Tl = SR('.timeline')[0],
+            Ts = SR('.time-A'),
+            Th = Ts[0].Css.height + Ts[0].Css.marginTop + Ts[0].Css.marginBottom + Ts[0].parentNode.Css.paddingTop,
+            TsOn = function (){
+                for (let i=0 ; i <Ts.length; i++){
+                    if(Ts[i].parentNode.Css.top < 82 && (isUndefined(Ts[i+1]) || Ts[i+1].parentNode.Css.top > 82)){
+                        Ts[i].style = 'position: fixed; top: 82px;';
+                        Ts[i].parentNode.style = 'padding-top:' + Th + 'px;';
+                    } else {
+                        Ts[i].style = '';
+                        Ts[i].parentNode.style = '';
+                    }
+                }
+            };
+        if(MasElements.viewer.scrollHeight > SRGlobal.Window.Height){
             if(page) page.addClass('sleep');
             if(postform) postform.addClass('sleep');
-
-            addEvent(MasElements.viewer,'scroll',positionfix);
-
-            let Ts = SR('.time-A'),
-                Th = Ts[0].Css.height + Ts[0].Css.marginBottom + Ts[0].parentNode.Css.paddingTop;
-                TsOn = function (){
-                    for (let i=0 ; i <Ts.length; i++){
-                        if(Ts[i].parentNode.Css.top < 72 && (isUndefined(Ts[i+1]) || Ts[i+1].parentNode.Css.top > 72)){
-                            Ts[i].style = 'position: fixed; top: 82px;';
-                            Ts[i].parentNode.style = 'padding-top:' + Th + 'px;';
-                        } else {
-                            Ts[i].style = '';
-                            Ts[i].parentNode.style = '';
-                        }
-                    }
-                };
-
-            addEvent(MasElements.viewer,'scroll',TsOn);
-        });
-    </script>
-
-<!--{else}-->
-	<div class="vessel withedge">
-		<p class="global_nothing">{lang global_nothing}</p>
-	</div>
-<!--{/if}-->
+        } else {
+            Tl.style.marginBottom = '200px';
+        }
+        addEvent(MasElements.viewer,'scroll',TsOn);
+        addEvent(MasElements.viewer,'scroll',positionfix);
+    });
+</script>

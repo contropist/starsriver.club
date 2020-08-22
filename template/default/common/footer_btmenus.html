@@ -47,10 +47,10 @@
         <!--{/if}-->
     </ul >
     <script>
-        jQuery('#ScrollToTop').click(function () {
-            jQuery('html,body').animate({scrollTop: '0px'}, 390);
-            jQuery('.mas-viewer').animate({scrollTop: '0px'}, 390);
-        });
+        SR('#ScrollToTop')[0].onclick = function () {
+            window.scrollTo({top: 0, behavior: 'smooth'});
+            if(MasElements.viewer) MasElements.viewer.scrollTo({top: 0, behavior: 'smooth'});
+        };
         var bottomMenu = document.querySelector('#bottommenu');
         var bottomMenuitem = document.querySelectorAll('#bottommenu > .itemlist > li');
         bottomMenu.addEventListener('mouseenter', showitem, false);

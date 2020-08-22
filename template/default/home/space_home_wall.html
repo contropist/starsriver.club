@@ -66,7 +66,8 @@
                 }
 
                 addEvent(document,'DOMContentLoaded',function () {
-                    let postform = SR('#quickcommentform_{$space[uid]}')[0],
+                    let wall = SR('.wall')[0],
+                        postform = SR('#quickcommentform_{$space[uid]}')[0],
                         scrltem = 0,
                         positionfix = function (){
                         if(SRGlobal.Window.Width > 1000){
@@ -80,16 +81,18 @@
                             if(SRGlobal.Window.Scroll.DirY === 'down'){
                                 scrltem = SRGlobal.Window.Scroll.Top;
                                 postform.addClass('sleep');
-                            } else if(SRGlobal.Window.Scroll.DirY === 'up' && scrltem - SRGlobal.Window.Scroll.Top > 390) {
+                            } else if(SRGlobal.Window.Scroll.DirY === 'up' && scrltem - SRGlobal.Window.Scroll.Top > Math.min(390, MasElements.viewer.scrollHeight - SRGlobal.Window.Height - 20)) {
                                 postform.delClass('sleep');
                             }
                         }
                     };
 
-                    if(postform){
-                        postform.addClass('sleep');
-                        addEvent(MasElements.viewer,'scroll',positionfix);
+                    if(MasElements.viewer.scrollHeight > SRGlobal.Window.Height){
+                        if(postform) postform.addClass('sleep');
+                    } else {
+                        if(wall) wall.style.marginBottom = '160px';
                     }
+                    addEvent(MasElements.viewer,'scroll',positionfix);
                 });
 
 
