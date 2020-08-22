@@ -124,7 +124,7 @@
 
             Tl = SR('.timeline')[0],
             Ts = SR('.time-A'),
-            Th = Ts[0].Css.height + Ts[0].Css.marginTop + Ts[0].Css.marginBottom + Ts[0].parentNode.Css.paddingTop,
+            Th = Ts[0].Css.height,
             TsOn = function (){
                 for (let i=0 ; i <Ts.length; i++){
                     if(Ts[i].parentNode.Css.top < 82 && (isUndefined(Ts[i+1]) || Ts[i+1].parentNode.Css.top > 82)){
