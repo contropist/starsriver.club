@@ -7452,7 +7452,7 @@
             --node-right-s-center-padding: 0;
 
             --timeA-fontsize: 24px;
-            --timeA-width: 200px;
+            --timeA-width: 160px;
             --timeA-shadow: -6px 4px 13px rgba(120, 144, 177, .25);
             --timeA-before-rightdrag: calc(100% - 10px);
             --timeA-after-leftdrag: -34px;
