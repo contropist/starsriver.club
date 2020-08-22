@@ -575,7 +575,7 @@
         height:28px;
         line-height: 28px;
         border:1px solid #ddd;
-        margin: 0.5px 5px;
+        margin: 1px 5px;
         padding: 0 8px;
         box-sizing: border-box;
     }
@@ -1577,9 +1577,8 @@
         line-height: 18px;
         padding: 0 6px;
         border-radius: 7px;
-        border: 1px solid;
+        border: 1px solid #aaa;
         background: rgba(0,0,0,.05);
-        border-color: #aaa;
         color: #666;
         margin: 2px;
     }
@@ -2921,9 +2920,9 @@
     .plate.layout-2-type3 > section.col-1{ width:180px;}
     .plate.layout-2-type3 > section.col-2{ width: calc(100% - 180px);}
 
-    .plate.layout-2-type4 > section{ width: calc(50% - 7.5px); }
-    .plate.layout-2-type4 > section:nth-of-type(1){ margin-right: 7.5px}
-    .plate.layout-2-type4 > section:nth-of-type(2){ margin-left: 7.5px }
+    .plate.layout-2-type4 > section{ width: calc(50% - 8px); }
+    .plate.layout-2-type4 > section:nth-of-type(1){ margin-right: 8px}
+    .plate.layout-2-type4 > section:nth-of-type(2){ margin-left: 8px }
 
     .plate[class*='layout-3-'] > section:nth-of-type(1){ margin-right: 10px }
     .plate[class*='layout-3-'] > section:nth-of-type(2){ margin: 0 5px}
@@ -2934,11 +2933,11 @@
     .plate.layout-3-type2 > section:nth-of-type(2){ width: calc(100% - 470px)}
     .plate.layout-3-type2 > section:nth-of-type(3){ width: 240px }
 
-    .plate[class*='layout-4-'] > section:nth-of-type(1){ margin-right: 11.25px }
-    .plate[class*='layout-4-'] > section:nth-of-type(2){ margin: 0 7.5px 0 3.75px }
-    .plate[class*='layout-4-'] > section:nth-of-type(3){ margin: 0 3.75px 0 7.5px }
-    .plate[class*='layout-4-'] > section:nth-of-type(4){ margin-left: 11.25px }
-    .plate.layout-4-type1 > section{ width: calc(25% - 11.25px); }
+    .plate[class*='layout-4-'] > section:nth-of-type(1){ margin-right: 11px }
+    .plate[class*='layout-4-'] > section:nth-of-type(2){ margin: 0 8px 0 4px }
+    .plate[class*='layout-4-'] > section:nth-of-type(3){ margin: 0 4px 0 8px }
+    .plate[class*='layout-4-'] > section:nth-of-type(4){ margin-left: 11px }
+    .plate.layout-4-type1 > section{ width: calc(25% - 11px); }
 	
     .plate.layout-nest {width:100%; margin:0;}
     .plate.layout-first { margin-top:10px;}
@@ -3901,11 +3900,11 @@
         color: #4c4c4c;
     }
     .plate.soft .vessel.harf{
-        width: calc(50% - 7.5px);
-        margin: 0 7.5px 15px 0;
+        width: calc(50% - 8px);
+        margin: 0 8px 15px 0;
     }
     .plate.soft .vessel.harf:nth-of-type(2n){
-        margin: 0 0 0 7.5px;
+        margin: 0 0 0 8px;
     }
     .plate.soft .nav-vertical{
         display: block;

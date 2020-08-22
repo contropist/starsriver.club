@@ -7439,13 +7439,13 @@
             --node-left-element-position: relative;
             --node-left-element-aligh: left;
 
-            --timeA-fontsize: 20px;
+            --timeA-fontsize: 24px;
             --timeA-width: 200px;
             --timeA-shadow: -6px 4px 13px rgba(120, 144, 177, .25);
             --timeA-before-rightdrag: calc(100% - 10px);
             --timeA-after-leftdrag: -34px;
 
-            --timeB-fontsize: 18px;
+            --timeB-fontsize: 24px;
             --timeB-padding: 0 0px;
             --timeB-after-leftdrag: -28px;
 
