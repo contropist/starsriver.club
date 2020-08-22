@@ -7691,6 +7691,9 @@
                 transition: .2s ease-in-out;
                 border-radius: 12px 12px 0 0;
             }
+            .app-userspace .flow-deliver textarea{
+                height: 42px;
+            }
             .app-userspace .flow-deliver.sleep{
                 transform: translate3d(0, 600px, 0);
             }
