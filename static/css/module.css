@@ -7535,7 +7535,7 @@
             width: var(--timeA-width);
             height: 50px;
             line-height: 50px;
-            padding: 10px 15px;
+            padding: 2px 15px;
             background: #fff;
             border-radius: 4px;
             box-shadow: var(--timeA-shadow);
