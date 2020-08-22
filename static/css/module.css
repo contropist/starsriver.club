@@ -7412,6 +7412,8 @@
             --node-left-element-width: var(--node-left-width);
             --node-left-element-position: absolute;
             --node-left-element-aligh: right;
+            --node-right-margin: 8px 0 10px 20px;
+            --node-right-s-center-padding: 0 var(--box-edge);
 
             --timeA-fontsize: 26px;
             --timeA-width: calc(var(--node-left-element-width) - 26px);
@@ -7438,6 +7440,8 @@
             --node-left-element-width: 100%;
             --node-left-element-position: relative;
             --node-left-element-aligh: left;
+            --node-right-margin: 8px 0 0 8px;
+            --node-right-s-center-padding: 0;
 
             --timeA-fontsize: 24px;
             --timeA-width: 200px;
@@ -7453,6 +7457,7 @@
         }
         .app-userspace .timeline{
             --line-color: #c8d1de;
+            --box-edge:15px;
             position: relative;
             display: block;
             width: 100%;
@@ -7595,11 +7600,10 @@
         }
 
         .app-userspace .timeline .node .n-right{
-            --box-edge:15px;
             position: relative;
             background: #fff;
             padding: var(--box-edge);
-            margin: 8px 0 10px 20px;;
+            margin: var(--node-right-margin);
             box-shadow: 0 0 10px rgba(120, 144, 177, .2);
             border-radius: 4px;
         }
@@ -7622,7 +7626,7 @@
         }
         .app-userspace .timeline .node .n-right .s-center{
             margin-bottom: var(--box-edge);
-            padding: 0 var(--box-edge);
+            padding: var(--node-right-s-center-padding);
         }
         .app-userspace .timeline .node .n-right .s-center .flow-comment-list{
             position: relative;
