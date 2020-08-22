@@ -42,26 +42,7 @@
             <!--{template home/space_home_userabout}-->
         </div>
         <div class="mas-viewer-container">
-            <!--{if helper_access::check_module('share') && $space[self]}-->
-                <!--{template home/space_home_mod_share_form}-->
-            <!--{/if}-->
-            <!--{template home/space_home_mod_share_nav}-->
-            <!--{if $list}-->
-                <ul id="share_ul">
-                    <!--{loop $list $k $value}-->
-                        <!--{template home/space_home_mod_share_li}-->
-                    <!--{/loop}-->
-                </ul>
-                <!--{if $pricount}-->
-                    <p class="vessel alert hi-warning">{lang hide_share}</p>
-                <!--{/if}-->
-                <!--{if $multi}--><div class="pg">$multi</div><!--{/if}-->
-            <!--{else}-->
-                <ul id="share_ul"></ul>
-                <div class=" vessel withedge">
-                    <p class="global_nothing">{lang global_nothing}</p>
-                </div>
-            <!--{/if}-->
+            <!--{template home/space_home_mod_share_list}-->
         </div>
     </div>
 <!--{/if}-->

@@ -121,6 +121,7 @@
                     }
                 }
             },
+
             Tl = SR('.timeline')[0],
             Ts = SR('.time-A'),
             Th = Ts[0].Css.height + Ts[0].Css.marginTop + Ts[0].Css.marginBottom + Ts[0].parentNode.Css.paddingTop,
@@ -135,6 +136,7 @@
                     }
                 }
             };
+
         if(MasElements.viewer.scrollHeight > SRGlobal.Window.Height){
             if(page) page.addClass('sleep');
             if(postform) postform.addClass('sleep');
@@ -143,5 +145,6 @@
         }
         addEvent(MasElements.viewer,'scroll',TsOn);
         addEvent(MasElements.viewer,'scroll',positionfix);
+
     });
 </script>

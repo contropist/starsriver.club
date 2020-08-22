@@ -1,3 +1,20 @@
+<!--[nest=nestcontenttop]--><div id="nestcontenttop" class="area"></div><!--[/nest]-->
+<!--{hook/space_doing_top}-->
+<!--{if $space[self] && helper_access::check_module('doing')}-->
+<div class="vessel withedge">
+    <!--{template home/space_route_mod_doing_deliverer}-->
+</div>
+<!--{/if}-->
+<!--{hook/space_doing_bottom}-->
+
+<div class="vessel">
+    <div class="nav">
+        <a class="$actives[all]" href="home.php?mod=space&do=$do&view=all">{lang view_all}</a>
+        <a class="$actives[we]" href="home.php?mod=space&do=$do&view=we">{lang me_friend_doing}</a>
+        <a class="$actives[me]" href="home.php?mod=space&do=$do&view=me">{lang doing_view_me}</a>
+    </div>
+</div>
+
 <!--{if $dolist}-->
 	<!--{if $pricount}-->
 		<p class="vessel alert hi-warning">{lang hide_doing}</p>
@@ -54,3 +71,8 @@
 		<p class="global_nothing">{lang global_nothing}</p>
 	</div>
 <!--{/if}-->
+
+<!--[nest=nest1]--><div id="nest1" class="area"></div><!--[/nest]-->
+<!--[nest=nest2]--><div id="nest2" class="area"></div><!--[/nest]-->
+<!--[nest=nest3]--><div id="nest3" class="area"></div><!--[/nest]-->
+<!--[nest=nestcontentbottom]--><div id="nestcontentbottom" class="area"></div><!--[/nest]-->

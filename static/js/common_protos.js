@@ -39,6 +39,7 @@ Object.defineProperty(HTMLElement.prototype, 'Css', {
             fontSize: parseFloat(calcstyle('fontSize')),
 
             background: parseFloat(calcstyle('background')),
+
         };
     },
 });
