@@ -68,29 +68,36 @@
                 addEvent(document,'DOMContentLoaded',function () {
                     let wall = SR('.wall')[0],
                         postform = SR('#quickcommentform_{$space[uid]}')[0],
+                        postform_style = '',
                         scrltem = 0,
                         positionfix = function (){
                         if(SRGlobal.Window.Width > 1000){
-                            if(body.hasClass('scroll-overhead')){
-                                postform.style = 'position: fixed !important; right: 8px; top:'+ (MasElements.Bank.Css.height + 16) + 'px;';
-                            } else {
-                                postform.style = '';
-                            }
+                            fastdom.measure(() => {
+                                if(body.hasClass('scroll-overhead')){
+                                    postform_style = 'position: fixed !important; right: 8px; top:'+ (MasElements.Bank.Css.height + 16) + 'px;';
+                                } else {
+                                    postform_style = '';
+                                }
+                            });
+                            fastdom.mutate(() => {
+                                postform.style = postform_style;
+                            });
+
                         } else {
                             postform.style = '';
                             if(SRGlobal.Window.Scroll.DirY === 'down'){
                                 scrltem = SRGlobal.Window.Scroll.Top;
-                                postform.addClass('sleep');
+                                fastdom.mutate(() => {postform.addClass('sleep')});
                             } else if(SRGlobal.Window.Scroll.DirY === 'up' && scrltem - SRGlobal.Window.Scroll.Top > Math.min(390, MasElements.viewer.scrollHeight - SRGlobal.Window.Height - 20)) {
-                                postform.delClass('sleep');
+                                    fastdom.mutate(() => {postform.delClass('sleep')});
                             }
                         }
                     };
 
                     if(MasElements.viewer.scrollHeight > SRGlobal.Window.Height){
-                        if(postform) postform.addClass('sleep');
+                        if(postform) fastdom.mutate(() => {postform.addClass('sleep')});
                     } else {
-                        if(wall) wall.style.marginBottom = '160px';
+                        if(wall) fastdom.mutate(() => {wall.style.marginBottom = '160px'});
                     }
                     addEvent(MasElements.viewer,'scroll',positionfix);
                 });

@@ -77,13 +77,14 @@
             viewerBannerImg: SR('.Mas > .mas-viewer > .mas-viewer-header > div > .banner > img')[0],
             Bank:            SR('.Mas > .mas-viewer > .mas-viewer-header  > div > .bank')[0],
             BankS:           SR('.Mas > .mas-viewer > .mas-viewer-header  > div > .bank.type-scroll')[0],
+
             MasViewerScroll: {
                 Top: 0,
-                Left: 0
+                Left: 0,
+                BeforeTop: 0,
+                BeforeLeft: 0,
             }
         };
-
-
 
         DocAction.initalize();
         MasAction.initalize();
@@ -94,26 +95,28 @@
             console.log(SRGlobal);
         },
         WinScrollDirRefresh: function (tmp, obj){
-            tmp.Top = obj.scrollTop;
-            tmp.Left = obj.scrollLeft;
+            fastdom.measure(() => {
+                tmp.Top = obj.scrollTop;
+                tmp.Left = obj.scrollLeft;
 
-            SRGlobal.Window.Scroll.Top = tmp.Top;
-            SRGlobal.Window.Scroll.Left = tmp.Left;
+                SRGlobal.Window.Scroll.Top = tmp.Top;
+                SRGlobal.Window.Scroll.Left = tmp.Left;
 
-            if(tmp.Top > tmp.BeforeTop){
-                SRGlobal.Window.Scroll.DirY = 'down';
-            } else if(tmp.Top < tmp.BeforeTop){
-                SRGlobal.Window.Scroll.DirY = 'up';
-            }
+                if (tmp.Top > tmp.BeforeTop) {
+                    SRGlobal.Window.Scroll.DirY = 'down';
+                } else {
+                    SRGlobal.Window.Scroll.DirY = 'up';
+                }
 
-            if(tmp.Left > tmp.BeforeLeft){
-                SRGlobal.Window.Scroll.DirX = 'right';
-            } else if(tmp.Left < tmp.BeforeLeft){
-                SRGlobal.Window.Scroll.DirX = 'left';
-            }
+                if (tmp.Left > tmp.BeforeLeft) {
+                    SRGlobal.Window.Scroll.DirX = 'right';
+                } else {
+                    SRGlobal.Window.Scroll.DirX = 'left';
+                }
 
-            tmp.BeforeTop = tmp.Top;
-            tmp.BeforeLeft = tmp.Left;
+                tmp.BeforeTop = tmp.Top;
+                tmp.BeforeLeft = tmp.Left;
+            });
         }
     };
 
@@ -142,7 +145,8 @@
 
                 /* nav样式初始化 */
                 if(banner){
-                    (document.documentElement.scrollTop || document.body.scrollTop || 0) >= (banner.Css.height - nav.Css.height) ? fastdom.mutate(() => {body.addClass('scroll-overhead');}) : '';
+                    (document.documentElement.scrollTop || document.body.scrollTop || 0) >= (banner.Css.height - nav.Css.height) ?
+                        fastdom.mutate(() => {body.addClass('scroll-overhead');}) : '';
                 }
 
                 /* 页面尺寸初始化 */
@@ -150,9 +154,7 @@
 
                 /* 清除loader遮罩 */
                 for(let self of loader.pare){
-                    fastdom.mutate(() => {
-                        self.parentElement.removeChild(self);
-                    });
+                    fastdom.mutate(() => {self.parentElement.removeChild(self)});
                 }
             };
 
@@ -160,61 +162,48 @@
         },
 
         resize: function () {
-
-            SRGlobal.Window.Height = document.documentElement.clientHeight || document.body.clientHeight;
-            SRGlobal.Window.Width = document.documentElement.clientWidth || document.body.clientWidth;
-
-            if(SRGlobal.Window.Height >= SRGlobal.Window.Width){
-                body.addClass('WD-V');
-            } else {
-                body.delClass('WD-V');
-            }
-
             let MasGuideWidth = isUndefined(MasElements.guide) ? 0 : 72,
-
                 windowSize = 'WL-0';
 
-            if(SRGlobal.Window.Width > 350 + MasGuideWidth){
-                windowSize = 'WL-3P';
-            }
-            if(SRGlobal.Window.Width > 470 + MasGuideWidth){
-                windowSize = 'WL-4P';
-            }
-            if(SRGlobal.Window.Width > 760){
-                windowSize = 'WL-7P';
-            }
-            if(SRGlobal.Window.Width > 1320){
-                windowSize = 'WL-13P';
-            }
-            if(SRGlobal.Window.Width > 1910){
-                windowSize = 'WL-1K';
-            }
-            if(SRGlobal.Window.Width > 2550){
-                windowSize = 'WL-2K';
-            }
-            if(SRGlobal.Window.Width > 4080){
-                windowSize = 'WL-4K';
-            }
+            fastdom.measure(() => {
+                SRGlobal.Window.Height = document.documentElement.clientHeight || document.body.clientHeight;
+                SRGlobal.Window.Width = document.documentElement.clientWidth || document.body.clientWidth;
 
-            if(SRGlobal.Temp.windowSize !== windowSize){
+                if (SRGlobal.Window.Width > 4080) {
+                    windowSize = 'WL-4K';
+                } else if (SRGlobal.Window.Width > 2550) {
+                    windowSize = 'WL-2K';
+                } else if (SRGlobal.Window.Width > 1910) {
+                    windowSize = 'WL-1K';
+                } else if (SRGlobal.Window.Width > 1320) {
+                    windowSize = 'WL-13P';
+                } else if (SRGlobal.Window.Width > 760) {
+                    windowSize = 'WL-7P';
+                } else if (SRGlobal.Window.Width > 470 + MasGuideWidth) {
+                    windowSize = 'WL-4P';
+                } else if (SRGlobal.Window.Width > 350 + MasGuideWidth) {
+                    windowSize = 'WL-3P';
+                }
+
                 SRGlobal.Temp.windowSize = windowSize;
-                fastdom.mutate(() => {
-                    body.delClass("WL-0 WL-3P WL-4P WL-7P WL-13P WL-1K WL-2K WL-4K");
-                    body.addClass(windowSize);
-                });
+            });
+
+            if (SRGlobal.Window.Height >= SRGlobal.Window.Width) {
+                fastdom.mutate(() => {body.addClass('WD-V')});
+            } else {
+                fastdom.mutate(() => {body.delClass('WD-V')});
             }
 
-            if(nav){
-                fastdom.mutate(() => {
-                    nav.delClass('trans-ease-slow trans-ease');
-                });
-            }
-            if(document.querySelector('#e_controls')) {
-                document.querySelector('#e_controls').delClass('trans-ease-slow trans-ease');
-            }
-            if(document.querySelector('#console')) {
-                document.querySelector('#console').delClass('trans-ease-slow trans-ease');
-            }
+            fastdom.mutate(() => {
+                body.delClass("WL-0 WL-3P WL-4P WL-7P WL-13P WL-1K WL-2K WL-4K");
+                body.addClass(SRGlobal.Temp.windowSize);
+            });
+
+            fastdom.mutate(() => {
+                if(nav) nav.delClass('trans-ease-slow trans-ease');
+                if(document.querySelector('#e_controls')) document.querySelector('#e_controls').delClass('trans-ease-slow trans-ease');
+                if(document.querySelector('#console')) document.querySelector('#console').delClass('trans-ease-slow trans-ease');
+            });
         },
 
         scroll: function () {
@@ -224,31 +213,28 @@
             SRGlobal.Window.Scroll.ToBottom = SRGlobal.Window.Scroll.Top + SRGlobal.Window.Height >= SRGlobal.Window.Scroll.Height ? 1 : 0;
 
             if(SRGlobal.Window.Scroll.ToBottom){
-                fastdom.mutate(() => {
-                    body.addClass('scroll-tobottom');
-                });
+                fastdom.mutate(() => {body.addClass('scroll-tobottom')});
             } else {
-                fastdom.mutate(() => {
-                    body.delClass('scroll-tobottom');
-                });
+                fastdom.mutate(() => {body.delClass('scroll-tobottom')});
             }
 
             if(banner){
-                SRGlobal.Window.Scroll.Top >= (banner.Css.height - nav.Css.height) ? body.addClass('scroll-overhead') : body.delClass('scroll-overhead');
+                SRGlobal.Window.Scroll.Top >= (banner.Css.height - nav.Css.height) ?
+                    fastdom.mutate(() => {body.addClass('scroll-overhead')}) : fastdom.mutate(() => {body.delClass('scroll-overhead')});
             }
 
             //nav 滚动效果
             (function () {
                 if(nav){
-                    nav.addClass('trans-ease');
+                    fastdom.mutate(() => {nav.addClass('trans-ease')});
 
                     if(SRGlobal.Window.Scroll.Top > banner.clientHeight && SRGlobal.Window.Scroll.DirY === 'down'){
-                        nav.addClass('sleep');
+                        fastdom.mutate(() => {nav.addClass('sleep')});
                     } else {
-                        nav.delClass('sleep');
+                        fastdom.mutate(() => {nav.delClass('sleep')});
                     }
                     if(SRGlobal.Window.Scroll.ToBottom && !uconsole){
-                        nav.delClass('sleep');
+                        fastdom.mutate(() => {nav.delClass('sleep')});
                     }
                 }
             })();
@@ -395,9 +381,9 @@
         },
 
         viewerScroll: function () {
-            Misc.WinScrollDirRefresh(MasElements.MasViewerScroll, MasElements.viewer);
 
-            if(MasElements.viewer && MasElements.viewerBanner.Css.height !== 0){
+            Misc.WinScrollDirRefresh(MasElements.MasViewerScroll, MasElements.viewer);
+            if(MasElements.viewerHeader){
                 if(MasElements.MasViewerScroll.Top >= MasElements.viewerHeader.Css.height - MasElements.Bank.Css.height){
                     fastdom.mutate(() => {body.addClass('scroll-overhead');});
                 } else {
@@ -406,7 +392,7 @@
 
                 if(!body.hasClass('scroll-overhead')){
                     fastdom.mutate(() => {
-                        let trspct = (1 - MasElements.MasViewerScroll.Top / MasElements.viewerBannerImg.Css.height) * 50;
+                        let trspct = (1 - (MasElements.MasViewerScroll.Top / MasElements.viewerBannerImg.Css.height) * 1.5 ) * 50;
                         MasElements.viewerBannerImg.style.transform = 'translate(-50%, -' + trspct + '%)';
                     });
                 }
@@ -416,11 +402,15 @@
         bannerImgResize: function () {
             if(MasElements.viewerBannerImg){
                 if(MasElements.viewerBannerImg.naturalWidth / MasElements.viewerBannerImg.naturalHeight >= MasElements.viewerBanner.Css.width / MasElements.viewerBanner.Css.height){
-                    MasElements.viewerBannerImg.style.width = "auto";
-                    MasElements.viewerBannerImg.style.height = "100%";
+                    fastdom.mutate(() => {
+                        MasElements.viewerBannerImg.style.width = "auto";
+                        MasElements.viewerBannerImg.style.height = "100%";
+                    });
                 } else {
-                    MasElements.viewerBannerImg.style.width = "100%";
-                    MasElements.viewerBannerImg.style.height = "auto";
+                    fastdom.mutate(() => {
+                        MasElements.viewerBannerImg.style.width = "100%";
+                        MasElements.viewerBannerImg.style.height = "auto";
+                    });
                 }
             }
         }

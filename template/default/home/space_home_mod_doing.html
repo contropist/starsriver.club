@@ -124,7 +124,7 @@
                             if(page) page.addClass('sleep');
                             if(postform) postform.addClass('sleep');
                         });
-                    } else if(SRGlobal.Window.Scroll.DirY === 'up' &&  scrltem - SRGlobal.Window.Scroll.Top > Math.min(390, MasElements.viewer.scrollHeight - SRGlobal.Window.Height - 20)) {
+                    } else if(scrltem - SRGlobal.Window.Scroll.Top > Math.min(390, MasElements.viewer.scrollHeight - SRGlobal.Window.Height - 20)) {
                         fastdom.mutate(() => {
                             if(page) page.delClass('sleep');
                             if(postform) postform.delClass('sleep');

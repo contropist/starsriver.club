@@ -1462,10 +1462,10 @@
 
 /*region Nav - Vertical */
     .nav-vertical{
-        display: block;
+        display: flex;
+        flex-flow: column wrap;
     }
     .nav-vertical > *{
-        display: inline-block;
         width: 100%;
     }
     .nav-vertical > .title{
