@@ -398,7 +398,7 @@
                 }
 
                 if(!overhead){
-                    let trspct = (1 - (Math.min(MasElements.MasViewerScroll.Top,MasElements.viewerBannerImg.Css.height) / MasElements.viewerBannerImg.Css.height) * 1.5 ) * 50;
+                    let trspct = (1 - (MasElements.MasViewerScroll.Top / MasElements.viewerBannerImg.Css.height) * 1.5 ) * 50;
                     fastdom.mutate(() => {
                         MasElements.viewerBannerImg.style.transform = 'translate(-50%, -' + trspct + '%)';
                     });
