@@ -396,7 +396,7 @@
                 }
 
                 if(!overhead){
-                    let trspct = (1 - (MasElements.MasViewerScroll.Top / MasElements.viewerBannerImg.Css.height) * 1.5 ) * 50;
+                    let trspct = (1 - (MasElements.MasViewerScroll.Top / MasElements.viewerBannerImg.Css.height) * 1.2 ) * 50;
                     MasElements.viewerBannerImg.style.transform = 'translate(-50%, -' + trspct + '%)';
                 }
             }
