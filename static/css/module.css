@@ -7519,17 +7519,17 @@
             box-sizing: border-box;
         }
 
-        .app-userspace .timeline .node .n-left{
+        .app-userspace .timeline .n-left{
             position: var(--node-left-element-position);
             right: var(--node-left-rightdrag);
             width: var(--node-left-element-width);
             padding: var(--node-left-padding);
             text-align: var(--node-left-element-aligh);
         }
-        .app-userspace .timeline .node .n-left > *{
+        .app-userspace .timeline .n-left > *{
             display: block;
         }
-        .app-userspace .timeline .node .n-left .time-A{
+        .app-userspace .timeline .n-left .time-A{
             z-index: 1;
             position: relative;
             width: var(--timeA-width);
@@ -7544,7 +7544,7 @@
             font-size: var(--timeA-fontsize);
             word-break: break-word;
         }
-        .app-userspace .timeline .node .n-left .time-A::before{
+        .app-userspace .timeline .n-left .time-A::before{
             content: '';
             position: absolute;
             display: inline-block;
@@ -7556,7 +7556,7 @@
             top: 18px;
             border-radius: 4px;
         }
-        .app-userspace .timeline .node .n-left .time-A::after{
+        .app-userspace .timeline .n-left .time-A::after{
             content: '';
             position: absolute;
             top: 14px;
@@ -7567,7 +7567,7 @@
             background: #fff;
             border-radius: 12px;
         }
-        .app-userspace .timeline .node .n-left .time-B{
+        .app-userspace .timeline .n-left .time-B{
             z-index: 0;
             position: relative;
             margin-top: 15px;
@@ -7576,7 +7576,7 @@
             color: var(--color-text-dark);
             font-size: var(--timeB-fontsize);
         }
-        .app-userspace .timeline .node .n-left .time-B::after{
+        .app-userspace .timeline .n-left .time-B::after{
             content: '';
             position: absolute;
             top: 1px;
@@ -7587,21 +7587,21 @@
             background: #fff;
             border-radius: 12px;
         }
-        .app-userspace .timeline .node .n-left .user-tag{
+        .app-userspace .timeline .n-left .user-tag{
             position: relative;
             margin: 10px 0 0 0;
             line-height: 26px;
         }
-        .app-userspace .timeline .node .n-left .avatar{
+        .app-userspace .timeline .n-left .avatar{
             position: absolute;
             left: var(--ut-avatar-leftdrag);
             width: 26px;
             height: 26px;
         }
-        .app-userspace .timeline .node .n-left .avatar .avatar-main{
+        .app-userspace .timeline .n-left .avatar .avatar-main{
             box-shadow: 0 0 0 3px var(--line-color);
         }
-        .app-userspace .timeline .node .n-left .username{
+        .app-userspace .timeline .n-left .username{
             margin-right: 10px;
             color: var(--color-text-dark);
             font-size: 15px;
@@ -7609,7 +7609,7 @@
             opacity: .8;
         }
 
-        .app-userspace .timeline .node .n-right{
+        .app-userspace .timeline .n-right{
             position: relative;
             background: #fff;
             padding: var(--box-edge);
@@ -7617,15 +7617,15 @@
             box-shadow: 0 0 10px rgba(120, 144, 177, .2);
             border-radius: 4px;
         }
-        .app-userspace .timeline .node .n-right .s-top{
+        .app-userspace .timeline .n-right .s-top{
             line-height: 26px;
             margin-bottom: var(--box-edge);
         }
-        .app-userspace .timeline .node .n-right .s-top .title{
+        .app-userspace .timeline .n-right .s-top .title{
             font-size: 15px;
             color: var(--color-text-dark);
         }
-        .app-userspace .timeline .node .n-right .s-top .censor{
+        .app-userspace .timeline .n-right .s-top .censor{
             display: inline-block;
             padding: 0 5px;
             background: var(--color-heart-pink);
@@ -7634,23 +7634,23 @@
             border-radius: 7px;
             margin-left: 5px;
         }
-        .app-userspace .timeline .node .n-right .s-center{
+        .app-userspace .timeline .n-right .s-center{
             margin-bottom: var(--box-edge);
             padding: var(--node-right-s-center-padding);
         }
-        .app-userspace .timeline .node .n-right .s-center .flow-comment-list{
+        .app-userspace .timeline .n-right .s-center .flow-comment-list{
             position: relative;
             margin-top: var(--box-edge);
             border-left: 2px dashed var(--line-color);
             padding-left: 10px;
         }
-        .app-userspace .timeline .node .n-right .s-center .flow-comment-list .height-limited{
+        .app-userspace .timeline .n-right .s-center .flow-comment-list .height-limited{
             max-height: 300px;
         }
-        .app-userspace .timeline .node .n-right .s-end {
+        .app-userspace .timeline .n-right .s-end {
             text-align: right;
         }
-        .app-userspace .timeline .node .n-right .s-end .icon {
+        .app-userspace .timeline .n-right .s-end .icon {
             background: var(--color-lightgray);
             color: var(--color-text-lightgray);
             font-size: 18px;
@@ -7660,7 +7660,7 @@
             line-height: 30px;
             text-align: center;
         }
-        .app-userspace .timeline .node .n-right .s-end .icon:hover {
+        .app-userspace .timeline .n-right .s-end .icon:hover {
             background: var(--color-sky-blue);
             color: #fff;
         }

@@ -5,8 +5,6 @@
 
         SRGlobal = {
 
-            Debugmod : false,
-
             Window:{
                 Width: document.documentElement.clientWidth || document.body.clientWidth,
                 Height: document.documentElement.clientHeight || document.body.clientHeight,
@@ -23,10 +21,30 @@
 
             Cursor:{
                 type:'', //游标类型
+
                 Top:0,
                 Left:0,
                 BeforeTop:0,
                 BeforeLeft:0,
+
+                click:{
+                    Top:0,
+                    Left:0,
+                    BeforeTop:0,
+                    BeforeLeft:0,
+                },
+                down:{
+                    Top:0,
+                    Left:0,
+                    BeforeTop:0,
+                    BeforeLeft:0,
+                },
+                up:{
+                    Top:0,
+                    Left:0,
+                    BeforeTop:0,
+                    BeforeLeft:0,
+                }
             },
 
             Wheel:{
@@ -72,6 +90,9 @@
     });
 
     var Misc = {
+        Debug: function (){
+            console.log(SRGlobal);
+        },
         WinScrollDirRefresh: function (tmp, obj){
             tmp.Top = obj.scrollTop;
             tmp.Left = obj.scrollLeft;
@@ -103,14 +124,16 @@
 
         initalize: function () {
 
-            addEvent(document,'click',     DocAction.click);
             addEvent(window,  'scroll',    DocAction.scroll);
             addEvent(window,  'resize',    DocAction.resize);
-            addEvent(window,  'mousewheel',DocAction.wheel);
-            addEvent(document,'mousewheel',DocAction.wheel);
+            addEvent(document,'mousewheel',DocAction.mousewheel);
+            addEvent(document,'mousemove', DocAction.mousemove);
+            addEvent(document,'mousedown', DocAction.mousedown);
+            addEvent(document,'mouseup',   DocAction.mouseup);
+            addEvent(document,'click',     DocAction.mouseclick);
 
             if(document.addEventListener) { //firefox
-                document.addEventListener('DOMMouseScroll', DocAction.wheel(), false);
+                document.addEventListener('DOMMouseScroll', DocAction.mousewheel(), false);
             }
 
             loader.hook.onload = function () {
@@ -133,20 +156,6 @@
             };
 
             loader.hook.src = loader.hook.data('src');
-        },
-
-        click: function (evt) { //传入e事件来兼容火狐
-
-            let e =  evt || window.event;
-            let triggle = getEventobj();
-
-            SRGlobal.Cursor.Top = e.clientY;
-            SRGlobal.Cursor.Left = e.clientX;
-
-            /* modal 在 body 的委托 */
-            if(triggle.data('type') === 'modal'){
-                triggle.target.modal(triggle.data('action'));
-            }
         },
 
         resize: function () {
@@ -207,8 +216,6 @@
 
             Misc.WinScrollDirRefresh(SRGlobal.Window.Scroll, document.documentElement);
 
-            SRGlobal.Window.Scroll.Height = document.documentElement.scrollHeight || document.body.scrollHeight;
-            SRGlobal.Window.Scroll.Width = document.documentElement.scrollWidth || document.body.scrollWidth;
             SRGlobal.Window.Scroll.ToBottom = SRGlobal.Window.Scroll.Top + SRGlobal.Window.Height >= SRGlobal.Window.Scroll.Height ? 1 : 0;
 
             if(SRGlobal.Window.Scroll.ToBottom){
@@ -307,7 +314,7 @@
             })();
         },
 
-        wheel: function (evt) {
+        mousewheel: function (evt) {
             let e = evt || window.event;
             if (e.wheelDelta) {  //判断浏览器IE，谷歌滑轮事件
                 if (e.wheelDelta > 0) {SRGlobal.Wheel.Dir="up"}
@@ -318,6 +325,52 @@
             }
         },
 
+        mousemove: function (evt) {
+            let e =  evt || window.event;
+            let triggle = getEventobj();
+            SRGlobal.Cursor.BeforeTop = SRGlobal.Cursor.Top;
+            SRGlobal.Cursor.BeforeLeft = SRGlobal.Cursor.Left;
+            SRGlobal.Cursor.Top = e.clientY;
+            SRGlobal.Cursor.Left = e.clientX;
+        },
+
+        mousedown: function (evt) {
+            let e =  evt || window.event;
+            let triggle = getEventobj();
+            SRGlobal.Cursor.down.BeforeTop = SRGlobal.Cursor.down.Top;
+            SRGlobal.Cursor.down.BeforeLeft = SRGlobal.Cursor.down.Left;
+            SRGlobal.Cursor.down.Top = SRGlobal.Cursor.Top;
+            SRGlobal.Cursor.down.Left = SRGlobal.Cursor.Left;
+
+            console.log(SRGlobal.Cursor);
+        },
+
+        mouseup: function (evt) {
+            let e =  evt || window.event;
+            let triggle = getEventobj();
+            SRGlobal.Cursor.up.BeforeTop = SRGlobal.Cursor.up.Top;
+            SRGlobal.Cursor.up.BeforeLeft = SRGlobal.Cursor.up.Left;
+            SRGlobal.Cursor.up.Top = SRGlobal.Cursor.Top;
+            SRGlobal.Cursor.up.Left = SRGlobal.Cursor.Left;
+
+            console.log(SRGlobal.Cursor);
+        },
+
+        mouseclick: function (evt) {
+            let e =  evt || window.event;
+            let triggle = getEventobj();
+            SRGlobal.Cursor.click.BeforeTop = SRGlobal.Cursor.click.Top;
+            SRGlobal.Cursor.click.BeforeLeft = SRGlobal.Cursor.click.Left;
+            SRGlobal.Cursor.click.Top = SRGlobal.Cursor.Top;
+            SRGlobal.Cursor.click.Left = SRGlobal.Cursor.Left;
+
+            console.log(SRGlobal.Cursor);
+
+            /* modal 在 body 的委托 */
+            if(triggle.data('type') === 'modal'){
+                triggle.target.modal(triggle.data('action'));
+            }
+        },
     };
 
     var MasAction = {

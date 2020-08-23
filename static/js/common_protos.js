@@ -11,14 +11,17 @@ Object.defineProperty(HTMLElement.prototype, 'Css', {
         }
 
         return {
+
             top: self.getBoundingClientRect().top + window.scrollY,
             top2win: self.getBoundingClientRect().top,
             bottom: self.getBoundingClientRect().bottom,
             left: self.getBoundingClientRect().left + window.scrollX,
             left2win: self.getBoundingClientRect().left,
             right: self.getBoundingClientRect().right,
+
             width: self.clientWidth || self.offsetWidth,
             height: self.clientHeight || self.offsetHeight,
+
             scrollTop: self.pageYOffset || self.scrollTop,
             scrollLeft: self.pageXOffset || self.scrollLeft,
             boxSizing: parseFloat(calcstyle('boxSizing')),
