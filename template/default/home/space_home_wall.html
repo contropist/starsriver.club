@@ -68,28 +68,26 @@
                 addEvent(document,'DOMContentLoaded',function () {
                     let wall = SR('.wall')[0],
                         postform = SR('#quickcommentform_{$space[uid]}')[0],
-                        postform_style = '',
                         scrltem = 0,
                         positionfix = function (){
                         if(SRGlobal.Window.Width <= 1000){
                             postform.style = '';
                             if(SRGlobal.Window.Scroll.DirY === 'down'){
                                 scrltem = SRGlobal.Window.Scroll.Top;
-                                fastdom.mutate(() => {postform.addClass('sleep')});
+                                postform.addClass('sleep');
                             } else if(scrltem - SRGlobal.Window.Scroll.Top > Math.min(390, MasElements.viewer.scrollHeight - SRGlobal.Window.Height - 20)) {
-                                fastdom.mutate(() => {postform.delClass('sleep')});
+                                postform.delClass('sleep');
                             }
                         }
                     };
 
                     if(MasElements.viewer.scrollHeight > SRGlobal.Window.Height){
-                        if(postform) fastdom.mutate(() => {postform.addClass('sleep')});
+                        if(postform) postform.addClass('sleep');
                     } else {
-                        if(wall) fastdom.mutate(() => {wall.style.marginBottom = '160px'});
+                        if(wall) wall.style.marginBottom = '160px';
                     }
                     addEvent(MasElements.viewer,'scroll',positionfix);
                 });
-
 
             </script>
         </div>

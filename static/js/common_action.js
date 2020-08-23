@@ -20,7 +20,7 @@
             },
 
             Cursor:{
-                type:'', //游标类型
+                type:'',
 
                 Top:0,
                 Left:0,
@@ -95,28 +95,26 @@
             console.log(SRGlobal);
         },
         WinScrollDirRefresh: function (tmp, obj){
-            fastdom.measure(() => {
-                tmp.Top = obj.scrollTop;
-                tmp.Left = obj.scrollLeft;
+            tmp.Top = obj.scrollTop;
+            tmp.Left = obj.scrollLeft;
 
-                SRGlobal.Window.Scroll.Top = tmp.Top;
-                SRGlobal.Window.Scroll.Left = tmp.Left;
+            SRGlobal.Window.Scroll.Top = tmp.Top;
+            SRGlobal.Window.Scroll.Left = tmp.Left;
 
-                if (tmp.Top > tmp.BeforeTop) {
-                    SRGlobal.Window.Scroll.DirY = 'down';
-                } else {
-                    SRGlobal.Window.Scroll.DirY = 'up';
-                }
+            if (tmp.Top > tmp.BeforeTop) {
+                SRGlobal.Window.Scroll.DirY = 'down';
+            } else {
+                SRGlobal.Window.Scroll.DirY = 'up';
+            }
 
-                if (tmp.Left > tmp.BeforeLeft) {
-                    SRGlobal.Window.Scroll.DirX = 'right';
-                } else {
-                    SRGlobal.Window.Scroll.DirX = 'left';
-                }
+            if (tmp.Left > tmp.BeforeLeft) {
+                SRGlobal.Window.Scroll.DirX = 'right';
+            } else {
+                SRGlobal.Window.Scroll.DirX = 'left';
+            }
 
-                tmp.BeforeTop = tmp.Top;
-                tmp.BeforeLeft = tmp.Left;
-            });
+            tmp.BeforeTop = tmp.Top;
+            tmp.BeforeLeft = tmp.Left;
         }
     };
 
@@ -145,8 +143,7 @@
 
                 /* nav样式初始化 */
                 if(banner){
-                    (document.documentElement.scrollTop || document.body.scrollTop || 0) >= (banner.Css.height - nav.Css.height) ?
-                        fastdom.mutate(() => {body.addClass('scroll-overhead');}) : '';
+                    (document.documentElement.scrollTop || document.body.scrollTop || 0) >= (banner.Css.height - nav.Css.height) ? body.addClass('scroll-overhead') : '';
                 }
 
                 /* 页面尺寸初始化 */
@@ -154,7 +151,7 @@
 
                 /* 清除loader遮罩 */
                 for(let self of loader.pare){
-                    fastdom.mutate(() => {self.parentElement.removeChild(self)});
+                    self.parentElement.removeChild(self);
                 }
             };
 
@@ -162,48 +159,47 @@
         },
 
         resize: function () {
+
+            SRGlobal.Window.Height = document.documentElement.clientHeight || document.body.clientHeight;
+            SRGlobal.Window.Width = document.documentElement.clientWidth || document.body.clientWidth;
+
             let MasGuideWidth = isUndefined(MasElements.guide) ? 0 : 72,
                 windowSize = 'WL-0';
 
-            fastdom.measure(() => {
-                SRGlobal.Window.Height = document.documentElement.clientHeight || document.body.clientHeight;
-                SRGlobal.Window.Width = document.documentElement.clientWidth || document.body.clientWidth;
-
-                if (SRGlobal.Window.Width > 4080) {
-                    windowSize = 'WL-4K';
-                } else if (SRGlobal.Window.Width > 2550) {
-                    windowSize = 'WL-2K';
-                } else if (SRGlobal.Window.Width > 1910) {
-                    windowSize = 'WL-1K';
-                } else if (SRGlobal.Window.Width > 1320) {
-                    windowSize = 'WL-13P';
-                } else if (SRGlobal.Window.Width > 760) {
-                    windowSize = 'WL-7P';
-                } else if (SRGlobal.Window.Width > 470 + MasGuideWidth) {
-                    windowSize = 'WL-4P';
-                } else if (SRGlobal.Window.Width > 350 + MasGuideWidth) {
-                    windowSize = 'WL-3P';
-                }
-
-                SRGlobal.Temp.windowSize = windowSize;
-            });
-
-            if (SRGlobal.Window.Height >= SRGlobal.Window.Width) {
-                fastdom.mutate(() => {body.addClass('WD-V')});
-            } else {
-                fastdom.mutate(() => {body.delClass('WD-V')});
+            if (SRGlobal.Window.Width > 4080) {
+                windowSize = 'WL-4K';
+            } else if (SRGlobal.Window.Width > 2550) {
+                windowSize = 'WL-2K';
+            } else if (SRGlobal.Window.Width > 1910) {
+                windowSize = 'WL-1K';
+            } else if (SRGlobal.Window.Width > 1320) {
+                windowSize = 'WL-13P';
+            } else if (SRGlobal.Window.Width > 760) {
+                windowSize = 'WL-7P';
+            } else if (SRGlobal.Window.Width > 470 + MasGuideWidth) {
+                windowSize = 'WL-4P';
+            } else if (SRGlobal.Window.Width > 350 + MasGuideWidth) {
+                windowSize = 'WL-3P';
             }
 
-            fastdom.mutate(() => {
-                body.delClass("WL-0 WL-3P WL-4P WL-7P WL-13P WL-1K WL-2K WL-4K");
-                body.addClass(SRGlobal.Temp.windowSize);
-            });
 
-            fastdom.mutate(() => {
-                if(nav) nav.delClass('trans-ease-slow trans-ease');
-                if(document.querySelector('#e_controls')) document.querySelector('#e_controls').delClass('trans-ease-slow trans-ease');
-                if(document.querySelector('#console')) document.querySelector('#console').delClass('trans-ease-slow trans-ease');
-            });
+
+            if (SRGlobal.Window.Height >= SRGlobal.Window.Width) {
+                body.addClass('WD-V');
+            } else {
+                body.delClass('WD-V');
+            }
+
+            if(SRGlobal.Temp.windowSize !== windowSize){
+                SRGlobal.Temp.windowSize = windowSize;
+                body.delClass("WL-0 WL-3P WL-4P WL-7P WL-13P WL-1K WL-2K WL-4K");
+                body.addClass(windowSize);
+            }
+
+
+            if(nav) nav.delClass('trans-ease-slow trans-ease');
+            if(document.querySelector('#e_controls')) document.querySelector('#e_controls').delClass('trans-ease-slow trans-ease');
+            if(document.querySelector('#console')) document.querySelector('#console').delClass('trans-ease-slow trans-ease');
         },
 
         scroll: function () {
@@ -213,28 +209,27 @@
             SRGlobal.Window.Scroll.ToBottom = SRGlobal.Window.Scroll.Top + SRGlobal.Window.Height >= SRGlobal.Window.Scroll.Height ? 1 : 0;
 
             if(SRGlobal.Window.Scroll.ToBottom){
-                fastdom.mutate(() => {body.addClass('scroll-tobottom')});
+                body.addClass('scroll-tobottom');
             } else {
-                fastdom.mutate(() => {body.delClass('scroll-tobottom')});
+                body.delClass('scroll-tobottom');
             }
 
             if(banner){
-                SRGlobal.Window.Scroll.Top >= (banner.Css.height - nav.Css.height) ?
-                    fastdom.mutate(() => {body.addClass('scroll-overhead')}) : fastdom.mutate(() => {body.delClass('scroll-overhead')});
+                SRGlobal.Window.Scroll.Top >= (banner.Css.height - nav.Css.height) ? body.addClass('scroll-overhead') : body.delClass('scroll-overhead')
             }
 
             //nav 滚动效果
             (function () {
                 if(nav){
-                    fastdom.mutate(() => {nav.addClass('trans-ease')});
+                    nav.addClass('trans-ease');
 
                     if(SRGlobal.Window.Scroll.Top > banner.clientHeight && SRGlobal.Window.Scroll.DirY === 'down'){
-                        fastdom.mutate(() => {nav.addClass('sleep')});
+                        nav.addClass('sleep');
                     } else {
-                        fastdom.mutate(() => {nav.delClass('sleep')});
+                        nav.delClass('sleep');
                     }
                     if(SRGlobal.Window.Scroll.ToBottom && !uconsole){
-                        fastdom.mutate(() => {nav.delClass('sleep')});
+                        nav.delClass('sleep');
                     }
                 }
             })();
@@ -246,13 +241,13 @@
                 if(editor_nav){
                     editor_nav.addClass('trans-ease');
                     if(SRGlobal.Window.Scroll.Top > banner.clientHeight && SRGlobal.Window.Scroll.DirY === 'down'){
-                        fastdom.mutate(() => {editor_nav.style.transform ='translateY(-' + nav.Css.height +'px)';});
+                        editor_nav.style.transform ='translateY(-' + nav.Css.height +'px)';
                     } else {
-                        fastdom.mutate(() => {editor_nav.style.transform ='translateY(0)';});
+                        editor_nav.style.transform ='translateY(0)';
                     }
 
                     if(SRGlobal.Window.Scroll.ToBottom){
-                        fastdom.mutate(() => {editor_nav.style.transform ='translateY(0)';});
+                        editor_nav.style.transform ='translateY(0)';
                     }
                 }
             })();
@@ -312,11 +307,11 @@
         mousewheel: function (evt) {
             let e = evt || window.event;
             if (e.wheelDelta) {  //判断浏览器IE，谷歌滑轮事件
-                if (e.wheelDelta > 0) {SRGlobal.Wheel.Dir="up"}
-                if (e.wheelDelta < 0) {SRGlobal.Wheel.Dir="down"}
+                if (e.wheelDelta > 0) SRGlobal.Wheel.Dir="up";
+                if (e.wheelDelta < 0) SRGlobal.Wheel.Dir="down";
             } else if (e.detail) {  //Firefox滑轮事件
-                if (e.detail> 0) {SRGlobal.Wheel.Dir="down"}
-                if (e.detail< 0) {SRGlobal.Wheel.Dir="up"}
+                if (e.detail> 0) SRGlobal.Wheel.Dir="down";
+                if (e.detail< 0) SRGlobal.Wheel.Dir="up";
             }
         },
 
@@ -369,14 +364,12 @@
             addEvent(window,'resize',MasAction.bannerImgResize);
 
             if(MasElements.viewerBannerImg){
-                fastdom.mutate(() => {
-                    MasElements.viewerBannerImg.style.display = 'none';
-                    MasElements.viewerBannerImg.onload = function () {
-                        MasAction.bannerImgResize();
-                        MasElements.viewerBannerImg.style.display = '';
-                    };
-                    MasElements.viewerBannerImg.src = MasElements.viewerBannerImg.data('src');
-                });
+                MasElements.viewerBannerImg.style.display = 'none';
+                MasElements.viewerBannerImg.onload = function () {
+                    MasAction.bannerImgResize();
+                    MasElements.viewerBannerImg.style.display = '';
+                };
+                MasElements.viewerBannerImg.src = MasElements.viewerBannerImg.data('src');
             }
         },
 
@@ -388,20 +381,14 @@
                 let overhead = MasElements.MasViewerScroll.Top >= MasElements.viewerHeader.Css.height - MasElements.Bank.Css.height ? 1 : 0;
 
                 if(overhead){
-                    fastdom.mutate(() => {
-                        body.addClass('scroll-overhead');
-                    });
+                    body.addClass('scroll-overhead');
                 } else {
-                    fastdom.mutate(() => {
-                        body.delClass('scroll-overhead');
-                    });
+                    body.delClass('scroll-overhead');
                 }
 
                 if(!overhead){
                     let trspct = (1 - (MasElements.MasViewerScroll.Top / MasElements.viewerBannerImg.Css.height) * 1.5 ) * 50;
-                    fastdom.mutate(() => {
-                        MasElements.viewerBannerImg.style.transform = 'translate(-50%, -' + trspct + '%)';
-                    });
+                    MasElements.viewerBannerImg.style.transform = 'translate(-50%, -' + trspct + '%)';
                 }
             }
         },
@@ -409,15 +396,11 @@
         bannerImgResize: function () {
             if(MasElements.viewerBannerImg){
                 if(MasElements.viewerBannerImg.naturalWidth / MasElements.viewerBannerImg.naturalHeight >= MasElements.viewerBanner.Css.width / MasElements.viewerBanner.Css.height){
-                    fastdom.mutate(() => {
-                        MasElements.viewerBannerImg.style.width = "auto";
-                        MasElements.viewerBannerImg.style.height = "100%";
-                    });
+                    MasElements.viewerBannerImg.style.width = "auto";
+                    MasElements.viewerBannerImg.style.height = "100%";
                 } else {
-                    fastdom.mutate(() => {
-                        MasElements.viewerBannerImg.style.width = "100%";
-                        MasElements.viewerBannerImg.style.height = "auto";
-                    });
+                    MasElements.viewerBannerImg.style.width = "100%";
+                    MasElements.viewerBannerImg.style.height = "auto";
                 }
             }
         }

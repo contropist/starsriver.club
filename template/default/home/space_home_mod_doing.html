@@ -101,7 +101,6 @@
     addEvent(document,'DOMContentLoaded',function () {
 
         let postform = SR('#doing_deliver')[0],
-            postform_style = '',
             page = SR('#pager_doing')[0],
             scrltem = 0,
             positionfix = function (){
@@ -109,15 +108,11 @@
                     postform.style = '';
                     if(SRGlobal.Window.Scroll.DirY === 'down'){
                         scrltem = SRGlobal.Window.Scroll.Top;
-                        fastdom.mutate(() => {
-                            if(page) page.addClass('sleep');
-                            if(postform) postform.addClass('sleep');
-                        });
+                        if(page) page.addClass('sleep');
+                        if(postform) postform.addClass('sleep');
                     } else if(scrltem - SRGlobal.Window.Scroll.Top > Math.min(390, MasElements.viewer.scrollHeight - SRGlobal.Window.Height - 20)) {
-                        fastdom.mutate(() => {
-                            if(page) page.delClass('sleep');
-                            if(postform) postform.delClass('sleep');
-                        });
+                        if(page) page.delClass('sleep');
+                        if(postform) postform.delClass('sleep');
                     }
                 }
             },
@@ -128,24 +123,20 @@
             TsOn = function (){
                 for (let i=0 ; i <Ts.length; i++){
                     if(Ts[i].parentNode.Css.top < 82 && (isUndefined(Ts[i+1]) || Ts[i+1].parentNode.Css.top > 82)){
-                        fastdom.mutate(() => {
-                            Ts[i].style = 'position: fixed; top: 82px;';
-                            Ts[i].parentNode.style = 'padding-top:' + Th + 'px;';
-                        });
+                        Ts[i].style = 'position: fixed; top: 82px;';
+                        Ts[i].parentNode.style = 'padding-top:' + Th + 'px;';
                     } else {
-                        fastdom.mutate(() => {
-                            Ts[i].style = '';
-                            Ts[i].parentNode.style = '';
-                        });
+                        Ts[i].style = '';
+                        Ts[i].parentNode.style = '';
                     }
                 }
             };
 
         if(MasElements.viewer.scrollHeight > SRGlobal.Window.Height){
-            if(page) fastdom.mutate(() => {page.addClass('sleep')});
-            if(postform) fastdom.mutate(() => {postform.addClass('sleep')});
+            if(page) page.addClass('sleep');
+            if(postform) postform.addClass('sleep');
         } else {
-            fastdom.mutate(() => {Tl.style.marginBottom = '200px';});
+            Tl.style.marginBottom = '200px';
         }
         addEvent(MasElements.viewer,'scroll',TsOn);
         addEvent(MasElements.viewer,'scroll',positionfix);
