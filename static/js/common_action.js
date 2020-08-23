@@ -379,6 +379,12 @@
 
             SRGlobal.Window.Scroll.ToBottom = MasElements.viewer.ScrollTop + MasElements.viewer.Css.Height >= MasElements.viewer.scrollHeight ? 1 : 0;
 
+            if(SRGlobal.Window.Scroll.ToBottom){
+                body.addClass('scroll-tobottom');
+            } else {
+                body.delClass('scroll-tobottom');
+            }
+
             if(MasElements.viewerHeader){
 
                 let overhead = MasElements.MasViewerScroll.Top >= MasElements.viewerHeader.Css.height - MasElements.Bank.Css.height ? 1 : 0;
