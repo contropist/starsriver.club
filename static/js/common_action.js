@@ -376,6 +376,9 @@
         viewerScroll: function () {
 
             Misc.WinScrollDirRefresh(MasElements.MasViewerScroll, MasElements.viewer);
+
+            SRGlobal.Window.Scroll.ToBottom = MasElements.viewer.ScrollTop + MasElements.viewer.Css.Height >= MasElements.viewer.scrollHeight ? 1 : 0;
+
             if(MasElements.viewerHeader){
 
                 let overhead = MasElements.MasViewerScroll.Top >= MasElements.viewerHeader.Css.height - MasElements.Bank.Css.height ? 1 : 0;
