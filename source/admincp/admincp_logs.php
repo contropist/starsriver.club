@@ -413,7 +413,7 @@ SEARCH;
 	);
 	showtablerow('', array('colspan="4"'), array('<input type="submit" name="srchlogbtn" class="btn" value="'.$lang['search'].'" />'));
 	showtablefooter();
-	echo '<script src="static/js/calendar.js" type="text/javascript"></script>';
+	echo '<script src="static/js/calendar.js"></script>';
 	showtableheader('', 'fixpadding');
 	showtablerow('class="header"', array('class="td23"','class="td23"','class="td23"','class="td24"','class="td24"'), array(
 		cplang('username'),
@@ -758,7 +758,7 @@ EOD;
 		);
 		showtablerow('', array('colspan="4"'), array('<input type="submit" name="srchlogbtn" class="btn" value="'.$lang['search'].'" />'));
 		showtablefooter();
-		echo '<script src="static/js/calendar.js" type="text/javascript"></script>';
+		echo '<script src="static/js/calendar.js"></script>';
 		showtableheader('', 'fixpadding');
 		showtablerow('class="header"', array('width="35"','class="td23"','class="td24"','class="td24"','class="td23"','class="td24"','class="td24"'), array(
 			'',

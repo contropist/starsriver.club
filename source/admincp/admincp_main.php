@@ -41,7 +41,7 @@ echo <<<EOT
         <title>$title</title>
         <link rel="stylesheet" href="{$_G['config']['output']['fonturl']}/Feather.css">
         <link rel="stylesheet" href="static/image/admincp/src/css/admincp.css?{$_G['style']['verhash']}" type="text/css" media="all" />
-        <script src="{$_G['setting']['jspath']}common.js?{$_G['style']['verhash']}" type="text/javascript"></script>
+        <script src="{$_G['setting']['jspath']}common.js?{$_G['style']['verhash']}"></script>
     </head>
     <body>
         <div id="append_parent"></div>
@@ -121,7 +121,7 @@ EOT;
                         nav_newwin : '$lang[nav_newwin]'
                     };
             </script>
-            <script src="static/image/admincp/src/js/admincp_common.js" type="text/javascript"></script>
+            <script src="static/image/admincp/src/js/admincp_common.js"></script>
         </div>
     </body>
 </html>

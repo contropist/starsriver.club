@@ -24,7 +24,7 @@
             <span class="title-tip" id="return_$_GET[handlekey]">{lang push}</span>
             <!--{if $_G[inajax]}--><a onclick="hideWindow('$_GET['handlekey']');" class="close" title="{lang close}">×</a><!--{/if}-->
         </div>
-		<script type="text/javascript" src="{$_G[setting][jspath]}portal.js?{VERHASH}"></script>
+		<script src="{$_G[setting][jspath]}portal.js?{VERHASH}"></script>
 		<form id="recommendform" method="post" enctype="multipart/form-data" action="portal.php?mod=portalcp&ac=block&op=recommend&id=$_GET[id]&idtype=$_GET[idtype]" onsubmit="if(recommenditem_check()) { ajaxpost('recommendform','return_$_GET[handlekey]','return_$_GET[handlekey]','onerror');} return false;">
             <div class="body">
                 <div class="input-box">

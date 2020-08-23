@@ -725,11 +725,11 @@ if(!$operation) {
 						$var['variable'] = $var['value'] = '';
 					} elseif($var['type'] == 'date') {
 						$var['type'] = 'calendar';
-						$extra['date'] = '<script type="text/javascript" src="static/js/calendar.js"></script>';
+						$extra['date'] = '<script src="static/js/calendar.js"></script>';
 					} elseif($var['type'] == 'datetime') {
 						$var['type'] = 'calendar';
 						$var['extra'] = 1;
-						$extra['date'] = '<script type="text/javascript" src="static/js/calendar.js"></script>';
+						$extra['date'] = '<script src="static/js/calendar.js"></script>';
 					} elseif($var['type'] == 'forum') {
 						require_once libfile('function/forumlist');
 						$var['type'] = '<select name="'.$var['variable'].'"><option value="">'.cplang('plugins_empty').'</option>'.forumselect(FALSE, 0, $var['value'], TRUE).'</select>';

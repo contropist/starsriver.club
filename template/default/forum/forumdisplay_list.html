@@ -61,7 +61,7 @@
 			<a class="{if $_GET['filter'] == 'digest'}checked{/if}" href="forum.php?mod=forumdisplay&fid=$_G[fid]&filter=digest&digest=1$forumdisplayadd[digest]">{lang digest_posts}</a>
 			<!--{if $_GET['filter'] == 'hot'}-->
 			<div class="l timer">
-				<script type="text/javascript" src="{$_G[setting][jspath]}calendar.js?{VERHASH}"></script>
+				<script src="{$_G[setting][jspath]}calendar.js?{VERHASH}"></script>
 				<span class="icon-calendar pointer" id="hottime" value="$ctime" fid="$_G[fid]" onclick="showcalendar(event, this, false, false, false, false, function(){viewhot(this);});">$ctime</span>
 			</div>
 			<!--{/if}-->
@@ -134,7 +134,7 @@
 												<!--{if $rushinfo[$thread[tid]]}-->
 												<span class="tooltip trans-ease-quick" data-pos="tl" id="rushtimer_$thread[tid]"> {lang havemore_special}
 													<span id="rushtimer_body_$thread[tid]"></span>
-													<span style="display: none"><script language="javascript">settimer($rushinfo[$thread[tid]]['timer'], 'rushtimer_body_$thread[tid]');</script></span>
+													<span style="display: none"><script>settimer($rushinfo[$thread[tid]]['timer'], 'rushtimer_body_$thread[tid]');</script></span>
 													{if $rushinfo[$thread[tid]]['timertype'] == 'start'} {lang header_start} {else} {lang over} {/if}
 												</span>
 												<!--{/if}-->
@@ -291,7 +291,7 @@
 									<!--{/loop}-->
 								</ul>
 							<div id="tmppic" style="display: none;"></div>
-							<script type="text/javascript" src="{$_G[setting][jspath]}redef.js?{VERHASH}"></script>
+							<script src="{$_G[setting][jspath]}redef.js?{VERHASH}"></script>
 							<script reload="1">
 								var wf = {};
 								_attachEvent(window, "load", function () {
@@ -435,7 +435,7 @@
 <!--{if $multipage && $filter != 'hot'}-->
 	<!--{if !($_G[forum][picstyle] && !$_G[cookie][forumdefstyle])}-->
 		<a class="px4-radius" href="forum.php?mod=forumdisplay&fid={$_G[fid]}&filter={$filter}&orderby={$_GET[orderby]}{$forumdisplayadd[page]}&{$multipage_archive}&page=$nextpage" rel="$multipage_more" curpage="$page" id="autopbn" totalpage="$maxpage" picstyle="$_G[forum][picstyle]" forumdefstyle="$_G[cookie][forumdefstyle]">{lang next_page_extra}</a>
-		<script type="text/javascript" src="{$_G[setting][jspath]}autoloadpage.js?{VERHASH}"></script>
+		<script src="{$_G[setting][jspath]}autoloadpage.js?{VERHASH}"></script>
 		<div class="plate_block"><span id="fd_page_bottom">$multipage</span></div>
 	<!--{else}-->
 		<div id="pgbtn"><a class="px4-radius pgbtn" hidefocus="true">{lang finished}</a></div>

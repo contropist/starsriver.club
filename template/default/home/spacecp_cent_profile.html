@@ -22,7 +22,7 @@
 				<!--{if $operation == 'password'}-->
 					<!--region password-->
 					<div class="withedge">
-						<script type="text/javascript" src="{$_G[setting][jspath]}register.js?{VERHASH}"></script>
+						<script src="{$_G[setting][jspath]}register.js?{VERHASH}"></script>
 						<p class="tool-notice">
 							<!--{if !$_G['member']['freeze']}-->
 
@@ -197,7 +197,7 @@
                                         </div>
                                     </div>
                                     <div id="signhtmlpreview"></div>
-                                    <script type="text/javascript" src="{$_G[setting][jspath]}bbcode.js?{VERHASH}"></script>
+                                    <script src="{$_G[setting][jspath]}bbcode.js?{VERHASH}"></script>
                                     <script>var forumallowhtml = 0,allowhtml = 0,allowsmilies = 0,allowbbcode = parseInt('{$_G[group][allowsigbbcode]}'),allowimgcode = parseInt('{$_G[group][allowsigimgcode]}');var DISCUZCODE = [];DISCUZCODE['num'] = '-1';DISCUZCODE['html'] = [];</script>
                                 <!--{/if}-->
                                 <!--{if in_array('timeoffset', $allowitems)}-->

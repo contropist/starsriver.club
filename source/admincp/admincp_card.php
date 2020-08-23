@@ -92,7 +92,7 @@ if($operation == 'set') {
 	}
 
 	$perpage = max(20, empty($_GET['perpage']) ? 20 : intval($_GET['perpage']));
-	echo '<script type="text/javascript" src="static/js/calendar.js"></script>';
+	echo '<script src="static/js/calendar.js"></script>';
 
 	/*search={"card_manage_tips":"action=card&operation=manage"}*/
 	showtips('card_manage_tips');
@@ -252,7 +252,7 @@ EOT;
 			$card_type[] = array($result['id'], $result['typename']);
 		}
 
-		echo '<script type="text/javascript" src="static/js/calendar.js"></script>';
+		echo '<script src="static/js/calendar.js"></script>';
 		showformheader('card&operation=make&');
 		/*search={"card_make_tips":"webcontroller.php?action=card&operation=make"}*/
 		showtips('card_make_tips');
@@ -260,7 +260,7 @@ EOT;
 
 		showsetting('card_make_rule', '', '', '<input type="text" name="rule" class="txt" value="'.($card_log['rule']['rule'] ? $card_log['rule']['rule'] : '').'" onkeyup="javascript:checkcardrule(this);"><br><span id="cardrule_view" class="tips2" style="display:none;"></span>');
 echo <<<EOT
-	<script type="text/javascript" charset="gbk">
+	<script charset="gbk">
 		function checkcardrule(obj) {
 			var chrLength = obj.value.length;
 			$('cardrule_view').style.display = "";

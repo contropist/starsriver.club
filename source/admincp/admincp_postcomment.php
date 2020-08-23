@@ -57,7 +57,7 @@ if(!submitcheck('postcommentsubmit')) {
 	}
 	/*search*/
 	echo <<<EOT
-<script type="text/javascript" src="static/js/calendar.js"></script>
+<script src="static/js/calendar.js"></script>
 <script>
 function page(number) {
 	$('postcommentforum').page.value=number;

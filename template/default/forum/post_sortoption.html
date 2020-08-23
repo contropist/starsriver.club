@@ -65,7 +65,7 @@
 				<div id="select_$option[identifier]">
 				<!--{if in_array($option['type'], array('number', 'text', 'email', 'calendar', 'image', 'url', 'range', 'upload', 'range'))}-->
 					<!--{if $option['type'] == 'calendar'}-->
-						<script type="text/javascript" src="{$_G['setting']['jspath']}calendar.js?{VERHASH}"></script>
+						<script src="{$_G['setting']['jspath']}calendar.js?{VERHASH}"></script>
 						<input type="text" name="typeoption[{$option[identifier]}]" id="typeoption_$option[identifier]" tabindex="1" size="$option[inputsize]" onchange="checkoption('$option[identifier]', '$option[required]', '$option[type]')" value="$option[value]" onclick="showcalendar(event, this, false)" $option[unchangeable]/>
 					<!--{elseif $option['type'] == 'image'}-->
 						<!--{if !($option[unchangeable] && $option['value'])}-->

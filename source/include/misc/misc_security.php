@@ -97,7 +97,7 @@ function securitymessage($subject, $message, $reload = TRUE, $form = FALSE) {
 		echo '</head>';
 		echo '<body bgcolor="#FFFFFF">';
 		if($reload) {
-			echo '<script language="JavaScript">';
+			echo '<script>';
 			echo 'function reload() {';
 			echo '	document.location.reload();';
 			echo '}';

@@ -54,7 +54,7 @@ if(!submitcheck('sharesubmit')) {
 	showtips('share_tips');
 	/*search*/
 	echo <<<EOT
-<script type="text/javascript" src="static/js/calendar.js"></script>
+<script src="static/js/calendar.js"></script>
 <script>
 function page(number) {
 	$('shareforum').page.value=number;

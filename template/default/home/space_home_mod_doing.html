@@ -99,25 +99,36 @@
 <!--{/if}-->
 <script>
     addEvent(document,'DOMContentLoaded',function () {
+
         let postform = SR('#doing_deliver')[0],
+            postform_style = '',
             page = SR('#pager_doing')[0],
             scrltem = 0,
             positionfix = function (){
                 if(SRGlobal.Window.Width > 1470){
-                    if(body.hasClass('scroll-overhead')){
-                        postform.style = 'position: fixed !important; left: ' + (MasElements.guide.Css.width + 761) + 'px; top:'+ (MasElements.Bank.Css.height + 32) + 'px;';
-                    } else {
-                        postform.style = '';
-                    }
+                    fastdom.measure(() => {
+                        if(body.hasClass('scroll-overhead')){
+                            postform_style = 'position: fixed !important; left: ' + (MasElements.guide.Css.width + 761) + 'px; top:'+ (MasElements.Bank.Css.height + 32) + 'px;';
+                        } else {
+                            postform_style = '';
+                        }
+                    });
+                    fastdom.mutate(() => {
+                        postform.style = postform_style;
+                    });
                 } else {
                     postform.style = '';
                     if(SRGlobal.Window.Scroll.DirY === 'down'){
                         scrltem = SRGlobal.Window.Scroll.Top;
-                        if(page) page.addClass('sleep');
-                        if(postform) postform.addClass('sleep');
+                        fastdom.mutate(() => {
+                            if(page) page.addClass('sleep');
+                            if(postform) postform.addClass('sleep');
+                        });
                     } else if(SRGlobal.Window.Scroll.DirY === 'up' &&  scrltem - SRGlobal.Window.Scroll.Top > Math.min(390, MasElements.viewer.scrollHeight - SRGlobal.Window.Height - 20)) {
-                        if(page) page.delClass('sleep');
-                        if(postform) postform.delClass('sleep');
+                        fastdom.mutate(() => {
+                            if(page) page.delClass('sleep');
+                            if(postform) postform.delClass('sleep');
+                        });
                     }
                 }
             },
@@ -128,23 +139,28 @@
             TsOn = function (){
                 for (let i=0 ; i <Ts.length; i++){
                     if(Ts[i].parentNode.Css.top < 82 && (isUndefined(Ts[i+1]) || Ts[i+1].parentNode.Css.top > 82)){
-                        Ts[i].style = 'position: fixed; top: 82px;';
-                        Ts[i].parentNode.style = 'padding-top:' + Th + 'px;';
+                        fastdom.mutate(() => {
+                            Ts[i].style = 'position: fixed; top: 82px;';
+                            Ts[i].parentNode.style = 'padding-top:' + Th + 'px;';
+                        });
                     } else {
-                        Ts[i].style = '';
-                        Ts[i].parentNode.style = '';
+                        fastdom.mutate(() => {
+                            Ts[i].style = '';
+                            Ts[i].parentNode.style = '';
+                        });
                     }
                 }
             };
 
         if(MasElements.viewer.scrollHeight > SRGlobal.Window.Height){
-            if(page) page.addClass('sleep');
-            if(postform) postform.addClass('sleep');
+            fastdom.mutate(() => {
+                if(page) page.addClass('sleep');
+                if(postform) postform.addClass('sleep');
+            });
         } else {
-            Tl.style.marginBottom = '200px';
+            fastdom.mutate(() => {Tl.style.marginBottom = '200px';});
         }
         addEvent(MasElements.viewer,'scroll',TsOn);
         addEvent(MasElements.viewer,'scroll',positionfix);
-
     });
 </script>

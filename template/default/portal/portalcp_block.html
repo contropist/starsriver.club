@@ -506,7 +506,7 @@
 	<!--{subtemplate portal/portalcp_block_setting}-->
 
 <!--{elseif $op == 'item' || $op == 'additem'}-->
-	<script type="text/javascript" src="{$_G[setting][jspath]}calendar.js?{VERHASH}"></script>
+	<script src="{$_G[setting][jspath]}calendar.js?{VERHASH}"></script>
 	<div class="header">
 		<span class="title-tip" id="return_$_GET[handlekey]">{lang block_edit}</span>
 		<!--{if $_GET[itemfrom]=='ajax'}--><a href="portal.php?mod=portalcp&ac=block&op=data&bid=$bid{if $_GET[from]}&from=$_GET[from]{/if}" onclick="showWindow('showblock', this.href);closecalendar(e);return false;"> &lt;&lt;{lang return} </a><!--{/if}-->
@@ -612,7 +612,7 @@
     <p>{lang verify_message}</p>
 	<!--{/if}-->
 <!--{elseif $op == 'verifydata'}-->
-	<script type="text/javascript" src="{$_G[setting][jspath]}calendar.js?{VERHASH}"></script>
+	<script src="{$_G[setting][jspath]}calendar.js?{VERHASH}"></script>
 	<div class="header">
 		<span class="title-tip" id="return_$_GET[handlekey]">{lang moderate_data}</span>
 		<!--{if $_G[inajax]}--><a onclick="hideWindow('$_GET['handlekey']');" class="close" title="{lang close}">×</a><!--{/if}-->
@@ -640,7 +640,7 @@
 	</script>
 <!--{elseif $op == 'managedata'}-->
 
-	<script type="text/javascript" src="{$_G[setting][jspath]}calendar.js?{VERHASH}"></script>
+	<script src="{$_G[setting][jspath]}calendar.js?{VERHASH}"></script>
 	<div class="header">
 		<span class="title-tip" id="return_$_GET[handlekey]">{lang edit_data}</span>
 		<!--{if $_G[inajax]}--><a onclick="hideWindow('$_GET['handlekey']');" class="close" title="{lang close}">×</a><!--{/if}-->

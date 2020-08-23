@@ -2,11 +2,11 @@
 	<!--{if $_G['basescript'] == 'forum' && $_G['setting']['archiver']}--><link rel="archives" title="$_G['setting']['bbname']" href="{$_G[siteurl]}archiver/" /><!--{/if}-->
 	<!--{if !empty($rsshead)}-->$rsshead<!--{/if}-->
 	<!--{if $_G['basescript'] == 'forum' || $_G['basescript'] == 'group'}-->
-		<script type="text/javascript" src="{$_G[setting][jspath]}forum.js?{VERHASH}"></script>
+		<script src="{$_G[setting][jspath]}forum.js?{VERHASH}"></script>
 	<!--{elseif $_G['basescript'] == 'home'}-->
-		<script type="text/javascript" src="{$_G[setting][jspath]}home.js?{VERHASH}"></script>
+		<script src="{$_G[setting][jspath]}home.js?{VERHASH}"></script>
 	<!--{elseif $_G['basescript'] == 'portal'}-->
-		<script type="text/javascript" src="{$_G[setting][jspath]}portal.js?{VERHASH}"></script>
+		<script src="{$_G[setting][jspath]}portal.js?{VERHASH}"></script>
 	<!--{/if}-->
 </head>
 

@@ -28,7 +28,7 @@
             <div id="rulespreview"></div>
         </li>
 		<li class="box size-10-0 no-edge">
-			<script type="text/javascript" src="{$_G[setting][jspath]}bbcode.js?{VERHASH}"></script>
+			<script src="{$_G[setting][jspath]}bbcode.js?{VERHASH}"></script>
 			<form method="post" autocomplete="off" action="{$cpscript}?mod=modcp&action=$_GET[action]&op=$op">
 				<input type="hidden" name="formhash" value="{FORMHASH}">
 				<input type="hidden" name="fid" value="$_G[fid]">
@@ -54,7 +54,7 @@
         </li>
 
 	<!--{elseif $op == 'recommend'}-->
-		<script type="text/javascript" src="{$_G[setting][jspath]}forum_moderate.js?{VERHASH}"></script>
+		<script src="{$_G[setting][jspath]}forum_moderate.js?{VERHASH}"></script>
 		<!--{if $threadlist}-->
 		<li class="box size-10-0 no-edge" >
 			<form method="post" autocomplete="off" action="{$cpscript}?mod=modcp&action=$_GET[action]&show=$_GET['show']">
@@ -106,4 +106,4 @@
 <script reload="1">
 	simulateSelect('fid');
 </script>
-<script type="text/javascript" src="{$_G[setting][jspath]}calendar.js?{VERHASH}"></script>
+<script src="{$_G[setting][jspath]}calendar.js?{VERHASH}"></script>

@@ -7467,7 +7467,8 @@
             --line-color: #c8d1de;
             --box-edge:15px;
             position: relative;
-            display: block;
+            display: flex;
+            flex-flow: column wrap;
             width: 100%;
             max-width: 720px;
         }
@@ -7868,7 +7869,9 @@
             width: calc(100% - 16px - var(--wall-commentform-width));
         }
         .app-userspace #userspace_wall .wall .comments .comments-list{
-            font-size: 0;
+            display: flex;
+            flex-wrap: wrap;
+            align-content: center;
         }
         .app-userspace #userspace_wall .wall .comments .comments-list li{
             position: relative;

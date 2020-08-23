@@ -340,7 +340,7 @@ if($operation == 'tag') {
 				</table>
 			</div>
 		</form>
-		<script src="static/js/makehtml.js?1" type="text/javascript"></script>
+		<script src="static/js/makehtml.js?1"></script>
 
 SEARCH;
 

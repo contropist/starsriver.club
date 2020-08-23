@@ -1,8 +1,8 @@
 <!--{if in_array($do, array('feed', 'view'))}-->
 	<!--{if helper_access::check_module('follow') && ( $do == 'feed' || ( $do == 'view' && $viewself))}-->
 		<div class="vessel withedge">
-			<script type="text/javascript" src="{$_G[setting][jspath]}forum.js?{VERHASH}"></script>
-			<script type="text/javascript" src="{$_G[setting][jspath]}forum_moderate.js?{VERHASH}"></script>
+			<script src="{$_G[setting][jspath]}forum.js?{VERHASH}"></script>
+			<script src="{$_G[setting][jspath]}forum_moderate.js?{VERHASH}"></script>
 			<script>
 				var postminchars = parseInt('$_G['setting']['minpostsize']');
 				var postmaxchars = parseInt('$_G['setting']['maxpostsize']');

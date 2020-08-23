@@ -55,7 +55,7 @@ if(!submitcheck('doingsubmit')) {
 	}
 	/*search*/
 	echo <<<EOT
-<script type="text/javascript" src="static/js/calendar.js"></script>
+<script src="static/js/calendar.js"></script>
 <script>
 function page(number) {
 	$('doingforum').page.value=number;

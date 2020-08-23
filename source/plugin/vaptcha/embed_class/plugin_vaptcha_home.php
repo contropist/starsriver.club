@@ -149,7 +149,7 @@ JS;
 
 	private function msg($msg) {
 		$script = <<<HTML
-		<script type='text/javascript' reload='1'>
+		<script reload='1'>
 		typeof errorhandle_buycredit=='function' && errorhandle_buycredit('$msg', {});
 		hideWindow('buycredit');
 		showDialog('$msg', 'alert', null, null, 0, null, null, null, null, 2, null);

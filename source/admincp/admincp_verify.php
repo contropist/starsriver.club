@@ -140,7 +140,7 @@ echo <<<EOF
 				</div>
 			</form>
 			<iframe id="frame_profile" name="frame_profile" style="display: none"></iframe>
-			<script type="text/javascript" src="static/js/calendar.js"></script>
+			<script src="static/js/calendar.js"></script>
 			<script>
 				function showreason(vid, flag) {
 					var reasonobj = $('reason_'+vid);
@@ -496,7 +496,7 @@ EOF;
 					}
 				}
 				if($single && $_GET['frame'] == 'no') {
-					echo "<script type=\"text/javascript\">var trObj = parent.$('mod_{$single}_row');trObj.parentNode.removeChild(trObj);</script>";
+					echo "<script>var trObj = parent.$('mod_{$single}_row');trObj.parentNode.removeChild(trObj);</script>";
 				} else {
 					cpmsg('members_verify_succeed', 'action=verify&operation=verify&do='.$vid.'&anchor='.$_GET['anchor'], 'succeed');
 				}

@@ -559,7 +559,7 @@ function getblockhtml($blockname,$parameters = []) {
 				} else {
 					$parameters['config']['height'] .= 'px';
 				}
-				$html = "<script language=\"javascript\" type=\"text/javascript\">document.write(AC_FL_RunContent('id', 'mp3player', 'name', 'mp3player', 'devicefont', 'false', 'width', '100%', 'height', '".$parameters['config']['height']."', 'src', '$swfurl', 'menu', 'false',  'allowScriptAccess', 'never', 'swLiveConnect', 'true', 'wmode', 'transparent'));</script>";
+				$html = "<script>document.write(AC_FL_RunContent('id', 'mp3player', 'name', 'mp3player', 'devicefont', 'false', 'width', '100%', 'height', '".$parameters['config']['height']."', 'src', '$swfurl', 'menu', 'false',  'allowScriptAccess', 'never', 'swLiveConnect', 'true', 'wmode', 'transparent'));</script>";
 			} else {
 				$html = lang('space', 'music_no_content');
 			}

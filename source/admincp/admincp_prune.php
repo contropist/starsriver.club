@@ -60,7 +60,7 @@ if(!submitcheck('prunesubmit')) {
 	/*search={"nav_prune":"action=prune"}*/
 	showtips('prune_tips');
 	echo <<<EOT
-<script type="text/javascript" src="static/js/calendar.js"></script>
+<script src="static/js/calendar.js"></script>
 <script>
 function page(number) {
 	$('pruneforum').page.value=number;

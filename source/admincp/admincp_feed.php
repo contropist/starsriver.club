@@ -45,7 +45,7 @@ if($operation == 'global') {
 		}
 		/*search={"nav_feed":"action=feed"}*/
 		showformheader('feed&operation=global', $feed['uid'] ? '' : 'onsubmit="edit_save();"');
-		echo '<script type="text/javascript" src="'.STATICURL.'image/editor/editor_function.js"></script>';
+		echo '<script src="'.STATICURL.'image/editor/editor_function.js"></script>';
 		echo "<input type=\"hidden\" name=\"feednew[feedid]\" value=\"$feed[feedid]\" /><input type=\"hidden\" name=\"feednew[feeduid]\" value=\"$feed[uid]\" />";
 		showtableheader();
 		if(empty($feed['uid'])) {
@@ -178,7 +178,7 @@ EOF;
 		}
 
 		echo <<<EOT
-	<script type="text/javascript" src="static/js/calendar.js"></script>
+	<script src="static/js/calendar.js"></script>
 	<script>
 	function page(number) {
 		$('feedforum').page.value=number;

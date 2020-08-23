@@ -98,7 +98,7 @@
 	<!--{/if}-->
 
 	<!--{if $_G['basescript'] != 'portal' && $_GET['nest'] == 'yes' && check_nest_perm($topic)}-->
-		<script type="text/javascript" src="{$_G[setting][jspath]}portal.js?{VERHASH}"></script>
+		<script src="{$_G[setting][jspath]}portal.js?{VERHASH}"></script>
 	<!--{/if}-->
 
 	<!--{if $_GET['nest'] == 'yes' && check_nest_perm($topic)}--><!--{template common/header_nest}--><!--{/if}-->
@@ -109,12 +109,12 @@
 
 	<!--{if $_GET['nest'] == 'yes'}-->
 		<!--{if check_nest_perm($topic) && (empty($do) || $do != 'index')}-->
-			<script type="text/javascript" src="{$_G[setting][jspath]}common_nest.js?{VERHASH}"></script>
-			<script type="text/javascript" src="{$_G[setting][jspath]}portal_nest{if !check_nest_perm($topic, 'layout')}_data{/if}.js?{VERHASH}"></script>
+			<script src="{$_G[setting][jspath]}common_nest.js?{VERHASH}"></script>
+			<script src="{$_G[setting][jspath]}portal_nest{if !check_nest_perm($topic, 'layout')}_data{/if}.js?{VERHASH}"></script>
 		<!--{/if}-->
 		<!--{if $space['self'] && CURMODULE == 'space' && $do == 'index'}-->
-			<script type="text/javascript" src="{$_G[setting][jspath]}common_nest.js?{VERHASH}"></script>
-			<script type="text/javascript" src="{$_G[setting][jspath]}space_nest.js?{VERHASH}"></script>
+			<script src="{$_G[setting][jspath]}common_nest.js?{VERHASH}"></script>
+			<script src="{$_G[setting][jspath]}space_nest.js?{VERHASH}"></script>
 		<!--{/if}-->
 	<!--{/if}-->
 </section>

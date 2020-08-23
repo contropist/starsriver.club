@@ -76,7 +76,7 @@ if(!submitcheck('picsubmit')) {
 	}
 	/*search*/
 	echo <<<EOT
-<script type="text/javascript" src="static/js/calendar.js"></script>
+<script src="static/js/calendar.js"></script>
 <script>
 function page(number) {
 	$('picforum').page.value=number;

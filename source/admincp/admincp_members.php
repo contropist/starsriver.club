@@ -1068,7 +1068,7 @@ EOF;
 		/*search={"members_group":"action=members&operation=group"}*/
 		shownav('user', 'members_group');
 		showsubmenu('members_group_member', [], '', array('username' => $member['username']));
-		echo '<script src="static/js/calendar.js" type="text/javascript"></script>';
+		echo '<script src="static/js/calendar.js"></script>';
 		showformheader("members&operation=group&uid=$member[uid]");
 		showtableheader('usergroup', 'nobottom');
 		showsetting('members_group_group', '', '', '<select name="groupidnew" onchange="if(in_array(this.value, ['.$radmingids.'])) {$(\'relatedadminid\').style.display = \'\';$(\'adminidnew\').name=\'adminidnew[\' + this.value + \']\';} else {$(\'relatedadminid\').style.display = \'none\';$(\'adminidnew\').name=\'adminidnew[0]\';}"><optgroup label="'.$lang['usergroups_system'].'">'.$groups['system'].'<optgroup label="'.$lang['usergroups_special'].'">'.$groups['special'].'<optgroup label="'.$lang['usergroups_specialadmin'].'">'.$groups['specialadmin'].'<optgroup label="'.$lang['usergroups_member'].'">'.$groups['member'].'</select>');
@@ -1217,7 +1217,7 @@ EOF;
 		}
 
 		echo <<<EOT
-<script language="JavaScript">
+<script>
 	var extcredits = new [];
 	function membercredits() {
 		var credits = 0;
@@ -1404,7 +1404,7 @@ EOT;
 
 	if(!submitcheck('bansubmit')) {
 
-		echo '<script src="static/js/calendar.js" type="text/javascript"></script>';
+		echo '<script src="static/js/calendar.js"></script>';
 		shownav('user', 'members_ban_user');
 		showsubmenu($lang['members_ban_user'].($member['username'] ? ' - '.$member['username'] : ''));
 		showtips('members_ban_tips');
@@ -2784,7 +2784,7 @@ function showsearchform($operation = '') {
 
 	/*search={"nav_members":"action=members&operation=search"}*/
 	showtagheader('div', 'searchmembers', !$_GET['submit']);
-	echo '<script src="static/js/calendar.js" type="text/javascript"></script>';
+	echo '<script src="static/js/calendar.js"></script>';
 	echo '<style type="text/css">#residedistrictbox select, #birthdistrictbox select{width: auto;}</style>';
 	$formurl = "members&operation=$operation".($_GET['do'] == 'mobile' ? '&do=mobile' : '');
 	showformheader($formurl, "onSubmit=\"if($('updatecredittype1') && $('updatecredittype1').checked && !window.confirm('$lang[members_reward_clean_alarm]')){return false;} else {return true;}\"");

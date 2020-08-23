@@ -57,7 +57,7 @@ if($notifydata['location']) {
 <meta name="TENCENT_ONLINE_PAYMENT" content="China TENCENT">
 <html>
 <body>
-<script language="javascript" type="text/javascript">
+<script>
 window.location.href='$_G[siteurl]forum.php?mod=misc&action=paysucceed';
 </script>
 </body>

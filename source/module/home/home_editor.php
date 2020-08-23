@@ -23,9 +23,9 @@ if (empty($_GET['op'])) {
 			<meta name="renderer" content="webkit" />
 			<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 			<title>Editor</title>
-			<script type="text/javascript" src="static/js/common.js"></script>
-			<script type="text/javascript" src="static/js/home.js"></script>
-			<script language="javascript" src="static/image/editor/editor_base.js"></script>
+			<script src="static/js/common.js"></script>
+			<script src="static/js/home.js"></script>
+			<script src="static/image/editor/editor_base.js"></script>
 			<style type="text/css">
 				body{margin:0;padding:0;}
 				body, td, input, button, select, textarea {font: 12px/1.5em Tahoma, Arial, Helvetica, snas-serif;}
@@ -133,7 +133,7 @@ if (empty($_GET['op'])) {
 				.edTb{border-bottom:1px solid #c5c5c5;background-position:0 -28px}
 				.sepline{width:4px;height:20px;margin-top:2px;margin-right:3px;background-position:-476px 0;background-repeat:no-repeat;float:left }
 			</style>
-			<script language="JavaScript">
+			<script>
 				function fontname(obj){format('fontname',obj.innerHTML);obj.parentNode.style.display='none'}
 				function fontsize(size,obj){format('fontsize',size);obj.parentNode.style.display='none'}
 			</script>
@@ -278,7 +278,7 @@ if (empty($_GET['op'])) {
 					<tr><td>
 							<textarea id="dvtext" style="overflow-y:auto; margin-top: 0; padding:0px 4px 4px;width:100%;height:100%;word-wrap:break-word;border:0;display:none;"></textarea>
 							<div id="dvhtml" style="height:100%;width:100%;overflow:hidden">
-								<SCRIPT LANGUAGE="JavaScript">
+								<SCRIPT>
 									function blank_load() {
 										var inihtml = '';
 										var obj = parent.document.getElementById('uchome-ttHtmlEditor');

@@ -511,7 +511,7 @@ var rowtypedata = [
 			cpmsg('grouptype_delete_alarm', "action=group&operation=deletetype&fid=$fid&confirmed=1&formhash=$formhash", 'loadingform', array(), '<div id="percent">0%</div>', FALSE);
 			echo "
 			<div id=\"statusid\" style=\"display:none\"></div>
-			<script type=\"text/JavaScript\">
+			<script>
 				var xml_http_building_link = '".cplang('xml_http_building_link')."';
 				var xml_http_sending = '".cplang('xml_http_sending')."';
 				var xml_http_loading = '".cplang('xml_http_loading')."';
@@ -1100,7 +1100,7 @@ function searchgroups($submit) {
 
 	/*search={"nav_group_manage":"action=group&operation=manage"}*/
 	showtagheader('div', 'searchgroups', !$submit);
-	echo '<script src="static/js/calendar.js" type="text/javascript"></script>';
+	echo '<script src="static/js/calendar.js"></script>';
 	showformheader("group&operation=manage");
 	showtableheader();
 	showsetting('groups_manage_name', 'srchname', $srchname, 'text');

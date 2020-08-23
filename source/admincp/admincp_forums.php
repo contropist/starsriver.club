@@ -1924,7 +1924,7 @@ EOT;
 
 			echo "
 			<div id=\"statusid\" style=\"display:none\"></div>
-			<script type=\"text/JavaScript\">
+			<script>
 				var xml_http_building_link = '".cplang('xml_http_building_link')."';
 				var xml_http_sending = '".cplang('xml_http_sending')."';
 				var xml_http_loading = '".cplang('xml_http_loading')."';

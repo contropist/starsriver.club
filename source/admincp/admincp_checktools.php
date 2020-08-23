@@ -415,7 +415,7 @@ if ($operation == 'filecheck') {
         $alertmsg = cplang('setting_attach_remote_ok');
     }
 
-    echo '<script language="javascript">alert(\'' . str_replace('\'', '\\\'', $alertmsg) . '\');parent.$(\'cpform\').action=\'' . ADMINSCRIPT . '?action=setting&edit=yes\';parent.$(\'cpform\').target=\'_self\'</script>';
+    echo '<script>alert(\'' . str_replace('\'', '\\\'', $alertmsg) . '\');parent.$(\'cpform\').action=\'' . ADMINSCRIPT . '?action=setting&edit=yes\';parent.$(\'cpform\').target=\'_self\'</script>';
 
 } elseif ($operation == 'mailcheck') {
     $oldmail = dunserialize($_G['setting']['mail']);
@@ -467,7 +467,7 @@ if ($operation == 'filecheck') {
         $alertmsg = $lang['setting_mail_check_error'] . $alertmsg;
     }
 
-    echo '<script language="javascript">alert(\'' . str_replace(array(
+    echo '<script>alert(\'' . str_replace(array(
             '\'',
             "\n",
             "\r"

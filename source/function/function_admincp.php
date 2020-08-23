@@ -262,7 +262,7 @@ function cpmsg($message, $url = '', $type = '', $values = [], $extra = '', $halt
 			"<br>$message$extra<br>".
 			"<p class=\"margintop\"><input type=\"submit\" class=\"btn\" name=\"confirmed\" value=\"".cplang('ok')."\"> &nbsp; \n".
 			($cancelurl ? "<input type=\"button\" class=\"btn\" value=\"".cplang('cancel')."\" onClick=\"location.href='$cancelurl'\">" :
-			"<script type=\"text/javascript\">".
+			"<script>".
 			"if(history.length > (BROWSER.ie ? 0 : 1)) document.write('<input type=\"button\" class=\"btn\" value=\"".cplang('cancel')."\" onClick=\"history.go(-1);\">');".
 			"</script>").
 			"</p></form><br>";
@@ -277,11 +277,11 @@ function cpmsg($message, $url = '', $type = '', $values = [], $extra = '', $halt
 			} else {
 				$message .= '<p class="marginbot"><a href="'.$url.'" class="lightlink">'.cplang($type == 'download' ? 'message_download' : 'message_redirect').'</a></p>';
 				$timeout = $type != 'loading' ? 3000 : 1000;
-				$message .= "<script type=\"text/JavaScript\">setTimeout(\"redirect('$url');\", $timeout);</script>";
+				$message .= "<script>setTimeout(\"redirect('$url');\", $timeout);</script>";
 			}
 		} elseif($type != 'succeed') {
 			$message .= '<p class="marginbot">'.
-			"<script type=\"text/javascript\">".
+			"<script>".
 			"if(history.length > (BROWSER.ie ? 0 : 1)) document.write('<a href=\"javascript:history.go(-1);\" class=\"lightlink\">".cplang('message_return')."</a>');".
 			"</script>".
 			'</p>';
@@ -331,8 +331,8 @@ var admincpfilename = '$basescript',
     SITEURL = '$_G[siteurl]', 
     JSPATH = '{$_G['setting']['jspath']}';
         </script>
-        <script src="{$_G['setting']['jspath']}common.js?{$_G['style']['verhash']}" type="text/javascript"></script>
-        <script src="{$_G['setting']['jspath']}admincp.js?{$_G['style']['verhash']}" type="text/javascript"></script>
+        <script src="{$_G['setting']['jspath']}common.js?{$_G['style']['verhash']}"></script>
+        <script src="{$_G['setting']['jspath']}admincp.js?{$_G['style']['verhash']}"></script>
         <script>
             if(ISFRAME && !parent.document.getElementById('leftmenu') && !parent.parent.document.getElementById('leftmenu')) {
                 redirect(admincpfilename + '?frames=yes&' + document.URL.substr(document.URL.indexOf(admincpfilename) + admincpfilename.length + 1));

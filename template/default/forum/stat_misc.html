@@ -104,7 +104,7 @@
 					$link
 					<!--{/loop}-->
 					<li>
-						<script src="{$_G[setting][jspath]}calendar.js?{VERHASH}" type="text/javascript"></script>
+						<script src="{$_G[setting][jspath]}calendar.js?{VERHASH}"></script>
 						<form action="misc.php?mod=stat&op=modworks&uid=$uid" method="post">
 							<input type="hidden" name="formhash" value="{FORMHASH}" />
 							{lang stats_modworks_timerange}: <input type="text" name="modworks_starttime" class="px vm" size="10" onclick="showcalendar(event, this, false)" autocomplete="off" /> {lang stats_modworks_to} <input type="text" name="modworks_endtime" class="px vm" size="10" onclick="showcalendar(event, this, false)" autocomplete="off" />
@@ -163,7 +163,7 @@
 					$link
 					<!--{/loop}-->
 					<li>
-						<script src="{$_G[setting][jspath]}calendar.js?{VERHASH}" type="text/javascript"></script>
+						<script src="{$_G[setting][jspath]}calendar.js?{VERHASH}"></script>
 						<form action="misc.php?mod=stat&op=modworks" method="post">
 							<input type="hidden" name="formhash" value="{FORMHASH}" />
 							{lang stats_modworks_timerange}: <input type="text" name="modworks_starttime" class="px vm" size="10" onclick="showcalendar(event, this, false)" autocomplete="off" /> {lang stats_modworks_to} <input type="text" name="modworks_endtime" class="px vm" size="10" onclick="showcalendar(event, this, false)" autocomplete="off" />

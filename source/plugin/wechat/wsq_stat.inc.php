@@ -50,7 +50,7 @@ foreach($langarray as $l) {
 
 echo <<<EOF
 <script src="./source/plugin/wechat/js/jquery.min.js"></script>
-<script type="text/javascript" src="./source/plugin/wechat/js/highcharts.js"></script>
+<script src="./source/plugin/wechat/js/highcharts.js"></script>
 <script>
 var jq=$.noConflict();
 jq(function () {

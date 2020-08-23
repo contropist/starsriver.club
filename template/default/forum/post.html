@@ -31,10 +31,10 @@
         <!--{else}-->
             <!--{eval $editor[value] = $message;}-->
         <!--{/if}-->
-        <script type="text/javascript" src="{$_G['setting']['jspath']}forum_post.js?{VERHASH}"></script>
+        <script src="{$_G['setting']['jspath']}forum_post.js?{VERHASH}"></script>
         <!--{if $isfirstpost && $sortid}-->
             <script>var forum_optionlist = <!--{if $forum_optionlist}-->'$forum_optionlist'<!--{else}-->''<!--{/if}-->;</script>
-            <script type="text/javascript" src="{$_G['setting']['jspath']}threadsort.js?{VERHASH}"></script>
+            <script src="{$_G['setting']['jspath']}threadsort.js?{VERHASH}"></script>
         <!--{/if}-->
         <!--{block activeposttype}-->
             <!--{if $_GET['action'] == 'newthread'}-->
@@ -224,7 +224,7 @@
         </div>
 
         <!--{if $special || ($_G['group']['allowsetpublishdate'] && ($_GET[action] == 'newthread' || ($_GET[action] == 'edit' && $isfirstpost && $thread['displayorder'] == -4))) || ($_GET[action] == 'newthread' && $_G['group']['allowpostrushreply'] && $special != 2) || ($_GET[action] == 'edit' && getstatus($thread['status'], 3))}-->
-            <script type="text/javascript" src="{$_G['setting']['jspath']}calendar.js?{VERHASH}"></script>
+            <script src="{$_G['setting']['jspath']}calendar.js?{VERHASH}"></script>
         <!--{/if}-->
 
         <!--{if $allowuploadtoday || $special == 1}-->
@@ -367,7 +367,7 @@
             <!--{/if}-->
         </script>
         <!--{if ($_GET['action'] == 'newthread' || $_GET['action'] == 'reply' || $_GET['action'] == 'edit') && $_G['group']['allowat']}-->
-            <script type="text/javascript" src="{$_G['setting']['jspath']}at.js?{VERHASH}"></script>
+            <script src="{$_G['setting']['jspath']}at.js?{VERHASH}"></script>
         <!--{/if}-->
     </section>
 </div>

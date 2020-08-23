@@ -205,6 +205,6 @@ if(empty($operation)) {
 	}
 
 }
-echo '<script type="text/javascript" src="static/js/calendar.js"></script>';
+echo '<script src="static/js/calendar.js"></script>';
 
 ?>

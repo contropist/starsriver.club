@@ -26,8 +26,8 @@
                         </div>
                     </div>
                     <div class="menu_part userlevelpart">
-                        <script src="home.php?mod=spacecp&amp;ac=pm&amp;op=checknewpm&amp;rand=1489309985" type="text/javascript"></script>
-                        <script src="home.php?mod=spacecp&amp;ac=follow&amp;op=checkfeed&amp;rand=1489309985" type="text/javascript"></script>
+                        <script src="home.php?mod=spacecp&amp;ac=pm&amp;op=checknewpm&amp;rand=1489309985"></script>
+                        <script src="home.php?mod=spacecp&amp;ac=follow&amp;op=checkfeed&amp;rand=1489309985"></script>
                         <p class="rank bias-color">$_G['cache']['usergroups'][$maingroup['groupid']]['stars']</p>
                         <p class="bar1"><span class="bar2 bias-color" style="width:<!--{eval echo $_G['member']['credits'] / $group[groupcreditshigher] * 100; }-->%;"></span></p>
                         <p class="r count">$_G['member']['credits']/<!--{if $group[groupcreditshigher]}-->$group[groupcreditshigher]<!--{else}-->∞<!--{/if}--></p>
@@ -44,7 +44,7 @@
                     </div>
                     <div class="menu_part status">
                         <!--{if empty($_G['cookie']['ignore_notice']) && ($_G[member][newpm] || $_G[member][newprompt_num][follower] || $_G[member][newprompt_num][follow] || $_G[member][newprompt])}-->
-                        <script language="javascript">delayShow($('myprompt'), function() {showMenu({'ctrlid':'myprompt','duration':3})});</script>
+                        <script>delayShow($('myprompt'), function() {showMenu({'ctrlid':'myprompt','duration':3})});</script>
                         <!--{/if}-->
 
                         <!--{if ($_G['group']['allowmanagearticle'] || $_G['group']['allowpostarticle'] || $_G['group']['allownest'] || getstatus($_G['member']['allowadmincp'], 4) || getstatus($_G['member']['allowadmincp'], 6) || getstatus($_G['member']['allowadmincp'], 2) || getstatus($_G['member']['allowadmincp'], 3))}-->

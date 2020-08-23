@@ -553,7 +553,7 @@ function block_makeform($blocksetting, $values){
 			$s .= '</select>';
 		} elseif($type == 'calendar') {
 			if(! $calendar_loaded) {
-				$s .= "<script type=\"text/javascript\" src=\"{$_G[setting][jspath]}calendar.js?".VERHASH."\"></script>";
+				$s .= "<script src=\"{$_G[setting][jspath]}calendar.js?".VERHASH."\"></script>";
 				$calendar_loaded = true;
 			}
 			$s .= '<input type="text" name="'.$varname.'" value="'.dhtmlspecialchars($value).'" onclick="showcalendar(event, this, true)" />';

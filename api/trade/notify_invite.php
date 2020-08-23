@@ -74,7 +74,7 @@ if($notifydata['location']) {
 <meta name="TENCENT_ONLINE_PAYMENT" content="China TENCENT">
 <html>
 <body>
-<script language="javascript" type="text/javascript">
+<script>
 window.location.href='$_G[siteurl]misc.php?mod=buyinvitecode&action=paysucceed&orderid=$orderid';
 </script>
 </body>

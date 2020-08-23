@@ -134,7 +134,7 @@ if(!$operation) {
 		));
 		/*search={"nav_recyclebin":"action=recyclebin","search":"action=recyclebin&operation=search"}*/
 		echo <<<EOT
-<script type="text/javascript" src="static/js/calendar.js"></script>
+<script src="static/js/calendar.js"></script>
 <script>
 function page(number) {
 	$('rbsearchform').page.value=number;

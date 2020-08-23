@@ -981,8 +981,8 @@ EOF;
 		<a onclick="insertcode('forum');return false;" href="javascript:;">{forum}</a>
 		</p>
 		</div>
-		<script src="static/js/home.js" type="text/javascript"></script>
-		<script language="javascript">
+		<script src="static/js/home.js"></script>
+		<script>
 		var codediv = $('codediv');
 		var codetypes = [], codenames = [];
 		$jscodetypes
@@ -1712,7 +1712,7 @@ EOF;
 
 		$seccodecheck = 1;
 		$sechash = 'S'.$_G['sid'];
-		$seccheckhtml = "<span id=\"seccode_c$sechash\"></span><script type=\"text/javascript\">updateseccode('c$sechash', '<br><sec> <sec> <sec>', 'admin');</script>";
+		$seccheckhtml = "<span id=\"seccode_c$sechash\"></span><script>updateseccode('c$sechash', '<br><sec> <sec> <sec>', 'admin');</script>";
 
 		$checksc = array();
 		$setting['seccodedata'] = dunserialize($setting['seccodedata']);

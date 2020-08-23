@@ -150,7 +150,7 @@ if(!($operation)) {
 
 	if(!submitcheck('addsubmit')) {
 
-		echo '<script type="text/javascript" src="static/js/calendar.js"></script>';
+		echo '<script src="static/js/calendar.js"></script>';
 		shownav('extended', 'nav_tasks');
 		showsubmenu('nav_tasks', array(
 			array('admin', 'tasks', 0),
@@ -343,7 +343,7 @@ if(!($operation)) {
 
 	if(!submitcheck('editsubmit')) {
 
-		echo '<script type="text/javascript" src="static/js/calendar.js"></script>';
+		echo '<script src="static/js/calendar.js"></script>';
 		shownav('extended', 'nav_tasks');
 		showsubmenu('nav_tasks', array(
 			array('admin', 'tasks', 0),

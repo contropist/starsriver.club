@@ -63,7 +63,7 @@ function html_login_header($form = true) {
 EOT;
 	if($form) {
 		echo <<<EOT
-<script language="JavaScript">
+<script>
 	if(self.parent.frames.length != 0) {
 		self.parent.location=document.location;
 	}

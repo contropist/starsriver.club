@@ -89,7 +89,7 @@ if(!submitcheck('blogsubmit')) {
 	}
 	/*search*/
 	echo <<<EOT
-<script type="text/javascript" src="static/js/calendar.js"></script>
+<script src="static/js/calendar.js"></script>
 <script>
 function page(number) {
 	$('blogforum').page.value=number;

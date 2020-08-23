@@ -264,7 +264,7 @@ EOT;
 
 	if(!submitcheck('ordersubmit')) {
 
-		echo '<script type="text/javascript" src="static/js/calendar.js"></script>';
+		echo '<script src="static/js/calendar.js"></script>';
 		shownav('extended', 'nav_ec');
 		showsubmenu('nav_ec', array(
 			array('nav_ec_config', 'setting&operation=ec', 0),

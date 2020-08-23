@@ -54,8 +54,8 @@ if($operation == 'all') {
 
 	showformheader('makehtml&operation=all');
 	showtableheader('');
-	echo '<script type="text/javascript" src="'.STATICURL.'js/calendar.js"></script>',
-		'<script type="text/javascript" src="'.STATICURL.'js/makehtml.js?1"></script>',
+	echo '<script src="'.STATICURL.'js/calendar.js"></script>',
+		'<script src="'.STATICURL.'js/makehtml.js?1"></script>',
 		$css;
 	showsetting('start_time', 'starttime', dgmdate(TIMESTAMP, 'Y-m-d'), 'calendar', '', '', '', '1');
 	echo '<tr><td colspan="15"><div class="fixsel"><a href="javascript:void(0);" class="btn_big" id="submit_portal_html">'.$lang['makehtml_createall'].'</a></div></td></tr>', $result;
@@ -144,7 +144,7 @@ EOT;
 
 	showformheader('makehtml&operation=index');
 	showtableheader('');
-	echo '<script type="text/javascript" src="'.STATICURL.'js/makehtml.js?1"></script>', $css;
+	echo '<script src="'.STATICURL.'js/makehtml.js?1"></script>', $css;
 	echo '<tr><td colspan="15"><div class="fixsel"><a href="javascript:void(0);" class="btn_big" id="submit_portal_html">'.$lang['makehtml_createindex'].'</a></div></td></tr>', $result;
 	$adminscript = ADMINSCRIPT;
 	echo <<<EOT
@@ -176,8 +176,8 @@ EOT;
 	showtips('makehtml_tips_category');
 	showformheader('makehtml&operation=category');
 	showtableheader('');
-	echo '<script type="text/javascript" src="'.STATICURL.'js/calendar.js"></script>',
-		'<script type="text/javascript" src="'.STATICURL.'js/makehtml.js?1"></script>',
+	echo '<script src="'.STATICURL.'js/calendar.js"></script>',
+		'<script src="'.STATICURL.'js/makehtml.js?1"></script>',
 		$css;
 
 	showsetting('start_time', 'starttime', '', 'calendar', '', '', '', '1');
@@ -251,8 +251,8 @@ EOT;
 	showtips('makehtml_tips_article');
 	showformheader('makehtml&operation=category');
 	showtableheader('');
-	echo '<script type="text/javascript" src="'.STATICURL.'js/calendar.js"></script>',
-		'<script type="text/javascript" src="'.STATICURL.'js/makehtml.js?1"></script>',
+	echo '<script src="'.STATICURL.'js/calendar.js"></script>',
+		'<script src="'.STATICURL.'js/makehtml.js?1"></script>',
 		$css;
 
 	showsetting('start_time', 'starttime', dgmdate(TIMESTAMP - 86400, 'Y-m-d'), 'calendar', '', '', '', '1');
@@ -341,8 +341,8 @@ EOT;
 	showtips('makehtml_tips_topic');
 	showformheader('makehtml&operation=topic');
 	showtableheader('');
-	echo '<script type="text/javascript" src="'.STATICURL.'js/calendar.js"></script>',
-		'<script type="text/javascript" src="'.STATICURL.'js/makehtml.js?1"></script>',
+	echo '<script src="'.STATICURL.'js/calendar.js"></script>',
+		'<script src="'.STATICURL.'js/makehtml.js?1"></script>',
 		$css;
 
 	showsetting('start_time', 'starttime', '', 'calendar', '', '', '', '1');
