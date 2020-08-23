@@ -193,7 +193,7 @@ function switchicon(iconid, obj) {
 
 function clearContent() {
 	if(wysiwyg) {
-		editdoc.body.innerHTML = BROWSER.firefox ? '<br>' : '';
+		editdoc.body.innerHTML = '';
 	} else {
 		textobj.value = '';
 	}

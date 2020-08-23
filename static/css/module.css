@@ -7676,6 +7676,11 @@
             box-shadow: 0 0 10px rgba(120,144,177,.2);
             border-radius: 4px;
         }
+        .scroll-overhead .app-userspace .flow-deliver{
+            position: fixed;
+            top: 100px;
+            left: calc(var(--width-mas-guide) + 761px);
+        }
 
         .app-userspace .page{
             z-index: 3;
@@ -7704,6 +7709,7 @@
             text-shadow: 2px 1px 0px rgba(0,0,0,.05);
             opacity: .8;
         }
+
         @media screen and (max-width:1470px) {
             .app-userspace .timeline{
                 margin: 0 auto;
@@ -7713,14 +7719,13 @@
                 background: #fff;
                 width: auto;
                 top: auto !important;
-                right: 0;
-                left: var(--width-mas-guide) !important;
-                bottom: calc(var(--footer-drawer-touch-bar-height) + 71px);
+                right: auto;
+                left: calc(var(--width-mas-guide) + 20px) !important;
+                bottom: calc(var(--footer-drawer-touch-bar-height) + 91px);
                 padding: 20px;
                 box-shadow: 0 0 10px rgba(120,144,177,.2);
                 transform: translate3d(0,0,0);
                 transition: .2s ease-in-out;
-                border-radius: 12px 12px 0 0;
             }
             .app-userspace .flow-deliver textarea{
                 height: 42px;
@@ -7728,6 +7733,17 @@
             .app-userspace .flow-deliver.sleep{
                 transform: translate3d(0, 600px, 0);
             }
+
+            .WL-0 .app-userspace .flow-deliver,
+            .WL-3P .app-userspace .flow-deliver,
+            .WL-4P .app-userspace .flow-deliver{
+                right: 0;
+                left: calc(var(--width-mas-guide)) !important;
+                bottom: calc(var(--footer-drawer-touch-bar-height) + 71px);
+                padding: 20px;
+                border-radius: 0;
+            }
+
             .app-userspace .page{
                 box-shadow: 0 0 0 1px rgba(0,0,0,.1);
                 transition: .2s ease-in-out;
@@ -7736,6 +7752,8 @@
             .app-userspace .page.sleep{
                 transform: translate3d(0, 100px, 0);
             }
+        }
+        @media screen and (max-width:720px) {
             .app-userspace .page .pg > a{
                 display: none;
             }
@@ -7744,6 +7762,7 @@
                 display: inline-block;
             }
         }
+
     /*endregion*/
 
     /*region #userspace_doing*/
@@ -7805,6 +7824,11 @@
             display: inline-block;
             width: var(--wall-commentform-width);
             margin: 50px var(--box-margin) var(--box-margin) var(--box-margin);
+        }
+        .scroll-overhead .app-userspace #userspace_wall .wall .commentform{
+            position: fixed;
+            right: var(--box-margin);
+            top: 92px;
         }
         .app-userspace #userspace_wall .wall .commentform .menu{
             position: absolute;

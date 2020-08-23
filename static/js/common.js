@@ -83,24 +83,6 @@ function _detachEvent(obj, evt, func, eventobj) {
 	}
 }
 
-function browserVersion(types) {
-	var other = 1;
-	for(i in types) {
-		var v = types[i] ? types[i] : i;
-		if(USERAGENT.indexOf(v) != -1) {
-			var re = new RegExp(v + '(\\/|\\s|:)([\\d\\.]+)', 'ig');
-			var matches = re.exec(USERAGENT);
-			var ver = matches != null ? matches[2] : 0;
-			other = ver !== 0 && v != 'mozilla' ? 0 : other;
-		}else {
-			var ver = 0;
-		}
-		eval('BROWSER.' + i + '= ver');
-	}
-	BROWSER.other = other;
-}
-
-
 function isUndefined(variable) {
 	return typeof variable == 'undefined' ? true : false;
 }
@@ -469,7 +451,6 @@ function appendscript(src, text, reload, charset) {
 	var scriptNode = document.createElement("script");
 	scriptNode.type = "text/javascript";
 	scriptNode.id = id;
-	scriptNode.charset = charset ? charset : (BROWSER.firefox ? document.characterSet : document.charset);
 	try {
 		if(src) {
 			scriptNode.src = src;
@@ -607,7 +588,9 @@ function showMenu(v) {
 	var menuid = isUndefined(v['menuid']) ? showid + '_menu' : v['menuid'];
 	var ctrlObj = $(ctrlid);
 	var menuObj = $(menuid);
+
 	if(!menuObj) return;
+
 	var mtype = isUndefined(v['mtype']) ? 'menu' : v['mtype'];
 	var evt = isUndefined(v['evt']) ? 'mouseover' : v['evt'];
 	var pos = isUndefined(v['pos']) ? '43' : v['pos'];
@@ -760,11 +743,7 @@ function showMenu(v) {
 	}
 	if(maxh && menuObj.scrollHeight > maxh) {
 		menuObj.style.height = maxh + 'px';
-		if(BROWSER.opera) {
-			menuObj.style.overflow = 'auto';
-		} else {
-			menuObj.style.overflowY = 'auto';
-		}
+		menuObj.style.overflow = 'auto';
 	}
 
 	if(!duration) {
@@ -859,24 +838,26 @@ function dragMenu(menuObj, e, op) {
 function setMenuPosition(showid, menuid, pos) {
 	var showObj = $(showid);
 	var menuObj = menuid ? $(menuid) : $(showid + '_menu');
+
 	if(isUndefined(pos) || !pos) pos = '43';
-	var basePoint = parseInt(pos.substr(0, 1));
-	var direction = parseInt(pos.substr(1, 1));
-	var important = pos.indexOf('!') !== -1 ? 1 : 0;
-	var sxy = 0, sx = 0, sy = 0, sw = 0, sh = 0, ml = 0, mt = 0, bpl = 0, bpt = 0;
+
+	var basePoint = parseInt(pos.substr(0, 1)),
+        direction = parseInt(pos.substr(1, 1)),
+        important = pos.indexOf('!') !== -1 ? 1 : 0,
+        sxy = 0, sx = 0, sy = 0, sw = 0, sh = 0, ml = 0, mt = 0, bpl = 0, bpt = 0;
 
 	if(!menuObj || (basePoint > 0 && !showObj)) return;
+
 	if(showObj) {
-
-
 		sxy = fetchOffset(showObj);
 		sx = sxy['left'];
 		sy = sxy['top'];
-		sw = showObj.offsetWidth;
-		sh = showObj.offsetHeight;
+		sw = showObj.Css.width;
+		sh = showObj.Css.height;
 	}
-	mw = menuObj.offsetWidth;
-	mh = menuObj.offsetHeight;
+
+	mw = menuObj.Css.width;
+	mh = menuObj.Css.height;
 
 	switch(basePoint) {
 		case 1:
@@ -896,6 +877,7 @@ function setMenuPosition(showid, menuid, pos) {
 			bpt = sy + sh;
 			break;
 	}
+
 	switch(direction) {
 		case 0:
 			menuObj.style.left = (document.body.clientWidth - menuObj.clientWidth) / 2 + 'px';
@@ -918,8 +900,9 @@ function setMenuPosition(showid, menuid, pos) {
 			mt = bpt;
 			break;
 	}
-	var scrollTop = Math.max(document.documentElement.scrollTop, document.body.scrollTop);
-	var scrollLeft = Math.max(document.documentElement.scrollLeft, document.body.scrollLeft);
+
+	var scrollTop = SRGlobal.Window.Scroll.Top;
+	var scrollLeft = SRGlobal.Window.Scroll.Left;
 	if(!important) {
 		if(in_array(direction, [1, 4]) && ml < 0) {
 			ml = bpl;
@@ -943,7 +926,7 @@ function setMenuPosition(showid, menuid, pos) {
 	if(pos.substr(0, 3) === '210') {
 		ml += 69 - sw / 2;
 		mt -= 5;
-		if(showObj.tagName === 'TEXTAREA') {
+		if(showObj.tagName === 'textarea') {
 			ml -= sw / 2;
 			mt += sh / 2;
 		}
@@ -952,6 +935,7 @@ function setMenuPosition(showid, menuid, pos) {
         if(menuObj.scrolly) mt -= scrollTop;
         menuObj.style.position = 'fixed';
 	}
+
 	if(ml) menuObj.style.left = ml + 'px';
 	if(mt) menuObj.style.top = mt + 'px';
 }
@@ -1035,19 +1019,13 @@ function getCurrentStyle(obj, cssproperty, csspropertyNS) {
 	}
 }
 
-function fetchOffset(obj, mode) {
-	var left_offset = 0, top_offset = 0, mode = !mode ? 0 : mode;
+function fetchOffset(obj) {
+	let left_offset = 0,
+        top_offset = 0;
 
-	if(obj.getBoundingClientRect && !mode) {
-		var rect = obj.getBoundingClientRect();
-		var scrollTop = Math.max(document.documentElement.scrollTop, document.body.scrollTop);
-		var scrollLeft = Math.max(document.documentElement.scrollLeft, document.body.scrollLeft);
-		if(document.documentElement.dir === 'rtl') {
-			scrollLeft = scrollLeft + document.documentElement.clientWidth - document.documentElement.scrollWidth;
-		}
-		left_offset = rect.left + scrollLeft - document.documentElement.clientLeft;
-		top_offset = rect.top + scrollTop - document.documentElement.clientTop;
-	}
+    left_offset = obj.Css.left;
+    top_offset = obj.Css.top;
+
 	if(left_offset <= 0 || top_offset <= 0) {
 		left_offset = obj.offsetLeft;
 		top_offset = obj.offsetTop;
@@ -1177,7 +1155,6 @@ function showWindow(k, url, mode, cache, menuv) {
 	var hidedom = '';
 
 	if(disallowfloat && disallowfloat.indexOf(k) !== -1) {
-		if(BROWSER.ie) url += (url.indexOf('?') !== -1 ?  '&' : '?') + 'referer=' + escape(location.href);
 		location.href = url;
 		doane();
 		return;
@@ -1194,9 +1171,9 @@ function showWindow(k, url, mode, cache, menuv) {
 			menuObj.act = $(url).action;
 			ajaxpost(url, 'fwin_content_' + k, '', '', '', function() {initMenu();show();});
 		}
-		if(parseInt(BROWSER.ie) !== 6) {
-			loadingst = setTimeout(function() {showDialog('', 'info', '<img src="' + IMGDIR + '/loading.gif"> 请稍候...')}, 500);
-		}
+
+		loadingst = setTimeout(function() {showDialog('', 'info', '<img src="' + IMGDIR + '/loading.gif"> 请稍候...')}, 500);
+
 	};
 	var initMenu = function() {
 		clearTimeout(loadingst);
@@ -1311,12 +1288,7 @@ function AC_GetArgs(args, classid, mimeType) {
 function simulateSelect(selectId, widthvalue) {
 	var selectObj = $(selectId);
 	if(!selectObj) return;
-	if(BROWSER.other) {
-		if(selectObj.getAttribute('change')) {
-			selectObj.onchange = function () {eval(selectObj.getAttribute('change'));}
-		}
-		return;
-	}
+
 	var defaultopt = selectObj.options[0] ? selectObj.options[0].innerHTML : '';
 	var defaultv = '';
 	var menuObj = document.createElement('div');
@@ -1956,13 +1928,8 @@ function mobileplayer() {
 }
 
 
-var BROWSER = {};
+
 var USERAGENT = navigator.userAgent.toLowerCase();
-browserVersion({'ie':'msie','firefox':'','chrome':'','opera':'','safari':'','mozilla':'','webkit':'','maxthon':'','qq':'qqbrowser','rv':'rv'});
-if(BROWSER.safari || BROWSER.rv) {
-	BROWSER.firefox = true;
-}
-BROWSER.opera = BROWSER.opera ? opera.version() : 0;
 
 HTMLNODE = document.getElementsByTagName('head')[0].parentNode;
 
@@ -1992,54 +1959,6 @@ var USERCARDST = null;
 var CLIPBOARDSWFDATA = '';
 var NOTICECURTITLE = document.title;
 var safescripts = {}, evalscripts = [];
-
-if(BROWSER.firefox && window.HTMLElement) {
-	HTMLElement.prototype.__defineGetter__( "innerText", function(){
-		var anyString = "";
-		var childS = this.childNodes;
-		for(var i=0; i <childS.length; i++) {
-			if(childS[i].nodeType===1) {
-				anyString += childS[i].tagName==="BR" ? '\n' : childS[i].innerText;
-			} else if(childS[i].nodeType===3) {
-				anyString += childS[i].nodeValue;
-			}
-		}
-		return anyString;
-	});
-	HTMLElement.prototype.__defineSetter__( "innerText", function(sText){
-		this.textContent=sText;
-	});
-	HTMLElement.prototype.__defineSetter__('outerHTML', function(sHTML) {
-			var r = this.ownerDocument.createRange();
-		r.setStartBefore(this);
-		var df = r.createContextualFragment(sHTML);
-		this.parentNode.replaceChild(df,this);
-		return sHTML;
-	});
-
-	HTMLElement.prototype.__defineGetter__('outerHTML', function() {
-		var attr;
-		var attrs = this.attributes;
-		var str = '<' + this.tagName.toLowerCase();
-		for(var i = 0;i < attrs.length;i++){
-			attr = attrs[i];
-			if(attr.specified)
-			str += ' ' + attr.name + '="' + attr.value + '"';
-		}
-		if(!this.canHaveChildren) {
-			return str + '>';
-		}
-		return str + '>' + this.innerHTML + '</' + this.tagName.toLowerCase() + '>';
-		});
-
-	HTMLElement.prototype.__defineGetter__('canHaveChildren', function() {
-		switch(this.tagName.toLowerCase()) {
-			case 'area':case 'base':case 'basefont':case 'col':case 'frame':case 'hr':case 'img':case 'br':case 'input':case 'isindex':case 'link':case 'meta':case 'param':
-			return false;
-			}
-		return true;
-	});
-}
 
 if(typeof IN_ADMINCP == 'undefined') {
 	if(creditnotice != '' && getcookie('creditnotice')) {

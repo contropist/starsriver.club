@@ -71,25 +71,13 @@
                         postform_style = '',
                         scrltem = 0,
                         positionfix = function (){
-                        if(SRGlobal.Window.Width > 1000){
-                            fastdom.measure(() => {
-                                if(body.hasClass('scroll-overhead')){
-                                    postform_style = 'position: fixed !important; right: 8px; top:'+ (MasElements.Bank.Css.height + 16) + 'px;';
-                                } else {
-                                    postform_style = '';
-                                }
-                            });
-                            fastdom.mutate(() => {
-                                postform.style = postform_style;
-                            });
-
-                        } else {
+                        if(SRGlobal.Window.Width <= 1000){
                             postform.style = '';
                             if(SRGlobal.Window.Scroll.DirY === 'down'){
                                 scrltem = SRGlobal.Window.Scroll.Top;
                                 fastdom.mutate(() => {postform.addClass('sleep')});
-                            } else if(SRGlobal.Window.Scroll.DirY === 'up' && scrltem - SRGlobal.Window.Scroll.Top > Math.min(390, MasElements.viewer.scrollHeight - SRGlobal.Window.Height - 20)) {
-                                    fastdom.mutate(() => {postform.delClass('sleep')});
+                            } else if(scrltem - SRGlobal.Window.Scroll.Top > Math.min(390, MasElements.viewer.scrollHeight - SRGlobal.Window.Height - 20)) {
+                                fastdom.mutate(() => {postform.delClass('sleep')});
                             }
                         }
                     };

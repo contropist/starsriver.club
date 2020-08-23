@@ -3911,6 +3911,7 @@
         padding-bottom: 8px;
     }
     .plate.soft .nav-vertical .title{
+        display: block;
         height: 52px;
         line-height: 52px;
         text-align: center;

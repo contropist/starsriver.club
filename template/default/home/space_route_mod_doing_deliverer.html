@@ -7,7 +7,7 @@
     <textarea name="message" id="message" onkeyup="strLenCalc(this, 'maxlimit')" onkeydown="ctrlEnter(event, 'add');" placeholder="$defaultstr"></textarea>
 
     <div class="subline">
-        <i class="smilies" onclick="emoticons(this.id, 'message');">( ͡° ͜ʖ ͡°)</i>
+        <i class="smilies" id="doing_deliver_smilies" onclick="emoticons(this.id, 'message');">( ͡° ͜ʖ ͡°)</i>
         <div class="ccbox">
             <input type="checkbox" name="to_signhtml" id="updatesign" value="1" />
             <label for="updatesign">{lang doing_update_personal_signature}</label>

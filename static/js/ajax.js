@@ -99,16 +99,10 @@ function _ajaxpost(formid, showid, waitid, showidclass, submitbtn, recall) {
 		}
 		if(!evaled) evalscript(s);
 		ajaxframe.loading = 0;
-		if(!BROWSER.firefox || BROWSER.safari) {
-			$('append_parent').removeChild(ajaxframe.parentNode);
-		} else {
-			setTimeout(
-				function(){
-					$('append_parent').removeChild(ajaxframe.parentNode);
-				},
-				100
-			);
-		}
+
+        setTimeout(function(){
+            $('append_parent').removeChild(ajaxframe.parentNode);},100
+        );
 	};
 	if(!ajaxframe) {
 		var div = document.createElement('div');
@@ -195,7 +189,6 @@ function _appendscript(src, text, reload, charset) {
 	var scriptNode = document.createElement("script");
 	scriptNode.type = "text/javascript";
 	scriptNode.id = id;
-	scriptNode.charset = charset ? charset : (BROWSER.firefox ? document.characterSet : document.charset);
 	try {
 		if(src) {
 			scriptNode.src = src;

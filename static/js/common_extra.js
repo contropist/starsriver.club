@@ -105,7 +105,7 @@ function _checksec(type, idhash, showmsg, recall, modid) {
 	x.loading = '';
     var obj = $('checksec' + type + 'verify_' + idhash);
 	obj.className = 'ft-';
-	x.get('misc.php?mod=sec' + type + '&action=check&inajax=1&modid=' + modid + '&idhash=' + idhash + '&secverify=' + (BROWSER.ie && document.charset == 'utf-8' ? encodeURIComponent(secverify) : secverify), function(s){
+	x.get('misc.php?mod=sec' + type + '&action=check&inajax=1&modid=' + modid + '&idhash=' + idhash + '&secverify=' + secverify, function(s){
 		obj.style.display = '';
 		if(s.substr(0, 7) == 'succeed') {
 			obj.className = 'ft-check-circle hat-green';
@@ -184,7 +184,7 @@ function _copycode(obj) {
 		rng.moveToElementText(obj);
 		rng.select();
 	}
-	setCopy(BROWSER.ie ? obj.innerText.replace(/\r\n\r\n/g, '\r\n') : obj.textContent, '代码已复制到剪贴板');
+	setCopy(obj.textContent, '代码已复制到剪贴板');
 }
 
 function _showselect(obj, inpid, t, rettype) {

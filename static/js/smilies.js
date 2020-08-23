@@ -16,18 +16,11 @@ function _smilies_show(id, smcols, seditorkey) {
 	if(typeof smilies_type == 'undefined') {
 		var scriptNode = document.createElement("script");
 		scriptNode.type = "text/javascript";
-		scriptNode.charset = charset ? charset : (BROWSER.firefox ? document.characterSet : document.charset);
 		scriptNode.src = 'data/cache/common_smilies_var.js?' + VERHASH;
 		$('append_parent').appendChild(scriptNode);
-		if(BROWSER.ie) {
-			scriptNode.onreadystatechange = function() {
-				smilies_onload(seditorkey + 'sml_menu', smcols, seditorkey);
-			};
-		} else {
-			scriptNode.onload = function() {
-				smilies_onload(seditorkey + 'sml_menu', smcols, seditorkey);
-			};
-		}
+        scriptNode.onload = function() {
+            smilies_onload(seditorkey + 'sml_menu', smcols, seditorkey);
+        };
 	} else {
 		smilies_onload(seditorkey + 'sml_menu', smcols, seditorkey);
 	}

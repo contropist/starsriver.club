@@ -73,7 +73,7 @@ function checkAll(form, name) {
 function cnCode(str) {
 	str = str.replace(/<\/?[^>]+>|\[\/?.+?\]|"/ig, "");
 	str = str.replace(/\s{2,}/ig, ' ');
-	return BROWSER.ie && document.charset == 'utf-8' ? encodeURIComponent(str) : str;
+	return str;
 }
 
 function getExt(path) {
@@ -543,7 +543,7 @@ function showBlock(cid, oid) {
 
 function resizeTx(obj){
 	var oid = obj.id + '_limit';
-	if(!BROWSER.ie) obj.style.height = 0;
+	obj.style.height = 0;
 	obj.style.height = obj.scrollHeight + 'px';
 	if($(oid)) $(oid).style.display = obj.scrollHeight > 30 ? '':'none';
 }
@@ -583,7 +583,7 @@ function showFace(showid, target, dropstr) {
 }
 
 function emoticons(showid, target) {
-    if($(showid + '_menu') != null) {
+    if($(showid + '_menu')) {
         $(showid+'_menu').style.display = '';
     } else {
         var emoticon = [

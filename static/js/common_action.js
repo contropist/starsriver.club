@@ -384,15 +384,22 @@
 
             Misc.WinScrollDirRefresh(MasElements.MasViewerScroll, MasElements.viewer);
             if(MasElements.viewerHeader){
-                if(MasElements.MasViewerScroll.Top >= MasElements.viewerHeader.Css.height - MasElements.Bank.Css.height){
-                    fastdom.mutate(() => {body.addClass('scroll-overhead');});
+
+                let overhead = MasElements.MasViewerScroll.Top >= MasElements.viewerHeader.Css.height - MasElements.Bank.Css.height ? 1 : 0;
+
+                if(overhead){
+                    fastdom.mutate(() => {
+                        body.addClass('scroll-overhead');
+                    });
                 } else {
-                    fastdom.mutate(() => {body.delClass('scroll-overhead');});
+                    fastdom.mutate(() => {
+                        body.delClass('scroll-overhead');
+                    });
                 }
 
-                if(!body.hasClass('scroll-overhead')){
+                if(!overhead){
+                    let trspct = (1 - (Math.min(MasElements.MasViewerScroll.Top,MasElements.viewerBannerImg.Css.height) / MasElements.viewerBannerImg.Css.height) * 1.5 ) * 50;
                     fastdom.mutate(() => {
-                        let trspct = (1 - (MasElements.MasViewerScroll.Top / MasElements.viewerBannerImg.Css.height) * 1.5 ) * 50;
                         MasElements.viewerBannerImg.style.transform = 'translate(-50%, -' + trspct + '%)';
                     });
                 }

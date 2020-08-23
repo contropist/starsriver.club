@@ -99,7 +99,7 @@ function keyPageScroll(e, prev, next, url, page) {
 		return true;
 	}
 	e = e ? e : window.event;
-	var tagname = BROWSER.ie ? e.srcElement.tagName : e.target.tagName;
+	var tagname = e.target.tagName;
 	if(tagname == 'INPUT' || tagname == 'TEXTAREA') return;
 	actualCode = e.keyCode ? e.keyCode : e.charCode;
 	if(next && actualCode == 39) {
@@ -563,26 +563,9 @@ function previewThread(tid, tbody) {
 		previewTbody = tbody;
 		previewTid = tid;
 
-		if(BROWSER.ie) {
-			previewDiv = document.createElement('div');
-			previewDiv.id = 'threadPreview_'+tid;
-			previewDiv.style.id = 'none';
-			var x = Ajax();
-			x.get('forum.php?mod=viewthread&tid='+tid+'&inajax=1&from=preview', function(ret) {
-				var evaled = false;
-				if(ret.indexOf('ajaxerror') != -1) {
-					evalscript(ret);
-					evaled = true;
-				}
-				previewDiv.innerHTML = ret;
-				newTd.appendChild(previewDiv);
-				if(!evaled) evalscript(ret);
-				newTr.style.display = '';
-			});
-		} else {
-			newTd.innerHTML += '<div id="threadPreview_'+tid+'"></div>';
-			ajaxget('forum.php?mod=viewthread&tid='+tid+'&from=preview', 'threadPreview_'+tid, null, null, null, function() {newTr.style.display = '';});
-		}
+        newTd.innerHTML += '<div id="threadPreview_'+tid+'"></div>';
+        ajaxget('forum.php?mod=viewthread&tid='+tid+'&from=preview', 'threadPreview_'+tid, null, null, null, function() {newTr.style.display = '';});
+
 	} else {
 		$(tbody).removeChild($('threadPreviewTR_'+tid));
 		previewTbody = previewTid = null;

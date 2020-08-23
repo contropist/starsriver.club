@@ -8,13 +8,7 @@ var andriod = ua.indexOf( "Android" ) > -1;
 
 var JSLOADED = [];
 
-var BROWSER = {};
 var USERAGENT = navigator.userAgent.toLowerCase();
-browserVersion({'ie':'msie','firefox':'','chrome':'','opera':'','safari':'','mozilla':'','webkit':'','maxthon':'','qq':'qqbrowser','rv':'rv'});
-if(BROWSER.safari || BROWSER.rv) {
-    BROWSER.firefox = true;
-}
-BROWSER.opera = BROWSER.opera ? opera.version() : 0;
 
 (function($, window, document, undefined) {
     var dataPropertyName = "virtualMouseBindings",
@@ -959,43 +953,16 @@ function getcookie(name, nounescape) {
     }
 }
 
-function browserVersion(types) {
-    var other = 1;
-    for(i in types) {
-        var v = types[i] ? types[i] : i;
-        if(USERAGENT.indexOf(v) != -1) {
-            var re = new RegExp(v + '(\\/|\\s|:)([\\d\\.]+)', 'ig');
-            var matches = re.exec(USERAGENT);
-            var ver = matches != null ? matches[2] : 0;
-            other = ver !== 0 && v != 'mozilla' ? 0 : other;
-        } else {
-            var ver = 0;
-        }
-        eval('BROWSER.' + i + '= ver');
-    }
-    BROWSER.other = other;
-}
-
 function AC_FL_RunContent() {
     var str = '';
     var ret = AC_GetArgs(arguments, "clsid:d27cdb6e-ae6d-11cf-96b8-444553540000", "application/x-shockwave-flash");
-    if(BROWSER.ie && !BROWSER.opera) {
-        str += '<object ';
-        for (var i in ret.objAttrs) {
-            str += i + '="' + ret.objAttrs[i] + '" ';
-        }
-        str += '>';
-        for (var i in ret.params) {
-            str += '<param name="' + i + '" value="' + ret.params[i] + '" /> ';
-        }
-        str += '</object>';
-    } else {
+
         str += '<embed ';
         for (var i in ret.embedAttrs) {
             str += i + '="' + ret.embedAttrs[i] + '" ';
         }
         str += '></embed>';
-    }
+
     return str;
 }
 

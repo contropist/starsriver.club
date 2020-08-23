@@ -7,7 +7,7 @@
 		<input type="hidden" name="formhash" value="{FORMHASH}" />
 		<textarea name="message" id="stmessage" placeholder="$defaultstr" onkeydown="if(ctrlEnter(event, 'addsubmit_btn')){if(event.keyCode == 13){ doane(event);}}" onkeyup="strLenCalc(this, 'maxlimit');"></textarea>
 		<div class="subline">
-			<i class="smilies" onclick="emoticons(this.id, 'stmessage');">≖‿≖✧</i>
+			<i class="smilies" id="space_status_smilies" onclick="emoticons(this.id, 'stmessage');">≖‿≖✧</i>
 			<div class="ccbox">
 				<input type="checkbox" name="to_signhtml" id="synch" value="1"/>
 				<label for="synch">{lang doing_update_personal_signature}</label>

@@ -105,18 +105,7 @@
             page = SR('#pager_doing')[0],
             scrltem = 0,
             positionfix = function (){
-                if(SRGlobal.Window.Width > 1470){
-                    fastdom.measure(() => {
-                        if(body.hasClass('scroll-overhead')){
-                            postform_style = 'position: fixed !important; left: ' + (MasElements.guide.Css.width + 761) + 'px; top:'+ (MasElements.Bank.Css.height + 32) + 'px;';
-                        } else {
-                            postform_style = '';
-                        }
-                    });
-                    fastdom.mutate(() => {
-                        postform.style = postform_style;
-                    });
-                } else {
+                if(SRGlobal.Window.Width <= 1470){
                     postform.style = '';
                     if(SRGlobal.Window.Scroll.DirY === 'down'){
                         scrltem = SRGlobal.Window.Scroll.Top;
@@ -153,10 +142,8 @@
             };
 
         if(MasElements.viewer.scrollHeight > SRGlobal.Window.Height){
-            fastdom.mutate(() => {
-                if(page) page.addClass('sleep');
-                if(postform) postform.addClass('sleep');
-            });
+            if(page) fastdom.mutate(() => {page.addClass('sleep')});
+            if(postform) fastdom.mutate(() => {postform.addClass('sleep')});
         } else {
             fastdom.mutate(() => {Tl.style.marginBottom = '200px';});
         }
