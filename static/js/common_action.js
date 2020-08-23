@@ -377,7 +377,7 @@
 
             Misc.WinScrollDirRefresh(MasElements.MasViewerScroll, MasElements.viewer);
 
-            SRGlobal.Window.Scroll.ToBottom = MasElements.viewer.scrollTop + MasElements.viewer.Css.Height >= MasElements.viewer.scrollHeight ? 1 : 0;
+            SRGlobal.Window.Scroll.ToBottom = MasElements.viewer.scrollTop + MasElements.viewer.Css.height >= MasElements.viewer.scrollHeight ? 1 : 0;
 
             if(SRGlobal.Window.Scroll.ToBottom){
                 body.addClass('scroll-tobottom');
