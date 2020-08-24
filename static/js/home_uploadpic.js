@@ -97,19 +97,10 @@ function insertAttach(id) {
 
 function getPath(obj){
 	if (obj) {
-		if (BROWSER.ie && BROWSER.ie < 7) {
-			obj.select();
-			return document.selection.createRange().text;
-
-		} else if(BROWSER.firefox) {
-			if (obj.files) {
-				return obj.files.item(0).getAsDataURL();
-			}
-			return obj.value;
-		} else {
-			return '';
-		}
-		return obj.value;
+        if (obj.files) {
+            return obj.files.item(0).getAsDataURL();
+        }
+        return obj.value;
 	}
 }
 function inArray(needle, haystack) {

@@ -111,16 +111,12 @@ function attachimginfo(obj, infoobj, show, event) {
 		$(infoobj).style.top = obj.offsetHeight < 40 ? (objinfo['top'] + obj.offsetHeight) + 'px' : objinfo['top'] + 'px';
 		$(infoobj).style.display = '';
 	} else {
-		if(BROWSER.ie) {
-			$(infoobj).style.display = 'none';
-			return;
-		} else {
-			var mousex = document.body.scrollLeft + event.clientX;
-			var mousey = document.documentElement.scrollTop + event.clientY;
-			if(mousex < objinfo['left'] || mousex > objinfo['left'] + objinfo['width'] || mousey < objinfo['top'] || mousey > objinfo['top'] + objinfo['height']) {
-				$(infoobj).style.display = 'none';
-			}
-		}
+        var mousex = document.body.scrollLeft + event.clientX;
+        var mousey = document.documentElement.scrollTop + event.clientY;
+        if(mousex < objinfo['left'] || mousex > objinfo['left'] + objinfo['width'] || mousey < objinfo['top'] || mousey > objinfo['top'] + objinfo['height']) {
+            $(infoobj).style.display = 'none';
+        }
+
 	}
 }
 
@@ -135,7 +131,7 @@ function signature(obj) {
 }
 
 function tagshow(event) {
-	var obj = BROWSER.ie ? event.srcElement : event.target;
+	var obj = event.target;
 	ajaxmenu(obj, 0, 1, 2);
 }
 
@@ -209,7 +205,7 @@ function fastpostappendreply() {
 	if($('fastpostmessage')) {
 		$('fastpostmessage').value = '';
 	} else {
-		editdoc.body.innerHTML = BROWSER.firefox ? '<br>' : '';
+		editdoc.body.innerHTML = '<br>';
 	}
 	if($('fastpostform').seccodehash){
 		updateseccode($('fastpostform').seccodehash.value);
@@ -628,11 +624,9 @@ function autofade(w, h, s) {
 	this.imgobj = $('threadbeginid');
 	this.opacity = 0;
 	this.fadein = function() {
-		if(BROWSER.ie) {
-			this.imgobj.filters.alpha.opacity = this.opacity;
-		} else {
-			this.imgobj.style.opacity = this.opacity/100;
-		}
+
+	    this.imgobj.style.opacity = this.opacity/100;
+
 		if(this.opacity >= 100) {
 			setTimeout(this.fadeout, s);
 			return;
@@ -641,11 +635,9 @@ function autofade(w, h, s) {
 		setTimeout(this.fadein, 50);
 	};
 	this.fadeout = function() {
-		if(BROWSER.ie) {
-			this.imgobj.filters.alpha.opacity = this.opacity;
-		} else {
-			this.imgobj.style.opacity = this.opacity/100;
-		}
+
+	    this.imgobj.style.opacity = this.opacity/100;
+
 		if(this.opacity <= 0) {
 			this.imgobj.style.display = 'none';
 			return;

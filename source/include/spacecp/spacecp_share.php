@@ -271,10 +271,10 @@ if($_GET['op'] == 'delete') {
 
             $linkmatch = [];
 
-            if (preg_match("/\<iframe\s.*src=\"(.*?)\".*\>.*\<\/iframe\>/is", $link, $linkmatch)) {
+            if (preg_match("/\<iframe\s.*(src=\".*?\").*\>.*\<\/iframe\>/is", $link, $linkmatch)) {
                 $type = 'iframe';
                 $arr['body_data'] = [
-                    'html' => "<iframe src='$linkmatch[1]'></iframe>"
+                    'html' => "<iframe $linkmatch[1]></iframe>"
                 ];
             } else {
                 preg_match("/((https?|iframe|ftp|gopher|news|telnet|rtsp|mms|callto|bctp|thunder|qqdl|synacast){1}:\/\/|www\.)[^\[\"']+/i", dhtmlspecialchars($link), $matches);

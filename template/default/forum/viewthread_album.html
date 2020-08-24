@@ -201,7 +201,7 @@
 								}
 								document.onkeyup = function(e){
 									e = e ? e : window.event;
-									var tagname = BROWSER.ie ? e.srcElement.tagName : e.target.tagName;
+									var tagname = e.target.tagName;
 									if(tagname == 'INPUT' || tagname == 'TEXTAREA') return;
 									actualCode = e.keyCode ? e.keyCode : e.charCode;
 									if(actualCode == 39) {

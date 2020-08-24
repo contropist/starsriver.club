@@ -211,7 +211,5 @@ function zerofill(s) {
 	return (s < 10 ? '0' : '') + s.toString();
 }
 
-if(!BROWSER.other) {
-	loadcss('forum_calendar');
-	loadcalendar();
-}
+loadcss('forum_calendar');
+loadcalendar();

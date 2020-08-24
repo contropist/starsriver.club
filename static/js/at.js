@@ -15,9 +15,7 @@ var atKeywords = null, keyMenuObj = null,atResult = [];
 var curatli = 0, atliclass = '', atsubmitid = '', atkeypress = 0;
 
 function extrafunc_atMenu() {
-	if(BROWSER.opera) {
-		return;
-	}
+
 	if(wysiwyg && EXTRAEVENT.shiftKey && EXTRAEVENT.keyCode == 50 && postaction && (postaction == 'newthread' || postaction == 'reply' || postaction == 'edit')) {
 		keyMenu('@', atMenu);
 		ctlent_enable[13] = 0;
@@ -30,9 +28,7 @@ function extrafunc_atMenu() {
 }
 
 function extrafunc_atMenuKeyUp() {
-	if(BROWSER.opera) {
-		return;
-	}
+
 	if(wysiwyg && EXTRAEVENT.shiftKey && EXTRAEVENT.keyCode == 50 && postaction && (postaction == 'newthread' || postaction == 'reply' || postaction == 'edit') && !atkeypress) {
 		keyBackspace();
 		keyMenu('@', atMenu);
@@ -179,7 +175,6 @@ function atMenuSet(kw) {
 	$('at_menu').style.display = 'none';
 	ctlent_enable[13] = 1;
 	curatli = 0;
-	if(BROWSER.firefox) {
 		var selection = editwin.getSelection();
 		var range = selection.getRangeAt(0);
 		var tmp = keyMenuObj.firstChild;
@@ -187,6 +182,5 @@ function atMenuSet(kw) {
 		range.setEnd(tmp, keyMenuObj.innerHTML.length - 5);
 		selection.removeAllRanges();
 		selection.addRange(range);
-	}
 	checkFocus();
 }

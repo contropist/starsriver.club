@@ -1042,7 +1042,7 @@ spacenest.extend({
 			x.showId = ajaxtarget;
 			x.get('portal.php?mod=portalcp&ac=nest'+para+'&inajax=1&ajaxtarget='+ajaxtarget,function(s, x) {
 				if (s) {
-					if (typeof cpb_frame == 'object' && !BROWSER.ie) {delete cpb_frame;}
+					if (typeof cpb_frame == 'object') {delete cpb_frame;}
 					if (!$('content'+type)) {
 						var dom = document.createElement('div');
 						dom.id = 'content'+type;

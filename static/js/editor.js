@@ -9,13 +9,6 @@ EXTRAFUNC['showEditorMenu'] = [];
 var EXTRASELECTION = '', EXTRASEL = null;
 
 function newEditor(mode, initialtext) {
-    wysiwyg = parseInt(mode);
-    if (!(BROWSER.ie || BROWSER.firefox || (BROWSER.opera >= 9 || BROWSER.rv))) {
-        allowswitcheditor = wysiwyg = 0;
-    }
-    if (!allowswitcheditor) {
-        $(editorid + '_switcher').style.display = 'none';
-    }
 
     if (wysiwyg) {
         if ($(editorid + '_iframe')) {
@@ -49,10 +42,7 @@ function setEditorTip(s) {
 }
 
 function initEditor() {
-    if (BROWSER.other) {
-        $(editorid + '_controls').style.display = 'none';
-        return;
-    }
+
     var buttons = $(editorid + '_controls').getElementsByTagName('a');
     initesbar();
     for (var i = 0; i < buttons.length; i++) {
@@ -75,7 +65,7 @@ function initEditor() {
                 }
             } else {
                 _attachEvent(buttons[i], 'mouseover', function (e) {
-                    setEditorTip(BROWSER.ie ? window.event.srcElement.title : e.target.title);
+                    setEditorTip(e.target.title);
                 });
                 if (buttons[i].id.substr(buttons[i].id.indexOf('_') + 1) === 'url') {
                     buttons[i].onclick = function (e) {
@@ -98,7 +88,7 @@ function initEditor() {
         }
     }
 
-    if (editorcontroltop === false && (BROWSER.ie && BROWSER.ie > 6 || !BROWSER.ie)) {
+    if (editorcontroltop === false) {
         seteditorcontrolpos();
         var obj = wysiwyg ? editwin.document.body.parentNode : $(editorid + '_textarea');
         editorcontrolwidth = $(editorid + '_controls').clientWidth - 8;
@@ -140,7 +130,7 @@ function initesbar() {
             } else if (buttons[i].id.substr(buttons[i].id.indexOf('_') + 1) === 'simple') {
             } else {
                 _attachEvent(buttons[i], 'mouseover', function (e) {
-                    setEditorTip(BROWSER.ie ? window.event.srcElement.title : e.target.title);
+                    setEditorTip(e.target.title);
                 });
                 if (buttons[i].id.substr(buttons[i].id.indexOf('_') + 1) === 'url') {
                     buttons[i].onclick = function (e) {
@@ -493,9 +483,6 @@ function keyMenu(code, func) {
 
 function checkFocus() {
     if (wysiwyg) {
-        if (BROWSER.rv) {
-            return;
-        }
         try {
             editwin.document.body.focus();
         } catch(e) {
@@ -513,40 +500,30 @@ function checklength(theform) {
 
 function writeEditorContents(text) {
     if (wysiwyg) {
-        if (text === '' && (BROWSER.firefox || BROWSER.opera)) {
-            text = '<p></p>';
-        }
-        if (initialized && !(BROWSER.firefox && BROWSER.firefox >= '3' || BROWSER.opera)) {
-            editdoc.body.innerHTML = text;
-        } else {
-            text = '' +
-                '<!DOCTYPE html>' +
-                '<html>' +
-                '<head id="editorheader">' +
-                '<meta charset="' + charset + '" />' +
-                '<meta name="renderer" content="webkit" />' +
-                '<meta http-equiv="X-UA-Compatible" content="IE=edge" />' +
-                '<link rel="stylesheet" type="text/css" href="' + CSSPATH + 'wysiwyg.css?' + VERHASH + '" />' +
-                (BROWSER.ie ? '<script>window.onerror = function() { return true; }</script>' : '') +
-                '</head><body>' + text + '</body></html>';
-            editdoc.designMode = allowhtml ? 'on' : 'off';
-            editdoc = editwin.document;
-            editdoc.open('text/html', 'replace');
-            editdoc.write(text);
-            editdoc.close();
-            if (!BROWSER.ie) {
-                var scriptNode = document.createElement("script");
-                scriptNode.type = "text/javascript";
-                scriptNode.text = 'window.onerror = function() { return true; }';
-                editdoc.getElementById('editorheader').appendChild(scriptNode);
-            }
-            editdoc.body.contentEditable = true;
-            editdoc.body.spellcheck = false;
-            initialized = true;
-            if (BROWSER.safari) {
-                editdoc.onclick = safariSel;
-            }
-        }
+        text = '' +
+            '<!DOCTYPE html>' +
+            '<html>' +
+            '<head id="editorheader">' +
+            '<meta charset="' + charset + '" />' +
+            '<meta name="renderer" content="webkit" />' +
+            '<meta http-equiv="X-UA-Compatible" content="IE=edge" />' +
+            '<link rel="stylesheet" type="text/css" href="' + CSSPATH + 'wysiwyg.css?' + VERHASH + '" />' +
+            '</head><body>' + text + '</body></html>';
+        editdoc.designMode = allowhtml ? 'on' : 'off';
+        editdoc = editwin.document;
+        editdoc.open('text/html', 'replace');
+        editdoc.write(text);
+        editdoc.close();
+
+            var scriptNode = document.createElement("script");
+            scriptNode.type = "text/javascript";
+            scriptNode.text = 'window.onerror = function() { return true; }';
+            editdoc.getElementById('editorheader').appendChild(scriptNode);
+
+        editdoc.body.contentEditable = true;
+        editdoc.body.spellcheck = false;
+        initialized = true;
+
     } else {
         textobj.value = text;
     }
@@ -590,24 +567,16 @@ function setEditorStyle() {
 }
 
 function setEditorEvents() {
-    if (BROWSER.firefox || BROWSER.opera) {
-        editdoc.addEventListener('mouseup', function (e) {
-            mouseUp(e)
-        }, true);
-        editdoc.addEventListener('keyup', function (e) {
-            keyUp(e)
-        }, true);
-        editwin.addEventListener('keydown', function (e) {
-            keyDown(e)
-        }, true);
-    } else if (editdoc.attachEvent) {
-        try {
-            editdoc.attachEvent('onmouseup', mouseUp);
-            editdoc.attachEvent('onkeyup', keyUp);
-            editdoc.attachEvent('onkeydown', keyDown);
-        } catch (e) {
-        }
-    }
+    editdoc.addEventListener('mouseup', function (e) {
+        mouseUp(e)
+    }, true);
+    editdoc.addEventListener('keyup', function (e) {
+        keyUp(e)
+    }, true);
+    editwin.addEventListener('keydown', function (e) {
+        keyDown(e)
+    }, true);
+
 }
 
 function mouseUp(event) {
@@ -810,13 +779,9 @@ function discuzcode(cmd, arg) {
             insertText(opentag + closetag, opentag.length, closetag.length);
 
             while (listvalue = prompt('输入一个列表项目.\r\n留空或者点击取消完成此列表.', '')) {
-                if (BROWSER.opera > 8) {
-                    listvalue = '\n' + '[*]' + listvalue;
-                    insertText(listvalue, strlen(listvalue) + 1, 0);
-                } else {
-                    listvalue = '[*]' + listvalue + '\n';
-                    insertText(listvalue, strlen(listvalue), 0);
-                }
+                listvalue = '[*]' + listvalue + '\n';
+                insertText(listvalue, strlen(listvalue), 0);
+
             }
         }
     } else if (!wysiwyg && cmd === 'unlink') {
@@ -867,7 +832,7 @@ function discuzcode(cmd, arg) {
         editorform.action = oldAction;
         editorform.target = "";
     } else {
-        var formatcmd = cmd === 'backcolor' && !BROWSER.ie ? 'hilitecolor' : cmd;
+        var formatcmd = cmd === 'backcolor' ? 'hilitecolor' : cmd;
         try {
             var ret = applyFormat(formatcmd, false, (isUndefined(arg) ? true : arg));
         } catch (e) {
@@ -919,7 +884,7 @@ function setContext(cmd) {
     } catch (e) {
         fs = null;
     }
-    if (fs === '' && !BROWSER.ie && window.getComputedStyle) {
+    if (fs === '' && window.getComputedStyle) {
         fs = editdoc.body.style.fontFamily;
     } else if (fs === null) {
         fs = '';
@@ -1025,12 +990,6 @@ function showEditorMenu(tag, params) {
     }
 
     selection = sel ? (wysiwyg ? sel.htmlText : sel.text) : getSel();
-
-    if (BROWSER.rv) {
-        selection = editdoc.getSelection();
-        sel = selection.getRangeAt(0);
-        selection = readNodes(sel.cloneContents(), false);
-    }
 
     if (menu) {
         if ($(ctrlid).getAttribute('menupos') !== null) {
@@ -1765,7 +1724,6 @@ function showHrBox(ctrlid, boxtype) {
     if (typeof postimg_type === 'undefined') {
         var scriptNode = document.createElement("script");
         scriptNode.type = "text/javascript";
-        scriptNode.charset = charset ? charset : (BROWSER.firefox ? document.characterSet : document.charset);
         scriptNode.src = 'data/cache/common_postimg.js?' + VERHASH;
         $('append_parent').appendChild(scriptNode);
         scriptNode.onload = function () {
@@ -1831,7 +1789,7 @@ function insertPostBackground(img) {
     if (img !== '0.gif') {
         code = '[postbg]' + img + '[/postbg]';
         if (wysiwyg) {
-            postbgElement = !BROWSER.ie ? editdoc.getElementsByName('editorpostbg') : editdoc.getElementsByTagName('style');
+            postbgElement = editdoc.getElementsByName('editorpostbg');
             for (var i = 0; i < postbgElement.length; i++) {
                 postbgElement[i].parentNode.removeChild(postbgElement[i]);
             }
@@ -1842,7 +1800,7 @@ function insertPostBackground(img) {
         }
     } else {
         if (wysiwyg) {
-            postbgElement = !BROWSER.ie ? editdoc.getElementsByName('editorpostbg') : editdoc.getElementsByTagName('style');
+            postbgElement = editdoc.getElementsByName('editorpostbg');
             for (var i = 0; i < postbgElement.length; i++) {
                 postbgElement[i].parentNode.removeChild(postbgElement[i]);
             }

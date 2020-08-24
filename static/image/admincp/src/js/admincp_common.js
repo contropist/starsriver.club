@@ -304,13 +304,9 @@ function uc_left_switch(obj) {
 _attachEvent(document.documentElement, 'keydown', resetEscAndF5);
 _attachEvent(window, 'resize', setMenuScroll, document);
 _attachEvent(window, 'resize', resizeHeadermenu, document);
-if (BROWSER.ie) {
-    $('leftmenu').onmousewheel = function (e) {
-        menuScroll(3, e)
-    };
-} else {
-    $('leftmenu').addEventListener("DOMMouseScroll", function (e) {
-        menuScroll(3, e)
-    }, false);
-}
+
+$('leftmenu').addEventListener("DOMMouseScroll", function (e) {
+    menuScroll(3, e)
+}, false);
+
 resizeHeadermenu();

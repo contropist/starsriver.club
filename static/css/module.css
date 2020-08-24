@@ -7964,7 +7964,8 @@
             --wall-commentform-width: 310px;
             --box-border-color: rgba(135, 135, 171, 0.20);
             --box-margin: 8px;
-            --box-radius: 10px
+            --box-radius: 10px;
+            padding: 0;
         }
         .app-userspace #userspace_wall .wall{
             font-size: 0;
@@ -8345,6 +8346,9 @@
     /*endregion*/
 
     /*region #userspace_profile*/
+        .app-userspace #userspace_profile{
+            padding: 0;
+        }
         .app-userspace #userspace_profile > .panel{
             --default-box-margin-width: 8px;
         }
