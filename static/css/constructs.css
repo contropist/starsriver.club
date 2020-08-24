@@ -3232,6 +3232,9 @@
     .Mas.edge .mas-viewer .mas-viewer-container .nav-horizon li a{
         padding: 0 15px;
     }
+    .Mas.edge .mas-viewer .mas-viewer-container .nav-horizon li:last-child a{
+        padding-right: 30px;
+    }
     .Mas.edge .mas-viewer .mas-viewer-container .nav-horizon li.active a{
         font-weight: 700;
         color: var(--color-sky-blue);
