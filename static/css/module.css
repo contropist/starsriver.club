@@ -7150,7 +7150,7 @@
             --space-bank-avatar-size: 96px;
         }
 
-        .scroll-overhead .app-userspace .mas-viewer-header，
+        .scroll-overhead .app-userspace .mas-viewer-header,
         .app-userspace .mas-viewer-header:hover{
             z-index: 1;
         }
