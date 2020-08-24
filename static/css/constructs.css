@@ -2479,7 +2479,6 @@
     /* Secondary */
     .secondary li {
         position: relative;
-        overflow: hidden;
     }
     .secondary li:hover{
         cursor: pointer;
@@ -2513,7 +2512,6 @@
     /* Halation For DarkStyle Button */
     .halation li{
         position: relative;
-        overflow: hidden;
     }
     .halation li:hover{
         cursor: pointer;
@@ -2546,7 +2544,6 @@
     /* Wave */
     .wave li{
         position: relative;
-        overflow: hidden;
     }
     .wave li:hover{
         cursor: pointer;
