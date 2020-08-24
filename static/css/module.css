@@ -7880,7 +7880,7 @@
         .WL-0  .app-userspace #userspace_share .timeline .n-right .s-center > .share-item-iframe iframe,
         .WL-3P .app-userspace #userspace_share .timeline .n-right .s-center > .share-item-iframe iframe{
             width: 100%;
-            min-height: 160px;
+            min-height: 180px;
         }
 
         .app-userspace #userspace_share .timeline .n-right .s-center > .share-item-video video{
