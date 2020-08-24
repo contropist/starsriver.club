@@ -82,9 +82,11 @@
                     };
 
                     if(MasElements.viewer.scrollHeight <= SRGlobal.Window.Height){
-                        if(wall) wall.style.marginBottom = '360px';
+                        if(wall) wall.style.marginBottom = '160px';
+                    } else {
+                        if(postform) postform.addClass('sleep');
                     }
-                    if(postform) postform.addClass('sleep');
+                   
                     addEvent(MasElements.viewer,'scroll',positionfix);
                 });
 
