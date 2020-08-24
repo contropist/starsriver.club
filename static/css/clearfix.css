@@ -216,6 +216,7 @@ textarea:disabled {
 
 a, button, .btn, select {
     cursor: pointer;
+    position: relative;
 }
 
 [hide], .hide,

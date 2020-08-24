@@ -855,6 +855,7 @@ $lang = array (
     'article_does_not_exist' => '抱歉，指定的话题不存在',
     'moderate_article_not_share' => '抱歉，不能分享尚未通过审核的文章',
     'url_incorrect_format' => '抱歉，分享的网址格式不正确',
+    'iframe_incorrect_format' => '抱歉，嵌入代码只能为视频类型',
     'no_privilege_commentadd' => '抱歉，你没有权限发表评论',
     'do_success_thread_share_mod' => '你的分享成功了，回复请等待管理员审核通过',
     'spacecp_share_repeat' => '抱歉，你已分享，请勿重复分享',

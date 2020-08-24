@@ -2,26 +2,7 @@
     <!--{template home/space_home_mod_share_form}-->
 <!--{/if}-->
 
-<ul class="nav-horizon">
-    <li class="$sub_actives[type_all]"><a href="$navtheurl&type=all">{lang share_all}</a></li>
-    <li class="$sub_actives[type_link]"><a href="$navtheurl&type=link">{lang share_link}</a></li>
-    <li class="$sub_actives[type_video]"><a href="$navtheurl&type=video">{lang share_video}</a></li>
-    <li class="$sub_actives[type_pic]"><a href="$navtheurl&type=pic">{lang share_pic}</a></li>
-    <li class="$sub_actives[type_music]"><a href="$navtheurl&type=music">{lang share_music}</a></li>
-
-    <!--{if helper_access::check_module('blog')}-->
-    <li class="$sub_actives[type_blog]"><a href="$navtheurl&type=blog">{lang share_blog}</a></li>
-    <!--{/if}-->
-    <!--{if helper_access::check_module('album')}-->
-    <li class="$sub_actives[type_album]"><a href="$navtheurl&type=album">{lang share_album}</a></li>
-    <!--{/if}-->
-    <li class="$sub_actives[type_poll]"><a href="$navtheurl&type=poll">{lang share_poll}</a></li>
-    <li class="$sub_actives[type_space]"><a href="$navtheurl&type=space">{lang share_space}</a></li>
-    <li class="$sub_actives[type_thread]"><a href="$navtheurl&type=thread">{lang share_thread}</a></li>
-    <!--{if helper_access::check_module('portal')}-->
-    <li class="$sub_actives[type_article]"><a href="$navtheurl&type=article">{lang share_article}</a></li>
-    <!--{/if}-->
-</ul>
+<!--{template home/space_home_mod_share_nav}-->
 
 <!--{if $list}-->
     <!--{if $pricount}-->
@@ -64,23 +45,19 @@
                         <!--{/if}-->
                     </div>
                     <div class="s-center">
-
-                        <!--{if $value[uid] != $_G[uid] && $value[itemid] && helper_access::check_module('share')}-->
-                            <a href="home.php?mod=spacecp&ac=share&type=$value[type]&id=$value[itemid]" id="k_share" onclick="showWindow(this.id, this.href, 'get', 0);">{lang sharemetoo}</a>
-                        <!--{/if}-->
-
                         <!--{if $value[body_general]}-->
                             <p class="message" id="quote_{$id}">$value[body_general]</p>
-                        <!--{/if}-->
-
-                        <!--{if $value['image']}-->
-                            <a href="$value[image_link]" target="_blank"><img src="$value[image]"/></a>
                         <!--{/if}-->
 
                         $value[body_template]
                     </div>
                     <div class="s-end">
-                        <!--{if $value[sid]}--><a class="icon mt-textsms reply" href="home.php?mod=space&uid=$value[uid]&do=share&id=$value[sid]" target="_blank"><span></span></a><!--{/if}-->
+                        <!--{if $value[uid] != $_G[uid] && $value[itemid] && helper_access::check_module('share')}-->
+                            <a class="icon mt-share share" href="home.php?mod=spacecp&ac=share&type=$value[type]&id=$value[itemid]" id="k_share" onclick="showWindow(this.id, this.href, 'get', 0);" title="{lang sharemetoo}"></a>
+                        <!--{/if}-->
+                        <!--{if $value[sid]}-->
+                            <a class="icon mt-textsms reply" href="home.php?mod=space&uid=$value[uid]&do=share&id=$value[sid]" target="_blank"></a>
+                        <!--{/if}-->
                     </div>
                 </div>
             </li>

@@ -735,7 +735,7 @@ function comment_edit(cid) {
 }
 function comment_delete(cid) {
 	var obj = $('comment_'+ cid +'_li');
-	obj.style.display = "none";
+	obj.parentNode.removeChild(obj);
 	if($('comment_replynum')) {
 		var a = parseInt($('comment_replynum').innerHTML);
 		var b = a - 1;
@@ -745,13 +745,13 @@ function comment_delete(cid) {
 
 function share_delete(sid) {
 	var obj = $('share_'+ sid +'_li');
-	obj.style.display = "none";
+	obj.parentNode.removeChild(obj);
 }
 function friend_delete(uid) {
 	var obj = $('friend_'+ uid +'_li');
-	if(obj != null) obj.style.display = "none";
+	if(obj != null) obj.parentNode.removeChild(obj);
 	var obj2 = $('friend_tbody_'+uid);
-	if(obj2 != null) obj2.style.display = "none";
+	if(obj2 != null) obj2.parentNode.removeChild(obj);
 }
 function friend_changegroup(id, result) {
 	if(result) {

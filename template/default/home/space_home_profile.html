@@ -103,7 +103,6 @@
                             <li class="box size-2-1 {if !$space[sellercredit]}disabled{/if}"><i class="mt-shopping_cart" style="background: var(--color-onnanoko-pink)"></i><em>{lang eccredit_buyerinfo}</em><s><a href="home.php?mod=space&uid=$space[uid]&do=trade&view=eccredit<!--{if $_G[setting][homepagestyle]}-->&sns=1<!--{/if}-->#buyercredit" target="_blank">$space[sellercredit]</a></s></li>
                         </ol>
                         <ul class="info-mix credit2 secondary">
-
                             <!--{loop $_G[setting][extcredits] $key $value}-->
                             <!--{if $value[title]}-->
                             <li><i>$value[img]</i><em>$value[title]：</em><s>{$space["extcredits$key"]} $value[unit]</s></li>

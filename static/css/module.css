@@ -7369,7 +7369,7 @@
             background: var(--color-sky-blue);
             color: #ffffff;
             border-radius: 50%;
-            margin-right: 5px;
+            margin-right: 10px;
         }
         .app-userspace .space-head > .bank .btn-group a .tooltip{
             left: -10px !important;
@@ -7475,6 +7475,7 @@
             flex-flow: column wrap;
             width: 100%;
             max-width: 720px;
+            min-height: 120px;
         }
         .app-userspace .timeline::before,
         .app-userspace .timeline::after{
@@ -7657,10 +7658,11 @@
         .app-userspace .timeline .n-right .s-end .icon {
             background: var(--color-lightgray);
             color: var(--color-text-lightgray);
-            font-size: 18px;
-            border-radius: 15px;
             width: 30px;
             height: 30px;
+            margin-left: 10px;
+            border-radius: 15px;
+            font-size: 18px;
             line-height: 30px;
             text-align: center;
         }
@@ -7872,10 +7874,7 @@
         }
         .app-userspace #userspace_share .timeline .n-right .s-center > .share-item-iframe iframe{
             width: 100%;
-            min-height: 260px;
-        }
-        .app-userspace #userspace_share .timeline .n-right .s-center > .share-item-iframe iframe{
-            width: 100%;
+            border: none;
             min-height: 260px;
         }
         .WL-0  .app-userspace #userspace_share .timeline .n-right .s-center > .share-item-iframe iframe,

@@ -13,8 +13,8 @@ if(!defined('IN_DISCUZ')) {
 
 function mkshare($share) {
 	$share['body_data'] = unserialize($share['body_data']);
-    $share['body_template'] = lang('feed','feed_share_body_template_'.$share['type']) ? lang('feed','feed_share_body_template_'.$share['type']) : $share['body_template'];
-    $share['title_template'] = lang('feed','feed_share_title_template_'.$share['type']) ? lang('feed','feed_share_title_template_'.$share['type']) : $share['body_template'];
+    $share['body_template'] = $share['body_template'] ? $share['body_template'] : lang('feed','feed_share_body_template_'.$share['type']);
+    $share['title_template'] = $share['title_template'] ? $share['title_template'] : lang('feed','feed_share_title_template_'.$share['type']);
 
 	$searchs = $replaces = [];
 	if($share['body_data']) {
