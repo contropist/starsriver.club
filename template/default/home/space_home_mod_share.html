@@ -64,7 +64,7 @@
         <!--{/loop}-->
     </ul>
 
-    <div class="page">
+    <div class="page" id="pager_share">
         <!--{if $multi}-->
             $multi
         <!--{else}-->
@@ -100,7 +100,7 @@
     addEvent(document,'DOMContentLoaded',function () {
 
         let postform = SR('#share_deliver')[0],
-            page = SR('#pager_doing')[0],
+            page = SR('#pager_share')[0],
             scrltem = 0,
             positionfix = function (){
                 if(SRGlobal.Window.Width <= 1470){
@@ -131,12 +131,13 @@
                 }
             };
 
-        if(MasElements.viewer.scrollHeight > SRGlobal.Window.Height){
-            if(page) page.addClass('sleep');
-            if(postform) postform.addClass('sleep');
-        } else {
-            Tl.style.marginBottom = '200px';
+        if(MasElements.viewer.scrollHeight <= SRGlobal.Window.Height){
+            Tl.stype.marginBottom = '200px';
         }
+        
+        if(page) page.addClass('sleep');
+        if(postform) postform.addClass('sleep')
+
         addEvent(MasElements.viewer,'scroll',TsOn);
         addEvent(MasElements.viewer,'scroll',positionfix);
     });
