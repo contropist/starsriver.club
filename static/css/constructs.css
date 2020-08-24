@@ -3199,9 +3199,6 @@
         position: relative;
         z-index: 0;
         width: 100%;
-    } 
-    .Mas.edge .mas-viewer .mas-viewer-header:hover{
-        z-index: 1;
     }
     .Mas.edge .mas-viewer .mas-viewer-container{
         position: relative;

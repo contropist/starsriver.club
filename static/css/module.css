@@ -7149,6 +7149,12 @@
             --space-bank-avatar-top: -48px;
             --space-bank-avatar-size: 96px;
         }
+
+        .scroll-overhead .app-userspace .mas-viewer-header，
+        .app-userspace .mas-viewer-header:hover{
+            z-index: 1;
+        }
+
         .app-userspace .space-head{
             position: relative;
             box-shadow: 0 0 5px rgba(0,0,0,.1);
