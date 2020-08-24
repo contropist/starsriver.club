@@ -266,64 +266,71 @@ if($_GET['op'] == 'delete') {
 		$showmessagecontent = '';
 
 		if($type == 'link') {
-			$link = dhtmlspecialchars(trim($_POST['link']));
-			preg_match("/((https?|ftp|gopher|news|telnet|rtsp|mms|callto|bctp|thunder|qqdl|synacast){1}:\/\/|www\.)[^\[\"']+/i", $link, $matches);
-			$link = $matches[0];
-			if($link) {
-				if(!preg_match("/^(http|ftp|https|mms)\:\/\/.{4,300}$/i", $link)) $link = '';
-			}
-			if(empty($link)) {
-				showmessage('url_incorrect_format');
-			}
 
-			$arr['itemid'] = '0';
-			$arr['fromuid'] = '0';
-			$arr['body_template'] = '<div class="share-link icon-link">{link}</div>';
-			$link_text = sub_url($link, 45);
+		    $link = trim($_POST['link']);
 
-			$arr['body_data'] = array('link'=>"<a href=\"$link\" target=\"_blank\">".$link_text."</a>", 'data'=>$link);
-			$parseLink = parse_url($link);
-			require_once libfile('function/discuzcode');
-			$flashvar = parseflv($link);
-			if(empty($flashvar) && preg_match("/\.flv$/i", $link)) {
-				$flashvar = array(
-					'flv' => $_G['style']['imgdir'].'/flvplayer.swf?&autostart=true&file='.urlencode($link),
-					'imgurl' => ''
-				);
-			}
+            $linkmatch = [];
+
+            if (preg_match("/\<iframe\s.*src=\"(.*?)\".*\>.*\<\/iframe\>/is", $link, $linkmatch)) {
+                $type = 'iframe';
+                $arr['body_data'] = [
+                    'html' => "<iframe src='$linkmatch[1]'></iframe>"
+                ];
+            } else {
+                preg_match("/((https?|iframe|ftp|gopher|news|telnet|rtsp|mms|callto|bctp|thunder|qqdl|synacast){1}:\/\/|www\.)[^\[\"']+/i", dhtmlspecialchars($link), $matches);
+
+                $link = $matches[0] ? (preg_match("/^(http|https|\<iframe|ftp|mms)\:\/\/.{3,}$/i", $matches[0]) ? $matches[0] : '' ) : '' ;
+
+                if(empty($link)) {
+                    showmessage('url_incorrect_format');
+                }
+
+                $arr['itemid'] = '0';
+                $arr['fromuid'] = '0';
+
+                $arr['body_data'] = [
+                    'url' => $link,
+                    'name' => sub_url($link, 45)
+                ];
+
+                require_once libfile('function/discuzcode');
+
+                $flashvar = parseflv($link);
+            }
+
+
 			if(!empty($flashvar)) {
-				$title = geturltitle($link);
+                $type = 'iframe';
+                $title = geturltitle($link);
 				if($title) {
 					$arr['body_data'] = array('link'=>"<a href=\"$link\" target=\"_blank\">".$title."</a>", 'data'=>$link);
 				}
-				$type = 'video';
 				$arr['body_data']['flashvar'] = $flashvar['flv'];
 				$arr['body_data']['host'] = 'flash';
 				$arr['body_data']['imgurl'] = $flashvar['imgurl'];
-			}
-
-			if(preg_match("/\.(webp|jpg|jpeg|png|ico|bmp|gif|tif|tga)$/i", $link)) {
-				$arr['body_data']['imgvar'] = $link;
-				$arr['body_data']['imgname'] = pathinfo($link)['filename'];
-				$type = 'pic';
-			}
-
-			if(preg_match("/\.(mp4|mkv|avi|webm|3gp|wmv|mpg|vob|mov)$/i", $link)) {
-				$arr['body_data']['movvar'] = $link;
-				$arr['body_data']['movname'] = pathinfo($link)['filename'];
-				$type = 'video';
-			}
-
-			if(preg_match("/\.(mp3|wma|ogg|ape|flac|aac|ac3|mmf|amr|m4a|m4r|wav|wavpack|mp2)$/i", $link)) {
-				$arr['body_data']['musicvar'] = $link;
-				$arr['body_data']['musicname'] = pathinfo($link)['filename'];
-				$type = 'music';
-			}
-
-			if(preg_match("/\.swf$/i", $link)) {
-				$arr['body_data']['flashaddr'] = $link;
-				$type = 'flash';
-			}
+            } elseif (preg_match("/\<iframe/i", $link)) {
+                $type = 'iframe';
+                $arr['body_data'] = [
+                    'html' => $link
+                ];
+            } elseif (preg_match("/\.(mp4|mkv|avi|webm|3gp|wmv|mpg|vob|mov)$/i", $link)) {
+                $type = 'video';
+                $arr['body_data'] = [
+                    'url' => $link
+                ];
+            } elseif (preg_match("/\.(mp3|wma|ogg|ape|flac|aac|ac3|mmf|amr|m4a|m4r|wav|wavpack|mp2)$/i", $link)) {
+                $type = 'music';
+                $arr['body_data'] = [
+                    'url' => $link,
+                    'name' => pathinfo($link)['filename']
+                ];
+            } elseif (preg_match("/\.(webp|jpg|jpeg|png|ico|bmp|gif|tif|tga)$/i", $link)) {
+                $type = 'pic';
+                $arr['body_data'] = [
+                    'url' => $link,
+                    'name' => pathinfo($link)['filename']
+                ];
+            }
 		}
 
 		if($_GET['iscomment'] && $_POST['general'] && $commentcable[$type] && $id) {

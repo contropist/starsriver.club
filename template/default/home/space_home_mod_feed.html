@@ -52,7 +52,7 @@
                         <img src="{STATICURL}image/common/vd.gif" alt="{lang click_play}" onclick="javascript:showFlash('{$feed['body_data']['host']}', '{$feed['body_data']['flashvar']}', this, '{$feed['feedid']}');"/>
                     <!--{/if}-->
                 <!--{elseif !empty($feed['body_data']['musicvar'])}-->
-                    <a class="musiclink" onclick="audioload('{$feed['body_data']['musicvar']}')"><i class="icon-play2"></i>{$feed['body_data']['musicname']}</a>
+                    <a class="share-item-music" onclick="audioload('{$feed['body_data']['musicvar']}')"><i class="icon-play2"></i>{$feed['body_data']['musicname']}</a>
                 <!--{elseif !empty($feed['body_data']['flashaddr'])}-->
                     <img src="{STATICURL}image/common/flash.gif" alt="{lang click_view}" onclick="javascript:showFlash('flash', '{$feed['body_data']['flashaddr']}', this, '{$feed['feedid']}');"/>
                 <!--{/if}-->

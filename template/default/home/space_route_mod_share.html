@@ -1,0 +1,30 @@
+<!--{if empty($nestmode)}-->
+    <!--{template home/space_trends_header}-->
+    <div class="plate layout-3-type2 app-dynamic soft">
+        <section>
+            <!--{subtemplate home/space_trends_side_left}-->
+        </section>
+        <section>
+            <!--{template home/space_trends_mod_share}-->
+        </section>
+        <section>
+            <!--{subtemplate home/space_trends_side_right}-->
+        </section>
+    </div>
+<!--{else}-->
+    <!--{template home/space_home_header}-->
+    <div class="mas-viewer">
+        <div class="mas-viewer-header">
+            <!--{template home/space_home_userabout}-->
+        </div>
+        <div class="mas-viewer-container" id="userspace_share">
+            <!--{template home/space_home_mod_share}-->
+        </div>
+    </div>
+<!--{/if}-->
+<script>
+    function succeedhandle_shareadd(url, msg, values) {
+        share_add(values['sid']);
+    }
+</script>
+<!--{template common/footer}-->

@@ -1,9 +1,10 @@
 <!--{if $space[self] && helper_access::check_module('doing')}-->
     <!--{template home/space_route_mod_doing_deliverer}-->
 <!--{/if}-->
+
 <!--{if $dolist}-->
 	<!--{if $pricount}-->
-		<p class="vessel alert hi-warning" style="margin: 0 0 0 -15px; width: calc(100% + 30px);">{lang hide_doing}</p>
+		<p class="alert hi-warning" style="margin: 0 0 0 -15px; width: calc(100% + 30px);">{lang hide_doing}</p>
 	<!--{/if}-->
     <ul class="timeline">
         <!--{eval $doday = '';}-->
@@ -104,7 +105,7 @@
             page = SR('#pager_doing')[0],
             scrltem = 0,
             positionfix = function (){
-                if(SRGlobal.Window.Width <= 1470){
+                if(SRGlobal.Window.Width <= 1680){
                     postform.style = '';
                     if(SRGlobal.Window.Scroll.DirY === 'down'){
                         scrltem = SRGlobal.Window.Scroll.Top;

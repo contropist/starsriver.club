@@ -25,7 +25,7 @@ function mkshare($share) {
 		}
 		foreach (array_keys($share['body_data']) as $key) {
 			$searchs[] = '{'.$key.'}';
-			$replaces[] = $share['body_data'][$key];
+			$replaces[] = urldecode($share['body_data'][$key]);
 		}
 	}
 	$share['body_template'] = str_replace($searchs, $replaces, $share['body_template']);

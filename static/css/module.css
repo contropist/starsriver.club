@@ -6553,7 +6553,7 @@
         word-break: break-all;
         padding: 0 3px;
     }
-    .app-dynamic .actstruct .body .share-link {
+    .app-dynamic .actstruct .body .share-item-link {
         display: block;
         width: auto;
         line-height: 22px;
@@ -6565,11 +6565,11 @@
         padding-right: 8px;
         border-radius: 5px;
     }
-    .app-dynamic .actstruct .body .share-link a{
+    .app-dynamic .actstruct .body .share-item-link a{
         color: inherit;
         font-size:inherit;
     }
-    .app-dynamic .actstruct .body .share-link::before {
+    .app-dynamic .actstruct .body .share-item-link::before {
         display: inline-block;
         line-height: inherit;
         border-right: 1px solid #e6e6e6;
@@ -6799,18 +6799,22 @@
         padding: 10px;
         color: #404b56;
     }
-    .app-dynamic .actstruct .musiclink {
-        border: 1px solid var(--color-main-theme);
-        padding: 5px 14px 5px 8px;
-        border-radius: 26px;
-        line-height: 20px;
-        color: #02a599;
-        box-sizing: border-box;
+    .app-dynamic .actstruct .share-item-video video{
+        width: 100%;
     }
-    .app-dynamic .actstruct .musiclink i{
-        margin: 0 10px 0 0;
-        font-size: 18px;
-        vertical-align: middle;
+    .app-dynamic .actstruct .share-item-music {
+        padding: 10px;
+        border-radius: 30px;
+        background: var(--color-main-theme);
+        color: #fff;
+        line-height: 20px;
+        white-space: nowrap;
+        overflow: hidden;
+    }
+    .app-dynamic .actstruct .share-item-music i{
+        display: inline-block;
+        margin-right: 6px;
+        font-size: 20px;
     }
 
     .app-dynamic .post-new-blog {
@@ -7121,26 +7125,26 @@
             font-size: 12px;
         }
 
-        .WL-0 .app-userspace{
+        .WL-0   .app-userspace{
             --space-banner-height: 130px;
             --space-bank-avatar-top: -24px;
             --space-bank-avatar-size: 72px;
         }
-        .WL-3P .app-userspace,
-        .WL-4P .app-userspace{
+        .WL-3P  .app-userspace,
+        .WL-4P  .app-userspace{
             --space-banner-height: 160px;
             --space-bank-avatar-top: -36px;
             --space-bank-avatar-size: 84px;
         }
-        .WL-7P .app-userspace{
+        .WL-7P  .app-userspace{
             --space-banner-height: 210px;
             --space-bank-avatar-top: -48px;
             --space-bank-avatar-size: 96px;
         }
         .WL-13P .app-userspace,
-        .WL-1K .app-userspace,
-        .WL-2K .app-userspace,
-        .WL-4K .app-userspace{
+        .WL-1K  .app-userspace,
+        .WL-2K  .app-userspace,
+        .WL-4K  .app-userspace{
             --space-banner-height: 260px;
             --space-bank-avatar-top: -48px;
             --space-bank-avatar-size: 96px;
@@ -7188,7 +7192,7 @@
             padding: 5px;
             width: calc(100% - 280px);
         }
-        .WL-0 .app-userspace .space-head > .cover .spaceinfo,
+        .WL-0  .app-userspace .space-head > .cover .spaceinfo,
         .WL-3P .app-userspace .space-head > .cover .spaceinfo,
         .WL-4P .app-userspace .space-head > .cover .spaceinfo {
             display: none;
@@ -7388,9 +7392,9 @@
             margin: 0 0 0 48px;
         }
         .WL-13P .app-userspace .space-head > .bank.type-scroll .avatar,
-        .WL-1K .app-userspace .space-head > .bank.type-scroll .avatar,
-        .WL-2K .app-userspace .space-head > .bank.type-scroll .avatar,
-        .WL-4K .app-userspace .space-head > .bank.type-scroll .avatar{
+        .WL-1K  .app-userspace .space-head > .bank.type-scroll .avatar,
+        .WL-2K  .app-userspace .space-head > .bank.type-scroll .avatar,
+        .WL-4K  .app-userspace .space-head > .bank.type-scroll .avatar{
             margin: 0;
         }
         .app-userspace .space-head > .bank.type-scroll .username{
@@ -7767,9 +7771,6 @@
 
     /*region #userspace_doing*/
         .app-userspace #userspace_doing{
-            padding: 0 15px;
-        }
-        .app-userspace #userspace_doing .vessel{
 
         }
         .app-userspace #userspace_doing .timeline .node .n-right .s-center > .message{
@@ -7779,6 +7780,169 @@
             border-left: 2px solid #aac1e2;
             background: #f9f9f9;
         }
+    /*endregion*/
+
+    /*region #userspace_share*/
+        .app-userspace #userspace_share{
+
+        }
+        .app-userspace #userspace_share .timeline .n-right .s-center > .message{
+            color: #000;
+            word-break: break-word;
+            padding: 10px;
+            border-left: 2px solid #aac1e2;
+            background: #f9f9f9;
+        }
+        .app-userspace #userspace_share .timeline .n-right .s-center > [class^="share-item"]{
+            display: inline-block;
+            box-sizing: border-box;
+            max-width: 100%;
+            margin-top: 10px;
+        }
+
+        .app-userspace #userspace_share .timeline .n-right .s-center > .blog {
+            margin-top: 10px;
+            border-radius: 10px;
+            background: #fcfcfc;
+            overflow: hidden;
+            border: 1px solid #e6e6e6;
+        }
+        .app-userspace #userspace_share .timeline .n-right .s-center > .blog .title {
+            display: block;
+            width: 100%;
+            overflow: hidden;
+            cursor: pointer;
+            color: #7d7d7d;
+            font-size: 16px;
+            line-height: 30px;
+            padding: 5px 10px;
+            box-sizing: border-box;
+            white-space: nowrap;
+            background: #fff;
+            border-bottom: 1px solid #e6e6e6;
+        }
+        .app-userspace #userspace_share .timeline .n-right .s-center > .blog .title::before {
+            content: '';
+            width: 8px;
+            height: 16px;
+            display: inline-block;
+            background: var(--color-onnanoko-pink);
+            opacity: .8;
+            border-radius: 4px;
+            margin-right: 5px;
+            vertical-align: -6%;
+        }
+        .app-userspace #userspace_share .timeline .n-right .s-center > .blog .title *{
+            color: inherit;
+            font-size: inherit;
+        }
+        .app-userspace #userspace_share .timeline .n-right .s-center > .blog .title a{
+            color: inherit;
+            font-size: inherit;
+            display: inline-block;
+            width: calc(100% - 20px);
+        }
+        .app-userspace #userspace_share .timeline .n-right .s-center > .blog .title .tag {
+            padding: 1px 5px;
+            border: 1px solid;
+            border-radius: 4px;
+            font-size: 12px;
+        }
+        .app-userspace #userspace_share .timeline .n-right .s-center > .blog .category {
+            margin: 10px 10px 0 10px;
+            color: #e8729a;
+            display: block;
+            border-left: 2px solid;
+            padding-left: 4px;
+            height: 14px;
+            line-height: 14px;
+        }
+        .app-userspace #userspace_share .timeline .n-right .s-center > .blog .category a {
+            display: inline-block;
+            color: #da518f;
+        }
+        .app-userspace #userspace_share .timeline .n-right .s-center > .blog .content {
+            padding: 10px;
+            color: #404b56;
+            word-break: break-word;
+        }
+
+        .app-userspace #userspace_share .timeline .n-right .s-center > .share-item-iframe{
+            width: 100%;
+        }
+        .app-userspace #userspace_share .timeline .n-right .s-center > .share-item-iframe iframe{
+            width: 100%;
+            min-height: 260px;
+        }
+        .app-userspace #userspace_share .timeline .n-right .s-center > .share-item-iframe iframe{
+            width: 100%;
+            min-height: 260px;
+        }
+        .WL-0  .app-userspace #userspace_share .timeline .n-right .s-center > .share-item-iframe iframe,
+        .WL-3P .app-userspace #userspace_share .timeline .n-right .s-center > .share-item-iframe iframe{
+            width: 100%;
+            min-height: 160px;
+        }
+
+        .app-userspace #userspace_share .timeline .n-right .s-center > .share-item-video video{
+            width: 100%;
+        }
+
+        .app-userspace #userspace_share .timeline .n-right .s-center > .share-item-music{
+            padding: 10px;
+            border-radius: 30px;
+            background: var(--color-main-theme);
+            color: #fff;
+            line-height: 20px;
+            white-space: nowrap;
+            overflow: hidden;
+        }
+        .app-userspace #userspace_share .timeline .n-right .s-center > .share-item-music i{
+            display: inline-block;
+            margin-right: 6px;
+            font-size: 20px;
+        }
+
+        .app-userspace #userspace_share .timeline .n-right .s-center > .share-item-image{
+            display: block;
+            width: 100%;
+            border: 1px solid var(--color-slightgray);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .app-userspace #userspace_share .timeline .n-right .s-center > .share-item-image img{
+            width: 100%;
+        }
+        .app-userspace #userspace_share .timeline .n-right .s-center > .share-item-image i{
+            display: block;
+            padding: 10px;
+            background: var(--color-vlightgray);
+            border-top: 1px solid var(--color-slightgray);
+            color: var(--color-text-gray);
+            word-break: break-word;
+        }
+
+        .app-userspace #userspace_share .timeline .n-right .s-center > .share-item-link {
+            padding: 8px;
+            line-height: 20px;
+            color: var(--color-text-gray);
+            background: var(--color-vlightgray);
+            overflow: hidden;
+            border: 1px solid var(--color-slightgray);
+            border-radius: 5px;
+        }
+        .app-userspace #userspace_share .timeline .n-right .s-center > .share-item-link a{
+            color: inherit;
+            font-size:inherit;
+        }
+        .app-userspace #userspace_share .timeline .n-right .s-center > .share-item-link::before {
+            display: inline-block;
+            line-height: inherit;
+            border-right: 1px solid var(--color-slightgray);
+            padding-right: 8px;
+            margin-right: 8px;
+        }
+
     /*endregion*/
 
     /*region #userspace_wall*/
@@ -8604,19 +8768,19 @@
             font-size: 12px;
         }
 
-        .WL-0 .app-userspace #userspace_profile > .panel > .panel-container > .box.size-1-0{ width:calc(100% - 2 * var(--default-box-margin-width));}
-        .WL-0 .app-userspace #userspace_profile > .panel > .panel-container > .box.size-2-0{ width:calc(100% - 2 * var(--default-box-margin-width));}
-        .WL-0 .app-userspace #userspace_profile > .panel > .panel-container > .box.size-4-0{ width:calc(100% - 2 * var(--default-box-margin-width));}
-        .WL-3P .app-userspace #userspace_profile > .panel > .panel-container > .box.size-1-0{ width:calc(50% - 2 * var(--default-box-margin-width));}
-        .WL-3P .app-userspace #userspace_profile > .panel > .panel-container > .box.size-2-0{ width:calc(100% - 2 * var(--default-box-margin-width));}
-        .WL-3P .app-userspace #userspace_profile > .panel > .panel-container > .box.size-4-0{ width:calc(100% - 2 * var(--default-box-margin-width));}
-        .WL-4P .app-userspace #userspace_profile > .panel > .panel-container > .box.size-1-0{ width:calc(50% - 2 * var(--default-box-margin-width));}
-        .WL-4P .app-userspace #userspace_profile > .panel > .panel-container > .box.size-2-0{ width:calc(50% - 2 * var(--default-box-margin-width));}
-        .WL-4P .app-userspace #userspace_profile > .panel > .panel-container > .box.size-4-0{ width:calc(100% - 2 * var(--default-box-margin-width));}
-        .WL-4P .app-userspace #userspace_profile > .panel > .panel-container > .box .box.size-2-1{ width:calc(50% - 2 * var(--default-box-margin-width));}
-        .WL-7P .app-userspace #userspace_profile > .panel > .panel-container > .box.size-1-0{ width:calc(25% - 2 * var(--default-box-margin-width));}
-        .WL-7P .app-userspace #userspace_profile > .panel > .panel-container > .box.size-2-0{ width:calc(50% - 2 * var(--default-box-margin-width));}
-        .WL-7P .app-userspace #userspace_profile > .panel > .panel-container > .box.size-4-0{ width:calc(100% - 2 * var(--default-box-margin-width));}
+        .WL-0   .app-userspace #userspace_profile > .panel > .panel-container > .box.size-1-0{ width:calc(100% - 2 * var(--default-box-margin-width));}
+        .WL-0   .app-userspace #userspace_profile > .panel > .panel-container > .box.size-2-0{ width:calc(100% - 2 * var(--default-box-margin-width));}
+        .WL-0   .app-userspace #userspace_profile > .panel > .panel-container > .box.size-4-0{ width:calc(100% - 2 * var(--default-box-margin-width));}
+        .WL-3P  .app-userspace #userspace_profile > .panel > .panel-container > .box.size-1-0{ width:calc(50% - 2 * var(--default-box-margin-width));}
+        .WL-3P  .app-userspace #userspace_profile > .panel > .panel-container > .box.size-2-0{ width:calc(100% - 2 * var(--default-box-margin-width));}
+        .WL-3P  .app-userspace #userspace_profile > .panel > .panel-container > .box.size-4-0{ width:calc(100% - 2 * var(--default-box-margin-width));}
+        .WL-4P  .app-userspace #userspace_profile > .panel > .panel-container > .box.size-1-0{ width:calc(50% - 2 * var(--default-box-margin-width));}
+        .WL-4P  .app-userspace #userspace_profile > .panel > .panel-container > .box.size-2-0{ width:calc(50% - 2 * var(--default-box-margin-width));}
+        .WL-4P  .app-userspace #userspace_profile > .panel > .panel-container > .box.size-4-0{ width:calc(100% - 2 * var(--default-box-margin-width));}
+        .WL-4P  .app-userspace #userspace_profile > .panel > .panel-container > .box .box.size-2-1{ width:calc(50% - 2 * var(--default-box-margin-width));}
+        .WL-7P  .app-userspace #userspace_profile > .panel > .panel-container > .box.size-1-0{ width:calc(25% - 2 * var(--default-box-margin-width));}
+        .WL-7P  .app-userspace #userspace_profile > .panel > .panel-container > .box.size-2-0{ width:calc(50% - 2 * var(--default-box-margin-width));}
+        .WL-7P  .app-userspace #userspace_profile > .panel > .panel-container > .box.size-4-0{ width:calc(100% - 2 * var(--default-box-margin-width));}
         .WL-13P .app-userspace #userspace_profile > .panel > .panel-container > .box.size-1-0{ width:calc(33.3333333% - 2 * var(--default-box-margin-width));}
         .WL-13P .app-userspace #userspace_profile > .panel > .panel-container > .box.size-2-0{ width:calc(33.3333333% - 2 * var(--default-box-margin-width));}
         .WL-13P .app-userspace #userspace_profile > .panel > .panel-container > .box.size-4-0{ width:calc(66.6666666% - 2 * var(--default-box-margin-width));}

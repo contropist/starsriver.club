@@ -131,7 +131,7 @@ if($id) {
 	$metakeywords = $navtitle;
 	$metadescription = $navtitle;
 
-	include_once template("nest:home/space_route_mod_share_list");
+	include_once template("nest:home/space_route_mod_share");
 }
 
 ?>

@@ -92,15 +92,19 @@ $lang = array(
 	'feed_share_title_template_thread' => '分享了文章：',
 	'feed_share_title_template_link' => '分享了网址',
 	'feed_share_title_template_video' => '分享了视频',
+	'feed_share_title_template_iframe' => '分享了视频',
 	'feed_share_title_template_music' => '分享了音乐',
-	'feed_share_title_template_flash' => '分享了 Flash',
 
-	'feed_share_body_template_blog' =>	'<div class="blog">{subject}<i class="category">作者：{username}</i><div class="content">{message}</div></div>',
-    'feed_share_body_template_link' =>	'<div class="share-link icon-link">{link}</div>',
-    'feed_share_body_template_music' => '<a class="musiclink" onclick="audioload(\'{musicvar}\')"><i class="icon-play2"></i>{musicname}</a>',
+    'feed_share_body_template_link' =>	'<div class="share-item-link icon-link"><a href="{url}">{name}</a></div>',
+    'feed_share_body_template_video' =>	'<div class="share-item-video"><video src="{url}" controls="controls">您的浏览器不支持 video 标签。</video></div>',
+    'feed_share_body_template_music' => '<a class="share-item-music" onclick="audioload(\'{url}\')"><i class="icon-play2"></i>{name}</a>',
+    'feed_share_body_template_pic' =>	'<div class="share-item-image"><img src="{url}" /><i>{name}</i></div>',
+    'feed_share_body_template_iframe' =>'<div class="share-item-iframe">{html}</div>',
+
+
+    'feed_share_body_template_blog' =>	'<div class="blog">{subject}<i class="category">作者：{username}</i><div class="content">{message}</div></div>',
     'feed_share_body_template_space' =>	'<b>{username}</b><br>{reside}<br>{spacenote}',
 	'feed_share_body_template_album' =>	'<b>{albumname}</b><br>{username}',
-	'feed_share_body_template_pic' =>	'画廊：<b>{albumname}</b><br>作者：{username}<br>{title}',
 	'feed_share_body_template_thread' =>	'<b>{subject}</b><br>{author}<br>{message}',
 	'feed_share_body_template_article' =>	'<b>{title}</b><br>{username}<br>{summary}',
 

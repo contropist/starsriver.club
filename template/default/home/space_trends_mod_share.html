@@ -1,0 +1,25 @@
+<!--[nest=nestcontenttop]--><div id="nestcontenttop" class="area"></div><!--[/nest]-->
+<!--{if helper_access::check_module('share') && $space[self]}-->
+    <!--{template home/space_trends_mod_share_form}-->
+<!--{/if}-->
+<!--{template home/space_trends_mod_share_nav}-->
+<!--{if $list}-->
+    <ul id="share_list">
+        <!--{loop $list $k $value}-->
+            <!--{template home/space_trends_mod_share_li}-->
+        <!--{/loop}-->
+    </ul>
+    <!--{if $pricount}-->
+        <p class="vessel alert hi-warning">{lang hide_share}</p>
+    <!--{/if}-->
+    <!--{if $multi}--><div class="pg">$multi</div><!--{/if}-->
+<!--{else}-->
+    <ul id="share_list"></ul>
+    <div class=" vessel withedge">
+        <p class="global_nothing">{lang global_nothing}</p>
+    </div>
+<!--{/if}-->
+<!--[nest=nest1]--><div id="nest1" class="area"></div><!--[/nest]-->
+<!--[nest=nest2]--><div id="nest2" class="area"></div><!--[/nest]-->
+<!--[nest=nest3]--><div id="nest3" class="area"></div><!--[/nest]-->
+<!--[nest=nestcontentbottom]--><div id="nestcontentbottom" class="area"></div><!--[/nest]-->

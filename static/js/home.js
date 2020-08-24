@@ -664,7 +664,7 @@ function wall_add(id) {
 }
 
 function share_add(sid) {
-	var obj = $('share_ul');
+	var obj = $('share_list');
 	var newli = document.createElement("li");
     newli.className = 'reply-item';
 	newli.id = 'share_' + sid + '_li';

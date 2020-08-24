@@ -129,11 +129,6 @@ strong {
     font-weight: 700;
 }
 
-img {
-    border-radius: 3px;
-    image-rendering: -webkit-optimize-contrast;
-}
-
 hr {
     border: 0;
     background: none;
