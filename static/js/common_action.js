@@ -376,6 +376,15 @@
         viewerScroll: function () {
 
             Misc.WinScrollDirRefresh(MasElements.MasViewerScroll, MasElements.viewer);
+
+            SRGlobal.Window.Scroll.ToBottom = MasElements.viewer.scrollTop + MasElements.viewer.Css.height >= MasElements.viewer.scrollHeight ? 1 : 0;
+
+            if(SRGlobal.Window.Scroll.ToBottom){
+                body.addClass('scroll-tobottom');
+            } else {
+                body.delClass('scroll-tobottom');
+            }
+
             if(MasElements.viewerHeader){
 
                 let overhead = MasElements.MasViewerScroll.Top >= MasElements.viewerHeader.Css.height - MasElements.Bank.Css.height ? 1 : 0;
@@ -387,7 +396,7 @@
                 }
 
                 if(!overhead){
-                    let trspct = (1 - (MasElements.MasViewerScroll.Top / MasElements.viewerBannerImg.Css.height) * 1.5 ) * 50;
+                    let trspct = (1 - (MasElements.MasViewerScroll.Top / MasElements.viewerBannerImg.Css.height) * 1.2 ) * 50;
                     MasElements.viewerBannerImg.style.transform = 'translate(-50%, -' + trspct + '%)';
                 }
             }
