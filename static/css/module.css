@@ -7152,7 +7152,7 @@
 
         .scroll-overhead .app-userspace .mas-viewer-header,
         .app-userspace .mas-viewer-header:hover{
-            z-index: 1;
+            z-index: 1 !important;
         }
 
         .app-userspace .space-head{
