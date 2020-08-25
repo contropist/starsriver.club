@@ -14,12 +14,12 @@ first:
 second:
   stage: deploy
   script:
-    - ln -s api /var/www/html/starsriver/\[SR\]\ club.starsriver/api
-    - ln -s archiver /var/www/html/starsriver/\[SR\]\ club.starsriver/archiver
-    - ln -s source /var/www/html/starsriver/\[SR\]\ club.starsriver/source
-    - ln -s static /var/www/html/starsriver/\[SR\]\ club.starsriver/static
-    - ln -s template /var/www/html/starsriver/\[SR\]\ club.starsriver/template
-    - ln -s uc_client /var/www/html/starsriver/\[SR\]\ club.starsriver/uc_client
+    - cp -r api /var/www/html/starsriver/\[SR\]\ club.starsriver
+    - cp -r archiver /var/www/html/starsriver/\[SR\]\ club.starsriver
+    - cp -r source /var/www/html/starsriver/\[SR\]\ club.starsriver
+    - cp -r static /var/www/html/starsriver/\[SR\]\ club.starsriver
+    - cp -r template /var/www/html/starsriver/\[SR\]\ club.starsriver
+    - cp -r uc_client /var/www/html/starsriver/\[SR\]\ club.starsriver
     - cp *.php /var/www/html/starsriver/\[SR\]\ club.starsriver
 
   only:
