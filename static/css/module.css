@@ -8089,7 +8089,7 @@
             left: 0;
         }
         .app-userspace #userspace_share .timeline .n-right .s-center > .share-item-space .avatar .avatar-main {
-            box-shadow: 0 0 0 2px var(--color-main-theme-shadow);
+            box-shadow: 0 0 0 2px var(--color-lightgray);
         }
         .app-userspace #userspace_share .timeline .n-right .s-center > .share-item-space .username {
             display: block;
