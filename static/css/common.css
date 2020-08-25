@@ -5058,6 +5058,9 @@
     }
     .mn {
         overflow: hidden;
+        position: absolute;
+        left: 600px;
+        zoom: .5;
     }
 
     .ct1 {

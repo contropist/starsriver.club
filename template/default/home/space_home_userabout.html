@@ -66,6 +66,10 @@
                 </script>
             <!--{/if}-->
 
+            <!--{if helper_access::check_module('share') && $space[uid] != $_G[uid]}-->
+                <a class="button" id="share_space" href="home.php?mod=spacecp&ac=share&type=space&id={$space['uid']}" onclick="showWindow(this.id, this.href, 'get', 0);">分享</a>
+            <!--{/if}-->
+
             <!--{if checkperm('allowbanuser') || checkperm('allowedituser') || $_G[adminid] == 1}-->
                 <div class="button more ft-list">
                     <ul>

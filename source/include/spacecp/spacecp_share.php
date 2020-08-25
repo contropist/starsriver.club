@@ -46,41 +46,49 @@ if($_GET['op'] == 'delete') {
 
 	cknewuser();
 
+    $commentcable = ['blog' => 'blogid', 'pic' => 'picid', 'thread' => 'thread', 'article' => 'article'];
+
     $type = empty($_GET['type']) ? '' : $_GET['type'];
     $id = empty($_GET['id']) ? 0 : intval($_GET['id']);
+    
     $note_uid = 0;
     $note_message = '';
     $note_values = [];
 
     $hotarr = [];
-
 	$arr = [];
 	$feed_hash_data = '';
 
 	switch ($type) {
         case 'space':
+            
             $feed_hash_data = "uid{$id}";
+            
             $tospace = getuserbyuid($id);
+            
             if (empty($tospace)) {
                 showmessage('space_does_not_exist');
             }
             if (isblacklist($tospace['uid'])) {
                 showmessage('is_blacklist');
             }
-
-            $arr['itemid'] = $id;
-            $arr['fromuid'] = $id;
-            $arr['body_data'] = array(
-                'username' => "<a href=\"home.php?mod=space&uid=$id\">" . $tospace['username'] . "</a>",
-                'reside' => $tospace['resideprovince'] . $tospace['residecity'],
-                'spacenote' => $tospace['spacenote']
-            );
-
+            
             loaducenter();
+    
             $isavatar = uc_check_avatar($id);
-            $arr['image'] = $isavatar ? avatar($id, 'middle', true) : UC_API . '/images/noavatar_middle.gif';
-            $arr['image_link'] = "home.php?mod=space&uid=$id";
-
+    
+            $arr = [
+                'itemid' => $id,
+                'fromuid' => $id,
+                'body_data' => [
+                    'avatar' => $isavatar ? avatar($id, 'middle', true) : UC_API . '/images/noavatar_middle.gif',
+                    'username' => $tospace['username'],
+                    'userlink' => 'home.php?mod=space&uid=' . $id,
+                    'reside' => $tospace['resideprovince'] . $tospace['residecity'],
+                    'spacenote' => $tospace['spacenote'] ? getstr($tospace['spacenote'], 50, 0, 0, 0, -1) : lang('template','should_write_that'),
+                ],
+            ];
+    
             $note_uid = $id;
             $note_message = 'share_space';
 
@@ -94,6 +102,7 @@ if($_GET['op'] == 'delete') {
                 C::t('home_blog')->fetch($id),
                 C::t('home_blogfield')->fetch($id)
             );
+            
             if (!$blog) {
                 showmessage('blog_does_not_exist');
             }
@@ -106,22 +115,34 @@ if($_GET['op'] == 'delete') {
             if (isblacklist($blog['uid'])) {
                 showmessage('is_blacklist');
             }
-            $arr['fromuid'] = $blog['uid'];
-            $arr['itemid'] = $id;
-            $arr['body_data'] = array(
-                'subject' => "<a class=\"title\" href=\"home.php?mod=space&uid=$blog[uid]&do=blog&id=$blog[blogid]\">$blog[subject]</a>",
-                'username' => "<a class=\"username\" href=\"home.php?mod=space&uid=$blog[uid]\">" . $blog['username'] . "</a>",
-                'message' => getstr($blog['message'], 150, 0, 0, 0, -1)
-            );
+    
+            $arr = [
+                'fromuid' => $blog['uid'],
+                'itemid' => $id,
+                'body_data' => [
+                    'url' => 'home.php?mod=space&uid='.$blog['uid'].'&do=blog&id='.$blog['blogid'],
+                    'subject'  => $blog['subject'],
+                    'username' => $blog['username'],
+                    'userlink' => 'home.php?mod=space&uid='.$blog['uid'],
+                    'content'  => getstr($blog['message'], 150, 0, 0, 0, -1)
+                ]
+            ];
+            
             if ($blog['pic']) {
-                $arr['image'] = pic_cover_get($blog['pic'], $blog['picflag']);
-                $arr['image_link'] = "home.php?mod=space&uid=$blog[uid]&do=blog&id=$blog[blogid]";
+                $arr['body_data']['retemplate'] = 'blog_withimg';
+                $arr['body_data']['image'] = pic_cover_get($blog['pic'], $blog['picflag']);
             }
+            
             $note_uid = $blog['uid'];
             $note_message = 'share_blog';
-            $note_values = array('url' => "home.php?mod=space&uid=$blog[uid]&do=blog&id=$blog[blogid]", 'subject' => $blog['subject'], 'from_id' => $id, 'from_idtype' => 'blogid');
+            $note_values = [
+                'url' => "home.php?mod=space&uid=$blog[uid]&do=blog&id=$blog[blogid]",
+                'subject' => $blog['subject'],
+                'from_id' => $id,
+                'from_idtype' => 'blogid'
+            ];
 
-            $hotarr = array('blogid', $blog['blogid'], $blog['hotuser']);
+            $hotarr = ['blogid', $blog['blogid'], $blog['hotuser']];
 
             break;
 
@@ -138,31 +159,45 @@ if($_GET['op'] == 'delete') {
             if (isblacklist($album['uid'])) {
                 showmessage('is_blacklist');
             }
+    
+            $arr = [
+                'itemid' => $id,
+                'fromuid' => $album['uid'],
+                'body_data' => [
+                    'owner' => $album['username'],
+                    'album' => $album['albumname'],
+                    'album_desc' => $album['depict'],
+                    'album_link' => "home.php?mod=space&uid=$album[uid]&do=album&id=$album[albumid]",
+                    'image_link' => pic_cover_get($album['pic'], $album['picflag']),
+                    'owner_link' => 'home.php?mod=space&uid='.$album['uid'],
+                ],
+            ];
 
-            $arr['itemid'] = $id;
-            $arr['fromuid'] = $album['uid'];
-            $arr['body_data'] = array(
-                'albumname' => "<a href=\"home.php?mod=space&uid=$album[uid]&do=album&id=$album[albumid]\">$album[albumname]</a>",
-                'username' => "<a href=\"home.php?mod=space&uid=$album[uid]\">" . $album['username'] . "</a>"
-            );
-            $arr['image'] = pic_cover_get($album['pic'], $album['picflag']);
-            $arr['image_link'] = "home.php?mod=space&uid=$album[uid]&do=album&id=$album[albumid]";
             $note_uid = $album['uid'];
             $note_message = 'share_album';
-            $note_values = array('url' => "home.php?mod=space&uid=$album[uid]&do=album&id=$album[albumid]", 'albumname' => $album['albumname'], 'from_id' => $id, 'from_idtype' => 'albumid');
+            $note_values = [
+                'url' => "home.php?mod=space&uid=$album[uid]&do=album&id=$album[albumid]",
+                'albumname' => $album['albumname'],
+                'from_id' => $id,
+                'from_idtype' => 'albumid'
+            ];
 
             break;
 
         case 'pic':
 
             $feed_hash_data = "picid{$id}";
+            
             $pic = C::t('home_pic')->fetch($id);
+            
             if (!$pic) {
                 showmessage('image_does_not_exist');
             }
+            
             $picfield = C::t('home_picfield')->fetch($id);
             $album = C::t('home_album')->fetch($pic['albumid']);
             $pic = array_merge($pic, $picfield, $album);
+            
             if (in_array($pic['status'], array(1, 2))) {
                 showmessage('moderate_pic_not_share');
             }
@@ -172,37 +207,55 @@ if($_GET['op'] == 'delete') {
             if (isblacklist($pic['uid'])) {
                 showmessage('is_blacklist');
             }
-            if (empty($pic['albumid'])) $pic['albumid'] = 0;
-            if (empty($pic['albumname'])) $pic['albumname'] = lang('spacecp', 'default_albumname');
-
-            $arr['itemid'] = $id;
-            $arr['fromuid'] = $pic['uid'];
-            $arr['body_data'] = array(
-                'albumname' => "<a href=\"home.php?mod=space&uid=$pic[uid]&do=album&id=$pic[albumid]\">$pic[albumname]</a>",
-                'username' => "<a href=\"home.php?mod=space&uid=$pic[uid]\">" . $pic['username'] . "</a>",
-                'title' => getstr($pic['title'], 100, 0, 0, 0, -1)
-            );
-            $arr['image'] = pic_get($pic['filepath'], 'album', $pic['thumb'], $pic['remote']);
-            $arr['image_link'] = "home.php?mod=space&uid=$pic[uid]&do=album&picid=$pic[picid]";
+            if (empty($pic['albumid'])) {
+                $pic['albumid'] = 0;
+            };
+            if (empty($pic['albumname'])) {
+                $pic['albumname'] = lang('spacecp', 'default_albumname');
+            };
+    
+            $arr = [
+                'itemid' => $id,
+                'fromuid' => $pic['uid'],
+                'body_data' => [
+                    'retemplate' => 'album_pic', //Template relink
+                    'owner' => $pic['username'],
+                    'album' => $pic['albumname'],
+                    'image' => getstr($pic['title'] ? $pic['title'] : $pic['filename'], 100, 0, 0, 0, -1),
+                    'image_link' => pic_get($pic['filepath'], 'album', $pic['thumb'], $pic['remote']),
+                    'image_togo' => 'home.php?mod=space&uid=' . $pic['uid'] . '&do=album&picid=' . $pic['picid'],
+                    'album_link' => 'home.php?mod=space&uid=' . $pic['uid'] . '&do=album&id=' . $pic['albumid'],
+                    'owner_link' => 'home.php?mod=space&uid=' . $pic['uid'],
+                ],
+            ];
+            
             $note_uid = $pic['uid'];
             $note_message = 'share_pic';
-            $note_values = array('url' => "home.php?mod=space&uid=$pic[uid]&do=album&picid=$pic[picid]", 'albumname' => $pic['albumname'], 'from_id' => $id, 'from_idtype' => 'picid');
+            $note_values = [
+                'url' => 'home.php?mod=space&uid='.$pic['uid'].'&do=album&picid='.$pic['picid'],
+                'albumname' => $pic['albumname'],
+                'from_id' => $id,
+                'from_idtype' => 'picid'
+            ];
 
-            $hotarr = array('picid', $pic['picid'], $pic['hotuser']);
+            $hotarr = ['picid', $pic['picid'], $pic['hotuser']];
 
             break;
 
         case 'thread':
-
-            $feed_hash_data = "tid{$id}";
-
-            $actives = array('share' => ' class="active"');
+            require_once libfile('function/post');
 
             $thread = C::t('forum_thread')->fetch($id);
             if (in_array($thread['displayorder'], array(-2, -3))) {
                 showmessage('moderate_thread_not_share');
             }
-            require_once libfile('function/post');
+
+            $feed_hash_data = "tid{$id}";
+
+            $actives = [
+                'share' => ' class="active"'
+            ];
+
             $post = C::t('forum_post')->fetch_threadpost_by_tid_invisible($id);
             $attachment = !preg_match("/\[hide=?\d*\](.*?)\[\/hide\]/is", $post['message'], $a) && preg_match("/\[attach\]\d+\[\/attach\]/i", $a[1]);
             $post['message'] = messagecutstr($post['message']);
@@ -225,6 +278,8 @@ if($_GET['op'] == 'delete') {
             break;
 
         case 'article':
+            require_once libfile('function/portal');
+
             $feed_hash_data = "articleid{$id}";
             $article = C::t('portal_article_title')->fetch($id);
             if (!$article) {
@@ -234,15 +289,14 @@ if($_GET['op'] == 'delete') {
                 showmessage('moderate_article_not_share');
             }
 
-            require_once libfile('function/portal');
             $article_url = fetch_article_url($article);
             $arr['itemid'] = $id;
             $arr['fromuid'] = $article['uid'];
-            $arr['body_data'] = array(
+            $arr['body_data'] = [
                 'title' => "<a href=\"$article_url\">$article[title]</a>",
                 'username' => "<a href=\"home.php?mod=space&uid=$article[uid]\">" . $article['username'] . "</a>",
                 'summary' => getstr($article['summary'], 150, 0, 0, 0, -1)
-            );
+            ];
             if ($article['pic']) {
                 $arr['image'] = pic_get($article['pic'], 'portal', $article['thumb'], $article['remote'], 1, 1);
                 $arr['image_link'] = $article_url;
@@ -254,16 +308,17 @@ if($_GET['op'] == 'delete') {
             break;
 
         default:
-            $actives = array('share' => ' class="active"');
-            $_G['refer'] = 'home.php?mod=space&uid=' . $_G['uid'] . '&do=share&view=me';
+            
             $type = 'link';
+            
+            $actives = ['share' => ' class="active"'];
+            $_G['refer'] = 'home.php?mod=space&uid=' . $_G['uid'] . '&do=share&view=me';
             $_GET['op'] = 'link';
             $linkdefault = 'http://';
             $generaldefault = '';
+            
             break;
     }
-
-	$commentcable = ['blog' => 'blogid', 'pic' => 'picid', 'thread' => 'thread', 'article' => 'article'];
 
 	if(submitcheck('sharesubmit', 0, $seccodecheck, $secqaacheck)) {
 

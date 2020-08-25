@@ -13,6 +13,12 @@ if(!defined('IN_DISCUZ')) {
 
 function mkshare($share) {
 	$share['body_data'] = unserialize($share['body_data']);
+	
+	/* Template relink */
+	if($share['body_data']['retemplate']){
+        $share['type'] = $share['body_data']['retemplate'];
+    }
+	
     $share['body_template'] = $share['body_template'] ? $share['body_template'] : lang('feed','feed_share_body_template_'.$share['type']);
     $share['title_template'] = $share['title_template'] ? $share['title_template'] : lang('feed','feed_share_title_template_'.$share['type']);
 

@@ -6735,13 +6735,13 @@
         background: #e1804c;
     }
 
-    .app-dynamic .actstruct .blog {
+    .app-dynamic .actstruct .share-item-blog {
         border-radius: 12px;
         background: #fcfcfc;
         overflow: hidden;
         border: 1px solid #e6e6e6;
     }
-    .app-dynamic .actstruct .blog .title {
+    .app-dynamic .actstruct .share-item-blog .title {
         display: block;
         width: 100%;
         overflow: hidden;
@@ -6755,7 +6755,7 @@
         background: #fff;
         border-bottom: 1px solid #e6e6e6;
     }
-    .app-dynamic .actstruct .blog .title::before {
+    .app-dynamic .actstruct .share-item-blog .title::before {
         content: '';
         width: 8px;
         height: 16px;
@@ -6766,23 +6766,23 @@
         margin-right: 5px;
         vertical-align: -6%;
     }
-    .app-dynamic .actstruct .blog .title *{
+    .app-dynamic .actstruct .share-item-blog .title *{
         color: inherit;
         font-size: inherit;
     }
-    .app-dynamic .actstruct .blog .title a{
+    .app-dynamic .actstruct .share-item-blog .title a{
         color: inherit;
         font-size: inherit;
         display: inline-block;
         width: calc(100% - 20px);
     }
-    .app-dynamic .actstruct .blog .title .tag {
+    .app-dynamic .actstruct .share-item-blog .title .tag {
         padding: 1px 5px;
         border: 1px solid;
         border-radius: 4px;
         font-size: 12px;
     }
-    .app-dynamic .actstruct .blog .category {
+    .app-dynamic .actstruct .share-item-blog .category {
         margin: 10px 10px 0 10px;
         color: #e8729a;
         display: block;
@@ -6791,11 +6791,11 @@
         height: 14px;
         line-height: 14px;
     }
-    .app-dynamic .actstruct .blog .category a {
+    .app-dynamic .actstruct .share-item-blog .category a {
         display: inline-block;
         color: #da518f;
     }
-    .app-dynamic .actstruct .blog .content {
+    .app-dynamic .actstruct .share-item-blog .content {
         padding: 10px;
         color: #404b56;
     }
@@ -7011,6 +7011,31 @@
             --box-border-color:  rgba(115, 115, 115,  .12);
             --box-padding:  20px;
         }
+.WL-0   .app-userspace{
+            --space-banner-height: 130px;
+            --space-bank-avatar-top: -24px;
+            --space-bank-avatar-size: 72px;
+        }
+.WL-3P  .app-userspace,
+.WL-4P  .app-userspace{
+            --space-banner-height: 160px;
+            --space-bank-avatar-top: -36px;
+            --space-bank-avatar-size: 84px;
+        }
+.WL-7P  .app-userspace{
+            --space-banner-height: 210px;
+            --space-bank-avatar-top: -48px;
+            --space-bank-avatar-size: 96px;
+        }
+.WL-13P .app-userspace,
+.WL-1K  .app-userspace,
+.WL-2K  .app-userspace,
+.WL-4K  .app-userspace{
+            --space-banner-height: 260px;
+            --space-bank-avatar-top: -48px;
+            --space-bank-avatar-size: 96px;
+        }
+
         .app-userspace [class^="hi-"]{
             box-sizing: border-box;
             width: calc(100% - 16px);
@@ -7125,32 +7150,8 @@
             font-size: 12px;
         }
 
-        .WL-0   .app-userspace{
-            --space-banner-height: 130px;
-            --space-bank-avatar-top: -24px;
-            --space-bank-avatar-size: 72px;
-        }
-        .WL-3P  .app-userspace,
-        .WL-4P  .app-userspace{
-            --space-banner-height: 160px;
-            --space-bank-avatar-top: -36px;
-            --space-bank-avatar-size: 84px;
-        }
-        .WL-7P  .app-userspace{
-            --space-banner-height: 210px;
-            --space-bank-avatar-top: -48px;
-            --space-bank-avatar-size: 96px;
-        }
-        .WL-13P .app-userspace,
-        .WL-1K  .app-userspace,
-        .WL-2K  .app-userspace,
-        .WL-4K  .app-userspace{
-            --space-banner-height: 260px;
-            --space-bank-avatar-top: -48px;
-            --space-bank-avatar-size: 96px;
-        }
-
         .app-userspace .space-head{
+            --space-banks-height: 72px;
             position: relative;
             box-shadow: 0 0 5px rgba(0,0,0,.1);
         }
@@ -7193,9 +7194,9 @@
             padding: 5px;
             width: calc(100% - 280px);
         }
-        .WL-0  .app-userspace .space-head > .cover .spaceinfo,
-        .WL-3P .app-userspace .space-head > .cover .spaceinfo,
-        .WL-4P .app-userspace .space-head > .cover .spaceinfo {
+.WL-0   .app-userspace .space-head > .cover .spaceinfo,
+.WL-3P  .app-userspace .space-head > .cover .spaceinfo,
+.WL-4P  .app-userspace .space-head > .cover .spaceinfo {
             display: none;
         }
 
@@ -7345,7 +7346,7 @@
             overflow: hidden;
             text-overflow: ellipsis;
         }
-        .WL-0 .app-userspace .space-head > .bank .username{
+  .WL-0 .app-userspace .space-head > .bank .username{
             max-width: 115px;
         }
         .app-userspace .space-head > .bank .username .tag{
@@ -7384,18 +7385,15 @@
             transform: translate(0, -120px);
             transition: .2s ease-in-out;
         }
-        .scroll-overhead .app-userspace .space-head > .bank.type-scroll{
-            transform: translate(0, 0);
-        }
         .app-userspace .space-head > .bank.type-scroll .avatar{
             width: 48px;
             height: 48px;
             margin: 0 0 0 48px;
         }
-        .WL-13P .app-userspace .space-head > .bank.type-scroll .avatar,
-        .WL-1K  .app-userspace .space-head > .bank.type-scroll .avatar,
-        .WL-2K  .app-userspace .space-head > .bank.type-scroll .avatar,
-        .WL-4K  .app-userspace .space-head > .bank.type-scroll .avatar{
+.WL-13P .app-userspace .space-head > .bank.type-scroll .avatar,
+.WL-1K  .app-userspace .space-head > .bank.type-scroll .avatar,
+.WL-2K  .app-userspace .space-head > .bank.type-scroll .avatar,
+.WL-4K  .app-userspace .space-head > .bank.type-scroll .avatar{
             margin: 0;
         }
         .app-userspace .space-head > .bank.type-scroll .username{
@@ -7408,11 +7406,42 @@
             display: inline-block;
             padding: 8px 0 0 5px;
         }
-        .WL-0 .app-userspace .space-head > .bank.type-scroll .btn-group,
-        .WL-3P .app-userspace .space-head > .bank.type-scroll .btn-group {
+.WL-0   .app-userspace .space-head > .bank.type-scroll .btn-group,
+.WL-3P  .app-userspace .space-head > .bank.type-scroll .btn-group {
             display: none;
         }
-    /*endregion*/
+
+        .app-userspace .flow-deliver{
+            z-index: 2;
+            position: absolute;
+            background: #fff;
+            width: 420px;
+            top: 64px;
+            left: 760px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(120,144,177,.2);
+            border-radius: 4px;
+        }
+.WL-0   .app-userspace .flow-deliver,
+.WL-3P  .app-userspace .flow-deliver,
+.WL-4P  .app-userspace .flow-deliver{
+            right: 0;
+            left: calc(var(--width-mas-guide)) !important;
+            bottom: calc(var(--footer-drawer-touch-bar-height) + 71px);
+            padding: 20px;
+            border-radius: 0;
+        }
+
+        .scroll-overhead .app-userspace .space-head > .bank.type-scroll{
+            transform: translate(0, 0);
+        }
+        .scroll-overhead .app-userspace .flow-deliver{
+            position: fixed;
+            top: 100px;
+            left: calc(var(--width-mas-guide) + 761px);
+        }
+
+/*endregion*/
 
     /*region @timeline*/
         .app-userspace .timeline{
@@ -7441,9 +7470,9 @@
             --ut-avatar-leftdrag: 100%;
         }
 
-        .WL-0 .app-userspace .timeline,
-        .WL-3P .app-userspace .timeline,
-        .WL-4P .app-userspace .timeline{
+.WL-0   .app-userspace .timeline,
+.WL-3P  .app-userspace .timeline,
+.WL-4P  .app-userspace .timeline{
             --line-tip-fontsize: 20px;
             --line-tip-lineheight: 72px;
 
@@ -7616,6 +7645,7 @@
         }
 
         .app-userspace .timeline .n-right{
+            z-index: 0;
             position: relative;
             background: #fff;
             padding: var(--box-edge);
@@ -7641,6 +7671,8 @@
             margin-left: 5px;
         }
         .app-userspace .timeline .n-right .s-center{
+            display: flex;
+            flex-flow: column;
             margin-bottom: var(--box-edge);
             padding: var(--node-right-s-center-padding);
         }
@@ -7670,23 +7702,6 @@
         .app-userspace .timeline .n-right .s-end .icon:hover {
             background: var(--color-sky-blue);
             color: #fff;
-        }
-
-        .app-userspace .flow-deliver{
-            z-index: 2;
-            position: absolute;
-            background: #fff;
-            width: 420px;
-            top: 64px;
-            left: 760px;
-            padding: 20px;
-            box-shadow: 0 0 10px rgba(120,144,177,.2);
-            border-radius: 4px;
-        }
-        .scroll-overhead .app-userspace .flow-deliver{
-            position: fixed;
-            top: 100px;
-            left: calc(var(--width-mas-guide) + 761px);
         }
 
         .app-userspace .page{
@@ -7741,16 +7756,6 @@
                 transform: translate3d(0, 600px, 0);
             }
 
-            .WL-0 .app-userspace .flow-deliver,
-            .WL-3P .app-userspace .flow-deliver,
-            .WL-4P .app-userspace .flow-deliver{
-                right: 0;
-                left: calc(var(--width-mas-guide)) !important;
-                bottom: calc(var(--footer-drawer-touch-bar-height) + 71px);
-                padding: 20px;
-                border-radius: 0;
-            }
-
             .app-userspace .page{
                 box-shadow: 0 0 0 1px rgba(0,0,0,.1);
                 transition: .2s ease-in-out;
@@ -7790,6 +7795,7 @@
             color: #000;
             word-break: break-word;
             padding: 10px;
+            margin-top: 10px;
             border-left: 2px solid #aac1e2;
             background: #f9f9f9;
         }
@@ -7798,125 +7804,6 @@
             box-sizing: border-box;
             max-width: 100%;
             margin-top: 10px;
-        }
-
-        .app-userspace #userspace_share .timeline .n-right .s-center > .blog {
-            margin-top: 10px;
-            border-radius: 10px;
-            background: #fcfcfc;
-            overflow: hidden;
-            border: 1px solid #e6e6e6;
-        }
-        .app-userspace #userspace_share .timeline .n-right .s-center > .blog .title {
-            display: block;
-            width: 100%;
-            overflow: hidden;
-            cursor: pointer;
-            color: #7d7d7d;
-            font-size: 16px;
-            line-height: 30px;
-            padding: 5px 10px;
-            box-sizing: border-box;
-            white-space: nowrap;
-            background: #fff;
-            border-bottom: 1px solid #e6e6e6;
-        }
-        .app-userspace #userspace_share .timeline .n-right .s-center > .blog .title::before {
-            content: '';
-            width: 8px;
-            height: 16px;
-            display: inline-block;
-            background: var(--color-onnanoko-pink);
-            opacity: .8;
-            border-radius: 4px;
-            margin-right: 5px;
-            vertical-align: -6%;
-        }
-        .app-userspace #userspace_share .timeline .n-right .s-center > .blog .title *{
-            color: inherit;
-            font-size: inherit;
-        }
-        .app-userspace #userspace_share .timeline .n-right .s-center > .blog .title a{
-            color: inherit;
-            font-size: inherit;
-            display: inline-block;
-            width: calc(100% - 20px);
-        }
-        .app-userspace #userspace_share .timeline .n-right .s-center > .blog .title .tag {
-            padding: 1px 5px;
-            border: 1px solid;
-            border-radius: 4px;
-            font-size: 12px;
-        }
-        .app-userspace #userspace_share .timeline .n-right .s-center > .blog .category {
-            margin: 10px 10px 0 10px;
-            color: #e8729a;
-            display: block;
-            border-left: 2px solid;
-            padding-left: 4px;
-            height: 14px;
-            line-height: 14px;
-        }
-        .app-userspace #userspace_share .timeline .n-right .s-center > .blog .category a {
-            display: inline-block;
-            color: #da518f;
-        }
-        .app-userspace #userspace_share .timeline .n-right .s-center > .blog .content {
-            padding: 10px;
-            color: #404b56;
-            word-break: break-word;
-        }
-
-        .app-userspace #userspace_share .timeline .n-right .s-center > .share-item-iframe{
-            width: 100%;
-        }
-        .app-userspace #userspace_share .timeline .n-right .s-center > .share-item-iframe iframe{
-            width: 100%;
-            border: none;
-            min-height: 260px;
-        }
-        .WL-0  .app-userspace #userspace_share .timeline .n-right .s-center > .share-item-iframe iframe,
-        .WL-3P .app-userspace #userspace_share .timeline .n-right .s-center > .share-item-iframe iframe{
-            width: 100%;
-            min-height: 180px;
-        }
-
-        .app-userspace #userspace_share .timeline .n-right .s-center > .share-item-video video{
-            width: 100%;
-        }
-
-        .app-userspace #userspace_share .timeline .n-right .s-center > .share-item-music{
-            padding: 10px;
-            border-radius: 30px;
-            background: var(--color-main-theme);
-            color: #fff;
-            line-height: 20px;
-            white-space: nowrap;
-            overflow: hidden;
-        }
-        .app-userspace #userspace_share .timeline .n-right .s-center > .share-item-music i{
-            display: inline-block;
-            margin-right: 6px;
-            font-size: 20px;
-        }
-
-        .app-userspace #userspace_share .timeline .n-right .s-center > .share-item-image{
-            display: block;
-            width: 100%;
-            border: 1px solid var(--color-slightgray);
-            border-radius: 8px;
-            overflow: hidden;
-        }
-        .app-userspace #userspace_share .timeline .n-right .s-center > .share-item-image img{
-            width: 100%;
-        }
-        .app-userspace #userspace_share .timeline .n-right .s-center > .share-item-image i{
-            display: block;
-            padding: 10px;
-            background: var(--color-vlightgray);
-            border-top: 1px solid var(--color-slightgray);
-            color: var(--color-text-gray);
-            word-break: break-word;
         }
 
         .app-userspace #userspace_share .timeline .n-right .s-center > .share-item-link {
@@ -7940,6 +7827,286 @@
             margin-right: 8px;
         }
 
+        .app-userspace #userspace_share .timeline .n-right .s-center > .share-item-iframe{
+            width: 100%;
+            overflow: hidden;
+            background: var(--color-vlightgray);
+        }
+        .app-userspace #userspace_share .timeline .n-right .s-center > .share-item-iframe iframe{
+            width: 100%;
+            border: none;
+            min-height: 260px;
+        }
+.WL-0   .app-userspace #userspace_share .timeline .n-right .s-center > .share-item-iframe iframe,
+.WL-3P  .app-userspace #userspace_share .timeline .n-right .s-center > .share-item-iframe iframe{
+            width: 100%;
+            min-height: 180px;
+        }
+
+        .app-userspace #userspace_share .timeline .n-right .s-center > .share-item-image{
+            display: block;
+            width: 100%;
+            border: 1px solid var(--color-slightgray);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .app-userspace #userspace_share .timeline .n-right .s-center > .share-item-image .image,
+        .app-userspace #userspace_share .timeline .n-right .s-center > .share-item-image .image img{
+            width: 100%;
+        }
+        .app-userspace #userspace_share .timeline .n-right .s-center > .share-item-image i,
+        .app-userspace #userspace_share .timeline .n-right .s-center > .share-item-image .album-pic-info{
+            display: block;
+            padding: 10px;
+            background: var(--color-vlightgray);
+            border-top: 1px solid var(--color-slightgray);
+            color: var(--color-text-gray);
+            word-break: break-word;
+            line-height: 14px;
+        }
+        .app-userspace #userspace_share .timeline .n-right .s-center > .share-item-image .album-pic-info a{
+            color: var(--color-text-info);
+            border-bottom: 1px dashed;
+        }
+
+        .app-userspace #userspace_share .timeline .n-right .s-center > .share-item-video video{
+            width: 100%;
+        }
+
+        .app-userspace #userspace_share .timeline .n-right .s-center > .share-item-music{
+            padding: 10px;
+            border-radius: 30px;
+            background: var(--color-main-theme);
+            color: #fff;
+            line-height: 20px;
+            white-space: nowrap;
+            overflow: hidden;
+        }
+        .app-userspace #userspace_share .timeline .n-right .s-center > .share-item-music i{
+            display: inline-block;
+            margin-right: 6px;
+            font-size: 20px;
+        }
+
+        .app-userspace #userspace_share .timeline .n-right .s-center > .share-item-blog {
+            border-radius: 14px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,.1);
+        }
+        .app-userspace #userspace_share .timeline .n-right .s-center > .share-item-blog .image{
+            width: 100%;
+            max-height:180px;
+            overflow: hidden;
+        }
+.WL-0   .app-userspace #userspace_share .timeline .n-right .s-center > .share-item-blog .image,
+.WL-4P  .app-userspace #userspace_share .timeline .n-right .s-center > .share-item-blog .image,
+.WL-3P  .app-userspace #userspace_share .timeline .n-right .s-center > .share-item-blog .image{
+            max-height:110px;
+        }
+        .app-userspace #userspace_share .timeline .n-right .s-center > .share-item-blog .image img{
+            width: 100%;
+        }
+        .app-userspace #userspace_share .timeline .n-right .s-center > .share-item-blog .subject {
+            display: block;
+            width: 100%;
+            overflow: hidden;
+            cursor: pointer;
+            color: #000;
+            font-size: 20px;
+            line-height: 30px;
+            padding: 10px 10px 0 10px;
+            box-sizing: border-box;
+            white-space: nowrap;
+        }
+        .app-userspace #userspace_share .timeline .n-right .s-center > .share-item-blog .subject .tag {
+            padding: 1px 5px;
+            border: 1px solid;
+            border-radius: 4px;
+            font-size: 12px;
+        }
+        .app-userspace #userspace_share .timeline .n-right .s-center > .share-item-blog .category {
+            padding: 10px 20px 0 20px;
+            color: var(--color-main-theme-dark);
+            display: block;
+            line-height: 14px;
+        }
+        .app-userspace #userspace_share .timeline .n-right .s-center > .share-item-blog .category::before {
+            content: '';
+            display: inline-block;
+            height: 10px;
+            width: 7px;
+            border-radius: 5px;
+            background: var(--color-main-theme-dark);
+            margin-right: 5px;
+        }
+        .app-userspace #userspace_share .timeline .n-right .s-center > .share-item-blog .content {
+            padding: 10px 20px;
+            color: var(--color-text-gray);
+            word-break: break-word;
+        }
+
+        .app-userspace #userspace_share .timeline .n-right .s-center > .share-item-album {
+            display: flex;
+            flex-flow: row wrap;
+            width: 100%;
+            padding: 10px;
+            background: var(--color-vlightgray);
+            border: 3px solid #eeeef5;
+            border-radius: 10px;
+        }
+        .app-userspace #userspace_share .timeline .n-right .s-center > .share-item-album .album-img {
+            width: 20%;
+            overflow: hidden;
+            border-radius: 4px;
+        }
+        .app-userspace #userspace_share .timeline .n-right .s-center > .share-item-album .album-img img{
+            width: 100%;
+        }
+        .app-userspace #userspace_share .timeline .n-right .s-center > .share-item-album .album-info{
+            width: 80%;
+            padding-left:10px;
+            line-height: 25px;
+        }
+        .app-userspace #userspace_share .timeline .n-right .s-center > .share-item-album .album-name {
+            display: block;
+            width: 100%;
+            color: var(--color-text-dark);
+            font-size: 18px;
+        }
+        .app-userspace #userspace_share .timeline .n-right .s-center > .share-item-album .album-desc {
+            padding: 10px;
+            color: var(--color-text-dark);
+            word-break: break-word;
+            border-top: 2px dashed #e3e5e8;
+            width: 100%;
+            margin-top: 10px;
+        }
+        .app-userspace #userspace_share .timeline .n-right .s-center > .share-item-album .owner-name {
+            color: var(--color-main-theme-dark);
+        }
+        .app-userspace #userspace_share .timeline .n-right .s-center > .share-item-album .owner-name::before {
+            content: '';
+            display: inline-block;
+            width: 6px;
+            height: 10px;
+            background: var(--color-main-theme-dark);
+            border-radius: 2px;
+            margin-right: 5px;
+         }
+
+        .app-userspace #userspace_share .timeline .n-right .s-center > .share-item-space {
+            --avatar-size: 64px;
+            --username-fontsize: 16px;
+            --space-note-fontsize: 14px;
+            display: flex;
+            flex-flow: row nowrap;
+            overflow: hidden;
+            width: 100%;
+            height: 149px;
+            padding: 40px;
+            border-radius: 10px;
+            background-image: url(//static.starscdn.com/repository/bbs.starsriver/img/home/share-item/share-item-space-bg.png);
+            background-size: 30px 30px;
+        }
+.WL-0   .app-userspace #userspace_share .timeline .n-right .s-center > .share-item-space,
+.WL-3P  .app-userspace #userspace_share .timeline .n-right .s-center > .share-item-space,
+.WL-4P  .app-userspace #userspace_share .timeline .n-right .s-center > .share-item-space {
+            --avatar-size: 42px;
+            --username-fontsize: 14px;
+            --space-note-fontsize: 12px;
+
+        }
+        .app-userspace #userspace_share .timeline .n-right .s-center > .share-item-space::before {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            border: 2px dashed #fff;
+            top: -42px;
+            right: -42px;
+            border-radius: 60px;
+        }
+        .app-userspace #userspace_share .timeline .n-right .s-center > .share-item-space::after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            border: 2px dashed #fff;
+            bottom: -40px;
+            left: -40px;
+            transform: rotate(32deg);
+        }
+        .app-userspace #userspace_share .timeline .n-right .s-center > .share-item-space .decrater {
+            z-index: 0;
+            position: absolute;
+            width: calc(100% - 66px);
+            height: calc(100% - 66px);
+            background: #fff;
+            top: 33px;
+            left: 33px;
+            border-radius: 5px;
+            box-shadow: 0 0 2px rgba(0,0,0,.15);
+        }
+        .app-userspace #userspace_share .timeline .n-right .s-center > .share-item-space .decrater::before {
+            content: '';
+            position: absolute;
+            width: 66px;
+            height: 46px;
+            border-width: 2px;
+            border-color: #fff;
+            border-style: dashed;
+            border-bottom: 0;
+            border-right: 0;
+            top: -10px;
+            left: -10px;
+        }
+        .app-userspace #userspace_share .timeline .n-right .s-center > .share-item-space .decrater::after {
+            content: '';
+            position: absolute;
+            width: 66px;
+            height: 46px;
+            border-width: 2px;
+            border-color: #fff;
+            border-style: dashed;
+            border-top: 0;
+            border-left: 0;
+            bottom: -10px;
+            right: -10px;
+        }
+        .app-userspace #userspace_share .timeline .n-right .s-center > .share-item-space .avatar {
+            z-index: 1;
+            position: relative;
+            height: var(--avatar-size);
+            width: var(--avatar-size);
+            left: 0;
+        }
+        .app-userspace #userspace_share .timeline .n-right .s-center > .share-item-space .info {
+            z-index: 1;
+            position: relative;
+            box-sizing: border-box;
+            padding: 0 0 0 15px;
+            width: calc(100% - var(--avatar-size));
+            left: 0;
+        }
+        .app-userspace #userspace_share .timeline .n-right .s-center > .share-item-space .avatar .avatar-main {
+            box-shadow: 0 0 0 2px var(--color-main-theme-shadow);
+        }
+        .app-userspace #userspace_share .timeline .n-right .s-center > .share-item-space .username {
+            display: block;
+            width: 100%;
+            padding: 5px 0;
+            font-size: var(--username-fontsize);
+            font-weight: 700;
+            color: #8aa0bb;
+        }
+        .app-userspace #userspace_share .timeline .n-right .s-center > .share-item-space .space-note {
+            display: block;
+            width: 100%;
+            max-height: 39px;
+            overflow: hidden;
+            color: #4a617d;
+            font-size: var(--space-note-fontsize);
+        }
     /*endregion*/
 
     /*region #userspace_wall*/
@@ -7963,6 +8130,26 @@
             --box-margin: 8px;
             --box-radius: 10px;
         }
+.WL-0   .app-userspace #userspace_wall,
+.WL-3P  .app-userspace #userspace_wall,
+.WL-4P  .app-userspace #userspace_wall{
+            --box-col: 1;
+        }
+.WL-7P  .app-userspace #userspace_wall{
+            --box-col: 2;
+        }
+.WL-13P .app-userspace #userspace_wall{
+            --box-col: 3;
+        }
+.WL-1K  .app-userspace #userspace_wall{
+            --box-col: 4;
+        }
+.WL-2K  .app-userspace #userspace_wall{
+            --box-col: 6;
+        }
+.WL-4K  .app-userspace #userspace_wall{
+            --box-col: 8;
+        }
         .app-userspace #userspace_wall .wall{
             font-size: 0;
             display: block;
@@ -7978,6 +8165,7 @@
             border-radius: 5px;
             border: 1px solid var(--box-border-color);
         }
+
         .app-userspace #userspace_wall .wall .commentform{
             z-index: 1;
             position: absolute;
@@ -7985,11 +8173,6 @@
             display: inline-block;
             width: var(--wall-commentform-width);
             margin: 50px var(--box-margin) var(--box-margin) var(--box-margin);
-        }
-        .scroll-overhead .app-userspace #userspace_wall .wall .commentform{
-            position: fixed;
-            right: var(--box-margin);
-            top: 92px;
         }
         .app-userspace #userspace_wall .wall .commentform .menu{
             position: absolute;
@@ -8046,6 +8229,7 @@
             padding-top: 10px;
             color: var(--color-text-gray);
         }
+
         .app-userspace #userspace_wall .wall .comments{
             z-index: 0;
             position: relative;
@@ -8064,6 +8248,7 @@
             margin: 50px var(--box-margin) var(--box-margin) var(--box-margin);
             text-align: left;
         }
+
         .app-userspace #userspace_wall .wall .decrater-b{
             position: absolute;
             display: inline-block;
@@ -8147,8 +8332,7 @@
             background: #f9f9f9;
             border: 1px solid var(--box-border-color);
         }
-
-        .app-userspace #userspace_wall .wall li .decrater-c .card-tag{
+        .app-userspace #userspace_wall .wall .decrater-c .card-tag{
             display: inline-block;
             position: absolute;
             bottom: 100%;
@@ -8160,17 +8344,17 @@
             border-radius: 50px;
             box-shadow: 0 0 0 2px var(--color-lightgray);
         }
-        .app-userspace #userspace_wall .wall li .decrater-c .card-tag.magicflicker{
+        .app-userspace #userspace_wall .wall .decrater-c .card-tag.magicflicker{
             background-image: url('{IMGURL}/magic/flicker-bg0.jpg') !important;
             background-size: 101% !important;
             background-position: center !important;
         }
-        .app-userspace #userspace_wall .wall li .decrater-c .card-tag .avatar{
+        .app-userspace #userspace_wall .wall .decrater-c .card-tag .avatar{
             position: relative;
             width: 28px;
             height: 28px;
         }
-        .app-userspace #userspace_wall .wall li .decrater-c .card-tag .username{
+        .app-userspace #userspace_wall .wall .decrater-c .card-tag .username{
             display: inline-block;
             line-height: 28px;
             color: var(--color-text-dark);
@@ -8181,12 +8365,12 @@
             font-weight: 700;
             opacity: .7;
         }
-        .app-userspace #userspace_wall .wall li .decrater-c .card-tag.magicflicker .username{
+        .app-userspace #userspace_wall .wall .decrater-c .card-tag.magicflicker .username{
             color: #fff;
             text-shadow: 0 0 7px #000;
             opacity: 1;
         }
-        .app-userspace #userspace_wall .wall li .decrater-c .card-message{
+        .app-userspace #userspace_wall .wall .decrater-c .card-message{
             padding: 10px 5px 0 5px;
             border-top: 2px dotted var(--box-border-color);
             color: var(--color-text-dark);
@@ -8195,7 +8379,7 @@
             height: 80px;
             line-height: 20px;
         }
-        .app-userspace #userspace_wall .wall li .decrater-c .card-message .msg-tip{
+        .app-userspace #userspace_wall .wall .decrater-c .card-message .msg-tip{
             display: inline-block;
             background: var(--color-charry-pink);
             color: #fff;
@@ -8203,17 +8387,17 @@
             border-radius: 5px;
             font-size: 12px;
         }
-        .app-userspace #userspace_wall .wall li .decrater-c .card-message .emoji-face{
+        .app-userspace #userspace_wall .wall .decrater-c .card-message .emoji-face{
             width: 20px;
         }
-        .app-userspace #userspace_wall .wall li .decrater-c .card-btm{
+        .app-userspace #userspace_wall .wall .decrater-c .card-btm{
             padding: 10px 5px 0 5px;
             border-top: 2px dotted var(--box-border-color);
             box-sizing: content-box;
             height: 24px;
             line-height: 24px;
         }
-        .app-userspace #userspace_wall .wall li .decrater-c .card-btm .date{
+        .app-userspace #userspace_wall .wall .decrater-c .card-btm .date{
             z-index: 0;
             font-size: 13px;
             color: var(--color-text-gray);
@@ -8224,7 +8408,7 @@
             max-width: 60%;
             overflow: hidden;
         }
-        .app-userspace #userspace_wall .wall li .decrater-c .card-btm .reply{
+        .app-userspace #userspace_wall .wall .decrater-c .card-btm .reply{
             font-size: 12px;
             display: inline-block;
             background: var(--color-miku-green);
@@ -8232,7 +8416,7 @@
             padding: 0 5px;
             border-radius: 3px;
         }
-        .app-userspace #userspace_wall .wall li .decrater-c .card-btm .reply::before{
+        .app-userspace #userspace_wall .wall .decrater-c .card-btm .reply::before{
             margin-right: 3px;
         }
 
@@ -8266,25 +8450,10 @@
             margin-right: 5px;
         }
 
-        .WL-0 .app-userspace #userspace_wall,
-        .WL-3P .app-userspace #userspace_wall,
-        .WL-4P .app-userspace #userspace_wall{
-            --box-col: 1;
-        }
-        .WL-7P .app-userspace #userspace_wall{
-            --box-col: 2;
-        }
-        .WL-13P .app-userspace #userspace_wall{
-            --box-col: 3;
-        }
-        .WL-1K .app-userspace #userspace_wall{
-            --box-col: 4;
-        }
-        .WL-2K .app-userspace #userspace_wall{
-            --box-col: 6;
-        }
-        .WL-4K .app-userspace #userspace_wall{
-            --box-col: 8;
+        .scroll-overhead .app-userspace #userspace_wall .wall .commentform{
+            position: fixed;
+            right: var(--box-margin);
+            top: 92px;
         }
         @media screen and (max-width:1000px) {
             .app-userspace #userspace_wall .wall .comments{
