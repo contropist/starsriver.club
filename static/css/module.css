@@ -7150,11 +7150,6 @@
             --space-bank-avatar-size: 96px;
         }
 
-        .scroll-overhead .app-userspace .mas-viewer-header,
-        .app-userspace .mas-viewer-header:hover{
-            z-index: 1 !important;
-        }
-
         .app-userspace .space-head{
             position: relative;
             box-shadow: 0 0 5px rgba(0,0,0,.1);
@@ -7791,9 +7786,6 @@
     /*endregion*/
 
     /*region #userspace_share*/
-        .app-userspace #userspace_share{
-
-        }
         .app-userspace #userspace_share .timeline .n-right .s-center > .message{
             color: #000;
             word-break: break-word;
@@ -7970,7 +7962,6 @@
             --box-border-color: rgba(135, 135, 171, 0.20);
             --box-margin: 8px;
             --box-radius: 10px;
-            padding: 0;
         }
         .app-userspace #userspace_wall .wall{
             font-size: 0;
@@ -8351,9 +8342,6 @@
     /*endregion*/
 
     /*region #userspace_profile*/
-        .app-userspace #userspace_profile{
-            padding: 0;
-        }
         .app-userspace #userspace_profile > .panel{
             --default-box-margin-width: 8px;
         }

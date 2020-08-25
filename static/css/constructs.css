@@ -3137,33 +3137,33 @@
         letter-spacing: -2px;
         color: #e30000;
     }
-    .Mas.edge .mas-guide .nav-vertical{
+    .Mas.edge .mas-guide .nav-vertical > ul{
         width: 100%;
         padding-top: 10px;
         margin-top: 10px;
         border-top: 1px solid var(--color-slightgray) ;
     }
 
-    .Mas.edge .mas-guide .nav-vertical li{
+    .Mas.edge .mas-guide .nav-vertical > ul > li{
         display: inline-block;
         width: 100%;
         box-sizing: border-box;
         background: var(--menu-li-background);
     }
-    .Mas.edge .mas-guide .nav-vertical li:hover{
+    .Mas.edge .mas-guide .nav-vertical > ul > li:hover{
         background: var(--color-lightgray);
     }
-    .Mas.edge .mas-guide .nav-vertical li.active{
+    .Mas.edge .mas-guide .nav-vertical > ul > li.active{
         background: var(--menu-li-background-active);
     }
 
-    .Mas.edge .mas-guide .nav-vertical li a{
+    .Mas.edge .mas-guide .nav-vertical > ul > li a{
         width: 100%;
         box-sizing: border-box;
         padding: var(--menu-padding);
         text-align: var(--menu-text-align);
     }
-    .Mas.edge .mas-guide .nav-vertical li a i{
+    .Mas.edge .mas-guide .nav-vertical > ul > li a i{
         display: inline-block;
         margin: var(--menu-icon-margin);
         width: var(--menu-icon-size);
@@ -3175,11 +3175,11 @@
         text-align: center;
         border-radius: 100%;
     }
-    .Mas.edge .mas-guide .nav-vertical li.active a i{
+    .Mas.edge .mas-guide .nav-vertical > ul > li.active a i{
         color: var(--menu-icon-color-active);
         background: var(--menu-icon-background-active);
     }
-    .Mas.edge .mas-guide .nav-vertical li a span{
+    .Mas.edge .mas-guide .nav-vertical > ul > li a span{
         display: var(--menu-text-display);
         width: var(--menu-text-width);
         line-height: var(--menu-text-line-height);
@@ -3187,7 +3187,7 @@
         color: var(--menu-text-color);
         white-space: nowrap;
     }
-    .Mas.edge .mas-guide .nav-vertical li.active a span{
+    .Mas.edge .mas-guide .nav-vertical > ul > li.active a span{
         color: var(--menu-text-color-active);
         font-weight: var(--menu-text-weight);
     }
@@ -3200,46 +3200,56 @@
         z-index: 0;
         width: 100%;
     }
+    .scroll-overhead .Mas.edge .mas-viewer .mas-viewer-header,
+    .Mas.edge .mas-viewer .mas-viewer-header:hover{
+        z-index: 1 !important;
+    }
+
     .Mas.edge .mas-viewer .mas-viewer-container{
         position: relative;
         z-index: 0;
         width: 100%;
         box-sizing: border-box;
         margin-bottom: 90px;
+    }
+    .Mas.edge .mas-viewer .mas-viewer-container .whitespace{
+        display: inline-block;
+        width: 100%;
+        overflow: auto;
+        box-sizing: border-box;
+    }
+    .Mas.edge .mas-viewer .mas-viewer-container .whitespace.cn{
         padding: 0 15px;
     }
-
     .Mas.edge .mas-viewer .mas-viewer-container .nav-horizon{
         --nav-height: 48px;
-        background: #fff;
-        display: flex;
-        flex-flow: row;
-        width: 100%;
-        height: var(--nav-height);
-        margin-left: -15px;
-        justify-content: left;
-        border-bottom: 1px solid var(--color-lightgray);
-        overflow: auto;
-        padding: 0 15px;
     }
-    .Mas.edge .mas-viewer .mas-viewer-container .nav-horizon li{
+    .Mas.edge .mas-viewer .mas-viewer-container .nav-horizon > ul{
+        --nav-height: 48px;
+        background: #fff;
+        display: inline-block;
+        min-width: 100%;
+        height: var(--nav-height);
+        border-bottom: 1px solid var(--color-lightgray);
+        padding: 0 15px;
+        white-space: nowrap;
+    }
+    .Mas.edge .mas-viewer .mas-viewer-container .nav-horizon > ul > li{
+        display: inline-block;
         position: relative;
         white-space: nowrap;
         height: var(--nav-height);
         line-height: var(--nav-height);
         color: var(--color-text-gray);
     }
-    .Mas.edge .mas-viewer .mas-viewer-container .nav-horizon li a{
+    .Mas.edge .mas-viewer .mas-viewer-container .nav-horizon > ul > li a{
         padding: 0 15px;
     }
-    .Mas.edge .mas-viewer .mas-viewer-container .nav-horizon li:last-child a{
-        padding-right: 30px;
-    }
-    .Mas.edge .mas-viewer .mas-viewer-container .nav-horizon li.active a{
+    .Mas.edge .mas-viewer .mas-viewer-container .nav-horizon > ul > li.active a{
         font-weight: 700;
         color: var(--color-sky-blue);
     }
-    .Mas.edge .mas-viewer .mas-viewer-container .nav-horizon li.active a::after{
+    .Mas.edge .mas-viewer .mas-viewer-container .nav-horizon > ul >li.active a::after{
         content: '';
         width: calc(100% - 30px);
         height: 3px;

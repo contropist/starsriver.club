@@ -1,143 +1,145 @@
-<!--{if helper_access::check_module('share') && $space[self]}-->
-    <!--{template home/space_home_mod_share_form}-->
-<!--{/if}-->
-
 <!--{template home/space_home_mod_share_nav}-->
 
-<!--{if $list}-->
-    <!--{if $pricount}-->
-        <p class="alert hi-warning" style="margin: 0 0 0 -15px; width: calc(100% + 30px);">{lang hide_share}</p>
+<div class="whitespace cn">
+    <!--{if helper_access::check_module('share') && $space[self]}-->
+        <!--{template home/space_home_mod_share_form}-->
     <!--{/if}-->
-    <ul class="timeline" id="share_list">
-        <!--{eval $share_day = '';}-->
-        <!--{eval $share_min = '';}-->
-        <!--{loop $list $k $value}-->
-            <!--{eval $share_dayN = date('ymd',$value['dateline']);}-->
-            <!--{eval $share_minN = date('ymdi',$value['dateline']);}-->
-            <li class="node {if $share_day != $share_dayN}dayMark{/if}" id="share_$value[sid]_li">
-                <div class="n-left">
-                    <!--{if $share_day != $share_dayN}-->
-                        <!--{eval $share_day = $share_dayN;}-->
-                        <i class="time-A"><!--{date($value['dateline'],'Y/m/d')}--></i>
-                    <!--{/if}-->
 
-                    <!--{if $share_min != $share_minN}-->
-                    <!--{eval $share_min = $share_minN;}-->
-                        <i class="time-B"><!--{date($value['dateline'],'H:i')}--></i>
-                        <div class="user-tag">
-                            <a class="avatar" href="home.php?mod=space&uid=$value[uid]" c="1" target="_blank"><!--{avatar($value[uid],'small')}--></a>
-                            <a class="username" href="home.php?mod=space&uid=$value[uid]" target="_blank">$value[username]</a>
+    <!--{if $list}-->
+        <!--{if $pricount}-->
+            <p class="alert hi-warning" style="margin: 0 0 0 -15px; width: calc(100% + 30px);">{lang hide_share}</p>
+        <!--{/if}-->
+        <ul class="timeline" id="share_list">
+            <!--{eval $share_day = '';}-->
+            <!--{eval $share_min = '';}-->
+            <!--{loop $list $k $value}-->
+                <!--{eval $share_dayN = date('ymd',$value['dateline']);}-->
+                <!--{eval $share_minN = date('ymdi',$value['dateline']);}-->
+                <li class="node {if $share_day != $share_dayN}dayMark{/if}" id="share_$value[sid]_li">
+                    <div class="n-left">
+                        <!--{if $share_day != $share_dayN}-->
+                            <!--{eval $share_day = $share_dayN;}-->
+                            <i class="time-A"><!--{date($value['dateline'],'Y/m/d')}--></i>
+                        <!--{/if}-->
+
+                        <!--{if $share_min != $share_minN}-->
+                        <!--{eval $share_min = $share_minN;}-->
+                            <i class="time-B"><!--{date($value['dateline'],'H:i')}--></i>
+                            <div class="user-tag">
+                                <a class="avatar" href="home.php?mod=space&uid=$value[uid]" c="1" target="_blank"><!--{avatar($value[uid],'small')}--></a>
+                                <a class="username" href="home.php?mod=space&uid=$value[uid]" target="_blank">$value[username]</a>
+                            </div>
+                        <!--{/if}-->
+                    </div>
+                    <div class="n-right">
+                        <div class="s-top">
+                            <i class="title">$value[title_template]</i>
+                            <!--{if $value[status] == 1}--><i class="censor">({lang moderate_need})</i><!--{/if}-->
+                            <!--{hook/space_share_comment_op $k}-->
+                            <!--{if $value[uid]==$_G[uid]}-->
+                            <div class="tool r">
+                                <b class="dots"><i class="dot"></i><i class="dot"></i><i class="dot"></i></b>
+                                <span class="tooltip lt" data-ignore='1'>
+                                    <a href="home.php?mod=spacecp&ac=share&op=delete&sid=$value[sid]&handlekey=dellshk_{$value[sid]}" id="s_$value[sid]_delete" onclick="showWindow(this.id, this.href, 'get', 0);">{lang delete}</a>
+                                </span>
+                            </div>
+                            <!--{/if}-->
                         </div>
-                    <!--{/if}-->
+                        <div class="s-center">
+                            <!--{if $value[body_general]}-->
+                                <p class="message" id="quote_{$id}">$value[body_general]</p>
+                            <!--{/if}-->
+
+                            $value[body_template]
+                        </div>
+                        <div class="s-end">
+                            <!--{if $value[uid] != $_G[uid] && $value[itemid] && helper_access::check_module('share')}-->
+                                <a class="icon mt-share share" href="home.php?mod=spacecp&ac=share&type=$value[type]&id=$value[itemid]" id="k_share" onclick="showWindow(this.id, this.href, 'get', 0);" title="{lang sharemetoo}"></a>
+                            <!--{/if}-->
+                            <!--{if $value[sid]}-->
+                                <a class="icon mt-textsms reply" href="home.php?mod=space&uid=$value[uid]&do=share&id=$value[sid]" target="_blank"></a>
+                            <!--{/if}-->
+                        </div>
+                    </div>
+                </li>
+            <!--{/loop}-->
+        </ul>
+
+        <div class="page" id="pager_share">
+            <!--{if $multi}-->
+                $multi
+            <!--{else}-->
+                <p class="nomore">{lang nomore}</p>
+            <!--{/if}-->
+        </div>
+    <!--{else}-->
+        <ul class="timeline">
+            <li class="node">
+                <div class="n-left">
+                    <i class="time-A">? / ? / ?</i>
+                    <i class="time-B">? : ?</i>
+                    <div class="user-tag">
+                        <a class="avatar"><!--{avatar(0,'small')}--></a>
+                        <a class="username">————</a>
+                    </div>
                 </div>
                 <div class="n-right">
                     <div class="s-top">
-                        <i class="title">$value[title_template]</i>
-                        <!--{if $value[status] == 1}--><i class="censor">({lang moderate_need})</i><!--{/if}-->
-                        <!--{hook/space_share_comment_op $k}-->
-                        <!--{if $value[uid]==$_G[uid]}-->
-                        <div class="tool r">
-                            <b class="dots"><i class="dot"></i><i class="dot"></i><i class="dot"></i></b>
-                            <span class="tooltip lt" data-ignore='1'>
-                                <a href="home.php?mod=spacecp&ac=share&op=delete&sid=$value[sid]&handlekey=dellshk_{$value[sid]}" id="s_$value[sid]_delete" onclick="showWindow(this.id, this.href, 'get', 0);">{lang delete}</a>
-                            </span>
-                        </div>
-                        <!--{/if}-->
+                        <i class="title">{lang nomore}</i>
                     </div>
                     <div class="s-center">
-                        <!--{if $value[body_general]}-->
-                            <p class="message" id="quote_{$id}">$value[body_general]</p>
-                        <!--{/if}-->
-
-                        $value[body_template]
-                    </div>
-                    <div class="s-end">
-                        <!--{if $value[uid] != $_G[uid] && $value[itemid] && helper_access::check_module('share')}-->
-                            <a class="icon mt-share share" href="home.php?mod=spacecp&ac=share&type=$value[type]&id=$value[itemid]" id="k_share" onclick="showWindow(this.id, this.href, 'get', 0);" title="{lang sharemetoo}"></a>
-                        <!--{/if}-->
-                        <!--{if $value[sid]}-->
-                            <a class="icon mt-textsms reply" href="home.php?mod=space&uid=$value[uid]&do=share&id=$value[sid]" target="_blank"></a>
-                        <!--{/if}-->
+                        <div class="message">{lang global_nothing}</div>
                     </div>
                 </div>
             </li>
-        <!--{/loop}-->
-    </ul>
-
-    <div class="page" id="pager_share">
-        <!--{if $multi}-->
-            $multi
-        <!--{else}-->
+        </ul>
+        <div class="page" id="pager_share">
             <p class="nomore">{lang nomore}</p>
-        <!--{/if}-->
-    </div>
-<!--{else}-->
-    <ul class="timeline">
-        <li class="node">
-            <div class="n-left">
-                <i class="time-A">? / ? / ?</i>
-                <i class="time-B">? : ?</i>
-                <div class="user-tag">
-                    <a class="avatar"><!--{avatar(0,'small')}--></a>
-                    <a class="username">————</a>
-                </div>
-            </div>
-            <div class="n-right">
-                <div class="s-top">
-                    <i class="title">{lang nomore}</i>
-                </div>
-                <div class="s-center">
-                    <div class="message">{lang global_nothing}</div>
-                </div>
-            </div>
-        </li>
-    </ul>
-    <div class="page" id="pager_share">
-        <p class="nomore">{lang nomore}</p>
-    </div>
-<!--{/if}-->
-<script>
-    addEvent(document,'DOMContentLoaded',function () {
-        let postform = SR('#share_deliver')[0],
-            page = SR('#pager_share')[0],
-            scrltem = 0,
-            positionfix = function (){
-                if(SRGlobal.Window.Width <= 1470){
-                    postform.style = '';
-                    if(SRGlobal.Window.Scroll.DirY === 'down'){
-                        scrltem = SRGlobal.Window.Scroll.Top;
-                        if(page) page.addClass('sleep');
-                        if(postform) postform.addClass('sleep');
-                    } else if(scrltem - SRGlobal.Window.Scroll.Top > Math.min(390, MasElements.viewer.scrollHeight - SRGlobal.Window.Height - 20)) {
-                        if(page) page.delClass('sleep');
-                        if(postform) postform.delClass('sleep');
+        </div>
+    <!--{/if}-->
+    <script>
+        addEvent(document,'DOMContentLoaded',function () {
+            let postform = SR('#share_deliver')[0],
+                page = SR('#pager_share')[0],
+                scrltem = 0,
+                positionfix = function (){
+                    if(SRGlobal.Window.Width <= 1470){
+                        postform.style = '';
+                        if(SRGlobal.Window.Scroll.DirY === 'down'){
+                            scrltem = SRGlobal.Window.Scroll.Top;
+                            if(page) page.addClass('sleep');
+                            if(postform) postform.addClass('sleep');
+                        } else if(scrltem - SRGlobal.Window.Scroll.Top > Math.min(390, MasElements.viewer.scrollHeight - SRGlobal.Window.Height - 20)) {
+                            if(page) page.delClass('sleep');
+                            if(postform) postform.delClass('sleep');
+                        }
                     }
-                }
-            },
+                },
 
-            Tl = SR('.timeline')[0],
-            Ts = SR('.time-A'),
-            Th = Ts[0].Css.height,
-            TsOn = function (){
-                for (let i=0 ; i <Ts.length; i++){
-                    if(Ts[i].parentNode.Css.top < 82 && (isUndefined(Ts[i+1]) || Ts[i+1].parentNode.Css.top > 82)){
-                        Ts[i].style = 'position: fixed; top: 82px;';
-                        Ts[i].parentNode.style = 'padding-top:' + Th + 'px;';
-                    } else {
-                        Ts[i].style = '';
-                        Ts[i].parentNode.style = '';
+                Tl = SR('.timeline')[0],
+                Ts = SR('.time-A'),
+                Th = Ts[0].Css.height,
+                TsOn = function (){
+                    for (let i=0 ; i <Ts.length; i++){
+                        if(Ts[i].parentNode.Css.top < 82 && (isUndefined(Ts[i+1]) || Ts[i+1].parentNode.Css.top > 82)){
+                            Ts[i].style = 'position: fixed; top: 82px;';
+                            Ts[i].parentNode.style = 'padding-top:' + Th + 'px;';
+                        } else {
+                            Ts[i].style = '';
+                            Ts[i].parentNode.style = '';
+                        }
                     }
-                }
-            };
+                };
 
-        if(MasElements.viewer.scrollHeight <= SRGlobal.Window.Height){
-            Tl.style.marginBottom = '200px';
-        }
-        
-        if(page) page.addClass('sleep');
-        if(postform) postform.addClass('sleep')
+            if(MasElements.viewer.scrollHeight <= SRGlobal.Window.Height){
+                Tl.style.marginBottom = '200px';
+            }
 
-        addEvent(MasElements.viewer,'scroll',TsOn);
-        addEvent(MasElements.viewer,'scroll',positionfix);
-    });
-</script>
+            if(page) page.addClass('sleep');
+            if(postform) postform.addClass('sleep')
+
+            addEvent(MasElements.viewer,'scroll',TsOn);
+            addEvent(MasElements.viewer,'scroll',positionfix);
+        });
+    </script>
+</div>
