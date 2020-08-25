@@ -162,7 +162,7 @@ $lang = array(
             <div class="decrater"></div>
             <s class="avatar"><img class="avatar-main" src="{avatar}"></s>
             <div class="info">
-                <s class="username">{username}</s>
+                <s class="username ellipsis">{username}</s>
                 <s class="space-note">{spacenote}</s>
             </div>
         </a>',
