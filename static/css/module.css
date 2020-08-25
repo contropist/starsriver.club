@@ -8005,7 +8005,7 @@
             height: 149px;
             padding: 40px;
             border-radius: 10px;
-            background-image: url(//static.starscdn.com/repository/bbs.starsriver/img/home/share-item/share-item-space-bg.png);
+            background-image: url({IMGURL}/home/share-item/share-item-space-bg.png);
             background-size: 30px 30px;
         }
 .WL-0   .app-userspace #userspace_share .timeline .n-right .s-center > .share-item-space,
