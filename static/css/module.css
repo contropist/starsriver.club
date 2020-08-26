@@ -8005,7 +8005,7 @@
             height: 149px;
             padding: 40px;
             border-radius: 10px;
-            background-image: url(//static.starscdn.com/repository/bbs.starsriver/img/home/share-item/share-item-space-bg.png);
+            background-image: url({IMGURL}/home/share-item/share-item-space-bg.png);
             background-size: 30px 30px;
             box-shadow: inset 0 0 7px rgba(120,144,177,.2);
         }
@@ -8090,7 +8090,7 @@
             left: 0;
         }
         .app-userspace #userspace_share .timeline .n-right .s-center > .share-item-space .avatar .avatar-main {
-            box-shadow: 0 0 0 2px var(--color-main-theme-shadow);
+            box-shadow: 0 0 0 2px var(--color-lightgray);
         }
         .app-userspace #userspace_share .timeline .n-right .s-center > .share-item-space .username {
             display: block;
