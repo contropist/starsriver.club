@@ -1,3 +1,30 @@
+<div class="vessel">
+    <div class="nav">
+        <a class="$actives[all]" href="home.php?mod=space&do=home&view=all">{lang view_all}</a>
+        <!--{if $_G['uid']}-->
+        <a class="$actives[we]" href="home.php?mod=space&do=home&view=we">{lang friend_feed}</a>
+        <a class="$actives[me]" href="home.php?mod=space&do=home&view=me">{lang my_feed}</a>
+        <!--{hook/space_trends_navlink}-->
+        <!--{if $_G['setting']['magicstatus'] && $_G['setting']['magics']['thunder']}-->
+        <a id="a_magic_thunder" href="home.php?mod=magic&mid=thunder" onclick="showWindow('magics', this.href, 'get', 0)">{$_G[setting][magics][thunder]}</a>
+        <!--{/if}-->
+        <!--{/if}-->
+    </div>
+    <!--{if $_GET['view'] !== 'me'}-->
+    <hr>
+    <ul class="tags">
+        <!--{if $_GET[view] == 'all'}-->
+        <li class="$orderactives[dateline]"><a href="home.php?mod=space&do=home&view=all&order=dateline">{lang newest_feed}</a></li>
+        <li class="$orderactives[hot]"><a href="home.php?mod=space&do=home&view=all&order=hot">{lang hot_feed}</a></li>
+        <!--{elseif $groups}-->
+        <li class="{$gidactives[-1]}"><a href="home.php?mod=space&do=home&view=we">{lang all_friends}</a></li>
+        <!--{loop $groups $key $value}--><li class="{$gidactives[$key]}"><a href="home.php?mod=space&do=home&view=we&gid=$key">$value</a></li><!--{/loop}-->
+        <!--{/if}-->
+    </ul>
+    <!--{/if}-->
+</div>
+<!--[nest=nestcontentmiddle]--><div class="area" id="nestcontentmiddle"></div><!--[/nest]-->
+
 <!--{if $list}-->
     <!--{loop $list $day $value}-->
         <!--{template home/space_home_home_mod_li}-->
@@ -24,3 +51,11 @@
            <a onclick="filter_more($start);">&laquo; {lang pack_up}</a>
     </div>
 <!--{/if}-->
+
+<!--{if $multi}-->
+<div class="vessel">
+    <div class="pgs">$multi</div>
+</div>
+<!--{/if}-->
+<!--{hook/space_trends_bottom}-->
+<div class="vessel" id="ajax_wait"></div>

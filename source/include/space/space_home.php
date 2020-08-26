@@ -84,13 +84,13 @@ if (!IS_ROBOT) {
             $ordersql = "dateline DESC";
             $f_index = '';
             $findex = '';
-            $orderactives = array('dateline' => 'active');
+            $orderactives = ['dateline' => 'active'];
         } else {
             $hot = $minhot;
             $ordersql = "dateline DESC";
             $f_index = '';
             $findex = '';
-            $orderactives = array('hot' => 'active');
+            $orderactives = ['hot' => 'active'];
         }
 
     } elseif ($_GET['view'] == 'me') {
@@ -114,7 +114,6 @@ if (!IS_ROBOT) {
             $findex = '';
 
         } else {
-
 
             if ($_GET['type'] == 'me') {
                 $uids = $_G['uid'];
@@ -285,7 +284,12 @@ if ($space['self'] && empty($start)) {
             $birthdaycache = C::t('forum_spacecache')->fetch($_G['uid'], 'birthday');
             if (empty($birthdaycache) || $exp > $birthdaycache['expiration']) {
                 $birthlist = C::t('common_member_profile')->fetch_all_will_birthday_by_uid($space['feedfriend']);
-                C::t('forum_spacecache')->insert(array('uid' => $_G['uid'], 'variable' => 'birthday', 'value' => serialize($birthlist), 'expiration' => $exp,), false, true);
+                C::t('forum_spacecache')->insert([
+                    'uid' => $_G['uid'],
+                    'variable' => 'birthday',
+                    'value' => serialize($birthlist),
+                    'expiration' => $exp,
+                ], false, true);
             } else {
                 $birthlist = dunserialize($birthdaycache['value']);
             }
@@ -331,9 +335,9 @@ if ($_G['uid']) {
 $actives = array($_GET['view'] => 'active');
 if ($_GET['from'] == 'space') {
     if ($_GET['do'] == 'home') {
-        $navtitle = lang('space', 'sb_feed', array('who' => $space['username']));
-        $metakeywords = lang('space', 'sb_feed', array('who' => $space['username']));
-        $metadescription = lang('space', 'sb_feed', array('who' => $space['username']));
+        $navtitle = lang('space', 'sb_feed', ['who' => $space['username']]);
+        $metakeywords = lang('space', 'sb_feed', ['who' => $space['username']]);
+        $metadescription = lang('space', 'sb_feed', ['who' => $space['username']]);
     }
 } else {
     list($navtitle, $metadescription, $metakeywords) = get_seosetting('home');
@@ -352,7 +356,6 @@ if ($_GET['from'] == 'space') {
         $metadescription = $_G['setting']['navs'][4]['navname'];
     }
 }
-if (empty($cp_mode))
+if (empty($cp_mode)){
     include_once template("nest:home/space_route_home");
-
-?>
+}
