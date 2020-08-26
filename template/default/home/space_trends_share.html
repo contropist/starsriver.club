@@ -1,12 +1,12 @@
 <!--[nest=nestcontenttop]--><div id="nestcontenttop" class="area"></div><!--[/nest]-->
 <!--{if helper_access::check_module('share') && $space[self]}-->
-    <!--{template home/space_trends_mod_share_form}-->
+    <!--{template home/space_trends_share_mod_form}-->
 <!--{/if}-->
-<!--{template home/space_trends_mod_share_nav}-->
+<!--{template home/space_trends_share_mod_nav}-->
 <!--{if $list}-->
     <ul id="share_list">
         <!--{loop $list $k $value}-->
-            <!--{template home/space_trends_mod_share_li}-->
+            <!--{subtemplate home/space_trends_share_mod_li}-->
         <!--{/loop}-->
     </ul>
     <!--{if $pricount}-->

@@ -163,6 +163,6 @@ if(!empty($_GET['searchsubmit']) || !empty($_GET['searchmode'])) {
 $navtitle = lang('core', 'title_search_friend');
 
 $actives = array($op=>' class="active"', 'search'=>' class="active"');
-include template('home/space_route_mod_friend_search');
+include template('home/space_route_friend_mod_search');
 
 ?>

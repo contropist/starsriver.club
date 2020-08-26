@@ -64,23 +64,26 @@ if($_GET['op'] == 'delete') {
             
             $feed_hash_data = "uid{$id}";
             
-            $tospace = getuserbyuid($id);
+            $user = getuserbyuid($id);
             
-            if (empty($tospace)) {
+            if (empty($user)) {
                 showmessage('space_does_not_exist');
             }
-            if (isblacklist($tospace['uid'])) {
+            if (isblacklist($id)) {
                 showmessage('is_blacklist');
             }
+            
+            $tospace = C::t('common_member_field_home')->fetch($id);
+            $userprofile = C::t('common_member_profile')->fetch($id);
             
             $arr = [
                 'itemid' => $id,
                 'fromuid' => $id,
                 'body_data' => [
                     'avatar' => avatar($id, 'middle', true),
-                    'username' => $tospace['username'],
+                    'username' => $user['username'],
                     'userlink' => 'home.php?mod=space&uid=' . $id,
-                    'reside' => $tospace['resideprovince'] . $tospace['residecity'],
+                    'reside' => $userprofile['resideprovince'] . $userprofile['residecity'],
                     'spacenote' => $tospace['spacenote'] ? getstr($tospace['spacenote'], 50, 0, 0, 0, -1) : lang('template','should_write_that'),
                 ],
             ];

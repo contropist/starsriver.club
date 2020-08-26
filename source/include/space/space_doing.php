@@ -163,4 +163,4 @@ if($space['username']) {
 }
 $metakeywords = $navtitle;
 $metadescription = $navtitle;
-include_once template('nest:home/space_route_mod_doing');
+include_once template('nest:home/space_route_doing');

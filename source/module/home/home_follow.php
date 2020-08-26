@@ -263,6 +263,6 @@ if($_GET['uid']){
     $viewedusername = getuserbyuid($_GET['uid'])['username'];
 }
 
-include template('nest:home/space_route_mod_follow_feed');
+include template('nest:home/space_route_follow');
 
 ?>

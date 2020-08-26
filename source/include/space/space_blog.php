@@ -334,7 +334,7 @@ if($id) {
 	$navtitle = helper_seo::get_title_page($navtitle, $_G['page']);
 
 	space_merge($space, 'field_home');
-	include_once template("nest:home/space_route_mod_blog_list");
+	include_once template("nest:home/space_route_blog");
 
 }
 

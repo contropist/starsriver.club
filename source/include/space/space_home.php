@@ -353,6 +353,6 @@ if ($_GET['from'] == 'space') {
     }
 }
 if (empty($cp_mode))
-    include_once template("nest:home/space_route");
+    include_once template("nest:home/space_route_home");
 
 ?>

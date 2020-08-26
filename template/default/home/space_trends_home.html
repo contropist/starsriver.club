@@ -1,10 +1,10 @@
 <!--{if $list}-->
     <!--{loop $list $day $value}-->
-        <!--{template home/space_trends_mod_feed}-->
+        <!--{template home/space_trends_home_mod_li}-->
     <!--{/loop}-->
 <!--{elseif $feeds}-->
     <!--{loop $feeds $feed}-->
-        <!--{template home/space_trends_mod_feed}-->
+        <!--{template home/space_trends_home_mod_li}-->
     <!--{/loop}-->
 <!--{else}-->
     <div class="vessel withedge">
@@ -19,7 +19,7 @@
 <div class="vessel" id="feed_filter_div_{$start}" style="display:none;">
     <h4>{lang following_feed_shielding}</h4>
         <!--{loop $filter_list $value}-->
-        <!--{template home/space_trends_mod_feed}-->
+        <!--{template home/space_trends_home_mod_li}-->
         <!--{/loop}-->
        <a onclick="filter_more($start);">&laquo; {lang pack_up}</a>
 </div>

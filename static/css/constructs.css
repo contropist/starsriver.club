@@ -3767,6 +3767,7 @@
         border-radius: 6px;
         color: var(--color-text-gray);
         font-size: 12px;
+        margin-left: 5px;
     }
     .plate.cloud .vessel .inputline .radiolist input[type="radio"]:checked + label{
         background: #0ca7e2;

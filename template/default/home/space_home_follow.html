@@ -1,10 +1,12 @@
+<!--{template home/space_home_follow_mod_form}-->
+
 <!--{if in_array($do, array('feed', 'view'))}-->
 	<!--{if in_array($do, array('feed', 'view'))}-->
 		<!--{if !empty($list['feed'])}-->
 			<div id="followlist">
 				<!--{eval $beforeuser = 0; $hiddennum = 0; $carray = array();}-->
 				<!--{loop $list['feed'] $feed}-->
-					<!--{template home/space_home_mod_follow_feed_li}-->
+					<!--{template home/space_home_follow_mod_li}-->
 				<!--{/loop}-->
 			</div>
 			<div class="loading">

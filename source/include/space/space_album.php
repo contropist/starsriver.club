@@ -421,7 +421,7 @@ if($id) {
 
 	$metakeywords = $navtitle;
 	$metadescription = $navtitle;
-	include_once template("nest:home/space_route_mod_album_list");
+	include_once template("nest:home/space_route_album");
 }
 
 function ckfriend_album($album) {

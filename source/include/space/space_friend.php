@@ -251,7 +251,7 @@ $metakeywords = lang('space', 'sb_friend', array('who' => $space['username']));
 $metadescription = lang('space', 'sb_share', array('who' => $space['username']));
 
 $a_actives = array($_GET['view'].$_GET['type'] => ' class="active"');
-include_once template("nest:home/space_route_mod_friend");
+include_once template("nest:home/space_route_friend");
 
 function getfollowflag($data) {
 	global $_G;
