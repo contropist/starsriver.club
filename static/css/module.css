@@ -97,7 +97,6 @@
         font-size: 14px;
         color: #535154;
         white-space: nowrap;
-        overflow: hidden;
     }
     .category-guide .list a::before,
     .thread-recommend .sublist a::before{
@@ -6309,12 +6308,249 @@
 
 
 /*---------------
-|       空间     |::app-dynamic
+|      空间      |::app-dynamic, ::app-userapace
 |----------------
-|  空间样式表
+|    空间样式表
 -----------------------------------------------------------------------------------------------------------------------*/
+/** home::follow **/
+/*region 公共动态-follow*/
+    .app-dynamic .actstruct.follow .relay{
+
+    }
+    .app-dynamic .actstruct.follow .content{
+        margin-top: 6px;
+    }
+    .app-dynamic .actstruct.follow .content.quote{
+        border: 1px solid #e6e6e6;
+        padding: 10px;
+        border-radius: 8px;
+        background: #f9f9f9;
+    }
+    .app-dynamic .actstruct.follow .content .follow-below{
+        color: var(--color-onnanoko-pink);
+        margin: 10px 0 0 5px;;
+    }
+    .app-dynamic .actstruct.follow .content .follow-below::before{
+        content: '';
+        display: inline-block;
+        height: 14px;
+        width: 6px;
+        border-radius: 2px;
+        background: var(--color-onnanoko-pink);
+        opacity: .8;
+        margin-right: 5px;
+        vertical-align: -10%;
+    }
+    .app-dynamic .actstruct.follow .content .follow-author{
+        line-height: 32px;
+        margin-top: 10px;
+    }
+    .app-dynamic .actstruct.follow .content .follow-author .avatar{
+        position: relative;
+        width: 32px;
+        height: 32px;
+    }
+    .app-dynamic .actstruct.follow .content .follow-author .username{
+        color: #738190;
+        font-weight: 700;
+    }
+    .app-dynamic .actstruct.follow .content .follow-author .time{
+        margin-left: 10px;
+        color: #999999;
+        font-size: 12px
+    }
+    .app-dynamic .actstruct.follow .content .follow-title{
+        display: block;
+        overflow: hidden;
+        font-size: 17px;
+        font-weight: 700;
+        word-break: keep-all;
+        white-space: nowrap;
+    }
+    .app-dynamic .actstruct.follow .content .follow-article{
+        margin-top: 8px;
+        padding: 0 5px;
+        line-height: 22px;
+    }
+    .app-dynamic .actstruct.follow .content .follow-article img{
+        max-width: 100%;
+        margin: 5px 0;
+        border: 1px solid #e6e6e6;
+    }
+    .app-dynamic .actstruct.follow .content .follow-article .fold,
+    .app-dynamic .actstruct.follow .content .follow-article .unfold{
+        display: block;
+        text-align: center;
+        border: 1px solid #ccc;
+        margin-top: 8px;
+        border-radius: 5px;
+        color: #aaa;
+    }
+    .app-dynamic .actstruct.follow .content .follow-article .fold:hover,
+    .app-dynamic .actstruct.follow .content .follow-article .unfold:hover{
+        border-color: #39a5c5;
+        color: #39a5c5;
+    }
+    .app-dynamic .actstruct.follow .content .follow-article .attach{
+        border: 1px solid #dedede;
+        padding: 3px 10px;
+        border-radius: 4px;
+        background: #ffffff;
+        margin-top: 5px;
+    }
+    .app-dynamic .actstruct.follow .content .follow-article .attach .title{
+        margin:0 0 3px -11px;
+        color: #999;
+        display: block;
+    }
+    .app-dynamic .actstruct.follow .content .follow-article .attach .title::before{
+        content: '';
+        display: inline-block;
+        background: var(--color-main-theme);
+        width: 4px;
+        height: 13px;
+        vertical-align: -10%;
+        margin-right: 5px;
+        border-radius: 1px;
+    }
+    .app-dynamic .actstruct.follow .content .follow-article .attach ul li{
+        display: block;
+        padding-left: 4px;
+    }
+    .app-dynamic .actstruct.follow .content .follow-article .attach ul li strong{
+        color: #737373;
+    }
+    .app-dynamic .actstruct.follow .content .follow-article .attach ul li span{
+        font-size: 12px;
+        margin-left: 5px;
+        color: #999;
+    }
+
+    .app-dynamic .starer .user, .app-dynamic .starer .fun {
+        display: inline-block;
+        box-sizing: border-box;
+        width: 50%;
+    }
+    .app-dynamic .starer .user *, .app-dynamic .starer .fun *{
+        margin: 0 auto;
+    }
+    .app-dynamic .starer .user{
+        padding: 10px 0 10px 15px;
+        text-align: center;
+    }
+    .app-dynamic .starer .user *{
+        display: block;
+    }
+    .app-dynamic .starer .user .avatar{
+        display: block;
+        position: relative;
+        width: 48px;
+        height: 48px;
+    }
+    .app-dynamic .starer .user .username{
+        margin-top: 5px;
+        font-size: 0;
+    }
+    .app-dynamic .starer .user .username .name{
+        display: inline-block;
+        max-width: calc(100% - 22px);
+        font-weight: 700;
+        color: #738190;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        word-break: keep-all;
+        white-space: nowrap;
+    }
+    .app-dynamic .starer .user .username .setbk{
+        text-align: left;
+        display: inline-block;
+        width: 22px;
+        color: #3ca5f1;
+    }
+    .app-dynamic .starer .user .username .setbk::before{
+        vertical-align: -3%;
+    }
+    .app-dynamic .starer .fun {
+        text-align: center;
+        padding: 32px 15px 10px 0;
+    }
+    .app-dynamic .starer .fun *{
+        text-align: center;
+        display: inline-block;
+        box-sizing: border-box;
+        transition: .05s ease-in-out;
+        border-radius: 4px;
+        height: 28px;
+        line-height: 20px;
+    }
+    .app-dynamic .starer .fun .star{
+        color: #fff;
+        padding: 2px 0;
+        width: 68px;
+        background: #489ae0;
+        border: 2px solid #489ae0;
+    }
+    .app-dynamic .starer .fun .star.on{
+        color: #989898;
+        background: #ffffff;
+        border-color: #dadada;
+    }
+    .app-dynamic .starer .fun .star-sp{
+        color: #b1b1b1;
+        padding: 2px 0;
+        width: 28px;
+        border: 2px solid #dadada;
+    }
+    .app-dynamic .starer .fun .star-sp::before{
+        vertical-align: -3%;
+    }
+    .app-dynamic .starer .fun .star-sp.on{
+        color: #e65182;
+        border-color: #e65182;
+    }
+
+    .app-dynamic .starer .status{
+        display: block;
+        width: 100%;
+        text-align: center;
+        margin-top: 5px;
+        padding: 11px 0 10px 0;
+        border-top: 1px solid #ececec;
+        border-radius: 35% 35% 0 0;
+        box-shadow: inset 0 2px 10px rgba(0,0,0,.05);
+    }
+    .app-dynamic .starer .status span{
+        display: inline-block;
+        width: 72px;
+    }
+    .app-dynamic .starer .status span *{
+        display: block;
+        width: 100%;
+        text-align: center;
+        font-weight: 700;
+    }
+    .app-dynamic .starer .status span i{
+        color: #99a2aa;
+        letter-spacing: 6px;
+        text-indent: 3px;
+    }
+    .app-dynamic .starer .status span a{
+        color: #00a1d6;
+        margin-top: 8px;
+    }
+    .app-dynamic .starer .status b{
+        display: inline-block;
+        margin: 5px;
+        width: 1px;
+        height: 30px;
+        background: #dcdcdc;
+    }
+/*endregion*/
+/** end **/
+
+
 /** home::space, home::follow **/
-/*region space 和 follow 通用*/
+/*region trends应用 */
     body {
         background: #d2e9fb url(//s2.hdslb.com/bfs/static/blive/blfe-dynamic-web/static/img/background.bc72515.png) top/contain no-repeat;
         background-size: 100%;
@@ -6624,10 +6860,7 @@
     }
 
 /*endregion*/
-/** end **/
 
-
-/** home::space **/
 /*region 公共动态-space*/
     .app-dynamic .side-box .task{
         line-height: 24px;
@@ -7777,8 +8010,6 @@
         }
 
     /*endregion*/
-
-
 
     /*region #userspace_doing*/
         .app-userspace #userspace_doing{
@@ -9598,245 +9829,6 @@
     }
 /*endregion*/
 /** end **/
-
-
-
-/** home::follow **/
-/*region 公共动态-follow*/
-    .app-dynamic .actstruct.follow .relay{
-
-    }
-    .app-dynamic .actstruct.follow .content{
-         margin-top: 6px;
-     }
-    .app-dynamic .actstruct.follow .content.quote{
-        border: 1px solid #e6e6e6;
-        padding: 10px;
-        border-radius: 8px;
-        background: #f9f9f9;
-    }
-    .app-dynamic .actstruct.follow .content .follow-below{
-        color: var(--color-onnanoko-pink);
-        margin: 10px 0 0 5px;;
-    }
-    .app-dynamic .actstruct.follow .content .follow-below::before{
-        content: '';
-        display: inline-block;
-        height: 14px;
-        width: 6px;
-        border-radius: 2px;
-        background: var(--color-onnanoko-pink);
-        opacity: .8;
-        margin-right: 5px;
-        vertical-align: -10%;
-    }
-    .app-dynamic .actstruct.follow .content .follow-author{
-        line-height: 32px;
-        margin-top: 10px;
-    }
-    .app-dynamic .actstruct.follow .content .follow-author .avatar{
-        position: relative;
-        width: 32px;
-        height: 32px;
-    }
-    .app-dynamic .actstruct.follow .content .follow-author .username{
-        color: #738190;
-        font-weight: 700;
-    }
-    .app-dynamic .actstruct.follow .content .follow-author .time{
-        margin-left: 10px;
-        color: #999999;
-        font-size: 12px
-    }
-    .app-dynamic .actstruct.follow .content .follow-title{
-        display: block;
-        overflow: hidden;
-        font-size: 17px;
-        font-weight: 700;
-        word-break: keep-all;
-        white-space: nowrap;
-    }
-    .app-dynamic .actstruct.follow .content .follow-article{
-        margin-top: 8px;
-        padding: 0 5px;
-        line-height: 22px;
-    }
-    .app-dynamic .actstruct.follow .content .follow-article img{
-        max-width: 100%;
-        margin: 5px 0;
-        border: 1px solid #e6e6e6;
-    }
-    .app-dynamic .actstruct.follow .content .follow-article .fold,
-    .app-dynamic .actstruct.follow .content .follow-article .unfold{
-        display: block;
-        text-align: center;
-        border: 1px solid #ccc;
-        margin-top: 8px;
-        border-radius: 5px;
-        color: #aaa;
-    }
-    .app-dynamic .actstruct.follow .content .follow-article .fold:hover,
-    .app-dynamic .actstruct.follow .content .follow-article .unfold:hover{
-        border-color: #39a5c5;
-        color: #39a5c5;
-    }
-    .app-dynamic .actstruct.follow .content .follow-article .attach{
-        border: 1px solid #dedede;
-        padding: 3px 10px;
-        border-radius: 4px;
-        background: #ffffff;
-        margin-top: 5px;
-    }
-    .app-dynamic .actstruct.follow .content .follow-article .attach .title{
-        margin:0 0 3px -11px;
-        color: #999;
-        display: block;
-    }
-    .app-dynamic .actstruct.follow .content .follow-article .attach .title::before{
-        content: '';
-        display: inline-block;
-        background: var(--color-main-theme);
-        width: 4px;
-        height: 13px;
-        vertical-align: -10%;
-        margin-right: 5px;
-        border-radius: 1px;
-    }
-    .app-dynamic .actstruct.follow .content .follow-article .attach ul li{
-        display: block;
-        padding-left: 4px;
-    }
-    .app-dynamic .actstruct.follow .content .follow-article .attach ul li strong{
-        color: #737373;
-    }
-    .app-dynamic .actstruct.follow .content .follow-article .attach ul li span{
-        font-size: 12px;
-        margin-left: 5px;
-        color: #999;
-    }
-
-    .app-dynamic .starer .user, .app-dynamic .starer .fun {
-        display: inline-block;
-        box-sizing: border-box;
-        width: 50%;
-    }
-    .app-dynamic .starer .user *, .app-dynamic .starer .fun *{
-        margin: 0 auto;
-    }
-    .app-dynamic .starer .user{
-        padding: 10px 0 10px 15px;
-        text-align: center;
-    }
-    .app-dynamic .starer .user *{
-        display: block;
-    }
-    .app-dynamic .starer .user .avatar{
-        display: block;
-        position: relative;
-        width: 48px;
-        height: 48px;
-    }
-    .app-dynamic .starer .user .username{
-        margin-top: 5px;
-        font-size: 0;
-    }
-    .app-dynamic .starer .user .username .name{
-        display: inline-block;
-        max-width: calc(100% - 22px);
-        font-weight: 700;
-        color: #738190;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        word-break: keep-all;
-        white-space: nowrap;
-    }
-    .app-dynamic .starer .user .username .setbk{
-        text-align: left;
-        display: inline-block;
-        width: 22px;
-        color: #3ca5f1;
-    }
-    .app-dynamic .starer .user .username .setbk::before{
-        vertical-align: -3%;
-    }
-    .app-dynamic .starer .fun {
-        text-align: center;
-        padding: 32px 15px 10px 0;
-    }
-    .app-dynamic .starer .fun *{
-        text-align: center;
-        display: inline-block;
-        box-sizing: border-box;
-        transition: .05s ease-in-out;
-        border-radius: 4px;
-        height: 28px;
-        line-height: 20px;
-    }
-    .app-dynamic .starer .fun .star{
-        color: #fff;
-        padding: 2px 0;
-        width: 68px;
-        background: #489ae0;
-        border: 2px solid #489ae0;
-    }
-    .app-dynamic .starer .fun .star.on{
-        color: #989898;
-        background: #ffffff;
-        border-color: #dadada;
-    }
-    .app-dynamic .starer .fun .star-sp{
-        color: #b1b1b1;
-        padding: 2px 0;
-        width: 28px;
-        border: 2px solid #dadada;
-    }
-    .app-dynamic .starer .fun .star-sp::before{
-        vertical-align: -3%;
-    }
-    .app-dynamic .starer .fun .star-sp.on{
-        color: #e65182;
-        border-color: #e65182;
-    }
-
-    .app-dynamic .starer .status{
-        display: block;
-        width: 100%;
-        text-align: center;
-        margin-top: 5px;
-        padding: 11px 0 10px 0;
-        border-top: 1px solid #ececec;
-        border-radius: 35% 35% 0 0;
-        box-shadow: inset 0 2px 10px rgba(0,0,0,.05);
-    }
-    .app-dynamic .starer .status span{
-        display: inline-block;
-        width: 72px;
-    }
-    .app-dynamic .starer .status span *{
-        display: block;
-        width: 100%;
-        text-align: center;
-        font-weight: 700;
-    }
-    .app-dynamic .starer .status span i{
-        color: #99a2aa;
-        letter-spacing: 6px;
-        text-indent: 3px;
-    }
-    .app-dynamic .starer .status span a{
-        color: #00a1d6;
-        margin-top: 8px;
-    }
-    .app-dynamic .starer .status b{
-        display: inline-block;
-        margin: 5px;
-        width: 1px;
-        height: 30px;
-        background: #dcdcdc;
-    }
-/*endregion*/
-/** end **/
-
 
 
 /*---------------

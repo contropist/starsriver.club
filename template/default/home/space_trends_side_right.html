@@ -10,9 +10,9 @@
 				<a class="username" href="home.php?mod=space&uid={if $viewedusername}$_GET['uid']{else}$space[uid]{/if}"><!--{if $viewedusername}-->$viewedusername<!--{else}-->{$_G[username]}<!--{/if}--></a>
 				<div class="gird">
 					<!--{if $_GET['mod'] == 'follow'}-->
-						<span><i>$space['feeds']</i><a href="home.php?mod=space&uid=$uid">{lang follow}</a></span>
-						<span><i>$space['following']</i><a href="home.php?mod=follow&do=following&uid=$uid">{lang follow_add}</a></span>
-						<span><i>$space['follower']</i><a href="home.php?mod=follow&do=follower&uid=$uid">{lang follow_follower}</a></span>
+						<span><i>$space['feeds']</i><a href="home.php?mod=follow&do=view&uid={$uid}">{lang follow}</a></span>
+						<span><i>$space['following']</i><a href="home.php?mod=follow&do=following&uid={$uid}">{lang follow_add}</a></span>
+						<span><i>$space['follower']</i><a href="home.php?mod=follow&do=follower&uid={$uid}">{lang follow_follower}</a></span>
 					<!--{else}-->
 						<span><i>$space[views]</i>{lang visit_per_man}</span>
 					<!--{/if}-->
