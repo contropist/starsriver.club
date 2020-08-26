@@ -167,12 +167,12 @@
 			<div class="admin-list">
 				<!--{hook/collection_viewoptions}-->
 				<span class="user">
-					<a class="avatar" href="home.php?mod=space&uid={$_G['collection']['uid']}" c="1" title="{$_G['collection']['username']}"><!--{avatar($_G['collection']['uid'],'middle')}--></a>
+					<a class="avatar" href="home.php?mod=space&uid={$_G['collection']['uid']}" c="1" title="{$_G['collection']['username']}"><!--{avatar($_G['collection']['uid'])}--></a>
 				</span>
 				<!--{if $collectionteamworker}-->
 				<!--{loop $collectionteamworker $collectionworker}-->
 						<span class="user" id="k_worker_uid_{$collectionworker['uid']}">
-							<a class="avatar" href="home.php?mod=space&uid={$collectionworker['uid']}" c="1" title="{$collectionworker['username']}"><!--{avatar($collectionworker['uid'],'middle')}--></a>
+							<a class="avatar" href="home.php?mod=space&uid={$collectionworker['uid']}" c="1" title="{$collectionworker['username']}"><!--{avatar($collectionworker['uid'])}--></a>
 							<!--{if $permission}-->
 							<a class="del ft-trash-2" href="forum.php?mod=collection&action=edit&op=removeworker&ctid={$_G['collection']['ctid']}&uid={$collectionworker['uid']}&formhash={FORMHASH}"  onclick="showDialog('{lang collection_delete_confirm2}','confirm','','ajaxget(\''+this.href+'\',\'k_worker_uid_{$collectionworker['uid']}\')');return false;"></a>
 							<!--{/if}-->
@@ -208,7 +208,7 @@
 				<!--{loop $followers $follower}-->
 					<li>
 						<a href="home.php?mod=space&uid=$follower[uid]" c="1">
-							<!--{avatar($follower[uid],middle)}-->
+							<!--{avatar($follower[uid])}-->
 							<i class="name">$follower[username]</i>
 						</a>
 					</li>

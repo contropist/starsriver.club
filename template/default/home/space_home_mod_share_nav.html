@@ -10,13 +10,13 @@
         <!--{if helper_access::check_module('album')}-->
         <li class="$sub_actives[type_album]"><a href="$navtheurl&type=album">{lang share_album}</a></li>
         <!--{/if}-->
+        <!--{if helper_access::check_module('portal')}-->
+        <li class="$sub_actives[type_article]"><a href="$navtheurl&type=article">{lang share_article}</a></li>
+        <!--{/if}-->
         <!--{if helper_access::check_module('blog')}-->
         <li class="$sub_actives[type_blog]"><a href="$navtheurl&type=blog">{lang share_blog}</a></li>
         <!--{/if}-->
         <li class="$sub_actives[type_thread]"><a href="$navtheurl&type=thread">{lang share_thread}</a></li>
-        <!--{if helper_access::check_module('portal')}-->
-        <li class="$sub_actives[type_article]"><a href="$navtheurl&type=article">{lang share_article}</a></li>
-        <!--{/if}-->
         <li class="$sub_actives[type_poll]"><a href="$navtheurl&type=poll">{lang share_poll}</a></li>
         <li class="$sub_actives[type_space]"><a href="$navtheurl&type=space">{lang share_space}</a></li>
     </ul>

@@ -29,7 +29,7 @@
 	<section class="thread-nav shadow-3D">
 		<div class="common">
 			<!--{if $_G[forum_thread][authorid] && $_G[forum_thread][author]}-->
-			<a class="avatar" href="home.php?mod=space&uid=$_G[forum_thread][authorid]" title="$_G[forum_thread][author]"><!--{avatar($_G[forum_thread][authorid],middle)}--></a>
+			<a class="avatar" href="home.php?mod=space&uid=$_G[forum_thread][authorid]" title="$_G[forum_thread][author]"><!--{avatar($_G[forum_thread][authorid])}--></a>
 			<!--{/if}-->
 			<div class="title">
 				<a class="maintitle">$_G[forum_thread][subject]</a>
@@ -54,7 +54,7 @@
                     <a class="ico-btn btn_post ft-message-circle " id="post_reply" onclick="showWindow('reply', 'forum.php?mod=post&action=reply&fid=$_G[fid]&tid=$_G[tid]')" ><span class="tooltip" data-pos="tl">{lang post_newreply}</span></a>
                     <!--{/if}-->
                     <a class="ico-btn btn_back ft-delete "  href="$upnavlink"><span class="tooltip" data-pos="tl">{lang return}</span></a>
-                    <a class="ico-btn btn_share ft-share " href="forum.php?mod=viewthread&tid=$_G[tid]$fromuid" onclick="return copyThreadUrl(this, '$_G[setting][bbname]')"><span class="tooltip" data-pos="tl">{lang share}</span></a>
+                    <a class="ico-btn btn_share ft-share " href="home.php?mod=spacecp&ac=share&type=thread&id=$_G[tid]" onclick="showWindow('sharethread', this.href, 'get', 0);"><span class="tooltip" data-pos="tl">{lang share}</span></a>
                 </div>
 			</div>
             <div class="stat">

@@ -20,7 +20,7 @@
 			</div>
 			<div class="body">
 				<!--{if $memberlist}-->
-				<a class="first" href="home.php?mod=space&uid=$memberlist[0][uid]&do=profile" target="_blank" id="bid_$memberlist[0][uid]" {if $memberlist[0][note]} onmouseover="showTip(this)" tip="$memberlist[0][username]: $memberlist[0][note]"{/if}><!--{avatar($memberlist[0][uid],middle)}--></a>
+				<a class="first" href="home.php?mod=space&uid=$memberlist[0][uid]&do=profile" target="_blank" id="bid_$memberlist[0][uid]" {if $memberlist[0][note]} onmouseover="showTip(this)" tip="$memberlist[0][username]: $memberlist[0][note]"{/if}><!--{avatar($memberlist[0][uid])}--></a>
 				<ul style="max-height: 95px;font-size: 0">
 					<!--{eval unset($memberlist[0]);}-->
 					<!--{loop $memberlist $member}-->

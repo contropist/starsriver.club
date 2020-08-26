@@ -11,11 +11,6 @@ if(!defined('IN_DISCUZ')) {
 	exit('Access Denied');
 }
 
-function discuz_uc_avatar($uid, $size = '', $returnsrc = FALSE) {
-	global $_G;
-	return avatar($uid, $size, $returnsrc, FALSE, $_G['setting']['avatarmethod'], $_G['setting']['ucenterurl']);
-}
-
 function dunlink($attach) {
 	global $_G;
 	$filename = $attach['attachment'];

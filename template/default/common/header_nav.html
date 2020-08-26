@@ -63,7 +63,7 @@
                 <!--{elseif !empty($_G['cookie']['loginuser'])}-->
                 <a id="loginuser"><!--{echo dhtmlspecialchars($_G['cookie']['loginuser'])}--></a>
                 <!--{elseif !$_G[connectguest]}-->
-                <a class="avatar pxa-radius trans-ease"><!--{avatar($_G[uid],middle)}--></a>
+                <a class="avatar pxa-radius trans-ease"><!--{avatar($_G[uid])}--></a>
                 <div class="menu btm-radius trans-ease">
                     <div class="">
 
@@ -71,7 +71,7 @@
                     <!--{template member/login_simple}-->
                 </div>
                 <!--{else}-->
-                <a class="avatar pxa-radius trans-ease"><!--{avatar($_G[uid],middle)}--></a>
+                <a class="avatar pxa-radius trans-ease"><!--{avatar($_G[uid])}--></a>
                 <div class="menu btm-radius trans-ease">
                     <div class="menu_part suserinfo">
                         <a class="username">{$_G[member][username]}</a>

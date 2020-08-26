@@ -47,36 +47,39 @@
         <!--{/if}-->
     </ul >
     <script>
-        SR('#ScrollToTop')[0].onclick = function () {
-            window.scrollTo({top: 0, behavior: 'smooth'});
-            if(MasElements.viewer) MasElements.viewer.scrollTo({top: 0, behavior: 'smooth'});
-        };
-        var bottomMenu = document.querySelector('#bottommenu');
-        var bottomMenuitem = document.querySelectorAll('#bottommenu > .itemlist > li');
-        bottomMenu.addEventListener('mouseenter', showitem, false);
-        bottomMenu.addEventListener('mouseleave', hideitem, false);
-        initdelay();
+        addEvent(document,'DOMContentLoaded',function () {
 
-        function showitem() {
-            bottomMenu.style.height = 46 * (bottomMenuitem.length) + 'px';
-            for (var i = 1; i < bottomMenuitem.length; i++) {
-                bottomMenuitem[i].style.transform = 'translate3d(0, -' + (4 + 46 * i) + 'px, 0)';
-            }
-        }
+            SR('#ScrollToTop')[0].onclick = function () {
+                window.scrollTo({top: 0, behavior: 'smooth'});
+                if(MasElements.viewer) MasElements.viewer.scrollTo({top: 0, behavior: 'smooth'});
+            };
 
-        function hideitem() {
-            bottomMenu.style.height = 'auto';
-            for (var i = 1; i < bottomMenuitem.length; i++) {
-                bottomMenuitem[i].style.transform = 'translate3d(0,0,0)';
-            }
-        }
+            let bm = SR('#bottommenu')[0],
+                bmi = SR('#bottommenu > .itemlist > li'),
+                s = function () {
+                    bm.style.height = 46 * (bmi.length) + 'px';
+                    for (let i = 1; i < bmi.length; i++) {
+                        bmi[i].style.transform = 'translate3d(0, -' + (4 + 46 * i) + 'px, 0)';
+                    }
+                },
+                h = function () {
+                    bm.style.height = 'auto';
+                    for (let i = 1; i < bmi.length; i++) {
+                        bmi[i].style.transform = 'translate3d(0,0,0)';
+                    }
+                },
+                i = function () {
+                    for (let i = 1; i < bmi.length; i++) {
+                        bmi[i].style.transitionDelay = (bmi.length - i) * 50 - 100 + 'ms';
+                        bmi[i].style.zIndex = -i - 1;
+                    }
+                };
 
-        function initdelay() {
-            for (var i = 1; i < bottomMenuitem.length; i++) {
-                bottomMenuitem[i].style.transitionDelay = (bottomMenuitem.length - i) * 50 - 100 + 'ms';
-                bottomMenuitem[i].style.zIndex = -i - 1;
-            }
-        }
+            i();
+
+            addEvent(bm,'mouseenter',s)
+            addEvent(bm,'mouseleave',h)
+        });
 
     </script>
 </div >

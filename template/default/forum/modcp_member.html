@@ -42,7 +42,7 @@
                 <div class="panel no-edge">
                     <ol class="panel-container">
                         <li class="box size-4-0 no-edge user {if $member[groupid] == 4}hi-warning{elseif $member[groupid] == 5}hi-danger{else}hi-success{/if} px4-radius">
-                            <a class="avatar pxa-radius" href="home.php?mod=space&uid=$member[uid]" target="_blank"><!--{echo avatar($member[uid], 'mid');}--></a>
+                            <a class="avatar pxa-radius" href="home.php?mod=space&uid=$member[uid]" target="_blank"><!--{echo avatar($member[uid]);}--></a>
                             <!--{if $member[groupid] == 4}-->
                             <i class="user-modstate"><span>{lang modcp_members_status_banpost}</span></i>
                             <i class="modstate">{if $member['banexpiry']}$member['banexpiry']{lang valid_before}{/if}{lang modcp_members_status_banpost2}</i>

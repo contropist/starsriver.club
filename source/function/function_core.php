@@ -402,8 +402,7 @@ function avatar($uid, $size = 'middle', $returnsrc = FALSE, $real = FALSE, $stat
 	$size = in_array($size, ['big', 'middle', 'small']) ? $size : 'middle';
 	$uid = abs(intval($uid));
 	if(!$staticavatar && !$static) {
-        $timestamp = $uid == $_G['uid'] ? "&ts=1" : "";
-        return $returnsrc ? $ucenterurl.'/avatar.php?uid='.$uid.'&size='.$size.($real ? '&type=real' : '').$timestamp : '<img class="avatar-main" src="'.$ucenterurl.'/avatar.php?uid='.$uid.'&size='.$size.($real ? '&type=real' : '').$timestamp.'" />';
+        return $returnsrc ? $ucenterurl.'/avatar.php?uid='.$uid.'&size='.$size.($real ? '&type=real' : '') : '<img class="avatar-main" src="'.$ucenterurl.'/avatar.php?uid='.$uid.'&size='.$size.($real ? '&type=real' : '').'"/>';
 	} else {
 		$uid = sprintf("%09d", $uid);
 		$dir1 = substr($uid, 0, 3);
