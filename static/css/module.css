@@ -7659,6 +7659,7 @@
         }
         .app-userspace .timeline .n-right .s-top .title{
             font-size: 15px;
+            font-weight: 700;
             color: var(--color-text-dark);
         }
         .app-userspace .timeline .n-right .s-top .censor{
@@ -7795,7 +7796,6 @@
             color: #000;
             word-break: break-word;
             padding: 10px;
-            margin-top: 10px;
             border-left: 2px solid #aac1e2;
             background: #f9f9f9;
         }
@@ -7806,7 +7806,7 @@
             margin-top: 10px;
         }
 
-        .app-userspace #userspace_share .timeline .n-right .s-center > .share-item-link {
+        .app-userspace #userspace_share .timeline .share-item-link {
             padding: 8px;
             line-height: 20px;
             color: var(--color-text-gray);
@@ -7815,11 +7815,11 @@
             border: 1px solid var(--color-slightgray);
             border-radius: 5px;
         }
-        .app-userspace #userspace_share .timeline .n-right .s-center > .share-item-link a{
+        .app-userspace #userspace_share .timeline .share-item-link a{
             color: inherit;
             font-size:inherit;
         }
-        .app-userspace #userspace_share .timeline .n-right .s-center > .share-item-link::before {
+        .app-userspace #userspace_share .timeline .share-item-link::before {
             display: inline-block;
             line-height: inherit;
             border-right: 1px solid var(--color-slightgray);
@@ -7827,53 +7827,7 @@
             margin-right: 8px;
         }
 
-        .app-userspace #userspace_share .timeline .n-right .s-center > .share-item-iframe{
-            width: 100%;
-            overflow: hidden;
-            background: var(--color-vlightgray);
-        }
-        .app-userspace #userspace_share .timeline .n-right .s-center > .share-item-iframe iframe{
-            width: 100%;
-            border: none;
-            min-height: 260px;
-        }
-.WL-0   .app-userspace #userspace_share .timeline .n-right .s-center > .share-item-iframe iframe,
-.WL-3P  .app-userspace #userspace_share .timeline .n-right .s-center > .share-item-iframe iframe{
-            width: 100%;
-            min-height: 180px;
-        }
-
-        .app-userspace #userspace_share .timeline .n-right .s-center > .share-item-image{
-            display: block;
-            width: 100%;
-            border: 1px solid var(--color-slightgray);
-            border-radius: 8px;
-            overflow: hidden;
-        }
-        .app-userspace #userspace_share .timeline .n-right .s-center > .share-item-image .image,
-        .app-userspace #userspace_share .timeline .n-right .s-center > .share-item-image .image img{
-            width: 100%;
-        }
-        .app-userspace #userspace_share .timeline .n-right .s-center > .share-item-image i,
-        .app-userspace #userspace_share .timeline .n-right .s-center > .share-item-image .album-pic-info{
-            display: block;
-            padding: 10px;
-            background: var(--color-vlightgray);
-            border-top: 1px solid var(--color-slightgray);
-            color: var(--color-text-gray);
-            word-break: break-word;
-            line-height: 14px;
-        }
-        .app-userspace #userspace_share .timeline .n-right .s-center > .share-item-image .album-pic-info a{
-            color: var(--color-text-info);
-            border-bottom: 1px dashed;
-        }
-
-        .app-userspace #userspace_share .timeline .n-right .s-center > .share-item-video video{
-            width: 100%;
-        }
-
-        .app-userspace #userspace_share .timeline .n-right .s-center > .share-item-music{
+        .app-userspace #userspace_share .timeline .share-item-music{
             padding: 10px;
             border-radius: 30px;
             background: var(--color-main-theme);
@@ -7882,123 +7836,227 @@
             white-space: nowrap;
             overflow: hidden;
         }
-        .app-userspace #userspace_share .timeline .n-right .s-center > .share-item-music i{
+        .app-userspace #userspace_share .timeline .share-item-music i{
             display: inline-block;
             margin-right: 6px;
             font-size: 20px;
         }
 
-        .app-userspace #userspace_share .timeline .n-right .s-center > .share-item-blog {
-            border-radius: 14px;
-            overflow: hidden;
-            box-shadow: 0 4px 20px rgba(120,144,177,.2);
-        }
-        .app-userspace #userspace_share .timeline .n-right .s-center > .share-item-blog .image{
-            width: 100%;
-            max-height:180px;
-            overflow: hidden;
-        }
-.WL-0   .app-userspace #userspace_share .timeline .n-right .s-center > .share-item-blog .image,
-.WL-4P  .app-userspace #userspace_share .timeline .n-right .s-center > .share-item-blog .image,
-.WL-3P  .app-userspace #userspace_share .timeline .n-right .s-center > .share-item-blog .image{
-            max-height:110px;
-        }
-        .app-userspace #userspace_share .timeline .n-right .s-center > .share-item-blog .image img{
-            width: 100%;
-        }
-        .app-userspace #userspace_share .timeline .n-right .s-center > .share-item-blog .subject {
-            display: block;
+        .app-userspace #userspace_share .timeline .share-item-iframe{
             width: 100%;
             overflow: hidden;
-            cursor: pointer;
-            color: #000;
-            font-size: 20px;
-            line-height: 30px;
-            padding: 10px 10px 0 10px;
-            box-sizing: border-box;
-            white-space: nowrap;
+            background: var(--color-vlightgray);
         }
-        .app-userspace #userspace_share .timeline .n-right .s-center > .share-item-blog .subject .tag {
-            padding: 1px 5px;
-            border: 1px solid;
-            border-radius: 4px;
-            font-size: 12px;
+        .app-userspace #userspace_share .timeline .share-item-iframe iframe{
+            width: 100%;
+            border: none;
+            min-height: 260px;
         }
-        .app-userspace #userspace_share .timeline .n-right .s-center > .share-item-blog .category {
-            padding: 10px 20px 0 20px;
-            color: var(--color-main-theme-dark);
-            display: block;
-            line-height: 14px;
-        }
-        .app-userspace #userspace_share .timeline .n-right .s-center > .share-item-blog .category::before {
-            content: '';
-            display: inline-block;
-            height: 10px;
-            width: 7px;
-            border-radius: 5px;
-            background: var(--color-main-theme-dark);
-            margin-right: 5px;
-        }
-        .app-userspace #userspace_share .timeline .n-right .s-center > .share-item-blog .content {
-            padding: 10px 20px;
-            color: var(--color-text-gray);
-            word-break: break-word;
+.WL-0   .app-userspace #userspace_share .timeline .share-item-iframe iframe,
+.WL-3P  .app-userspace #userspace_share .timeline .share-item-iframe iframe{
+            width: 100%;
+            min-height: 180px;
         }
 
-        .app-userspace #userspace_share .timeline .n-right .s-center > .share-item-album {
+        .app-userspace #userspace_share .timeline .share-item-video video{
+            width: 100%;
+        }
+
+        .app-userspace #userspace_share .timeline .share-item-image{
+            display: block;
+            width: 100%;
+            border: 2px solid var(--color-lightgray);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .app-userspace #userspace_share .timeline .share-item-image .image,
+        .app-userspace #userspace_share .timeline .share-item-image .image img{
+            width: 100%;
+        }
+        .app-userspace #userspace_share .timeline .share-item-image i,
+        .app-userspace #userspace_share .timeline .share-item-image .album-pic-info{
             display: flex;
+            flex-flow: row nowrap;
+            align-items: center;
+            padding: 0 10px;
+            line-height: 34px;
+            background: var(--color-vlightgray);
+            border-top: 1px solid var(--color-slightgray);
+            color: var(--color-text-gray);
+            word-break: break-all;
+            white-space: nowrap;
+        }
+        .app-userspace #userspace_share .timeline .share-item-image .album-pic-info a{
+            color: var(--color-text-info);
+            margin-right: 5px;
+        }
+        .app-userspace #userspace_share .timeline .share-item-image .album-pic-info .username img{
+            width: 24px;
+            height: 24px;
+            border-radius: 20px;
+            margin: 5px 5px 0 0;
+        }
+
+        .app-userspace #userspace_share .timeline .share-item-album {
+            display: flex !important;
             flex-flow: row wrap;
             width: 100%;
             padding: 10px;
-            background: var(--color-vlightgray);
+            background-image: url("{IMGURL}/common/background/album-button-back.svg");
+            background-size: 8px;
             border: 3px solid #eeeef5;
             border-radius: 10px;
         }
-        .app-userspace #userspace_share .timeline .n-right .s-center > .share-item-album .album-img {
+        .app-userspace #userspace_share .timeline .share-item-album .album-img {
             width: 20%;
             overflow: hidden;
             border-radius: 4px;
         }
-        .app-userspace #userspace_share .timeline .n-right .s-center > .share-item-album .album-img img{
+        .app-userspace #userspace_share .timeline .share-item-album .album-img img{
             width: 100%;
         }
-        .app-userspace #userspace_share .timeline .n-right .s-center > .share-item-album .album-info{
+        .app-userspace #userspace_share .timeline .share-item-album .album-info{
             width: 80%;
             padding-left:10px;
             line-height: 25px;
         }
-        .app-userspace #userspace_share .timeline .n-right .s-center > .share-item-album .album-name {
+        .app-userspace #userspace_share .timeline .share-item-album .album-name {
             display: block;
             width: 100%;
             color: var(--color-text-dark);
-            font-size: 18px;
+            font-size: 20px;
+            font-weight: 700;
         }
-        .app-userspace #userspace_share .timeline .n-right .s-center > .share-item-album .album-desc {
+        .app-userspace #userspace_share .timeline .share-item-album .album-desc {
             padding: 10px;
             color: var(--color-text-dark);
             word-break: break-word;
             border-top: 2px dashed #e3e5e8;
             width: 100%;
             margin-top: 10px;
+            background: rgb(255 255 255 / 50%);
+            border-radius: 0 0 6px 6px;
         }
-        .app-userspace #userspace_share .timeline .n-right .s-center > .share-item-album .owner-name {
-            color: var(--color-main-theme-dark);
+        .app-userspace #userspace_share .timeline .share-item-album .owner-name {
+            color: #5a6b84;
+            font-weight: 700;
+            font-size: 15px;
+            background: #fff;
+            border-radius: 10px;
+            padding: 0 10px 0 0;
+            box-shadow: 0 0 0 2px rgb(238 238 245);
+            line-height: 20px;
+            height: 20px;
+            margin-top: 5px;
         }
-        .app-userspace #userspace_share .timeline .n-right .s-center > .share-item-album .owner-name::before {
-            content: '';
-            display: inline-block;
-            width: 6px;
-            height: 10px;
-            background: var(--color-main-theme-dark);
-            border-radius: 2px;
-            margin-right: 5px;
-         }
+        .app-userspace #userspace_share .timeline .share-item-album .owner-name img{
+            width: 20px;
+            height: 20px;
+            border-radius: 25px;
+            margin: 0 5px 0 0;
+        }
 
-        .app-userspace #userspace_share .timeline .n-right .s-center > .share-item-space {
+        .app-userspace #userspace_share .timeline .share-item-blog {
+            border-radius: 14px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(120,144,177,.2);
+        }
+        .app-userspace #userspace_share .timeline .share-item-blog .image{
+            width: 100%;
+            max-height:180px;
+            overflow: hidden;
+        }
+.WL-0   .app-userspace #userspace_share .timeline .share-item-blog .image,
+.WL-4P  .app-userspace #userspace_share .timeline .share-item-blog .image,
+.WL-3P  .app-userspace #userspace_share .timeline .share-item-blog .image{
+            max-height:110px;
+        }
+        .app-userspace #userspace_share .timeline .share-item-blog .image img{
+            width: 100%;
+        }
+        .app-userspace #userspace_share .timeline .share-item-blog .subject {
+            display: block;
+            width: 100%;
+            overflow: hidden;
+            cursor: pointer;
+            color: var(--color-text-dark);
+            font-size: 22px;
+            font-weight: 700;
+            margin: 20px 20px 0 20px;
+            box-sizing: border-box;
+            white-space: nowrap;
+        }
+        .app-userspace #userspace_share .timeline .share-item-blog .subject .tag {
+            padding: 1px 5px;
+            border: 1px solid;
+            border-radius: 4px;
+            font-size: 12px;
+        }
+        .app-userspace #userspace_share .timeline .share-item-blog .author {
+            margin: 10px 30px 0 30px;
+            color: var(--color-main-theme-dark);
+            display: inline-block;
+            line-height: 15px;
+            font-size: 15px;
+            font-weight: 700;
+        }
+        .app-userspace #userspace_share .timeline .share-item-blog .author img{
+            width: 20px;
+            height: 20px;
+            border-radius: 25px;
+            margin: -3px 5px 0 0;
+        }
+        .app-userspace #userspace_share .timeline .share-item-blog .content {
+            padding: 10px 30px 20px 30px;
+            color: var(--color-text-gray);
+            word-break: break-word;
+        }
+
+        .app-userspace #userspace_share .timeline .share-item-thread {
+            --share-item-thread-back-color: #f4f5f7;
+            --share-item-thread-bord-color: #e1e5ec;
+            border-radius: 4px;
+            overflow: hidden;
+            background: var(--share-item-thread-back-color);
+            padding: 10px;
+            border: 1px solid var(--share-item-thread-bord-color);
+        }
+        .app-userspace #userspace_share .timeline .share-item-thread .headline {
+            display: flex;
+            flex-flow: row nowrap;
+            line-height: 30px;
+            white-space: nowrap;
+        }
+        .app-userspace #userspace_share .timeline .share-item-thread .headline a{
+            color: var(--color-main-theme-dark);
+            font-weight: 700;
+            margin: 0 5px;
+        }
+        .app-userspace #userspace_share .timeline .share-item-thread .author {
+            margin-left: 0 !important;
+        }
+        .app-userspace #userspace_share .timeline .share-item-thread .author img{
+            width: 24px;
+            height: 24px;
+            border-radius: 25px;
+            margin: 3px 5px 3px 0;
+        }
+        .app-userspace #userspace_share .timeline .share-item-thread .content .text{
+            background: #fff;
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 4px;
+            border: 1px solid var(--share-item-thread-bord-color);
+        }
+        .app-userspace #userspace_share .timeline .share-item-thread .content .imgs{
+
+        }
+
+        .app-userspace #userspace_share .timeline .share-item-space {
             --avatar-size: 64px;
             --username-fontsize: 16px;
             --space-note-fontsize: 14px;
-            display: flex;
+            display: flex !important;
             flex-flow: row nowrap;
             overflow: hidden;
             width: 100%;
@@ -8009,15 +8067,14 @@
             background-size: 30px 30px;
             box-shadow: inset 0 0 7px rgba(120,144,177,.2);
         }
-.WL-0   .app-userspace #userspace_share .timeline .n-right .s-center > .share-item-space,
-.WL-3P  .app-userspace #userspace_share .timeline .n-right .s-center > .share-item-space,
-.WL-4P  .app-userspace #userspace_share .timeline .n-right .s-center > .share-item-space {
+.WL-0   .app-userspace #userspace_share .timeline .share-item-space,
+.WL-3P  .app-userspace #userspace_share .timeline .share-item-space,
+.WL-4P  .app-userspace #userspace_share .timeline .share-item-space {
             --avatar-size: 42px;
             --username-fontsize: 14px;
             --space-note-fontsize: 12px;
-
         }
-        .app-userspace #userspace_share .timeline .n-right .s-center > .share-item-space::before {
+        .app-userspace #userspace_share .timeline .share-item-space::before {
             content: '';
             position: absolute;
             width: 80px;
@@ -8027,7 +8084,7 @@
             right: -42px;
             border-radius: 60px;
         }
-        .app-userspace #userspace_share .timeline .n-right .s-center > .share-item-space::after {
+        .app-userspace #userspace_share .timeline .share-item-space::after {
             content: '';
             position: absolute;
             width: 80px;
@@ -8037,7 +8094,7 @@
             left: -40px;
             transform: rotate(32deg);
         }
-        .app-userspace #userspace_share .timeline .n-right .s-center > .share-item-space .decrater {
+        .app-userspace #userspace_share .timeline .share-item-space .decrater {
             z-index: 0;
             position: absolute;
             width: calc(100% - 66px);
@@ -8048,7 +8105,7 @@
             border-radius: 5px;
             box-shadow: 0 0 2px rgba(0,0,0,.15);
         }
-        .app-userspace #userspace_share .timeline .n-right .s-center > .share-item-space .decrater::before {
+        .app-userspace #userspace_share .timeline .share-item-space .decrater::before {
             content: '';
             position: absolute;
             width: 66px;
@@ -8061,7 +8118,7 @@
             top: -10px;
             left: -10px;
         }
-        .app-userspace #userspace_share .timeline .n-right .s-center > .share-item-space .decrater::after {
+        .app-userspace #userspace_share .timeline .share-item-space .decrater::after {
             content: '';
             position: absolute;
             width: 66px;
@@ -8074,14 +8131,14 @@
             bottom: -10px;
             right: -10px;
         }
-        .app-userspace #userspace_share .timeline .n-right .s-center > .share-item-space .avatar {
+        .app-userspace #userspace_share .timeline .share-item-space .avatar {
             z-index: 1;
             position: relative;
             height: var(--avatar-size);
             width: var(--avatar-size);
             left: 0;
         }
-        .app-userspace #userspace_share .timeline .n-right .s-center > .share-item-space .info {
+        .app-userspace #userspace_share .timeline .share-item-space .info {
             z-index: 1;
             position: relative;
             box-sizing: border-box;
@@ -8089,10 +8146,10 @@
             width: calc(100% - var(--avatar-size));
             left: 0;
         }
-        .app-userspace #userspace_share .timeline .n-right .s-center > .share-item-space .avatar .avatar-main {
+        .app-userspace #userspace_share .timeline .share-item-space .avatar .avatar-main {
             box-shadow: 0 0 0 2px var(--color-lightgray);
         }
-        .app-userspace #userspace_share .timeline .n-right .s-center > .share-item-space .username {
+        .app-userspace #userspace_share .timeline .share-item-space .username {
             display: block;
             width: 100%;
             padding: 5px 0;
@@ -8100,7 +8157,7 @@
             font-weight: 700;
             color: #8aa0bb;
         }
-        .app-userspace #userspace_share .timeline .n-right .s-center > .share-item-space .space-note {
+        .app-userspace #userspace_share .timeline .share-item-space .space-note {
             display: block;
             width: 100%;
             max-height: 39px;

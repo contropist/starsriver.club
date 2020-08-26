@@ -73,15 +73,11 @@ if($_GET['op'] == 'delete') {
                 showmessage('is_blacklist');
             }
             
-            loaducenter();
-    
-            $isavatar = uc_check_avatar($id);
-    
             $arr = [
                 'itemid' => $id,
                 'fromuid' => $id,
                 'body_data' => [
-                    'avatar' => $isavatar ? avatar($id, 'middle', true) : UC_API . '/images/noavatar_middle.gif',
+                    'avatar' => avatar($id, 'middle', true),
                     'username' => $tospace['username'],
                     'userlink' => 'home.php?mod=space&uid=' . $id,
                     'reside' => $tospace['resideprovince'] . $tospace['residecity'],
@@ -123,7 +119,8 @@ if($_GET['op'] == 'delete') {
                     'url' => 'home.php?mod=space&uid='.$blog['uid'].'&do=blog&id='.$blog['blogid'],
                     'subject'  => $blog['subject'],
                     'username' => $blog['username'],
-                    'userlink' => 'home.php?mod=space&uid='.$blog['uid'],
+                    'user_avatar' => avatar($blog['uid'], 'middle', true),
+                    'user_link' => 'home.php?mod=space&uid='.$blog['uid'],
                     'content'  => getstr($blog['message'], 150, 0, 0, 0, -1)
                 ]
             ];
@@ -170,6 +167,7 @@ if($_GET['op'] == 'delete') {
                     'album_link' => "home.php?mod=space&uid=$album[uid]&do=album&id=$album[albumid]",
                     'image_link' => pic_cover_get($album['pic'], $album['picflag']),
                     'owner_link' => 'home.php?mod=space&uid='.$album['uid'],
+                    'owner_avatar' => avatar($album['uid'], 'middle', true),
                 ],
             ];
 
@@ -198,7 +196,7 @@ if($_GET['op'] == 'delete') {
             $album = C::t('home_album')->fetch($pic['albumid']);
             $pic = array_merge($pic, $picfield, $album);
             
-            if (in_array($pic['status'], array(1, 2))) {
+            if (in_array($pic['status'], [1, 2])) {
                 showmessage('moderate_pic_not_share');
             }
             if ($pic['friend']) {
@@ -226,6 +224,7 @@ if($_GET['op'] == 'delete') {
                     'image_togo' => 'home.php?mod=space&uid=' . $pic['uid'] . '&do=album&picid=' . $pic['picid'],
                     'album_link' => 'home.php?mod=space&uid=' . $pic['uid'] . '&do=album&id=' . $pic['albumid'],
                     'owner_link' => 'home.php?mod=space&uid=' . $pic['uid'],
+                    'owner_avatar' => avatar($pic['uid'], 'middle', true),
                 ],
             ];
             
@@ -243,44 +242,62 @@ if($_GET['op'] == 'delete') {
             break;
 
         case 'thread':
+    
+            $feed_hash_data = "tid{$id}";
+    
             require_once libfile('function/post');
-
+    
             $thread = C::t('forum_thread')->fetch($id);
-            if (in_array($thread['displayorder'], array(-2, -3))) {
+            
+            if (in_array($thread['displayorder'], [-2, -3])) {
                 showmessage('moderate_thread_not_share');
             }
-
-            $feed_hash_data = "tid{$id}";
-
-            $actives = [
-                'share' => ' class="active"'
-            ];
-
+            
             $post = C::t('forum_post')->fetch_threadpost_by_tid_invisible($id);
-            $attachment = !preg_match("/\[hide=?\d*\](.*?)\[\/hide\]/is", $post['message'], $a) && preg_match("/\[attach\]\d+\[\/attach\]/i", $a[1]);
             $post['message'] = messagecutstr($post['message']);
-            $arr['body_data'] = array(
-                'subject' => "<a href=\"forum.php?mod=viewthread&tid=$id\">$thread[subject]</a>",
-                'author' => "<a href=\"home.php?mod=space&uid=$thread[authorid]\">$thread[author]</a>",
-                'message' => getstr($post['message'], 150, 0, 0, 0, -1)
-            );
-            $arr['itemid'] = $id;
-            $arr['fromuid'] = $thread['authorid'];
+            
+            $attachment = !preg_match("/\[hide=?\d*\](.*?)\[\/hide\]/is", $post['message'], $a) && preg_match("/\[attach\]\d+\[\/attach\]/i", $a[1]);
             $attachment = $attachment ? C::t('forum_attachment_n')->fetch_max_image('tid:' . $id, 'tid', $id) : false;
+    
+            $arr = [
+                'itemid' => $id,
+                'fromuid' => $thread['authorid'],
+                'body_data' => [
+                    'url' => 'forum.php?mod=viewthread&tid='.$id,
+                    'subject' => $thread['subject'],
+                    'author'  => $thread['author'],
+                    'author_avatar' => avatar($thread['authorid'], 'middle', true),
+                    'author_link'  => 'home.php?mod=space&uid='.$thread['authorid'],
+                    'message' => $post['message'] ? getstr($post['message'], 150, 0, 0, 0, -1) : lang('template','should_redirect'),
+                ]
+            ];
+            
             if ($attachment) {
-                $arr['image'] = pic_get($attachment['attachment'], 'forum', $attachment['thumb'], $attachment['remote'], 1);
-                $arr['image_link'] = "forum.php?mod=viewthread&tid=$id";
+                $arr['body_data']['retemplate'] = 'thread_withimg';
+                $arr['body_data']['image'] = pic_get($attachment['attachment'], 'forum', $attachment['thumb'], $attachment['remote'], 1);
             }
 
             $note_uid = $thread['authorid'];
             $note_message = 'share_thread';
-            $note_values = array('url' => "forum.php?mod=viewthread&tid=$id", 'subject' => $thread['subject'], 'from_id' => $id, 'from_idtype' => 'tid');
+            $note_values = [
+                'url' => "forum.php?mod=viewthread&tid=$id",
+                'subject' => $thread['subject'],
+                'from_id' => $id,
+                'from_idtype' => 'tid',
+            ];
+    
+            $actives = [
+                'share' => ' class="active"'
+            ];
+            
             break;
 
         case 'article':
+            
+            $feed_hash_data = "articleid{$id}";
+    
             require_once libfile('function/portal');
 
-            $feed_hash_data = "articleid{$id}";
             $article = C::t('portal_article_title')->fetch($id);
             if (!$article) {
                 showmessage('article_does_not_exist');
@@ -290,32 +307,51 @@ if($_GET['op'] == 'delete') {
             }
 
             $article_url = fetch_article_url($article);
-            $arr['itemid'] = $id;
-            $arr['fromuid'] = $article['uid'];
-            $arr['body_data'] = [
-                'title' => "<a href=\"$article_url\">$article[title]</a>",
-                'username' => "<a href=\"home.php?mod=space&uid=$article[uid]\">" . $article['username'] . "</a>",
-                'summary' => getstr($article['summary'], 150, 0, 0, 0, -1)
+    
+            $arr = [
+                'itemid' => $id,
+                'fromuid' => $article['uid'],
+                'body_data' => [
+                    'url' => $article_url,
+                    'title' => $article['title'],
+                    'username' => $article['username'],
+                    'user_avatar' => avatar($article['uid'], 'middle', true),
+                    'user_link' => 'home.php?mod=space&uid='.$article['uid'],
+                    'summary' => getstr($article['summary'], 150, 0, 0, 0, -1)
+                ]
             ];
+            
             if ($article['pic']) {
-                $arr['image'] = pic_get($article['pic'], 'portal', $article['thumb'], $article['remote'], 1, 1);
-                $arr['image_link'] = $article_url;
+                $arr['body_data']['retemplate'] = 'article_withimg';
+                $arr['body_data']['image'] = pic_get($article['pic'], 'portal', $article['thumb'], $article['remote'], 1, 1);
             }
+            
             $note_uid = $article['uid'];
             $note_message = 'share_article';
-            $note_values = array('url' => $article_url, 'subject' => $article['title'], 'from_id' => $id, 'from_idtype' => 'aid');
-
+            $note_values = [
+                'url' => $article_url,
+                'subject' => $article['title'],
+                'from_id' => $id,
+                'from_idtype' => 'aid'
+            ];
+    
             break;
 
         default:
             
             $type = 'link';
             
-            $actives = ['share' => ' class="active"'];
             $_G['refer'] = 'home.php?mod=space&uid=' . $_G['uid'] . '&do=share&view=me';
+            
             $_GET['op'] = 'link';
+            
             $linkdefault = 'http://';
+            
             $generaldefault = '';
+    
+            $actives = [
+                'share' => ' class="active"'
+            ];
             
             break;
     }
@@ -351,7 +387,6 @@ if($_GET['op'] == 'delete') {
                 ];
             } elseif (preg_match("/\<iframe\s.*src=\"(.*?)\".*\>.*\<\/iframe\>/is", $link, $linkmatch)) {
                 $hostmatchs = [];
-
                 preg_match("/\/\/(.*?)\//is", $link, $hostmatchs);
                 $support_url = [
                     'player.pptv.com',
