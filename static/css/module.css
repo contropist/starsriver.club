@@ -8229,15 +8229,15 @@
             margin: 10px 30px 0 30px;
             color: var(--color-main-theme-dark);
             display: inline-block;
-            line-height: 15px;
+            line-height: 24px;
             font-size: 15px;
             font-weight: 700;
         }
         .app-userspace #userspace_share .timeline .share-item-blog .author img{
-            width: 20px;
-            height: 20px;
+            width: 24px;
+            height: 24px;
             border-radius: 25px;
-            margin: -3px 5px 0 0;
+            margin: 0 5px 0 0;
         }
         .app-userspace #userspace_share .timeline .share-item-blog .content {
             padding: 10px 30px 20px 30px;
