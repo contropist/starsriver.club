@@ -59,7 +59,6 @@ if($_GET['action'] == 'checkusername') {
 		if(empty($invite['fuid']) && (empty($invite['endtime']) || $_G['timestamp'] < $invite['endtime'])) {
 			$result['uid'] = $invite['uid'];
 			$result['id'] = $invite['id'];
-			$result['appid'] = $invite['appid'];
 		}
 	}
 	if(empty($result)) {

@@ -11,7 +11,7 @@ if(!defined('IN_DISCUZ')) {
 	exit('Access Denied');
 }
 
-function feed_add($icon, $title_template='', $title_data=[], $body_template='', $body_data=[], $body_general='', $images=[], $image_links=[], $target_ids='', $friend='', $appid='', $returnid=0, $id=0, $idtype='', $uid=0, $username='') {
+function feed_add($icon, $title_template='', $title_data=[], $body_template='', $body_data=[], $body_general='', $images=[], $image_links=[], $target_ids='', $friend='', $returnid=0, $id=0, $idtype='', $uid=0, $username='') {
 	global $_G;
 
 	if(!helper_access::check_module('feed')) {
@@ -34,7 +34,6 @@ function feed_add($icon, $title_template='', $title_data=[], $body_template='', 
         }
     }
     $feedarr = [
-        'appid' => $appid,
         'icon' => $icon,
         'uid' => $uid ? intval($uid) : $_G['uid'],
         'username' => $username ? $username : $_G['username'],
@@ -57,7 +56,6 @@ function feed_add($icon, $title_template='', $title_data=[], $body_template='', 
     ];
     /*
 	$feedarr = array(
-		'appid' => $appid,
 		'icon' => $icon,
 		'uid' => $uid ? intval($uid) : $_G['uid'],
 		'username' => $username ? $username : $_G['username'],
@@ -77,18 +75,14 @@ function feed_add($icon, $title_template='', $title_data=[], $body_template='', 
 	$feedarr['body_data'] = serialize($body_data);
 	$feedarr['hash_data'] = empty($title_data['hash_data'])?'':$title_data['hash_data'];
 
-	if(is_numeric($icon)) {
-		$feed_table = 'home_feed_app';
-		unset($feedarr['id'], $feedarr['idtype']);
-	} else {
-		if($feedarr['hash_data']) {
-			$oldfeed = C::t('home_feed')->fetch_feedid_by_hashdata($feedarr['uid'], $feedarr['hash_data']);
-			if($oldfeed) {
-				return 0;
-			}
-		}
-		$feed_table = 'home_feed';
-	}
+
+    if($feedarr['hash_data']) {
+        $oldfeed = C::t('home_feed')->fetch_feedid_by_hashdata($feedarr['uid'], $feedarr['hash_data']);
+        if($oldfeed) {
+            return 0;
+        }
+    }
+    $feed_table = 'home_feed';
 
 	return C::t($feed_table)->insert($feedarr, $returnid);
 }

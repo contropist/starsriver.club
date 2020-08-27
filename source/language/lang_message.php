@@ -92,7 +92,6 @@ $lang = array (
     'search_ctrl' => '抱歉，你在 {searchctrl} 秒内只能进行一次搜索',
     'search_toomany' => '抱歉，站点设置每分钟系统最多响应搜索请求 {maxspm} 次，请稍候再试',
     'search_closed' => '搜索功能已关闭',
-    'no_privilege_myop' => '抱歉，你目前没有权限使用此应用，<a href="home.php?mod=spacecp&ac=usergroup" target="_blank">点击这里查看权限</a>',
     'collection_permission_deny' => '抱歉，该专辑不存在或没有相应的权限',
     'collection_edit_checkentire' => '请将内容填写完整',
     'collection_teamworkers_exceed' => '共同维护人数已达上限，不能再邀请或接受其他人参与维护',

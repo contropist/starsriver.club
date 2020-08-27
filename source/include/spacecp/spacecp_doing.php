@@ -82,7 +82,6 @@ if(helper_access::check_module('doing')) {
 
 		if(helper_access::check_module('feed') && ckprivacy('doing', 'feed') && $doing_status == '0') {
 			$feedarr = array(
-				'appid' => '',
 				'icon' => 'doing',
 				'uid' => $_G['uid'],
 				'username' => $_G['username'],

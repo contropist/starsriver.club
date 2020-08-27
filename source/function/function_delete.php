@@ -60,7 +60,6 @@ function deletemember($uids, $delpost = true) {
     C::t('home_friend')->delete_by_uid_fuid($arruids);
     C::t('home_friend_request')->delete_by_uid_or_fuid($arruids);
     C::t('common_invite')->delete_by_uid_or_fuid($arruids);
-    C::t('common_myinvite')->delete_by_touid_or_fromuid($uids);
     C::t('common_moderate')->delete($arruids, 'uid_cid');
     C::t('common_member_forum_buylog')->delete_by_uid($arruids);
     C::t('forum_threadhidelog')->delete_by_uid($arruids);

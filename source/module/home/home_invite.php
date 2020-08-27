@@ -11,9 +11,10 @@ if(!defined('IN_DISCUZ')) {
 	exit('Access Denied');
 }
 
+global $_G;
+
 $id = intval($_GET['id']);
 $uid = intval($_GET['u']);
-$appid = intval($_GET['app']);
 $acceptconfirm = false;
 if($_G['setting']['regstatus'] < 2) {
 	showmessage('not_open_invite', '', [], array('return' => true));
@@ -29,7 +30,6 @@ if($_G['uid']) {
 		if(count($cookies) == 3) {
 			$uid = intval($cookies[0]);
 			$_GET['c'] = $cookies[1];
-			$appid = intval($cookies[2]);
 		} else {
 			$id = intval($cookies[0]);
 			$_GET['c'] = $cookies[1];
@@ -57,7 +57,6 @@ if($id) {
 		showmessage('invite_code_endtime_error', '', [], array('return' => true));
 	}
 
-	$appid = $invite['appid'];
 	$uid = $invite['uid'];
 
 	$cookievar = "$id,$invite[code]";
@@ -65,7 +64,7 @@ if($id) {
 } elseif ($uid) {
 
 	$id = 0;
-	$invite_code = space_key($uid, $appid);
+	$invite_code = space_key($uid);
 	if($_GET['c'] !== $invite_code) {
 		showmessage('invite_code_error', '', [], array('return' => true));
 	}
@@ -75,7 +74,7 @@ if($id) {
 		showmessage('invite_code_error', '', [], array('return' => true));
 	}
 
-	$cookievar = "$uid,$invite_code,$appid";
+	$cookievar = "$uid,$invite_code";
 
 } else {
 	showmessage('invite_code_error', '', [], array('return' => true));
@@ -122,7 +121,7 @@ if($acceptconfirm) {
 	}
 
 	include_once libfile('function/stat');
-	updatestat($appid ? 'appinvite' : 'invite');
+	updatestat('invite');
 
 	showmessage('invite_friend_ok', $jumpurl);
 

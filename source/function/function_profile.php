@@ -11,7 +11,7 @@ if(!defined('IN_DISCUZ')) {
 	exit('Access Denied');
 }
 
-function profile_setting($fieldid, $space=[], $showstatus=false, $ignoreunchangable = false, $ignoreshowerror = false) {
+function profile_setting($fieldid, $space=[], $showstatus=false, $ignoreunchangable = false) {
 	global $_G;
 
 	if(empty($_G['cache']['profilesetting'])) {
@@ -198,7 +198,6 @@ function profile_setting($fieldid, $space=[], $showstatus=false, $ignoreunchanga
 			$html = "<input type='text' name='$fieldid' id='$fieldid' value='$space[$fieldid]' />";
 		}
 	}
-	//$html .= !$ignoreshowerror ? "<div class='input-tip'></div>" : '';
 	$html .= "<div class='input-tip'></div>";
 
 	if($showstatus) {

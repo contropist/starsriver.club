@@ -866,7 +866,6 @@ EOT;
 		showsetting('usergroups_edit_home_allow_friend', 'allowfriendnew', $group['allowfriend'], 'radio');
 		showsetting('usergroups_edit_home_allow_click', 'allowclicknew', $group['allowclick'], 'radio');
 		showsetting('usergroups_edit_home_allow_comment', 'allowcommentnew', $group['allowcomment'], 'radio');
-		showsetting('usergroups_edit_home_allow_myop', 'allowmyopnew', $group['allowmyop'], 'radio');
 		showsetting('usergroups_edit_home_allow_space_nest_html', 'allowspacenesthtmlnew', $group['allowspacenesthtml'], 'radio');
 		showsetting('usergroups_edit_home_allow_space_nest_bbcode', 'allowspacenestbbcodenew', $group['allowspacenestbbcode'], 'radio');
 		showsetting('usergroups_edit_home_allow_space_nest_imgcode', 'allowspacenestimgcodenew', $group['allowspacenestimgcode'], 'radio');
@@ -1139,7 +1138,6 @@ EOT;
 			'allowclick' => $_GET['allowclicknew'],
 			'allowcomment' => $_GET['allowcommentnew'],
 			'allowcommentarticle' => intval($_GET['allowcommentarticlenew']),
-			'allowmyop' => $_GET['allowmyopnew'],
 			'allowcommentpost' => bindec(intval($_GET['allowcommentpostnew'][2]).intval($_GET['allowcommentpostnew'][1])),
 			'allowspacenesthtml' => $_GET['allowspacenesthtmlnew'],
 			'allowspacenestbbcode' => $_GET['allowspacenestbbcodenew'],

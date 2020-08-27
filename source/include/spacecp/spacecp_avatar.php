@@ -11,8 +11,10 @@ if(!defined('IN_DISCUZ')) {
 	exit('Access Denied');
 }
 
+global $_G;
+
 if(submitcheck('avatarsubmit')) {
-	showmessage('do_success', 'cp.php?ac=avatar&quickforward=1');
+	showmessage('do_success');
 }
 
 loaducenter();

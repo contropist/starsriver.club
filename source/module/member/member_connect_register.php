@@ -11,6 +11,8 @@ if(!defined('IN_DISCUZ')) {
 	exit('Access Denied');
 }
 
+global $_G;
+
 $from_connect = $_G['setting']['connect']['allow'] ? 1 : 0;
 $regname = 'connect';
 

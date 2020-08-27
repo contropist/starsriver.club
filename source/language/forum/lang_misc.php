@@ -260,7 +260,6 @@ $lang = array
 	'perms_allowpoke' => '打招呼',
 	'perms_allowfriend' => '加好友',
 	'perms_allowclick' => '表态',
-	'perms_allowmyop' => '使用应用',
 	'perms_allowcomment' => '发表留言/评论',
 	'perms_allowstatdata' => '查看统计数据',
 	'perms_allowstat' => '查看趋势统计',

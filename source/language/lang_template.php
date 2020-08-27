@@ -131,7 +131,6 @@ $lang = array (
     'activation' => '激活',
     'admincp' => '管理中心',
     'changestyle' => '切换风格',
-    'cloudcp' => '云平台',
     'default' => '默认',
     'forum_manager' => '{$_G[setting][navs][2][navname]}管理',
     'shortcut_notice' => '你经常访问 {$_G[setting][bbname]}，试试添加到桌面，访问更方便！',

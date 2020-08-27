@@ -96,7 +96,6 @@ $lang = [
     'follow_user_followed' => 'TA已关注你',
     'did_not_follow_to_me' => 'TA未关注你',
     'accept_invitation' => '接受邀请',
-    'and_play_together' => '，并一起玩',
     'become_friend' => '<p>成为好友后，你们就可以一起讨论话题，及时关注对方的更新 ……</p>
                         <p>你也可以方便快捷地发布自己的日志、上传图片、记录生活点滴与好友分享</p>
                         <p>还等什么呢？赶快加入我们吧</p>',
@@ -105,7 +104,6 @@ $lang = [
     'invite_friends' => '好友邀请',
     'invite_you_to_friends' => '热情邀请你为好友',
     'lgnore_invitation' => '忽略邀请',
-    'play_together' => '一起玩',
     'register_immediately' => '马上登录',
     'somebody_friends' => '的好友',
     'want_to_register' => '我要注册',
@@ -1245,9 +1243,7 @@ $lang = [
     'friend_get' => '好友可获得',
     'friend_invite_link' => '我的好友邀请链接',
     'friend_invite_message' => '你可以通过 QQ、MSN 等 IM 工具，或者发送邮件，把下面的链接告诉你的好友，邀请他们加入进来 ',
-    'friend_invite_play' => '邀请我的好友一起玩',
     'friend_invite_success' => '邀请成功一个好友，',
-    'friend_play_together' => '好友一起玩',
     'friend_to_say' => '想对好友说的话',
     'get_invitation_code' => '获取邀请码',
     'go_nuts' => '赶快行动吧！',

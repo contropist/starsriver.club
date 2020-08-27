@@ -10,10 +10,16 @@
 if(!defined('IN_DISCUZ')) {
 	exit('Access Denied');
 }
+
+global $_G;
+
+$amount = 0;
+
 if(empty($_GET['op']))	$_GET['op'] = 'base';
 if(in_array($_GET['op'], array('transfer', 'exchange'))) {
 	$taxpercent = sprintf('%1.2f', $_G['setting']['creditstax'] * 100).'%';
 }
+
 if($_GET['op'] == 'base') {
 	$loglist = $extcredits_exchange = [];
 	if(!empty($_G['setting']['extcredits'])) {

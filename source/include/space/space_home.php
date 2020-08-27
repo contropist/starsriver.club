@@ -38,7 +38,7 @@ if (empty($_GET['view'])) {
     } else {
         $_GET['view'] = 'all';
     }
-} elseif (!in_array($_GET['view'], ['we', 'me', 'all', 'app'])) {
+} elseif (!in_array($_GET['view'], ['we', 'me', 'all'])) {
     $_GET['view'] = 'all';
 }
 if (empty($_GET['order'])) {
@@ -67,7 +67,6 @@ $gets = [
     'do' => 'home',
     'view' => $_GET['view'],
     'order' => $_GET['order'],
-    'appid' => $_GET['appid'],
     'type' => $_GET['type'],
     'icon' => $_GET['icon']
 ];
@@ -123,7 +122,6 @@ if (!IS_ROBOT) {
         }
     }
 
-    $appid = empty($_GET['appid']) ? 0 : intval($_GET['appid']);
     $icon = empty($_GET['icon']) ? '' : trim($_GET['icon']);
     $gid = !isset($_GET['gid']) ? '-1' : intval($_GET['gid']);
     if ($gid >= 0) {
@@ -142,7 +140,7 @@ if (!IS_ROBOT) {
 
     if ($need_count) {
         $count = 0;
-        $query = C::t('home_feed')->fetch_all_by_search(1, $uids, $icon, '', '', '', $hot, '', $start, $perpage, $findex, $appid);
+        $query = C::t('home_feed')->fetch_all_by_search(1, $uids, $icon, '', '', '', $hot, '', $start, $perpage, $findex);
         foreach ($query as $value) {
             $feeds[] = mkfeed($value);
             $count++;

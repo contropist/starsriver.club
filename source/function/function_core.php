@@ -356,7 +356,7 @@ function checkmobile() {
 		$_G['mobile'] = $v;
 		return '3'; //wml版
 	}
-	$brower = array('mozilla', 'chrome', 'safari', 'opera', 'm3gate', 'winwap', 'openwave', 'myop');
+	$brower = array('mozilla', 'chrome', 'safari', 'opera', 'm3gate', 'winwap', 'openwave');
 	if(dstrpos($useragent, $brower)) return false;
 
 	$_G['mobile'] = 'unknown';
@@ -1728,9 +1728,9 @@ function updatenesttemplate($targettplname = '', $tpldirectory = '') {
 	return $r;
 }
 
-function space_key($uid, $appid=0) {
+function space_key($uid) {
 	global $_G;
-	return substr(md5($_G['setting']['siteuniqueid'].'|'.$uid.(empty($appid)?'':'|'.$appid)), 8, 16);
+	return substr(md5($_G['setting']['siteuniqueid'].'|'.$uid), 8, 16);
 }
 
 
@@ -2027,11 +2027,6 @@ function dintval($int, $allowarray = false) {
 		}
 	}
 	return $ret;
-}
-
-
-function makeSearchSignUrl() {
-	return [];
 }
 
 function get_related_link($extent) {

@@ -11,10 +11,9 @@ if(!defined('IN_DISCUZ')) {
 	exit('Access Denied');
 }
 
-$lang = array
-(
+global $_G;
 
-
+$lang = array(
 	'header_index' => '首页',
 	'header_global' => '全局',
 	'header_forum' => '论坛',
@@ -204,9 +203,7 @@ $lang = array
 	'menu_safe_accountguard' => '帐号保镖',
 
 	'menu_setting_qqconnect' => 'QQ 绑定设置',
-
-	'menu_cloud_doctor' => '诊断工具',
-
+	
 	'admincp_title' => $_G['setting']['bbname'].' 管理中心',
 
 );

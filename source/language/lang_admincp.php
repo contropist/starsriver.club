@@ -683,8 +683,6 @@ $lang = array(
     'home_security_checkip'             => '<li>你关闭了 <span>管理员IP验证</span>。建议只有在管理员无法登录后台的时候才关闭此项检查。<p class="solve">修改 config/config_global.php 当中的相应设置可以开启此功能</p></li>',
     'home_security_tpledit'             => '<li>你开启了 <span>在线编辑模板</span> 功能。建议你只有在十分必要的时候才开启它。<p class="solve">请修改 config/config_global.php 关闭此功能</p></li>',
     'home_security_runquery'            => '<li>你开启了 <span>运行 SQL 语句</span> 功能。建议你只有在十分必要的时候才开启它。<p class="solve">请修改 config/config_global.php 关闭此功能</p></li>',
-    'home_security_service_close_info'  => '<li>推荐你开通云平台, 开通后，当站点程序出现严重安全漏洞需要立即进行修补的时候，我们会通过QQ及时通知给你<br><a href="?action=plugins">点击<strong>"云平台->开通Discuz!云平台"</strong>开通此功能</a></li>',
-    'home_security_service_open_info'   => '<li>你已开通云平台，当站点程序出现严重安全漏洞需要立即进行修补的时候，我们会通过QQ及时通知给你。<br>平台管理入口：<a href="?action=cloud&operation=applist"><strong>"云平台->管理Discuz!云平台"</strong></a></li>',
     'home_security_service_mobile'      => '你的手机号码',
     'home_security_service_qq'          => '你的QQ号码',
     'home_security_service_email'       => '你的电子邮箱',
@@ -1186,8 +1184,7 @@ $lang = array(
 			在查看好友动态的时候，点击每条动态前面的小图标(例如 <img src="' . IMGURL . '/feed/blog.gif" align="absmiddle">)，<br>
 			浏览器的网址会变为类似如下的链接：<br>
 			http://xxx.com/home.php?mod=space&uid=&do=feed&view=we&appid=3&<b>icon=blog</b>，<br>
-			其中，icon=blog，就表示该动态类型为 blog<br>
-			MYOP应用的icon为 7位数字。你可以用英文单词 <b>myop</b> 来表示所有MYOP应用的动态类型',
+			其中，icon=blog，就表示该动态类型为 blog',
     'setting_home_base_feedhotnum'                          => '首页显示热点的数目',
     'setting_home_base_feedhotnum_comment'                  => '(默认为 3)为0，则首页不显示热点推荐。最大不要超过10个。<br>系统会自动获取10个热点，其中，排名第一的热点会固定显示，其余热点会随机显示',
     'setting_home_base_newspacenum'                         => '首页欢迎新成员选项',
@@ -1981,8 +1978,6 @@ $lang = array(
     'setting_credits_trans5_none'             => '不使用积分',
     'setting_credits_trans6'                  => '空间消费使用的积分',
     'setting_credits_trans6_comment'          => '设置在空间中消费使用的积分类型',
-    'setting_credits_trans7'                  => '漫游应用使用的积分',
-    'setting_credits_trans7_comment'          => '设置与漫游特定应用中的积分体系兑换使用的积分',
     'setting_credits_trans8'                  => '用户举报奖惩使用的积分',
     'setting_credits_trans8_comment'          => '设置用户举报后对用户奖惩时使用的积分',
     'setting_credits_trans9'                  => '积分转账使用的积分',
@@ -2118,8 +2113,6 @@ $lang = array(
     'setting_sec_seccode_height'                   => '验证码图片高度',
     'setting_sec_seccode_height_comment'           => '验证码图片的高度，范围在 30～80 之间',
 
-    'setting_sec_seccode_cloudip'                        => '云端IP库检测',
-    'setting_sec_seccode_cloudip_comment'                => '启用后当用户的登录 IP 在云端可疑 IP 库中时，用户的注册、登录、发表等操作会自动启用验证码',
     'setting_sec_seccode_rule_min'                       => '分钟',
     'setting_sec_seccode_rule_hour'                      => '小时',
     'setting_sec_seccode_rule_register'                  => '注册时启用验证码',
@@ -2450,7 +2443,6 @@ $lang = array(
     'search_item_name'                        => '搜索项目',
     'setting_search_srchhotkeywords'          => '热门关键词',
     'setting_search_srchhotkeywords_comment'  => '每行一个',
-    'setting_search_srchhotkeywords_disabled' => '<strong>你已开启纵横搜索服务，搜索相关设置请到 <a href="webcontroller.php?action=cloud&operation=search">云平台->纵横搜索</a> 设置</strong>',
 
     'settings_sphinx'                            => 'Sphinx 全文检索设置',
     'settings_sphinx_sphinxon'                   => '是否开启',
@@ -5818,7 +5810,6 @@ $lang = array(
     'project_option_group_allowmagic'             => '允许使用道具',
     'project_option_group_allowstat'              => '允许查看趋势统计',
     'project_option_group_allowstatdata'          => '允许查看站点统计',
-    'project_option_group_allowmyop'              => '允许使用应用',
     'project_option_group_magicdiscount'          => '购买道具折扣',
     'project_option_group_domainlength'           => '二级域名最短长度',
     'project_option_group_seccode'                => '发布操作需填验证码',
