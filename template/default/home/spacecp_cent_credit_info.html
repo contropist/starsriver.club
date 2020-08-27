@@ -11,7 +11,7 @@
 					<i><!--{if $credit[img]}-->{$credit[img]}<!--{/if}--></i>
 					{$credit[title]} : <!--{echo getuserprofile('extcredits'.$creditid) != 0 ? getuserprofile('extcredits'.$creditid) : '--';}-->{$credit[unit]}
 					<!--{if ($_G['setting']['ec_ratio'] && ($_G['setting']['ec_tenpay_opentrans_chnid'] || $_G['setting'][ec_tenpay_bargainor] || $_G['setting']['ec_account'])) || $_G['setting']['card']['open']}-->
-					<a href="home.php?mod=spacecp&ac=credit&op=buy">{lang card_use}</a>
+					<a class="recharge" href="home.php?mod=spacecp&ac=credit&op=buy">{lang card_use}</a>
 					<!--{/if}-->
 				</li>
 			<!--{/if}-->

@@ -11,8 +11,6 @@ if(!defined('IN_DISCUZ')) {
 	exit('Access Denied');
 }
 
-$_G['disabledwidthauto'] = 0;
-
 require_once libfile('function/spacecp');
 
 if(!$_G['setting']['taskon'] && $_G['adminid']  != 1) {

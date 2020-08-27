@@ -1,15 +1,6 @@
 <div class="nav-vertical">
 	<i class="title">{lang feed}</i>
-	<!--{if $_G[setting][homestyle]}-->
-		<!--{template common/userabout}-->
-	<!--{else}-->
-	<ul>
-		<li $actives[we]><a href="home.php?mod=space&do=home&view=we">{lang friend_feed}</a></li>
-		<li $actives[me]><a href="home.php?mod=space&do=home&view=me">{lang my_feed}</a></li>
-		<li $actives[all]><a href="home.php?mod=space&do=home&view=all">{lang view_all}</a></li>
-		<!--{hook/space_trends_navlink}-->
-	</ul>
-	<!--{/if}-->
+    <!--{template common/userabout}-->
 </div>
 <!--{if $_G[uid]}-->
 	<!--{if $_G['setting']['taskon'] && !empty($task) && is_array($task)}-->

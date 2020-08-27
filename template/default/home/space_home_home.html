@@ -1,57 +1,81 @@
-<div class="vessel">
-    <div class="nav">
-        <a class="$actives[all]" href="home.php?mod=space&do=home&view=all">{lang view_all}</a>
-        <!--{if $_G['uid']}-->
-        <a class="$actives[we]" href="home.php?mod=space&do=home&view=we">{lang friend_feed}</a>
-        <a class="$actives[me]" href="home.php?mod=space&do=home&view=me">{lang my_feed}</a>
-        <!--{hook/space_trends_navlink}-->
-        <!--{if $_G['setting']['magicstatus'] && $_G['setting']['magics']['thunder']}-->
-        <a id="a_magic_thunder" href="home.php?mod=magic&mid=thunder" onclick="showWindow('magics', this.href, 'get', 0)">{$_G[setting][magics][thunder]}</a>
-        <!--{/if}-->
-        <!--{/if}-->
-    </div>
-    <!--{if $_GET['view'] !== 'me'}-->
-    <hr>
-    <ul class="tags">
-        <!--{if $_GET[view] == 'all'}-->
-        <li class="$orderactives[dateline]"><a href="home.php?mod=space&do=home&view=all&order=dateline">{lang newest_feed}</a></li>
-        <li class="$orderactives[hot]"><a href="home.php?mod=space&do=home&view=all&order=hot">{lang hot_feed}</a></li>
-        <!--{elseif $groups}-->
-        <li class="{$gidactives[-1]}"><a href="home.php?mod=space&do=home&view=we">{lang all_friends}</a></li>
-        <!--{loop $groups $key $value}--><li class="{$gidactives[$key]}"><a href="home.php?mod=space&do=home&view=we&gid=$key">$value</a></li><!--{/loop}-->
-        <!--{/if}-->
-    </ul>
+<div class="whitespace cn">
+    <!--{if $list}-->
+        <ul class="timeline">
+            <li class="node">
+                <!--{loop $list $day $value}-->
+                    <!--{template home/space_home_home_mod_li}-->
+                <!--{/loop}-->
+            </li>
+        </ul>
+        <div class="page" id="pager_home">
+            <!--{if $multi}-->
+                $multi
+            <!--{else}-->
+                <p class="nomore">{lang nomore}</p>
+            <!--{/if}-->
+        </div>
+    <!--{elseif $feeds}-->
+        <ul class="timeline">
+            <li class="node">
+                <!--{loop $feeds $feed}-->
+                    <!--{template home/space_home_home_mod_li}-->
+                <!--{/loop}-->
+            </li>
+        </ul>
+        <div class="page" id="pager_home">
+            <!--{if $multi}-->
+                $multi
+            <!--{else}-->
+                <p class="nomore">{lang nomore}</p>
+            <!--{/if}-->
+        </div>
+    <!--{else}-->
+        <!--{template home/space_home__mod_timeline_empty}-->
     <!--{/if}-->
+    <script>
+        addEvent(document,'DOMContentLoaded',function () {
+            let postform = SR('#doing_deliver')[0],
+                page = SR('#pager_home')[0],
+                scrltem = 0,
+                positionfix = function (){
+                    if(SRGlobal.Window.Width <= 1680){
+                        postform.style = '';
+                        if(SRGlobal.Window.Scroll.DirY === 'down'){
+                            scrltem = SRGlobal.Window.Scroll.Top;
+                            if(page) page.addClass('sleep');
+                            if(postform) postform.addClass('sleep');
+                        } else if(scrltem - SRGlobal.Window.Scroll.Top > Math.min(640, MasElements.viewer.scrollHeight - SRGlobal.Window.Height - 20)) {
+                            if(page) page.delClass('sleep');
+                            if(postform) postform.delClass('sleep');
+                        }
+                    }
+                },
+
+                Tl = SR('.timeline')[0],
+                Ts = SR('.time-A'),
+                Th = Ts[0].Css.height,
+                TsOn = function (){
+                    for (let i=0 ; i <Ts.length; i++){
+                        if(Ts[i].parentNode.Css.top < 82 && (isUndefined(Ts[i+1]) || Ts[i+1].parentNode.Css.top > 82)){
+                            Ts[i].style = 'position: fixed; top: 82px;';
+                            Ts[i].parentNode.style = 'padding-top:' + Th + 'px;';
+                        } else {
+                            Ts[i].style = Ts[i].parentNode.style = '';
+                        }
+                    }
+                };
+
+            if(MasElements.viewer.scrollHeight <= SRGlobal.Window.Height){
+                Tl.style.marginBottom = '200px';
+            }
+
+            if(page) page.addClass('sleep');
+            if(postform) postform.addClass('sleep');
+
+            addEvent(MasElements.viewer,'scroll',TsOn);
+            addEvent(MasElements.viewer,'scroll',positionfix);
+        });
+    </script>
 </div>
-<!--[nest=nestcontentmiddle]--><div class="area" id="nestcontentmiddle"></div><!--[/nest]-->
-
-<!--{if $feeds}-->
-    <!--{loop $feeds $feed}-->
-        <!--{template home/space_home_home_mod_li}-->
-    <!--{/loop}-->
-<!--{else}-->
-    <div class="vessel withedge">
-        <p class="global_nothing">{lang no_feed}</p>
-    </div>
-<!--{/if}-->
-
-<!--{if $filtercount}-->
-    <div class="vessel" id="feed_filter_notice_{$start}">
-        {lang depending_your}<a href="home.php?mod=spacecp&ac=privacy&op=filter" target="_blank">{lang filter_settings}</a>,{lang shield_feed_message} (<a onclick="filter_more($start);" id="a_feed_privacy_more">{lang click_view}</a>)
-    </div>
-    <div class="vessel hide" id="feed_filter_div_{$start}" style="display:none;">
-        <h4>{lang following_feed_shielding}</h4>
-            <!--{loop $filter_list $value}-->
-                <!--{subtemplate home/space_home_home_mod_li}-->
-            <!--{/loop}-->
-           <a onclick="filter_more($start);">&laquo; {lang pack_up}</a>
-    </div>
-<!--{/if}-->
-
-<!--{if $multi}-->
-<div class="vessel">
-    <div class="pgs">$multi</div>
-</div>
-<!--{/if}-->
-<!--{hook/space_trends_bottom}-->
 <div class="vessel" id="ajax_wait"></div>
+<!--{hook/space_trends_bottom}-->

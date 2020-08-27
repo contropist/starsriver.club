@@ -19,8 +19,6 @@ $id = empty($_GET['id'])?0:intval($_GET['id']);
 
 $perpage = 20;
 
-$_G['disabledwidthauto'] = 0;
-
 $start = ($page-1)*$perpage;
 ckstart($start, $perpage);
 

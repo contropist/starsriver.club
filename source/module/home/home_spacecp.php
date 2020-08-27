@@ -52,8 +52,6 @@ if (lang('core', 'title_memcp_' . $ac)) {
     $navtitle = lang('core', 'title_memcp_' . $ac);
 }
 
-$_G['disabledwidthauto'] = 0;
-
 require_once libfile('spacecp/' . $ac, 'include');
 
 ?>

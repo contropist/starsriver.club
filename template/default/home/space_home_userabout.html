@@ -126,9 +126,7 @@
         <span class="username">$space[username]<i class="tag">UID: $space[uid]</i></span>
         <div class="btn-group">
             <!--{if $space[uid] == $_G[uid]}-->
-                <!--{if $_G[setting][homepagestyle]}-->
-                    <a class="bit-build" href="home.php?mod=space&do=index&nest=yes"><span class="tooltip" data-pos="tl">{lang nest_space}</span></a>
-                <!--{/if}-->
+                <a class="bit-build" href="home.php?mod=space&do=index&nest=yes"><span class="tooltip" data-pos="tl">{lang nest_space}</span></a>
                 <!--{if helper_access::check_module('wall')}-->
                     <a class="icon-mail2" href="home.php?mod=space&do=wall"><span class="tooltip" data-pos="tl">{lang view_message}</span></a>
                 <!--{/if}-->
@@ -157,9 +155,7 @@
         <span class="username">$space[username]<i class="tag">UID: $space[uid]</i></span>
         <div class="btn-group">
             <!--{if $space[uid] == $_G[uid]}-->
-                <!--{if $_G[setting][homepagestyle]}-->
-                    <a class="bit-build" href="home.php?mod=space&do=index&nest=yes"><span class="tooltip" data-pos="bl">{lang nest_space}</span></a>
-                <!--{/if}-->
+                <a class="bit-build" href="home.php?mod=space&do=index&nest=yes"><span class="tooltip" data-pos="bl">{lang nest_space}</span></a>
                 <!--{if helper_access::check_module('wall')}-->
                     <a class="icon-mail2" href="home.php?mod=space&do=wall"><span class="tooltip" data-pos="bl">{lang view_message}</span></a>
                 <!--{/if}-->

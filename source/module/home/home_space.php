@@ -145,9 +145,6 @@ $nestmode = 0;
 
 list($seccodecheck, $secqaacheck) = seccheck('publish');
 
-if ($do != 'index') {
-    $_G['disabledwidthauto'] = 0;
-}
 require_once libfile('space/' . $do, 'include');
 
 ?>

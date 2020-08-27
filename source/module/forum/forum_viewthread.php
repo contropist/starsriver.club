@@ -988,17 +988,11 @@ if(getstatus($_G['forum_thread']['status'], 10)) {
 if(empty($_GET['viewpid'])) {
 	$sufix = '';
 	if($_GET['from'] == 'portal') {
-		$_G['disabledwidthauto'] = 1;
-		$_G['widthauto'] = 0;
 		$sufix = '_portal';
 		$post = &$postlist[$_G['forum_firstpid']];
 	} elseif($_GET['from'] == 'preview') {
-		$_G['disabledwidthauto'] = 1;
-		$_G['widthauto'] = 0;
 		$sufix = '_preview';
 	} elseif($_GET['from'] == 'album') {
-		$_G['disabledwidthauto'] = 1;
-		$_G['widthauto'] = 0;
 		$sufix = '_album';
 		$post = &$postlist[$_G['forum_firstpid']];
 		$post['message'] = cutstr(strip_tags(preg_replace('/(<ignore_js_op>.*<\/ignore_js_op>)/is', '', $post['message'])), 200);

@@ -122,8 +122,6 @@ class discuz_application extends discuz_base{
 			'gzipcompress' => '',
 			'authkey' => '',
 			'timenow' => [],
-			'widthauto' => 0,
-			'disabledwidthauto' => 0,
 
 			'PHP_SELF' => '',
 			'siteurl' => '',

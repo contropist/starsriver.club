@@ -540,26 +540,12 @@ if(!submitcheck('settingsubmit')) {
 		/*search={"setting_styles":"action=setting&operation=styles","setting_styles_global":"action=setting&operation=styles&anchor=global"}*/
 		showtips('setting_tips', 'global_tips', $_GET['anchor'] == 'global');
 		showtableheader('setting_styles_global', 'nobottom', 'id="global"'.($_GET['anchor'] != 'global' ? ' style="display: none"' : ''));
-		showsetting('setting_styles_global_home_style', array('settingnew[homestyle]', array(
-				array(1, $lang['setting_styles_global_home_style_1']),
-				array(0, $lang['setting_styles_global_home_style_0']),
-		)), $setting['homestyle'], 'mradio');
-		showsetting('setting_styles_global_homepage_style', array('settingnew[homepagestyle]', array(
-				array(1, $lang['setting_styles_global_homepage_style_1']),
-				array(0, $lang['setting_styles_global_homepage_style_0']),
-		)), $setting['homepagestyle'], 'mradio');
-
+		
 		showsetting('setting_styles_global_navsubhover', array('settingnew[navsubhover]', array(
 			array(0, $lang['setting_styles_global_navsubhover_0']),
 			array(1, $lang['setting_styles_global_navsubhover_1']),
 		)), $setting['navsubhover'], 'mradio');
-		showsetting('setting_styles_index_allowwidthauto', array('settingnew[allowwidthauto]', array(
-			array(1, $lang['setting_styles_index_allowwidthauto_1']),
-			array(0, $lang['setting_styles_index_allowwidthauto_0']),
-		), 1), $setting['allowwidthauto'], 'mradio');
-		showtagheader('tbody', '', 1, 'sub');
-		showsetting('setting_styles_index_switchwidthauto', 'settingnew[switchwidthauto]', $setting['switchwidthauto'], 'radio');
-		showtagfooter('tbody');
+		
 		showsetting('setting_styles_global_allowfloatwin', array('settingnew[allowfloatwin]', $floatwinarray), $setting['allowfloatwin'], 'mcheckbox');
 		showsetting('setting_styles_global_showfjump', 'settingnew[showfjump]', $setting['showfjump'], 'radio');
 		showsetting('setting_styles_global_creditnotice', 'settingnew[creditnotice]', $setting['creditnotice'], 'radio');

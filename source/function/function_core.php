@@ -1626,20 +1626,6 @@ function diconv($str, $in_charset, $out_charset = CHARSET, $ForceTable = FALSE) 
 	return $out;
 }
 
-function widthauto() {
-	global $_G;
-	if($_G['disabledwidthauto']) {
-		return 0;
-	}
-	if(!empty($_G['widthauto'])) {
-		return $_G['widthauto'] > 0 ? 1 : 0;
-	}
-	if($_G['setting']['switchwidthauto'] && !empty($_G['cookie']['widthauto'])) {
-		return $_G['cookie']['widthauto'] > 0 ? 1 : 0;
-	} else {
-		return $_G['setting']['allowwidthauto'] ? 0 : 1;
-	}
-}
 function renum($array) {
 	$newnums = $nums = [];
 	foreach ($array as $id => $num) {

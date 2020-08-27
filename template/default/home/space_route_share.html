@@ -1,18 +1,26 @@
 <!--{if empty($nestmode)}-->
-    <!--{template home/space_trends_header}-->
+    <!--{template home/space_trends__header}-->
     <div class="plate layout-3-type2 app-dynamic soft">
         <section>
-            <!--{subtemplate home/space_trends_side_left}-->
+            <!--{subtemplate home/space_trends__side_left}-->
         </section>
         <section>
+            <!--[nest=nest1]--><div id="nest1" class="area"></div><!--[/nest]-->
+            <!--[nest=nest2]--><div id="nest2" class="area"></div><!--[/nest]-->
+            <!--[nest=nest3]--><div id="nest3" class="area"></div><!--[/nest]-->
+
+            <!--[nest=nestcontenttop]--><div id="nestcontenttop" class="area"></div><!--[/nest]-->
+
             <!--{template home/space_trends_share}-->
+
+            <!--[nest=nestcontentbottom]--><div id="nestcontentbottom" class="area"></div><!--[/nest]-->
         </section>
         <section>
-            <!--{subtemplate home/space_trends_side_right}-->
+            <!--{subtemplate home/space_trends__side_right}-->
         </section>
     </div>
 <!--{else}-->
-    <!--{template home/space_home_header}-->
+    <!--{template home/space_home__header}-->
     <div class="mas-viewer">
         <div class="mas-viewer-header">
             <!--{template home/space_home_userabout}-->

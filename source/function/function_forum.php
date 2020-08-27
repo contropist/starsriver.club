@@ -589,9 +589,6 @@ function loadforum($fid = null, $tid = null) {
 	if(empty($_G['uid'])) {
 		$_G['group']['allowpostactivity'] = $_G['group']['allowpostpoll'] = $_G['group']['allowvote'] = $_G['group']['allowpostreward'] = $_G['group']['allowposttrade'] = $_G['group']['allowpostdebate'] = $_G['group']['allowpostrushreply'] = 0;
 	}
-	if(!empty($_G['forum']['widthauto'])) {
-		$_G['widthauto'] = $_G['forum']['widthauto'];
-	}
 }
 
 function get_thread_by_tid($tid, $forcetableid = null) {

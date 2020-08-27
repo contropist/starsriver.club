@@ -11,8 +11,6 @@ if(!defined('IN_DISCUZ')) {
 	exit('Access Denied');
 }
 
-$_G['disabledwidthauto'] = 0;
-
 $ac = in_array($_GET['ac'], ['comment', 'article', 'related', 'block', 'portalblock', 'blockdata', 'topic', 'nest', 'upload', 'category', 'plugin', 'logout'])?$_GET['ac']:'index';
 
 if (!$_G['setting']['portalstatus'] && !in_array($ac, ['index', 'block', 'portalblock', 'blockdata', 'logout'])) {

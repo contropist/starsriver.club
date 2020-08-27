@@ -1,4 +1,4 @@
-<!--{template home/space_home_header}-->
+<!--{template home/space_home__header}-->
 
 <div class="mas-viewer">
     <div class="mas-viewer-header">
@@ -99,8 +99,8 @@
                         <ol class="info-mix credit panel-container">
                             <li class="box size-2-1"><i class="mt-all_inbox" style="background: var(--color-file-yel)"></i><em>{lang used_space}</em><s>$space[attachsize]</s></li>
                             <li class="box size-2-1"><i class="mt-credit_card" style="background: var(--color-sky-blue)"></i><em>{lang credits}</em><s>$space[credits]</s></li>
-                            <li class="box size-2-1 {if !$space[buyercredit]}disabled{/if}"><i class="mt-store" style="background: var(--color-hat-green)"></i><em>{lang eccredit_sellerinfo}</em><s><a href="home.php?mod=space&uid=$space[uid]&do=trade&view=eccredit<!--{if $_G[setting][homepagestyle]}-->&sns=1<!--{/if}-->#sellcredit" target="_blank">$space[buyercredit]</a></s></li>
-                            <li class="box size-2-1 {if !$space[sellercredit]}disabled{/if}"><i class="mt-shopping_cart" style="background: var(--color-onnanoko-pink)"></i><em>{lang eccredit_buyerinfo}</em><s><a href="home.php?mod=space&uid=$space[uid]&do=trade&view=eccredit<!--{if $_G[setting][homepagestyle]}-->&sns=1<!--{/if}-->#buyercredit" target="_blank">$space[sellercredit]</a></s></li>
+                            <li class="box size-2-1 {if !$space[buyercredit]}disabled{/if}"><i class="mt-store" style="background: var(--color-hat-green)"></i><em>{lang eccredit_sellerinfo}</em><s><a href="home.php?mod=space&uid=$space[uid]&do=trade&view=eccredit&sns=1#sellcredit" target="_blank">$space[buyercredit]</a></s></li>
+                            <li class="box size-2-1 {if !$space[sellercredit]}disabled{/if}"><i class="mt-shopping_cart" style="background: var(--color-onnanoko-pink)"></i><em>{lang eccredit_buyerinfo}</em><s><a href="home.php?mod=space&uid=$space[uid]&do=trade&view=eccredit&sns=1#buyercredit" target="_blank">$space[sellercredit]</a></s></li>
                         </ol>
                         <ul class="info-mix credit2 secondary">
                             <!--{loop $_G[setting][extcredits] $key $value}-->
@@ -261,7 +261,7 @@
                             <li class="nowrap"><i class="ft-share-2"></i><em>{lang shares_num}：</em><s><a href="home.php?mod=space&uid=$space[uid]&do=share&view=me&from=space" target="_blank">$space[sharings]</a></s></li>
                             <!--{/if}-->
 
-                            <li class="nowrap"><i class="ft-mouse-pointer"></i><em>{lang space_visits}：</em><s><!--{if $_G[setting][homepagestyle]}-->$space[views]<!--{else}-->--<!--{/if}--></s></li>
+                            <li class="nowrap"><i class="ft-mouse-pointer"></i><em>{lang space_visits}：</em><s><!--{if $space[views]}-->$space[views]<!--{else}-->--<!--{/if}--></s></li>
                         </ul>
                     </div>
                 </li>

@@ -838,11 +838,7 @@ var rowtypedata = [
 						showsetting('forums_edit_extend_simple', '', '', cplang('forums_edit_sub_multi_tips'));
 					}
 				}
-				showsetting('forums_edit_extend_widthauto', array('widthautonew', array(
-					array(0, cplang('default')),
-					array(-1, cplang('forums_edit_extend_widthauto_-1')),
-					array(1, cplang('forums_edit_extend_widthauto_1')),
-				), 1), $forum['widthauto'], 'mradio');
+
 				showsetting('forums_edit_extend_picstyle', 'picstylenew', $forum['picstyle'], 'radio');
 				showsetting('forums_edit_extend_allowside', 'allowsidenew', $forum['allowside'], 'radio');
 				showsetting('forums_edit_extend_recommend_top', 'allowglobalsticknew', $forum['allowglobalstick'], 'radio');
@@ -1782,7 +1778,6 @@ EOT;
 				'commentitem' => $_GET['commentitemnew'],
 				'formulaperm' => $_GET['formulapermnew'],
 				'picstyle' => $_GET['picstylenew'],
-				'widthauto' => $_GET['widthautonew'],
 				'noantitheft' => intval($_GET['noantitheftnew']),
 				'noforumhidewater' => intval($_GET['noforumhidewaternew']),
 				'noforumrecommend' => intval($_GET['noforumrecommendnew']),

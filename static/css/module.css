@@ -6556,9 +6556,6 @@
         background-size: 100%;
     }
 
-    .app-dynamic .side-userinfo {
-
-    }
     .app-dynamic .side-userinfo .user-banner{
         display: block;
         width: 100%;
@@ -8282,6 +8279,10 @@
         .app-userspace #userspace_share .timeline .share-item-thread .content .imgs{
 
         }
+        .app-userspace #userspace_share .timeline .share-item-thread .content .redirect-needed{
+            text-align: center;
+            color: var(--color-text-lightgray);
+        }
 
         .app-userspace #userspace_share .timeline .share-item-space {
             --avatar-size: 64px;
@@ -9936,6 +9937,21 @@
         line-height: 20px;
         vertical-align: top;
         margin: 6px 3px 0 0;
+    }
+    .app-profile [id*="setting_"] .credit-list .credit-it .recharge{
+        margin: 0 5px;
+        padding: 0 5px;
+        height: 24px;
+        vertical-align: middle;
+        line-height: 24px;
+        border: 2px solid var(--color-main-theme);
+        border-radius: 5px;
+        box-shadow: 0 0 0 2px var(--color-main-theme-shadow);
+        color: var(--color-main-theme-dark);
+    }
+    .app-profile [id*="setting_"] .credit-list .credit-it .recharge:hover{
+        background: var(--color-main-theme);
+        color: #fff;
     }
 
     .app-profile [id*="setting_avatar"] .avatar-preview{

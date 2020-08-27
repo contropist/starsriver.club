@@ -221,9 +221,7 @@ function replacesitevar($string, $replaces = []) {
 function clearcookies() {
 	global $_G;
 	foreach($_G['cookie'] as $k => $v) {
-		if($k != 'widthauto') {
-			dsetcookie($k);
-		}
+	    dsetcookie($k);
 	}
 	$_G['uid'] = $_G['adminid'] = 0;
 	$_G['username'] = $_G['member']['password'] = '';

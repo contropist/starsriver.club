@@ -2,8 +2,7 @@
 <!--{eval $friendsname = array(1 => '{lang friendname_1}',2 => '{lang friendname_2}',3 => '{lang friendname_3}',4 => '{lang friendname_4}');}-->
 
 
-<!--{if $_G[setting][homepagestyle]}-->
-	<!--{subtemplate home/space_home_header}-->
+	<!--{subtemplate home/space_home__header}-->
 	<div>
 		<div class="mn">
 			<div class="bm">
@@ -12,27 +11,6 @@
 					<h1 class="mt">{lang album}</h1>
 				</div>
 			<div class="bm_c">
-<!--{else}-->
-	<!--{template common/header}-->
-	<div id="pt" class="bm cl">
-		<div class="z">
-			<a href="./" class="nvhm" title="{lang homepage}">$_G[setting][bbname]</a><em class="direct"></em>
-			<a href="home.php?mod=space&uid=$space[uid]">{$space[username]}</a><em class="direct"></em>
-			<a href="home.php?mod=space&uid=$space[uid]&do=album&view=me&from=space">{lang album}</a>
-		</div>
-	</div>
-	
-	<div>
-		<!--[nest=nest1]--><div id="nest1" class="area"></div><!--[/nest]-->
-	</div>
-	<!--{template home/space_menu}-->
-	<div>
-		<div class="mn">
-			<!--[nest=nestcontenttop]--><div id="nestcontenttop" class="area"></div><!--[/nest]-->
-			<div class="bm bw0">
-				<div class="bm_c">
-<!--{/if}-->
-		
 		<div class="tbmu cl">
 			<!--{if $album[albumid]>0}-->
 			<a href="home.php?mod=spacecp&ac=favorite&type=album&id=$album[albumid]&spaceuid=$space[uid]&handlekey=sharealbumhk_{$album[albumid]}" id="a_favorite" onclick="showWindow(this.id, this.href, 'get', 0);" class="oshr ofav">{lang favorite}</a>
@@ -130,28 +108,15 @@
 			</div>
 		</div>
 		<!--{/if}-->
-		
-		<!--{if !$_G[setting][homepagestyle]}--><!--[nest=nestcontentbottom]--><div id="nestcontentbottom" class="area"></div><!--[/nest]--><!--{/if}-->
 
 
 					</div>
 				</div>
-			<!--{if $_G[setting][homepagestyle]}-->
 			</div>
 			<div class="sd">
 				<!--{subtemplate home/space_userabout}-->
-			<!--{/if}-->
 		</div>
 	</div>
-
-<!--{if !$_G[setting][homepagestyle]}-->
-	<div class="wp mtn">
-		<!--[nest=nest3]--><div id="nest3" class="area"></div><!--[/nest]-->
-	</div>
-<!--{/if}-->
-
-	
-
 
 
 <!--{template common/footer}-->

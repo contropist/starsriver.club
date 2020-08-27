@@ -15,7 +15,7 @@
                 <!--{eval $dominN = date('ymdi',$dv['dateline']);}-->
                 <!--{eval $doid = $dv[doid];}-->
                 <!--{eval $_GET[key] = $key = random(8);}-->
-                <li class="node {if $doday != $dodayN}dayMark{/if}" id="{$key}dl{$doid}" {if checkperm('managedoing')}title="IP: $dv[ip]"{/if}>
+                <li class="node {if $doday != $dodayN}dayMark{/if}" id="{$key}dl{$doid}" title="{if checkperm('managedoing')}IP: $dv[ip]{/if}">
                     <div class="n-left">
                         <!--{if $doday != $dodayN}-->
                             <!--{eval $doday = $dodayN;}-->
@@ -60,7 +60,6 @@
                             <a class="icon reply mt-textsms" onclick="docomment_form($doid, 0, '$key');"></a>
                             <!--{/if}-->
                         </div>
-
                     </div>
                 </li>
             <!--{/loop}-->
@@ -75,29 +74,7 @@
             <!--{/if}-->
         </div>
     <!--{else}-->
-        <ul class="timeline">
-            <li class="node">
-            <div class="n-left">
-                <i class="time-A">? / ? / ?</i>
-                <i class="time-B">? : ?</i>
-                <div class="user-tag">
-                    <a class="avatar"><!--{avatar(0,'small')}--></a>
-                    <a class="username">————</a>
-                </div>
-            </div>
-            <div class="n-right">
-                <div class="s-top">
-                    <i class="title">{lang nomore}</i>
-                </div>
-                <div class="s-center">
-                    <div class="message">{lang global_nothing}</div>
-                </div>
-            </div>
-            </li>
-        </ul>
-        <div class="page" id="pager_doing">
-            <p class="nomore">{lang nomore}</p>
-        </div>
+        <!--{template home/space_home__mod_timeline_empty}-->
     <!--{/if}-->
     <script>
         addEvent(document,'DOMContentLoaded',function () {

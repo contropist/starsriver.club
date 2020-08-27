@@ -13,8 +13,6 @@ if (!defined('IN_DISCUZ')) {
 $page = $_G['page'];
 $type = $_GET['type'];
 
-$_G['disabledwidthauto'] = 1;
-
 if (!in_array($type, array('index', 'member', 'thread', 'blog', 'poll', 'picture', 'activity', 'forum', 'group'))) {
     $type = 'index';
 }
