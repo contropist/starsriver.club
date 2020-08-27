@@ -1,0 +1,59 @@
+<script src="static/js/admincp.js"></script>
+<script src="{$static_path}/js/jquery.min.js"></script>
+<body  id="test">
+
+    <table class="tb tb2">
+        <tbody>
+        <tr>
+            <td>{lang tencentcloud_center:plugin_function}</td>
+            <td>{lang tencentcloud_center:version}</td>
+            <td>{lang tencentcloud_center:status}</td>
+            <td>{lang tencentcloud_center:operator}</td>
+        </tr>
+        <!--{loop $pluginsInfo $key $plugin}-->
+        {eval echo '<tr>';}
+            {eval
+            echo '<td><span class="bold">'.$plugin[nick_name].'</span>';
+                echo '<p><span class="light">'.$plugin[plugin_desc].'</span></p></td>';
+            echo '<td>'.$plugin[version].'</td>';
+            }
+
+            <!--{if  $plugin['activation'] == 'true' }-->
+                <!--{if $plugin['status'] == 'true'  }-->
+                {eval
+            echo '<td>{lang tencentcloud_center:open}</td>';
+            echo '<td><a type="button"  style="margin-right:2%" class="btn" href="' . $plugin['href'] . '" type="button">{lang tencentcloud_center:config}</a>';
+            echo '<input type="hidden" value="'.$plugin['plugin_id'].'" name="tencentconfig[pluginId]"/>';
+            echo '<input type="hidden" value="disable" name="tencentconfig[operation]"/>';
+                echo '<a type="button"  style="margin-right:2%" class="btn" href="admin.php?action=plugins&operation=config&do='.$currentluginId.'&tcplugin='.$plugin['plugin_id'].'&tcoperation=disable&formhash='.FORMHASH.'" type="button">{lang tencentcloud_center:close}</a></td>';
+            }
+
+            <!--{else}-->
+            {eval
+            echo '<td>{lang tencentcloud_center:close}</td>';
+            echo '<td><input type="hidden" value="'.$plugin['plugin_id'].'" name="tencentconfig[pluginId]"/>';
+            echo '<input type="hidden" value="enable" name="tencentconfig[operation]"/>';
+                echo '<a type="button"  style="margin-right:2%" class="btn" href="admin.php?action=plugins&operation=config&do='.$currentluginId.'&tcplugin='.$plugin['plugin_id'].'&tcoperation=enable&formhash='.FORMHASH.'" type="button">{lang tencentcloud_center:open}</a></td>';
+            }
+            <!--{/if}-->
+
+            <!--{else}-->
+                {eval
+            echo  '<td>{lang tencentcloud_center:havnt_install}</td>';
+            echo  '<td><a type="button" class="btn" href="https://addon.dismall.com/plugins/'.$plugin['plugin_identifier'].'.html">{lang tencentcloud_center:install}</a></td>';
+            }
+            <!--{/if}-->
+            {eval echo '</tr>';}
+        <!--{/loop}-->
+        </tbody>
+    </table>
+    <br>
+    <br>
+    <div style="text-align: center" >
+        <a href="https://openapp.qq.com/" target="_blank">{lang tencentcloud_center:document_center}</a> | <a href="https://github.com/Tencent-Cloud-Plugins/" target="_blank">GitHub</a> | <a
+            href="https://support.qq.com/product/164613" target="_blank">{lang tencentcloud_center:reply_advice}</a>
+    </div>
+
+
+</body>
+

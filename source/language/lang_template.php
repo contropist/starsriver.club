@@ -397,7 +397,6 @@ $lang = array (
     'notice_system' => '系统提醒',
     'notice_manage' => '管理工作',
     'notice_app' => '应用提醒',
-    'notice_userapp' => '应用邀请',
     'noprem_viewimg' => '暂时没有权限浏览此图片',
     'noprem_dlimg1' => '该图片需付',
     'noprem_dlimg2' => '才可浏览',

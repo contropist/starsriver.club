@@ -141,8 +141,6 @@ class discuz_application extends discuz_base{
 			'cache' => [],
 			'session' => [],
 			'lang' => [],
-			'my_app' => [],
-			'my_userapp' => [],
 
 			'fid' => 0,
 			'tid' => 0,
@@ -166,7 +164,7 @@ class discuz_application extends discuz_base{
 			'notice_structure' => [
 				'mypost' => array('post','pcomment','activity','reward','goods','at'),
 				'interactive' => array('poke','friend','wall','comment','click','sharenotice'),
-				'system' => array('system','myapp','credit','group','verify','magic','task','show','group','pusearticle','mod_member','blog','article'),
+				'system' => array('system','credit','group','verify','magic','task','show','group','pusearticle','mod_member','blog','article'),
 				'manage' => array('mod_member','report','pmreport'),
 				'app' => [],
 			],

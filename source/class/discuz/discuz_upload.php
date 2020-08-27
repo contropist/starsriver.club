@@ -244,6 +244,7 @@ Class discuz_upload{
 	}
 
 	function make_dir($dir, $index = true) {
+        global $_G;
 		$res = true;
 		if(!is_dir($dir)) {
 			$res = @mkdir($dir, 0777);

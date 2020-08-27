@@ -276,6 +276,7 @@ a, button, .btn, select {
 .disabled, *:disabled {
     pointer-events: none !important;
     opacity: .39;
+    cursor: not-allowed !important;
 }
 
 .ellipsis {

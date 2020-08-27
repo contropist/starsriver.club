@@ -2011,9 +2011,6 @@ function updatemoderate($idtype, $ids, $status = 0) {
 	helper_form::updatemoderate($idtype, $ids, $status);
 }
 
-function userappprompt() {
-}
-
 function dintval($int, $allowarray = false) {
 	$ret = floatval($int);
 	if($int == $ret || !$allowarray && is_array($int)) return $ret;

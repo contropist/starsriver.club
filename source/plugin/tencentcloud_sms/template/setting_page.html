@@ -1,0 +1,213 @@
+<!--
+ Copyright (C) 2020 Tencent Cloud.
+
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+
+<style type="text/css">
+    input[disabled] {
+        background-color: gainsboro;
+    }
+</style>
+<form action="{$actionUrl}" method="post">
+    <table class="tb tb2">
+        <tbody>
+        <tr>
+            <th colspan="15" class="partition">{lang tencentcloud_sms:setting}</th>
+        </tr>
+        <tr>
+            <td colspan="2" class="td27">{lang tencentcloud_sms:custom_key}</td>
+        </tr>
+        <tr class="noborder">
+            <td class="vtop rowform">
+                <ul>
+                    <li <!--{if $customKey === 1 }-->class="checked" <!--{/if}--> ><input <!--{if $customKey === 1 }-->checked="checked" <!--{/if}--> id="custom-key" class="radio" type="radio" name="customKey" value="1"><label for="custom-key">{lang tencentcloud_sms:yes}</label></li>
+                    <li <!--{if $customKey === 0 }-->class="checked" <!--{/if}--> ><input <!--{if $customKey === 0 }-->checked="checked" <!--{/if}--> class="radio" id="global-key" type="radio" name="customKey" value="0"><label for="global-key">{lang tencentcloud_sms:no}</label></li>
+                </ul>
+            </td>
+            <td class="vtop tips2">{lang tencentcloud_sms:custom_key_desc}</td>
+        </tr>
+        <tr>
+            <td colspan="2" class="td27" ><label for="secret-id">SecretId:</label></td>
+        </tr>
+        <tr class="noborder">
+            <td class="vtop rowform">
+                <input id="secret-id" name="secretId" size="42" type="text" class="text" value="{$secretId}">
+            </td>
+            <td class="vtop tips2">SecretId</td>
+        </tr>
+        <tr>
+            <td colspan="2" class="td27"><label for="secret-key">SecretKey:</label></td>
+        </tr>
+        <tr class="noborder">
+            <td class="vtop rowform">
+                <input name="secretKey" size="42" id="secret-key" type="text" class="text" value="{$secretKey}">
+            </td>
+            <td class="vtop tips2">{lang tencentcloud_sms:visit}<a href="https://console.qcloud.com/cam/capi" target="_blank">{lang tencentcloud_sms:secret_manage}</a>{lang tencentcloud_sms:secret_key_desc}</td>
+        </tr>
+
+        <tr>
+            <td colspan="2" class="td27"><label for="sdk-app-id">SDKAppID:</label></td>
+        </tr>
+        <tr class="noborder">
+            <td class="vtop rowform">
+                <input name="SDKAppID" size="42" id="sdk-app-id" type="text" class="text" value="{$SDKAppID}">
+            </td>
+            <td class="vtop tips2">{lang tencentcloud_sms:visit}<a href="https://console.cloud.tencent.com/smsv2/app-manage" target="_blank">{lang tencentcloud_sms:app_manage}</a>{lang tencentcloud_sms:get_app_id}</td>
+        </tr>
+
+        <tr>
+            <td colspan="2" class="td27"><label for="sign">{lang tencentcloud_sms:sign}</label></td>
+        </tr>
+        <tr class="noborder">
+            <td class="vtop rowform">
+                <input name="sign" size="42" id="sign" type="text" class="text" value="{$sign}">
+            </td>
+            <td class="vtop tips2">{lang tencentcloud_sms:sign_desc}</td>
+        </tr>
+
+        <tr>
+            <td colspan="2" class="td27"><label for="template-id">{lang tencentcloud_sms:template_id}</label></td>
+        </tr>
+        <tr class="noborder">
+            <td class="vtop rowform">
+                <input name="templateId" size="42" id="template-id" type="text" class="text" value="{$templateId}">
+            </td>
+            <td class="vtop tips2">{lang tencentcloud_sms:template_id_desc}</td>
+        </tr>
+
+        <tr>
+            <td colspan="2" class="td27"><label for="code-expired">{lang tencentcloud_sms:code_expire}</label></td>
+        </tr>
+        <tr class="noborder">
+            <td class="vtop rowform">
+                <input name="codeExpired" size="42" id="code-expired" type="text" class="text" value="{$codeExpired}">
+            </td>
+            <td class="vtop tips2">{lang tencentcloud_sms:code_expire_desc}</td>
+        </tr>
+
+        <tr>
+            <td colspan="2" class="td27">{lang tencentcloud_sms:template_code_expire}</td>
+        </tr>
+        <tr class="noborder">
+            <td class="vtop rowform">
+                <ul>
+                    <li <!--{if $hasExpireTime === 1 }-->class="checked" <!--{/if}--> ><input <!--{if $hasExpireTime === 1 }-->checked="checked" <!--{/if}--> id="has-expired-time" class="radio" type="radio" name="hasExpiredTime" value="1"><label for="has-expired-time">{lang tencentcloud_sms:yes}</label></li>
+                    <li <!--{if $hasExpireTime === 0 }-->class="checked" <!--{/if}--> ><input <!--{if $hasExpireTime === 0 }-->checked="checked" <!--{/if}--> class="radio" id="has-not-expired-time" type="radio" name="hasExpiredTime" value="0"><label for="has-not-expired-time">{lang tencentcloud_sms:no}</label></li>
+                </ul>
+            </td>
+            <td class="vtop tips2">{lang tencentcloud_sms:template_code_expire_desc}</td>
+        </tr>
+
+        <tr>
+            <td colspan="2" class="td27">{lang tencentcloud_sms:post_need_phone}</td>
+        </tr>
+        <tr class="noborder">
+            <td class="vtop rowform">
+                <ul>
+                    <li <!--{if $postNeedPhone === 1 }-->class="checked" <!--{/if}--> ><input <!--{if $postNeedPhone === 1 }-->checked="checked" <!--{/if}--> id="post-need-phone" class="radio" type="radio" name="postNeedPhone" value="1"><label for="post-need-phone">{lang tencentcloud_sms:yes}</label></li>
+                    <li <!--{if $postNeedPhone === 0 }-->class="checked" <!--{/if}--> ><input <!--{if $postNeedPhone === 0 }-->checked="checked" <!--{/if}--> class="radio" id="post-not-need-phone" type="radio" name="postNeedPhone" value="0"><label for="post-not-need-phone">{lang tencentcloud_sms:no}</label></li>
+                </ul>
+            </td>
+            <td class="vtop tips2">{lang tencentcloud_sms:post_need_phone_desc}</td>
+        </tr>
+
+        <tr>
+            <td colspan="2" class="td27">{lang tencentcloud_sms:reply_need_phone}</td>
+        </tr>
+        <tr class="noborder">
+            <td class="vtop rowform">
+                <ul>
+                    <li <!--{if $commentNeedPhone === 1 }-->class="checked" <!--{/if}--> ><input <!--{if $commentNeedPhone === 1 }-->checked="checked" <!--{/if}--> id="reply-need-phone" class="radio" type="radio" name="replyNeedPhone" value="1"><label for="reply-need-phone">{lang tencentcloud_sms:yes}</label></li>
+                    <li <!--{if $commentNeedPhone === 0 }-->class="checked" <!--{/if}--> ><input <!--{if $commentNeedPhone === 0 }-->checked="checked" <!--{/if}--> class="radio" id="reply-not-need-phone" type="radio" name="replyNeedPhone" value="0"><label for="reply-not-need-phone">{lang tencentcloud_sms:no}</label></li>
+                </ul>
+            </td>
+            <td class="vtop tips2">{lang tencentcloud_sms:reply_need_phone_desc}</td>
+
+        </tr>
+
+        <tr>
+            <td colspan="15">
+                <div class="fixsel">
+                    <input type="submit" class="btn"  id="txc-submit-btn" value="{lang tencentcloud_sms:save}" />
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</form>
+<div style="text-align: center;flex: 0 0 auto;margin-top: 3rem;">
+    <a href="https://openapp.qq.com/docs/DiscuzX/sms.html" target="_blank">{lang tencentcloud_sms:docs_center}</a> | <a href="https://github.com/Tencent-Cloud-Plugins/tencentcloud-discuzx-plugin-sms" target="_blank">GitHub</a> | <a
+        href="https://support.qq.com/product/164613" target="_blank">{lang tencentcloud_sms:support}</a>
+</div>
+<script src="source/plugin/tencentcloud_sms/js/jquery.min.js"></script>
+<script type="text/javascript">
+    jQuery.noConflict();
+    jQuery(function($){
+        function changeDisable(type){
+            $("#secret-key").attr("disabled",type);
+            $("#secret-id").attr("disabled",type);
+        }
+        function initStatus(){
+            var status = $("#global-key").attr('checked');
+            if (status) {
+                changeDisable(true);
+            }
+        }
+        initStatus();
+
+        $("#custom-key").change(function () {
+            $(this).parent().addClass('checked');
+            $("#global-key").parent().removeClass('checked');
+            changeDisable(false);
+        });
+
+        $("#global-key").change(function () {
+            $(this).parent().addClass('checked');
+            $("#custom-key").parent().removeClass('checked');
+            changeDisable(true);
+        });
+
+        $("#has-expired-time").change(function () {
+            $(this).parent().addClass('checked');
+            $("#has-not-expired-time").parent().removeClass('checked');
+        });
+
+        $("#has-not-expired-time").change(function () {
+            $(this).parent().addClass('checked');
+            $("#has-expired-time").parent().removeClass('checked');
+        });
+
+        $("#post-not-need-phone").change(function () {
+            $(this).parent().addClass('checked');
+            $("#post-need-phone").parent().removeClass('checked');
+        });
+
+        $("#post-need-phone").change(function () {
+            $(this).parent().addClass('checked');
+            $("#post-not-need-phone").parent().removeClass('checked');
+        });
+
+        $("#reply-need-phone").change(function () {
+            $(this).parent().addClass('checked');
+            $("#reply-not-need-phone").parent().removeClass('checked');
+        });
+
+        $("#reply-not-need-phone").change(function () {
+            $(this).parent().addClass('checked');
+            $("#reply-need-phone").parent().removeClass('checked');
+        });
+
+
+    });
+</script>

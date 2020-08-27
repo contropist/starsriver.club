@@ -566,9 +566,6 @@ function getblockhtml($blockname,$parameters = []) {
 			$html = '<div class="ml mls cl">'.$html.'</div>';
 			break;
 
-		case 'myapp':
-			$html = '';		
-			break;
 		case 'block1':
 		case 'block2':
 		case 'block3':
@@ -719,11 +716,6 @@ function check_ban_block($blockname, $space) {
 		$return = false;
 	} elseif($blockname == 'thread' && $_G['setting']['allowviewuserthread'] === -1) {
 		$return = false;
-	} elseif($blockname == 'myapp') {
-		loadcache('usergroup_'.$space['groupid']);
-		if(empty($_G['setting']['my_app_status']) || empty($_G['cache']['usergroup_'.$space['groupid']]['allowmyop'])) {
-			$return = false;
-		}
 	}
 	return $return;
 }

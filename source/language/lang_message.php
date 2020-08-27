@@ -248,9 +248,7 @@ $lang = array (
     'mobile_template_no_found' => '你访问的页面无手机页面，是否进一步访问电脑版？<br><br><a href="{url}">继续访问</a><br><br>',
 
     'portal_status_off' => '抱歉，门户功能尚未开启',
-
-    'no_privilege_my_app_status' => '对不起，当前站点已经关闭了用户多应用服务。',
-
+    
     'register_check_found' => '该用户名已注册',
     'register_activation' => '用户名已存在',
     'no_invitation_code' => '抱歉，邀请码为空请填写，没有邀请码不允许注册',
@@ -529,9 +527,7 @@ $lang = array (
     'search_group_closed' => '抱歉，{_G/setting/navs/3/navname}搜索已关闭',
 
     'search_portal_closed' => '抱歉，文章搜索已冻结',
-
-    'no_privilege_myapp' => '抱歉，该应用不存在或已冻结，你可以<a href="userapp.php?mod=manage&my_suffix=%2Fapp%2Flist">选择其他应用</a>',
-
+    
     'collection_comment_closed' => '抱歉，管理员没有开放专辑的评论功能',
     'collection_comment_succ' => '发表评论成功',
     'collection_comment_remove_succ' => '评论成功删除',
@@ -564,9 +560,7 @@ $lang = array (
     'collection_follow_limited' => '关注专辑的数量不能超过 {limit} 个',
     'collection_follow_succ' => '成功订阅专辑',
     'collection_unfollow_succ' => '成功取消订阅专辑',
-
-    'no_privilege_deluserapp' => '抱歉，你没有权限操作此应用',
-
+    
     'email_check_sucess' => '你的邮箱({email})验证激活成功 ',
     'email_check_account_invalid' => '抱歉，受保护用户或创始人不能使用邮箱验证，直接修改用户信息。',
     'email_check_error' => '抱歉，你输入的邮箱验证链接不正确。你可以在个人资料页面，重新接收新的邮箱验证链接',

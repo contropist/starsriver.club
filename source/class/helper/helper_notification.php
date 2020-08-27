@@ -12,8 +12,7 @@ if(!defined('IN_DISCUZ')) {
 }
 
 class helper_notification {
-
-
+ 
 	public static function notification_add($touid, $type, $note, $notevars = [], $system = 0, $category = -1) {
 		global $_G;
 
@@ -31,9 +30,9 @@ class helper_notification {
 			$categoryname = '';
 			if($type == 'follow' || $type == 'follower') {
 				switch ($type) {
-							case 'follow' : $category = 5; break;
-							case 'follower' : $category = 6; break;
-						}
+                    case 'follow' : $category = 5; break;
+                    case 'follower' : $category = 6; break;
+                }
 				$categoryname = $type;
 			} else {
 				foreach($_G['notice_structure'] as $key => $val) {
@@ -66,7 +65,9 @@ class helper_notification {
 		} elseif($category == 1 || $category == 2) {
 			$categoryname = $type;
 		}
+		
 		$notevars['actor'] = "<a href=\"home.php?mod=space&uid=$_G[uid]\">".$_G['member']['username']."</a>";
+		
 		if(!is_numeric($type)) {
 			$vars = explode(':', $note);
 			if(count($vars) == 2) {
@@ -103,6 +104,7 @@ class helper_notification {
 			$setarr['authorid'] = 0;
 			$setarr['author'] = '';
 		}
+		
 		$pkId = 0;
 		if($oldnote['id']) {
 			C::t('home_notification')->update($oldnote['id'], $setarr);
@@ -111,6 +113,7 @@ class helper_notification {
 			$oldnote['new'] = 0;
 			$pkId = C::t('home_notification')->insert($setarr, true);
 		}
+		
 		$banType = array('task');
 
 		if(empty($oldnote['new'])) {

@@ -11,6 +11,8 @@ if(!defined('IN_DISCUZ')) {
 	exit('Access Denied');
 }
 
+global $_G;
+
 $addonsource = $_G['config']['addonsource'] ? $_G['config']['addonsource'] : ($_G['setting']['addon_source'] ? $_G['setting']['addon_source'] : array());
 $addon = $addonsource ?
 	$_G['config']['addon'][$addonsource] :
@@ -58,10 +60,13 @@ function cloudaddons_url($extra) {
 }
 
 function cloudaddons_check() {
+    
+    global $_G;
+    
 	if(!function_exists('gzuncompress')) {
 		cpmsg('cloudaddons_check_gzuncompress_error', '', 'error');
 	}
-	foreach(array('download', 'addonmd5') as $path) {
+	foreach(['download', 'addonmd5'] as $path) {
 		$tmpdir = DISCUZ_ROOT.'./data/'.$path.'/'.random(5);
 		$tmpfile = $tmpdir.'/index'.$_G['config']['output']['tpl_suffix'];
 		dmkdir($tmpdir, 0777);
@@ -395,7 +400,6 @@ function cloudaddons_clear($type, $id) {
 				@unlink($entrydir.'/'.$f);
 				if($type == 'plugin' && !$filedeleted) {
 					@unlink($entrydir.'/'.$f);
-					$importtxt = @implode('', file($entrydir.'/'.$f));
 					$pluginarray = getimportdata('Discuz! Plugin');
 					if($pluginarray['installfile']) {
 						@unlink($entrydir.'/'.$pluginarray['installfile']);

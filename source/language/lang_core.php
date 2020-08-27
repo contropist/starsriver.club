@@ -201,11 +201,6 @@ $lang = array
 
 	'title_memcp_pm' => '发送私信',
 	'title_memcp_domain' => '我的空间域名',
-	'title_userapp' => '应用',
-	'title_userapp_index_all' => '大家在玩什么',
-	'title_userapp_index_we' => '好友在玩什么',
-	'title_userapp_index_me' => '我在玩的',
-	'title_userapp_manage' => '{userapp}管理',
 
 	'title_collection' => '专辑',
 	'title_collection_create' => '创建专辑',

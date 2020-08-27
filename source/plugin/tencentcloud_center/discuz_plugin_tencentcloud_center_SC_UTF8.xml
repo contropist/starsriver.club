@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<root>
+	<item id="Title"><![CDATA[Discuz! Plugin]]></item>
+	<item id="Version"><![CDATA[X1.0.1]]></item>
+	<item id="Time"><![CDATA[2020-07-01 15:43]]></item>
+	<item id="From"><![CDATA[]]></item>
+	<item id="Data">
+		<item id="plugin">
+			<item id="available"><![CDATA[1]]></item>
+			<item id="adminid"><![CDATA[0]]></item>
+			<item id="name"><![CDATA[腾讯云全局配置]]></item>
+			<item id="identifier"><![CDATA[tencentcloud_center]]></item>
+			<item id="description"><![CDATA[腾讯云全局配置，提供统一配置和插件管理功能。]]></item>
+			<item id="datatables"><![CDATA[]]></item>
+			<item id="directory"><![CDATA[tencentcloud_center/]]></item>
+			<item id="copyright"><![CDATA[腾讯云]]></item>
+			<item id="version"><![CDATA[1.0.0]]></item>
+			<item id="__modules">
+				<item id="0">
+					<item id="name"><![CDATA[tencentcloudcenter]]></item>
+					<item id="param"><![CDATA[]]></item>
+					<item id="menu"><![CDATA[插件管理]]></item>
+					<item id="url"><![CDATA[]]></item>
+					<item id="type"><![CDATA[3]]></item>
+					<item id="adminid"><![CDATA[0]]></item>
+					<item id="displayorder"><![CDATA[0]]></item>
+					<item id="navtitle"><![CDATA[]]></item>
+					<item id="navicon"><![CDATA[]]></item>
+					<item id="navsubname"><![CDATA[]]></item>
+					<item id="navsuburl"><![CDATA[]]></item>
+				</item>
+				<item id="1">
+					<item id="name"><![CDATA[gloablsetting]]></item>
+					<item id="param"><![CDATA[]]></item>
+					<item id="menu"><![CDATA[全局配置]]></item>
+					<item id="url"><![CDATA[]]></item>
+					<item id="type"><![CDATA[3]]></item>
+					<item id="adminid"><![CDATA[0]]></item>
+					<item id="displayorder"><![CDATA[0]]></item>
+					<item id="navtitle"><![CDATA[]]></item>
+					<item id="navicon"><![CDATA[]]></item>
+					<item id="navsubname"><![CDATA[]]></item>
+					<item id="navsuburl"><![CDATA[]]></item>
+				</item>
+			</item>
+		</item>
+		<item id="version"><![CDATA[X3.4]]></item>
+		<item id="installfile"><![CDATA[install.php]]></item>
+		<item id="uninstallfile"><![CDATA[uninstall.php]]></item>
+		<item id="disablefile"><![CDATA[disable.php]]></item>
+		<item id="language">
+			<item id="scriptlang">
+				<item id="tencentcloud_captcha_desc"><![CDATA[通过腾讯云验证码提供立体、全面的人机验证。]]></item>
+				<item id="tencentcloud_captcha_nickname"><![CDATA[腾讯云验证码（CAPTCHA）插件]]></item>
+				<item id="tencentcloud_cos_nickname"><![CDATA[腾讯云对象存储（COS）插件]]></item>
+				<item id="tencentcloud_cos_desc"><![CDATA[通过腾讯云对象存储服务使网站中静态文件无缝同步腾讯云对象存储COS，提升网站内容访问速度，降低本地存储开销。]]></item>
+				<item id="tencentcloud_ims_nickname"><![CDATA[腾讯云图片内容安全（IMS）插件]]></item>
+				<item id="tencentcloud_ims_desc"><![CDATA[通过腾讯云图片内容安全服务对媒体库上传和URL插入的图片进行内容检测和过滤。]]></item>
+				<item id="tencentcloud_sms_nickname"><![CDATA[腾讯云短信（SMS）插件]]></item>
+				<item id="tencentcloud_sms_desc"><![CDATA[通过腾讯云短信服务使网站支持手机号登录,通过手机号+短信验证码找回密码等功能。]]></item>
+				<item id="tencentcloud_tms_nickname"><![CDATA[腾讯云文本内容安全（TMS）插件]]></item>
+				<item id="tencentcloud_tms_desc"><![CDATA[通过腾讯云文本内容安全服务对评论提交的文字进行内容检测和过滤。]]></item>
+				<item id="tencentcloud_vod_nickname"><![CDATA[腾讯云点播（VOD）插件]]></item>
+				<item id="tencentcloud_vod_desc"><![CDATA[使Discuz! X能快捷使用腾讯云点播产品功能。]]></item>
+				<item id="login_invalid"><![CDATA[账号切换失败，请重新设置帐号信息，您还可以尝试 {loginperm} 次。]]></item>
+				<item id="login_password_invalid"><![CDATA[账号切换失败，请重新设置帐号信息。]]></item>
+				<item id="login_question_empty"><![CDATA[请重新设置账号的安全提问以及正确的答案。]]></item>
+				<item id="login_question_invalid"><![CDATA[安全提问选择错误，请重新设置。]]></item>
+				<item id="user_nonexistence"><![CDATA[无效的马甲账号信息，请重新设置。]]></item>
+				<item id="user_locked"><![CDATA[此马甲账号被管理员锁定，您无法切换到 {user}，请与管理员联系。]]></item>
+				<item id="switch"><![CDATA[马甲]]></item>
+				<item id="memcp"><![CDATA[设置马甲]]></item>
+				<item id="usergroup_disabled"><![CDATA[您所在用户组无法使用本功能]]></item>
+				<item id="normal"><![CDATA[正常]]></item>
+				<item id="lock"><![CDATA[锁定]]></item>
+				<item id="username"><![CDATA[用户名]]></item>
+				<item id="repeat"><![CDATA[马甲]]></item>
+				<item id="lastswitch"><![CDATA[最后切换时间]]></item>
+				<item id="status"><![CDATA[状态]]></item>
+				<item id="search"><![CDATA[搜索]]></item>
+				<item id="repeats"><![CDATA[被哪些账号马甲]]></item>
+				<item id="repeatusers"><![CDATA[的马甲]]></item>
+				<item id="statuss"><![CDATA[状态的记录]]></item>
+				<item id="viewall"><![CDATA[查看全部]]></item>
+				<item id="deleted"><![CDATA[- 已删除 -]]></item>
+				<item id="adduser_succeed"><![CDATA[马甲账号 {usernamenew} 已成功添加。]]></item>
+				<item id="updateuser_succeed"><![CDATA[马甲帐号信息已成功更新。]]></item>
+			</item>
+			<item id="templatelang">
+				<item id="plugin_function"><![CDATA[插件功能]]></item>
+				<item id="version"><![CDATA[版本]]></item>
+				<item id="status"><![CDATA[状态]]></item>
+				<item id="operator"><![CDATA[操作]]></item>
+				<item id="config"><![CDATA[配置]]></item>
+				<item id="close"><![CDATA[关闭]]></item>
+				<item id="open"><![CDATA[开启]]></item>
+				<item id="havnt_install"><![CDATA[未安装]]></item>
+				<item id="install"><![CDATA[安装]]></item>
+				<item id="document_center"><![CDATA[文档中心]]></item>
+				<item id="reply_advice"><![CDATA[反馈建议]]></item>
+				<item id="save_settings"><![CDATA[保存设置]]></item>
+				<item id="yes"><![CDATA[是]]></item>
+				<item id="no"><![CDATA[否]]></item>
+				<item id="participate"><![CDATA[参与体验优化项目]]></item>
+				<item id="visit"><![CDATA[访问]]></item>
+				<item id="secret_manage"><![CDATA[密钥管理]]></item>
+				<item id="secret_desc"><![CDATA[获取 SecretId 和 SecretKey 或通过"新建密钥"创建密钥串]]></item>
+				<item id="open_global_secret"><![CDATA[开启全局密钥]]></item>
+			</item>
+		</item>
+	</item>
+</root>

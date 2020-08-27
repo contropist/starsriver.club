@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<root>
+	<item id="Title"><![CDATA[Discuz! Plugin]]></item>
+	<item id="Version"><![CDATA[X3.4]]></item>
+	<item id="Time"><![CDATA[2020-08-26 14:20]]></item>
+	<item id="From"><![CDATA[Discuz! Board (http://local.dzx.com/)]]></item>
+	<item id="Data">
+		<item id="plugin">
+			<item id="available"><![CDATA[0]]></item>
+			<item id="adminid"><![CDATA[1]]></item>
+			<item id="name"><![CDATA[腾讯云短信]]></item>
+			<item id="identifier"><![CDATA[tencentcloud_sms]]></item>
+			<item id="description"><![CDATA[支持用户在个人资料页绑定手机号。
+支持用户通过手机号/验证码登陆站点。
+支持发贴/回帖前验证用户是否绑定了手机号码。
+支持用户通过短信重置密码。
+支持管理员后台查询过往短信的发送记录。]]></item>
+			<item id="datatables"><![CDATA[]]></item>
+			<item id="directory"><![CDATA[tencentcloud_sms/]]></item>
+			<item id="copyright"><![CDATA[腾讯云]]></item>
+			<item id="version"><![CDATA[1.0.0]]></item>
+			<item id="__modules">
+				<item id="0">
+					<item id="name"><![CDATA[tencentcloud_sms]]></item>
+					<item id="param"><![CDATA[]]></item>
+					<item id="menu"><![CDATA[]]></item>
+					<item id="url"><![CDATA[]]></item>
+					<item id="type"><![CDATA[11]]></item>
+					<item id="adminid"><![CDATA[0]]></item>
+					<item id="displayorder"><![CDATA[0]]></item>
+					<item id="navtitle"><![CDATA[]]></item>
+					<item id="navicon"><![CDATA[]]></item>
+					<item id="navsubname"><![CDATA[]]></item>
+					<item id="navsuburl"><![CDATA[]]></item>
+				</item>
+				<item id="1">
+					<item id="name"><![CDATA[setting_page]]></item>
+					<item id="param"><![CDATA[]]></item>
+					<item id="menu"><![CDATA[设置]]></item>
+					<item id="url"><![CDATA[]]></item>
+					<item id="type"><![CDATA[3]]></item>
+					<item id="adminid"><![CDATA[0]]></item>
+					<item id="displayorder"><![CDATA[0]]></item>
+					<item id="navtitle"><![CDATA[]]></item>
+					<item id="navicon"><![CDATA[]]></item>
+					<item id="navsubname"><![CDATA[]]></item>
+					<item id="navsuburl"><![CDATA[]]></item>
+				</item>
+				<item id="2">
+					<item id="name"><![CDATA[sms_send_test]]></item>
+					<item id="param"><![CDATA[]]></item>
+					<item id="menu"><![CDATA[测试发送]]></item>
+					<item id="url"><![CDATA[]]></item>
+					<item id="type"><![CDATA[3]]></item>
+					<item id="adminid"><![CDATA[0]]></item>
+					<item id="displayorder"><![CDATA[1]]></item>
+					<item id="navtitle"><![CDATA[]]></item>
+					<item id="navicon"><![CDATA[]]></item>
+					<item id="navsubname"><![CDATA[]]></item>
+					<item id="navsuburl"><![CDATA[]]></item>
+				</item>
+				<item id="3">
+					<item id="name"><![CDATA[sms_sent_records]]></item>
+					<item id="param"><![CDATA[]]></item>
+					<item id="menu"><![CDATA[验证码短信发送记录]]></item>
+					<item id="url"><![CDATA[]]></item>
+					<item id="type"><![CDATA[3]]></item>
+					<item id="adminid"><![CDATA[0]]></item>
+					<item id="displayorder"><![CDATA[2]]></item>
+					<item id="navtitle"><![CDATA[]]></item>
+					<item id="navicon"><![CDATA[]]></item>
+					<item id="navsubname"><![CDATA[]]></item>
+					<item id="navsuburl"><![CDATA[]]></item>
+				</item>
+				<item id="4">
+					<item id="name"><![CDATA[bind_phone]]></item>
+					<item id="param"><![CDATA[]]></item>
+					<item id="menu"><![CDATA[绑定手机号]]></item>
+					<item id="url"><![CDATA[]]></item>
+					<item id="type"><![CDATA[7]]></item>
+					<item id="adminid"><![CDATA[0]]></item>
+					<item id="displayorder"><![CDATA[99]]></item>
+					<item id="navtitle"><![CDATA[]]></item>
+					<item id="navicon"><![CDATA[]]></item>
+					<item id="navsubname"><![CDATA[]]></item>
+					<item id="navsuburl"><![CDATA[]]></item>
+				</item>
+			</item>
+		</item>
+		<item id="version"><![CDATA[X3.4]]></item>
+		<item id="language">
+			<item id="scriptlang">
+				<item id="need_bind_phone"><![CDATA[请绑定手机号后再操作]]></item>
+				<item id="require_sdk"><![CDATA[缺少依赖文件，请确保安装了腾讯云sdk]]></item>
+				<item id="unbind"><![CDATA[未绑定手机号]]></item>
+				<item id="phone_error"><![CDATA[手机号格式错误]]></item>
+				<item id="send_success"><![CDATA[参数填写正确，短信发送成功]]></item>
+				<item id="use"><![CDATA[使用]]></item>
+				<item id="setting"><![CDATA[设置]]></item>
+				<item id="test_send"><![CDATA[里填写的参数进行短信发送测试]]></item>
+				<item id="record"><![CDATA[发送的短信仅用于测试接口，不会记录]]></item>
+				<item id="phone"><![CDATA[手机号]]></item>
+				<item id="send"><![CDATA[发送短信]]></item>
+				<item id="docs_center"><![CDATA[文档中心]]></item>
+				<item id="support"><![CDATA[意见反馈]]></item>
+				<item id="type_maps">
+					<item id="0"><![CDATA[全部]]></item>
+					<item id="1"><![CDATA[登录]]></item>
+					<item id="2"><![CDATA[绑定]]></item>
+					<item id="3"><![CDATA[重置密码]]></item>
+				</item>
+				<item id="send_record"><![CDATA[验证码短信发送记录]]></item>
+				<item id="start_date"><![CDATA[开始日期]]></item>
+				<item id="end_date"><![CDATA[截止日期]]></item>
+				<item id="type"><![CDATA[类型]]></item>
+				<item id="page_size"><![CDATA[每页大小]]></item>
+				<item id="search"><![CDATA[搜索]]></item>
+				<item id="table_head">
+					<item id="0"><![CDATA[ID]]></item>
+					<item id="1"><![CDATA[手机号]]></item>
+					<item id="2"><![CDATA[验证码]]></item>
+					<item id="3"><![CDATA[验证码用途]]></item>
+					<item id="4"><![CDATA[验证码状态]]></item>
+					<item id="5"><![CDATA[发送时间]]></item>
+				</item>
+				<item id="valid"><![CDATA[有效]]></item>
+				<item id="invalid"><![CDATA[无效]]></item>
+				<item id="used"><![CDATA[已使用]]></item>
+				<item id="param_empty"><![CDATA[不能为空]]></item>
+				<item id="custom_error"><![CDATA[自定义密钥传参错误]]></item>
+				<item id="sign_empty"><![CDATA[短信签名不能为空]]></item>
+				<item id="template_id_empty"><![CDATA[模板ID不能为空]]></item>
+				<item id="code_expired_empty"><![CDATA[验证码有效时间不能为空]]></item>
+				<item id="type_error"><![CDATA[类型不正确]]></item>
+				<item id="error_msg">
+					<item id="0"><![CDATA[操作成功]]></item>
+					<item id="10000"><![CDATA[系统繁忙，请稍后再试]]></item>
+					<item id="10001"><![CDATA[手机号不正确]]></item>
+					<item id="10002"><![CDATA[验证码不正确]]></item>
+					<item id="10003"><![CDATA[请先登录后再操作]]></item>
+					<item id="10004"><![CDATA[该手机号未绑定任何用户]]></item>
+					<item id="10005"><![CDATA[两次输入的密码不相等]]></item>
+					<item id="10006"><![CDATA[密码长的不符合标准]]></item>
+					<item id="10007"><![CDATA[该手机号已绑定其他用户]]></item>
+					<item id="FailedOperation.TemplateIncorrectOrUnapproved"><![CDATA[该模版ID未审批或请求的参数个数与该模版ID不匹配]]></item>
+					<item id="InvalidParameterValue.IncorrectPhoneNumber"><![CDATA[手机号格式错误]]></item>
+					<item id="AuthFailure.SecretIdNotFound"><![CDATA[请检查Secret Id是否填写正确，注意前后不得有空格。]]></item>
+					<item id="AuthFailure.SignatureFailure"><![CDATA[请检查Secret Key是否填写正确，注意前后不得有空格。]]></item>
+					<item id="AuthFailure.SignatureExpire"><![CDATA[签名过期。本地时间和腾讯云服务器时间相差不得超过五分钟，请检查本地时间是否和北京标准时间同步]]></item>
+					<item id="UnauthorizedOperation.SmsSdkAppidVerifyFail"><![CDATA[请检查SDK APP ID是否填写正确。]]></item>
+					<item id="FailedOperation.SignatureIncorrectOrUnapproved"><![CDATA[签名填写错误或者签名未审批。]]></item>
+					<item id="FailedOperation.InsufficientBalanceInSmsPackage"><![CDATA[套餐包余量不足，请购买套餐包。]]></item>
+					<item id="FailedOperation.PhoneNumberInBlacklist"><![CDATA[手机号在黑名单库中，通常是用户退订或者命中运营商黑名单导致的。]]></item>
+					<item id="FailedOperation.PhoneNumberOnBlacklist"><![CDATA[手机号在黑名单库中，通常是用户退订或者命中运营商黑名单导致的。]]></item>
+					<item id="LimitExceeded.PhoneNumberOneHourLimit"><![CDATA[单个手机号1小时内下发短信条数超过设定的上限，可自行到腾讯云控制台调整短信频率限制策略。]]></item>
+					<item id="LimitExceeded.PhoneNumberThirtySecondLimit"><![CDATA[单个手机号30秒内下发短信条数超过设定的上限，可自行到腾讯云控制台调整短信频率限制策略。]]></item>
+				</item>
+			</item>
+			<item id="templatelang">
+				<item id="setting"><![CDATA[参数设置]]></item>
+				<item id="yes"><![CDATA[是]]></item>
+				<item id="no"><![CDATA[否]]></item>
+				<item id="visit"><![CDATA[访问]]></item>
+				<item id="custom_key"><![CDATA[自定义密钥：]]></item>
+				<item id="custom_key_desc"><![CDATA[为该插件配置单独定义的腾讯云密钥]]></item>
+				<item id="secret_key_desc"><![CDATA[获取SecretId和SecretKey或通过"新建密钥"创建密钥串]]></item>
+				<item id="secret_manage"><![CDATA[密钥管理]]></item>
+				<item id="app_manage"><![CDATA[应用管理]]></item>
+				<item id="get_app_id"><![CDATA[获取SDKAppID或通过"创建应用"创建SDKAppID]]></item>
+				<item id="sign"><![CDATA[短信签名:]]></item>
+				<item id="sign_desc"><![CDATA[审核通过的短信签名，不包含【】]]></item>
+				<item id="template_id"><![CDATA[模板ID:]]></item>
+				<item id="template_id_desc"><![CDATA[审核通过的模板ID]]></item>
+				<item id="code_expire"><![CDATA[验证码有效时间:]]></item>
+				<item id="code_expire_desc"><![CDATA[单位：分钟，默认5。范围【1-360】]]></item>
+				<item id="template_code_expire"><![CDATA[模板包含过期时间:]]></item>
+				<item id="template_code_expire_desc"><![CDATA[请与模板中参数个数保持一致，否则将导致短信发送失败]]></item>
+				<item id="post_need_phone"><![CDATA[发帖需要绑定手机号:]]></item>
+				<item id="post_need_phone_desc"><![CDATA[未绑定手机号的账号是否可以发帖]]></item>
+				<item id="reply_need_phone"><![CDATA[回帖需要绑定手机号:]]></item>
+				<item id="save"><![CDATA[保存]]></item>
+				<item id="reply_need_phone_desc"><![CDATA[未绑定手机号的账号是否可以回帖]]></item>
+				<item id="bind_phone"><![CDATA[绑定手机号]]></item>
+				<item id="verify_code"><![CDATA[短信验证码]]></item>
+				<item id="send_verify_code"><![CDATA[发送验证码]]></item>
+				<item id="bind"><![CDATA[绑定]]></item>
+				<item id="has_bind"><![CDATA[已绑定的手机号]]></item>
+				<item id="rebind"><![CDATA[重新绑定]]></item>
+				<item id="flush_code"><![CDATA[秒后重新获取验证码]]></item>
+				<item id="get_verify_code"><![CDATA[获取短信验证码]]></item>
+				<item id="phone_error"><![CDATA[手机号格式错误！]]></item>
+				<item id="code_error"><![CDATA[短信验证码填写错误！]]></item>
+				<item id="bind_first"><![CDATA[需要先绑定手机号]]></item>
+				<item id="phone_login"><![CDATA[手机号登录]]></item>
+				<item id="phone_reset"><![CDATA[手机号重置密码]]></item>
+				<item id="phone"><![CDATA[手机号]]></item>
+				<item id="reg"><![CDATA[立即注册]]></item>
+				<item id="auto_login"><![CDATA[自动登录]]></item>
+				<item id="login"><![CDATA[登录]]></item>
+				<item id="login_success"><![CDATA[成功登录]]></item>
+				<item id="reset_success"><![CDATA[重置密码成功！]]></item>
+				<item id="submit"><![CDATA[提交]]></item>
+				<item id="new_pwd"><![CDATA[新密码]]></item>
+				<item id="confirm_new_pwd"><![CDATA[确认新密码]]></item>
+				<item id="two_pwd_diff"><![CDATA[两次填写的密码不一致！]]></item>
+				<item id="docs_center"><![CDATA[文档中心]]></item>
+				<item id="support"><![CDATA[意见反馈]]></item>
+			</item>
+		</item>
+		<item id="installfile"><![CDATA[install.php]]></item>
+		<item id="uninstallfile"><![CDATA[uninstall.php]]></item>
+		<item id="enablefile"><![CDATA[enable.php]]></item>
+		<item id="disablefile"><![CDATA[disable.php]]></item>
+	</item>
+</root>

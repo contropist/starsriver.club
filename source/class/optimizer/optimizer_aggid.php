@@ -35,6 +35,7 @@ class optimizer_aggid {
 	}
 
 	public function optimizer() {
+        global $_G;
 		$adminfile = defined(ADMINSCRIPT) ? ADMINSCRIPT : 'webcontroller.php';
 		dheader('Location: '.$_G['siteurl'].$adminfile.'?action=setting&operation=accountguard');
 	}

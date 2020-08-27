@@ -1263,7 +1263,6 @@ $lang = array(
     'setting_home_realname_allowshare'         => '允许分享',
     'setting_home_realname_allowfavorite'      => '允许收藏',
     'setting_home_realname_allowcomment'       => '允许留言/评论',
-    'setting_home_realname_allowuserapp'       => '允许使用MYOP应用',
 
     'setting_home_privacy'                        => '隐私设置',
     'setting_home_privacy_new_user'               => '新用户默认隐私设置',
@@ -1402,7 +1401,6 @@ $lang = array(
     'misc_focus_position_forum'      => '论坛',
     'misc_focus_position_group'      => '社团',
     'misc_focus_position_search'     => '搜索',
-    'misc_focus_position_userapp'    => '应用',
 
     'setting_faq_title' => '查看更多提示',
 
@@ -6229,7 +6227,6 @@ $lang = array(
     'adv_edit_targets_group'                  => '社团',
     'adv_edit_targets_home'                   => '空间',
     'adv_edit_targets_search'                 => '搜索',
-    'adv_edit_targets_userapp'                => '应用',
     'adv_edit_targets_plugin'                 => '独立插件',
     'adv_edit_showtype'                       => '广告展现方式:',
     'adv_edit_showtype_0'                     => '页面中直接输出',

@@ -57,7 +57,6 @@ $lang = array(
 
     'show_out'                             => '{actor} 访问了你的主页后，你在续航排名榜中的最后一个积分也被消费掉了',
     'puse_article'                         => '恭喜你，你的<a href="{url}" target="_blank">{subject}</a>已被添加到文章列表， <a href="{newurl}" target="_blank">点击查看</a>',
-    'myinvite_request'                     => '有新的应用消息<a href="home.php?mod=space&do=notice&view=userapp">点此进入应用消息页面进行相关操作</a>',
     'group_member_join'                    => '{actor} 申请加入你的 <a href="forum.php?mod=group&fid={fid}" target="_blank">{groupname}</a> 社团，现需要审核，请到社团<a href="{url}" target="_blank">管理后台</a> 进行审核',
     'group_member_invite'                  => '{actor} 邀请你加入 <a href="forum.php?mod=group&fid={fid}" target="_blank">{groupname}</a> 社团，<a href="{url}" target="_blank">马上加入</a>',
     'group_member_check'                   => '你已通过了 <a href="{url}" target="_blank">{groupname}</a> 社团的审核，请 <a href="{url}" target="_blank">点击这里访问</a>',

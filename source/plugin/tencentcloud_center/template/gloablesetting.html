@@ -1,0 +1,102 @@
+<body>
+<form  method="POST" id='tencent' >
+    <input type="hidden" name="formhash" value="{FORMHASH}" />
+    <table class="tb tb2">
+        <tbody>
+        <tr>
+            <td colspan="2" class="td27" s="1">{lang tencentcloud_center:open_global_secret}:</td>
+        </tr>
+        <tr class="noborder">
+            <td class="vtop rowform">
+                <ul onmouseover="altStyle(this);">
+                    <li id="site_sec_yes" class="checked">
+                        <input class="radio" type="radio" name="tencentcloudglobal[site_sec_on]" value="1" onclick="switchKey(1)">{lang tencentcloud_center:yes}
+                    </li>
+                    <li id="site_sec_no" >
+                        <input class="radio" type="radio" name="tencentcloudglobal[site_sec_on]" value="0"  onclick="switchKey(0)">
+                        {lang tencentcloud_center:no}</li>
+                </ul>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" class="td27" s="1">SecretId:</td>
+        </tr>
+        <tr class="noborder">
+            <td class="vtop rowform">
+                <input name="tencentcloudglobal[secretId]" id="secretId" size="50" type="text" class="text" value="{$config['secretId']}">
+            </td>
+            <td class="vtop tips2" s="1">{lang tencentcloud_center:visit}<a href="https://console.qcloud.com/cam/capi" target="_blank">{lang tencentcloud_center:secret_manage}</a>{lang tencentcloud_center:secret_desc}</td>
+        </tr>
+        <tr>
+            <td colspan="2" class="td27" s="1">SecretKey:</td>
+        </tr>
+        <tr class="noborder">
+            <td class="vtop rowform">
+                <input name="tencentcloudglobal[secretKey]" id="secretKey"  size="50" type="text" class="text" value="{$config['secretKey']}">
+            </td>
+            <td class="vtop tips2" s="1">{lang tencentcloud_center:visit}<a href="https://console.qcloud.com/cam/capi" target="_blank">{lang tencentcloud_center:secret_manage}</a>{lang tencentcloud_center:secret_desc}</td>
+        </tr>
+        <tr>
+            <td colspan="2" class="td27" s="1">{lang tencentcloud_center:participate}:</td>
+        </tr>
+        <tr class="noborder">
+            <td class="vtop rowform">
+                <ul onmouseover="altStyle(this);" >
+                    <li class="checked" id="site_report_yes">
+                        <input class="radio" type="radio" name="tencentcloudglobal[site_report_on]" value="1" >{lang tencentcloud_center:yes}
+                    </li>
+                    <li id="site_report_no">
+                        <input class="radio" type="radio" name="tencentcloudglobal[site_report_on]" value="0" >
+                        {lang tencentcloud_center:no}</li>
+                </ul>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="15">
+                <div class="fixsel">
+                <input type="submit" class="btn"  id="globalsubmit" value="{lang tencentcloud_center:save_settings}" />
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+</form>
+<div style="text-align: center" >
+    <a href="https://openapp.qq.com/" target="_blank">{lang tencentcloud_center:document_center}</a> | <a href="https://github.com/Tencent-Cloud-Plugins/" target="_blank">GitHub</a> | <a
+        href="https://support.qq.com/product/164613" target="_blank">{lang tencentcloud_center:reply_advice}</a>
+</div>
+<script>
+    var customSelect = '{$config["site_sec_on"]}';
+    var siteReport = '{$config["site_report_on"]}';
+    if (siteReport == '1'){
+        document.getElementById('site_report_yes').getElementsByTagName('input')[0].checked=true;
+    }else {
+        document.getElementById('site_report_no').getElementsByTagName('input')[0].checked=true;
+    }
+    if (customSelect == '1'){
+        document.getElementById('site_sec_yes').setAttribute('class','checked');
+        document.getElementById('site_sec_yes').getElementsByTagName('input')[0].checked=true;
+    }else {
+        document.getElementById('site_sec_no').setAttribute('class','checked');
+        document.getElementById('site_sec_no').getElementsByTagName('input')[0].checked=true;
+        document.getElementById('secretId').disabled=true;
+        document.getElementById('secretKey').disabled=true;
+        document.getElementById('secretId').style.backgroundColor="gainsboro";
+        document.getElementById('secretKey').style.backgroundColor="gainsboro";
+    }
+    function switchKey(key) {
+        if (key == 1) {
+            document.getElementById('secretId').disabled = false;
+            document.getElementById('secretKey').disabled = false;
+            document.getElementById('secretId').style.backgroundColor="";
+            document.getElementById('secretKey').style.backgroundColor="";
+        }else {
+            document.getElementById('secretId').disabled=true;
+            document.getElementById('secretKey').disabled=true;
+            document.getElementById('secretId').style.backgroundColor="gainsboro";
+            document.getElementById('secretKey').style.backgroundColor="gainsboro";
+        }
+    }
+</script>
+</body>

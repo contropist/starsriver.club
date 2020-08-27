@@ -97,7 +97,7 @@ $lang = [
     'did_not_follow_to_me' => 'TA未关注你',
     'accept_invitation' => '接受邀请',
     'and_play_together' => '，并一起玩',
-    'become_friend' => '<p>成为好友后，你们就可以一起讨论话题，及时关注对方的更新，还可以玩有趣的游戏 $userapp[appname] ……</p>
+    'become_friend' => '<p>成为好友后，你们就可以一起讨论话题，及时关注对方的更新 ……</p>
                         <p>你也可以方便快捷地发布自己的日志、上传图片、记录生活点滴与好友分享</p>
                         <p>还等什么呢？赶快加入我们吧</p>',
     'friend_information' => '<p>已有 $space[friends] 个好友, $space[albums] 个画廊, $space[doings] 条记录, $space[blogs] 篇日志, $space[threads] 个话题</p>',
@@ -1199,7 +1199,6 @@ $lang = [
     'musicbox_height_message' => '设置音乐盒的高度',
     'my_space_describe' => '我的空间描述',
     'my_space_name' => '我的空间名称',
-    'myapp_img' => '图标大小',
     'no_music_play_list' => '暂无音乐播放列表',
     'not_delete_last_line' => '最后一行不允许删除',
     'not_play_message' => '不能播放的时候请检查该地址 mp3 文件是否存在',
@@ -1460,7 +1459,6 @@ $lang = [
     'mail_system_insys' => '系统提醒',
     'mail_system_magic' => '道具相关',
     'mail_system_mod_member' => '用户审核状态',
-    'mail_system_myapp' => '漫游应用相关',
     'mail_system_pmreport' => '私信举报',
     'mail_system_report' => '举报处理结果',
     'mail_system_show' => '续航排名下榜',

@@ -11,6 +11,8 @@ if(!defined('IN_DISCUZ')) {
 	exit('Access Denied');
 }
 
+global $_G;
+
 $pluginkey = 'space_'.$_GET['op'];
 $_GET['id'] = $_GET['id'] ? preg_replace("/[^A-Za-z0-9_:]/", '', $_GET['id']) : '';
 $navtitle = $_G['setting']['plugins'][$pluginkey][$_GET['id']]['name'];

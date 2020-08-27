@@ -11,6 +11,9 @@ if (!defined('IN_DISCUZ')) {
     exit('Access Denied');
 }
 
+global $_G;
+
+
 if (!$_G['uid'] && $_G['setting']['privacy']['view']['home']) {
     showmessage('home_no_privilege', '', [], ['login' => true]);
 }
@@ -72,7 +75,7 @@ $gets = [
 $theurl = 'home.php?' . url_implode($gets);
 
 if (!IS_ROBOT) {
-    $feeds = $feed_list = $user_list = $filter_list = $list = $magic = [];
+    $feeds = $feed_list = $user_list = $filter_list = $magic = [];
 
     $need_count = true;
     $uids = [];
@@ -99,65 +102,12 @@ if (!IS_ROBOT) {
         $ordersql = "dateline DESC";
         $f_index = '';
         $findex = '';
-
-        $nestmode = 1;
-        if ($space['self'] && $_GET['from'] != 'space')
+        
+        if ($space['self'] && $_GET['from'] != 'space'){
             $nestmode = 0;
-
-    } elseif ($_GET['view'] == 'app' && $_G['setting']['my_app_status']) {
-
-        $uids = null;
-        if ($_GET['type'] == 'all') {
-
-            $ordersql = "dateline DESC";
-            $f_index = '';
-            $findex = '';
-
         } else {
-
-            if ($_GET['type'] == 'me') {
-                $uids = $_G['uid'];
-                $ordersql = "dateline DESC";
-                $f_index = '';
-                $findex = '';
-
-            } else {
-                $uids = array_merge(explode(',', $space['feedfriend']), 0);
-                $ordersql = "dateline DESC";
-                $f_index = 'USE INDEX(dateline)';
-                $findex = 'dateline';
-                $_GET['type'] = 'we';
-                $_G['home_tpl_hidden_time'] = 1;
-            }
+            $nestmode = 1;
         }
-
-        $icon = empty($_GET['icon']) ? '' : trim($_GET['icon']);
-
-        $feed_list = $appfeed_list = $hiddenfeed_list = $filter_list = $hiddenfeed_num = $icon_num = [];
-
-        $feed_list = C::t('home_feed_app')->fetch_all_by_uid_icon(1, $icon, $start, $perpage);
-
-        var_dump($feed_list);
-
-        $count = count($feed_list);
-
-        $multi = simplepage($count, $perpage, $page, $theurl);
-        require_once libfile('function/feed');
-
-        $list = [];
-
-        foreach ($feed_list as $value) {
-            $nowcount = 0;
-            $value = mkfeed($value);
-            $nowcount++;
-            if ($nowcount > 5 && empty($icon)) {
-                break;
-            }
-            $list[] = $value;
-        }
-
-        $need_count = false;
-        $typeactives = [$_GET['type'] => ' class="active"'];
 
     } else {
 

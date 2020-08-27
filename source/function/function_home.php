@@ -491,7 +491,6 @@ function getuserdefaultnest() {
 									'block`wall' => array('attr' => array('name'=>'wall'))
 							),
 							'column`frame1_right' => array(
-									'block`myapp' => array('attr' => array('name'=>'myapp')),
 									'block`friend' => array('attr' => array('name'=>'friend')),
 									'block`visitor' => array('attr' => array('name'=>'visitor')),
 									'block`group' => array('attr' => array('name'=>'group'))
@@ -509,7 +508,6 @@ function getuserdefaultnest() {
 					'visitor' => array('shownum' => 18),
 					'wall' => array('shownum' => 16),
 					'feed' => array('shownum' => 16),
-					'myapp' => array('shownum' => 9, 'logotype'=> 'logo'),
 			),
 		'nv' => array(
 			'nvhidden' => 0,

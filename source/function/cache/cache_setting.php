@@ -739,7 +739,7 @@ function get_cachedata_mainnav() {
 				continue;
 			}
 		}
-		if($nav['identifier'] == 5 && $nav['type'] == 0 && !$_G['setting']['my_app_status']) {
+		if($nav['identifier'] == 5 && $nav['type'] == 0) {
 			$nav['available'] = 0;
 		}
 		if($nav['identifier'] == 8 && $nav['type'] == 0 && !$_G['setting']['ranklist']['status']) {
@@ -790,11 +790,6 @@ function get_cachedata_mainnav() {
 				$data['navs'][$id]['available'] = 0;
 				continue;
 			}
-		}
-		if($nav['identifier'] == 5 && $nav['type'] == 0) {
-			$onmouseover = 'delayShow(this, function () {showMenu({\'ctrlid\':\'mn_userapp\',\'pos\':\'43!\',\'ctrlclass\':\'a\',\'duration\':2});showUserApp();})';
-			$data['menunavs'][] = '<div class="p_pop h_pop" id="'.$navid.'_menu" style="display: none"></div>';
-			$data['subnavs'][$navid] = '';
 		}
 
 		if($nav['logo']) {
