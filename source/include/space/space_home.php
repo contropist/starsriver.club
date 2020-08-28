@@ -13,7 +13,6 @@
     
     global $_G;
     
-    
     if (!$_G['uid'] && $_G['setting']['privacy']['view']['home']) {
         showmessage('home_no_privilege', '', [], ['login' => true]);
     }
@@ -41,71 +40,105 @@
     } elseif (!in_array($_GET['view'], ['we', 'me', 'all',])) {
         $_GET['view'] = 'all';
     }
-    if (empty($_GET['order'])) {
-        $_GET['order'] = 'dateline';
-    }
-    
-    $perpage = $_G['setting']['feedmaxnum'] < 20 ? 20 : $_G['setting']['feedmaxnum'];
-    $perpage = mob_perpage($perpage);
+
     
     if ($_GET['view'] == 'all' && $_GET['order'] == 'hot') {
         $perpage = 20;
+    } else {
+        $perpage = mob_perpage($_G['setting']['feedmaxnum'] < 20 ? 20 : $_G['setting']['feedmaxnum']);
     }
     
     $page = intval($_GET['page']);
+    
     if ($page < 1) $page = 1;
     
     $start = ($page - 1) * $perpage;
     
     ckstart($start, $perpage);
     
-    $_G['home_today'] = $_G['timestamp'] - ($_G['timestamp'] + $_G['setting']['timeoffset'] * 3600) % 86400;
+    $_G['home_today'] = $_G['timestamp'] - ($_G['timestamp'] + $_G['setting']['timeoffset'] * 3600) % (3600*24);
     
     $gets = [
         'mod' => 'space',
         'uid' => $space['uid'],
         'do' => 'home',
         'view' => $_GET['view'],
-        'order' => $_GET['order'],
+        'order' => !empty($_GET['order']) ? $_GET['order'] : 'dateline',
         'type' => $_GET['type'],
         'icon' => $_GET['icon'],
+        'from' => $_GET['from'],
     ];
     
     $theurl = 'home.php?' . url_implode($gets);
     
+    $feeds = $hotlist = $filter_list = $magic = $uids = [];
+    
+    $need_count = true;
+    
+    $count = $filtercount = 0;
+    
+    $multi = $hot = '';
+    
     if (!IS_ROBOT) {
-        $feeds = $feed_list = $user_list = $filter_list = $magic = [];
-        
-        $need_count = true;
-        $uids = [];
-        $multi = $hot = '';
-        
-        if ($_GET['view'] == 'all') {
+    
+        if($space['self'] && empty($start) && $_G['setting']['feedhotnum'] > 0 && ($gets['view'] == 'we' || $gets['view'] == 'all')) {
             
-            if ($_GET['order'] == 'dateline') {
+            $temp = [];
+            $term = $_G['timestamp'] - $_G['setting']['feedhotday'] * 3600 * 24;
+            $hquery = C::t('home_feed')->fetch_all_by_hot($term);
+            
+            foreach ($hquery as $value) {
+                if ($value['hot'] > 0 && ckfriend($value['uid'], $value['friend'], $value['target_ids'])) {
+                    if (empty($hotlist)) {
+                        $hotlist[$value['feedid']] = $value;
+                    } else {
+                        $temp[$value['feedid']] = $value;
+                    }
+                }
+            }
+    
+            $nexthotnum = $_G['setting']['feedhotnum'] - 1;
+    
+            if ($nexthotnum > 0) {
+                if (count($temp) > $nexthotnum) {
+                    $hotlist_key = array_rand($temp, $nexthotnum);
+                    if ($nexthotnum == 1) {
+                        $hotlist[$hotlist_key] = $temp[$hotlist_key];
+                    } else {
+                        foreach ($hotlist_key as $key) {
+                            $hotlist[$key] = $temp[$key];
+                        }
+                    }
+                } else {
+                    $hotlist = array_merge($hotlist, $temp);
+                }
+            }
+        }
+        
+        if ($gets['view'] == 'all') {
+            
+            $f_index = '';
+            $findex = '';
+            
+            if ($gets['order'] == 'dateline') {
                 $ordersql = "dateline DESC";
-                $f_index = '';
-                $findex = '';
                 $orderactives = ['dateline' => 'active'];
             } else {
                 $hot = $minhot;
                 $ordersql = "dateline DESC";
-                $f_index = '';
-                $findex = '';
                 $orderactives = ['hot' => 'active'];
             }
-            
-        } elseif ($_GET['view'] == 'me') {
+        } elseif ($gets['view'] == 'me') {
             
             $uids = [$space['uid']];
             $ordersql = "dateline DESC";
             $f_index = '';
             $findex = '';
             
-            if ($space['self'] && $_GET['from'] != 'space') {
-                $nestmode = 0;
-            } else {
+            if ($_GET['from'] == 'space') {
                 $nestmode = 1;
+            } else {
+                $nestmode = 0;
             }
             
         } else {
@@ -140,31 +173,41 @@
         $gidactives[$gid] = 'active';
         
         if ($need_count) {
-            $count = 0;
+    
+            $hash_datas = [];
+            $more_list = [];
+            $uid_feedcount = [];
+    
             $query = C::t('home_feed')->fetch_all_by_search(1, $uids, $icon, '', '', '', $hot, '', $start, $perpage, $findex);
             foreach ($query as $value) {
-                $feeds[] = mkfeed($value);
-                $count++;
+                if (!isset($hotlist[$value['feedid']]) && ckfriend($value['uid'], $value['friend'], $value['target_ids'])) {
+                    $value = mkfeed($value);
+                    if ($gets['view'] == 'me' || ckicon_uid($value)) {
+                        $feeds[] = $value;
+                        $count++;
+                    } else {
+                        $filtercount++;
+                        $filter_list[] = $value;
+                    }
+                }
             }
             $multi = simplepage($count, $perpage, $page, $theurl);
         }
     }
     
-    $olfriendlist = $visitorlist = $task = $ols = $birthlist = $guidelist = [];
-    $oluids = [];
-    $groups = [];
-    $defaultusers = $newusers = $showusers = [];
+    $olfriendlist = $visitorlist = $task = $ols = $birthlist = $guidelist = $oluids = $groups = $defaultusers = $newusers = $showusers = [];
     
     if ($space['self'] && empty($start)) {
         
         space_merge($space, 'field_home');
-        if ($_GET['view'] == 'we') {
+        if ($gets['view'] == 'we') {
             require_once libfile('function/friend');
             $groups = friend_group_list();
         }
         
         $isnewer = ($_G['timestamp'] - $space['regdate'] > 3600 * 24 * 7) ? 0 : 1;
-        if ($isnewer && $_G['setting']['homestyle']) {
+        
+        if ($isnewer) {
             
             $friendlist = [];
             $query = C::t('home_friend')->fetch_all($space['uid']);
@@ -281,7 +324,8 @@
             $space['profileprogress'] = countprofileprogress();
         }
     }
-    $actives = [$_GET['view'] => 'active'];
+    $actives = [$gets['view'] => 'active'];
+    
     if ($_GET['from'] == 'space') {
         if ($_GET['do'] == 'home') {
             $navtitle = lang('space', 'sb_feed', ['who' => $space['username']]);
@@ -289,25 +333,18 @@
             $metadescription = lang('space', 'sb_feed', ['who' => $space['username']]);
         }
     } else {
-        [$navtitle,
-         $metadescription,
-         $metakeywords,
-        ] = get_seosetting('home');
+        [$navtitle, $metadescription, $metakeywords,] = get_seosetting('home');
         if (!$navtitle) {
             $navtitle = $_G['setting']['navs'][4]['navname'];
             $nobbname = false;
         } else {
             $nobbname = true;
         }
-        
-        if (!$metakeywords) {
-            $metakeywords = $_G['setting']['navs'][4]['navname'];
-        }
-        
-        if (!$metadescription) {
-            $metadescription = $_G['setting']['navs'][4]['navname'];
-        }
+    
+        $metakeywords = $metakeywords ? $metakeywords : $_G['setting']['navs'][4]['navname'];
+        $metadescription = $metadescription ? $metadescription : $_G['setting']['navs'][4]['navname'];
+
     }
     if (empty($cp_mode)) {
-        include_once template("nest:home/space_route_home");
+        include_once template("nest:home/space_route_feed");
     }

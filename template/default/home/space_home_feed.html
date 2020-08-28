@@ -1,0 +1,144 @@
+<div class="whitespace cn">
+    <!--{if $space[self] && helper_access::check_module('doing')}-->
+        <!--{template home/space_route_doing_mod_deliverer}-->
+    <!--{/if}-->
+
+    <!--{if $feeds}-->
+        <ul class="timeline" id="feed_list">
+            <!--{eval $dynamicday = '';}-->
+            <!--{eval $dynamicmin = '';}-->
+            <!--{loop $feeds $feed}-->
+                <!--{eval $_GET[key] = $key = random(8);}-->
+                <!--{eval $dynamicdayN = date('ymd',$feed['dateline']);}-->
+                <!--{eval $dynamicminN = date('ymdi',$feed['dateline']);}-->
+                <li class="node {if $dynamicday != $dynamicdayN}dayMark{/if}" id="feed_{$feed[feedid]}_li">
+                    <div class="n-left">
+                        <!--{if $dynamicday != $dynamicdayN}-->
+                            <!--{eval $dynamicday = $dynamicdayN;}-->
+                            <i class="time-A"><!--{date($feed['dateline'],'Y/m/d')}--></i>
+                        <!--{/if}-->
+                        <!--{if $dynamicmin != $dynamicminN}-->
+                            <!--{eval $dynamicmin = $dynamicminN;}-->
+                            <i class="time-B"><!--{date($feed['dateline'],'H:i')}--></i>
+                            <div class="user-tag">
+                                <a class="avatar" href="{if $user[uid]}home.php?mod=space&uid=$feed[uid]{/if}" target="_blank" c="1"><!--{avatar($feed[uid],small)}--></a>
+                                <a class="username" href="{if $user[uid]}home.php?mod=space&uid=$feed[uid]{/if}" target="_blank"><!--{if $feed[uid]}-->$feed[username]<!--{else}--><!--{/if}--></a>
+                            </div>
+                        <!--{/if}-->
+                    </div>
+                    <div class="n-right">
+                        <div class="s-top">
+                            <a class="type" href="home.php?mod=space&uid={$uid}&do=home&view=$_GET[view]&appid=$feed[appid]&icon=$feed[icon]"><img src="$feed[icon_image]"/></a>
+                            <!--{if empty($_G['home']['tpl'][hidden_hot]) && $feed[hot]}-->
+                                <a class="hot" href="home.php?mod=spacecp&ac=feed&feedid=$feed[feedid]"><em>$feed[hot]</em>{lang join_immediately}</a>
+                            <!--{/if}-->
+                            <i class="title"><!--{if $feed['title_template']}-->$feed[title_template]<!--{/if}--></i>
+                            <!--{if $_G['uid']}-->
+                            <div class="tool r">
+                                <b class="dots"><i class="dot"></i><i class="dot"></i><i class="dot"></i></b>
+                                <span class="tooltip lt" data-ignore='1'>
+                                    <a onclick="showWindow(this.id, 'home.php?mod=spacecp&ac=feed&op=menu&feedid=$feed[feedid]', 'get', 0);doane(event);">
+                                        <!--{if $_G['uid'] == $feed[uid]}-->{lang delete}<!--{else}-->{lang shield}<!--{/if}-->
+                                    </a>
+                                </span>
+                            </div>
+                            <!--{/if}-->
+                        </div>
+                        <div class="s-center">
+                            <!--{if trim(str_replace('&nbsp;', '', $feed['body_general']))}-->
+                                <div class="message">$feed[body_general]</div>
+                            <!--{/if}-->
+
+                            <!--{if $feed['body_template']}--><div class="message">$feed[body_template]</div><!--{/if}-->
+
+                            <div class="clear-objgap">
+                                <!--{if $feed['image_1']}--><a class="album-img" href="$feed[image_1_link]" {$feed[target]}><img src="$feed[image_1]"/></a><!--{/if}-->
+                                <!--{if $feed['image_2']}--><a class="album-img" href="$feed[image_2_link]" {$feed[target]}><img src="$feed[image_2]"/></a><!--{/if}-->
+                                <!--{if $feed['image_3']}--><a class="album-img" href="$feed[image_3_link]" {$feed[target]}><img src="$feed[image_3]"/></a><!--{/if}-->
+                                <!--{if $feed['image_4']}--><a class="album-img" href="$feed[image_4_link]" {$feed[target]}><img src="$feed[image_4]"/></a><!--{/if}-->
+                            </div>
+
+                            <!--{if !empty($feed['body_data']['musicvar'])}-->
+                            <a class="share-item-music" onclick="audioload('{$feed['body_data']['musicvar']}')"><i class="icon-play2"></i>{$feed['body_data']['musicname']}</a>
+                            <!--{/if}-->
+
+                            <!--{if $user_list[$feed['hash_data']]}-->
+                                <p>{lang other_participants}:<!--{eval echo implode(', ', $user_list[$feed['hash_data']]);}--></p>
+                            <!--{/if}-->
+
+                            <div class="flow-comment-list" id="{if $feed['idtype']=='doid'}{$key}_$feed[id]{elseif in_array($feed['idtype'], ['blogid','picid','sid','eventid'])}feedcomment_$feed[feedid]{/if}" style="display:none;"></div>
+                        </div>
+                        <div class="s-end">
+                            <!--{if $feed['idtype']=='doid'}-->
+                                <a class="icon mt-textsms reply" onclick="{if $_G['uid']}docomment_get('$feed[id]', '$key'){else}showWindow(this.id, 'home.php?mod=spacecp&ac=feed', 'get', 0);doane(event){/if}" id="{$_GET[key]}_do_a_op_$feed[id]"></a>
+                            <!--{elseif in_array($feed['idtype'], ['blogid','picid','sid','eventid'])}-->
+                                <a class="icon mt-textsms reply" onclick="{if $_G['uid']}feedcomment_get($feed[feedid]){else}showWindow(this.id, 'home.php?mod=spacecp&ac=feed', 'get', 0);doane(event){/if}" id="feedcomment_a_op_$feed[feedid]"></a>
+                            <!--{/if}-->
+                        </div>
+                    </div>
+                </li>
+            <!--{/loop}-->
+        </ul>
+        <div class="page" id="pager_home">
+            <!--{if $multi}-->
+                $multi
+            <!--{else}-->
+                <p class="nomore">{lang nomore}</p>
+            <!--{/if}-->
+        </div>
+    <!--{else}-->
+        <!--{template home/space_home__mod_timeline_empty}-->
+    <!--{/if}-->
+    <script>
+        addEvent(document,'DOMContentLoaded',function () {
+            let postform = SR('#doing_deliver')[0],
+                page = SR('#pager_home')[0],
+                scrltem = 0,
+                positionfix = function (){
+                    if(SRGlobal.Window.Width <= 1680){
+                        postform.style = '';
+                        if(SRGlobal.Window.Scroll.DirY === 'down'){
+                            scrltem = SRGlobal.Window.Scroll.Top;
+                            if(page) page.addClass('sleep');
+                            if(postform) postform.addClass('sleep');
+                        } else if(scrltem - SRGlobal.Window.Scroll.Top > Math.min(640, MasElements.viewer.scrollHeight - SRGlobal.Window.Height - 20)) {
+                            if(page) page.delClass('sleep');
+                            if(postform) postform.delClass('sleep');
+                        }
+                    }
+                },
+                Tl = SR('.timeline')[0],
+                Ts = SR('.time-A'),
+                Th = Ts[0].Css.height,
+                TsOn = function (){
+                    for (let i=0 ; i <Ts.length; i++){
+                        if(Ts[i].parentNode.Css.top < 82 && (isUndefined(Ts[i+1]) || Ts[i+1].parentNode.Css.top > 82)){
+                            Ts[i].style = 'position: fixed; top: 82px;';
+                            Ts[i].parentNode.style = 'padding-top:' + Th + 'px;';
+                        } else {
+                            Ts[i].style = Ts[i].parentNode.style = '';
+                        }
+                    }
+                };
+
+            if(MasElements.viewer.scrollHeight <= SRGlobal.Window.Height){
+                Tl.style.marginBottom = '200px';
+            }
+
+            if(page) {
+                page.addClass('sleep');
+            }
+
+            if(postform) {
+                postform.addClass('sleep');
+                addEvent(MasElements.viewer,'scroll',positionfix);
+            }
+
+            if(Tl) {
+                addEvent(MasElements.viewer,'scroll',TsOn);
+            }
+        });
+    </script>
+</div>
+<div class="vessel" id="ajax_wait"></div>
+<!--{hook/space_trends_bottom}-->

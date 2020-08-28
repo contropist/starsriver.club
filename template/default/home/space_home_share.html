@@ -49,7 +49,6 @@
                             <!--{if $value[body_general]}-->
                                 <div class="message" id="quote_{$id}">$value[body_general]</div>
                             <!--{/if}-->
-
                             $value[body_template]
                         </div>
                         <div class="s-end">
@@ -112,11 +111,18 @@
                 Tl.style.marginBottom = '200px';
             }
 
-            if(page) page.addClass('sleep');
-            if(postform) postform.addClass('sleep')
+            if(page) {
+                page.addClass('sleep');
+            }
 
-            addEvent(MasElements.viewer,'scroll',TsOn);
-            addEvent(MasElements.viewer,'scroll',positionfix);
+            if(postform) {
+                postform.addClass('sleep');
+                addEvent(MasElements.viewer,'scroll',positionfix);
+            }
+
+            if(Tl) {
+                addEvent(MasElements.viewer,'scroll',TsOn);
+            }
         });
     </script>
 </div>

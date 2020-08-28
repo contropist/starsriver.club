@@ -6747,7 +6747,8 @@
         margin-top: 3.9px;
     }
     .app-dynamic .actstruct .header a {
-        vertical-align: middle;
+        font-weight: 700;
+        color: var(--color-text-gray);
     }
     .app-dynamic .actstruct .header .username {
         margin: 0 10px 0 0;
@@ -6773,41 +6774,18 @@
         margin-right: 8px;
     }
     .app-dynamic .actstruct .body {
+        display: flex;
+        flex-flow: column wrap;
         box-sizing: border-box;
         margin: 10px 0;
-        padding-right: 15px;
-        line-height: 22px;
+        padding-right: 20px;
     }
     .app-dynamic .actstruct .body .content {
         word-break: break-all;
     }
     .app-dynamic .actstruct .body .message {
-        margin-bottom: 10px;
         word-break: break-all;
         padding: 0 3px;
-    }
-    .app-dynamic .actstruct .body .share-item-link {
-        display: block;
-        width: auto;
-        line-height: 22px;
-        height: 22px;
-        color: #565785;
-        background: #fcfcfc;
-        overflow: hidden;
-        border: 1px solid #e6e6e6;
-        padding-right: 8px;
-        border-radius: 5px;
-    }
-    .app-dynamic .actstruct .body .share-item-link a{
-        color: inherit;
-        font-size:inherit;
-    }
-    .app-dynamic .actstruct .body .share-item-link::before {
-        display: inline-block;
-        line-height: inherit;
-        border-right: 1px solid #e6e6e6;
-        padding: 0 8px;
-        margin: 0 8px 0 0;
     }
     .app-dynamic .actstruct .footer {
         text-align: right;
@@ -6817,11 +6795,12 @@
     }
     .app-dynamic .actstruct .footer .icon {
         display: inline-block;
-        margin: 0 10px;
+        margin: 0 0 0 10px;
         color: #888;
-        height: 18px;
         font-size: 18px !important;
-        line-height: 18px !important;
+        line-height: 24px !important;
+        text-align: center;
+        width: 24px;
     }
     .app-dynamic .actstruct .footer .icon::before {
         display: inline-block;
@@ -6856,9 +6835,6 @@
         color: #456;
     }
 
-/*endregion*/
-
-/*region 公共动态-space*/
     .app-dynamic .side-box .task{
         line-height: 24px;
         font-size: 0;
@@ -6965,87 +6941,380 @@
         background: #e1804c;
     }
 
-    .app-dynamic .actstruct .share-item-blog {
-        border-radius: 12px;
-        background: #fcfcfc;
-        overflow: hidden;
-        border: 1px solid #e6e6e6;
-    }
-    .app-dynamic .actstruct .share-item-blog .title {
-        display: block;
-        width: 100%;
-        overflow: hidden;
-        cursor: pointer;
-        color: #7d7d7d;
-        font-size: 16px;
-        line-height: 30px;
-        padding: 5px 10px;
-        box-sizing: border-box;
-        white-space: nowrap;
-        background: #fff;
-        border-bottom: 1px solid #e6e6e6;
-    }
-    .app-dynamic .actstruct .share-item-blog .title::before {
-        content: '';
-        width: 8px;
-        height: 16px;
-        display: inline-block;
-        background: var(--color-onnanoko-pink);
-        opacity: .8;
-        border-radius: 4px;
-        margin-right: 5px;
-        vertical-align: -6%;
-    }
-    .app-dynamic .actstruct .share-item-blog .title *{
-        color: inherit;
-        font-size: inherit;
-    }
-    .app-dynamic .actstruct .share-item-blog .title a{
-        color: inherit;
-        font-size: inherit;
-        display: inline-block;
-        width: calc(100% - 20px);
-    }
-    .app-dynamic .actstruct .share-item-blog .title .tag {
-        padding: 1px 5px;
-        border: 1px solid;
-        border-radius: 4px;
-        font-size: 12px;
-    }
-    .app-dynamic .actstruct .share-item-blog .category {
-        margin: 10px 10px 0 10px;
-        color: #e8729a;
-        display: block;
-        border-left: 2px solid;
-        padding-left: 4px;
-        height: 14px;
-        line-height: 14px;
-    }
-    .app-dynamic .actstruct .share-item-blog .category a {
-        display: inline-block;
-        color: #da518f;
-    }
-    .app-dynamic .actstruct .share-item-blog .content {
-        padding: 10px;
-        color: #404b56;
-    }
-    .app-dynamic .actstruct .share-item-video video{
-        width: 100%;
-    }
-    .app-dynamic .actstruct .share-item-music {
-        padding: 10px;
-        border-radius: 30px;
-        background: var(--color-main-theme);
-        color: #fff;
-        line-height: 20px;
-        white-space: nowrap;
-        overflow: hidden;
-    }
-    .app-dynamic .actstruct .share-item-music i{
-        display: inline-block;
-        margin-right: 6px;
-        font-size: 20px;
-    }
+    /*region @share-item*/
+        .app-dynamic .actstruct [class^="share-item"]{
+            display: inline-block;
+            box-sizing: border-box;
+            max-width: 100%;
+            margin-top: 10px;
+        }
+        .app-dynamic .share-item-link {
+            padding: 8px;
+            line-height: 20px;
+            color: var(--color-text-gray);
+            background: var(--color-vlightgray);
+            overflow: hidden;
+            border: 1px solid var(--color-slightgray);
+            border-radius: 5px;
+        }
+        .app-dynamic .share-item-link a{
+            color: inherit;
+            font-size:inherit;
+        }
+        .app-dynamic .share-item-link::before {
+            display: inline-block;
+            line-height: inherit;
+            border-right: 1px solid var(--color-slightgray);
+            padding-right: 8px;
+            margin-right: 8px;
+        }
+
+        .app-dynamic .share-item-music{
+            padding: 10px;
+            max-width: 100%;
+            border-radius: 30px;
+            background: var(--color-main-theme);
+            color: #fff;
+            line-height: 20px;
+            white-space: nowrap;
+            overflow: hidden;
+        }
+        .app-dynamic .share-item-music i{
+            display: inline-block;
+            margin-right: 6px;
+            font-size: 20px;
+        }
+
+        .app-dynamic .share-item-iframe{
+            width: 100%;
+            overflow: hidden;
+            background: var(--color-vlightgray);
+        }
+        .app-dynamic .share-item-iframe iframe{
+            width: 100%;
+            border: none;
+            min-height: 320px;
+        }
+.WL-13P .app-dynamic .share-item-iframe iframe,
+.WL-7P  .app-dynamic .share-item-iframe iframe{
+            min-height: 260px;
+        }
+.WL-0   .app-dynamic .share-item-iframe iframe,
+.WL-3P  .app-dynamic .share-item-iframe iframe{
+            min-height: 180px;
+        }
+
+        .app-dynamic .share-item-video video{
+            width: 100%;
+        }
+
+        .app-dynamic .share-item-image{
+            display: block;
+            width: 100%;
+            border: 2px solid var(--color-lightgray);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .app-dynamic .share-item-image .image,
+        .app-dynamic .share-item-image .image img{
+            width: 100%;
+        }
+        .app-dynamic .share-item-image i,
+        .app-dynamic .share-item-image .album-pic-info{
+            display: flex;
+            flex-flow: row nowrap;
+            align-items: center;
+            padding: 0 10px;
+            line-height: 34px;
+            background: var(--color-vlightgray);
+            border-top: 1px solid var(--color-slightgray);
+            color: var(--color-text-gray);
+            word-break: break-all;
+            white-space: nowrap;
+        }
+        .app-dynamic .share-item-image .album-pic-info a{
+            color: var(--color-text-info);
+            margin-right: 5px;
+        }
+        .app-dynamic .share-item-image .album-pic-info .username img{
+            width: 24px;
+            height: 24px;
+            border-radius: 20px;
+            margin: 5px 5px 0 0;
+        }
+
+        .app-dynamic .share-item-album {
+            display: flex !important;
+            flex-flow: row wrap;
+            width: 100%;
+            padding: 10px;
+            background-image: url("{IMGURL}/common/background/album-button-back.svg");
+            background-size: 8px;
+            border: 3px solid #eeeef5;
+            border-radius: 10px;
+        }
+        .app-dynamic .share-item-album .image {
+            width: 20%;
+            overflow: hidden;
+            border-radius: 4px;
+        }
+        .app-dynamic .share-item-album .image img{
+            width: 100%;
+        }
+        .app-dynamic .share-item-album .album-info{
+            width: 80%;
+            padding-left:10px;
+            line-height: 25px;
+        }
+        .app-dynamic .share-item-album .album-name {
+            display: block;
+            width: 100%;
+            color: var(--color-text-dark);
+            font-size: 20px;
+            font-weight: 700;
+        }
+        .app-dynamic .share-item-album .album-desc {
+            padding: 10px;
+            color: var(--color-text-dark);
+            word-break: break-word;
+            border-top: 2px dashed #e3e5e8;
+            width: 100%;
+            margin-top: 10px;
+            background: rgb(255 255 255 / 50%);
+            border-radius: 0 0 6px 6px;
+        }
+        .app-dynamic .share-item-album .owner-name {
+            color: #5a6b84;
+            font-weight: 700;
+            font-size: 15px;
+            background: #fff;
+            border-radius: 10px;
+            padding: 0 10px 0 0;
+            box-shadow: 0 0 0 2px rgb(238 238 245);
+            line-height: 20px;
+            height: 20px;
+            margin-top: 5px;
+        }
+        .app-dynamic .share-item-album .owner-name img{
+            width: 20px;
+            height: 20px;
+            border-radius: 25px;
+            margin: 0 5px 0 0;
+        }
+
+        .app-dynamic .share-item-blog {
+            border-radius: 14px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(120,144,177,.2);
+        }
+        .app-dynamic .share-item-blog .image{
+            width: 100%;
+            max-height:180px;
+            overflow: hidden;
+        }
+.WL-0   .app-dynamic .share-item-blog .image,
+.WL-4P  .app-dynamic .share-item-blog .image,
+.WL-3P  .app-dynamic .share-item-blog .image{
+            max-height:110px;
+        }
+        .app-dynamic .share-item-blog .image img{
+            width: 100%;
+        }
+        .app-dynamic .share-item-blog .subject {
+            display: block;
+            width: 100%;
+            overflow: hidden;
+            cursor: pointer;
+            color: var(--color-text-dark);
+            font-size: 22px;
+            font-weight: 700;
+            margin: 20px 20px 0 20px;
+            box-sizing: border-box;
+            white-space: nowrap;
+        }
+        .app-dynamic .share-item-blog .subject .tag {
+            padding: 1px 5px;
+            border: 1px solid;
+            border-radius: 4px;
+            font-size: 12px;
+        }
+        .app-dynamic .share-item-blog .author {
+            margin: 10px 30px 0 30px;
+            color: var(--color-main-theme-dark);
+            display: inline-block;
+            line-height: 24px;
+            font-size: 15px;
+            font-weight: 700;
+        }
+        .app-dynamic .share-item-blog .author img{
+            width: 24px;
+            height: 24px;
+            border-radius: 25px;
+            margin: 0 5px 0 0;
+        }
+        .app-dynamic .share-item-blog .content {
+            padding: 10px 30px 20px 30px;
+            color: var(--color-text-gray);
+            word-break: break-word;
+            line-height: 16px;
+        }
+
+        .app-dynamic .share-item-thread {
+            --share-item-thread-back-color: #f8fafa;
+            --share-item-thread-bord-color: #ebedf1;
+            border-radius: 6px;
+            overflow: hidden;
+            background: var(--share-item-thread-back-color);
+            padding: 10px;
+            border: 2px solid var(--share-item-thread-bord-color);
+        }
+        .app-dynamic .share-item-thread .headline {
+            display: flex;
+            flex-flow: row nowrap;
+            line-height: 30px;
+            white-space: nowrap;
+        }
+        .app-dynamic .share-item-thread .headline a{
+            color: var(--color-main-theme-dark);
+            font-weight: 700;
+            margin: 0 5px;
+        }
+        .app-dynamic .share-item-thread .author {
+            margin-left: 0 !important;
+        }
+        .app-dynamic .share-item-thread .author img{
+            width: 24px;
+            height: 24px;
+            border-radius: 25px;
+            margin: 3px 5px 3px 0;
+        }
+        .app-dynamic .share-item-thread .content .text{
+            padding: 10px;
+            margin-top: 5px;
+            border-radius: 4px;
+        }
+        .app-dynamic .share-item-thread .content .imgs{
+
+        }
+        .app-dynamic .share-item-thread .content .redirect-needed{
+            text-align: center;
+            color: var(--color-text-lightgray);
+        }
+
+        .app-dynamic .share-item-space {
+            --avatar-size: 64px;
+            --username-fontsize: 16px;
+            --space-note-fontsize: 14px;
+            display: flex !important;
+            flex-flow: row nowrap;
+            overflow: hidden;
+            width: 100%;
+            height: 149px;
+            padding: 40px;
+            border-radius: 10px;
+            background-image: url({IMGURL}/home/share-item/share-item-space-bg.png);
+            background-size: 30px 30px;
+            box-shadow: inset 0 0 7px rgba(120,144,177,.2);
+        }
+.WL-0   .app-dynamic .share-item-space,
+.WL-3P  .app-dynamic .share-item-space,
+.WL-4P  .app-dynamic .share-item-space {
+            --avatar-size: 42px;
+            --username-fontsize: 14px;
+            --space-note-fontsize: 12px;
+        }
+        .app-dynamic .share-item-space::before {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            border: 2px dashed #fff;
+            top: -42px;
+            right: -42px;
+            border-radius: 60px;
+        }
+        .app-dynamic .share-item-space::after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            border: 2px dashed #fff;
+            bottom: -40px;
+            left: -40px;
+            transform: rotate(32deg);
+        }
+        .app-dynamic .share-item-space .decrater {
+            z-index: 0;
+            position: absolute;
+            width: calc(100% - 66px);
+            height: calc(100% - 66px);
+            background: #fff;
+            top: 33px;
+            left: 33px;
+            border-radius: 5px;
+            box-shadow: 0 0 2px rgba(0,0,0,.15);
+        }
+        .app-dynamic .share-item-space .decrater::before {
+            content: '';
+            position: absolute;
+            width: 66px;
+            height: 46px;
+            border-width: 2px;
+            border-color: #fff;
+            border-style: dashed;
+            border-bottom: 0;
+            border-right: 0;
+            top: -10px;
+            left: -10px;
+        }
+        .app-dynamic .share-item-space .decrater::after {
+            content: '';
+            position: absolute;
+            width: 66px;
+            height: 46px;
+            border-width: 2px;
+            border-color: #fff;
+            border-style: dashed;
+            border-top: 0;
+            border-left: 0;
+            bottom: -10px;
+            right: -10px;
+        }
+        .app-dynamic .share-item-space .avatar {
+            z-index: 1;
+            position: relative;
+            height: var(--avatar-size);
+            width: var(--avatar-size);
+            left: 0;
+        }
+        .app-dynamic .share-item-space .info {
+            z-index: 1;
+            position: relative;
+            box-sizing: border-box;
+            padding: 0 0 0 15px;
+            width: calc(100% - var(--avatar-size));
+            left: 0;
+        }
+        .app-dynamic .share-item-space .avatar .avatar-main {
+            box-shadow: 0 0 0 2px var(--color-lightgray);
+        }
+        .app-dynamic .share-item-space .username {
+            display: block;
+            width: 100%;
+            padding: 5px 0;
+            font-size: var(--username-fontsize);
+            font-weight: 700;
+            color: #8aa0bb;
+        }
+        .app-dynamic .share-item-space .space-note {
+            display: block;
+            width: 100%;
+            max-height: 39px;
+            overflow: hidden;
+            color: #4a617d;
+            font-size: var(--space-note-fontsize);
+        }
+    /*endregion*/
 
     .app-dynamic .post-new-blog {
         text-align: center;
@@ -8008,35 +8277,14 @@
 
     /*endregion*/
 
-    /*region #userspace_doing*/
-        .app-userspace #userspace_doing{
-
-        }
-        .app-userspace #userspace_doing .timeline .node .n-right .s-center > .message{
-            color: #000;
-            word-break: break-word;
-            padding: 10px;
-            border-left: 3px solid #aac1e2;
-            background: #f9f9f9;
-        }
-    /*endregion*/
-
-    /*region #userspace_share*/
-        .app-userspace #userspace_share .timeline .n-right .s-center > .message{
-            color: #000;
-            word-break: break-word;
-            padding: 10px;
-            border-left: 3px solid #aac1e2;
-            background: #f9f9f9;
-        }
-        .app-userspace #userspace_share .timeline .n-right .s-center > [class^="share-item"]{
+    /*region @share-item*/
+        .app-userspace .timeline [class^="share-item"]{
             display: inline-block;
             box-sizing: border-box;
             max-width: 100%;
             margin-top: 10px;
         }
-
-        .app-userspace #userspace_share .timeline .share-item-link {
+        .app-userspace .timeline .share-item-link {
             padding: 8px;
             line-height: 20px;
             color: var(--color-text-gray);
@@ -8045,11 +8293,11 @@
             border: 1px solid var(--color-slightgray);
             border-radius: 5px;
         }
-        .app-userspace #userspace_share .timeline .share-item-link a{
+        .app-userspace .timeline .share-item-link a{
             color: inherit;
             font-size:inherit;
         }
-        .app-userspace #userspace_share .timeline .share-item-link::before {
+        .app-userspace .timeline .share-item-link::before {
             display: inline-block;
             line-height: inherit;
             border-right: 1px solid var(--color-slightgray);
@@ -8057,8 +8305,9 @@
             margin-right: 8px;
         }
 
-        .app-userspace #userspace_share .timeline .share-item-music{
+        .app-userspace .timeline .share-item-music{
             padding: 10px;
+            max-width: 100%;
             border-radius: 30px;
             background: var(--color-main-theme);
             color: #fff;
@@ -8066,45 +8315,44 @@
             white-space: nowrap;
             overflow: hidden;
         }
-        .app-userspace #userspace_share .timeline .share-item-music i{
+        .app-userspace .timeline .share-item-music i{
             display: inline-block;
             margin-right: 6px;
             font-size: 20px;
         }
 
-        .app-userspace #userspace_share .timeline .share-item-iframe{
+        .app-userspace .timeline .share-item-iframe{
             width: 100%;
             overflow: hidden;
             background: var(--color-vlightgray);
         }
-        .app-userspace #userspace_share .timeline .share-item-iframe iframe{
+        .app-userspace .timeline .share-item-iframe iframe{
             width: 100%;
             border: none;
             min-height: 260px;
         }
-.WL-0   .app-userspace #userspace_share .timeline .share-item-iframe iframe,
-.WL-3P  .app-userspace #userspace_share .timeline .share-item-iframe iframe{
-            width: 100%;
+.WL-0   .app-userspace .timeline .share-item-iframe iframe,
+.WL-3P  .app-userspace .timeline .share-item-iframe iframe{
             min-height: 180px;
         }
 
-        .app-userspace #userspace_share .timeline .share-item-video video{
+        .app-userspace .timeline .share-item-video video{
             width: 100%;
         }
 
-        .app-userspace #userspace_share .timeline .share-item-image{
+        .app-userspace .timeline .share-item-image{
             display: block;
             width: 100%;
             border: 2px solid var(--color-lightgray);
             border-radius: 8px;
             overflow: hidden;
         }
-        .app-userspace #userspace_share .timeline .share-item-image .image,
-        .app-userspace #userspace_share .timeline .share-item-image .image img{
+        .app-userspace .timeline .share-item-image .image,
+        .app-userspace .timeline .share-item-image .image img{
             width: 100%;
         }
-        .app-userspace #userspace_share .timeline .share-item-image i,
-        .app-userspace #userspace_share .timeline .share-item-image .album-pic-info{
+        .app-userspace .timeline .share-item-image i,
+        .app-userspace .timeline .share-item-image .album-pic-info{
             display: flex;
             flex-flow: row nowrap;
             align-items: center;
@@ -8116,18 +8364,18 @@
             word-break: break-all;
             white-space: nowrap;
         }
-        .app-userspace #userspace_share .timeline .share-item-image .album-pic-info a{
+        .app-userspace .timeline .share-item-image .album-pic-info a{
             color: var(--color-text-info);
             margin-right: 5px;
         }
-        .app-userspace #userspace_share .timeline .share-item-image .album-pic-info .username img{
+        .app-userspace .timeline .share-item-image .album-pic-info .username img{
             width: 24px;
             height: 24px;
             border-radius: 20px;
             margin: 5px 5px 0 0;
         }
 
-        .app-userspace #userspace_share .timeline .share-item-album {
+        .app-userspace .timeline .share-item-album {
             display: flex !important;
             flex-flow: row wrap;
             width: 100%;
@@ -8137,27 +8385,27 @@
             border: 3px solid #eeeef5;
             border-radius: 10px;
         }
-        .app-userspace #userspace_share .timeline .share-item-album .album-img {
+        .app-userspace .timeline .share-item-album .image {
             width: 20%;
             overflow: hidden;
             border-radius: 4px;
         }
-        .app-userspace #userspace_share .timeline .share-item-album .album-img img{
+        .app-userspace .timeline .share-item-album .image img{
             width: 100%;
         }
-        .app-userspace #userspace_share .timeline .share-item-album .album-info{
+        .app-userspace .timeline .share-item-album .album-info{
             width: 80%;
             padding-left:10px;
             line-height: 25px;
         }
-        .app-userspace #userspace_share .timeline .share-item-album .album-name {
+        .app-userspace .timeline .share-item-album .album-name {
             display: block;
             width: 100%;
             color: var(--color-text-dark);
             font-size: 20px;
             font-weight: 700;
         }
-        .app-userspace #userspace_share .timeline .share-item-album .album-desc {
+        .app-userspace .timeline .share-item-album .album-desc {
             padding: 10px;
             color: var(--color-text-dark);
             word-break: break-word;
@@ -8167,7 +8415,7 @@
             background: rgb(255 255 255 / 50%);
             border-radius: 0 0 6px 6px;
         }
-        .app-userspace #userspace_share .timeline .share-item-album .owner-name {
+        .app-userspace .timeline .share-item-album .owner-name {
             color: #5a6b84;
             font-weight: 700;
             font-size: 15px;
@@ -8179,32 +8427,32 @@
             height: 20px;
             margin-top: 5px;
         }
-        .app-userspace #userspace_share .timeline .share-item-album .owner-name img{
+        .app-userspace .timeline .share-item-album .owner-name img{
             width: 20px;
             height: 20px;
             border-radius: 25px;
             margin: 0 5px 0 0;
         }
 
-        .app-userspace #userspace_share .timeline .share-item-blog {
+        .app-userspace .timeline .share-item-blog {
             border-radius: 14px;
             overflow: hidden;
             box-shadow: 0 4px 20px rgba(120,144,177,.2);
         }
-        .app-userspace #userspace_share .timeline .share-item-blog .image{
+        .app-userspace .timeline .share-item-blog .image{
             width: 100%;
             max-height:180px;
             overflow: hidden;
         }
-.WL-0   .app-userspace #userspace_share .timeline .share-item-blog .image,
-.WL-4P  .app-userspace #userspace_share .timeline .share-item-blog .image,
-.WL-3P  .app-userspace #userspace_share .timeline .share-item-blog .image{
+.WL-0   .app-userspace .timeline .share-item-blog .image,
+.WL-4P  .app-userspace .timeline .share-item-blog .image,
+.WL-3P  .app-userspace .timeline .share-item-blog .image{
             max-height:110px;
         }
-        .app-userspace #userspace_share .timeline .share-item-blog .image img{
+        .app-userspace .timeline .share-item-blog .image img{
             width: 100%;
         }
-        .app-userspace #userspace_share .timeline .share-item-blog .subject {
+        .app-userspace .timeline .share-item-blog .subject {
             display: block;
             width: 100%;
             overflow: hidden;
@@ -8216,13 +8464,13 @@
             box-sizing: border-box;
             white-space: nowrap;
         }
-        .app-userspace #userspace_share .timeline .share-item-blog .subject .tag {
+        .app-userspace .timeline .share-item-blog .subject .tag {
             padding: 1px 5px;
             border: 1px solid;
             border-radius: 4px;
             font-size: 12px;
         }
-        .app-userspace #userspace_share .timeline .share-item-blog .author {
+        .app-userspace .timeline .share-item-blog .author {
             margin: 10px 30px 0 30px;
             color: var(--color-main-theme-dark);
             display: inline-block;
@@ -8230,19 +8478,20 @@
             font-size: 15px;
             font-weight: 700;
         }
-        .app-userspace #userspace_share .timeline .share-item-blog .author img{
+        .app-userspace .timeline .share-item-blog .author img{
             width: 24px;
             height: 24px;
             border-radius: 25px;
             margin: 0 5px 0 0;
         }
-        .app-userspace #userspace_share .timeline .share-item-blog .content {
+        .app-userspace .timeline .share-item-blog .content {
             padding: 10px 30px 20px 30px;
             color: var(--color-text-gray);
             word-break: break-word;
+            line-height: 16px;
         }
 
-        .app-userspace #userspace_share .timeline .share-item-thread {
+        .app-userspace .timeline .share-item-thread {
             --share-item-thread-back-color: #f8fafa;
             --share-item-thread-bord-color: #ebedf1;
             border-radius: 6px;
@@ -8251,40 +8500,40 @@
             padding: 10px;
             border: 2px solid var(--share-item-thread-bord-color);
         }
-        .app-userspace #userspace_share .timeline .share-item-thread .headline {
+        .app-userspace .timeline .share-item-thread .headline {
             display: flex;
             flex-flow: row nowrap;
             line-height: 30px;
             white-space: nowrap;
         }
-        .app-userspace #userspace_share .timeline .share-item-thread .headline a{
+        .app-userspace .timeline .share-item-thread .headline a{
             color: var(--color-main-theme-dark);
             font-weight: 700;
             margin: 0 5px;
         }
-        .app-userspace #userspace_share .timeline .share-item-thread .author {
+        .app-userspace .timeline .share-item-thread .author {
             margin-left: 0 !important;
         }
-        .app-userspace #userspace_share .timeline .share-item-thread .author img{
+        .app-userspace .timeline .share-item-thread .author img{
             width: 24px;
             height: 24px;
             border-radius: 25px;
             margin: 3px 5px 3px 0;
         }
-        .app-userspace #userspace_share .timeline .share-item-thread .content .text{
+        .app-userspace .timeline .share-item-thread .content .text{
             padding: 10px;
             margin-top: 5px;
             border-radius: 4px;
         }
-        .app-userspace #userspace_share .timeline .share-item-thread .content .imgs{
+        .app-userspace .timeline .share-item-thread .content .imgs{
 
         }
-        .app-userspace #userspace_share .timeline .share-item-thread .content .redirect-needed{
+        .app-userspace .timeline .share-item-thread .content .redirect-needed{
             text-align: center;
             color: var(--color-text-lightgray);
         }
 
-        .app-userspace #userspace_share .timeline .share-item-space {
+        .app-userspace .timeline .share-item-space {
             --avatar-size: 64px;
             --username-fontsize: 16px;
             --space-note-fontsize: 14px;
@@ -8299,14 +8548,14 @@
             background-size: 30px 30px;
             box-shadow: inset 0 0 7px rgba(120,144,177,.2);
         }
-.WL-0   .app-userspace #userspace_share .timeline .share-item-space,
-.WL-3P  .app-userspace #userspace_share .timeline .share-item-space,
-.WL-4P  .app-userspace #userspace_share .timeline .share-item-space {
+.WL-0   .app-userspace .timeline .share-item-space,
+.WL-3P  .app-userspace .timeline .share-item-space,
+.WL-4P  .app-userspace .timeline .share-item-space {
             --avatar-size: 42px;
             --username-fontsize: 14px;
             --space-note-fontsize: 12px;
         }
-        .app-userspace #userspace_share .timeline .share-item-space::before {
+        .app-userspace .timeline .share-item-space::before {
             content: '';
             position: absolute;
             width: 80px;
@@ -8316,7 +8565,7 @@
             right: -42px;
             border-radius: 60px;
         }
-        .app-userspace #userspace_share .timeline .share-item-space::after {
+        .app-userspace .timeline .share-item-space::after {
             content: '';
             position: absolute;
             width: 80px;
@@ -8326,7 +8575,7 @@
             left: -40px;
             transform: rotate(32deg);
         }
-        .app-userspace #userspace_share .timeline .share-item-space .decrater {
+        .app-userspace .timeline .share-item-space .decrater {
             z-index: 0;
             position: absolute;
             width: calc(100% - 66px);
@@ -8337,7 +8586,7 @@
             border-radius: 5px;
             box-shadow: 0 0 2px rgba(0,0,0,.15);
         }
-        .app-userspace #userspace_share .timeline .share-item-space .decrater::before {
+        .app-userspace .timeline .share-item-space .decrater::before {
             content: '';
             position: absolute;
             width: 66px;
@@ -8350,7 +8599,7 @@
             top: -10px;
             left: -10px;
         }
-        .app-userspace #userspace_share .timeline .share-item-space .decrater::after {
+        .app-userspace .timeline .share-item-space .decrater::after {
             content: '';
             position: absolute;
             width: 66px;
@@ -8363,14 +8612,14 @@
             bottom: -10px;
             right: -10px;
         }
-        .app-userspace #userspace_share .timeline .share-item-space .avatar {
+        .app-userspace .timeline .share-item-space .avatar {
             z-index: 1;
             position: relative;
             height: var(--avatar-size);
             width: var(--avatar-size);
             left: 0;
         }
-        .app-userspace #userspace_share .timeline .share-item-space .info {
+        .app-userspace .timeline .share-item-space .info {
             z-index: 1;
             position: relative;
             box-sizing: border-box;
@@ -8378,10 +8627,10 @@
             width: calc(100% - var(--avatar-size));
             left: 0;
         }
-        .app-userspace #userspace_share .timeline .share-item-space .avatar .avatar-main {
+        .app-userspace .timeline .share-item-space .avatar .avatar-main {
             box-shadow: 0 0 0 2px var(--color-lightgray);
         }
-        .app-userspace #userspace_share .timeline .share-item-space .username {
+        .app-userspace .timeline .share-item-space .username {
             display: block;
             width: 100%;
             padding: 5px 0;
@@ -8389,13 +8638,33 @@
             font-weight: 700;
             color: #8aa0bb;
         }
-        .app-userspace #userspace_share .timeline .share-item-space .space-note {
+        .app-userspace .timeline .share-item-space .space-note {
             display: block;
             width: 100%;
             max-height: 39px;
             overflow: hidden;
             color: #4a617d;
             font-size: var(--space-note-fontsize);
+        }
+    /*endregion*/
+
+    /*region #userspace_doing*/
+        .app-userspace #userspace_doing .timeline .node .n-right .s-center > .message{
+            color: #000;
+            word-break: break-word;
+            padding: 10px;
+            border-left: 3px solid #aac1e2;
+            background: #f9f9f9;
+        }
+    /*endregion*/
+
+    /*region #userspace_share*/
+        .app-userspace .timeline .n-right .s-center > .message{
+            color: #000;
+            word-break: break-word;
+            padding: 10px;
+            border-left: 3px solid #aac1e2;
+            background: #f9f9f9;
         }
     /*endregion*/
 

@@ -200,11 +200,14 @@ if($_GET['view'] == 'online') {
 		}
 	}
 
-	$nestmode = 1;
-	if($space['self'] && ($_GET['from'] != 'space' || !$_G['setting']['homepagestyle'])) $nestmode = 0;
-	if($nestmode) {
-		$theurl .= "&from=space";
-	}
+	$nestmode = 0;
+	
+	if($_GET['from'] == 'space') {
+        $theurl .= "&from=space";
+        $nestmode = 1;
+    } else {
+        $nestmode = 0;
+    };
 
 	$multi = multi($count, $perpage, $page, $theurl);
 

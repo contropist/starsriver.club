@@ -24,6 +24,7 @@ function getblockhtml($blockname,$parameters = []) {
 	$uid = intval($space['uid']);
 
 	$shownum = empty($parameters['shownum']) ? $shownum : intval($parameters['shownum']);
+	
 	switch ($blockname) {
 		case 'personalinfo':
 			$do = 'profile';
@@ -665,7 +666,6 @@ function mkfeedhtml($value) {
 	}
 
 	if ($value['body_general']) {
-		$classname = $value['image_1'] ? ' z' : '';
 		$html .= "<blockquote>$value[body_general]</blockquote>";
 	}
 	$html .= "</div>";
@@ -675,26 +675,26 @@ function mkfeedhtml($value) {
 }
 
 function &getlayout($layout='') {
-	$layoutarr = array(
-			'1:2:1' => array('240', '480', '240'),
-			'1:1:2' => array('240', '240', '480'),
-			'2:1:1' => array('480', '240', '240'),
-			'2:2' => array('480', '480'),
-			'1:3' => array('240', '720'),
-			'3:1' => array('720', '240'),
-			'1:4' => array('190', '770'),
-			'4:1' => array('770', '190'),
-			'2:2:1' => array('385', '385', '190'),
-			'1:2:2' => array('190', '385', '385'),
-			'1:1:3' => array('190', '190', '570'),
-			'1:3:1' => array('190', '570', '190'),
-			'3:1:1' => array('570', '190', '190'),
-			'3:2' => array('575', '385'),
-			'2:3' => array('385', '575')
-	);
-
-	if (!empty($layout)) {
-		$rt = (isset($layoutarr[$layout])) ? $layoutarr[$layout] : false;
+    $layoutarr = [
+        '1:2:1' => ['240', '480', '240',],
+        '1:1:2' => ['240', '240', '480',],
+        '2:1:1' => ['480', '240', '240',],
+        '2:2' => ['480', '480',],
+        '1:3' => ['240', '720',],
+        '3:1' => ['720', '240',],
+        '1:4' => ['190', '770',],
+        '4:1' => ['770', '190',],
+        '2:2:1' => ['385', '385', '190',],
+        '1:2:2' => ['190', '385', '385',],
+        '1:1:3' => ['190', '190', '570',],
+        '1:3:1' => ['190', '570', '190',],
+        '3:1:1' => ['570', '190', '190',],
+        '3:2' => ['575', '385',],
+        '2:3' => ['385', '575',],
+    ];
+    
+    if (!empty($layout)) {
+        $rt = (isset($layoutarr[$layout])) ? $layoutarr[$layout] : false;
 	} else {
 		$rt = $layoutarr;
 	}

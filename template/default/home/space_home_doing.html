@@ -7,15 +7,14 @@
         <!--{if $pricount}-->
             <p class="alert hi-warning" style="margin: 0 0 0 -15px; width: calc(100% + 30px);">{lang hide_doing}</p>
         <!--{/if}-->
-        <ul class="timeline">
+        <ul class="timeline" id="doing_list">
             <!--{eval $doday = '';}-->
             <!--{eval $domin = '';}-->
             <!--{loop $dolist $dv}-->
                 <!--{eval $dodayN = date('ymd',$dv['dateline']);}-->
                 <!--{eval $dominN = date('ymdi',$dv['dateline']);}-->
-                <!--{eval $doid = $dv[doid];}-->
                 <!--{eval $_GET[key] = $key = random(8);}-->
-                <li class="node {if $doday != $dodayN}dayMark{/if}" id="{$key}dl{$doid}" title="{if checkperm('managedoing')}IP: $dv[ip]{/if}">
+                <li class="node {if $doday != $dodayN}dayMark{/if}" id="{$key}dl{$dv[doid]}" title="{if checkperm('managedoing')}IP: $dv[ip]{/if}">
                     <div class="n-left">
                         <!--{if $doday != $dodayN}-->
                             <!--{eval $doday = $dodayN;}-->
@@ -38,7 +37,7 @@
                             <div class="tool r">
                                 <b class="dots"><i class="dot"></i><i class="dot"></i><i class="dot"></i></b>
                                 <span class="tooltip lt" data-ignore='1'>
-                                    <a href="home.php?mod=spacecp&ac=doing&op=delete&doid=$doid&id=$dv[id]&handlekey=doinghk_{$doid}_$dv[id]" id="{$key}_doing_delete_{$doid}_{$dv[id]}" onclick="showWindow(this.id, this.href, 'get', 0);">{lang delete}</a>
+                                    <a href="home.php?mod=spacecp&ac=doing&op=delete&doid=$dv[doid]&id=$dv[id]&handlekey=doinghk_{$dv[doid]}_$dv[id]" id="{$key}_doing_delete_{$dv[doid]}_{$dv[id]}" onclick="showWindow(this.id, this.href, 'get', 0);">{lang delete}</a>
                                 </span>
                             </div>
                             <!--{/if}-->
@@ -46,10 +45,10 @@
                         <div class="s-center">
                             <div class="message">$dv[message]</div>
                             <div class="flow-comment-list">
-                                <!--{eval $list = $clist[$doid];}-->
-                                <div id="{$key}_$doid">
-                                    <div id="{$key}_form_{$doid}_0"></div>
-                                    <!--{if $clist[$doid]}-->
+                                <!--{eval $list = $clist[$dv[doid]];}-->
+                                <div id="{$key}_$dv[doid]">
+                                    <div id="{$key}_form_{$dv[doid]}_0"></div>
+                                    <!--{if $clist[$dv[doid]]}-->
                                         <!--{template home/space_route_doing_mod_comments}-->
                                     <!--{/if}-->
                                 </div>
@@ -57,7 +56,7 @@
                         </div>
                         <div class="s-end">
                             <!--{if helper_access::check_module('doing')}-->
-                            <a class="icon reply mt-textsms" onclick="docomment_form($doid, 0, '$key');"></a>
+                            <a class="icon reply mt-textsms" onclick="docomment_form($dv[doid], 0, '$key');"></a>
                             <!--{/if}-->
                         </div>
                     </div>
@@ -114,11 +113,21 @@
                 Tl.style.marginBottom = '200px';
             }
 
-            if(page) page.addClass('sleep');
-            if(postform) postform.addClass('sleep');
+            if(page) {
+                page.addClass('sleep');
+            }
 
-            addEvent(MasElements.viewer,'scroll',TsOn);
-            addEvent(MasElements.viewer,'scroll',positionfix);
+            if(postform) {
+                postform.addClass('sleep');
+                addEvent(MasElements.viewer,'scroll',positionfix);
+            }
+
+            if(Tl) {
+                addEvent(MasElements.viewer,'scroll',TsOn);
+            }
+
+
+
         });
     </script>
 </div>

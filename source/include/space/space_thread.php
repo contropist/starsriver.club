@@ -69,6 +69,7 @@ $listcount = 0;
 if($_GET['view'] == 'me') {
 
 	if($_GET['from'] == 'space') $nestmode = 1;
+	
 	$allowview = true;
 	$viewtype = in_array($_GET['type'], array('reply', 'thread', 'postcomment')) ? $_GET['type'] : 'thread';
 	$filter = in_array($_GET['filter'], array('recyclebin', 'ignored', 'save', 'aduit', 'close', 'common')) ? $_GET['filter'] : '';

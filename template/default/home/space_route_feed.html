@@ -1,0 +1,43 @@
+<!--{if empty($nestmode)}-->
+    <!--{template home/space_trends__header}-->
+    <div class="plate layout-3-type2 app-dynamic soft">
+        <section>
+            <!--{template home/space_trends__side_left}-->
+        </section>
+        <section>
+            <!--[nest=nest1]--><div id="nest1" class="area"></div><!--[/nest]-->
+            <!--[nest=nest2]--><div id="nest2" class="area"></div><!--[/nest]-->
+            <!--[nest=nest3]--><div id="nest3" class="area"></div><!--[/nest]-->
+
+            <!--{if $space['uid'] && $space[self]}-->
+                <!--{template home/space_status}-->
+            <!--{/if}-->
+
+            <!--{hook/space_trends_top}-->
+
+            <!--[nest=nestcontenttop]--><div class="area" id="nestcontenttop"></div><!--[/nest]-->
+            <!--{template home/space_trends_feed}-->
+            <!--[nest=nestcontentbottom]--><div class="area" id="nestcontentbottom"></div><!--[/nest]-->
+        </section>
+        <section>
+            <!--{subtemplate home/space_trends__side_right}-->
+        </section>
+    </div>
+<!--{else}-->
+    <!--{template home/space_home__header}-->
+    <div class="mas-viewer">
+        <div class="mas-viewer-header">
+            <!--{template home/space_home_userabout}-->
+        </div>
+        <div class="mas-viewer-container">
+            <!--{template home/space_home_feed}-->
+        </div>
+    </div>
+<!--{/if}-->
+<script>
+    let elems = selector('li[class~=magicthunder]', $('feed_div'));
+    for(let i=0; i<elems.length; i++){
+        magicColor(elems[i]);
+    }
+</script>
+<!--{template common/footer}-->
