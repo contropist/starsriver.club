@@ -3329,6 +3329,7 @@
         width:22px;
         height:22px;
         padding: 2px !important;
+        image-rendering: -webkit-optimize-contrast !important;
     }
     .smilies-box .page{
         display:block;

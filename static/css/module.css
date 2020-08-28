@@ -6795,12 +6795,12 @@
     }
     .app-dynamic .actstruct .footer .icon {
         display: inline-block;
-        margin: 0 0 0 10px;
+        margin: 0 0 0 15px;
         color: #888;
         font-size: 18px !important;
         line-height: 24px !important;
         text-align: center;
-        width: 24px;
+        height: 24px;
     }
     .app-dynamic .actstruct .footer .icon::before {
         display: inline-block;
