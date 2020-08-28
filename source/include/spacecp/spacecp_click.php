@@ -145,7 +145,14 @@ if($_GET['op'] == 'add') {
 	if(empty($item['friend']) && ckprivacy('click', 'feed')) {
 		require_once libfile('function/feed');
 		$fs['title_data']['hash_data'] = "{$idtype}{$id}";
-		feed_add('click', $fs['title_template'], $fs['title_data'], '', [], $fs['body_general'],$fs['images'], $fs['image_links']);
+        feed_add([
+            'icon' => 'click',
+            'title_template' => $fs['title_template'],
+            'title_data' => $fs['title_data'],
+            'body_general' => $fs['body_general'],
+            'images' => $fs['images'],
+            'images_link' => $fs['image_links'],
+        ]);
 	}
 
 	updatecreditbyaction('click', 0, [], $idtype.$id);

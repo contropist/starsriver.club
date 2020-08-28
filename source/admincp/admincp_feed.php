@@ -120,14 +120,17 @@ EOF;
 		if(empty($feedid)) {
 			$_G['uid'] = 0;
 			require_once libfile('function/feed');
-			$feedid = feed_add('sitefeed',
-				trim($feednew['title_template']),array(),
-				trim($feednew['body_template']),array(),
-				trim($feednew['body_general']),
-				array(trim($feednew['image_1']),trim($feednew['image_2']),trim($feednew['image_3']),trim($feednew['image_4'])),
-				array(trim($feednew['image_1_link']),trim($feednew['image_2_link']),trim($feednew['image_3_link']),trim($feednew['image_4_link'])),
-				'','','',1
-			);
+            $feedid = feed_add([
+                'icon' => 'sitefeed',
+                'title_template' => trim($feednew['title_template']),
+                'body_template' => trim($feednew['body_template']),
+                'body_general' => trim($feednew['body_general']),
+                'images' => array(trim($feednew['image_1']),trim($feednew['image_2']),trim($feednew['image_3']),trim($feednew['image_4'])),
+                'images_link' => array(trim($feednew['image_1_link']),trim($feednew['image_2_link']),trim($feednew['image_3_link']),trim($feednew['image_4_link'])),
+                'target_ids' => '',
+                'returnid' => '',
+                'id' => 1,
+            ]);
 
 		} else {
 			if(empty($feednew['feeduid'])) {

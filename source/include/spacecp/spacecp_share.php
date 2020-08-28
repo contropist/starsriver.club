@@ -46,7 +46,12 @@ if($_GET['op'] == 'delete') {
 
 	cknewuser();
 
-    $commentcable = ['blog' => 'blogid', 'pic' => 'picid', 'thread' => 'thread', 'article' => 'article'];
+    $commentcable = [
+        'blog' => 'blogid',
+        'pic' => 'picid',
+        'thread' => 'thread',
+        'article' => 'article'
+    ];
 
     $type = empty($_GET['type']) ? '' : $_GET['type'];
     $id = empty($_GET['id']) ? 0 : intval($_GET['id']);
@@ -569,36 +574,50 @@ if($_GET['op'] == 'delete') {
 		$arr['username'] = $_G['username'];
 		$arr['dateline'] = $_G['timestamp'];
 
+		/* feed list upgrade */
 		if($arr['status'] == 0 && ckprivacy('share', 'feed')) {
 			require_once libfile('function/feed');
-			feed_add(
-			    'share',
-                $arr['title_template'],
-                ['hash_data' => $feed_hash_data],
-                $arr['body_template'],
-                $arr['body_data'],
-                $arr['body_general'],
-                [$arr['image']],
-                [$arr['image_link']]);
+			feed_add([
+                'icon' => 'share',
+                'title_template' => $arr['title_template'],
+                'title_data' => ['hash_data' => $feed_hash_data],
+                'body_template' => $arr['body_template'],
+                'body_data' => $arr['body_data'],
+                'body_general' => $arr['body_general'],
+                'images' => [$arr['image']],
+                'images_link' => [$arr['image_link']],
+                'type' => $type,
+            ]);
 		}
 
 		$arr['body_data'] = serialize($arr['body_data']);
 
 		$sid = C::t('home_share')->insert($arr, true);
-
-		switch($type) {
-			case 'space':  C::t('common_member_status')->increase($id, array('sharetimes' => 1));break;
-			case 'blog':   C::t('home_blog')->increase($id, null, array('sharetimes' => 1));break;
-			case 'album':  C::t('home_album')->update_num_by_albumid($id, 1, 'sharetimes');break;
-			case 'pic':    C::t('home_pic')->update_sharetimes($id);break;
-			case 'article':C::t('portal_article_count')->increase($id, array('sharetimes' => 1));break;
-            case 'thread': C::t('forum_thread')->increase($id, array('sharetimes' => 1));
+        
+        switch ($type) {
+            case 'space':
+                C::t('common_member_status')->increase($id, ['sharetimes' => 1]);
+                break;
+            case 'blog':
+                C::t('home_blog')->increase($id, null, ['sharetimes' => 1]);
+                break;
+            case 'album':
+                C::t('home_album')->update_num_by_albumid($id, 1, 'sharetimes');
+                break;
+            case 'pic':
+                C::t('home_pic')->update_sharetimes($id);
+                break;
+            case 'article':
+                C::t('portal_article_count')->increase($id, ['sharetimes' => 1]);
+                break;
+            case 'thread':
+                C::t('forum_thread')->increase($id, ['sharetimes' => 1]);
                 require_once libfile('function/forum');
                 update_threadpartake($id);
                 break;
-		}
-
-		if($arr['status'] == 1) {
+        }
+        
+        if ($arr['status'] == 1) {
 			updatemoderate('sid', $sid);
 			manage_addnotify('verifyshare');
 		}

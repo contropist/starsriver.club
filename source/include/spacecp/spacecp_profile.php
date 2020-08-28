@@ -339,7 +339,11 @@ if (submitcheck('profilesubmit')) {
     }
 
     include_once libfile('function/feed');
-    feed_add('profile', 'feed_profile_update_' . $operation, array('hash_data' => 'profile'));
+    feed_add([
+        'icon' => 'profile',
+        'title_template' => 'feed_profile_update_' . $operation,
+        'title_data' => ['hash_data' => 'profile'],
+    ]);
     countprofileprogress();
     $message = $vid ? lang('spacecp', 'profile_verify_verifying', array('verify' => $verifyconfig['title'])) : '';
     profile_showsuccess($message);

@@ -108,7 +108,13 @@ if($acceptconfirm) {
 	if(!empty($space['privacy']['feed']['invite'])) {
 		require_once libfile('function/feed');
 		$tite_data = array('username' => '<a href="home.php?mod=space&uid='.$_G['uid'].'">'.$_G['username'].'</a>');
-		feed_add('friend', 'feed_invite', $tite_data, '', [], '', [], [], '', '', '', 0, 0, '', $space['uid'], $space['username']);
+        feed_add([
+            'icon' => 'friend',
+            'title_template' => 'feed_invite',
+            'title_data' => $tite_data,
+            'uid' => $space['uid'],
+            'username' => $space['username'],
+        ]);
 	}
 
 	if($_G['setting']['inviteconfig']['inviteaddcredit']) {

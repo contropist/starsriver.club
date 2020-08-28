@@ -854,7 +854,14 @@ class register_ctl {
 				if(!empty($invite['privacy']['feed']['invite'])) {
 					require_once libfile('function/feed');
 					$tite_data = array('username' => '<a href="home.php?mod=space&uid='.$_G['uid'].'">'.$_G['username'].'</a>');
-					feed_add('friend', 'feed_invite', $tite_data, '', [], '', [], [], '', '', '', 0, 0, '', $invite['uid'], $invite['username']);
+					feed_add([
+                        'icon' => 'friend',
+                        'title_template' => 'feed_invite',
+                        'title_data' => $tite_data,
+                        'idtype' => 0,
+                        'uid' => $invite['uid'],
+                        'username' => $invite['username'],
+                    ]);
 				}
 			}
 

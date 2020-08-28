@@ -33,8 +33,7 @@ function add_comment($message, $id, $idtype, $cid = 0) {
 		showmessage('quickclear_noperm');
 	}
 	$summay = getstr($message, 150, 0, 0, 0, -1);
-
-
+	
 	$comment = [];
 	if($cid) {
 		$comment = C::t('home_comment')->fetch_by_id_idtype($id, $idtype, $cid);
@@ -146,16 +145,18 @@ function add_comment($message, $id, $idtype, $cid = 0) {
 	if($hotarr && $tospace['uid'] != $_G['uid']) {
 		hot_update($hotarr[0], $hotarr[1], $hotarr[2]);
 	}
-
-	$fs = [];
-	$fs['icon'] = 'comment';
-	$fs['target_ids'] = '';
-	$fs['friend'] = '';
-	$fs['body_template'] = '';
-	$fs['body_data'] = [];
-	$fs['body_general'] = '';
-	$fs['images'] = [];
-	$fs['image_links'] = [];
+    
+    $fs = [
+        'icon'          => 'comment',
+        'target_ids'    => '',
+        'friend'        => '',
+        'body_template' => '',
+        'body_data'     => [],
+        'body_general'  => '',
+        'images'        => [],
+        'image_links'   => [],
+    
+    ];
 
 	switch ($idtype) {
 		case 'uid':
@@ -193,20 +194,21 @@ function add_comment($message, $id, $idtype, $cid = 0) {
 	} else {
 		$comment_status = 0;
 	}
-
-	$setarr = array(
-		'uid' => $tospace['uid'],
-		'id' => $id,
-		'idtype' => $idtype,
-		'authorid' => $_G['uid'],
-		'author' => $_G['username'],
-		'dateline' => $_G['timestamp'],
-		'message' => $message,
-		'ip' => $_G['clientip'],
-		'port' => $_G['remoteport'],
-		'status' => $comment_status,
-	);
-	$cid = C::t('home_comment')->insert($setarr, true);
+    
+    $setarr = [
+        'uid'      => $tospace['uid'],
+        'id'       => $id,
+        'idtype'   => $idtype,
+        'authorid' => $_G['uid'],
+        'author'   => $_G['username'],
+        'dateline' => $_G['timestamp'],
+        'message'  => $message,
+        'ip'       => $_G['clientip'],
+        'port'     => $_G['remoteport'],
+        'status'   => $comment_status,
+    ];
+	
+    $cid = C::t('home_comment')->insert($setarr, true);
 
 	$action = 'comment';
 	$becomment = 'getcomment';
@@ -282,7 +284,18 @@ function add_comment($message, $id, $idtype, $cid = 0) {
 			if(ckprivacy('comment', 'feed')) {
 				require_once libfile('function/feed');
 				$fs['title_data']['hash_data'] = "{$idtype}{$id}";
-				feed_add($fs['icon'], $fs['title_template'], $fs['title_data'], $fs['body_template'], $fs['body_data'], $fs['body_general'],$fs['images'], $fs['image_links'], $fs['target_ids'], $fs['friend']);
+                feed_add([
+                    'icon'           => $fs['icon'],
+                    'title_template' => $fs['title_template'],
+                    'title_data'     => $fs['title_data'],
+                    'body_template'  => $fs['body_template'],
+                    'body_data'      => $fs['body_data'],
+                    'body_general'   => $fs['body_general'],
+                    'images'         => $fs['images'],
+                    'images_link'    => $fs['image_links'],
+                    'target_ids'     => $fs['target_ids'],
+                    'friend'         => $fs['friend'],
+                ]);
 			}
 
 			$note_values['from_id'] = $id;

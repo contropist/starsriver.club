@@ -67,7 +67,11 @@ if($op == 'add') {
 
 			if(ckprivacy('friend', 'feed')) {
 				require_once libfile('function/feed');
-				feed_add('friend', 'feed_friend_title', array('touser'=>"<a href=\"home.php?mod=space&uid=$tospace[uid]\">$tospace[username]</a>"));
+                feed_add([
+                    'icon' => 'friend',
+                    'title_template' => 'feed_friend_title',
+                    'title_data' => array('touser'=>"<a href=\"home.php?mod=space&uid=$tospace[uid]\">$tospace[username]</a>"),
+                ]);
 			}
 
 			notification_add($uid, 'friend', 'friend_add');

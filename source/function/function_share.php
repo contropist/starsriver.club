@@ -22,19 +22,21 @@ function mkshare($share) {
     $share['body_template'] = $share['body_template'] ? $share['body_template'] : lang('share','share_body_template_'.$share['type']);
     $share['title_template'] = $share['title_template'] ? $share['title_template'] : lang('share','share_title_template_'.$share['type']);
 
-	$searchs = $replaces = [];
-	if($share['body_data']) {
-		if(isset($share['body_data']['flashaddr'])) {
-			$share['body_data']['flashaddr'] = addslashes($share['body_data']['flashaddr']);
-		} elseif(isset($share['body_data']['musicvar'])) {
-			$share['body_data']['musicvar'] = addslashes($share['body_data']['musicvar']);
+	if($share['title_data']) {
+        $searchs = $replaces = [];
+        foreach (array_keys($share['title_data']) as $key) {
+			$searchs[] = '{'.$key.'}';
+			$replaces[] = urldecode($share['title_data'][$key]);
 		}
-		foreach (array_keys($share['body_data']) as $key) {
+        $share['title_template'] = str_replace($searchs, $replaces, $share['title_template']);
+	}
+	if($share['body_data']) {
+        $searchs = $replaces = [];
+        foreach (array_keys($share['body_data']) as $key) {
 			$searchs[] = '{'.$key.'}';
 			$replaces[] = urldecode($share['body_data'][$key]);
 		}
-	}
-	$share['body_template'] = str_replace($searchs, $replaces, $share['body_template']);
+        $share['body_template'] = str_replace($searchs, $replaces, $share['body_template']);
+    }
 	return $share;
 }
-?>

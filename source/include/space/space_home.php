@@ -181,7 +181,9 @@
             $query = C::t('home_feed')->fetch_all_by_search(1, $uids, $icon, '', '', '', $hot, '', $start, $perpage, $findex);
             foreach ($query as $value) {
                 if (!isset($hotlist[$value['feedid']]) && ckfriend($value['uid'], $value['friend'], $value['target_ids'])) {
+                    
                     $value = mkfeed($value);
+                    
                     if ($gets['view'] == 'me' || ckicon_uid($value)) {
                         $feeds[] = $value;
                         $count++;

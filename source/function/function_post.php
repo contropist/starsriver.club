@@ -542,7 +542,17 @@ function postfeed($feed) {
 	global $_G;
 	if($feed) {
 		require_once libfile('function/feed');
-		feed_add($feed['icon'], $feed['title_template'], $feed['title_data'], $feed['body_template'], $feed['body_data'], '', $feed['images'], $feed['image_links'], '', '', '', 0, $feed['id'], $feed['idtype']);
+		feed_add([
+            'icon' => $feed['icon'],
+            'title_template' => $feed['title_template'],
+            'title_data' => $feed['title_data'],
+            'body_template' => $feed['body_template'],
+            'body_data' => $feed['body_data'],
+            'images' => $feed['images'],
+            'images_link' => $feed['image_links'],
+            'id' => $feed['id'],
+            'idtype' => $feed['idtype'],
+        ]);
 	}
 }
 

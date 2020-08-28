@@ -137,25 +137,27 @@
                 document.addEventListener('DOMMouseScroll', DocAction.mousewheel(), false);
             }
 
-            loader.hook.onload = function () {
-                /* tooltip初始化 */
-                tooltip_init();
+            if(loader.hook){
+                loader.hook.onload = function () {
+                    /* tooltip初始化 */
+                    tooltip_init();
 
-                /* nav样式初始化 */
-                if(banner){
-                    (document.documentElement.scrollTop || document.body.scrollTop || 0) >= (banner.Css.height - nav.Css.height) ? body.addClass('scroll-overhead') : '';
-                }
+                    /* nav样式初始化 */
+                    if(banner){
+                        (document.documentElement.scrollTop || document.body.scrollTop || 0) >= (banner.Css.height - nav.Css.height) ? body.addClass('scroll-overhead') : '';
+                    }
 
-                /* 页面尺寸初始化 */
-                DocAction.resize();
+                    /* 页面尺寸初始化 */
+                    DocAction.resize();
 
-                /* 清除loader遮罩 */
-                for(let self of loader.pare){
-                    self.parentElement.removeChild(self);
-                }
-            };
+                    /* 清除loader遮罩 */
+                    for(let self of loader.pare){
+                        self.parentElement.removeChild(self);
+                    }
+                };
 
-            loader.hook.src = loader.hook.data('src');
+                loader.hook.src = loader.hook.data('src');
+            }
         },
 
         resize: function () {
@@ -181,8 +183,6 @@
             } else if (SRGlobal.Window.Width > 350 + MasGuideWidth) {
                 windowSize = 'WL-3P';
             }
-
-
 
             if (SRGlobal.Window.Height >= SRGlobal.Window.Width) {
                 body.addClass('WD-V');

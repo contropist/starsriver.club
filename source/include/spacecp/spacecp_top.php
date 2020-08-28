@@ -50,12 +50,18 @@ if(submitcheck('friendsubmit')) {
 
 	if(ckprivacy('show', 'feed')) {
 		require_once libfile('function/feed');
-		feed_add('show', 'feed_showcredit', array(
-		'fusername' => "<a href=\"home.php?mod=space&uid=$fuid\">{$friend[fusername]}</a>",
-		'credit' => $showcredit));
-	}
-
-	showmessage('showcredit_friend_do_success', "misc.php?mod=ranklist&type=member");
+		
+        feed_add([
+            'icon' => 'show',
+            'title_template' => 'feed_showcredit',
+            'title_data' => [
+                'fusername' => '<a href="home.php?mod=space&uid='.$fuid.'">'.$friend['fusername'].'</a>',
+                'credit' => $showcredit,
+            ]
+        ]);
+    }
+    
+    showmessage('showcredit_friend_do_success', "misc.php?mod=ranklist&type=member");
 
 } elseif(submitcheck('showsubmit')) {
 
@@ -81,7 +87,12 @@ if(submitcheck('friendsubmit')) {
 
 	if(ckprivacy('show', 'feed')) {
 		require_once libfile('function/feed');
-		feed_add('show', 'feed_showcredit_self', array('credit'=>$showcredit), '', [], $_POST['note']);
+        feed_add([
+            'icon' => 'show',
+            'title_template' => 'feed_showcredit_self',
+            'title_data' => ['credit' => $showcredit],
+            'body_general' => $_POST['note'],
+        ]);
 	}
 
 	showmessage('showcredit_do_success', dreferer());

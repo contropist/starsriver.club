@@ -11,6 +11,8 @@ if(!defined('IN_DISCUZ') || !defined('IN_ADMINCP')) {
 	exit('Access Denied');
 }
 
+global $_G;
+
 require './source/admincp/admincp_menu.php';
 
 lang('admincp_menu');
@@ -35,13 +37,18 @@ if(isfounder()) {
 $basescript = ADMINSCRIPT;
 
 echo <<<EOT
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <html>
     <head>
         <title>$title</title>
         <link rel="stylesheet" href="{$_G['config']['output']['fonturl']}/Feather.css">
         <link rel="stylesheet" href="static/image/admincp/src/css/admincp.css?{$_G['style']['verhash']}" type="text/css" media="all" />
-        <script src="{$_G['setting']['jspath']}common.js?{$_G['style']['verhash']}"></script>
+
+        <script src="{$_G[setting][jspath]}common.js?{$_G['style']['verhash']}"></script>
+        <script src="{$_G[setting][jspath]}common_protos.js?{$_G['style']['verhash']}"></script>
+        <script src="{$_G[setting][jspath]}common_compos.js?{$_G['style']['verhash']}"></script>
+        <script src="{$_G[setting][jspath]}common_action.js?{$_G['style']['verhash']}"></script>
+
     </head>
     <body>
         <div id="append_parent"></div>

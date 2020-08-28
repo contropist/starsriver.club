@@ -185,23 +185,21 @@ if(!submitcheck('modsubmit') && !$_GET['fast']) {
 					$feed_hash_data = '';
 					break;
 			}
-			feed_add('share',
-				$share['title_template'],
-				array('hash_data' => $feed_hash_data),
-				$share['body_template'],
-				dunserialize($share['body_data']),
-				$share['body_general'],
-				array($share['image']),
-				array($share['image_link']),
-				'',
-				'',
-				'',
-				0,
-				0,
-				'',
-				$share['uid'],
-				$share['username']
-			);
+            
+            feed_add([
+                'icon' => 'share',
+                'title_template' => $share['title_template'],
+                'title_data' => ['hash_data' => $feed_hash_data],
+                'body_template' => $share['body_template'],
+                'body_data' => dunserialize($share['body_data']),
+                'body_general' => $share['body_general'],
+                'images' => [$share['image']],
+                'images_link' => [$share['image_link']],
+                'idtype' => 0,
+                'uid' => $share['uid'],
+                'username' => $share['username'],
+                'type' => $share['type'],
+            ]);
 		}
 		updatemoderate('sid', $moderation['validate'], 2);
 	}

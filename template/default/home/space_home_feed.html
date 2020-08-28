@@ -49,7 +49,7 @@
                                 <div class="message">$feed[body_general]</div>
                             <!--{/if}-->
 
-                            <!--{if $feed['body_template']}--><div class="message">$feed[body_template]</div><!--{/if}-->
+                            <!--{if $feed['body_template']}-->$feed[body_template]<!--{/if}-->
 
                             <div class="clear-objgap">
                                 <!--{if $feed['image_1']}--><a class="album-img" href="$feed[image_1_link]" {$feed[target]}><img src="$feed[image_1]"/></a><!--{/if}-->

@@ -11,116 +11,142 @@ if(!defined('IN_DISCUZ')) {
 	exit('Access Denied');
 }
 
-function feed_add($icon, $title_template='', $title_data=[], $body_template='', $body_data=[], $body_general='', $images=[], $image_links=[], $target_ids='', $friend='', $returnid=0, $id=0, $idtype='', $uid=0, $username='') {
-	global $_G;
-
-	if(!helper_access::check_module('feed')) {
-		return false;
-	}
-	$title_template = $title_template ? lang('feed', $title_template):'';
-	$body_template = $body_template ? lang('feed', $body_template):'';
-	$body_general = $body_general ? lang('feed', $body_general):'';
-	if(empty($uid) || empty($username)) {
-		$uid = $username = '';
-	}
-
-	$imgs = [];
-	foreach ($image_links as $key => $v){
-	    if(empty($image_links[$key])){
+function feed_add($arr = []) {
+    
+    global $_G;
+    
+    if (!helper_access::check_module('feed') || empty($arr)) {
+        return false;
+    }
+    
+    $data = [
+        'id'                    => !empty($arr['id']) ? $arr['id'] : 0,
+        'idtype'                => !empty($arr['idtype']) ? $arr['idtype'] : '',
+        'target_ids'            => !empty($arr['target_ids']) ? $arr['target_ids'] : '',
+        'uid'                   => !empty($arr['uid']) ? $arr['uid'] : 0,
+        'username'              => !empty($arr['username']) ? $arr['username'] : '',
+        'icon'                  => !empty($arr['icon']) ? $arr['icon'] : '',
+        'type'                  => !empty($arr['type']) ? $arr['type'] : '',
+        'title_template'        => !empty($arr['title_template']) ? $arr['title_template'] : '',
+        'title_data'            => !empty($arr['title_data']) ? $arr['title_data'] : [],
+        'body_template'         => !empty($arr['body_template']) ? $arr['body_template'] : '',
+        'body_data'             => !empty($arr['body_data']) ? $arr['body_data'] : [],
+        'body_general'          => !empty($arr['body_general']) ? $arr['body_general'] : [],
+        'images'                => !empty($arr['images']) ? $arr['images'] : [],
+        'images_link'           => !empty($arr['images_link']) ? $arr['images_link'] : [],
+        'friend'                => !empty($arr['friend']) ? $arr['friend'] : '',
+        'returnid'              => !empty($arr['returnid']) ? $arr['returnid'] : 0,
+    ];
+    
+    $data['title_template'] = $data['title_template'] ? lang('feed', $data['title_template']) : '';
+    $data['body_template'] = $data['body_template'] ? lang('feed', $data['body_template']) : '';
+    
+    if (empty($data['uid']) || empty($data['username'])) {
+        $data['uid'] = $data['username'] = '';
+    }
+    
+	foreach ($data['images_link'] as $key => $v){
+	    if(!empty($data['images_link'][$key])){
             $imgs[] = [
-                'url' => $image_links[$key],
-                'name' => $images[$key],
+                'url' => $data['images_link'][$key],
+                'name' => $data['images'][$key],
             ];
         }
     }
 	
     $feedarr = [
-        'hash_data' => empty($title_data['hash_data'])?'':$title_data['hash_data'],
-        'id' => $id,
-        'idtype' => $idtype,
-        'uid' => $uid ? intval($uid) : $_G['uid'],
-        'username' => $username ? $username : $_G['username'],
+        'id' => $data['id'],
+        'idtype' => $data['idtype'],
+        'target_ids' => $data['target_ids'],
+        'friend' => $data['friend'],
+        'icon' => $data['icon'],
+        'type' => $data['type'],
+        'hash_data' => empty($data['title_data']['hash_data'])?'': $data['title_data']['hash_data'],
+        'uid' => $data['uid'] ? intval($data['uid']) : $_G['uid'],
+        'username' => $data['username'] ? $data['username'] : $_G['username'],
         'dateline' => $_G['timestamp'],
-        'title_data' => serialize($title_data),
-        'title_template' => $title_template,
-        'body_data' => serialize($body_data),
-        'body_template' => $body_template,
-        'body_general' => $body_general,
-        'image_1' => empty($images[0]) ? '' : $images[0],
-        'image_1_link' => empty($image_links[0]) ? '' : $image_links[0],
-        'image_2' => empty($images[1]) ? '' : $images[1],
-        'image_2_link' => empty($image_links[1]) ? '' : $image_links[1],
-        'image_3' => empty($images[2]) ? '' : $images[2],
-        'image_3_link' => empty($image_links[2]) ? '' : $image_links[2],
-        'image_4' => empty($images[3]) ? '' : $images[3],
-        'image_4_link' => empty($image_links[3]) ? '' : $image_links[3],
-        'target_ids' => $target_ids,
-        'friend' => $friend,
-        'icon' => $icon,
+        'body_data' => serialize($data['body_data']),
+        'body_template' => $data['body_template'],
+        'title_data' => serialize($data['title_data']),
+        'title_template' => $data['title_template'],
+        'body_general_template' => $data['body_general_template'],
+        'body_general' => $data['body_general'],
+        'image_1' => empty($data['images'][0]) ? '' : $data['images'][0],
+        'image_1_link' => empty($data['images_link'][0]) ? '' : $data['images_link'][0],
+        'image_2' => empty($data['images'][1]) ? '' : $data['images'][1],
+        'image_2_link' => empty($data['images_link'][1]) ? '' : $data['images_link'][1],
+        'image_3' => empty($data['images'][2]) ? '' : $data['images'][2],
+        'image_3_link' => empty($data['images_link'][2]) ? '' : $data['images_link'][2],
+        'image_4' => empty($data['images'][3]) ? '' : $data['images'][3],
+        'image_4_link' => empty($data['images_link'][3]) ? '' : $data['images_link'][3],
     ];
-
-
+	
     if($feedarr['hash_data']) {
         $oldfeed = C::t('home_feed')->fetch_feedid_by_hashdata($feedarr['uid'], $feedarr['hash_data']);
         if($oldfeed) {
             return 0;
         }
     }
-    $feed_table = 'home_feed';
 
-	return C::t($feed_table)->insert($feedarr, $returnid);
+	return C::t('home_feed')->insert($feedarr, $data['returnid']);
 }
 
 function mkfeed($feed, $actors=[]) {
 	global $_G;
 	
-    $feed['title_data'] = empty($feed['title_data']) ? [] : (is_array($feed['title_data']) ? $feed['title_data'] : @dunserialize($feed['title_data']));
-    $feed['body_data'] = empty($feed['body_data']) ? [] : (is_array($feed['body_data']) ? $feed['body_data'] : @dunserialize($feed['body_data']));
+	if($feed['icon'] == 'share'){
+        require_once libfile('function/share');
+        $feed = mkshare($feed);
+    } else {
+        $feed['title_data'] = empty($feed['title_data']) ? [] : (is_array($feed['title_data']) ? $feed['title_data'] : @dunserialize($feed['title_data']));
+        $feed['body_data'] = empty($feed['body_data']) ? [] : (is_array($feed['body_data']) ? $feed['body_data'] : @dunserialize($feed['body_data']));
+        
+        if (!is_array($feed['title_data'])) $feed['title_data'] = [];
+        if(!is_array($feed['body_data'])) $feed['body_data'] = [];
+        
+        $searchs = $replaces = [];
+        if($feed['title_data']) {
+            foreach (array_keys($feed['title_data']) as $key) {
+                $searchs[] = '{'.$key.'}';
+                $replaces[] = $feed['title_data'][$key];
+            }
+        }
+        
+        $searchs[] = '{actor}';
+        $replaces[] = empty($actors)?"<a href=\"home.php?mod=space&uid=$feed[uid]\" target=\"_blank\">$feed[username]</a>":implode(lang('core', 'dot'), $actors);
+        $feed['title_template'] = str_replace($searchs, $replaces, $feed['title_template']);
+        $feed['title_template'] = feed_mktarget($feed['title_template']);
+        
+        $searchs = $replaces = [];
+        $searchs[] = '{actor}';
+        $replaces[] = empty($actors)?"<a href=\"home.php?mod=space&uid=$feed[uid]\" target=\"_blank\">$feed[username]</a>":implode(lang('core', 'dot'), $actors);
+        
+        if($feed['body_data'] && is_array($feed['body_data'])) {
+            foreach (array_keys($feed['body_data']) as $key) {
+                $searchs[] = '{'.$key.'}';
+                $replaces[] = $feed['body_data'][$key];
+            }
+        }
+        
+        $feed['magic_class'] = '';
+        if(!empty($feed['body_data']['magic_thunder'])) {
+            $feed['magic_class'] = 'magicthunder';
+        }
+        
+        $feed['body_template'] = str_replace($searchs, $replaces, $feed['body_template']);
+        $feed['body_template'] = feed_mktarget($feed['body_template']);
+        
+        $feed['body_general'] = feed_mktarget($feed['body_general']);
+        
+        
+    }
     
-    if (!is_array($feed['title_data'])) $feed['title_data'] = [];
-	if(!is_array($feed['body_data'])) $feed['body_data'] = [];
-	
-	$searchs = $replaces = [];
-	if($feed['title_data']) {
-		foreach (array_keys($feed['title_data']) as $key) {
-			$searchs[] = '{'.$key.'}';
-			$replaces[] = $feed['title_data'][$key];
-		}
-	}
-
-	$searchs[] = '{actor}';
-	
-	$replaces[] = empty($actors)?"<a href=\"home.php?mod=space&uid=$feed[uid]\" target=\"_blank\">$feed[username]</a>":implode(lang('core', 'dot'), $actors);
-	$feed['title_template'] = str_replace($searchs, $replaces, $feed['title_template']);
-	$feed['title_template'] = feed_mktarget($feed['title_template']);
-
-	$searchs = $replaces = [];
-	$searchs[] = '{actor}';
-	$replaces[] = empty($actors)?"<a href=\"home.php?mod=space&uid=$feed[uid]\" target=\"_blank\">$feed[username]</a>":implode(lang('core', 'dot'), $actors);
-	
-	if($feed['body_data'] && is_array($feed['body_data'])) {
-		foreach (array_keys($feed['body_data']) as $key) {
-			$searchs[] = '{'.$key.'}';
-			$replaces[] = $feed['body_data'][$key];
-		}
-	}
-
-	$feed['magic_class'] = '';
-	if(!empty($feed['body_data']['magic_thunder'])) {
-		$feed['magic_class'] = 'magicthunder';
-	}
-
-	$feed['body_template'] = str_replace($searchs, $replaces, $feed['body_template']);
-	$feed['body_template'] = feed_mktarget($feed['body_template']);
-
-	$feed['body_general'] = feed_mktarget($feed['body_general']);
-
-	$feed['icon_image'] = STATICURL."image/feed/{$feed['icon']}.gif";
-
-	$feed['new'] = 0;
-	if($_G['cookie']['home_readfeed'] && $feed['dateline']+300 > $_G['cookie']['home_readfeed']) {
-		$feed['new'] = 1;
-	}
+    $feed['icon_image'] = STATICURL."image/feed/{$feed['icon']}.gif";
+    
+    $feed['new'] = 0;
+    if($_G['cookie']['home_readfeed'] && $feed['dateline']+300 > $_G['cookie']['home_readfeed']) {
+        $feed['new'] = 1;
+    }
 
 	return $feed;
 }
@@ -140,15 +166,11 @@ function feed_publish($id, $idtype, $add=0) {
  
 	global $_G;
 	
-	$id = intval($id);
-	
-	if(empty($id)) {
-		return;
+	if(!helper_access::check_module('feed') || empty($id)) {
+		return 0;
 	}
-	
-	if(!helper_access::check_module('feed')) {
-		return false;
-	}
+    
+    $id = intval($id);
 	
     $setarr = [];
 	

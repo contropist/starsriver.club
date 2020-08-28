@@ -80,4 +80,6 @@ $lang = [
 	'feed_thread_debatevote_message_1' =>	'',
 	'feed_thread_debatevote_message_2' =>	'',
 	'feed_thread_debatevote_message_3' =>	'',
+    
+ 
 ];
