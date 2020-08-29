@@ -106,9 +106,9 @@ class logging_ctl {
 				} else {
 					$init_arr = explode(',', $this->setting['initcredits']);
 					$groupid = $this->setting['regverify'] ? 8 : $this->setting['newusergroupid'];
-
-					C::t('common_member')->insert($uid, $result['ucresult']['username'], md5(random(10)), $result['ucresult']['email'], $_G['clientip'], $groupid, $init_arr);
-					$result['member'] = getuserbyuid($uid);
+                    
+                    C::t('common_member')->insert($uid, $result['ucresult']['username'], md5(random(10)), $result['ucresult']['email'], $_G['clientip'], $groupid, $init_arr);
+                    $result['member'] = getuserbyuid($uid);
 					$result['status'] = 1;
 				}
 			}
@@ -134,8 +134,13 @@ class logging_ctl {
 				if($_G['member']['lastip'] && $_G['member']['lastvisit']) {
 					dsetcookie('lip', $_G['member']['lastip'].','.$_G['member']['lastvisit']);
 				}
-				C::t('common_member_status')->update($_G['uid'], array('lastip' => $_G['clientip'], 'port' => $_G['remoteport'], 'lastvisit' =>TIMESTAMP, 'lastactivity' => TIMESTAMP));
-				$ucsynlogin = $this->setting['allowsynlogin'] ? uc_user_synlogin($_G['uid']) : '';
+                C::t('common_member_status')->update($_G['uid'], [
+                    'lastip'       => $_G['clientip'],
+                    'port'         => $_G['remoteport'],
+                    'lastvisit'    => TIMESTAMP,
+                    'lastactivity' => TIMESTAMP,
+                ]);
+                $ucsynlogin = $this->setting['allowsynlogin'] ? uc_user_synlogin($_G['uid']) : '';
 
 				$pwold = false;
 				if($this->setting['strongpw'] && !$this->setting['pwdsafety']) {
@@ -156,17 +161,17 @@ class logging_ctl {
 				if($_G['member']['adminid'] != 1) {
 					if($this->setting['accountguard']['loginoutofdate'] && $_G['member']['lastvisit'] && TIMESTAMP - $_G['member']['lastvisit'] > 90 * 86400) {
 						C::t('common_member')->update($_G['uid'], array('freeze' => 2));
-						C::t('common_member_validate')->insert(array(
-							'uid' => $_G['uid'],
-							'submitdate' => TIMESTAMP,
-							'moddate' => 0,
-							'admin' => '',
-							'submittimes' => 1,
-							'status' => 0,
-							'message' => '',
-							'remark' => '',
-						), false, true);
-						manage_addnotify('verifyuser');
+                        C::t('common_member_validate')->insert([
+                            'uid'         => $_G['uid'],
+                            'submitdate'  => TIMESTAMP,
+                            'moddate'     => 0,
+                            'admin'       => '',
+                            'submittimes' => 1,
+                            'status'      => 0,
+                            'message'     => '',
+                            'remark'      => '',
+                        ], false, true);
+                        manage_addnotify('verifyuser');
 						showmessage('location_login_outofdate', 'home.php?mod=spacecp&ac=profile&op=password&resend=1', array('type' => 1), array('showdialog' => true, 'striptags' => false, 'locationtime' => true));
 					}
 
@@ -789,10 +794,10 @@ class register_ctl {
 					'dateline' => TIMESTAMP,
 				);
 				C::t('common_member_verify_info')->insert($setverify);
-				C::t('common_member_verify')->insert(array('uid' => $uid));
-			}
-
-			require_once libfile('cache/userstats', 'function');
+                C::t('common_member_verify')->insert(['uid' => $uid]);
+            }
+            
+            require_once libfile('cache/userstats', 'function');
 			build_cache_userstats();
 
 			if($this->extrafile && file_exists($this->extrafile)) {
@@ -808,17 +813,17 @@ class register_ctl {
 
 			$regmessage = dhtmlspecialchars($_GET['regmessage']);
 			if($this->setting['regverify'] == 2) {
-				C::t('common_member_validate')->insert(array(
-					'uid' => $uid,
-					'submitdate' => $_G['timestamp'],
-					'moddate' => 0,
-					'admin' => '',
-					'submittimes' => 1,
-					'status' => 0,
-					'message' => $regmessage,
-					'remark' => '',
-				), false, true);
-				manage_addnotify('verifyuser');
+                C::t('common_member_validate')->insert([
+                    'uid'         => $uid,
+                    'submitdate'  => $_G['timestamp'],
+                    'moddate'     => 0,
+                    'admin'       => '',
+                    'submittimes' => 1,
+                    'status'      => 0,
+                    'message'     => $regmessage,
+                    'remark'      => '',
+                ], false, true);
+                manage_addnotify('verifyuser');
 			}
 
 			setloginstatus(array(
@@ -853,14 +858,15 @@ class register_ctl {
 				space_merge($invite, 'field_home');
 				if(!empty($invite['privacy']['feed']['invite'])) {
 					require_once libfile('function/feed');
-					$tite_data = array('username' => '<a href="home.php?mod=space&uid='.$_G['uid'].'">'.$_G['username'].'</a>');
-					feed_add([
-                        'icon' => 'friend',
+                    feed_add([
+                        'icon'           => 'friend',
                         'title_template' => 'feed_invite',
-                        'title_data' => $tite_data,
-                        'idtype' => 0,
-                        'uid' => $invite['uid'],
-                        'username' => $invite['username'],
+                        'title_data'     => [
+                            'username' => '<a href="home.php?mod=space&uid=' . $_G['uid'] . '">' . $_G['username'] . '</a>',
+                        ],
+                        'idtype'         => 0,
+                        'uid'            => $invite['uid'],
+                        'username'       => $invite['username'],
                     ]);
 				}
 			}
@@ -962,15 +968,15 @@ class crime_action_ctl {
 		if($key === FALSE) {
 			return false;
 		}
-		$insert = array(
-			'uid' => $uid,
-			'operatorid' => $_G['uid'],
-			'operator' => $_G['username'],
-			'action' => $key,
-			'reason' => $reason,
-			'dateline' => $_G['timestamp']
-		);
-		C::t('common_member_crime')->insert($insert);
+        $insert = [
+            'uid'        => $uid,
+            'operatorid' => $_G['uid'],
+            'operator'   => $_G['username'],
+            'action'     => $key,
+            'reason'     => $reason,
+            'dateline'   => $_G['timestamp'],
+        ];
+        C::t('common_member_crime')->insert($insert);
 		return true;
 	}
 

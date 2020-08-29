@@ -268,17 +268,13 @@ class model_forum_post extends discuz_model {
 					C::t('forum_forum')->update($this->forum['fup'], array('lastpost' => $lastpost));
 				}
 			}
-
-
+			
 			$this->param['page'] = getstatus($this->thread['status'], 4) ? 1 : @ceil(($this->thread['special'] ? $this->thread['replies'] + 1 : $this->thread['replies'] + 2) / getglobal('ppp'));
 
 			if($this->param['updatethreaddata']) {
 				C::t('forum_thread')->update($this->thread['tid'], $this->param['updatethreaddata'], false, false, 0, true);
 			}
-
-
-
-
+			
 			return 'post_reply_succeed';
 		}
 	}

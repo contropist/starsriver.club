@@ -337,12 +337,12 @@ if (submitcheck('profilesubmit')) {
         }
         C::t('common_member_field_home')->update($space['uid'], array('privacy' => serialize($space['privacy'])));
     }
-
-    include_once libfile('function/feed');
+    
+    require_once libfile('function/feed');
     feed_add([
-        'icon' => 'profile',
+        'icon'           => 'profile',
         'title_template' => 'feed_profile_update_' . $operation,
-        'title_data' => ['hash_data' => 'profile'],
+        'title_data'     => ['hash_data' => 'profile'],
     ]);
     countprofileprogress();
     $message = $vid ? lang('spacecp', 'profile_verify_verifying', array('verify' => $verifyconfig['title'])) : '';

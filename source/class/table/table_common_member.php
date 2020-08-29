@@ -333,10 +333,14 @@ class table_common_member extends discuz_table_archive
 
 	public function count_zombie() {
 		$dateline = TIMESTAMP - 7776000;//60*60*24*90
-		return DB::result_first('SELECT count(*) FROM %t mc, %t ms WHERE mc.posts<5 AND ms.lastvisit<%d AND ms.uid=mc.uid', array('common_member_count', 'common_member_status', $dateline));
-	}
-
-	public function split($splitnum, $iscron = false) {
+        return DB::result_first('SELECT count(*) FROM %t mc, %t ms WHERE mc.posts<5 AND ms.lastvisit<%d AND ms.uid=mc.uid', [
+            'common_member_count',
+            'common_member_status',
+            $dateline,
+        ]);
+    }
+    
+    public function split($splitnum, $iscron = false) {
 		loadcache('membersplitdata');
 		@set_time_limit(0);
 		discuz_database_safecheck::setconfigstatus(0);

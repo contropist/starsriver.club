@@ -266,17 +266,16 @@ class model_forum_thread extends discuz_model
 	public function feed() {
 		if($this->forum('allowfeed') && !$this->param['isanonymous']) {
 			if(empty($this->feed)) {
-				$this->feed = array(
-					'icon' => '',
-					'title_template' => '',
-					'title_data' => [],
-					'body_template' => '',
-					'body_data' => [],
-					'title_data' => [],
-					'images' => []
-				);
-
-				$message = !$this->param['price'] && !$this->param['readperm'] ? $this->param['message'] : '';
+                $this->feed = [
+                    'icon'           => '',
+                    'title_template' => '',
+                    'title_data'     => [],
+                    'body_template'  => '',
+                    'body_data'      => [],
+                    'images'         => [],
+                ];
+                
+                $message = !$this->param['price'] && !$this->param['readperm'] ? $this->param['message'] : '';
 				$message = messagesafeclear($message);
 				$this->feed['icon'] = 'thread';
 				$this->feed['title_template'] = 'feed_thread_title';
@@ -296,11 +295,11 @@ class model_forum_thread extends discuz_model
 				}
 
 			}
-
-
+			
 			$this->feed['title_data']['hash_data'] = 'tid'.$this->tid;
 			$this->feed['id'] = $this->tid;
 			$this->feed['idtype'] = 'tid';
+			
 			if($this->feed['icon']) {
 				postfeed($this->feed);
 			}

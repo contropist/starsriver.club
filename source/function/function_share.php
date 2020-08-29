@@ -12,6 +12,7 @@ if(!defined('IN_DISCUZ')) {
 }
 
 function mkshare($share) {
+	$share['title_data'] = unserialize($share['title_data']);
 	$share['body_data'] = unserialize($share['body_data']);
 	
 	/* Template relink */

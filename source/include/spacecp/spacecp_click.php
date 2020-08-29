@@ -89,69 +89,70 @@ if($_GET['op'] == 'add') {
 
 	$fs = [];
 	switch ($idtype) {
-		case 'blogid':
-			$fs['title_template'] = 'feed_click_blog';
-			$fs['title_data'] = array(
-				'touser' => "<a href=\"home.php?mod=space&uid=$item[uid]\">{$item[username]}</a>",
-				'subject' => "<a href=\"home.php?mod=space&uid=$item[uid]&do=blog&id=$item[blogid]\">$item[subject]</a>",
-				'click' => $click['name']
-			);
-
-			$q_note = 'click_blog';
-			$q_note_values = array(
-				'url'=>"home.php?mod=space&uid=$item[uid]&do=blog&id=$item[blogid]",
-				'subject'=>$item['subject'],
-				'from_id' => $item['blogid'],
-				'from_idtype' => 'blogid'
-			);
-			break;
-		case 'aid':
-			require_once libfile('function/portal');
-			$article_url = fetch_article_url($item);
-			$fs['title_template'] = 'feed_click_article';
-			$fs['title_data'] = array(
-				'touser' => "<a href=\"home.php?mod=space&uid=$item[uid]\">{$item[username]}</a>",
-				'subject' => "<a href=\"$article_url\">$item[title]</a>",
-				'click' => $click['name']
-			);
-
-			$q_note = 'click_article';
-			$q_note_values = array(
-				'url'=>$article_url,
-				'subject'=>$item['title'],
-				'from_id' => $item['aid'],
-				'from_idtype' => 'aid'
-			);
-			break;
-		case 'picid':
-			$fs['title_template'] = 'feed_click_pic';
-			$fs['title_data'] = array(
-				'touser' => "<a href=\"home.php?mod=space&uid=$item[uid]\">{$item[username]}</a>",
-				'click' => $click['name']
-			);
-			$fs['images'] = array(pic_get($item['filepath'], 'album', $item['thumb'], $item['remote']));
-			$fs['image_links'] = array("home.php?mod=space&uid=$item[uid]&do=album&picid=$item[picid]");
-			$fs['body_general'] = $item['title'];
-
-			$q_note = 'click_pic';
-			$q_note_values = array(
-				'url'=>"home.php?mod=space&uid=$item[uid]&do=album&picid=$item[picid]",
-				'from_id' => $item['picid'],
-				'from_idtype' => 'picid'
-			);
-			break;
-	}
-
-	if(empty($item['friend']) && ckprivacy('click', 'feed')) {
-		require_once libfile('function/feed');
-		$fs['title_data']['hash_data'] = "{$idtype}{$id}";
+        case 'blogid':
+            $fs['title_template'] = 'feed_click_blog';
+            $fs['title_data'] = [
+                'touser'  => "<a href=\"home.php?mod=space&uid=$item[uid]\">{$item[username]}</a>",
+                'subject' => "<a href=\"home.php?mod=space&uid=$item[uid]&do=blog&id=$item[blogid]\">$item[subject]</a>",
+                'click'   => $click['name'],
+            ];
+            
+            $q_note = 'click_blog';
+            $q_note_values = [
+                'url'         => "home.php?mod=space&uid=$item[uid]&do=blog&id=$item[blogid]",
+                'subject'     => $item['subject'],
+                'from_id'     => $item['blogid'],
+                'from_idtype' => 'blogid',
+            ];
+            break;
+        case 'aid':
+            require_once libfile('function/portal');
+            $article_url = fetch_article_url($item);
+            $fs['title_template'] = 'feed_click_article';
+            $fs['title_data'] = [
+                'touser'  => "<a href=\"home.php?mod=space&uid=$item[uid]\">{$item[username]}</a>",
+                'subject' => "<a href=\"$article_url\">$item[title]</a>",
+                'click'   => $click['name'],
+            ];
+            
+            $q_note = 'click_article';
+            $q_note_values = [
+                'url'         => $article_url,
+                'subject'     => $item['title'],
+                'from_id'     => $item['aid'],
+                'from_idtype' => 'aid',
+            ];
+            break;
+        case 'picid':
+            $fs['title_template'] = 'feed_click_pic';
+            $fs['title_data'] = [
+                'touser' => "<a href=\"home.php?mod=space&uid=$item[uid]\">{$item[username]}</a>",
+                'click'  => $click['name'],
+            ];
+            $fs['images'] = [pic_get($item['filepath'], 'album', $item['thumb'], $item['remote'])];
+            $fs['image_links'] = ["home.php?mod=space&uid=$item[uid]&do=album&picid=$item[picid]"];
+            $fs['body_general'] = $item['title'];
+            
+            $q_note = 'click_pic';
+            $q_note_values = [
+                'url'         => "home.php?mod=space&uid=$item[uid]&do=album&picid=$item[picid]",
+                'from_id'     => $item['picid'],
+                'from_idtype' => 'picid',
+            ];
+            break;
+    }
+    
+    if (empty($item['friend']) && ckprivacy('click', 'feed')) {
+        $fs['title_data']['hash_data'] = "{$idtype}{$id}";
+    
+        require_once libfile('function/feed');
         feed_add([
-            'icon' => 'click',
+            'icon'           => 'click',
             'title_template' => $fs['title_template'],
-            'title_data' => $fs['title_data'],
-            'body_general' => $fs['body_general'],
-            'images' => $fs['images'],
-            'images_link' => $fs['image_links'],
+            'title_data'     => $fs['title_data'],
+            'body_general'   => $fs['body_general'],
+            'images'         => $fs['images'],
+            'images_link'    => $fs['image_links'],
         ]);
 	}
 

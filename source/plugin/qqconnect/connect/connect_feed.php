@@ -269,15 +269,14 @@ if ($op == 'new') {
 			$feedlog_status = $feedlog['status'];
 			$feedlog_status = setstatus(4, 1, $feedlog_status);
 			$feedlog_status = setstatus(3, 0, $feedlog_status);
-			C::t('#qqconnect#connect_postfeedlog')->update_by_pid($pid,
-				array(
-					'status' => $feedlog_status,
-					'lastpublished' => $_G['timestamp'],
-					'publishtimes' => $feedlog['publishtimes'] + 1,
-				));
-		}
-
-		if(!$weiboErrorCode) {
+            C::t('#qqconnect#connect_postfeedlog')->update_by_pid($pid, [
+                    'status'        => $feedlog_status,
+                    'lastpublished' => $_G['timestamp'],
+                    'publishtimes'  => $feedlog['publishtimes'] + 1,
+                ]);
+        }
+        
+        if(!$weiboErrorCode) {
 			dsetcookie('connect_sync_post');
 			$connectService->connectJsOutputMessage(lang('plugin/qqconnect', 'connect_feed_sync_success'), '', 0);
 		} else {

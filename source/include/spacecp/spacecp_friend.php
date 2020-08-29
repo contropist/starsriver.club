@@ -11,6 +11,8 @@ if(!defined('IN_DISCUZ')) {
 	exit('Access Denied');
 }
 
+global $_G;
+
 require_once libfile('function/friend');
 
 $op = empty($_GET['op'])?'':$_GET['op'];
@@ -68,11 +70,11 @@ if($op == 'add') {
 			if(ckprivacy('friend', 'feed')) {
 				require_once libfile('function/feed');
                 feed_add([
-                    'icon' => 'friend',
+                    'icon'           => 'friend',
                     'title_template' => 'feed_friend_title',
-                    'title_data' => array('touser'=>"<a href=\"home.php?mod=space&uid=$tospace[uid]\">$tospace[username]</a>"),
+                    'title_data'     => ['touser' => "<a href=\"home.php?mod=space&uid=$tospace[uid]\">$tospace[username]</a>"],
                 ]);
-			}
+            }
 
 			notification_add($uid, 'friend', 'friend_add');
 			showmessage('friends_add', dreferer(), array('username' => $tospace['username'], 'uid'=>$uid, 'from' => $_GET['from']), array('showdialog'=>1, 'showmsg' => true, 'closetime' => true));

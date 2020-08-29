@@ -33,9 +33,15 @@
             <script>document.execCommand("Stop")</script>
         <![endif]-->
 
+        <link rel="stylesheet" href='{$_G[setting][csspath]}common.css?{VERHASH}'/>
         <link rel="stylesheet" href='{$_G[setting][csspath]}constructs.css?{VERHASH}'/>
-		<!--{csstemplate}-->
+        <link rel="stylesheet" href='{$_G[setting][csspath]}{$_G[basescript]}_{CURMODULE}.css?{VERHASH}'/>
 
+        <!--{if $_G[uid] && isset($_G[cookie][extstyle]) && strpos($_G[cookie][extstyle], TPLDIR) !== false}-->
+            <link rel="stylesheet" id="css_extstyle" type="text/css" href="$_G[cookie][extstyle]/style.css" />
+        <!--{elseif $_G[style][defaultextstyle]}-->
+            <link rel="stylesheet" id="css_extstyle" type="text/css" href="$_G[style][defaultextstyle]/style.css" />
+        <!--{/if}-->
         <script src="{LIBURL}/js/stars/stars-fix.js"></script>
         <script src="{LIBURL}/js/jquery/jquery-3.3.1.min.js"></script>
         <script src="{LIBURL}/js/jquery-ui/jquery-ui.min.js"></script>

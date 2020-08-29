@@ -627,13 +627,24 @@ function mkfeedhtml($value) {
 
 	$_GET['uid'] = intval($_GET['uid']);
 	$_GET['view'] = dhtmlspecialchars($_GET['view']);
+	
 	$html = '';
-	$html .= "<li class=\"cl $value[magic_class]\" id=\"feed_{$value[feedid]}_li\">";
-	$html .= "<div class=\"cl\" {$value[style]}>";
-	$html .= "<a class=\"t\" href=\"home.php?mod=space&uid=$_GET[uid]&do=home&view=$_GET[view]&icon=$value[icon]\" title=\"".lang('space', 'feed_view_only')."\"><img src=\"$value[icon_image]\" /></a>$value[title_template]";
-	$html .= "\t<span class=\"xg1\">".dgmdate($value[dateline], 'n-j H:i')."</span>";
-
-	$html .= "<div class=\"ec\">";
+	$html .= "<li class=\"feed_item $value[magic_class]\" id=\"feed_{$value[feedid]}_li\">";
+	$html .= "<div {$value[style]}>";
+	$html .= "<a class=\"title\" href=\"home.php?mod=space&uid=$_GET[uid]&do=home&view=$_GET[view]&icon=$value[icon]\" title=\"".lang('space', 'feed_view_only')."\"><img src=\"$value[icon_image]\" /></a>$value[title_template]";
+	$html .= "\t<span class=\"date\">".dgmdate($value[dateline], 'n-j H:i')."</span>";
+    
+    
+    if ($value['body_general']) {
+        $html .= "<div class='message'>$value[body_general]</div>";
+    }
+    
+    if ($value['body_template']) {
+        $style = $value['image_3'] ? ' style="clear: both; zoom: 1;"' : '';
+        $html .= "<div class=\"feed_item_$value[icon]\" $style>$value[body_template]</div>";
+    }
+	
+	$html .= "<div class=\"images\">";
 
 	if ($value['image_1']) {
 		$html .= "<a href=\"$value[image_1_link]\"{$value[target]}><img src=\"$value[image_1]\" alt=\"\" class=\"tn\" /></a>";
@@ -646,19 +657,6 @@ function mkfeedhtml($value) {
 	}
 	if ($value['image_4']) {
 		$html .= "<a href=\"$value[image_4_link]\"{$value[target]}><img src=\"$value[image_4]\" alt=\"\" class=\"tn\" /></a>";
-	}
-
-	if ($value['body_template']) {
-		$style = $value['image_3'] ? ' style="clear: both; zoom: 1;"' : '';
-		$html .= "<div class=\"d\" $style>$value[body_template]</div>";
-	}
-
-	if (!empty($value['body_data']['musicvar'])) {
-		$html .= "<img src=\"".STATICURL."/image/common/music.gif\" alt=\"".lang('space', 'click_play')."\" onclick=\"javascript:showFlash('music', '{$value['body_data']['musicvar']}', this, '{$value['feedid']}');\" class=\"tn\" />";
-	}
-
-	if ($value['body_general']) {
-		$html .= "<blockquote>$value[body_general]</blockquote>";
 	}
 	
 	$html .= "</div>";

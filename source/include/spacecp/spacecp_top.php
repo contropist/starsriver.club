@@ -50,14 +50,13 @@ if(submitcheck('friendsubmit')) {
 
 	if(ckprivacy('show', 'feed')) {
 		require_once libfile('function/feed');
-		
         feed_add([
-            'icon' => 'show',
+            'icon'           => 'show',
             'title_template' => 'feed_showcredit',
-            'title_data' => [
-                'fusername' => '<a href="home.php?mod=space&uid='.$fuid.'">'.$friend['fusername'].'</a>',
-                'credit' => $showcredit,
-            ]
+            'title_data'     => [
+                'fusername' => '<a href="home.php?mod=space&uid=' . $fuid . '">' . $friend['fusername'] . '</a>',
+                'credit'    => $showcredit,
+            ],
         ]);
     }
     
@@ -88,10 +87,10 @@ if(submitcheck('friendsubmit')) {
 	if(ckprivacy('show', 'feed')) {
 		require_once libfile('function/feed');
         feed_add([
-            'icon' => 'show',
+            'icon'           => 'show',
             'title_template' => 'feed_showcredit_self',
-            'title_data' => ['credit' => $showcredit],
-            'body_general' => $_POST['note'],
+            'title_data'     => ['credit' => $showcredit],
+            'body_general'   => $_POST['note'],
         ]);
 	}
 

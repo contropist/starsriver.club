@@ -33,13 +33,15 @@
                     </div>
                     <div class="n-right">
                         <div class="s-top">
-                            <i class="title">$value[title_template]</i>
-                            <!--{if $value[status] == 1}--><i class="censor">({lang moderate_need})</i><!--{/if}-->
-                            <!--{hook/space_share_comment_op $k}-->
+                            <div class="title">
+                                $value[title_template]
+                                <!--{if $value[status] == 1}--><i class="censor">({lang moderate_need})</i><!--{/if}-->
+                            </div>
                             <!--{if $value[uid]==$_G[uid]}-->
                             <div class="tool r">
                                 <b class="dots"><i class="dot"></i><i class="dot"></i><i class="dot"></i></b>
                                 <span class="tooltip lt" data-ignore='1'>
+                                    <!--{hook/space_share_comment_op $k}-->
                                     <a href="home.php?mod=spacecp&ac=share&op=delete&sid=$value[sid]&handlekey=dellshk_{$value[sid]}" id="s_$value[sid]_delete" onclick="showWindow(this.id, this.href, 'get', 0);">{lang delete}</a>
                                 </span>
                             </div>

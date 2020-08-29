@@ -124,20 +124,18 @@ if(!submitcheck('modsubmit') && !$_GET['fast']) {
 		C::t('home_doing')->update($moderation['validate'], array('status' => '0'));
 		$query_t = C::t('home_doing')->fetch_all($moderation['validate']);
 		if(helper_access::check_module('feed')) {
-			foreach ($query_t as $doing) {
-				$feedarr = array(
-					'icon' => 'doing',
-					'uid' => $doing['uid'],
-					'username' => $doing['username'],
-					'dateline' => $doing['dateline'],
-					'title_template' => lang('feed', 'feed_doing_title'),
-					'title_data' => serialize(array('message'=>$doing['message'])),
-					'body_template' => '',
-					'body_data' => '',
-					'id' => $doing['doid'],
-					'idtype' => 'doid'
-				);
-				$validates += C::t('home_feed')->insert($feedarr);
+            require_once libfile('function/feed');
+            foreach ($query_t as $doing) {
+                $validates += feed_add([
+                    'icon'           => 'doing',
+                    'uid'            => $doing['uid'],
+                    'username'       => $doing['username'],
+                    'dateline'       => $doing['dateline'],
+                    'title_template' => 'doing',
+                    'body_general'   => $doing['message'],
+                    'id'             => $doing['doid'],
+                    'idtype'         => 'doid'
+                ]);
 			}
 		}
 		updatemoderate('doid', $moderation['validate'], 2);

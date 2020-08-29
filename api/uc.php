@@ -110,49 +110,143 @@ class uc_note {
 		if(!API_RENAMEUSER) {
 			return API_RETURN_FORBIDDEN;
 		}
-
-
-
-		$tables = array(
-			'common_block' => array('id' => 'uid', 'name' => 'username'),
-			'common_invite' => array('id' => 'fuid', 'name' => 'fusername'),
-			'common_member_verify_info' => array('id' => 'uid', 'name' => 'username'),
-			'common_mytask' => array('id' => 'uid', 'name' => 'username'),
-			'common_report' => array('id' => 'uid', 'name' => 'username'),
-
-			'forum_thread' => array('id' => 'authorid', 'name' => 'author'),
-			'forum_activityapply' => array('id' => 'uid', 'name' => 'username'),
-			'forum_groupuser' => array('id' => 'uid', 'name' => 'username'),
-			'forum_pollvoter' => array('id' => 'uid', 'name' => 'username'),
-			'forum_post' => array('id' => 'authorid', 'name' => 'author'),
-			'forum_postcomment' => array('id' => 'authorid', 'name' => 'author'),
-			'forum_ratelog' => array('id' => 'uid', 'name' => 'username'),
-
-			'home_album' => array('id' => 'uid', 'name' => 'username'),
-			'home_blog' => array('id' => 'uid', 'name' => 'username'),
-			'home_clickuser' => array('id' => 'uid', 'name' => 'username'),
-			'home_docomment' => array('id' => 'uid', 'name' => 'username'),
-			'home_doing' => array('id' => 'uid', 'name' => 'username'),
-			'home_feed' => array('id' => 'uid', 'name' => 'username'),
-			'home_feed_app' => array('id' => 'uid', 'name' => 'username'),
-			'home_friend' => array('id' => 'fuid', 'name' => 'fusername'),
-			'home_friend_request' => array('id' => 'fuid', 'name' => 'fusername'),
-			'home_notification' => array('id' => 'authorid', 'name' => 'author'),
-			'home_pic' => array('id' => 'uid', 'name' => 'username'),
-			'home_poke' => array('id' => 'fromuid', 'name' => 'fromusername'),
-			'home_share' => array('id' => 'uid', 'name' => 'username'),
-			'home_show' => array('id' => 'uid', 'name' => 'username'),
-			'home_specialuser' => array('id' => 'uid', 'name' => 'username'),
-			'home_visitor' => array('id' => 'vuid', 'name' => 'vusername'),
-
-			'portal_article_title' => array('id' => 'uid', 'name' => 'username'),
-			'portal_comment' => array('id' => 'uid', 'name' => 'username'),
-			'portal_topic' => array('id' => 'uid', 'name' => 'username'),
-			'portal_topic_pic' => array('id' => 'uid', 'name' => 'username'),
-		);
-
-		if(!C::t('common_member')->update($get['uid'], array('username' => $get[newusername])) && isset($_G['setting']['membersplit'])){
-			C::t('common_member_archive')->update($get['uid'], array('username' => $get[newusername]));
+        
+        
+        $tables = [
+            'common_block'              => [
+                'id'   => 'uid',
+                'name' => 'username',
+            ],
+            'common_invite'             => [
+                'id'   => 'fuid',
+                'name' => 'fusername',
+            ],
+            'common_member_verify_info' => [
+                'id'   => 'uid',
+                'name' => 'username',
+            ],
+            'common_mytask'             => [
+                'id'   => 'uid',
+                'name' => 'username',
+            ],
+            'common_report'             => [
+                'id'   => 'uid',
+                'name' => 'username',
+            ],
+            
+            'forum_thread'        => [
+                'id'   => 'authorid',
+                'name' => 'author',
+            ],
+            'forum_activityapply' => [
+                'id'   => 'uid',
+                'name' => 'username',
+            ],
+            'forum_groupuser'     => [
+                'id'   => 'uid',
+                'name' => 'username',
+            ],
+            'forum_pollvoter'     => [
+                'id'   => 'uid',
+                'name' => 'username',
+            ],
+            'forum_post'          => [
+                'id'   => 'authorid',
+                'name' => 'author',
+            ],
+            'forum_postcomment'   => [
+                'id'   => 'authorid',
+                'name' => 'author',
+            ],
+            'forum_ratelog'       => [
+                'id'   => 'uid',
+                'name' => 'username',
+            ],
+            'home_album'          => [
+                'id'   => 'uid',
+                'name' => 'username',
+            ],
+            'home_blog'           => [
+                'id'   => 'uid',
+                'name' => 'username',
+            ],
+            'home_clickuser'      => [
+                'id'   => 'uid',
+                'name' => 'username',
+            ],
+            'home_docomment'      => [
+                'id'   => 'uid',
+                'name' => 'username',
+            ],
+            'home_doing'          => [
+                'id'   => 'uid',
+                'name' => 'username',
+            ],
+            'home_feed'           => [
+                'id'   => 'uid',
+                'name' => 'username',
+            ],
+            'home_feed_app'       => [
+                'id'   => 'uid',
+                'name' => 'username',
+            ],
+            'home_friend'         => [
+                'id'   => 'fuid',
+                'name' => 'fusername',
+            ],
+            'home_friend_request' => [
+                'id'   => 'fuid',
+                'name' => 'fusername',
+            ],
+            'home_notification'   => [
+                'id'   => 'authorid',
+                'name' => 'author',
+            ],
+            'home_pic'            => [
+                'id'   => 'uid',
+                'name' => 'username',
+            ],
+            'home_poke'           => [
+                'id'   => 'fromuid',
+                'name' => 'fromusername',
+            ],
+            'home_share'          => [
+                'id'   => 'uid',
+                'name' => 'username',
+            ],
+            'home_show'           => [
+                'id'   => 'uid',
+                'name' => 'username',
+            ],
+            'home_specialuser'    => [
+                'id'   => 'uid',
+                'name' => 'username',
+            ],
+            'home_visitor'        => [
+                'id'   => 'vuid',
+                'name' => 'vusername',
+            ],
+            
+            'portal_article_title' => [
+                'id'   => 'uid',
+                'name' => 'username',
+            ],
+            'portal_comment'       => [
+                'id'   => 'uid',
+                'name' => 'username',
+            ],
+            'portal_topic'         => [
+                'id'   => 'uid',
+                'name' => 'username',
+            ],
+            'portal_topic_pic'     => [
+                'id'   => 'uid',
+                'name' => 'username',
+            ],
+        ];
+        
+        if (!C::t('common_member')->update($get['uid'], array('username' => $get['newusername'])) && isset($_G['setting']['membersplit'])) {
+            C::t('common_member_archive')->update($get['uid'], array('username' => $get['newusername']));
 		}
 
 		loadcache("posttableids");

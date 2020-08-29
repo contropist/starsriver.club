@@ -488,18 +488,18 @@ function updatemodlog($tids, $action, $expiration = 0, $iscron = 0, $reason = ''
 	}
 	foreach(explode(',', str_replace(array('\'', ' '), array('', ''), $tids)) as $tid) {
 		if($tid) {
-
-			$data = array(
-					'tid' => $tid,
-					'uid' => $uid,
-					'username' => $username,
-					'dateline' => $_G['timestamp'],
-					'action' => $action,
-					'expiration' => $expiration,
-					'status' => 1,
-					'reason' => $reason
-				);
-			if($stamp) {
+            
+            $data = [
+                'tid'        => $tid,
+                'uid'        => $uid,
+                'username'   => $username,
+                'dateline'   => $_G['timestamp'],
+                'action'     => $action,
+                'expiration' => $expiration,
+                'status'     => 1,
+                'reason'     => $reason,
+            ];
+            if($stamp) {
 				$data['stamp'] = $stamp;
 			}
 			C::t('forum_threadmod')->insert($data);
@@ -542,16 +542,18 @@ function postfeed($feed) {
 	global $_G;
 	if($feed) {
 		require_once libfile('function/feed');
-		feed_add([
-            'icon' => $feed['icon'],
+        feed_add([
+            'icon'           => $feed['icon'],
             'title_template' => $feed['title_template'],
-            'title_data' => $feed['title_data'],
-            'body_template' => $feed['body_template'],
-            'body_data' => $feed['body_data'],
-            'images' => $feed['images'],
-            'images_link' => $feed['image_links'],
-            'id' => $feed['id'],
-            'idtype' => $feed['idtype'],
+            'title_data'     => $feed['title_data'],
+            'body_template'  => $feed['body_template'],
+            'body_data'      => $feed['body_data'],
+            'body_general'   => $feed['body_general'],
+            'images'         => $feed['images'],
+            'images_link'    => $feed['image_links'],
+            'id'             => $feed['id'],
+            'idtype'         => $feed['idtype'],
+            'type'           => $feed['type'],
         ]);
 	}
 }

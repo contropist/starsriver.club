@@ -127,7 +127,7 @@ if($_GET['op'] == 'delete') {
                     'url' => 'home.php?mod=space&uid='.$blog['uid'].'&do=blog&id='.$blog['blogid'],
                     'subject'  => $blog['subject'],
                     'username' => $blog['username'],
-                    'user_avatar' => avatar($blog['uid'], 'middle', true),
+                    'user_avatar' => avatar($blog['uid'], 'small', true),
                     'user_link' => 'home.php?mod=space&uid='.$blog['uid'],
                     'content'  => getstr($blog['message'], 150, 0, 0, 0, -1)
                 ]
@@ -323,7 +323,7 @@ if($_GET['op'] == 'delete') {
                     'url' => $article_url,
                     'title' => $article['title'],
                     'username' => $article['username'],
-                    'user_avatar' => avatar($article['uid'], 'middle', true),
+                    'user_avatar' => avatar($article['uid'], 'small', true),
                     'user_link' => 'home.php?mod=space&uid='.$article['uid'],
                     'summary' => getstr($article['summary'], 150, 0, 0, 0, -1)
                 ]
@@ -577,16 +577,16 @@ if($_GET['op'] == 'delete') {
 		/* feed list upgrade */
 		if($arr['status'] == 0 && ckprivacy('share', 'feed')) {
 			require_once libfile('function/feed');
-			feed_add([
-                'icon' => 'share',
+            feed_add([
+                'icon'           => 'share',
                 'title_template' => $arr['title_template'],
-                'title_data' => ['hash_data' => $feed_hash_data],
-                'body_template' => $arr['body_template'],
-                'body_data' => $arr['body_data'],
-                'body_general' => $arr['body_general'],
-                'images' => [$arr['image']],
-                'images_link' => [$arr['image_link']],
-                'type' => $type,
+                'title_data'     => ['hash_data' => $feed_hash_data],
+                'body_template'  => $arr['body_template'],
+                'body_data'      => $arr['body_data'],
+                'body_general'   => $arr['body_general'],
+                'images'         => [$arr['image']],
+                'images_link'    => [$arr['image_link']],
+                'type'           => $type,
             ]);
 		}
 

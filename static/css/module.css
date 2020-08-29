@@ -6308,247 +6308,10 @@
 
 
 /*---------------
-|      空间      |::app-dynamic, ::app-userapace
+|      空间      |::app-userapace, ::app-dynamic
 |----------------
 |    空间样式表
 -----------------------------------------------------------------------------------------------------------------------*/
-/** home::follow **/
-/*region 公共动态-follow*/
-    .app-dynamic .actstruct.follow .relay{
-
-    }
-    .app-dynamic .actstruct.follow .content{
-        margin-top: 6px;
-    }
-    .app-dynamic .actstruct.follow .content.quote{
-        border: 1px solid #e6e6e6;
-        padding: 10px;
-        border-radius: 8px;
-        background: #f9f9f9;
-    }
-    .app-dynamic .actstruct.follow .content .follow-below{
-        color: var(--color-onnanoko-pink);
-        margin: 10px 0 0 5px;;
-    }
-    .app-dynamic .actstruct.follow .content .follow-below::before{
-        content: '';
-        display: inline-block;
-        height: 14px;
-        width: 6px;
-        border-radius: 2px;
-        background: var(--color-onnanoko-pink);
-        opacity: .8;
-        margin-right: 5px;
-        vertical-align: -10%;
-    }
-    .app-dynamic .actstruct.follow .content .follow-author{
-        line-height: 32px;
-        margin-top: 10px;
-    }
-    .app-dynamic .actstruct.follow .content .follow-author .avatar{
-        position: relative;
-        width: 32px;
-        height: 32px;
-    }
-    .app-dynamic .actstruct.follow .content .follow-author .username{
-        color: #738190;
-        font-weight: 700;
-    }
-    .app-dynamic .actstruct.follow .content .follow-author .time{
-        margin-left: 10px;
-        color: #999999;
-        font-size: 12px
-    }
-    .app-dynamic .actstruct.follow .content .follow-title{
-        display: block;
-        overflow: hidden;
-        font-size: 17px;
-        font-weight: 700;
-        word-break: keep-all;
-        white-space: nowrap;
-    }
-    .app-dynamic .actstruct.follow .content .follow-article{
-        margin-top: 8px;
-        padding: 0 5px;
-        line-height: 22px;
-    }
-    .app-dynamic .actstruct.follow .content .follow-article img{
-        max-width: 100%;
-        margin: 5px 0;
-        border: 1px solid #e6e6e6;
-    }
-    .app-dynamic .actstruct.follow .content .follow-article .fold,
-    .app-dynamic .actstruct.follow .content .follow-article .unfold{
-        display: block;
-        text-align: center;
-        border: 1px solid #ccc;
-        margin-top: 8px;
-        border-radius: 5px;
-        color: #aaa;
-    }
-    .app-dynamic .actstruct.follow .content .follow-article .fold:hover,
-    .app-dynamic .actstruct.follow .content .follow-article .unfold:hover{
-        border-color: #39a5c5;
-        color: #39a5c5;
-    }
-    .app-dynamic .actstruct.follow .content .follow-article .attach{
-        border: 1px solid #dedede;
-        padding: 3px 10px;
-        border-radius: 4px;
-        background: #ffffff;
-        margin-top: 5px;
-    }
-    .app-dynamic .actstruct.follow .content .follow-article .attach .title{
-        margin:0 0 3px -11px;
-        color: #999;
-        display: block;
-    }
-    .app-dynamic .actstruct.follow .content .follow-article .attach .title::before{
-        content: '';
-        display: inline-block;
-        background: var(--color-main-theme);
-        width: 4px;
-        height: 13px;
-        vertical-align: -10%;
-        margin-right: 5px;
-        border-radius: 1px;
-    }
-    .app-dynamic .actstruct.follow .content .follow-article .attach ul li{
-        display: block;
-        padding-left: 4px;
-    }
-    .app-dynamic .actstruct.follow .content .follow-article .attach ul li strong{
-        color: #737373;
-    }
-    .app-dynamic .actstruct.follow .content .follow-article .attach ul li span{
-        font-size: 12px;
-        margin-left: 5px;
-        color: #999;
-    }
-
-    .app-dynamic .starer .user, .app-dynamic .starer .fun {
-        display: inline-block;
-        box-sizing: border-box;
-        width: 50%;
-    }
-    .app-dynamic .starer .user *, .app-dynamic .starer .fun *{
-        margin: 0 auto;
-    }
-    .app-dynamic .starer .user{
-        padding: 10px 0 10px 15px;
-        text-align: center;
-    }
-    .app-dynamic .starer .user *{
-        display: block;
-    }
-    .app-dynamic .starer .user .avatar{
-        display: block;
-        position: relative;
-        width: 48px;
-        height: 48px;
-    }
-    .app-dynamic .starer .user .username{
-        margin-top: 5px;
-        font-size: 0;
-    }
-    .app-dynamic .starer .user .username .name{
-        display: inline-block;
-        max-width: calc(100% - 22px);
-        font-weight: 700;
-        color: #738190;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        word-break: keep-all;
-        white-space: nowrap;
-    }
-    .app-dynamic .starer .user .username .setbk{
-        text-align: left;
-        display: inline-block;
-        width: 22px;
-        color: #3ca5f1;
-    }
-    .app-dynamic .starer .user .username .setbk::before{
-        vertical-align: -3%;
-    }
-    .app-dynamic .starer .fun {
-        text-align: center;
-        padding: 32px 15px 10px 0;
-    }
-    .app-dynamic .starer .fun *{
-        text-align: center;
-        display: inline-block;
-        box-sizing: border-box;
-        transition: .05s ease-in-out;
-        border-radius: 4px;
-        height: 28px;
-        line-height: 20px;
-    }
-    .app-dynamic .starer .fun .star{
-        color: #fff;
-        padding: 2px 0;
-        width: 68px;
-        background: #489ae0;
-        border: 2px solid #489ae0;
-    }
-    .app-dynamic .starer .fun .star.on{
-        color: #989898;
-        background: #ffffff;
-        border-color: #dadada;
-    }
-    .app-dynamic .starer .fun .star-sp{
-        color: #b1b1b1;
-        padding: 2px 0;
-        width: 28px;
-        border: 2px solid #dadada;
-    }
-    .app-dynamic .starer .fun .star-sp::before{
-        vertical-align: -3%;
-    }
-    .app-dynamic .starer .fun .star-sp.on{
-        color: #e65182;
-        border-color: #e65182;
-    }
-
-    .app-dynamic .starer .status{
-        display: block;
-        width: 100%;
-        text-align: center;
-        margin-top: 5px;
-        padding: 11px 0 10px 0;
-        border-top: 1px solid #ececec;
-        border-radius: 35% 35% 0 0;
-        box-shadow: inset 0 2px 10px rgba(0,0,0,.05);
-    }
-    .app-dynamic .starer .status span{
-        display: inline-block;
-        width: 72px;
-    }
-    .app-dynamic .starer .status span *{
-        display: block;
-        width: 100%;
-        text-align: center;
-        font-weight: 700;
-    }
-    .app-dynamic .starer .status span i{
-        color: #99a2aa;
-        letter-spacing: 6px;
-        text-indent: 3px;
-    }
-    .app-dynamic .starer .status span a{
-        color: #00a1d6;
-        margin-top: 8px;
-    }
-    .app-dynamic .starer .status b{
-        display: inline-block;
-        margin: 5px;
-        width: 1px;
-        height: 30px;
-        background: #dcdcdc;
-    }
-/*endregion*/
-/** end **/
-
-
 /** home::space, home::follow **/
 /*region trends应用 */
     body {
@@ -6556,399 +6319,405 @@
         background-size: 100%;
     }
 
-    .app-dynamic .side-userinfo .user-banner{
-        display: block;
-        width: 100%;
-        min-height: 72px;
-        background: #f2f2f2;
-        border-radius: 8px 8px 0 0;
-        background-image: url(//static.starscdn.com/repository/bbs.starsriver/img/common/banner/header-banner.png);
-        background-repeat: no-repeat;
-        background-position: center;
-        background-size: auto 100%;
-    }
-    .app-dynamic .side-userinfo .avatar{
-        position: relative;
-        display: inline-block;
-        margin: -22px 0 0 18px;
-        height: 56px;
-        width: 56px;
-        box-shadow: 0 0 4px rgba(0,0,0,.39);
-        border-radius: 50%;
-    }
-    .app-dynamic .side-userinfo .avatar.unlogin{
-        display: block;
-        margin: -28px auto 12px auto;
-        height: 64px;
-        width: 64px;
-        box-shadow: 0 0 4px rgba(0,0,0,.39);
-        border-radius: 50%;
-    }
-    .app-dynamic .side-userinfo .username{
-        margin: 6px;
-        font-size: 16px;
-        color: #738190;
-        font-weight: 700;
-        max-width: calc(100% - 94px);
-    }
-    .app-dynamic .side-userinfo .lorbtn{
-        margin: 6px 13px 20px 13px;
-        font-size: 14px;
-        height: 28px;
-        line-height: 28px;
-        color: #ffffff;
-        width: 64px;
-        background: var(--color-main-theme);
-        padding: 5px;
-        text-align: center;
-        border-radius: 15px;
-    }
-    .app-dynamic .side-userinfo .gird{
-        display: block;
-        margin: 18px 0;
-        padding: 0 39px;
-        font-size: 0;
-        text-align: center;
-    }
-    .app-dynamic .side-userinfo .gird span{
-        width: calc(1/3*100%);
-        display: inline-block;
-        text-align: center;
-        color: #99a2aa;
-        font-weight: 700;
-    }
-    .app-dynamic .side-userinfo .gird span a{
-        color: inherit;
-        font-weight: inherit;
-    }
-    .app-dynamic .side-userinfo .gird span i{
-        display: block;
-        text-align: center;
-        margin-bottom: 5px;
-        color: #00a1d6;
-        font-weight: 700;
-    }
-    .app-dynamic .side-userinfo .spc{
-        font-size: 13px;
-        word-break: break-all;
-        display: block;
-        padding:10px 15px;
-        color: #696969;
-    }
-    .app-dynamic .side-userinfo .data-progress{
-        display: block;
-        height: 12px;
-        background: linear-gradient(to right,#f4f8ff,#def3ff);
-        border-radius: 6px;
-        margin: 8px 0;
-        overflow: hidden;
-    }
-    .app-dynamic .side-userinfo .data-progress i{
-        display: block;
-        height: inherit;
-        border-radius: inherit;
-        background:linear-gradient(to right, #2dc0e2, var(--color-main-theme));
-    }
-    .app-dynamic .side-userinfo .data-tip{
-        color: #696969;
-        text-align: center;
-        display: block;
-    }
+    /*region @sidebox*/
+        .app-dynamic .side-userinfo .user-banner{
+            display: block;
+            width: 100%;
+            min-height: 72px;
+            background: #f2f2f2;
+            border-radius: 8px 8px 0 0;
+            background-image: url(//static.starscdn.com/repository/bbs.starsriver/img/common/banner/header-banner.png);
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: auto 100%;
+        }
+        .app-dynamic .side-userinfo .avatar{
+            position: relative;
+            display: inline-block;
+            margin: -22px 0 0 18px;
+            height: 56px;
+            width: 56px;
+            box-shadow: 0 0 4px rgba(0,0,0,.39);
+            border-radius: 50%;
+        }
+        .app-dynamic .side-userinfo .avatar.unlogin{
+            display: block;
+            margin: -28px auto 12px auto;
+            height: 64px;
+            width: 64px;
+            box-shadow: 0 0 4px rgba(0,0,0,.39);
+            border-radius: 50%;
+        }
+        .app-dynamic .side-userinfo .username{
+            margin: 6px;
+            font-size: 16px;
+            color: #738190;
+            font-weight: 700;
+            max-width: calc(100% - 94px);
+        }
+        .app-dynamic .side-userinfo .lorbtn{
+            margin: 6px 13px 20px 13px;
+            font-size: 14px;
+            height: 28px;
+            line-height: 28px;
+            color: #ffffff;
+            width: 64px;
+            background: var(--color-main-theme);
+            padding: 5px;
+            text-align: center;
+            border-radius: 15px;
+        }
+        .app-dynamic .side-userinfo .gird{
+            display: block;
+            margin: 18px 0;
+            padding: 0 39px;
+            font-size: 0;
+            text-align: center;
+        }
+        .app-dynamic .side-userinfo .gird span{
+            width: calc(1/3*100%);
+            display: inline-block;
+            text-align: center;
+            color: #99a2aa;
+            font-weight: 700;
+        }
+        .app-dynamic .side-userinfo .gird span a{
+            color: inherit;
+            font-weight: inherit;
+        }
+        .app-dynamic .side-userinfo .gird span i{
+            display: block;
+            text-align: center;
+            margin-bottom: 5px;
+            color: #00a1d6;
+            font-weight: 700;
+        }
+        .app-dynamic .side-userinfo .spc{
+            font-size: 13px;
+            word-break: break-all;
+            display: block;
+            padding:10px 15px;
+            color: #696969;
+        }
+        .app-dynamic .side-userinfo .data-progress{
+            display: block;
+            height: 12px;
+            background: linear-gradient(to right,#f4f8ff,#def3ff);
+            border-radius: 6px;
+            margin: 8px 0;
+            overflow: hidden;
+        }
+        .app-dynamic .side-userinfo .data-progress i{
+            display: block;
+            height: inherit;
+            border-radius: inherit;
+            background:linear-gradient(to right, #2dc0e2, var(--color-main-theme));
+        }
+        .app-dynamic .side-userinfo .data-tip{
+            color: #696969;
+            text-align: center;
+            display: block;
+        }
 
-    .app-dynamic .side-box{
-        margin: 0;
-    }
-    .app-dynamic .side-box .spline{
-        height: 10px;
-        padding: 0 5px;
-        box-sizing: border-box;
-        border-top: 1px solid #e2e2e2;
-        text-align: center;
-        margin-top: 7px;
-    }
-    .app-dynamic .side-box .spline span{
-        display: inline-block;
-        text-align: center;
-        line-height: 12px;
-        margin: -7px auto;
-        padding: 0 10px;
-        color: #9a9a9a;
-        background: #fff;
-    }
-    .app-dynamic .side-box .header{
-        padding: 10px 10px 6px 10px;
-    }
-    .app-dynamic .side-box .header > b {
-        font-size: 14px;
-        color: #789;
-        padding-right:8px;
-        margin: 5px;
-        cursor: default;
-    }
-    .app-dynamic .side-box .header > b::before{
-        content: '';
-        display: inline-block;
-        background: var(--color-main-theme);
-        height: 14px;
-        width: 5px;
-        border-radius: 3px;
-        margin-right: 8px;
-        vertical-align: -8%;
-    }
-    .app-dynamic .side-box .header > .more{
-        float: right;
-        color: #bdbdbd;
-        border: 2px solid #ddd;
-        border-radius: 6px;
-        padding: 0 8px;
-        margin: 3px;
-		line-height:20px;
-        font-size: 12px;
-    }
-    .app-dynamic .side-box .header > .more:hover{
-        color: var(--color-main-theme);
-        border-color: var(--color-main-theme);
-        box-shadow:0 0 0 2px var(--color-main-theme-shadow);
-    }
-    .app-dynamic .side-box .body{
-        margin: 0;
-        padding: 0 8px 8px  8px;
-    }
-    .app-dynamic .avatar-list .signal{
-        position: absolute;
-        width: 20px;
-        height: 20px;
-        right: 3px;
-        top: 32px;
-        background: #2ec1df;
-        border-radius: 50%;
-        transform: scale(.8);
-        color: #fff;
-        font-size: 12px;
-        line-height: 20px;
-        box-shadow:0 0 0 2px #fff;
-    }
+        .app-dynamic .side-box{
+            margin: 0;
+        }
+        .app-dynamic .side-box .spline{
+            height: 10px;
+            padding: 0 5px;
+            box-sizing: border-box;
+            border-top: 1px solid #e2e2e2;
+            text-align: center;
+            margin-top: 7px;
+        }
+        .app-dynamic .side-box .spline span{
+            display: inline-block;
+            text-align: center;
+            line-height: 12px;
+            margin: -7px auto;
+            padding: 0 10px;
+            color: #9a9a9a;
+            background: #fff;
+        }
+        .app-dynamic .side-box .header{
+            padding: 10px 10px 6px 10px;
+        }
+        .app-dynamic .side-box .header > b {
+            font-size: 14px;
+            color: #789;
+            padding-right:8px;
+            margin: 5px;
+            cursor: default;
+        }
+        .app-dynamic .side-box .header > b::before{
+            content: '';
+            display: inline-block;
+            background: var(--color-main-theme);
+            height: 14px;
+            width: 5px;
+            border-radius: 3px;
+            margin-right: 8px;
+            vertical-align: -8%;
+        }
+        .app-dynamic .side-box .header > .more{
+            float: right;
+            color: #bdbdbd;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            padding: 0 8px;
+            margin: 3px;
+            line-height:20px;
+            font-size: 12px;
+        }
+        .app-dynamic .side-box .header > .more:hover{
+            color: var(--color-main-theme);
+            border-color: var(--color-main-theme);
+            box-shadow:0 0 0 2px var(--color-main-theme-shadow);
+        }
+        .app-dynamic .side-box .body{
+            margin: 0;
+            padding: 0 8px 8px  8px;
+        }
+        .app-dynamic .avatar-list .signal{
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            right: 3px;
+            top: 32px;
+            background: #2ec1df;
+            border-radius: 50%;
+            transform: scale(.8);
+            color: #fff;
+            font-size: 12px;
+            line-height: 20px;
+            box-shadow:0 0 0 2px #fff;
+        }
 
-    .app-dynamic .actstruct {
-        position: relative;
-        box-sizing: border-box;
-        padding-left: 64px;
-        min-height: 80px;
-    }
-    .app-dynamic .actstruct .avatar {
-        top: 0;
-        left: 0;
-        width: 48px;
-        height: 48px;
-    }
-    .app-dynamic .actstruct .header {
-        display: inline-block;
-        width: 100%;
-        margin-top: 3.9px;
-    }
-    .app-dynamic .actstruct .header a {
-        font-weight: 700;
-        color: var(--color-text-gray);
-    }
-    .app-dynamic .actstruct .header .username {
-        margin: 0 10px 0 0;
-        font-size: 16px;
-        font-weight: 700;
-        color: #6d757a;
-    }
-    .app-dynamic .actstruct .header .tool {
-        position: absolute;
-        top: 4px;
-        right: 0;
-    }
-    .app-dynamic .actstruct .header .sub-line {
-        display: inline-block;
-        line-height: 18px;
-        margin-top: 2px;
-        width: calc(100% - 32px);
-    }
-    .app-dynamic .actstruct .header .str {
-        font-size: 12px;
-        color: #aba8a8;
-        height: 20px;
-        margin-right: 8px;
-    }
-    .app-dynamic .actstruct .body {
-        display: flex;
-        flex-flow: column wrap;
-        box-sizing: border-box;
-        margin: 10px 0;
-        padding-right: 20px;
-    }
-    .app-dynamic .actstruct .body .content {
-        word-break: break-all;
-    }
-    .app-dynamic .actstruct .body .message {
-        word-break: break-all;
-        padding: 0 3px;
-    }
-    .app-dynamic .actstruct .footer {
-        text-align: right;
-        margin-top: 3.9px;
-        display: inline-block;
-        width: 100%;
-    }
-    .app-dynamic .actstruct .footer .icon {
-        display: inline-block;
-        margin: 0 0 0 15px;
-        color: #888;
-        font-size: 18px !important;
-        line-height: 24px !important;
-        text-align: center;
-        height: 24px;
-    }
-    .app-dynamic .actstruct .footer .icon::before {
-        display: inline-block;
-        width: 18px;
-    }
-    .app-dynamic .actstruct .footer .icon.reply::before {
-        vertical-align: -8%;
-    }
-    .app-dynamic .actstruct .footer .icon span {
-        margin-left: 6px;
-        color: #aaa;
-        font-size: 12px;
-    }
-    
-    .app-dynamic .actstruct .thread .title{
-        display: block;
-        font-size: 17px;
-        color: #696969;
-        font-weight: 700;
-        overflow: hidden;
-        white-space: nowrap;
-        word-break: keep-all;
-        text-overflow: ellipsis;
-        margin-bottom: 10px;
-    }
-    .app-dynamic .actstruct .thread .title *{
-        font-size: inherit;
-        color: inherit;
-        font-weight: inherit;
-    }
-    .app-dynamic .actstruct .thread .article{
-        color: #456;
-    }
+        .app-dynamic .side-box .task{
+            line-height: 24px;
+            font-size: 0;
+            padding: 6px;
+            display: inline-block;
+            box-sizing: border-box;
+            width: 100%;
+        }
+        .app-dynamic .side-box .task > *{
+            display: inline-block;
+        }
+        .app-dynamic .side-box .task .icon{
+            height: 24px;
+            width: 24px;
+        }
+        .app-dynamic .side-box .task .icon img{
+            width: 100%;
+        }
+        .app-dynamic .side-box .task .name{
+            width: calc(100% - 24px - 64px);
+            font-size: 12px;
+            color: #466a84;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            box-sizing: border-box;
+            padding-left: 5px;
+        }
+        .app-dynamic .side-box .task .get{
+            width: 64px;
+            text-align: right;
+            white-space: nowrap;
+            overflow: hidden;
+        }
+        .app-dynamic .side-box .magic-card {
+            margin-top: 5px;
+            padding:0 6px;
+            cursor: default;
+        }
+        .app-dynamic .side-box .magic-card .icon{
+            width: 42px;
+            height: 42px;
+            line-height: 42px;
+            display: inline-block;
+        }
+        .app-dynamic .side-box .magic-card .icon img{
+            width: 100%;
+            vertical-align: middle;
+        }
+        .app-dynamic .side-box .magic-card .name{
+            height: 42px;
+            line-height: 42px;
+            margin-left: 10px;
+            font-size: 20px;
+            color: #8ba1b7;
+            font-weight: 700;
+        }
+        .app-dynamic .side-box .magic-card .descrip{
+            display: block;
+            margin: 6px;
+            color: #789;
+            font-size: 13px;
+            max-height: 0;
+            line-height: 22px;
+            overflow: hidden;
+            transition: .3s ease-in-out !important
+        }
+        .app-dynamic .side-box .magic-card:hover .descrip{
+            max-height: 160px;
+            text-overflow: unset;
+            white-space: normal;
+        }
+        .app-dynamic .side-box .magic-card .on-sell {
+            text-align: center;
+            margin-top: 10px;
+        }
+        .app-dynamic .side-box .magic-card .on-sell .price-plate{
+            text-align: center;
+            display: block;
+            width: 98%;
+            margin: 0 auto;
+            border-radius: 4px;
+            color: #00afee;
+            line-height: 28px;
+            background: #ffffff;
+            overflow: hidden;
+            box-shadow: inset 0 0 0 2px #00afee66;
+        }
+        .app-dynamic .side-box .magic-card .on-sell .pay-btn{
+            display: inline-block;
+            border-radius: 4px;
+            margin: 4px 0;
+            padding: 2px 24px;
+            color: #fff;
+            font-size: 14px;
+        }
+        .app-dynamic .side-box .magic-card .on-sell .stockout{
+            border-radius: 4px;
+            line-height: 28px;
+            width: 100%;
+            display: block;
+            margin: 5px auto;
+            color: #fff;
+            background: #e1804c;
+        }
+    /*endregion*/
 
-    .app-dynamic .side-box .task{
-        line-height: 24px;
-        font-size: 0;
-        padding: 6px;
-        display: inline-block;
-        box-sizing: border-box;
-        width: 100%;
-    }
-    .app-dynamic .side-box .task > *{
-        display: inline-block;
-    }
-    .app-dynamic .side-box .task .icon{
-        height: 24px;
-        width: 24px;
-    }
-    .app-dynamic .side-box .task .icon img{
-        width: 100%;
-    }
-    .app-dynamic .side-box .task .name{
-        width: calc(100% - 24px - 64px);
-        font-size: 12px;
-        color: #466a84;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        box-sizing: border-box;
-        padding-left: 5px;
-    }
-    .app-dynamic .side-box .task .get{
-        width: 64px;
-        text-align: right;
-        white-space: nowrap;
-        overflow: hidden;
-    }
-    .app-dynamic .side-box .magic-card {
-        margin-top: 5px;
-        padding:0 6px;
-        cursor: default;
-    }
-    .app-dynamic .side-box .magic-card .icon{
-        width: 42px;
-        height: 42px;
-        line-height: 42px;
-        display: inline-block;
-    }
-    .app-dynamic .side-box .magic-card .icon img{
-        width: 100%;
-        vertical-align: middle;
-    }
-    .app-dynamic .side-box .magic-card .name{
-        height: 42px;
-        line-height: 42px;
-        margin-left: 10px;
-        font-size: 20px;
-        color: #8ba1b7;
-        font-weight: 700;
-    }
-    .app-dynamic .side-box .magic-card .descrip{
-        display: block;
-        margin: 6px;
-        color: #789;
-        font-size: 13px;
-        max-height: 0;
-        line-height: 22px;
-        overflow: hidden;
-        transition: .3s ease-in-out !important
-    }
-    .app-dynamic .side-box .magic-card:hover .descrip{
-        max-height: 160px;
-        text-overflow: unset;
-        white-space: normal;
-    }
-    .app-dynamic .side-box .magic-card .on-sell {
-        text-align: center;
-        margin-top: 10px;
-    }
-    .app-dynamic .side-box .magic-card .on-sell .price-plate{
-        text-align: center;
-        display: block;
-        width: 98%;
-        margin: 0 auto;
-        border-radius: 4px;
-        color: #00afee;
-        line-height: 28px;
-        background: #ffffff;
-        overflow: hidden;
-        box-shadow: inset 0 0 0 2px #00afee66;
-    }
-    .app-dynamic .side-box .magic-card .on-sell .pay-btn{
-        display: inline-block;
-        border-radius: 4px;
-        margin: 4px 0;
-        padding: 2px 24px;
-        color: #fff;
-        font-size: 14px;
-    }
-    .app-dynamic .side-box .magic-card .on-sell .stockout{
-        border-radius: 4px;
-        line-height: 28px;
-        width: 100%;
-        display: block;
-        margin: 5px auto;
-        color: #fff;
-        background: #e1804c;
-    }
+    /*region @actstruct*/
+        .app-dynamic .actstruct {
+            position: relative;
+            box-sizing: border-box;
+            padding-left: 64px;
+            min-height: 80px;
+        }
+        .app-dynamic .actstruct .avatar {
+            top: 0;
+            left: 0;
+            width: 48px;
+            height: 48px;
+        }
+        .app-dynamic .actstruct .header {
+            display: inline-block;
+            width: 100%;
+            margin-top: 3.9px;
+        }
+        .app-dynamic .actstruct .header a {
+            font-weight: 700;
+            color: var(--color-text-gray);
+        }
+        .app-dynamic .actstruct .header .username {
+            margin: 0 10px 0 0;
+            font-size: 16px;
+            font-weight: 700;
+            color: #6d757a;
+        }
+        .app-dynamic .actstruct .header .tool {
+            position: absolute;
+            top: 4px;
+            right: 0;
+        }
+        .app-dynamic .actstruct .header .sub-line {
+            display: inline-block;
+            line-height: 18px;
+            margin-top: 2px;
+            width: calc(100% - 32px);
+        }
+        .app-dynamic .actstruct .header .str {
+            font-size: 12px;
+            color: #aba8a8;
+            height: 20px;
+            margin-right: 8px;
+        }
+        .app-dynamic .actstruct .body {
+            display: flex;
+            flex-flow: column wrap;
+            box-sizing: border-box;
+            margin: 10px 0;
+            padding-right: 20px;
+        }
+        .app-dynamic .actstruct .body .content {
+            word-break: break-word;
+            display: block;
+            width: 100%;
+        }
+        .app-dynamic .actstruct .body .message {
+            word-break: break-word;
+            padding: 0 3px;
+        }
+        .app-dynamic .actstruct .footer {
+            text-align: right;
+            margin-top: 3.9px;
+            display: inline-block;
+            width: 100%;
+        }
+        .app-dynamic .actstruct .footer .icon {
+            display: inline-block;
+            margin: 0 0 0 15px;
+            color: #888;
+            font-size: 18px !important;
+            line-height: 24px !important;
+            text-align: center;
+            height: 24px;
+        }
+        .app-dynamic .actstruct .footer .icon::before {
+            display: inline-block;
+            width: 18px;
+        }
+        .app-dynamic .actstruct .footer .icon.reply::before {
+            vertical-align: -8%;
+        }
+        .app-dynamic .actstruct .footer .icon span {
+            margin-left: 6px;
+            color: #aaa;
+            font-size: 12px;
+        }
 
-    /*region @share-item*/
-        .app-dynamic .actstruct [class^="share-item"]{
+        .app-dynamic .actstruct .thread .title{
+            display: block;
+            font-size: 17px;
+            color: #696969;
+            font-weight: 700;
+            overflow: hidden;
+            white-space: nowrap;
+            word-break: keep-all;
+            text-overflow: ellipsis;
+            margin-bottom: 10px;
+        }
+        .app-dynamic .actstruct .thread .title *{
+            font-size: inherit;
+            color: inherit;
+            font-weight: inherit;
+        }
+        .app-dynamic .actstruct .thread .article{
+            color: #456;
+        }
+    /*endregion*/
+
+    /*region @share-element*/
+        .app-dynamic .actstruct [class^="share-element"]{
             display: inline-block;
             box-sizing: border-box;
             max-width: 100%;
             margin-top: 10px;
         }
-        .app-dynamic .share-item-link {
+        .app-dynamic .share-element-link {
             padding: 8px;
             line-height: 20px;
             color: var(--color-text-gray);
@@ -6957,11 +6726,11 @@
             border: 1px solid var(--color-slightgray);
             border-radius: 5px;
         }
-        .app-dynamic .share-item-link a{
+        .app-dynamic .share-element-link a{
             color: inherit;
             font-size:inherit;
         }
-        .app-dynamic .share-item-link::before {
+        .app-dynamic .share-element-link::before {
             display: inline-block;
             line-height: inherit;
             border-right: 1px solid var(--color-slightgray);
@@ -6969,7 +6738,7 @@
             margin-right: 8px;
         }
 
-        .app-dynamic .share-item-music{
+        .app-dynamic .share-element-music{
             padding: 10px;
             max-width: 100%;
             border-radius: 30px;
@@ -6979,48 +6748,48 @@
             white-space: nowrap;
             overflow: hidden;
         }
-        .app-dynamic .share-item-music i{
+        .app-dynamic .share-element-music i{
             display: inline-block;
             margin-right: 6px;
             font-size: 20px;
         }
 
-        .app-dynamic .share-item-iframe{
+        .app-dynamic .share-element-iframe{
             width: 100%;
             overflow: hidden;
             background: var(--color-vlightgray);
         }
-        .app-dynamic .share-item-iframe iframe{
+        .app-dynamic .share-element-iframe iframe{
             width: 100%;
             border: none;
             min-height: 320px;
         }
-.WL-13P .app-dynamic .share-item-iframe iframe,
-.WL-7P  .app-dynamic .share-item-iframe iframe{
+.WL-13P .app-dynamic .share-element-iframe iframe,
+.WL-7P  .app-dynamic .share-element-iframe iframe{
             min-height: 260px;
         }
-.WL-0   .app-dynamic .share-item-iframe iframe,
-.WL-3P  .app-dynamic .share-item-iframe iframe{
+.WL-0   .app-dynamic .share-element-iframe iframe,
+.WL-3P  .app-dynamic .share-element-iframe iframe{
             min-height: 180px;
         }
 
-        .app-dynamic .share-item-video video{
+        .app-dynamic .share-element-video video{
             width: 100%;
         }
 
-        .app-dynamic .share-item-image{
+        .app-dynamic .share-element-image{
             display: block;
             width: 100%;
             border: 2px solid var(--color-lightgray);
             border-radius: 8px;
             overflow: hidden;
         }
-        .app-dynamic .share-item-image .image,
-        .app-dynamic .share-item-image .image img{
+        .app-dynamic .share-element-image .image,
+        .app-dynamic .share-element-image .image img{
             width: 100%;
         }
-        .app-dynamic .share-item-image i,
-        .app-dynamic .share-item-image .album-pic-info{
+        .app-dynamic .share-element-image i,
+        .app-dynamic .share-element-image .album-pic-info{
             display: flex;
             flex-flow: row nowrap;
             align-items: center;
@@ -7032,18 +6801,18 @@
             word-break: break-all;
             white-space: nowrap;
         }
-        .app-dynamic .share-item-image .album-pic-info a{
+        .app-dynamic .share-element-image .album-pic-info a{
             color: var(--color-text-info);
             margin-right: 5px;
         }
-        .app-dynamic .share-item-image .album-pic-info .username img{
+        .app-dynamic .share-element-image .album-pic-info .username img{
             width: 24px;
             height: 24px;
             border-radius: 20px;
             margin: 5px 5px 0 0;
         }
 
-        .app-dynamic .share-item-album {
+        .app-dynamic .share-element-album {
             display: flex !important;
             flex-flow: row wrap;
             width: 100%;
@@ -7053,27 +6822,28 @@
             border: 3px solid #eeeef5;
             border-radius: 10px;
         }
-        .app-dynamic .share-item-album .image {
+        .app-dynamic .share-element-album .image {
             width: 20%;
             overflow: hidden;
             border-radius: 4px;
         }
-        .app-dynamic .share-item-album .image img{
+        .app-dynamic .share-element-album .image img{
             width: 100%;
         }
-        .app-dynamic .share-item-album .album-info{
+        .app-dynamic .share-element-album .album-info{
             width: 80%;
             padding-left:10px;
             line-height: 25px;
+            box-sizing: border-box;
         }
-        .app-dynamic .share-item-album .album-name {
+        .app-dynamic .share-element-album .album-name {
             display: block;
             width: 100%;
             color: var(--color-text-dark);
             font-size: 20px;
             font-weight: 700;
         }
-        .app-dynamic .share-item-album .album-desc {
+        .app-dynamic .share-element-album .album-desc {
             padding: 10px;
             color: var(--color-text-dark);
             word-break: break-word;
@@ -7083,7 +6853,7 @@
             background: rgb(255 255 255 / 50%);
             border-radius: 0 0 6px 6px;
         }
-        .app-dynamic .share-item-album .owner-name {
+        .app-dynamic .share-element-album .owner-name {
             color: #5a6b84;
             font-weight: 700;
             font-size: 15px;
@@ -7095,32 +6865,32 @@
             height: 20px;
             margin-top: 5px;
         }
-        .app-dynamic .share-item-album .owner-name img{
+        .app-dynamic .share-element-album .owner-name img{
             width: 20px;
             height: 20px;
             border-radius: 25px;
             margin: 0 5px 0 0;
         }
 
-        .app-dynamic .share-item-blog {
+        .app-dynamic .share-element-blog {
             border-radius: 14px;
             overflow: hidden;
             box-shadow: 0 4px 20px rgba(120,144,177,.2);
         }
-        .app-dynamic .share-item-blog .image{
+        .app-dynamic .share-element-blog .image{
             width: 100%;
             max-height:180px;
             overflow: hidden;
         }
-.WL-0   .app-dynamic .share-item-blog .image,
-.WL-4P  .app-dynamic .share-item-blog .image,
-.WL-3P  .app-dynamic .share-item-blog .image{
+.WL-0   .app-dynamic .share-element-blog .image,
+.WL-4P  .app-dynamic .share-element-blog .image,
+.WL-3P  .app-dynamic .share-element-blog .image{
             max-height:110px;
         }
-        .app-dynamic .share-item-blog .image img{
+        .app-dynamic .share-element-blog .image img{
             width: 100%;
         }
-        .app-dynamic .share-item-blog .subject {
+        .app-dynamic .share-element-blog .subject {
             display: block;
             width: 100%;
             overflow: hidden;
@@ -7132,13 +6902,13 @@
             box-sizing: border-box;
             white-space: nowrap;
         }
-        .app-dynamic .share-item-blog .subject .tag {
+        .app-dynamic .share-element-blog .subject .tag {
             padding: 1px 5px;
             border: 1px solid;
             border-radius: 4px;
             font-size: 12px;
         }
-        .app-dynamic .share-item-blog .author {
+        .app-dynamic .share-element-blog .author {
             margin: 10px 30px 0 30px;
             color: var(--color-main-theme-dark);
             display: inline-block;
@@ -7146,62 +6916,62 @@
             font-size: 15px;
             font-weight: 700;
         }
-        .app-dynamic .share-item-blog .author img{
+        .app-dynamic .share-element-blog .author img{
             width: 24px;
             height: 24px;
             border-radius: 25px;
             margin: 0 5px 0 0;
         }
-        .app-dynamic .share-item-blog .content {
+        .app-dynamic .share-element-blog .content {
             padding: 10px 30px 20px 30px;
             color: var(--color-text-gray);
             word-break: break-word;
             line-height: 16px;
         }
 
-        .app-dynamic .share-item-thread {
-            --share-item-thread-back-color: #f8fafa;
-            --share-item-thread-bord-color: #ebedf1;
+        .app-dynamic .share-element-thread {
+            --share-element-thread-back-color: #f8fafa;
+            --share-element-thread-bord-color: #ebedf1;
             border-radius: 6px;
             overflow: hidden;
-            background: var(--share-item-thread-back-color);
+            background: var(--share-element-thread-back-color);
             padding: 10px;
-            border: 2px solid var(--share-item-thread-bord-color);
+            border: 2px solid var(--share-element-thread-bord-color);
         }
-        .app-dynamic .share-item-thread .headline {
+        .app-dynamic .share-element-thread .headline {
             display: flex;
             flex-flow: row nowrap;
             line-height: 30px;
             white-space: nowrap;
         }
-        .app-dynamic .share-item-thread .headline a{
+        .app-dynamic .share-element-thread .headline a{
             color: var(--color-main-theme-dark);
             font-weight: 700;
             margin: 0 5px;
         }
-        .app-dynamic .share-item-thread .author {
+        .app-dynamic .share-element-thread .author {
             margin-left: 0 !important;
         }
-        .app-dynamic .share-item-thread .author img{
+        .app-dynamic .share-element-thread .author img{
             width: 24px;
             height: 24px;
             border-radius: 25px;
             margin: 3px 5px 3px 0;
         }
-        .app-dynamic .share-item-thread .content .text{
+        .app-dynamic .share-element-thread .content .text{
             padding: 10px;
             margin-top: 5px;
             border-radius: 4px;
         }
-        .app-dynamic .share-item-thread .content .imgs{
+        .app-dynamic .share-element-thread .content .imgs{
 
         }
-        .app-dynamic .share-item-thread .content .redirect-needed{
+        .app-dynamic .share-element-thread .content .redirect-needed{
             text-align: center;
             color: var(--color-text-lightgray);
         }
 
-        .app-dynamic .share-item-space {
+        .app-dynamic .share-element-space {
             --avatar-size: 64px;
             --username-fontsize: 16px;
             --space-note-fontsize: 14px;
@@ -7212,18 +6982,18 @@
             height: 149px;
             padding: 40px;
             border-radius: 10px;
-            background-image: url({IMGURL}/home/share-item/share-item-space-bg.png);
+            background-image: url({IMGURL}/home/share-element/share-element-space-bg.png);
             background-size: 30px 30px;
             box-shadow: inset 0 0 7px rgba(120,144,177,.2);
         }
-.WL-0   .app-dynamic .share-item-space,
-.WL-3P  .app-dynamic .share-item-space,
-.WL-4P  .app-dynamic .share-item-space {
+.WL-0   .app-dynamic .share-element-space,
+.WL-3P  .app-dynamic .share-element-space,
+.WL-4P  .app-dynamic .share-element-space {
             --avatar-size: 42px;
             --username-fontsize: 14px;
             --space-note-fontsize: 12px;
         }
-        .app-dynamic .share-item-space::before {
+        .app-dynamic .share-element-space::before {
             content: '';
             position: absolute;
             width: 80px;
@@ -7233,7 +7003,7 @@
             right: -42px;
             border-radius: 60px;
         }
-        .app-dynamic .share-item-space::after {
+        .app-dynamic .share-element-space::after {
             content: '';
             position: absolute;
             width: 80px;
@@ -7243,7 +7013,7 @@
             left: -40px;
             transform: rotate(32deg);
         }
-        .app-dynamic .share-item-space .decrater {
+        .app-dynamic .share-element-space .decrater {
             z-index: 0;
             position: absolute;
             width: calc(100% - 66px);
@@ -7254,7 +7024,7 @@
             border-radius: 5px;
             box-shadow: 0 0 2px rgba(0,0,0,.15);
         }
-        .app-dynamic .share-item-space .decrater::before {
+        .app-dynamic .share-element-space .decrater::before {
             content: '';
             position: absolute;
             width: 66px;
@@ -7267,7 +7037,7 @@
             top: -10px;
             left: -10px;
         }
-        .app-dynamic .share-item-space .decrater::after {
+        .app-dynamic .share-element-space .decrater::after {
             content: '';
             position: absolute;
             width: 66px;
@@ -7280,14 +7050,14 @@
             bottom: -10px;
             right: -10px;
         }
-        .app-dynamic .share-item-space .avatar {
+        .app-dynamic .share-element-space .avatar {
             z-index: 1;
             position: relative;
             height: var(--avatar-size);
             width: var(--avatar-size);
             left: 0;
         }
-        .app-dynamic .share-item-space .info {
+        .app-dynamic .share-element-space .info {
             z-index: 1;
             position: relative;
             box-sizing: border-box;
@@ -7295,10 +7065,10 @@
             width: calc(100% - var(--avatar-size));
             left: 0;
         }
-        .app-dynamic .share-item-space .avatar .avatar-main {
+        .app-dynamic .share-element-space .avatar .avatar-main {
             box-shadow: 0 0 0 2px var(--color-lightgray);
         }
-        .app-dynamic .share-item-space .username {
+        .app-dynamic .share-element-space .username {
             display: block;
             width: 100%;
             padding: 5px 0;
@@ -7306,7 +7076,7 @@
             font-weight: 700;
             color: #8aa0bb;
         }
-        .app-dynamic .share-item-space .space-note {
+        .app-dynamic .share-element-space .space-note {
             display: block;
             width: 100%;
             max-height: 39px;
@@ -7504,7 +7274,7 @@
     }
 /*endregion*/
 
-/*region 用户空间 */
+/*region userspace应用 */
     /*region @space-head*/
         .app-userspace {
             --box-border-color:  rgba(115, 115, 115,  .12);
@@ -8153,13 +7923,27 @@
             border-radius: 4px;
         }
         .app-userspace .timeline .n-right .s-top{
+            display: flex;
+            flex-flow: row nowrap;
+            justify-content: space-between;
             line-height: 26px;
             margin-bottom: var(--box-edge);
         }
         .app-userspace .timeline .n-right .s-top .title{
+            display: inline-flex;
+            width: 90%;
             font-size: 15px;
             font-weight: 700;
+            line-height: 26px;
             color: var(--color-text-dark);
+        }
+        .app-userspace .timeline .n-right .s-top .title .icon{
+            padding: 0 5px;
+            font-size: 17px;
+        }
+        .app-userspace .timeline .n-right .s-top .title .icon img{
+            height: 20px;
+            margin: 3px 0;
         }
         .app-userspace .timeline .n-right .s-top .censor{
             display: inline-block;
@@ -8277,14 +8061,14 @@
 
     /*endregion*/
 
-    /*region @share-item*/
-        .app-userspace .timeline [class^="share-item"]{
+    /*region @share-element*/
+        .app-userspace .timeline [class^="share-element"]{
             display: inline-block;
             box-sizing: border-box;
             max-width: 100%;
             margin-top: 10px;
         }
-        .app-userspace .timeline .share-item-link {
+        .app-userspace .timeline .share-element-link {
             padding: 8px;
             line-height: 20px;
             color: var(--color-text-gray);
@@ -8293,11 +8077,11 @@
             border: 1px solid var(--color-slightgray);
             border-radius: 5px;
         }
-        .app-userspace .timeline .share-item-link a{
+        .app-userspace .timeline .share-element-link a{
             color: inherit;
             font-size:inherit;
         }
-        .app-userspace .timeline .share-item-link::before {
+        .app-userspace .timeline .share-element-link::before {
             display: inline-block;
             line-height: inherit;
             border-right: 1px solid var(--color-slightgray);
@@ -8305,7 +8089,7 @@
             margin-right: 8px;
         }
 
-        .app-userspace .timeline .share-item-music{
+        .app-userspace .timeline .share-element-music{
             padding: 10px;
             max-width: 100%;
             border-radius: 30px;
@@ -8315,44 +8099,44 @@
             white-space: nowrap;
             overflow: hidden;
         }
-        .app-userspace .timeline .share-item-music i{
+        .app-userspace .timeline .share-element-music i{
             display: inline-block;
             margin-right: 6px;
             font-size: 20px;
         }
 
-        .app-userspace .timeline .share-item-iframe{
+        .app-userspace .timeline .share-element-iframe{
             width: 100%;
             overflow: hidden;
             background: var(--color-vlightgray);
         }
-        .app-userspace .timeline .share-item-iframe iframe{
+        .app-userspace .timeline .share-element-iframe iframe{
             width: 100%;
             border: none;
             min-height: 260px;
         }
-.WL-0   .app-userspace .timeline .share-item-iframe iframe,
-.WL-3P  .app-userspace .timeline .share-item-iframe iframe{
+.WL-0   .app-userspace .timeline .share-element-iframe iframe,
+.WL-3P  .app-userspace .timeline .share-element-iframe iframe{
             min-height: 180px;
         }
 
-        .app-userspace .timeline .share-item-video video{
+        .app-userspace .timeline .share-element-video video{
             width: 100%;
         }
 
-        .app-userspace .timeline .share-item-image{
+        .app-userspace .timeline .share-element-image{
             display: block;
             width: 100%;
             border: 2px solid var(--color-lightgray);
             border-radius: 8px;
             overflow: hidden;
         }
-        .app-userspace .timeline .share-item-image .image,
-        .app-userspace .timeline .share-item-image .image img{
+        .app-userspace .timeline .share-element-image .image,
+        .app-userspace .timeline .share-element-image .image img{
             width: 100%;
         }
-        .app-userspace .timeline .share-item-image i,
-        .app-userspace .timeline .share-item-image .album-pic-info{
+        .app-userspace .timeline .share-element-image i,
+        .app-userspace .timeline .share-element-image .album-pic-info{
             display: flex;
             flex-flow: row nowrap;
             align-items: center;
@@ -8364,18 +8148,18 @@
             word-break: break-all;
             white-space: nowrap;
         }
-        .app-userspace .timeline .share-item-image .album-pic-info a{
+        .app-userspace .timeline .share-element-image .album-pic-info a{
             color: var(--color-text-info);
             margin-right: 5px;
         }
-        .app-userspace .timeline .share-item-image .album-pic-info .username img{
+        .app-userspace .timeline .share-element-image .album-pic-info .username img{
             width: 24px;
             height: 24px;
             border-radius: 20px;
             margin: 5px 5px 0 0;
         }
 
-        .app-userspace .timeline .share-item-album {
+        .app-userspace .timeline .share-element-album {
             display: flex !important;
             flex-flow: row wrap;
             width: 100%;
@@ -8385,27 +8169,28 @@
             border: 3px solid #eeeef5;
             border-radius: 10px;
         }
-        .app-userspace .timeline .share-item-album .image {
+        .app-userspace .timeline .share-element-album .image {
             width: 20%;
             overflow: hidden;
             border-radius: 4px;
         }
-        .app-userspace .timeline .share-item-album .image img{
+        .app-userspace .timeline .share-element-album .image img{
             width: 100%;
         }
-        .app-userspace .timeline .share-item-album .album-info{
+        .app-userspace .timeline .share-element-album .album-info{
             width: 80%;
             padding-left:10px;
             line-height: 25px;
+            box-sizing: border-box;
         }
-        .app-userspace .timeline .share-item-album .album-name {
+        .app-userspace .timeline .share-element-album .album-name {
             display: block;
             width: 100%;
             color: var(--color-text-dark);
             font-size: 20px;
             font-weight: 700;
         }
-        .app-userspace .timeline .share-item-album .album-desc {
+        .app-userspace .timeline .share-element-album .album-desc {
             padding: 10px;
             color: var(--color-text-dark);
             word-break: break-word;
@@ -8415,7 +8200,7 @@
             background: rgb(255 255 255 / 50%);
             border-radius: 0 0 6px 6px;
         }
-        .app-userspace .timeline .share-item-album .owner-name {
+        .app-userspace .timeline .share-element-album .owner-name {
             color: #5a6b84;
             font-weight: 700;
             font-size: 15px;
@@ -8427,34 +8212,34 @@
             height: 20px;
             margin-top: 5px;
         }
-        .app-userspace .timeline .share-item-album .owner-name img{
+        .app-userspace .timeline .share-element-album .owner-name img{
             width: 20px;
             height: 20px;
             border-radius: 25px;
             margin: 0 5px 0 0;
         }
 
-        .app-userspace .timeline .share-item-blog {
+        .app-userspace .timeline .share-element-blog {
             border-radius: 14px;
             overflow: hidden;
             box-shadow: 0 4px 20px rgba(120,144,177,.2);
         }
-        .app-userspace .timeline .share-item-blog .image{
+        .app-userspace .timeline .share-element-blog .image{
             width: 100%;
             max-height:180px;
             overflow: hidden;
         }
-.WL-0   .app-userspace .timeline .share-item-blog .image,
-.WL-4P  .app-userspace .timeline .share-item-blog .image,
-.WL-3P  .app-userspace .timeline .share-item-blog .image{
+.WL-0   .app-userspace .timeline .share-element-blog .image,
+.WL-4P  .app-userspace .timeline .share-element-blog .image,
+.WL-3P  .app-userspace .timeline .share-element-blog .image{
             max-height:110px;
         }
-        .app-userspace .timeline .share-item-blog .image img{
+        .app-userspace .timeline .share-element-blog .image img{
             width: 100%;
         }
-        .app-userspace .timeline .share-item-blog .subject {
+        .app-userspace .timeline .share-element-blog .subject {
             display: block;
-            width: 100%;
+            width: 80%;
             overflow: hidden;
             cursor: pointer;
             color: var(--color-text-dark);
@@ -8464,13 +8249,13 @@
             box-sizing: border-box;
             white-space: nowrap;
         }
-        .app-userspace .timeline .share-item-blog .subject .tag {
+        .app-userspace .timeline .share-element-blog .subject .tag {
             padding: 1px 5px;
             border: 1px solid;
             border-radius: 4px;
             font-size: 12px;
         }
-        .app-userspace .timeline .share-item-blog .author {
+        .app-userspace .timeline .share-element-blog .author {
             margin: 10px 30px 0 30px;
             color: var(--color-main-theme-dark);
             display: inline-block;
@@ -8478,62 +8263,62 @@
             font-size: 15px;
             font-weight: 700;
         }
-        .app-userspace .timeline .share-item-blog .author img{
+        .app-userspace .timeline .share-element-blog .author img{
             width: 24px;
             height: 24px;
             border-radius: 25px;
             margin: 0 5px 0 0;
         }
-        .app-userspace .timeline .share-item-blog .content {
+        .app-userspace .timeline .share-element-blog .content {
             padding: 10px 30px 20px 30px;
             color: var(--color-text-gray);
             word-break: break-word;
             line-height: 16px;
         }
 
-        .app-userspace .timeline .share-item-thread {
-            --share-item-thread-back-color: #f8fafa;
-            --share-item-thread-bord-color: #ebedf1;
+        .app-userspace .timeline .share-element-thread {
+            --share-element-thread-back-color: #f8fafa;
+            --share-element-thread-bord-color: #ebedf1;
             border-radius: 6px;
             overflow: hidden;
-            background: var(--share-item-thread-back-color);
+            background: var(--share-element-thread-back-color);
             padding: 10px;
-            border: 2px solid var(--share-item-thread-bord-color);
+            border: 2px solid var(--share-element-thread-bord-color);
         }
-        .app-userspace .timeline .share-item-thread .headline {
+        .app-userspace .timeline .share-element-thread .headline {
             display: flex;
             flex-flow: row nowrap;
             line-height: 30px;
             white-space: nowrap;
         }
-        .app-userspace .timeline .share-item-thread .headline a{
+        .app-userspace .timeline .share-element-thread .headline a{
             color: var(--color-main-theme-dark);
             font-weight: 700;
             margin: 0 5px;
         }
-        .app-userspace .timeline .share-item-thread .author {
+        .app-userspace .timeline .share-element-thread .author {
             margin-left: 0 !important;
         }
-        .app-userspace .timeline .share-item-thread .author img{
+        .app-userspace .timeline .share-element-thread .author img{
             width: 24px;
             height: 24px;
             border-radius: 25px;
             margin: 3px 5px 3px 0;
         }
-        .app-userspace .timeline .share-item-thread .content .text{
+        .app-userspace .timeline .share-element-thread .content .text{
             padding: 10px;
             margin-top: 5px;
             border-radius: 4px;
         }
-        .app-userspace .timeline .share-item-thread .content .imgs{
+        .app-userspace .timeline .share-element-thread .content .imgs{
 
         }
-        .app-userspace .timeline .share-item-thread .content .redirect-needed{
+        .app-userspace .timeline .share-element-thread .content .redirect-needed{
             text-align: center;
             color: var(--color-text-lightgray);
         }
 
-        .app-userspace .timeline .share-item-space {
+        .app-userspace .timeline .share-element-space {
             --avatar-size: 64px;
             --username-fontsize: 16px;
             --space-note-fontsize: 14px;
@@ -8544,18 +8329,18 @@
             height: 149px;
             padding: 40px;
             border-radius: 10px;
-            background-image: url({IMGURL}/home/share-item/share-item-space-bg.png);
+            background-image: url({IMGURL}/home/share-element/share-element-space-bg.png);
             background-size: 30px 30px;
             box-shadow: inset 0 0 7px rgba(120,144,177,.2);
         }
-.WL-0   .app-userspace .timeline .share-item-space,
-.WL-3P  .app-userspace .timeline .share-item-space,
-.WL-4P  .app-userspace .timeline .share-item-space {
+.WL-0   .app-userspace .timeline .share-element-space,
+.WL-3P  .app-userspace .timeline .share-element-space,
+.WL-4P  .app-userspace .timeline .share-element-space {
             --avatar-size: 42px;
             --username-fontsize: 14px;
             --space-note-fontsize: 12px;
         }
-        .app-userspace .timeline .share-item-space::before {
+        .app-userspace .timeline .share-element-space::before {
             content: '';
             position: absolute;
             width: 80px;
@@ -8565,7 +8350,7 @@
             right: -42px;
             border-radius: 60px;
         }
-        .app-userspace .timeline .share-item-space::after {
+        .app-userspace .timeline .share-element-space::after {
             content: '';
             position: absolute;
             width: 80px;
@@ -8575,7 +8360,7 @@
             left: -40px;
             transform: rotate(32deg);
         }
-        .app-userspace .timeline .share-item-space .decrater {
+        .app-userspace .timeline .share-element-space .decrater {
             z-index: 0;
             position: absolute;
             width: calc(100% - 66px);
@@ -8586,7 +8371,7 @@
             border-radius: 5px;
             box-shadow: 0 0 2px rgba(0,0,0,.15);
         }
-        .app-userspace .timeline .share-item-space .decrater::before {
+        .app-userspace .timeline .share-element-space .decrater::before {
             content: '';
             position: absolute;
             width: 66px;
@@ -8599,7 +8384,7 @@
             top: -10px;
             left: -10px;
         }
-        .app-userspace .timeline .share-item-space .decrater::after {
+        .app-userspace .timeline .share-element-space .decrater::after {
             content: '';
             position: absolute;
             width: 66px;
@@ -8612,14 +8397,14 @@
             bottom: -10px;
             right: -10px;
         }
-        .app-userspace .timeline .share-item-space .avatar {
+        .app-userspace .timeline .share-element-space .avatar {
             z-index: 1;
             position: relative;
             height: var(--avatar-size);
             width: var(--avatar-size);
             left: 0;
         }
-        .app-userspace .timeline .share-item-space .info {
+        .app-userspace .timeline .share-element-space .info {
             z-index: 1;
             position: relative;
             box-sizing: border-box;
@@ -8627,10 +8412,10 @@
             width: calc(100% - var(--avatar-size));
             left: 0;
         }
-        .app-userspace .timeline .share-item-space .avatar .avatar-main {
+        .app-userspace .timeline .share-element-space .avatar .avatar-main {
             box-shadow: 0 0 0 2px var(--color-lightgray);
         }
-        .app-userspace .timeline .share-item-space .username {
+        .app-userspace .timeline .share-element-space .username {
             display: block;
             width: 100%;
             padding: 5px 0;
@@ -8638,13 +8423,85 @@
             font-weight: 700;
             color: #8aa0bb;
         }
-        .app-userspace .timeline .share-item-space .space-note {
+        .app-userspace .timeline .share-element-space .space-note {
             display: block;
             width: 100%;
             max-height: 39px;
             overflow: hidden;
             color: #4a617d;
             font-size: var(--space-note-fontsize);
+        }
+    /*endregion*/
+
+    /*region @feed-element*/
+        .app-userspace .timeline .feed-element-blog {
+            border-radius: 14px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(120,144,177,.2);
+        }
+        .app-userspace .timeline .feed-element-blog .image{
+            width: 100%;
+            max-height:180px;
+            overflow: hidden;
+        }
+.WL-0   .app-userspace .timeline .feed-element-blog .image,
+.WL-4P  .app-userspace .timeline .feed-element-blog .image,
+.WL-3P  .app-userspace .timeline .feed-element-blog .image{
+            max-height:110px;
+        }
+        .app-userspace .timeline .feed-element-blog .image img{
+            width: 100%;
+        }
+        .app-userspace .timeline .feed-element-blog .subject {
+            display: block;
+            width: 80%;
+            overflow: hidden;
+            cursor: pointer;
+            color: var(--color-text-dark);
+            font-size: 22px;
+            font-weight: 700;
+            margin: 20px 20px 0 20px;
+            box-sizing: border-box;
+            white-space: nowrap;
+        }
+        .app-userspace .timeline .feed-element-blog .subject .tag {
+            padding: 1px 5px;
+            border: 1px solid;
+            border-radius: 4px;
+            font-size: 12px;
+        }
+        .app-userspace .timeline .feed-element-blog .author {
+            margin: 10px 30px 0 30px;
+            color: var(--color-main-theme-dark);
+            display: inline-block;
+            line-height: 24px;
+            font-size: 15px;
+            font-weight: 700;
+        }
+        .app-userspace .timeline .feed-element-blog .author img{
+            width: 24px;
+            height: 24px;
+            border-radius: 25px;
+            margin: 0 5px 0 0;
+        }
+        .app-userspace .timeline .feed-element-blog .content {
+            padding: 10px 30px 20px 30px;
+            color: var(--color-text-gray);
+            word-break: break-word;
+            line-height: 16px;
+        }
+    /*endregion*/
+
+    /*region #userspace_doing*/
+        .app-userspace #userspace_feed .timeline .node .n-right .s-top .title .passwd{
+            color: var(--color-heart-pink);
+        }
+        .app-userspace #userspace_feed .timeline .node .n-right .s-center > .message{
+            color: #000;
+            word-break: break-word;
+            padding: 10px;
+            border-left: 3px solid #aac1e2;
+            background: #f9f9f9;
         }
     /*endregion*/
 
@@ -9512,7 +9369,7 @@
     /*endregion*/
 /*endregion*/
 
-/*region 通知面板*/
+/*region notice应用*/
     .app-notice .vessel.new{
         border-left: 5px solid rgba(255, 59, 0, 0.8);
     }
@@ -10096,6 +9953,245 @@
         line-height: 26px;
         display: inline-block;
         width: auto;
+    }
+/*endregion*/
+/** end **/
+
+
+/** home::follow **/
+/*region follow应用*/
+    .app-dynamic .actstruct.follow .relay{
+
+    }
+    .app-dynamic .actstruct.follow .content{
+        margin-top: 6px;
+    }
+    .app-dynamic .actstruct.follow .content.quote{
+        width: 100%;
+        border: 1px solid #e6e6e6;
+        padding: 10px;
+        border-radius: 8px;
+        background: #f9f9f9;
+    }
+    .app-dynamic .actstruct.follow .content .follow-below{
+        color: var(--color-onnanoko-pink);
+        margin: 10px 0 0 5px;;
+    }
+    .app-dynamic .actstruct.follow .content .follow-below::before{
+        content: '';
+        display: inline-block;
+        height: 14px;
+        width: 6px;
+        border-radius: 2px;
+        background: var(--color-onnanoko-pink);
+        opacity: .8;
+        margin-right: 5px;
+        vertical-align: -10%;
+    }
+    .app-dynamic .actstruct.follow .content .follow-author{
+        line-height: 32px;
+        margin-top: 10px;
+    }
+    .app-dynamic .actstruct.follow .content .follow-author .avatar{
+        position: relative;
+        width: 32px;
+        height: 32px;
+    }
+    .app-dynamic .actstruct.follow .content .follow-author .username{
+        color: #738190;
+        font-weight: 700;
+    }
+    .app-dynamic .actstruct.follow .content .follow-author .time{
+        margin-left: 10px;
+        color: #999999;
+        font-size: 12px
+    }
+    .app-dynamic .actstruct.follow .content .follow-title{
+        display: block;
+        overflow: hidden;
+        font-size: 17px;
+        font-weight: 700;
+        word-break: keep-all;
+        white-space: nowrap;
+    }
+    .app-dynamic .actstruct.follow .content .follow-article{
+        margin-top: 8px;
+        padding: 0 5px;
+        line-height: 22px;
+    }
+    .app-dynamic .actstruct.follow .content .follow-article img{
+        max-width: 100%;
+        margin: 5px 0;
+        border: 1px solid #e6e6e6;
+    }
+    .app-dynamic .actstruct.follow .content .follow-article .fold,
+    .app-dynamic .actstruct.follow .content .follow-article .unfold{
+        display: block;
+        text-align: center;
+        border: 1px solid #ccc;
+        margin-top: 8px;
+        border-radius: 5px;
+        color: #aaa;
+    }
+    .app-dynamic .actstruct.follow .content .follow-article .fold:hover,
+    .app-dynamic .actstruct.follow .content .follow-article .unfold:hover{
+        border-color: #39a5c5;
+        color: #39a5c5;
+    }
+    .app-dynamic .actstruct.follow .content .follow-article .attach{
+        border: 1px solid #dedede;
+        padding: 3px 10px;
+        border-radius: 4px;
+        background: #ffffff;
+        margin-top: 5px;
+    }
+    .app-dynamic .actstruct.follow .content .follow-article .attach .title{
+        margin:0 0 3px -11px;
+        color: #999;
+        display: block;
+    }
+    .app-dynamic .actstruct.follow .content .follow-article .attach .title::before{
+        content: '';
+        display: inline-block;
+        background: var(--color-main-theme);
+        width: 4px;
+        height: 13px;
+        vertical-align: -10%;
+        margin-right: 5px;
+        border-radius: 1px;
+    }
+    .app-dynamic .actstruct.follow .content .follow-article .attach ul li{
+        display: block;
+        padding-left: 4px;
+    }
+    .app-dynamic .actstruct.follow .content .follow-article .attach ul li strong{
+        color: #737373;
+    }
+    .app-dynamic .actstruct.follow .content .follow-article .attach ul li span{
+        font-size: 12px;
+        margin-left: 5px;
+        color: #999;
+    }
+
+    .app-dynamic .starer .user, .app-dynamic .starer .fun {
+        display: inline-block;
+        box-sizing: border-box;
+        width: 50%;
+    }
+    .app-dynamic .starer .user *, .app-dynamic .starer .fun *{
+        margin: 0 auto;
+    }
+    .app-dynamic .starer .user{
+        padding: 10px 0 10px 15px;
+        text-align: center;
+    }
+    .app-dynamic .starer .user *{
+        display: block;
+    }
+    .app-dynamic .starer .user .avatar{
+        display: block;
+        position: relative;
+        width: 48px;
+        height: 48px;
+    }
+    .app-dynamic .starer .user .username{
+        margin-top: 5px;
+        font-size: 0;
+    }
+    .app-dynamic .starer .user .username .name{
+        display: inline-block;
+        max-width: calc(100% - 22px);
+        font-weight: 700;
+        color: #738190;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        word-break: keep-all;
+        white-space: nowrap;
+    }
+    .app-dynamic .starer .user .username .setbk{
+        text-align: left;
+        display: inline-block;
+        width: 22px;
+        color: #3ca5f1;
+    }
+    .app-dynamic .starer .user .username .setbk::before{
+        vertical-align: -3%;
+    }
+    .app-dynamic .starer .fun {
+        text-align: center;
+        padding: 32px 15px 10px 0;
+    }
+    .app-dynamic .starer .fun *{
+        text-align: center;
+        display: inline-block;
+        box-sizing: border-box;
+        transition: .05s ease-in-out;
+        border-radius: 4px;
+        height: 28px;
+        line-height: 20px;
+    }
+    .app-dynamic .starer .fun .star{
+        color: #fff;
+        padding: 2px 0;
+        width: 68px;
+        background: #489ae0;
+        border: 2px solid #489ae0;
+    }
+    .app-dynamic .starer .fun .star.on{
+        color: #989898;
+        background: #ffffff;
+        border-color: #dadada;
+    }
+    .app-dynamic .starer .fun .star-sp{
+        color: #b1b1b1;
+        padding: 2px 0;
+        margin-left: 5px;
+        width: 28px;
+        border: 2px solid #dadada;
+    }
+    .app-dynamic .starer .fun .star-sp::before{
+        vertical-align: -3%;
+    }
+    .app-dynamic .starer .fun .star-sp.on{
+        color: #e65182;
+        border-color: #e65182;
+    }
+
+    .app-dynamic .starer .status{
+        display: block;
+        width: 100%;
+        text-align: center;
+        margin-top: 5px;
+        padding: 11px 0 10px 0;
+        border-top: 1px solid #ececec;
+        border-radius: 35% 35% 0 0;
+        box-shadow: inset 0 2px 10px rgba(0,0,0,.05);
+    }
+    .app-dynamic .starer .status span{
+        display: inline-block;
+        width: 72px;
+    }
+    .app-dynamic .starer .status span *{
+        display: block;
+        width: 100%;
+        text-align: center;
+        font-weight: 700;
+    }
+    .app-dynamic .starer .status span i{
+        color: #99a2aa;
+        letter-spacing: 6px;
+        text-indent: 3px;
+    }
+    .app-dynamic .starer .status span a{
+        color: #00a1d6;
+        margin-top: 8px;
+    }
+    .app-dynamic .starer .status b{
+        display: inline-block;
+        margin: 5px;
+        width: 1px;
+        height: 30px;
+        background: #dcdcdc;
     }
 /*endregion*/
 /** end **/

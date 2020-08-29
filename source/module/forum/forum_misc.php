@@ -535,36 +535,36 @@ if($_GET['action'] == 'votepoll' && submitcheck('pollsubmit', 1)) {
 		unset($polloptionid[$key]);
 		$polloptionids[] = $id;
 	}
-
-	C::t('forum_polloption')->update_vote($polloptionids, $voterids."\t", 1);
-	C::t('forum_thread')->update($_G['tid'], array('lastpost'=>$_G['timestamp']), true);
-	C::t('forum_poll')->update_vote($_G['tid']);
-	C::t('forum_pollvoter')->insert(array(
-		'tid' => $_G['tid'],
-		'uid' => $_G['uid'],
-		'username' => $_G['username'],
-		'options' => implode("\t", $_GET['pollanswers']),
-		'dateline' => $_G['timestamp'],
-		));
-	updatecreditbyaction('joinpoll');
+    
+    C::t('forum_polloption')->update_vote($polloptionids, $voterids . "\t", 1);
+    C::t('forum_thread')->update($_G['tid'], ['lastpost' => $_G['timestamp']], true);
+    C::t('forum_poll')->update_vote($_G['tid']);
+    C::t('forum_pollvoter')->insert([
+        'tid'      => $_G['tid'],
+        'uid'      => $_G['uid'],
+        'username' => $_G['username'],
+        'options'  => implode("\t", $_GET['pollanswers']),
+        'dateline' => $_G['timestamp'],
+    ]);
+    updatecreditbyaction('joinpoll');
 
 	$space = [];
 	space_merge($space, 'field_home');
-
-	if($overt && !empty($space['privacy']['feed']['newreply'])) {
-		$feed['icon'] = 'poll';
-		$feed['title_template'] = 'feed_thread_votepoll_title';
-		$feed['title_data'] = array(
-			'subject' => "<a href=\"forum.php?mod=viewthread&tid=$_G[tid]\">$thread[subject]</a>",
-			'author' => "<a href=\"home.php?mod=space&uid=$thread[authorid]\">$thread[author]</a>",
-			'hash_data' => "tid{$_G[tid]}"
-		);
-		$feed['id'] = $_G['tid'];
-		$feed['idtype'] = 'tid';
-		postfeed($feed);
-	}
-
-	if(!empty($_G['inajax'])) {
+    
+    if ($overt && !empty($space['privacy']['feed']['newreply'])) {
+        $feed['icon'] = 'poll';
+        $feed['title_template'] = 'feed_thread_votepoll_title';
+        $feed['title_data'] = [
+            'subject'   => "<a href=\"forum.php?mod=viewthread&tid=$_G[tid]\">$thread[subject]</a>",
+            'author'    => "<a href=\"home.php?mod=space&uid=$thread[authorid]\">$thread[author]</a>",
+            'hash_data' => "tid{$_G[tid]}",
+        ];
+        $feed['id'] = $_G['tid'];
+        $feed['idtype'] = 'tid';
+        postfeed($feed);
+    }
+    
+    if(!empty($_G['inajax'])) {
 		showmessage('thread_poll_succeed', "forum.php?mod=viewthread&tid=$_G[tid]".($_GET['from'] ? '&from='.$_GET['from'] : ''), [], array('location' => true));
 	} else {
 		showmessage('thread_poll_succeed', "forum.php?mod=viewthread&tid=$_G[tid]".($_GET['from'] ? '&from='.$_GET['from'] : ''));
@@ -1149,15 +1149,16 @@ if($_GET['action'] == 'votepoll' && submitcheck('pollsubmit', 1)) {
 			space_merge($space, 'field_home');
 
 			if(!empty($space['privacy']['feed']['newreply'])) {
-				$feed['icon'] = 'activity';
-				$feed['title_template'] = 'feed_reply_activity_title';
-				$feed['title_data'] = array(
-					'subject' => "<a href=\"forum.php?mod=viewthread&tid=$_G[tid]\">$thread[subject]</a>",
-					'hash_data' => "tid{$_G[tid]}"
-				);
-				$feed['id'] = $_G['tid'];
-				$feed['idtype'] = 'tid';
-				postfeed($feed);
+                $feed['icon'] = 'activity';
+                $feed['title_template'] = 'feed_reply_activity_title';
+                $feed['title_data'] = [
+                    'subject'   => "<a href=\"forum.php?mod=viewthread&tid=$_G[tid]\">$thread[subject]</a>",
+                    'hash_data' => "tid{$_G[tid]}",
+                ];
+                $feed['id'] = $_G['tid'];
+                $feed['idtype'] = 'tid';
+                
+                postfeed($feed);
 			}
 		}
 		showmessage('activity_completion', "forum.php?mod=viewthread&tid=$_G[tid]".($_GET['from'] ? '&from='.$_GET['from'] : ''), [], array('showdialog' => 1, 'showmsg' => true, 'locationtime' => true, 'alert' => 'right'));

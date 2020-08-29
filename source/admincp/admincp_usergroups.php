@@ -243,23 +243,22 @@ EOT;
 					}
 
 					$newgid = C::t('common_usergroup')->insert($data, true);
-
-					$datafield = array(
-						'groupid' => $newgid,
-						'allowsearch' => 2,
-					);
-
-
-					C::t('common_usergroup_field')->insert($datafield);
-
-					C::t('forum_onlinelist')->insert(array(
-						'groupid' => $newgid,
-						'title' => $data['grouptitle'],
-						'displayorder' => '0',
-						'url' => '',
-					));
-
-					$sqladd = !empty($group['projectid']) && !empty($extadd[$group['projectid']]) ? $extadd[$group['projectid']] : '';
+                    
+                    $datafield = [
+                        'groupid'     => $newgid,
+                        'allowsearch' => 2,
+                    ];
+                    
+                    C::t('common_usergroup_field')->insert($datafield);
+                    
+                    C::t('forum_onlinelist')->insert([
+                        'groupid'      => $newgid,
+                        'title'        => $data['grouptitle'],
+                        'displayorder' => '0',
+                        'url'          => '',
+                    ]);
+                    
+                    $sqladd = !empty($group['projectid']) && !empty($extadd[$group['projectid']]) ? $extadd[$group['projectid']] : '';
 					if($sqladd) {
 						$projectid = substr($group['projectid'], 1);
 						$group_fields = C::t('common_usergroup_field')->fetch($projectid);
@@ -315,13 +314,13 @@ EOT;
 							$data = array_merge($data, $extadd[$_GET['groupnewaddproject'][$k]]);
 						}
 						$newgid = C::t('common_usergroup')->insert($data, true);
-
-						$datafield = array(
-							'groupid' => $newgid,
-							'allowsearch' => 2,
-						);
-
-						C::t('common_usergroup_field')->insert($datafield);
+                        
+                        $datafield = [
+                            'groupid'     => $newgid,
+                            'allowsearch' => 2,
+                        ];
+                        
+                        C::t('common_usergroup_field')->insert($datafield);
 						C::t('forum_onlinelist')->insert(array(
 							'groupid' => $newgid,
 							'title' => $data['grouptitle'],

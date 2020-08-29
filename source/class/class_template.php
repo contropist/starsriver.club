@@ -64,7 +64,6 @@ class template {
 		$template = preg_replace_callback("/[\n\r\t]*\{avatar\((.+?)\)\}[\n\r\t]*/i", array($this, 'parse_template_callback_avatartags_1'), $template);
 		$template = preg_replace_callback("/[\n\r\t]*\{eval\}\s*(\<\!\-\-)*(.+?)(\-\-\>)*\s*\{\/eval\}[\n\r\t]*/is", array($this, 'parse_template_callback_evaltags_2'), $template);
 		$template = preg_replace_callback("/[\n\r\t]*\{eval\s+(.+?)\s*\}[\n\r\t]*/is", array($this, 'parse_template_callback_evaltags_1'), $template);
-		$template = preg_replace_callback("/[\n\r\t]*\{csstemplate\}[\n\r\t]*/is", array($this, 'parse_template_callback_loadcsstemplate'), $template);
 		$template = str_replace("{LF}", "<?=\"\\n\"?>", $template);
 		$template = preg_replace("/\{(\\\$[a-zA-Z0-9_\-\>\[\]\'\"\$\.\x7f-\xff]+)\}/s", "<?=\\1?>", $template);
 		$template = preg_replace_callback("/\{hook\/(\w+?)(\s+(.+?))?\}/i", array($this, 'parse_template_callback_hooktags_13'), $template);
@@ -121,6 +120,8 @@ class template {
 		flock($fp, 2);
 		fwrite($fp, $template);
 		fclose($fp);
+		
+		self::loadcsstemplate();
 	}
 
 	function parse_template_callback_loadsubtemplate_2($matches) {
@@ -161,10 +162,6 @@ class template {
 
 	function parse_template_callback_evaltags_1($matches) {
 		return $this->evaltags($matches[1]);
-	}
-
-	function parse_template_callback_loadcsstemplate($matches) {
-		return $this->loadcsstemplate();
 	}
 
 	function parse_template_callback_hooktags_13($matches) {
@@ -360,14 +357,8 @@ class template {
 			} else {
 				exit('Can not write to cache files, please check directory ./data/ and ./data/cache/ .');
 			}
-			$scripts[] = $_G['basescript'].'_'.CURMODULE;
 		}
-		$scriptcss = '';
-		foreach($scripts as $css) {
-			$scriptcss .= '<link rel="stylesheet" type="text/css" href="'.$_G['setting']['csspath'].$css.'.css?{VERHASH}" />';
-		}
-		$scriptcss .= '{if $_G[uid] && isset($_G[cookie][extstyle]) && strpos($_G[cookie][extstyle], TPLDIR) !== false}<link rel="stylesheet" id="css_extstyle" type="text/css" href="$_G[cookie][extstyle]/style.css" />{elseif $_G[style][defaultextstyle]}<link rel="stylesheet" id="css_extstyle" type="text/css" href="$_G[style][defaultextstyle]/style.css" />{/if}';
-		return $scriptcss;
+		return true;
 	}
 
 	function loadcsstemplate_callback_cssvtags_12($matches) {

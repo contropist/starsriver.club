@@ -107,17 +107,16 @@ if($acceptconfirm) {
 	space_merge($space, 'field_home');
 	if(!empty($space['privacy']['feed']['invite'])) {
 		require_once libfile('function/feed');
-		$tite_data = array('username' => '<a href="home.php?mod=space&uid='.$_G['uid'].'">'.$_G['username'].'</a>');
         feed_add([
-            'icon' => 'friend',
+            'icon'           => 'friend',
             'title_template' => 'feed_invite',
-            'title_data' => $tite_data,
-            'uid' => $space['uid'],
-            'username' => $space['username'],
+            'title_data'     => ['username' => '<a href="home.php?mod=space&uid=' . $_G['uid'] . '">' . $_G['username'] . '</a>'],
+            'uid'            => $space['uid'],
+            'username'       => $space['username'],
         ]);
-	}
-
-	if($_G['setting']['inviteconfig']['inviteaddcredit']) {
+    }
+    
+    if($_G['setting']['inviteconfig']['inviteaddcredit']) {
 		updatemembercount($_G['uid'],
 			array($_G['setting']['inviteconfig']['inviterewardcredit'] => $_G['setting']['inviteconfig']['inviteaddcredit']));
 	}

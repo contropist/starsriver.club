@@ -97,7 +97,7 @@
 	<script>
 		function succeedhandle_$_GET[handlekey](url, msg, values) {
 			var obj = $('feed_'+ values['feedid'] +'_li');
-			obj.style.display = "none";
+			obj.parentNode.removeChild(obj);
 			hideWindow('$_GET['handlekey']');
 		}
 	</script>

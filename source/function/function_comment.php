@@ -282,8 +282,9 @@ function add_comment($message, $id, $idtype, $cid = 0) {
 
 		if($tospace['uid'] != $_G['uid']) {
 			if(ckprivacy('comment', 'feed')) {
-				require_once libfile('function/feed');
-				$fs['title_data']['hash_data'] = "{$idtype}{$id}";
+                $fs['title_data']['hash_data'] = "{$idtype}{$id}";
+                
+                require_once libfile('function/feed');
                 feed_add([
                     'icon'           => $fs['icon'],
                     'title_template' => $fs['title_template'],

@@ -80,20 +80,17 @@ if(helper_access::check_module('doing')) {
 			C::t('common_member_field_forum')->update($_G['uid'], array('sightml'=>$signhtml));
 		}
 
-		if(helper_access::check_module('feed') && ckprivacy('doing', 'feed') && $doing_status == '0') {
-			$feedarr = array(
-				'icon' => 'doing',
-				'uid' => $_G['uid'],
-				'username' => $_G['username'],
-				'dateline' => $_G['timestamp'],
-				'title_template' => lang('feed', 'feed_doing_title'),
-				'title_data' => '',
-				'body_template' => '{message}',
-				'body_data' => serialize(array('message'=>$message)),
-				'id' => $newdoid,
-				'idtype' => 'doid'
-			);
-			C::t('home_feed')->insert($feedarr);
+		if(ckprivacy('doing', 'feed') && $doing_status == '0') {
+            require_once libfile('function/feed');
+		    feed_add([
+                'icon'           => 'doing',
+                'uid'            => $_G['uid'],
+                'username'       => $_G['username'],
+                'title_template' => 'doing',
+                'body_general'   => $message,
+                'id'             => $newdoid,
+                'idtype'         => 'doid',
+            ]);
 		}
 		if($doing_status == '1') {
 			updatemoderate('doid', $newdoid);

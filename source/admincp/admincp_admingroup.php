@@ -26,8 +26,11 @@ if(!$operation) {
 			C::t('common_usergroup_field')->delete($gids);
 			C::t('common_admingroup')->delete($gids);
 			$newgroupid = C::t('common_usergroup')->fetch_new_groupid();
-			C::t('common_member')->update_by_groupid($gids, array('groupid' => $newgroupid, 'adminid' => '0'), 'UNBUFFERED');
-			deletegroupcache($gids);
+            C::t('common_member')->update_by_groupid($gids, [
+                'groupid' => $newgroupid,
+                'adminid' => '0',
+            ], 'UNBUFFERED');
+            deletegroupcache($gids);
 		}
 	}
 
@@ -91,36 +94,35 @@ if(!$operation) {
 		foreach($_GET['newradminid'] as $groupid => $newradminid) {
 			C::t('common_usergroup')->update($groupid, array('radminid' => $newradminid));
 		}
-
-		if($grouptitlenew && in_array($radminidnew, array(1, 2, 3))) {
-
-			$data = array();
-			$usergroup = C::t('common_usergroup')->fetch($radminidnew);
+        
+        if ($grouptitlenew && in_array($radminidnew, [1, 2, 3,])) {
+            $data = [];
+            $usergroup = C::t('common_usergroup')->fetch($radminidnew);
 			foreach ($usergroup as $key => $val) {
-				if(!in_array($key, array('groupid', 'radminid', 'type', 'system', 'grouptitle'))) {
-					$val = addslashes($val);
+                if (!in_array($key, ['groupid', 'radminid', 'type', 'system', 'grouptitle',])) {
+                    $val = addslashes($val);
 					$data[$key] = $val;
 				}
 			}
-			$fielddata = array();
-			$usergroup = C::t('common_usergroup_field')->fetch($radminidnew);
-			foreach ($usergroup as $key => $val) {
-				if(!in_array($key, array('groupid'))) {
-					$val = addslashes($val);
-					$fielddata[$key] = $val;
-				}
-			}
-
-			$adata = array();
-			$admingroup = C::t('common_admingroup')->fetch($radminidnew);
-			foreach ($admingroup as $key => $val) {
-				if(!in_array($key, array('admingid'))) {
-					$val = addslashes($val);
-					$adata[$key] = $val;
-				}
-			}
-
-			$data['radminid'] = $radminidnew;
+            $fielddata = [];
+            $usergroup = C::t('common_usergroup_field')->fetch($radminidnew);
+            foreach ($usergroup as $key => $val) {
+                if (!in_array($key, ['groupid'])) {
+                    $val = addslashes($val);
+                    $fielddata[$key] = $val;
+                }
+            }
+            
+            $adata = [];
+            $admingroup = C::t('common_admingroup')->fetch($radminidnew);
+            foreach ($admingroup as $key => $val) {
+                if (!in_array($key, ['admingid'])) {
+                    $val = addslashes($val);
+                    $adata[$key] = $val;
+                }
+            }
+            
+            $data['radminid'] = $radminidnew;
 			$data['type'] = 'special';
 			$data['grouptitle'] = $grouptitlenew;
 			$newgroupid = C::t('common_usergroup')->insert($data, true);
