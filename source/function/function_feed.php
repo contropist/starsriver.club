@@ -20,22 +20,22 @@ function feed_add($arr = []) {
     }
     
     $data = [
-        'id'                    => !empty($arr['id']) ? $arr['id'] : 0,
-        'idtype'                => !empty($arr['idtype']) ? $arr['idtype'] : '',
-        'target_ids'            => !empty($arr['target_ids']) ? $arr['target_ids'] : '',
-        'uid'                   => !empty($arr['uid']) ? $arr['uid'] : 0,
-        'username'              => !empty($arr['username']) ? $arr['username'] : '',
-        'icon'                  => !empty($arr['icon']) ? $arr['icon'] : '',
-        'type'                  => !empty($arr['type']) ? $arr['type'] : '',
-        'title_template'        => !empty($arr['title_template']) ? $arr['title_template'] : '',
-        'title_data'            => !empty($arr['title_data']) ? $arr['title_data'] : [],
-        'body_template'         => !empty($arr['body_template']) ? $arr['body_template'] : '',
-        'body_data'             => !empty($arr['body_data']) ? $arr['body_data'] : [],
-        'body_general'          => !empty($arr['body_general']) ? $arr['body_general'] : [],
-        'images'                => !empty($arr['images']) ? $arr['images'] : [],
-        'images_link'           => !empty($arr['images_link']) ? $arr['images_link'] : [],
-        'friend'                => !empty($arr['friend']) ? $arr['friend'] : '',
-        'returnid'              => !empty($arr['returnid']) ? $arr['returnid'] : 0,
+        'id'             => !empty($arr['id']) ? $arr['id'] : 0,
+        'idtype'         => !empty($arr['idtype']) ? $arr['idtype'] : '',
+        'target_ids'     => !empty($arr['target_ids']) ? $arr['target_ids'] : '',
+        'uid'            => !empty($arr['uid']) ? $arr['uid'] : 0,
+        'username'       => !empty($arr['username']) ? $arr['username'] : '',
+        'icon'           => !empty($arr['icon']) ? $arr['icon'] : '',
+        'type'           => !empty($arr['type']) ? $arr['type'] : '',
+        'title_template' => !empty($arr['title_template']) ? $arr['title_template'] : '',
+        'title_data'     => !empty($arr['title_data']) ? $arr['title_data'] : [],
+        'body_template'  => !empty($arr['body_template']) ? $arr['body_template'] : '',
+        'body_data'      => !empty($arr['body_data']) ? $arr['body_data'] : [],
+        'body_general'   => !empty($arr['body_general']) ? $arr['body_general'] : [],
+        'images'         => !empty($arr['images']) ? $arr['images'] : [],
+        'images_link'    => !empty($arr['images_link']) ? $arr['images_link'] : [],
+        'friend'         => !empty($arr['friend']) ? $arr['friend'] : '',
+        'returnid'       => !empty($arr['returnid']) ? $arr['returnid'] : 0,
     ];
     
     $data['title_template'] = $data['title_template'] ? lang('feed', $data['title_template']) : '';
@@ -53,34 +53,33 @@ function feed_add($arr = []) {
             ];
         }
     }
-	
+    
     $feedarr = [
-        'id' => $data['id'],
-        'idtype' => $data['idtype'],
-        'target_ids' => $data['target_ids'],
-        'friend' => $data['friend'],
-        'icon' => $data['icon'],
-        'type' => $data['type'],
-        'hash_data' => empty($data['title_data']['hash_data'])?'': $data['title_data']['hash_data'],
-        'uid' => $data['uid'] ? intval($data['uid']) : $_G['uid'],
-        'username' => $data['username'] ? $data['username'] : $_G['username'],
-        'dateline' => $_G['timestamp'],
-        'body_data' => serialize($data['body_data']),
-        'body_template' => $data['body_template'],
-        'title_data' => serialize($data['title_data']),
+        'id'             => $data['id'],
+        'idtype'         => $data['idtype'],
+        'target_ids'     => $data['target_ids'],
+        'friend'         => $data['friend'],
+        'icon'           => $data['icon'],
+        'type'           => $data['type'],
+        'hash_data'      => empty($data['title_data']['hash_data']) ? '' : $data['title_data']['hash_data'],
+        'uid'            => $data['uid'] ? intval($data['uid']) : $_G['uid'],
+        'username'       => $data['username'] ? $data['username'] : $_G['username'],
+        'dateline'       => $_G['timestamp'],
+        'body_data'      => serialize($data['body_data']),
+        'body_template'  => $data['body_template'],
+        'title_data'     => serialize($data['title_data']),
         'title_template' => $data['title_template'],
-        'body_general_template' => $data['body_general_template'],
-        'body_general' => $data['body_general'],
-        'image_1' => empty($data['images'][0]) ? '' : $data['images'][0],
-        'image_1_link' => empty($data['images_link'][0]) ? '' : $data['images_link'][0],
-        'image_2' => empty($data['images'][1]) ? '' : $data['images'][1],
-        'image_2_link' => empty($data['images_link'][1]) ? '' : $data['images_link'][1],
-        'image_3' => empty($data['images'][2]) ? '' : $data['images'][2],
-        'image_3_link' => empty($data['images_link'][2]) ? '' : $data['images_link'][2],
-        'image_4' => empty($data['images'][3]) ? '' : $data['images'][3],
-        'image_4_link' => empty($data['images_link'][3]) ? '' : $data['images_link'][3],
+        'body_general'   => $data['body_general'],
+        'image_1'        => empty($data['images'][0]) ? '' : $data['images'][0],
+        'image_1_link'   => empty($data['images_link'][0]) ? '' : $data['images_link'][0],
+        'image_2'        => empty($data['images'][1]) ? '' : $data['images'][1],
+        'image_2_link'   => empty($data['images_link'][1]) ? '' : $data['images_link'][1],
+        'image_3'        => empty($data['images'][2]) ? '' : $data['images'][2],
+        'image_3_link'   => empty($data['images_link'][2]) ? '' : $data['images_link'][2],
+        'image_4'        => empty($data['images'][3]) ? '' : $data['images'][3],
+        'image_4_link'   => empty($data['images_link'][3]) ? '' : $data['images_link'][3],
     ];
-	
+    
     if($feedarr['hash_data']) {
         $oldfeed = C::t('home_feed')->fetch_feedid_by_hashdata($feedarr['uid'], $feedarr['hash_data']);
         if($oldfeed) {
