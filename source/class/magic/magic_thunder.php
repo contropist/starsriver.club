@@ -46,20 +46,25 @@ class magic_thunder {
             'body_data'      => [
                 'uid'         => $uid,
                 'username'    => $_G['username'],
-                'user_avatar' => avatar($uid, 'middle', true),
+                'user_avatar' => avatar($uid, 'small', true),
             ],
+            'uid' => $uid,
+            'username' => $_G['username'],
+            'id' => $uid,
+            'idtype' => 'magic_thunder'.$uid
         ]);
 		
 		$_G['uid'] = $uid;
 		usemagic($this->magic['magicid'], $this->magic['num']);
 		updatemagiclog($this->magic['magicid'], '2', '1', '0', '0', 'uid', $_G['uid']);
-		showmessage('magics_thunder_message', 'home.php?mod=space&do=home&view=all', array('magicname'=>$_G['setting']['magics']['thunder']), array('alert' => 'right', 'showdialog' => 1, 'locationtime' => true));
-	}
-
-	function show() {
+        showmessage('magics_thunder_message', 'home.php?mod=space&do=home&view=all', ['magicname' => $_G['setting']['magics']['thunder']], [
+            'alert'        => 'right',
+            'showdialog'   => 1,
+            'locationtime' => true,
+        ]);
+    }
+    
+    function show() {
 		magicshowtips(lang('magic/thunder', 'thunder_info'));
 	}
-
 }
-
-?>
