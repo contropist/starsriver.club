@@ -7283,7 +7283,7 @@
         bottom: -1600px;
         left: -500px;
         z-index: -50;
-        opacity: .03;
+        opacity: .02;
         animation-name: rotate;
         animation-duration: 320s;
         animation-timing-function: linear;
