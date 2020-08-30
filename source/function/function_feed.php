@@ -20,7 +20,7 @@
             'title_data'     => !empty($arr['title_data']) ? $arr['title_data'] : [],
             'body_template'  => !empty($arr['body_template']) ? $arr['body_template'] : '',
             'body_data'      => !empty($arr['body_data']) ? $arr['body_data'] : [],
-            'body_general'   => !empty($arr['body_general']) ? $arr['body_general'] : [],
+            'body_general'   => !empty($arr['body_general']) ? $arr['body_general'] : '',
             'images'         => !empty($arr['images']) ? $arr['images'] : [],
             'images_link'    => !empty($arr['images_link']) ? $arr['images_link'] : [],
             'id'             => !empty($arr['id']) ? $arr['id'] : 0,
@@ -116,7 +116,7 @@
             $feed['magic_class'] = !empty($feed['body_data']['magic_thunder']) ? 'magic-thunder' : '';
         }
         
-        $feed['icon_image'] = STATICURL . "image/feed/{$feed['icon']}.gif";
+        $feed['icon_image'] = IMGURL . "/feed/feed-type-icon/{$feed['icon']}.svg";
         
         $feed['new'] = 0;
         if ($_G['cookie']['home_readfeed'] && $feed['dateline'] + 300 > $_G['cookie']['home_readfeed']) {
@@ -245,7 +245,7 @@
                         $albumurl = $userurl . '&do=album&id=' . $value['albumid'];
                         
                         $setarr = [
-                            'icon'           => 'album',
+                            'icon'           => 'pic',
                             'dateline'       => time(),
                             'hot'            => $value['hot'],
                             'title_template' => 'pic',

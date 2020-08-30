@@ -78,8 +78,12 @@
         'feed_profile_update_bbs'     => '更新了自己的论坛信息',
         'feed_profile_update_verify'  => '更新了自己的认证信息',
 
-        'feed_template_magic_thunder_title' => '<a class="link" href="home.php?mod=space&uid={uid}" target="_blank" c="1">{username}</a> 发出了“雷鸣之声”',
-        'feed_template_magic_thunder_body'  => '<a class="link" href="home.php?mod=space&uid={uid}" target="_blank"><img src="{user_avatar}"></a> 大家好，我上线啦',
+        'feed_template_magic_thunder_title' => '<a class="link" href="home.php?mod=space&uid={uid}" style="margin-left: 0" target="_blank" c="1">{username}</a> 发出了“雷鸣之声”',
+        'feed_template_magic_thunder_body'  => '
+            <div class="feed-element-magic-thunder">
+                <a class="avatar" href="home.php?mod=space&uid={uid}" target="_blank"><img class="avatar-main" src="{user_avatar}"></a>
+                <i class="hello">初来乍到，请多多指教！我是 {username}</i>
+            </div>',
 
         'feed_template_blog_passwd_title' => '更新了加密日志 <i class="tag passwd mt-lock"></i>',
         'feed_template_blog_passwd_body'  => '
