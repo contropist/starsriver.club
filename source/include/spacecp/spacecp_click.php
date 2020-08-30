@@ -92,8 +92,8 @@ if($_GET['op'] == 'add') {
         case 'blogid':
             $fs['title_template'] = 'feed_click_blog';
             $fs['title_data'] = [
-                'touser'  => "<a href=\"home.php?mod=space&uid=$item[uid]\">{$item[username]}</a>",
-                'subject' => "<a href=\"home.php?mod=space&uid=$item[uid]&do=blog&id=$item[blogid]\">$item[subject]</a>",
+                'touser'  => '<a href="home.php?mod=space&uid='.$item['uid'].'">'.$item['username'].'</a>',
+                'subject' => '<a href="home.php?mod=space&uid='.$item['uid'].'&do=blog&id='.$item['blogid'].'">'.$item['subject'].'</a>',
                 'click'   => $click['name'],
             ];
             
@@ -105,13 +105,14 @@ if($_GET['op'] == 'add') {
                 'from_idtype' => 'blogid',
             ];
             break;
+            
         case 'aid':
             require_once libfile('function/portal');
             $article_url = fetch_article_url($item);
             $fs['title_template'] = 'feed_click_article';
             $fs['title_data'] = [
-                'touser'  => "<a href=\"home.php?mod=space&uid=$item[uid]\">{$item[username]}</a>",
-                'subject' => "<a href=\"$article_url\">$item[title]</a>",
+                'touser'  => '<a href="home.php?mod=space&uid='.$item['uid'].'">'.$item['username'].'</a>',
+                'subject' => '<a href="'.$article_url.'">'.$item['title'].'</a>',
                 'click'   => $click['name'],
             ];
             
@@ -123,10 +124,11 @@ if($_GET['op'] == 'add') {
                 'from_idtype' => 'aid',
             ];
             break;
+            
         case 'picid':
             $fs['title_template'] = 'feed_click_pic';
             $fs['title_data'] = [
-                'touser' => "<a href=\"home.php?mod=space&uid=$item[uid]\">{$item[username]}</a>",
+                'touser'  => '<a href="home.php?mod=space&uid='.$item['uid'].'">'.$item['username'].'</a>',
                 'click'  => $click['name'],
             ];
             $fs['images'] = [pic_get($item['filepath'], 'album', $item['thumb'], $item['remote'])];
@@ -162,9 +164,17 @@ if($_GET['op'] == 'add') {
 	updatestat('click');
 
 	notification_add($item['uid'], 'click', $q_note, $q_note_values);
-
-	showmessage('click_success', '', array('idtype' => $idtype, 'id' => $id, 'clickid' => $clickid), array('msgtype' => 3, 'showmsg' => true, 'closetime' => true));
-
+    
+    showmessage('click_success', '', [
+        'idtype'  => $idtype,
+        'id'      => $id,
+        'clickid' => $clickid,
+    ], [
+        'msgtype'   => 3,
+        'showmsg'   => true,
+        'closetime' => true,
+    ]);
+    
 } elseif ($_GET['op'] == 'show') {
 
 	$maxclicknum = 0;

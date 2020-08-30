@@ -157,39 +157,49 @@ function add_comment($message, $id, $idtype, $cid = 0) {
         'image_links'   => [],
     
     ];
-
-	switch ($idtype) {
-		case 'uid':
-			$fs['icon'] = 'wall';
-			$fs['title_template'] = 'feed_comment_space';
-			$fs['title_data'] = array('touser'=>"<a href=\"home.php?mod=space&uid=$tospace[uid]\">$tospace[username]</a>");
-			break;
-		case 'picid':
-			$fs['title_template'] = 'feed_comment_image';
-			$fs['title_data'] = array('touser'=>"<a href=\"home.php?mod=space&uid=$tospace[uid]\">".$tospace['username']."</a>");
-			$fs['body_template'] = '{pic_title}';
-			$fs['body_data'] = array('pic_title'=>$pic['title']);
-			$fs['body_general'] = $summay;
-			$fs['images'] = array(pic_get($pic['filepath'], 'album', $pic['thumb'], $pic['remote']));
-			$fs['image_links'] = array("home.php?mod=space&uid=$tospace[uid]&do=album&picid=$pic[picid]");
-			$fs['target_ids'] = $album['target_ids'];
-			$fs['friend'] = $album['friend'];
-			break;
-		case 'blogid':
-			C::t('home_blog')->increase($id, 0, array('replynum'=>1));
-			$fs['title_template'] = 'feed_comment_blog';
-			$fs['title_data'] = array('touser'=>"<a href=\"home.php?mod=space&uid=$tospace[uid]\">".$tospace['username']."</a>", 'blog'=>"<a href=\"home.php?mod=space&uid=$tospace[uid]&do=blog&id=$id\">$blog[subject]</a>");
-			$fs['target_ids'] = $blog['target_ids'];
-			$fs['friend'] = $blog['friend'];
-			break;
-		case 'sid':
-			$fs['title_template'] = 'feed_comment_share';
-			$fs['title_data'] = array('touser'=>"<a href=\"home.php?mod=space&uid=$tospace[uid]\">".$tospace['username']."</a>", 'share'=>"<a href=\"home.php?mod=space&uid=$tospace[uid]&do=share&id=$id\">".str_replace(lang('spacecp', 'share_action'), '', $share['title_template'])."</a>");
-			break;
-	}
-
-	$message = censor($message);
-	if(censormod($message)) {
+    
+    switch ($idtype) {
+        case 'uid':
+            $fs['icon'] = 'wall';
+            $fs['title_template'] = 'feed_comment_space';
+            $fs['title_data'] = [
+                'touser' => '<a href="home.php?mod=space&uid='.$tospace['uid'].'">'.$tospace['username'].'</a>'
+            ];
+            break;
+        case 'picid':
+            $fs['title_template'] = 'feed_comment_image';
+            $fs['title_data'] = [
+                'touser' => '<a href="home.php?mod=space&uid='.$tospace['uid'].'">'.$tospace['username'].'</a>'
+            ];
+            $fs['body_template'] = '{pic_title}';
+            $fs['body_data'] = ['pic_title' => $pic['title']];
+            $fs['body_general'] = $summay;
+            $fs['images'] = [pic_get($pic['filepath'], 'album', $pic['thumb'], $pic['remote'])];
+            $fs['image_links'] = ["home.php?mod=space&uid=$tospace[uid]&do=album&picid=$pic[picid]"];
+            $fs['target_ids'] = $album['target_ids'];
+            $fs['friend'] = $album['friend'];
+            break;
+        case 'blogid':
+            C::t('home_blog')->increase($id, 0, ['replynum' => 1]);
+            $fs['title_template'] = 'feed_comment_blog';
+            $fs['title_data'] = [
+                'touser' => '<a href="home.php?mod=space&uid='.$tospace['uid'].'">'.$tospace['username'].'</a>',
+                'blog'   => '<a href="home.php?mod=space&uid='.$tospace['uid'].'&do=blog&id='.$id.'">'.$blog['subject'].'</a>',
+            ];
+            $fs['target_ids'] = $blog['target_ids'];
+            $fs['friend'] = $blog['friend'];
+            break;
+        case 'sid':
+            $fs['title_template'] = 'feed_comment_share';
+            $fs['title_data'] = [
+                'touser' => '<a href="home.php?mod=space&uid='.$tospace['uid'].'">'.$tospace['username'].'</a>',
+                'share'  => '<a href="home.php?mod=space&uid='.$tospace['uid'].'&do=share&id='.$id.'">'.str_replace(lang('spacecp', 'share_action'), '', $share['title_template']) .'</a>',
+            ];
+            break;
+    }
+    
+    $message = censor($message);
+    if (censormod($message)) {
 		$comment_status = 1;
 	} else {
 		$comment_status = 0;

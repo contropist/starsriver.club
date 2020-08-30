@@ -291,17 +291,17 @@ if($_GET['op'] == 'edit') {
 	if(!$pic = C::t('home_pic')->fetch($picid)) {
 		showmessage('image_does_not_exist');
 	}
-
-	if(submitcheck('hotsubmit')) {
-		$_POST['hot'] = intval($_POST['hot']);
-		C::t('home_pic')->update($picid, array('hot'=>$_POST['hot']));
-		if($_POST['hot'] > 0) {
-			require_once libfile('function/feed');
-			feed_publish($picid, 'picid');
-		} else {
-			C::t('home_feed')->update($picid, array('hot'=>$_POST['hot']), 'picid');
-		}
-		showmessage('do_success', dreferer());
+    
+    if (submitcheck('hotsubmit')) {
+        $_POST['hot'] = intval($_POST['hot']);
+        C::t('home_pic')->update($picid, ['hot' => $_POST['hot']]);
+        if ($_POST['hot'] > 0) {
+            require_once libfile('function/feed');
+            feed_publish($picid, 'picid');
+        } else {
+            C::t('home_feed')->update($picid, ['hot' => $_POST['hot']], 'picid');
+        }
+        showmessage('do_success', dreferer());
 	}
 } elseif($_GET['op'] == 'saveforumphoto') {
 	if(submitcheck('savephotosubmit')) {

@@ -100,7 +100,7 @@
                     $searchs[] = '{' . $key . '}';
                     $replaces[] = $feed['title_data'][$key];
                 }
-                $feed['title_template'] = feed_mktarget(str_replace($searchs, $replaces, $feed['title_template']));
+                $feed['title_template'] = str_replace($searchs, $replaces, $feed['title_template']);
             }
             
             if ($feed['body_data']) {
@@ -110,11 +110,10 @@
                     $searchs[] = '{' . $key . '}';
                     $replaces[] = $feed['body_data'][$key];
                 }
-                $feed['body_template'] = feed_mktarget(str_replace($searchs, $replaces, $feed['body_template']));
+                $feed['body_template'] = str_replace($searchs, $replaces, $feed['body_template']);
             }
             
             $feed['magic_class'] = !empty($feed['body_data']['magic_thunder']) ? 'magic-thunder' : '';
-            $feed['body_general'] = feed_mktarget($feed['body_general']);
         }
         
         $feed['icon_image'] = STATICURL . "image/feed/{$feed['icon']}.gif";
@@ -126,18 +125,6 @@
         
         return $feed;
     }
-    
-    function feed_mktarget($html) {
-        
-        global $_G;
-        
-        if ($html && $_G['setting']['feedtargetblank']) {
-            $html = preg_replace("/target\=([\'\"]?)[\w]+([\'\"]?)/i", '', $html);
-            $html = preg_replace("/<a(.+?)href=([\'\"]?)([^>\s]+)\\2([^>]*)>/i", '<a href="\\3" target="_blank" \\1 \\4>', $html);
-        }
-        return $html;
-    }
-    
     
     function feed_publish($id, $idtype, $add = 0) {
         

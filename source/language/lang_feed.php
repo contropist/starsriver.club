@@ -80,7 +80,7 @@
 
         'feed_template_doing_title' => '更新了记录',
 
-        'feed_template_blog_passwd_title' => '更新了加密日志 <i class="icon passwd mt-lock"></i>',
+        'feed_template_blog_passwd_title' => '更新了加密日志 <i class="tag passwd mt-lock"></i>',
         'feed_template_blog_passwd_body'  => '
             <div class="feed-element-blog">
                 <a class="subject ellipsis" href="{url}" target="_blank">{subject}</a>
@@ -88,7 +88,7 @@
                 <div class="content">{content}</div>
             </div>',
         
-        'feed_template_blog_passwd_withimg_title' => '更新了加密日志 <i class="icon passwd mt-lock"></i>',
+        'feed_template_blog_passwd_withimg_title' => '更新了加密日志 <i class="tag passwd mt-lock"></i>',
         'feed_template_blog_passwd_withimg_body'  => '
             <div class="feed-element-blog">
                 <div class="image"><img src="{image}"></div>
@@ -116,17 +116,16 @@
 
         'feed_template_album_title' => '更新了画廊',
         'feed_template_album_body'  => '
-            <div class="feed-element-album">画廊 <a class="ellipsis" href="{album_link}" target="_blank">{album}</a> 包含 {picnum} 张图片</div>',
+            <div class="feed-element-album">画廊 <a class="link ellipsis" href="{album_link}" target="_blank">{album}</a> 包含 {picnum} 张图片</div>',
         
-        'feed_template_pic_title'   => '上传了新图片 <a class="{url}">{image}</a>',
+        'feed_template_pic_title'   => '更新了图片 <a class="link ellipsis" href="{url}">{image}</a>',
         'feed_template_pic_body'    => '
             <div class="feed-element-image">
+                <div class="album-pic-info">
+                    <a class="username ellipsis" href="{user_link}" target="_blank" c="1"><img src="{user_avatar}">{username}</a> 的画廊 <a class="albumname ellipsis" href="{album_link}" target="_blank">&nbsp;{album}</a> 中的图片
+                </div>
                 <a class="image" href="{image_togo}" target="_blank">
                     <img src="{image_link}" />
                 </a>
-                <i class="ellipsis">图像：{image}</i>
-                <div class="album-pic-info">
-                    来源：<a class="username ellipsis" href="{user_link}" target="_blank" c="1"><img src="{user_avatar}">{username}</a> 的画廊 <a class="albumname ellipsis" href="{album_link}" target="_blank">{album}</a>
-                </div>
             </div>',
     ];

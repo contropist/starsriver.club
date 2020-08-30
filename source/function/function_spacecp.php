@@ -465,50 +465,58 @@ function getalbums($uid) {
 
 function hot_update($idtype, $id, $hotuser) {
 	global $_G;
-
-	$hotusers = empty($hotuser)?[]:explode(',', $hotuser);
-	if($hotusers && in_array($_G['uid'], $hotusers)) {
-		return false;
-	} else {
-		$hotusers[] = $_G['uid'];
-		$hotuser = implode(',', $hotusers);
-	}
-	$hotuser = daddslashes($hotuser);
-	$newhot = count($hotusers)+1;
-	if($newhot == $_G['setting']['feedhotmin']) {
-		$tablename = gettablebyidtype($idtype);
-		if($tablename) {
-			$item = C::t($tablename)->fetch_by_id_idtype($id);
-			$itemuid = $item['uid'];
-			updatecreditbyaction('hotinfo', $itemuid);
-		}
-	}
-
-	switch ($idtype) {
-		case 'blogid':
-			C::t('home_blogfield')->update($id, array('hotuser' => $hotuser));
-			C::t('home_blog')->increase($id, 0, array('hot' => 1));
-			break;
-		case 'picid':
-			C::t('home_picfield')->insert(array('picid' => $id, 'hotuser' => $hotuser), 0, 1);
-			C::t('home_pic')->update_hot($id);
-			break;
-		case 'sid':
-			C::t('home_share')->update_hot_by_sid($id, $hotuser);
-			break;
-		default:
-			return false;
-	}
-	if($feed = C::t('home_feed')->fetch($id, $idtype)) {
-		if(empty($feed['friend'])) {
-			C::t('home_feed')->update_hot_by_feedid($feed['feedid'], 1);
-		}
-	} elseif($idtype == 'picid') {
-		require_once libfile('function/feed');
-		feed_publish($id, $idtype);
-	}
-
-	return true;
+    
+    $hotusers = empty($hotuser) ? [] : explode(',', $hotuser);
+    
+    if ($hotusers && in_array($_G['uid'], $hotusers)) {
+        return false;
+    } else {
+        $hotusers[] = $_G['uid'];
+        $hotuser = implode(',', $hotusers);
+    }
+    
+    $hotuser = daddslashes($hotuser);
+    $newhot = count($hotusers) + 1;
+    if ($newhot == $_G['setting']['feedhotmin']) {
+        $tablename = gettablebyidtype($idtype);
+        if ($tablename) {
+            $item = C::t($tablename)->fetch_by_id_idtype($id);
+            $itemuid = $item['uid'];
+            updatecreditbyaction('hotinfo', $itemuid);
+        }
+    }
+    
+    switch ($idtype) {
+        case 'blogid':
+            C::t('home_blogfield')->update($id, ['hotuser' => $hotuser]);
+            C::t('home_blog')->increase($id, 0, ['hot' => 1]);
+            break;
+            
+        case 'picid':
+            C::t('home_picfield')->insert([
+                'picid'   => $id,
+                'hotuser' => $hotuser,
+            ], 0, 1);
+            C::t('home_pic')->update_hot($id);
+            break;
+            
+        case 'sid':
+            C::t('home_share')->update_hot_by_sid($id, $hotuser);
+            break;
+            
+        default:
+            return false;
+    }
+    if ($feed = C::t('home_feed')->fetch($id, $idtype)) {
+        if (empty($feed['friend'])) {
+            C::t('home_feed')->update_hot_by_feedid($feed['feedid'], 1);
+        }
+    } elseif ($idtype == 'picid') {
+        require_once libfile('function/feed');
+        feed_publish($id, $idtype);
+    }
+    
+    return true;
 }
 
 function gettablebyidtype($idtype) {

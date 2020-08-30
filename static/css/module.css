@@ -6796,13 +6796,14 @@
             padding: 0 10px;
             line-height: 34px;
             background: var(--color-vlightgray);
-            border-top: 1px solid var(--color-slightgray);
+            border-bottom: 2px solid var(--color-lightgray);
             color: var(--color-text-gray);
             word-break: break-all;
             white-space: nowrap;
         }
         .app-dynamic .share-element-image .album-pic-info a{
             color: var(--color-text-info);
+            font-weight: 700;
             margin-right: 5px;
         }
         .app-dynamic .share-element-image .album-pic-info .username img{
@@ -7724,7 +7725,7 @@
             --node-left-element-width: var(--node-left-width);
             --node-left-element-position: absolute;
             --node-left-element-aligh: right;
-            --node-right-margin: 0 0 10px 20px;
+            --node-right-margin: 0 0 20px 20px;
             --node-right-s-center-padding: 0 var(--box-edge);
 
             --timeA-fontsize: 26px;
@@ -7938,14 +7939,33 @@
             font-weight: 700;
             line-height: 26px;
             color: var(--color-text-dark);
+            white-space: nowrap;
+        }
+        .app-userspace .timeline .n-right .s-top .title .link{
+            margin: 0 5px;
+            color: var(--color-main-theme-dark);
+            font-weight: 700;
         }
         .app-userspace .timeline .n-right .s-top .title .icon{
             padding: 0 5px;
-            font-size: 17px;
+            font-size: 14px;
+            border-radius: 5px;
+            margin: 3px 5px;
+            height: 20px;
+            line-height: 20px;
         }
         .app-userspace .timeline .n-right .s-top .title .icon img{
             height: 20px;
-            margin: 3px 0;
+        }
+        .app-userspace .timeline .n-right .s-top .title .tag{
+            padding: 0 5px;
+            font-size: 14px;
+            background: var(--color-main-theme);
+            color: #fff;
+            border-radius: 5px;
+            margin: 3px 5px;
+            height: 20px;
+            line-height: 20px;
         }
         .app-userspace .timeline .n-right .s-top .censor{
             display: inline-block;
@@ -8145,13 +8165,14 @@
             padding: 0 10px;
             line-height: 34px;
             background: var(--color-vlightgray);
-            border-top: 1px solid var(--color-slightgray);
+            border-bottom: 2px solid var(--color-lightgray);
             color: var(--color-text-gray);
             word-break: break-all;
             white-space: nowrap;
         }
         .app-userspace .timeline .share-element-image .album-pic-info a{
             color: var(--color-text-info);
+            font-weight: 700;
             margin-right: 5px;
         }
         .app-userspace .timeline .share-element-image .album-pic-info .username img{
@@ -8436,6 +8457,54 @@
     /*endregion*/
 
     /*region @feed-element*/
+        .app-userspace .timeline .feed-element-image{
+            display: block;
+            width: 100%;
+            border: 2px solid var(--color-lightgray);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .app-userspace .timeline .feed-element-image .image,
+        .app-userspace .timeline .feed-element-image .image img{
+            width: 100%;
+        }
+        .app-userspace .timeline .feed-element-image .album-pic-info{
+            display: flex;
+            flex-flow: row nowrap;
+            align-items: center;
+            padding: 0 10px;
+            line-height: 34px;
+            background: var(--color-vlightgray);
+            border-bottom: 2px solid var(--color-lightgray);
+            color: var(--color-text-gray);
+            word-break: break-all;
+            white-space: nowrap;
+        }
+        .app-userspace .timeline .feed-element-image .album-pic-info a{
+            color: var(--color-text-info);
+            font-weight: 700;
+            margin-right: 5px;
+        }
+        .app-userspace .timeline .feed-element-image .album-pic-info .username img{
+            width: 24px;
+            height: 24px;
+            border-radius: 20px;
+            margin: 5px 5px 0 0;
+        }
+
+        .app-userspace .timeline .feed-element-album{
+            line-height: 18px;
+            color: var(--color-text-lightgray);
+            text-align: center;
+            font-size: 12px;
+        }
+        .app-userspace .timeline .feed-element-album a{
+            color: var(--color-main-theme-dark);
+            font-size: 12px;
+            font-weight: 700;
+            max-width: 40%;
+        }
+
         .app-userspace .timeline .feed-element-blog {
             border-radius: 14px;
             overflow: hidden;
@@ -8493,19 +8562,6 @@
             line-height: 16px;
         }
 
-        .app-userspace .timeline .feed-element-album{
-            line-height: 18px;
-            color: var(--color-text-lightgray);
-            text-align: center;
-            font-size: 12px;
-        }
-        .app-userspace .timeline .feed-element-album a{
-            color: var(--color-main-theme-dark);
-            font-size: 12px;
-            font-weight: 700;
-            max-width: 40%;
-        }
-
         .app-userspace .timeline .feed-element-imageGrid{
             margin-top: var(--box-edge);
             display: grid;
@@ -8521,9 +8577,12 @@
         }
     /*endregion*/
 
-    /*region #userspace_doing*/
+    /*region #userspace_feed*/
         .app-userspace #userspace_feed .timeline .node .n-right .s-top .title .passwd{
-            color: var(--color-heart-pink);
+            background: var(--color-mod-warning);
+        }
+        .app-userspace #userspace_feed .timeline .node .n-right .s-top .title .hot{
+            background: var(--color-heart-pink);
         }
         .app-userspace #userspace_feed .timeline .node .n-right .s-center > .message{
             color: #000;

@@ -32,8 +32,8 @@
         'share_title_template_pic' => '分享了图片',
         'share_body_template_pic' =>	'
             <div class="share-element-image">
-                <a class="image" href="{url}" target="_blank"><img src="{url}" /></a>
                 <i>{name}</i>
+                <a class="image" href="{url}" target="_blank"><img src="{url}" /></a>
             </div>',
         
         'share_title_template_album' => '分享了画廊',
@@ -50,15 +50,15 @@
             </div>',
         
         'share_title_template_album_pic' => '分享了画廊图片',
-        'share_body_template_album_pic' =>	'
+        'share_body_template_album_pic' => '
             <div class="share-element-image">
+                <div class="album-pic-info">
+                    <a class="username ellipsis" href="{owner_link}" target="_blank" c="1"><img src="{owner_avatar}">{owner}</a> 的画廊 <a class="albumname ellipsis" href="{album_link}" target="_blank">&nbsp;{album}</a> 中的图片
+                </div>
+                <i class="ellipsis">{image}</i>
                 <a class="image" href="{image_togo}" target="_blank">
                     <img src="{image_link}" />
                 </a>
-                <i class="ellipsis">图像：{image}</i>
-                <div class="album-pic-info">
-                    来源：<a class="username ellipsis" href="{owner_link}" target="_blank" c="1"><img src="{owner_avatar}">{owner}</a> 的画廊 <a class="albumname ellipsis" href="{album_link}" target="_blank">{album}</a>
-                </div>
             </div>',
         
         'share_title_template_article' => '分享了文章',
