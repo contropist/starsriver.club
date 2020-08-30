@@ -29,20 +29,10 @@
         'feed_click_article'          => '送了一个“{click}”给 {touser} 的文章 {subject}',
         'feed_task'                   => '完成了有奖任务 {task}',
         'feed_task_credit'            => '完成了有奖任务 {task}，领取了 {credit} 个奖励积分',
-        'feed_profile_update_base'    => '更新了自己的基本资料',
-        'feed_profile_update_contact' => '更新了自己的联系方式',
-        'feed_profile_update_edu'     => '更新了自己的教育情况',
-        'feed_profile_update_work'    => '更新了自己的工作信息',
-        'feed_profile_update_info'    => '更新了自己的个人信息',
-        'feed_profile_update_bbs'     => '更新了自己的论坛信息',
-        'feed_profile_update_verify'  => '更新了自己的认证信息',
         
         'feed_add_attachsize' => '用 {credit} 个积分兑换了 {size} 附件空间，可以上传更多的图片啦(<a href="home.php?mod=spacecp&ac=credit&op=addsize">我也来兑换</a>)',
         
         'feed_invite' => '发起邀请，和 {username} 成为了好友',
-        
-        'magicuse_thunder_announce_title' => '<strong>{username} 发出了“雷鸣之声”</strong>',
-        'magicuse_thunder_announce_body'  => '大家好，我上线啦<br><a href="home.php?mod=space&uid={uid}" target="_blank">欢迎来我家串个门</a>',
         
         'feed_thread_title'                => '发表了新话题',
         'feed_thread_message'              => '<div class="thread"><span class="title">{subject}</span><div class="article">{message}</div></div>',
@@ -74,11 +64,22 @@
         'feed_thread_debatevote_message_2' => '',
         'feed_thread_debatevote_message_3' => '',
 
-
+        /* New template */
         'feed_template_default_title' => '动态更新',
         'feed_template_default_body'  => '',
-
         'feed_template_doing_title' => '更新了记录',
+
+        'feed_template_profile_title' => '更新了个人资料',
+        'feed_profile_update_base'    => '更新了自己的基本资料',
+        'feed_profile_update_contact' => '更新了自己的联系方式',
+        'feed_profile_update_edu'     => '更新了自己的教育情况',
+        'feed_profile_update_work'    => '更新了自己的工作信息',
+        'feed_profile_update_info'    => '更新了自己的个人信息',
+        'feed_profile_update_bbs'     => '更新了自己的论坛信息',
+        'feed_profile_update_verify'  => '更新了自己的认证信息',
+
+        'feed_template_magic_thunder_title' => '<a class="link" href="home.php?mod=space&uid={uid}" target="_blank" c="1">{username}</a> 发出了“雷鸣之声”',
+        'feed_template_magic_thunder_body'  => '<a class="link" href="home.php?mod=space&uid={uid}" target="_blank"><img src="{user_avatar}"></a> 大家好，我上线啦',
 
         'feed_template_blog_passwd_title' => '更新了加密日志 <i class="tag passwd mt-lock"></i>',
         'feed_template_blog_passwd_body'  => '
@@ -118,7 +119,7 @@
         'feed_template_album_body'  => '
             <div class="feed-element-album">画廊 <a class="link ellipsis" href="{album_link}" target="_blank">{album}</a> 包含 {picnum} 张图片</div>',
         
-        'feed_template_pic_title'   => '更新了图片 <a class="link ellipsis" href="{url}">{image}</a>',
+        'feed_template_pic_title'   => '更新了图片 <a class="link ellipsis" href="{url}" target="_blank">{image}</a>',
         'feed_template_pic_body'    => '
             <div class="feed-element-image">
                 <div class="album-pic-info">

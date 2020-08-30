@@ -6797,7 +6797,7 @@
             line-height: 34px;
             background: var(--color-vlightgray);
             border-bottom: 2px solid var(--color-lightgray);
-            color: var(--color-text-gray);
+            color: #000;
             word-break: break-all;
             white-space: nowrap;
         }
@@ -6896,7 +6896,7 @@
             width: 100%;
             overflow: hidden;
             cursor: pointer;
-            color: var(--color-text-dark);
+            color: #000;
             font-size: 22px;
             font-weight: 700;
             margin: 20px 20px 0 20px;
@@ -6925,7 +6925,7 @@
         }
         .app-dynamic .share-element-blog .content {
             padding: 10px 30px 20px 30px;
-            color: var(--color-text-gray);
+            color: #000;
             word-break: break-word;
             line-height: 16px;
         }
@@ -7276,6 +7276,22 @@
 /*endregion*/
 
 /*region userspace应用 */
+    .mas-decrator{
+        position: fixed;
+        width: 2400px;
+        height: 2400px;
+        bottom: -1600px;
+        left: -500px;
+        z-index: -50;
+        opacity: .03;
+        animation-name: rotate;
+        animation-duration: 320s;
+        animation-timing-function: linear;
+        animation-direction: revert;
+        animation-play-state: running;
+        animation-iteration-count: infinite;
+    }
+
     /*region @space-head*/
         .app-userspace {
             --box-border-color:  rgba(115, 115, 115,  .12);
@@ -7783,7 +7799,6 @@
         .app-userspace .timeline::after{
             display: inline-block;
             position: absolute;
-            opacity: .8;
             width: 100%;
             left: 0;
             box-sizing: border-box;
@@ -7938,7 +7953,7 @@
             font-size: 15px;
             font-weight: 700;
             line-height: 26px;
-            color: var(--color-text-dark);
+            color: var(--color-text-gray);
             white-space: nowrap;
         }
         .app-userspace .timeline .n-right .s-top .title .link{
@@ -7963,9 +7978,9 @@
             background: var(--color-main-theme);
             color: #fff;
             border-radius: 5px;
-            margin: 3px 5px;
-            height: 20px;
-            line-height: 20px;
+            margin: 2px 5px;
+            height: 22px;
+            line-height: 22px;
         }
         .app-userspace .timeline .n-right .s-top .censor{
             display: inline-block;
@@ -8166,7 +8181,7 @@
             line-height: 34px;
             background: var(--color-vlightgray);
             border-bottom: 2px solid var(--color-lightgray);
-            color: var(--color-text-gray);
+            color: #000;
             word-break: break-all;
             white-space: nowrap;
         }
@@ -8265,7 +8280,7 @@
             width: 80%;
             overflow: hidden;
             cursor: pointer;
-            color: var(--color-text-dark);
+            color: #000;
             font-size: 22px;
             font-weight: 700;
             margin: 20px 20px 0 20px;
@@ -8294,7 +8309,7 @@
         }
         .app-userspace .timeline .share-element-blog .content {
             padding: 10px 30px 20px 30px;
-            color: var(--color-text-gray);
+            color: #000;
             word-break: break-word;
             line-height: 16px;
         }
@@ -8476,7 +8491,7 @@
             line-height: 34px;
             background: var(--color-vlightgray);
             border-bottom: 2px solid var(--color-lightgray);
-            color: var(--color-text-gray);
+            color: #000;
             word-break: break-all;
             white-space: nowrap;
         }
@@ -8493,9 +8508,9 @@
         }
 
         .app-userspace .timeline .feed-element-album{
-            line-height: 18px;
+            line-height: 16px;
             color: var(--color-text-lightgray);
-            text-align: center;
+            text-align: right;
             font-size: 12px;
         }
         .app-userspace .timeline .feed-element-album a{
@@ -8528,7 +8543,7 @@
             width: 80%;
             overflow: hidden;
             cursor: pointer;
-            color: var(--color-text-dark);
+            color: #000;
             font-size: 22px;
             font-weight: 700;
             margin: 20px 20px 0 20px;
@@ -8557,13 +8572,13 @@
         }
         .app-userspace .timeline .feed-element-blog .content {
             padding: 10px 30px 20px 30px;
-            color: var(--color-text-gray);
+            color: #000;
             word-break: break-word;
             line-height: 16px;
         }
 
         .app-userspace .timeline .feed-element-imageGrid{
-            margin-top: var(--box-edge);
+            margin-top: 5px;
             display: grid;
             grid-gap: 3px;
             border-radius: 6px;

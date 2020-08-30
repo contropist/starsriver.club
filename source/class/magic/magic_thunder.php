@@ -33,22 +33,21 @@ class magic_thunder {
 
 		$uid = $_G['uid'];
 		$_G['uid'] = 0;
-		$avatar = avatar($uid, 'middle',true);
+		
 		include_once libfile('function/feed');
         feed_add([
             'icon'           => 'thunder',
-            'title_template' => 'magicuse_thunder_announce_title',
+            'title_template' => 'magic_thunder',
             'title_data'     => [
                 'uid'      => $uid,
-                'username' => "<a href=\"home.php?mod=space&uid=$uid\">$_G[username]</a>",
+                'username' => $_G['username'],
             ],
-            'body_template'  => 'magicuse_thunder_announce_body',
+            'body_template'  => 'magic_thunder',
             'body_data'      => [
-                'uid'           => $uid,
-                'magic_thunder' => 1,
+                'uid'         => $uid,
+                'username'    => $_G['username'],
+                'user_avatar' => avatar($uid, 'middle', true),
             ],
-            'images'         => [$avatar],
-            'images_link'    => ["home.php?mod=space&uid=$uid"],
         ]);
 		
 		$_G['uid'] = $uid;

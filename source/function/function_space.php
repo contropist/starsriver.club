@@ -395,7 +395,7 @@ function getblockhtml($blockname,$parameters = []) {
 			$view = 'me';
 			$from = 'space';
 			if ($_G['setting']['allowviewuserthread'] !== -1) {
-				$fidsql = empty($_G['setting']['allowviewuserthread']) ? '' : " AND fid IN({$_G[setting][allowviewuserthread]}) ";
+				$fidsql = empty($_G['setting']['allowviewuserthread']) ? '' : " AND fid IN({$_G['setting']['allowviewuserthread']}) ";
 				$viewfids = str_replace("'", '', $_G['setting']['allowviewuserthread']);
 				if(!empty($viewfids)) {
 					$viewfids = explode(',', $viewfids);

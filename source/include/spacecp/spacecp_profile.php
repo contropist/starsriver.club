@@ -341,8 +341,9 @@ if (submitcheck('profilesubmit')) {
     require_once libfile('function/feed');
     feed_add([
         'icon'           => 'profile',
-        'title_template' => 'feed_profile_update_' . $operation,
+        'title_template' => 'profile',
         'title_data'     => ['hash_data' => 'profile'],
+        'body_general'   => lang('feed', 'feed_profile_update_' . $operation),
     ]);
     countprofileprogress();
     $message = $vid ? lang('spacecp', 'profile_verify_verifying', array('verify' => $verifyconfig['title'])) : '';
