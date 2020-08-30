@@ -7714,6 +7714,7 @@
 
     /*region @timeline*/
         .app-userspace .timeline{
+            --max-width: 720px;
             --line-tip-fontsize: 31px;
             --line-tip-lineheight: 72px;
 
@@ -7742,6 +7743,7 @@
 .WL-0   .app-userspace .timeline,
 .WL-3P  .app-userspace .timeline,
 .WL-4P  .app-userspace .timeline{
+            --max-width: 520px;
             --line-tip-fontsize: 20px;
             --line-tip-lineheight: 72px;
 
@@ -7773,7 +7775,7 @@
             display: flex;
             flex-flow: column wrap;
             width: 100%;
-            max-width: 720px;
+            max-width: var(--max-width);
             min-height: 120px;
         }
         .app-userspace .timeline::before,
@@ -8489,6 +8491,33 @@
             color: var(--color-text-gray);
             word-break: break-word;
             line-height: 16px;
+        }
+
+        .app-userspace .timeline .feed-element-album{
+            line-height: 18px;
+            color: var(--color-text-lightgray);
+            text-align: center;
+            font-size: 12px;
+        }
+        .app-userspace .timeline .feed-element-album a{
+            color: var(--color-main-theme-dark);
+            font-size: 12px;
+            font-weight: 700;
+            max-width: 40%;
+        }
+
+        .app-userspace .timeline .feed-element-imageGrid{
+            margin-top: var(--box-edge);
+            display: grid;
+            grid-gap: 3px;
+            border-radius: 6px;
+            overflow: hidden;
+        }
+        .app-userspace .timeline .feed-element-imageGrid .image{
+            overflow: hidden;
+            background: center;
+            background-size: cover;
+            border-radius: 3px;
         }
     /*endregion*/
 

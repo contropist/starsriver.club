@@ -36,7 +36,7 @@
                                 <!--{if $dv[status] == 1}--><i class="censor">{lang moderate_need}</i><!--{/if}-->
                             </div>
                             <!--{if $dv[uid]==$_G[uid]}-->
-                            <div class="tool r">
+                            <div class="tool">
                                 <b class="dots"><i class="dot"></i><i class="dot"></i><i class="dot"></i></b>
                                 <span class="tooltip lt" data-ignore='1'>
                                     <a href="home.php?mod=spacecp&ac=doing&op=delete&doid=$dv[doid]&id=$dv[id]&handlekey=doinghk_{$dv[doid]}_$dv[id]" id="{$key}_doing_delete_{$dv[doid]}_{$dv[id]}" onclick="showWindow(this.id, this.href, 'get', 0);">{lang delete}</a>

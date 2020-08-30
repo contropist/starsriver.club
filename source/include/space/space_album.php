@@ -35,7 +35,6 @@ if($id) {
 
 		ckfriend_album($album);
 
-
 		$album['picnum'] = $count = C::t('home_pic')->check_albumpic($id);
 
 		if(empty($count) && !$space['self']) {

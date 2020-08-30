@@ -76,8 +76,10 @@
         global $_G;
         
         if ($feed['icon'] == 'share') {
+            
             require_once libfile('function/share');
             $feed = mkshare($feed);
+            
         } else {
     
             $feed['title_data'] = unserialize($feed['title_data']);
@@ -111,7 +113,7 @@
                 $feed['body_template'] = feed_mktarget(str_replace($searchs, $replaces, $feed['body_template']));
             }
             
-            $feed['magic_class'] = !empty($feed['body_data']['magic_thunder']) ? 'magicthunder' : '';
+            $feed['magic_class'] = !empty($feed['body_data']['magic_thunder']) ? 'magic-thunder' : '';
             $feed['body_general'] = feed_mktarget($feed['body_general']);
         }
         
@@ -182,7 +184,6 @@
                             ],
                             'id'         => $value['blogid'],
                             'idtype'     => $idtype,
-                            'target_ids' => $value['target_ids'],
                             'uid'        => $value['uid'],
                             'username'   => $value['username'],
                             'friend'     => $value['friend'],
@@ -196,69 +197,93 @@
                     }
                 }
                 break;
-            
-            case 'picid':
-                $plussql = $id > 0 ? 'p.' . DB::field('picid', $id) : 'p.' . DB::field('uid', $_G['uid']) . ' ORDER BY dateline DESC LIMIT 1';
-                $query = C::t('home_pic')->fetch_all_by_sql($plussql);
-                if ($value = $query[0]) {
-                    if (empty($value['friend'])) {
-                        $status = $value['status'];
-                        $url = "home.php?mod=space&uid=$value[uid]&do=album&picid=$value[picid]";
-                        $setarr = [
-                            'icon'           => 'album',
-                            'dateline'       => time(),
-                            'hot'            => $value['hot'],
-                            'title_template' => 'pic',
-                            'body_template'  => 'pic',
-                            'body_data'      => [
-                                'title' => $value['title'],
-                            ],
-                            'id'             => $value['picid'],
-                            'idtype'         => $idtype,
-                            'target_ids'     => $value['target_ids'],
-                            'uid'            => $value['uid'],
-                            'username'       => $value['username'],
-                            'friend'         => $value['friend'],
-                            'image_1'        => pic_get($value['filepath'], 'album', $value['thumb'], $value['remote']),
-                            'image_1_link'   => $url,
-                        ];
-                    }
-                }
-                break;
-            
+                
             case 'albumid':
                 $key = 1;
                 if ($id > 0) {
-                    $query = C::t('home_pic')->fetch_all_by_sql('p.' . DB::field('albumid', $id), 'a.dateline DESC', 0, 4);
-                    foreach ($query as $value) {
-                        if ($value['friend'] <= 2) {
+                    $pics = C::t('home_pic')->fetch_all_by_albumid($id, 0, 9, 0, 0, 1);
+                    $album = C::t('home_album')->fetch($id);
+                    foreach ($pics as $pic) {
+                        if ($pic['friend'] <= 2) {
                             if (empty($setarr['icon'])) {
-                                $status = $value['status'];
+                                $status = $pic['status'];
+                                $userurl = 'home.php?mod=space&uid=' . $pic['uid'];
+                                $albumurl = $userurl . '&do=album&id=' . $id;
+    
                                 $setarr = [
                                     'icon'           => 'album',
                                     'dateline'       => time(),
                                     'title_template' => 'album',
                                     'body_template'  => 'album',
                                     'body_data'      => [
-                                        'album'  => "<a href=\"home.php?mod=space&uid=$value[uid]&do=album&id=$value[albumid]\">$value[albumname]</a>",
-                                        'picnum' => $value['picnum'],
+                                        'album'      => $album['albumname'],
+                                        'album_link' => $albumurl,
+                                        'picnum'     => $album['picnum'],
                                     ],
-                                    'id'             => $value['albumid'],
+                                    'id'             => $id,
                                     'idtype'         => $idtype,
-                                    'target_ids'     => $value['target_ids'],
-                                    'uid'            => $value['uid'],
-                                    'username'       => $value['username'],
-                                    'friend'         => $value['friend'],
+                                    'uid'            => $pic['uid'],
+                                    'username'       => $pic['username'],
+                                    'friend'         => $album['friend'],
                                 ];
                             }
-                            $setarr['image_' . $key] = pic_get($value['filepath'], 'album', $value['thumb'], $value['remote']);
-                            $setarr['image_' . $key . '_link'] = "home.php?mod=space&uid=$value[uid]&do=album&picid=$value[picid]";
                             
+                            $setarr['body_data']['imgs'][] = [
+                                'img' => pic_get($pic['filepath'], 'album', $pic['thumb'], $pic['remote']),
+                                'img_id' => $pic['picid'],
+                                'img_url' => 'home.php?mod=space&uid='.$pic['uid'].'&do=album&picid='.$pic['picid']
+                            ];
+                    
                             $key++;
-                            
+                    
                         } else {
                             break;
                         }
+                    }
+                    
+                    $setarr['body_data']['imgnum'] = !empty($setarr['body_data']['imgs']) ? sizeof($setarr['body_data']['imgs']) : 0;
+                }
+                break;
+                
+            case 'picid':
+                $plussql = $id > 0 ? 'p.' . DB::field('picid', $id) : 'p.' . DB::field('uid', $_G['uid']) . ' ORDER BY dateline DESC LIMIT 1';
+                $query = C::t('home_pic')->fetch_all_by_sql($plussql);
+                if ($value = $query[0]) {
+                    if (empty($value['friend'])) {
+                        $status = $value['status'];
+    
+                        $album = C::t('home_album')->fetch($value['albumid']);
+                        $userurl = 'home.php?mod=space&uid='.$value['uid'];
+                        $imgurl = $userurl . '&do=album&picid=' . $value['picid'];
+                        $albumurl = $userurl . '&do=album&id=' . $value['albumid'];
+                        
+                        $setarr = [
+                            'icon'           => 'album',
+                            'dateline'       => time(),
+                            'hot'            => $value['hot'],
+                            'title_template' => 'pic',
+                            'title_data'      => [
+                                'url'         => $imgurl,
+                                'image'       => $value['title'] ? $value['title'] : $value['filename'],
+                            ],
+                            'body_template'  => 'pic',
+                            'body_data'      => [
+                                'uid'         => $value['uid'],
+                                'username'    => $value['username'],
+                                'user_link'   => $userurl,
+                                'user_avatar' => avatar($value['uid'],'small',true),
+                                'image'       => $value['title'] ? $value['title'] : $value['filename'],
+                                'image_togo'  => $imgurl,
+                                'image_link'  => pic_get($value['filepath'], 'album', $value['thumb'], $value['remote']),
+                                'album'       => $album['albumname'],
+                                'album_link'  => $albumurl,
+                            ],
+                            'id'             => $value['picid'],
+                            'idtype'         => $idtype,
+                            'uid'            => $value['uid'],
+                            'username'       => $value['username'],
+                            'friend'         => $album['friend'],
+                        ];
                     }
                 }
                 break;

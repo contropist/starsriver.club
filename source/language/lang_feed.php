@@ -115,8 +115,18 @@
             </div>',
 
         'feed_template_album_title' => '更新了画廊',
-        'feed_template_album_body'  => '{album}共{picnum}张图片',
+        'feed_template_album_body'  => '
+            <div class="feed-element-album">画廊 <a class="ellipsis" href="{album_link}" target="_blank">{album}</a> 包含 {picnum} 张图片</div>',
         
-        'feed_template_pic_title'   => '上传了新图片',
-        'feed_template_pic_body'    => '{title}',
+        'feed_template_pic_title'   => '上传了新图片 <a class="{url}">{image}</a>',
+        'feed_template_pic_body'    => '
+            <div class="feed-element-image">
+                <a class="image" href="{image_togo}" target="_blank">
+                    <img src="{image_link}" />
+                </a>
+                <i class="ellipsis">图像：{image}</i>
+                <div class="album-pic-info">
+                    来源：<a class="username ellipsis" href="{user_link}" target="_blank" c="1"><img src="{user_avatar}">{username}</a> 的画廊 <a class="albumname ellipsis" href="{album_link}" target="_blank">{album}</a>
+                </div>
+            </div>',
     ];

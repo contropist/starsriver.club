@@ -300,4 +300,22 @@ a, button, .btn, select {
     width: 100%;
 }
 
+.rec-1-1,
+.rec-1-2,
+.rec-1-3,
+.rec-1-4,
+.rec-2-1,
+.rec-2-3,
+.rec-3-1,
+.rec-3-2,
+.rec-3-4,
+.rec-4-1,
+.rec-4-3,
+.rec-4-5,
+.rec-5-4,
+.rec-9-16,
+.rec-16-9 {
+    width: 100%;
+}
+
 /*endregion*/

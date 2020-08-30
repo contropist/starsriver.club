@@ -38,14 +38,14 @@
                                 <!--{/if}-->
                             </div>
                             <!--{if $_G['uid']}-->
-                            <div class="tool r">
-                                <b class="dots"><i class="dot"></i><i class="dot"></i><i class="dot"></i></b>
-                                <span class="tooltip lt" data-ignore='1'>
-                                    <a onclick="showWindow(this.id, 'home.php?mod=spacecp&ac=feed&op=menu&feedid=$feed[feedid]', 'get', 0);doane(event);">
-                                        <!--{if $_G['uid'] == $feed[uid]}-->{lang delete}<!--{else}-->{lang shield}<!--{/if}-->
-                                    </a>
-                                </span>
-                            </div>
+                                <div class="tool">
+                                    <b class="dots"><i class="dot"></i><i class="dot"></i><i class="dot"></i></b>
+                                    <span class="tooltip lt" data-ignore='1'>
+                                        <a onclick="showWindow(this.id, 'home.php?mod=spacecp&ac=feed&op=menu&feedid=$feed[feedid]', 'get', 0);doane(event);">
+                                            <!--{if $_G['uid'] == $feed[uid]}-->{lang delete}<!--{else}-->{lang shield}<!--{/if}-->
+                                        </a>
+                                    </span>
+                                </div>
                             <!--{/if}-->
                         </div>
                         <div class="s-center">
@@ -54,6 +54,18 @@
                             <!--{/if}-->
 
                             <!--{if $feed['body_template']}-->$feed[body_template]<!--{/if}-->
+
+                            <!--{if $feed['body_data']['imgs']}-->
+                                <div class="feed-element-imageGrid imageGrid grid-{$feed['body_data']['imgnum']}">
+                                    <!--{eval $counter = 1;}-->
+                                    <!--{loop $feed['body_data']['imgs'] $image_element}-->
+                                        <a class="image nth-of-{$counter}" href="{$image_element['img_url']}" style="background-image: url('$image_element['img']')">
+                                            <img class="rec-1-1" src="{LIBURL}/img/row-e-col/1.1.png"></i>
+                                        </a>
+                                        <!--{eval $counter += 1;}-->
+                                    <!--{/loop}-->
+                                </div>
+                            <!--{/if}-->
 
                             <div class="clear-objgap">
                                 <!--{if $feed['image_1']}--><a class="album-img" href="$feed[image_1_link]" {$feed[target]}><img src="$feed[image_1]"/></a><!--{/if}-->
