@@ -74,8 +74,46 @@
         'feed_profile_update_bbs'     => '更新了自己的论坛信息',
         'feed_profile_update_verify'  => '更新了自己的认证信息',
 
+        
+        /*
+        * feed-space-wall
+        *
+        * T {to_uid}      :用户ID
+        * T {to_uname}    :用户名
+        * T {to_ulink}    :用户空间链接
+        * T {to_uavatar}  :用户头像源链接
+        *
+        * */
         'feed_template_comment_space_title' => '在<a class="link" href="{to_ulink}" target="_blank" c="1">{to_uname}</a>的空间留言道',
+
+
+        /*
+        * feed-share
+        *
+        * T {to_uid}      :用户ID
+        * T {to_uname}    :用户名
+        * T {to_ulink}    :用户空间链接
+        * T {to_uavatar}  :用户头像源链接
+         *
+        * T {share_url}   :分享源链接
+        * T {share_act}   :分享名
+        *
+        * */
         'feed_template_comment_share_title' => '评论了<a class="link" href="{to_ulink}" target="_blank" c="1">{to_uname}</a>分享的<a class="link ellipsis" href="{share_url}" target="_blank">{share_act}</a>',
+
+
+        /*
+        * share-comment-image
+        *
+        * @ {to_uid}      :用户ID
+        * @ {to_uname}    :用户名
+        * @ {to_ulink}    :用户空间链接
+        * @ {to_uavatar}  :用户头像源链接
+         *
+        * B {image_togo}  :图像来源
+        * B {image_link}  :图像源链接
+        *
+        * */
         'feed_template_comment_image_title' => '评论了<a class="link" href="{to_ulink}" target="_blank" c="1">{to_uname}</a>的图片',
         'feed_template_comment_image_body' => '
             <div class="feed-element-evaluate-image">
@@ -87,7 +125,23 @@
                     <s class="username">{to_uname}</s>
                 </a>
             </div>',
-        
+
+
+        /*
+        * share-comment-blog
+        *
+        * @ {to_uid}      :用户ID
+        * @ {to_uname}    :用户名
+        * @ {to_ulink}    :用户空间链接
+        * @ {to_uavatar}  :用户头像源链接
+         *
+        * @ {blog_url}      :博客链接
+        * @ {blog_sub}      :博客标题
+         *
+        * B {blog_content}  :博客内容截取
+        * B {image}         :博客封面图
+        *
+        * */
         'feed_template_comment_blog_title'  => '评论了<a class="link" href="{to_ulink}" target="_blank" c="1">{to_uname}</a>的日志<a class="link ellipsis" href="{blog_url}" target="_blank">{blog_sub}</a>',
         'feed_template_comment_blog_body'  => '
             <div class="feed-element-evaluate-blog">
@@ -116,7 +170,17 @@
                     <div class="content">{blog_content}</div>
                 </div>
             </div>',
-        
+
+
+        /*
+        * feed-magic-thunder
+        *
+        * @ {uid}         :用户ID
+        * @ {username}    :用户名
+         *
+        * B {user_avatar}  :用户头像源链接
+        *
+        * */
         'feed_template_magic_thunder_title' => '<a class="link" href="home.php?mod=space&uid={uid}" style="margin-left: 0" target="_blank" c="1">{username}</a> 发出了“雷鸣之声”',
         'feed_template_magic_thunder_body'  => '
             <div class="feed-element-magic-thunder">
@@ -124,6 +188,22 @@
                 <i class="hello">初来乍到，请多多指教！我是 {username}</i>
             </div>',
 
+        
+        /*
+        * feed-blog
+        *
+        * B {uid}          :用户ID
+        * B {username}     :用户名
+        * B {user_link}    :用户空间链接
+        * B {user_avatar}  :用户头像源链接
+         *
+        * B {url}      :博客链接
+        * B {blogid}   :博客链接
+        * B {subject}  :博客标题
+        * B {content}  :博客内容截取
+        * B {image}    :博客封面图
+        *
+        * */
         'feed_template_blog_passwd_title' => '更新了加密日志 <i class="tag passwd mt-lock"></i>',
         'feed_template_blog_passwd_body'  => '
             <div class="feed-element-blog">
@@ -158,10 +238,39 @@
                 <div class="content">{content}</div>
             </div>',
 
+
+        /*
+        * feed-album
+        *
+        * B {album}      :画廊名称
+        * B {album_link} :画廊链接
+        * B {picnum}     :画廊图片总数
+        * B {imgs}       :画廊的图像节选 > Rended in template file
+        *
+        * */
         'feed_template_album_title' => '更新了画廊',
         'feed_template_album_body'  => '
             <div class="feed-element-album">画廊 <a class="link ellipsis" href="{album_link}" target="_blank">{album}</a> 包含 {picnum} 张图片</div>',
-        
+
+
+        /*
+        * feed-pic
+        *
+        * @ {image}        :图像名称
+         *
+        * T {url}          :图像来源链接
+         *
+        * B {uid}          :用户ID
+        * B {username}     :用户名
+        * B {user_link}    :用户空间链接
+        * B {user_avatar}  :用户头像链接
+         *
+        * B {album}        :画廊名称
+        * B {album_link}   :画廊链接
+        * B {image_togo}   :图像来源链接
+        * B {image_link}   :图像源链接
+        *
+        * */
         'feed_template_pic_title'   => '图片 <a class="link ellipsis" href="{url}" target="_blank">{image}</a> 受到关注',
         'feed_template_pic_body'    => '
             <div class="feed-element-image">
@@ -172,4 +281,5 @@
                     <img src="{image_link}" />
                 </a>
             </div>',
+        
     ];
