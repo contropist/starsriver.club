@@ -1685,9 +1685,6 @@ EOF;
 		$seccodetypearray = array(
 			array(0, cplang('setting_sec_seccode_type_image'), array('seccodeimageext' => '', 'seccodeimagewh' => '')),
 			array(1, cplang('setting_sec_seccode_type_chnfont'), array('seccodeimageext' => '', 'seccodeimagewh' => '')),
-			array(2, cplang('setting_sec_seccode_type_flash'), array('seccodeimageext' => 'none', 'seccodeimagewh' => '')),
-			array(3, cplang('setting_sec_seccode_type_wav'), array('seccodeimageext' => 'none', 'seccodeimagewh' => 'none')),
-			array(99, cplang('setting_sec_seccode_type_bitmap'), array('seccodeimageext' => 'none', 'seccodeimagewh' => 'none')),
 		);
 
 		$seccodetypearray = array_merge($seccodetypearray, getseccodes($seccodesettings));
@@ -3658,9 +3655,16 @@ function getseccodes() {
 					$script = substr($codeclass, 8);
 					$script = ($key ? $key.':' : '').$script;
 					if(!is_numeric($script)) {
-						$seccodetypearray[] = array($script, lang('seccode/'.$script, $code->name), array('seccodeimageext' => 'none', 'seccodeimagewh' => 'none'));
-					}
-				}
+                        $seccodetypearray[] = [
+                            $script,
+                            lang('seccode/' . $script, $code->name),
+                            [
+                                'seccodeimageext' => 'none',
+                                'seccodeimagewh'  => 'none',
+                            ],
+                        ];
+                    }
+                }
 			}
 		}
 	}

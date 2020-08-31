@@ -46,7 +46,7 @@ class magic_thunder {
             'body_data'      => [
                 'uid'         => $uid,
                 'username'    => $_G['username'],
-                'user_avatar' => avatar($uid, 'small', true),
+                'user_avatar' => avatar($uid, '', true),
             ],
             'uid' => $uid,
             'username' => $_G['username'],

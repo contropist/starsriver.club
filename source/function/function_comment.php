@@ -15,23 +15,26 @@ function add_comment($message, $id, $idtype, $cid = 0) {
 	global $_G, $bbcode;
 
 	$allowcomment = false;
+	
 	switch($idtype) {
 		case 'uid':
 			$allowcomment = helper_access::check_module('wall');
 			break;
+        case 'sid':
+            $allowcomment = helper_access::check_module('share');
+            break;
 		case 'picid':
 			$allowcomment = helper_access::check_module('album');
 			break;
 		case 'blogid':
 			$allowcomment = helper_access::check_module('blog');
 			break;
-		case 'sid':
-			$allowcomment = helper_access::check_module('share');
-			break;
 	}
+	
 	if(!$allowcomment) {
 		showmessage('quickclear_noperm');
 	}
+	
 	$summay = getstr($message, 150, 0, 0, 0, -1);
 	
 	$comment = [];
@@ -48,154 +51,199 @@ function add_comment($message, $id, $idtype, $cid = 0) {
 			$comment = [];
 		}
 	}
-
-	$hotarr = [];
+	
 	$stattype = '';
-	$tospace = $pic = $blog = $album = $share = $poll = [];
+    $hotarr = $tospace = $pic = $blog = $album = $share = $poll = [];
+    
+    switch ($idtype) {
+        case 'uid':
+            $tospace = getuserbyuid($id);
+            $stattype = 'wall';
+            break;
+    
+        case 'sid':
+            $share = C::t('home_share')->fetch($id);
+            if (empty($share)) {
+                showmessage('sharing_does_not_exist');
+            }
+        
+            $tospace = getuserbyuid($share['uid']);
+        
+            $hotarr = [
+                'sid',
+                $share['sid'],
+                $share['hotuser'],
+            ];
+            $stattype = 'sharecomment';
+            break;
+            
+        case 'picid':
+            $pic = C::t('home_pic')->fetch($id);
+            if (empty($pic)) {
+                showmessage('view_images_do_not_exist');
+            }
+            $picfield = C::t('home_picfield')->fetch($id);
+            $pic['hotuser'] = $picfield['hotuser'];
+            $tospace = getuserbyuid($pic['uid']);
+            $album = [];
+            if ($pic['albumid']) {
+                $query = C::t('home_album')->fetch($pic['albumid']);
+                if (!$query['albumid']) {
+                    C::t('home_pic')->update_for_albumid($albumid, ['albumid' => 0]);
+                }
+            }
+            if (!ckfriend($album['uid'], $album['friend'], $album['target_ids'])) {
+                showmessage('no_privilege_ckfriend_pic');
+            } elseif (!$tospace['self'] && $album['friend'] == 4) {
+                $cookiename = "view_pwd_album_$album[albumid]";
+                $cookievalue = empty($_G['cookie'][$cookiename]) ? '' : $_G['cookie'][$cookiename];
+                if ($cookievalue != md5(md5($album['password']))) {
+                    showmessage('no_privilege_ckpassword_pic');
+                }
+            }
+            $hotarr = [
+                'picid',
+                $pic['picid'],
+                $pic['hotuser'],
+            ];
+            $stattype = 'piccomment';
+            break;
+        
+        case 'blogid':
+            $blog = array_merge(
+                C::t('home_blog')->fetch($id),
+                C::t('home_blogfield')->fetch($id)
+            );
+            if (empty($blog)) {
+                showmessage('view_to_info_did_not_exist');
+            }
+            
+            $tospace = getuserbyuid($blog['uid']);
+            
+            if (!ckfriend($blog['uid'], $blog['friend'], $blog['target_ids'])) {
+                showmessage('no_privilege_ckfriend_blog');
+            } elseif (!$tospace['self'] && $blog['friend'] == 4) {
+                $cookiename = "view_pwd_blog_$blog[blogid]";
+                $cookievalue = empty($_G['cookie'][$cookiename]) ? '' : $_G['cookie'][$cookiename];
+                if ($cookievalue != md5(md5($blog['password']))) {
+                    showmessage('no_privilege_ckpassword_blog');
+                }
+            }
+            
+            if (!empty($blog['noreply'])) {
+                showmessage('do_not_accept_comments');
+            }
+            if ($blog['target_ids']) {
+                $blog['target_ids'] .= ",$blog[uid]";
+            }
+            
+            $hotarr = [
+                'blogid',
+                $blog['blogid'],
+                $blog['hotuser'],
+            ];
+            $stattype = 'blogcomment';
+            break;
 
-	switch($idtype) {
-		case 'uid':
-			$tospace = getuserbyuid($id);
-			$stattype = 'wall';
-			break;
-		case 'picid':
-			$pic = C::t('home_pic')->fetch($id);
-			if(empty($pic)) {
-				showmessage('view_images_do_not_exist');
-			}
-			$picfield = C::t('home_picfield')->fetch($id);
-			$pic['hotuser'] = $picfield['hotuser'];
-			$tospace = getuserbyuid($pic['uid']);
-
-			$album = [];
-			if($pic['albumid']) {
-				$query = C::t('home_album')->fetch($pic['albumid']);
-				if(!$query['albumid']) {
-					C::t('home_pic')->update_for_albumid($albumid, array('albumid' => 0));
-				}
-			}
-
-			if(!ckfriend($album['uid'], $album['friend'], $album['target_ids'])) {
-				showmessage('no_privilege_ckfriend_pic');
-			} elseif(!$tospace['self'] && $album['friend'] == 4) {
-				$cookiename = "view_pwd_album_$album[albumid]";
-				$cookievalue = empty($_G['cookie'][$cookiename])?'':$_G['cookie'][$cookiename];
-				if($cookievalue != md5(md5($album['password']))) {
-					showmessage('no_privilege_ckpassword_pic');
-				}
-			}
-
-			$hotarr = array('picid', $pic['picid'], $pic['hotuser']);
-			$stattype = 'piccomment';
-			break;
-		case 'blogid':
-			$blog = array_merge(
-				C::t('home_blog')->fetch($id),
-				C::t('home_blogfield')->fetch_targetids_by_blogid($id)
-			);
-			if(empty($blog)) {
-				showmessage('view_to_info_did_not_exist');
-			}
-
-			$tospace = getuserbyuid($blog['uid']);
-
-			if(!ckfriend($blog['uid'], $blog['friend'], $blog['target_ids'])) {
-				showmessage('no_privilege_ckfriend_blog');
-			} elseif(!$tospace['self'] && $blog['friend'] == 4) {
-				$cookiename = "view_pwd_blog_$blog[blogid]";
-				$cookievalue = empty($_G['cookie'][$cookiename])?'':$_G['cookie'][$cookiename];
-				if($cookievalue != md5(md5($blog['password']))) {
-					showmessage('no_privilege_ckpassword_blog');
-				}
-			}
-
-			if(!empty($blog['noreply'])) {
-				showmessage('do_not_accept_comments');
-			}
-			if($blog['target_ids']) {
-				$blog['target_ids'] .= ",$blog[uid]";
-			}
-
-			$hotarr = array('blogid', $blog['blogid'], $blog['hotuser']);
-			$stattype = 'blogcomment';
-			break;
-		case 'sid':
-			$share = C::t('home_share')->fetch($id);
-			if(empty($share)) {
-				showmessage('sharing_does_not_exist');
-			}
-
-			$tospace = getuserbyuid($share['uid']);
-
-			$hotarr = array('sid', $share['sid'], $share['hotuser']);
-			$stattype = 'sharecomment';
-			break;
-		default:
-			showmessage('non_normal_operation');
-			break;
-	}
-	if(empty($tospace)) {
-		showmessage('space_does_not_exist', '', [], array('return' => true));
-	}
-
-	if(isblacklist($tospace['uid'])) {
-		showmessage('is_blacklist');
-	}
-
-	if($hotarr && $tospace['uid'] != $_G['uid']) {
-		hot_update($hotarr[0], $hotarr[1], $hotarr[2]);
-	}
+        default:
+            showmessage('non_normal_operation');
+            break;
+    }
+    if (empty($tospace)) {
+        showmessage('space_does_not_exist', '', [], ['return' => true]);
+    }
+    
+    if (isblacklist($tospace['uid'])) {
+        showmessage('is_blacklist');
+    }
+    
+    if ($hotarr && $tospace['uid'] != $_G['uid']) {
+        hot_update($hotarr[0], $hotarr[1], $hotarr[2]);
+    }
     
     $fs = [
         'icon'          => 'comment',
-        'target_ids'    => '',
-        'friend'        => '',
-        'body_template' => '',
-        'body_data'     => [],
-        'body_general'  => '',
-        'images'        => [],
-        'image_links'   => [],
-    
+        'body_general'  => $summay,
     ];
     
     switch ($idtype) {
         case 'uid':
             $fs['icon'] = 'wall';
-            $fs['title_template'] = 'feed_comment_space';
+            $fs['title_template'] = 'comment_space';
             $fs['title_data'] = [
-                'touser' => '<a href="home.php?mod=space&uid='.$tospace['uid'].'">'.$tospace['username'].'</a>'
+                'to_uid'     => $tospace['uid'],
+                'to_uname'   => $tospace['username'],
+                'to_ulink'   => 'home.php?mod=space&uid=' . $tospace['uid'],
+                'to_uavatar' => avatar($tospace['uid'], 'small', true),
             ];
             break;
-        case 'picid':
-            $fs['title_template'] = 'feed_comment_image';
+    
+        case 'sid':
+            $fs['title_template'] = 'comment_share';
             $fs['title_data'] = [
-                'touser' => '<a href="home.php?mod=space&uid='.$tospace['uid'].'">'.$tospace['username'].'</a>'
+                'to_uid' => $tospace['uid'],
+                'to_uname' => $tospace['username'],
+                'to_ulink' => 'home.php?mod=space&uid='.$tospace['uid'],
+                'to_uavatar' => avatar($tospace['uid'],'small',true),
+                'share_url'  => 'home.php?mod=space&uid='.$tospace['uid'].'&do=share&id='.$id,
+                'share_act'  => str_replace(lang('spacecp', 'share_action'), '', lang('share','share_title_template_'.$share['type'])),
             ];
-            $fs['body_template'] = '{pic_title}';
-            $fs['body_data'] = ['pic_title' => $pic['title']];
-            $fs['body_general'] = $summay;
-            $fs['images'] = [pic_get($pic['filepath'], 'album', $pic['thumb'], $pic['remote'])];
-            $fs['image_links'] = ["home.php?mod=space&uid=$tospace[uid]&do=album&picid=$pic[picid]"];
+            break;
+            
+        case 'picid':
+            $fs['title_template'] = 'comment_image';
+            $fs['title_data'] = [
+                'to_uid'     => $tospace['uid'],
+                'to_uname'   => $tospace['username'],
+                'to_ulink'   => 'home.php?mod=space&uid=' . $tospace['uid'],
+                'to_uavatar' => avatar($tospace['uid'], 'small', true),
+            ];
+            $fs['body_template'] = 'comment_image';
+            $fs['body_data'] = [
+                'to_uid'     => $tospace['uid'],
+                'to_uname'   => $tospace['username'],
+                'to_ulink'   => 'home.php?mod=space&uid=' . $tospace['uid'],
+                'to_uavatar' => avatar($tospace['uid'], 'small', true),
+        
+                'image_link' => pic_get($pic['filepath'], 'album', $pic['thumb'], $pic['remote']),
+                'image_togo' => 'home.php?mod=space&uid=' . $tospace['uid'] . '&do=album&picid=' . $pic['picid'],
+            ];
             $fs['target_ids'] = $album['target_ids'];
             $fs['friend'] = $album['friend'];
             break;
+    
         case 'blogid':
             C::t('home_blog')->increase($id, 0, ['replynum' => 1]);
-            $fs['title_template'] = 'feed_comment_blog';
+            $fs['title_template'] = 'comment_blog';
             $fs['title_data'] = [
-                'touser' => '<a href="home.php?mod=space&uid='.$tospace['uid'].'">'.$tospace['username'].'</a>',
-                'blog'   => '<a href="home.php?mod=space&uid='.$tospace['uid'].'&do=blog&id='.$id.'">'.$blog['subject'].'</a>',
+                'to_uid'     => $tospace['uid'],
+                'to_uname'   => $tospace['username'],
+                'to_ulink'   => 'home.php?mod=space&uid=' . $tospace['uid'],
+                'to_uavatar' => avatar($tospace['uid'], 'small', true),
+                'blog_url'   => 'home.php?mod=space&uid=' . $tospace['uid'] . '&do=blog&id=' . $id,
+                'blog_sub'   => $blog['subject'],
             ];
+            $fs['body_template'] = 'comment_blog';
+            $fs['body_data'] = [
+                'to_uid'       => $tospace['uid'],
+                'to_uname'     => $tospace['username'],
+                'to_ulink'     => 'home.php?mod=space&uid=' . $tospace['uid'],
+                'to_uavatar'   => avatar($tospace['uid'], 'small', true),
+                'blog_url'     => 'home.php?mod=space&uid=' . $tospace['uid'] . '&do=blog&id=' . $id,
+                'blog_sub'     => $blog['subject'],
+                'blog_content' => getstr($blog['message'], 39, 0, 0, 0, -1),
+            ];
+    
+            if(!empty($blog['pic'])){
+                $fs['body_data']['retemplate'] = 'comment_blog_withimg';
+                $fs['body_data']['image'] = pic_cover_get($blog['pic'], $blog['picflag']);
+            }
+            
             $fs['target_ids'] = $blog['target_ids'];
             $fs['friend'] = $blog['friend'];
+            
             break;
-        case 'sid':
-            $fs['title_template'] = 'feed_comment_share';
-            $fs['title_data'] = [
-                'touser' => '<a href="home.php?mod=space&uid='.$tospace['uid'].'">'.$tospace['username'].'</a>',
-                'share'  => '<a href="home.php?mod=space&uid='.$tospace['uid'].'&do=share&id='.$id.'">'.str_replace(lang('spacecp', 'share_action'), '', $share['title_template']) .'</a>',
-            ];
-            break;
+
     }
     
     $message = censor($message);

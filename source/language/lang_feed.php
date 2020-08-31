@@ -14,12 +14,8 @@
     $lang = [
         'feed_attach'                 => '内容附件',
         'feed_poll'                   => '发起了新投票',
-        'feed_comment_space'          => '在 {touser} 的留言板留了言',
-        'feed_comment_image'          => '评论了 {touser} 的图片',
-        'feed_comment_blog'           => '评论了 {touser} 的日志 {blog}',
         'feed_comment_poll'           => '评论了 {touser} 的投票 {poll}',
         'feed_comment_event'          => '在 {touser} 组织的活动 {event} 中留言了',
-        'feed_comment_share'          => '对 {touser} 分享的 {share} 发表了评论',
         'feed_showcredit'             => '给 {fusername} 充电 {credit}，帮助好友提升在<a href="misc.php?mod=ranklist&type=member" target="_blank">续航剩余榜</a>中的名次',
         'feed_showcredit_self'        => '充电 {credit}，提升自己在<a href="misc.php?mod=ranklist&type=member" target="_blank">续航剩余榜</a>中的名次',
         'feed_friend_title'           => '和 {touser} 成为了好友',
@@ -68,7 +64,7 @@
         'feed_template_default_title' => '动态更新',
         'feed_template_default_body'  => '',
         'feed_template_doing_title' => '更新了记录',
-
+        
         'feed_template_profile_title' => '更新了个人资料',
         'feed_profile_update_base'    => '更新了自己的基本资料',
         'feed_profile_update_contact' => '更新了自己的联系方式',
@@ -78,6 +74,49 @@
         'feed_profile_update_bbs'     => '更新了自己的论坛信息',
         'feed_profile_update_verify'  => '更新了自己的认证信息',
 
+        'feed_template_comment_space_title' => '在<a class="link" href="{to_ulink}" target="_blank" c="1">{to_uname}</a>的空间留言道',
+        'feed_template_comment_share_title' => '评论了<a class="link" href="{to_ulink}" target="_blank" c="1">{to_uname}</a>分享的<a class="link ellipsis" href="{share_url}" target="_blank">{share_act}</a>',
+        'feed_template_comment_image_title' => '评论了<a class="link" href="{to_ulink}" target="_blank" c="1">{to_uname}</a>的图片',
+        'feed_template_comment_image_body' => '
+            <div class="feed-element-evaluate-image">
+                <a class="image" href="{image_togo}" target="_blank">
+                    <img src="{image_link}" />
+                </a>
+                <a class="user-tag" href="{to_ulink}" target="_blank">
+                    <s class="avatar"><img class="avatar-main" src="{to_uavatar}"></s>
+                    <s class="username">{to_uname}</s>
+                </a>
+            </div>',
+        
+        'feed_template_comment_blog_title'  => '评论了<a class="link" href="{to_ulink}" target="_blank" c="1">{to_uname}</a>的日志<a class="link ellipsis" href="{blog_url}" target="_blank">{blog_sub}</a>',
+        'feed_template_comment_blog_body'  => '
+            <div class="feed-element-evaluate-blog">
+                <div class="detail">
+                    <a class="subject ellipsis" href="{blog_url}" target="_blank">{blog_sub}</a>
+                    <a class="user-tag ellipsis" href="{to_ulink}" target="_blank">
+                        <s class="avatar"><img class="avatar-main" src="{to_uavatar}"></s>
+                        <s class="username">{to_uname}</s>
+                    </a>
+                    <div class="content">{blog_content}</div>
+                </div>
+            </div>',
+        
+        'feed_template_comment_blog_withimg_title'  => '评论了<a class="link" href="{to_ulink}" target="_blank" c="1">{to_uname}</a>的日志<a class="link ellipsis" href="{blog_url}" target="_blank">{blog_sub}</a>',
+        'feed_template_comment_blog_withimg_body'  => '
+            <div class="feed-element-evaluate-blog withimg">
+                <div class="image rec-img" style="background-image: url(\'{image}\')">
+                    <img src="'.LIBURL.'/img/row-e-col/1.1.png">
+                </div>
+                <div class="detail">
+                    <a class="subject ellipsis" href="{blog_url}" target="_blank">{blog_sub}</a>
+                    <a class="user-tag ellipsis" href="{to_ulink}" target="_blank">
+                        <s class="avatar"><img class="avatar-main" src="{to_uavatar}"></s>
+                        <s class="username">{to_uname}</s>
+                    </a>
+                    <div class="content">{blog_content}</div>
+                </div>
+            </div>',
+        
         'feed_template_magic_thunder_title' => '<a class="link" href="home.php?mod=space&uid={uid}" style="margin-left: 0" target="_blank" c="1">{username}</a> 发出了“雷鸣之声”',
         'feed_template_magic_thunder_body'  => '
             <div class="feed-element-magic-thunder">
@@ -123,7 +162,7 @@
         'feed_template_album_body'  => '
             <div class="feed-element-album">画廊 <a class="link ellipsis" href="{album_link}" target="_blank">{album}</a> 包含 {picnum} 张图片</div>',
         
-        'feed_template_pic_title'   => '更新了图片 <a class="link ellipsis" href="{url}" target="_blank">{image}</a>',
+        'feed_template_pic_title'   => '图片 <a class="link ellipsis" href="{url}" target="_blank">{image}</a> 受到关注',
         'feed_template_pic_body'    => '
             <div class="feed-element-image">
                 <div class="album-pic-info">

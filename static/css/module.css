@@ -6717,6 +6717,9 @@
             max-width: 100%;
             margin-top: 10px;
         }
+        .app-dynamic .actstruct [class^="share-element"] *{
+            box-sizing: border-box;
+        }
         .app-dynamic .share-element-link {
             padding: 8px;
             line-height: 20px;
@@ -6835,7 +6838,6 @@
             width: 80%;
             padding-left:10px;
             line-height: 25px;
-            box-sizing: border-box;
         }
         .app-dynamic .share-element-album .album-name {
             display: block;
@@ -6900,7 +6902,6 @@
             font-size: 22px;
             font-weight: 700;
             margin: 20px 20px 0 20px;
-            box-sizing: border-box;
             white-space: nowrap;
         }
         .app-dynamic .share-element-blog .subject .tag {
@@ -7061,7 +7062,6 @@
         .app-dynamic .share-element-space .info {
             z-index: 1;
             position: relative;
-            box-sizing: border-box;
             padding: 0 0 0 15px;
             width: calc(100% - var(--avatar-size));
             left: 0;
@@ -7087,186 +7087,190 @@
         }
     /*endregion*/
 
-    .app-dynamic .post-new-blog {
-        text-align: center;
-        display: block;
-        line-height: 64px;
-        font-size: 22px;
-        color: #999;
-    }
-    .app-dynamic .post-new-blog:hover {
-        color: var(--color-main-theme);
-    }
-    .app-dynamic .post-new-blog::before {
-        text-align: left;
-        display: inline-block;
-        width: 26px;
-        vertical-align: -3%;
-    }
-    .app-dynamic [data-foldbtn] {
-        display: block;
-        margin: 0 auto;
-    }
-    .app-dynamic .blog-classes .class {
-        font-size: 14px;
-        display: inline-block;
-        box-sizing: border-box;
-        width: 100%;
-        line-height: 24px;
-        padding: 10px 14px;
-        border-bottom: 1px solid #e6e6e6;
-    }
-    .app-dynamic .blog-classes .class:last-child {
-        border-bottom: none
-    }
-    .app-dynamic .blog-classes .class > a::before {
-        font-size: 18px;
-        vertical-align: -13%;
-        margin-right: 7px;
-        color: #999;
-    }
+    /*region dynamic::blog*/
+        .app-dynamic .post-new-blog {
+            text-align: center;
+            display: block;
+            line-height: 64px;
+            font-size: 22px;
+            color: #999;
+        }
+        .app-dynamic .post-new-blog:hover {
+            color: var(--color-main-theme);
+        }
+        .app-dynamic .post-new-blog::before {
+            text-align: left;
+            display: inline-block;
+            width: 26px;
+            vertical-align: -3%;
+        }
+        .app-dynamic [data-foldbtn] {
+            display: block;
+            margin: 0 auto;
+        }
+        .app-dynamic .blog-classes .class {
+            font-size: 14px;
+            display: inline-block;
+            box-sizing: border-box;
+            width: 100%;
+            line-height: 24px;
+            padding: 10px 14px;
+            border-bottom: 1px solid #e6e6e6;
+        }
+        .app-dynamic .blog-classes .class:last-child {
+            border-bottom: none
+        }
+        .app-dynamic .blog-classes .class > a::before {
+            font-size: 18px;
+            vertical-align: -13%;
+            margin-right: 7px;
+            color: #999;
+        }
+    /*endregion*/
 
-    .app-dynamic .album-list {
-        font-size: 0;
-        display: block;
-    }
-    .app-dynamic .album-list li {width: calc(100% / 3 - 10px) !important;}
-    .app-dynamic .album-list li:nth-of-type(3n - 2) { margin: 0 10px 15px 0 !important;}
-    .app-dynamic .album-list li:nth-of-type(3n - 1) { margin: 0 5px 15px 5px !important;}
-    .app-dynamic .album-list li:nth-of-type(3n) { margin: 0 0 15px 10px !important;}
-    .app-dynamic .album-list li .album-info{
-        position: relative;
-        display: block;
-        width: 100%;
-        border-radius: 0;
-        border-top-left-radius: inherit;
-        border-top-right-radius: inherit;
-        overflow: hidden;
-        font-size: 0;
-        background: #fafbfc;
-        background-image: url("{IMGURL}/common/background/album-button-back.svg");
-        background-size: 48px;
-    }
-    .app-dynamic .album-list li .album-info .album-cover{
-        position: relative;
-        display: inline-block;
-        background: #fff;
-        height: 120px;
-        width: 120px;
-        line-height: 120px;
-        text-align: center;
-        border-right: 1px solid #e0e0e0;
-        box-sizing: border-box;
-    }
-    .app-dynamic .album-list li .album-info .album-cover::before{
-        display: block;
-        font-size: 58px;
-        color: #a5b0b5;
-    }
-    .app-dynamic .album-list li .album-info .album-cover img{
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height:100%;
-        border-radius: 0;
-    }
-    .app-dynamic .album-list li .album-info .album-name{
-        font-family: Jokerman !important;
-        position: absolute;
-        bottom: 0;
-        right: 0;
-        margin: 0 10px;
-        overflow: hidden;
-        display: inline-block;
-        width: calc(100% - 140px);
-        line-height: 42px;
-        text-align: center;
-        font-size: 18px;
-        color: #a5b0b5;
-        font-weight: 600;
-        text-overflow: ellipsis;
-    }
-    .app-dynamic .album-list li .album-info .album-num{
-        font-family: Jokerman !important;
-        position: relative;
-        display: inline-block;
-        width: calc(100% - 120px);
-        line-height: 82px;
-        text-align: center;
-        font-size: 45px;
-        color: #a5b0b5;
-    }
-    .app-dynamic .album-list li .album-info .album-num.bignum{
-        font-size: 32px;
-    }
-    .app-dynamic .album-list li .user-info{
-        line-height: 30px;
-        display: block;
-        box-sizing: border-box;
-        width: 100%;
-        padding: 6px 10px;
-        border-top: 1px solid #d8e5ef;
-    }
-    .app-dynamic .album-list li .user-info .tool{
-        margin-top: 3px;
-    }
-    .app-dynamic .album-list li .user-info .avatar, .app-dynamic .img-list .picitem .pic-info .avatar{
-        position: relative;
-        display: inline-block;
-        height: 30px;
-        width: 30px;
-    }
-    .app-dynamic .album-list li .user-info .username, .app-dynamic .img-list .picitem .pic-info .username{
-        font-size: 13px;
-        color: #738190;
-    }
-    .app-dynamic .img-list .picitem {
-        margin-bottom: 10px;
-    }
-    .app-dynamic .img-list .picitem .image{
-        overflow: hidden;
-        border-radius: 0;
-        width: 100%;
-        border-top-left-radius: inherit;
-        border-top-right-radius: inherit;
-    }
-    .app-dynamic .img-list .picitem .image img{
-        width: 100%;
-        border-radius: 0;
-    }
-    .app-dynamic .img-list .picitem .pic-info{
-        border-top: 1px solid #d8e5ef;
-        width: 100%;
-        line-height: 30px;
-        box-sizing: border-box;
-        padding: 6px 10px;
-    }
-    .app-dynamic .img-list .picitem .pic-info .albumname{
-        color: #ff6b9c;
-        border: 1px solid;
-        padding: 0 10px;
-        border-radius: 20px;
-        line-height: 24px;
-        margin: 2px 0;
-    }
-    .app-dynamic .album-img {
-        width: 179px;
-        height: 179px;
-        overflow: hidden;
-        position: relative;
-        display: inline-block;
-        margin: 2px;
-        border-radius: 6px;
-    }
-    .app-dynamic .album-img img {
-        min-width: 100%;
-        min-height: 100%;
-        top: 50%;
-        left: 50%;
-        position: absolute;
-        transform: translate3d(-50%, -50%, 0);
-    }
+    /*region #dynamic::album*/
+        .app-dynamic .album-list {
+            font-size: 0;
+            display: block;
+        }
+        .app-dynamic .album-list li {width: calc(100% / 3 - 10px) !important;}
+        .app-dynamic .album-list li:nth-of-type(3n - 2) { margin: 0 10px 15px 0 !important;}
+        .app-dynamic .album-list li:nth-of-type(3n - 1) { margin: 0 5px 15px 5px !important;}
+        .app-dynamic .album-list li:nth-of-type(3n) { margin: 0 0 15px 10px !important;}
+        .app-dynamic .album-list li .album-info{
+            position: relative;
+            display: block;
+            width: 100%;
+            border-radius: 0;
+            border-top-left-radius: inherit;
+            border-top-right-radius: inherit;
+            overflow: hidden;
+            font-size: 0;
+            background: #fafbfc;
+            background-image: url("{IMGURL}/common/background/album-button-back.svg");
+            background-size: 48px;
+        }
+        .app-dynamic .album-list li .album-info .album-cover{
+            position: relative;
+            display: inline-block;
+            background: #fff;
+            height: 120px;
+            width: 120px;
+            line-height: 120px;
+            text-align: center;
+            border-right: 1px solid #e0e0e0;
+            box-sizing: border-box;
+        }
+        .app-dynamic .album-list li .album-info .album-cover::before{
+            display: block;
+            font-size: 58px;
+            color: #a5b0b5;
+        }
+        .app-dynamic .album-list li .album-info .album-cover img{
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height:100%;
+            border-radius: 0;
+        }
+        .app-dynamic .album-list li .album-info .album-name{
+            font-family: Jokerman !important;
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            margin: 0 10px;
+            overflow: hidden;
+            display: inline-block;
+            width: calc(100% - 140px);
+            line-height: 42px;
+            text-align: center;
+            font-size: 18px;
+            color: #a5b0b5;
+            font-weight: 600;
+            text-overflow: ellipsis;
+        }
+        .app-dynamic .album-list li .album-info .album-num{
+            font-family: Jokerman !important;
+            position: relative;
+            display: inline-block;
+            width: calc(100% - 120px);
+            line-height: 82px;
+            text-align: center;
+            font-size: 45px;
+            color: #a5b0b5;
+        }
+        .app-dynamic .album-list li .album-info .album-num.bignum{
+            font-size: 32px;
+        }
+        .app-dynamic .album-list li .user-info{
+            line-height: 30px;
+            display: block;
+            box-sizing: border-box;
+            width: 100%;
+            padding: 6px 10px;
+            border-top: 1px solid #d8e5ef;
+        }
+        .app-dynamic .album-list li .user-info .tool{
+            margin-top: 3px;
+        }
+        .app-dynamic .album-list li .user-info .avatar, .app-dynamic .img-list .picitem .pic-info .avatar{
+            position: relative;
+            display: inline-block;
+            height: 30px;
+            width: 30px;
+        }
+        .app-dynamic .album-list li .user-info .username, .app-dynamic .img-list .picitem .pic-info .username{
+            font-size: 13px;
+            color: #738190;
+        }
+        .app-dynamic .img-list .picitem {
+            margin-bottom: 10px;
+        }
+        .app-dynamic .img-list .picitem .image{
+            overflow: hidden;
+            border-radius: 0;
+            width: 100%;
+            border-top-left-radius: inherit;
+            border-top-right-radius: inherit;
+        }
+        .app-dynamic .img-list .picitem .image img{
+            width: 100%;
+            border-radius: 0;
+        }
+        .app-dynamic .img-list .picitem .pic-info{
+            border-top: 1px solid #d8e5ef;
+            width: 100%;
+            line-height: 30px;
+            box-sizing: border-box;
+            padding: 6px 10px;
+        }
+        .app-dynamic .img-list .picitem .pic-info .albumname{
+            color: #ff6b9c;
+            border: 1px solid;
+            padding: 0 10px;
+            border-radius: 20px;
+            line-height: 24px;
+            margin: 2px 0;
+        }
+        .app-dynamic .album-img {
+            width: 179px;
+            height: 179px;
+            overflow: hidden;
+            position: relative;
+            display: inline-block;
+            margin: 2px;
+            border-radius: 6px;
+        }
+        .app-dynamic .album-img img {
+            min-width: 100%;
+            min-height: 100%;
+            top: 50%;
+            left: 50%;
+            position: absolute;
+            transform: translate3d(-50%, -50%, 0);
+        }
+    /*endregion*/
 
     @media screen and (max-width:1240px) {
         .app-dynamic .album-list li{width: calc(100% / 2 - 8px) !important;}
@@ -7959,10 +7963,11 @@
         }
         .app-userspace .timeline .n-right .s-top .title .icon{
             margin: 2px 10px 2px 0;
+            min-width: 28px;
             height: 22px;
         }
         .app-userspace .timeline .n-right .s-top .title .icon img{
-            width: 22px;
+            height: 22px;
         }
         .app-userspace .timeline .n-right .s-top .title .link{
             margin: 0 5px;
@@ -8102,6 +8107,9 @@
             max-width: 100%;
             margin-top: 10px;
         }
+        .app-userspace .timeline [class^="share-element"] *{
+            box-sizing: border-box;
+        }
         .app-userspace .timeline .share-element-link {
             padding: 8px;
             line-height: 20px;
@@ -8216,7 +8224,6 @@
             width: 80%;
             padding-left:10px;
             line-height: 25px;
-            box-sizing: border-box;
         }
         .app-userspace .timeline .share-element-album .album-name {
             display: block;
@@ -8281,7 +8288,6 @@
             font-size: 22px;
             font-weight: 700;
             margin: 20px 20px 0 20px;
-            box-sizing: border-box;
             white-space: nowrap;
         }
         .app-userspace .timeline .share-element-blog .subject .tag {
@@ -8442,7 +8448,6 @@
         .app-userspace .timeline .share-element-space .info {
             z-index: 1;
             position: relative;
-            box-sizing: border-box;
             padding: 0 0 0 15px;
             width: calc(100% - var(--avatar-size));
             left: 0;
@@ -8469,6 +8474,12 @@
     /*endregion*/
 
     /*region @feed-element*/
+        .app-userspace .timeline .message + [class^="feed-element-"]{
+            margin-top: var(--box-edge);
+        }
+        .app-userspace .timeline .message + [class^="feed-element-"] *{
+            box-sizing: border-box;
+        }
         .app-userspace .timeline .feed-element-image{
             display: block;
             width: 100%;
@@ -8544,7 +8555,6 @@
             font-size: 22px;
             font-weight: 700;
             margin: 20px 20px 0 20px;
-            box-sizing: border-box;
             white-space: nowrap;
         }
         .app-userspace .timeline .feed-element-blog .subject .tag {
@@ -8554,9 +8564,9 @@
             font-size: 12px;
         }
         .app-userspace .timeline .feed-element-blog .author {
+            display: inline-block;
             margin: 10px 30px 0 30px;
             color: var(--color-main-theme-dark);
-            display: inline-block;
             line-height: 24px;
             font-size: 15px;
             font-weight: 700;
@@ -8576,15 +8586,9 @@
 
         .app-userspace .timeline .feed-element-imageGrid{
             margin-top: 5px;
-            display: grid;
-            grid-gap: 3px;
-            border-radius: 6px;
-            overflow: hidden;
         }
         .app-userspace .timeline .feed-element-imageGrid .image{
             overflow: hidden;
-            background: center;
-            background-size: cover;
             border-radius: 3px;
         }
 
@@ -8605,9 +8609,90 @@
             font-weight: 700;
             color: var(--color-text-dark);
         }
+
+        .app-userspace .timeline .feed-element-evaluate-image{
+            --avatar-size: 24px;
+            position: relative;
+            display: flex;
+            flex-flow: column nowrap;
+        }
+        .app-userspace .timeline .feed-element-evaluate-image .user-tag{
+            line-height: var(--avatar-size);
+            margin: 10px;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            background: rgba(255,255,255,.7);
+            border-radius: 34px;
+            padding: 5px;
+            box-shadow: 0 0 21px rgba(0,0,0,.3);
+            backdrop-filter: blur(2px);
+        }
+        .app-userspace .timeline .feed-element-evaluate-image .user-tag .avatar{
+            position: relative;
+            width: var(--avatar-size);
+            height: var(--avatar-size);
+        }
+        .app-userspace .timeline .feed-element-evaluate-image .user-tag .username{
+            margin: 0 5px;
+            font-weight: 700;
+            color: var(--color-text-dark);
+        }
+        .app-userspace .timeline .feed-element-evaluate-image .image img{
+            border-radius: 5px;
+            max-height: 320px;
+        }
+
+        .app-userspace .timeline .feed-element-evaluate-blog {
+            --avatar-size: 24px;
+            display: flex;
+            flex-flow: row nowrap;
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid var(--color-lightgray);
+        }
+        .app-userspace .timeline .feed-element-evaluate-blog .detail{
+            display: flex;
+            flex-flow: column nowrap;
+            width: 100%;
+            padding: 10px;
+            background: var(--color-vlightgray);
+        }
+        .app-userspace .timeline .feed-element-evaluate-blog .detail .subject{
+            color: #000;
+            font-size: 16px;
+            font-weight: 700;
+        }
+        .app-userspace .timeline .feed-element-evaluate-blog .detail .user-tag{
+            line-height: var(--avatar-size);
+            margin: 10px 0;
+        }
+        .app-userspace .timeline .feed-element-evaluate-blog .detail .user-tag .avatar{
+            position: relative;
+            width: var(--avatar-size);
+            height: var(--avatar-size);
+        }
+        .app-userspace .timeline .feed-element-evaluate-blog .detail .user-tag .username{
+            margin: 0 5px;
+            font-weight: 700;
+        }
+        .app-userspace .timeline .feed-element-evaluate-blog .detail .content{
+            margin: 0 5px;
+            color: #000;
+            word-break: break-word;
+            max-height: 38px;
+            overflow: hidden;
+        }
+        .app-userspace .timeline .feed-element-evaluate-blog.withimg .image{
+            width: 30%;
+        }
+        .app-userspace .timeline .feed-element-evaluate-blog.withimg .detail{
+            width: 70%;
+            background: none;
+        }
     /*endregion*/
 
-    /*region #userspace_feed*/
+    /*region #userspace::feed*/
         .app-userspace #userspace_feed .timeline .node .n-right .s-top .title .passwd{
             background: var(--color-mod-warning);
         }
@@ -8623,7 +8708,7 @@
         }
     /*endregion*/
 
-    /*region #userspace_doing*/
+    /*region #userspace::doing*/
         .app-userspace #userspace_doing .timeline .node .n-right .s-center > .message{
             color: #000;
             word-break: break-word;
@@ -8633,7 +8718,7 @@
         }
     /*endregion*/
 
-    /*region #userspace_share*/
+    /*region #userspace::share*/
         .app-userspace .timeline .n-right .s-center > .message{
             color: #000;
             word-break: break-word;
@@ -8643,7 +8728,7 @@
         }
     /*endregion*/
 
-    /*region #userspace_wall*/
+    /*region #userspace::wall*/
         #comment_face_menu{
             width: 270px;
             --face-size: 22px;
@@ -9044,7 +9129,7 @@
         }
     /*endregion*/
 
-    /*region #userspace_profile*/
+    /*region #userspace::profile*/
         .app-userspace #userspace_profile > .panel{
             --default-box-margin-width: 8px;
         }
