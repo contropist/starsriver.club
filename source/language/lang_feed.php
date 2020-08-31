@@ -60,7 +60,8 @@
         'feed_thread_debatevote_message_2' => '',
         'feed_thread_debatevote_message_3' => '',
 
-        /* New template */
+        
+        /* 参数注释标志：@-title或body T-仅title B-仅body */
         'feed_template_default_title' => '动态更新',
         'feed_template_default_body'  => '',
         'feed_template_doing_title' => '更新了记录',
@@ -73,7 +74,6 @@
         'feed_profile_update_info'    => '更新了自己的个人信息',
         'feed_profile_update_bbs'     => '更新了自己的论坛信息',
         'feed_profile_update_verify'  => '更新了自己的认证信息',
-
         
         /*
         * feed-space-wall
@@ -116,7 +116,7 @@
         * */
         'feed_template_comment_image_title' => '评论了<a class="link" href="{to_ulink}" target="_blank" c="1">{to_uname}</a>的图片',
         'feed_template_comment_image_body' => '
-            <div class="feed-element-evaluate-image">
+            <div class="feed-element-image">
                 <a class="image" href="{image_togo}" target="_blank">
                     <img src="{image_link}" />
                 </a>
@@ -274,12 +274,12 @@
         'feed_template_pic_title'   => '图片 <a class="link ellipsis" href="{url}" target="_blank">{image}</a> 受到关注',
         'feed_template_pic_body'    => '
             <div class="feed-element-image">
-                <div class="album-pic-info">
-                    <a class="username ellipsis" href="{user_link}" target="_blank" c="1"><img src="{user_avatar}">{username}</a> 的画廊 <a class="albumname ellipsis" href="{album_link}" target="_blank">&nbsp;{album}</a> 中的图片
-                </div>
                 <a class="image" href="{image_togo}" target="_blank">
                     <img src="{image_link}" />
                 </a>
+                <a class="user-tag" href="{user_link}" target="_blank">
+                    <s class="avatar"><img class="avatar-main" src="{user_avatar}"></s>
+                    <s class="username">{username}</s>
+                </a>
             </div>',
-        
     ];
