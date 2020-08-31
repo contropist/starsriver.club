@@ -126,38 +126,7 @@
                     <img src="{image_link}" />
                 </a>
             </div>',
-
         
-        /*
-        * share-article
-        *
-        * B {url}       :文章链接
-        * B {title}     :文章标题
-        * B {summary}   :概述
-        * B {image}     :文章封面图源链接
-         *
-        * B {user_link}   :用户空间链接
-        * B {user_avatar} :用户头像链接
-        * B {username}    :用户名
-        *
-        * */
-        'share_title_template_article' => '分享了文章',
-        'share_body_template_article' =>	'
-            <div class="share-element-article">
-                <a class="title ellipsis" href="{url}" target="_blank">{title}</a>
-                <a class="author ellipsis" href="{user_link}" target="_blank" c="1"><img src="{user_avatar}">{username}</a>
-                <div class="content">{summary}</div>
-            </div>',
-
-        'share_title_template_article_withimg' => '分享了文章',
-        'share_body_template_article_withimg' =>	'
-            <div class="share-element-article">
-                <div class="image"><img src="{image}"></div>
-                <a class="title ellipsis" href="{url}" target="_blank">{title}</a>
-                <a class="author ellipsis" href="{user_link}" target="_blank" c="1"><img src="{user_avatar}">{username}</a>
-                <div class="content">{summary}</div>
-            </div>',
-
 
         /*
         * share-blog
@@ -187,6 +156,37 @@
                 <a class="subject ellipsis" href="{url}" target="_blank">{subject}</a>
                 <a class="author ellipsis" href="{user_link}" target="_blank" c="1"><img src="{user_avatar}">{username}</a>
                 <div class="content">{content}</div>
+            </div>',
+
+        
+        /*
+        * share-article
+        *
+        * B {url}       :文章链接
+        * B {title}     :文章标题
+        * B {summary}   :概述
+        * B {image}     :文章封面图源链接
+         *
+        * B {user_link}   :用户空间链接
+        * B {user_avatar} :用户头像链接
+        * B {username}    :用户名
+        *
+        * */
+        'share_title_template_article' => '分享了文章',
+        'share_body_template_article' =>	'
+            <div class="share-element-article">
+                <a class="subject ellipsis" href="{url}" target="_blank">{title}</a>
+                <a class="author ellipsis" href="{user_link}" target="_blank" c="1"><img src="{user_avatar}">{username}</a>
+                <div class="content">{summary}</div>
+            </div>',
+
+        'share_title_template_article_withimg' => '分享了文章',
+        'share_body_template_article_withimg' =>	'
+            <div class="share-element-article">
+                <div class="image"><img src="{image}"></div>
+                <a class="subject ellipsis" href="{url}" target="_blank">{title}</a>
+                <a class="author ellipsis" href="{user_link}" target="_blank" c="1"><img src="{user_avatar}">{username}</a>
+                <div class="content">{summary}</div>
             </div>',
 
 

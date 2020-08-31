@@ -165,7 +165,7 @@
     
                 if(!empty($item['pic'])){
                     $fs['body_data']['retemplate'] = 'click_article_withimg';
-                    $fs['body_data']['image'] = pic_cover_get($item['pic'], $item['picflag']);
+                    $fs['body_data']['image'] = pic_get($item['pic'], 'portal', $item['thumb'], $item['remote'], 1, 1);
                 }
 
                 $q_note = 'click_article';

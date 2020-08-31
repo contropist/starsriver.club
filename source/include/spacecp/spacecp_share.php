@@ -85,7 +85,7 @@ if($_GET['op'] == 'delete') {
                 'itemid' => $id,
                 'fromuid' => $id,
                 'body_data' => [
-                    'avatar' => avatar($id, 'middle', true),
+                    'avatar' => avatar($id, 'small', true),
                     'username' => $user['username'],
                     'userlink' => 'home.php?mod=space&uid=' . $id,
                     'reside' => $userprofile['resideprovince'] . $userprofile['residecity'],
@@ -274,7 +274,7 @@ if($_GET['op'] == 'delete') {
                     'url' => 'forum.php?mod=viewthread&tid='.$id,
                     'subject' => $thread['subject'],
                     'author'  => $thread['author'],
-                    'author_avatar' => avatar($thread['authorid'], 'middle', true),
+                    'author_avatar' => avatar($thread['authorid'], 'small', true),
                     'author_link'  => 'home.php?mod=space&uid='.$thread['authorid'],
                     'message' => $post['message'] ? getstr($post['message'], 150, 0, 0, 0, -1) : lang('template','should_redirect'),
                 ]
@@ -310,7 +310,7 @@ if($_GET['op'] == 'delete') {
             if (!$article) {
                 showmessage('article_does_not_exist');
             }
-            if (in_array($article['status'], array(1, 2))) {
+            if (in_array($article['status'], [1, 2])) {
                 showmessage('moderate_article_not_share');
             }
 
