@@ -3137,7 +3137,7 @@
         overflow: visible;
         width: var(--width-mas-guide);
         background: #fff;
-        border-right: 1px solid var(--color-slightgray);
+        border-right: 1px solid var(--color-lightgray);
         --guide-upside-height: calc(100% - var(--guide-downside-height));
         --guide-downside-height: 92px;
     }
@@ -3193,7 +3193,7 @@
         width: 100%;
         padding-top: 10px;
         margin-top: 10px;
-        border-top: 1px solid var(--color-slightgray) ;
+        border-top: 1px solid var(--color-lightgray) ;
     }
 
     .Mas.edge .mas-guide .nav-vertical > ul > li{
@@ -3276,7 +3276,7 @@
     .Mas.edge .mas-viewer .mas-viewer-container .nav-horizon{
         --nav-height: 48px;
         height: var(--nav-height);
-        box-shadow: 0 1px 0 0 var(--color-slightgray);
+        box-shadow: 0 1px 0 0 var(--color-lightgray);
     }
     .Mas.edge .mas-viewer .mas-viewer-container .nav-horizon > ul{
         --nav-height: 48px;

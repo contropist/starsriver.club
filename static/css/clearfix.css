@@ -220,6 +220,7 @@ a, button, .btn, select {
     position: relative;
 }
 
+style, script,
 [hide], .hide,
 [hidden], .hidden,
 [template], .template, template {

@@ -216,13 +216,9 @@ function updateattach($modnewthreads, $tid, $pid, $attachnew, $attachupdate = []
 					$dir1 = substr($_daid, 0, 3);
 					$dir2 = substr($_daid, 3, 2);
 					$dir3 = substr($_daid, 5, 2);
-					$dw = 320;
-					$dh = 320;
-					$thumbfile = 'image/'.$dir1.'/'.$dir2.'/'.$dir3.'/'.substr($_daid, -2).'_'.$dw.'_'.$dh.'.jpg';
-					$image->Thumb($_G['setting']['attachdir'].'/forum/'.$newattachfile[$aid], $thumbfile, $dw, $dh, 'fixwr');
-					$dw = 720;
-					$dh = 720;
-					$thumbfile = 'image/'.$dir1.'/'.$dir2.'/'.$dir3.'/'.substr($_daid, -2).'_'.$dw.'_'.$dh.'.jpg';
+					$dw = 480;
+					$dh = 480;
+                    $thumbfile = 'image/'.$dir1.'/'.$dir2.'/'.$dir3.'/'.substr($_daid, -2).'_'.$dw.'_'.$dh.'.jpg';
 					$image->Thumb($_G['setting']['attachdir'].'/forum/'.$newattachfile[$aid], $thumbfile, $dw, $dh, 'fixwr');
 				}
 				if($_G['setting']['watermarkstatus'] && empty($_G['forum']['disablewatermark'])) {

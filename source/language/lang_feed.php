@@ -19,10 +19,6 @@
         'feed_showcredit'             => '给 {fusername} 充电 {credit}，帮助好友提升在<a href="misc.php?mod=ranklist&type=member" target="_blank">续航剩余榜</a>中的名次',
         'feed_showcredit_self'        => '充电 {credit}，提升自己在<a href="misc.php?mod=ranklist&type=member" target="_blank">续航剩余榜</a>中的名次',
         'feed_friend_title'           => '和 {touser} 成为了好友',
-        'feed_click_blog'             => '送了一个“{click}”给 {touser} 的日志 {subject}',
-        'feed_click_thread'           => '送了一个“{click}”给 {touser} 的话题 {subject}',
-        'feed_click_pic'              => '送了一个“{click}”给 {touser} 的图片',
-        'feed_click_article'          => '送了一个“{click}”给 {touser} 的文章 {subject}',
         'feed_task'                   => '完成了有奖任务 {task}',
         'feed_task_credit'            => '完成了有奖任务 {task}，领取了 {credit} 个奖励积分',
         
@@ -62,6 +58,7 @@
 
         
         /* 参数注释标志：@-title或body T-仅title B-仅body */
+        
         'feed_template_default_title' => '动态更新',
         'feed_template_default_body'  => '',
         'feed_template_doing_title' => '更新了记录',
@@ -74,7 +71,129 @@
         'feed_profile_update_info'    => '更新了自己的个人信息',
         'feed_profile_update_bbs'     => '更新了自己的论坛信息',
         'feed_profile_update_verify'  => '更新了自己的认证信息',
+
         
+        /*
+        * feed-click-image
+        *
+        * @ {to_uid}      :用户ID
+        * @ {to_uname}    :用户名
+        * @ {to_ulink}    :用户空间链接
+        * @ {to_uavatar}  :用户头像源链接
+        * @ {image}       :图像名称
+        * @ {image_togo}  :图像来源
+        *
+         *
+        * T {click}       :click类型
+         *
+        * B {image_link}  :图像源链接
+        *
+        * */
+        'feed_template_click_pic_title' => '给<a class="link ellipsis" href="{to_ulink}" target="_blank" c="1">{to_uname}</a>的图片<a class="link ellipsis" href="{image_togo}" target="_blank">{image}</a> 送上了<i class="highlight">「{click}」</i>',
+        'feed_template_click_pic_body'=> '
+            <div class="feed-element-image">
+                <a class="image" href="{image_togo}" target="_blank">
+                    <img src="{image_link}" />
+                </a>
+                <a class="user-tag" href="{to_ulink}" target="_blank">
+                    <s class="avatar"><img class="avatar-main" src="{to_uavatar}"></s>
+                    <s class="username">{to_uname}</s>
+                </a>
+            </div>',
+
+        
+        /*
+        * feed-click-blog
+        *
+        * @ {to_uid}      :用户ID
+        * @ {to_uname}    :用户名
+        * @ {to_ulink}    :用户空间链接
+        * @ {to_uavatar}  :用户头像源链接
+        * @ {blog_url}      :博客链接
+        * @ {blog_sub}      :博客标题
+         *
+        * T {click}       :click类型
+         *
+        * B {blog_content}  :博客内容截取
+        * B {image}         :博客封面图
+        *
+        * */
+        'feed_template_click_blog_title'  => '给<a class="link ellipsis" href="{to_ulink}" target="_blank" c="1">{to_uname}</a>的日志<a class="link ellipsis" href="{blog_url}" target="_blank">{blog_sub}</a>送上了<i class="highlight">「{click}」</i>',
+        'feed_template_click_blog_body'  => '
+            <div class="feed-element-evaluate-article">
+                <div class="detail">
+                    <a class="subject ellipsis" href="{blog_url}" target="_blank">{blog_sub}</a>
+                    <a class="user-tag ellipsis" href="{to_ulink}" target="_blank">
+                        <s class="avatar"><img class="avatar-main" src="{to_uavatar}"></s>
+                        <s class="username">{to_uname}</s>
+                    </a>
+                    <div class="content">{blog_content}</div>
+                </div>
+            </div>',
+
+        'feed_template_click_blog_withimg_title'  => '给<a class="link ellipsis" href="{to_ulink}" target="_blank" c="1">{to_uname}</a>的日志<a class="link ellipsis" href="{blog_url}" target="_blank">{blog_sub}</a>送上了<i class="highlight">「{click}」</i>',
+        'feed_template_click_blog_withimg_body'  => '
+            <div class="feed-element-evaluate-article withimg">
+                <div class="image rec-img" style="background-image: url(\'{image}\')">
+                    <img src="'.LIBURL.'/img/row-e-col/1.1.png">
+                </div>
+                <div class="detail">
+                    <a class="subject ellipsis" href="{blog_url}" target="_blank">{blog_sub}</a>
+                    <a class="user-tag ellipsis" href="{to_ulink}" target="_blank">
+                        <s class="avatar"><img class="avatar-main" src="{to_uavatar}"></s>
+                        <s class="username">{to_uname}</s>
+                    </a>
+                    <div class="content">{blog_content}</div>
+                </div>
+            </div>',
+
+
+        /*
+        * feed-click-article
+        *
+        * @ {to_uid}      :用户ID
+        * @ {to_uname}    :用户名
+        * @ {to_ulink}    :用户空间链接
+        * @ {to_uavatar}  :用户头像源链接
+        * @ {article_url} :文章链接
+        * @ {article_sub} :文章标题
+         *
+        * T {click}       :click类型
+         *
+        * B {article_content}  :文章内容截取
+        * B {image}            :文章封面图
+        *
+        * */
+        'feed_template_click_article_title'  => '给<a class="link ellipsis" href="{to_ulink}" target="_blank" c="1">{to_uname}</a>的文章<a class="link ellipsis" href="{article_url}" target="_blank">{article_sub}</a>送上了<i class="highlight">「{click}」</i>',
+        'feed_template_click_article_body'  => '
+            <div class="feed-element-evaluate-article">
+                <div class="detail">
+                    <a class="subject ellipsis" href="{article_url}" target="_blank">{article_sub}</a>
+                    <a class="user-tag ellipsis" href="{to_ulink}" target="_blank">
+                        <s class="avatar"><img class="avatar-main" src="{to_uavatar}"></s>
+                        <s class="username">{to_uname}</s>
+                    </a>
+                    <div class="content">{article_content}</div>
+                </div>
+            </div>',
+
+        'feed_template_click_article_withimg_title'  => '给<a class="link ellipsis" href="{to_ulink}" target="_blank" c="1">{to_uname}</a>的文章<a class="link ellipsis" href="{article_url}" target="_blank">{article_sub}</a>送上了<i class="highlight">「{click}」</i>',
+        'feed_template_click_article_withimg_body'  => '
+            <div class="feed-element-evaluate-article withimg">
+                <div class="image rec-img" style="background-image: url(\'{image}\')">
+                    <img src="'.LIBURL.'/img/row-e-col/1.1.png">
+                </div>
+                <div class="detail">
+                    <a class="subject ellipsis" href="{article_url}" target="_blank">{article_sub}</a>
+                    <a class="user-tag ellipsis" href="{to_ulink}" target="_blank">
+                        <s class="avatar"><img class="avatar-main" src="{to_uavatar}"></s>
+                        <s class="username">{to_uname}</s>
+                    </a>
+                    <div class="content">{article_content}</div>
+                </div>
+            </div>',
+        
+
         /*
         * feed-space-wall
         *
@@ -95,7 +214,7 @@
         * T {to_ulink}    :用户空间链接
         * T {to_uavatar}  :用户头像源链接
          *
-        * T {share_url}   :分享源链接
+        * T {share_url}   :分享链接
         * T {share_act}   :分享名
         *
         * */
@@ -103,7 +222,7 @@
 
 
         /*
-        * share-comment-image
+        * feed-comment-image
         *
         * @ {to_uid}      :用户ID
         * @ {to_uname}    :用户名
@@ -128,7 +247,7 @@
 
 
         /*
-        * share-comment-blog
+        * feed-comment-blog
         *
         * @ {to_uid}      :用户ID
         * @ {to_uname}    :用户名
@@ -144,7 +263,7 @@
         * */
         'feed_template_comment_blog_title'  => '评论了<a class="link" href="{to_ulink}" target="_blank" c="1">{to_uname}</a>的日志<a class="link ellipsis" href="{blog_url}" target="_blank">{blog_sub}</a>',
         'feed_template_comment_blog_body'  => '
-            <div class="feed-element-evaluate-blog">
+            <div class="feed-element-evaluate-article">
                 <div class="detail">
                     <a class="subject ellipsis" href="{blog_url}" target="_blank">{blog_sub}</a>
                     <a class="user-tag ellipsis" href="{to_ulink}" target="_blank">
@@ -157,7 +276,7 @@
         
         'feed_template_comment_blog_withimg_title'  => '评论了<a class="link" href="{to_ulink}" target="_blank" c="1">{to_uname}</a>的日志<a class="link ellipsis" href="{blog_url}" target="_blank">{blog_sub}</a>',
         'feed_template_comment_blog_withimg_body'  => '
-            <div class="feed-element-evaluate-blog withimg">
+            <div class="feed-element-evaluate-article withimg">
                 <div class="image rec-img" style="background-image: url(\'{image}\')">
                     <img src="'.LIBURL.'/img/row-e-col/1.1.png">
                 </div>
@@ -206,7 +325,7 @@
         * */
         'feed_template_blog_passwd_title' => '更新了加密日志 <i class="tag passwd mt-lock"></i>',
         'feed_template_blog_passwd_body'  => '
-            <div class="feed-element-blog">
+            <div class="feed-element-article">
                 <a class="subject ellipsis" href="{url}" target="_blank">{subject}</a>
                 <a class="author ellipsis" href="{user_link}" target="_blank" c="1"><img src="{user_avatar}">{username}</a>
                 <div class="content">{content}</div>
@@ -214,7 +333,7 @@
         
         'feed_template_blog_passwd_withimg_title' => '更新了加密日志 <i class="tag passwd mt-lock"></i>',
         'feed_template_blog_passwd_withimg_body'  => '
-            <div class="feed-element-blog">
+            <div class="feed-element-article">
                 <div class="image"><img src="{image}"></div>
                 <a class="subject ellipsis" href="{url}" target="_blank">{subject}</a>
                 <a class="author ellipsis" href="{user_link}" target="_blank" c="1"><img src="{user_avatar}">{username}</a>
@@ -223,7 +342,7 @@
         
         'feed_template_blog_title'  => '更新了日志',
         'feed_template_blog_body'   => '
-            <div class="feed-element-blog">
+            <div class="feed-element-article">
                 <a class="subject ellipsis" href="{url}" target="_blank">{subject}</a>
                 <a class="author ellipsis" href="{user_link}" target="_blank" c="1"><img src="{user_avatar}">{username}</a>
                 <div class="content">{content}</div>
@@ -231,7 +350,7 @@
         
         'feed_template_blog_withimg_title'  => '更新了日志',
         'feed_template_blog_withimg_body'   => '
-            <div class="feed-element-blog">
+            <div class="feed-element-article">
                 <div class="image"><img src="{image}"></div>
                 <a class="subject ellipsis" href="{url}" target="_blank">{subject}</a>
                 <a class="author ellipsis" href="{user_link}" target="_blank" c="1"><img src="{user_avatar}">{username}</a>
@@ -277,7 +396,7 @@
                 <a class="image" href="{image_togo}" target="_blank">
                     <img src="{image_link}" />
                 </a>
-                <a class="user-tag" href="{user_link}" target="_blank">
+                <a class="user-tag" href="{user_link}" target="_blank" c="1">
                     <s class="avatar"><img class="avatar-main" src="{user_avatar}"></s>
                     <s class="username">{username}</s>
                 </a>

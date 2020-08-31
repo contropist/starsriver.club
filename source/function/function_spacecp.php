@@ -187,7 +187,7 @@ function pic_save($FILE, $albumid, $title, $iswatermark = true, $catid = 0) {
 
 	require_once libfile('class/image');
 	$image = new image();
-	$result = $image->Thumb($new_name, '', 320, 720, 1);
+	$result = $image->Thumb($new_name, '', 480, 480, 1);
 	$thumb = empty($result)?0:1;
 
 	if($_G['setting']['maxthumbwidth'] && $_G['setting']['maxthumbheight']) {
@@ -308,7 +308,7 @@ function stream_save($strdata, $albumid = 0, $fileext = 'jpg', $name='', $title=
 
 			require_once libfile('class/image');
 			$image = new image();
-			$result = $image->Thumb($newfilename, NULL, 320, 720, 1);
+			$result = $image->Thumb($newfilename, NULL, 480, 480, 1);
 			$thumb = empty($result)?0:1;
 
 			$image->Watermark($newfilename);

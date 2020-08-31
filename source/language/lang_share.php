@@ -174,7 +174,7 @@
         * */
         'share_title_template_blog' => '分享了日志',
         'share_body_template_blog' =>	'
-            <div class="share-element-blog">
+            <div class="share-element-article">
                 <a class="subject ellipsis" href="{url}" target="_blank">{subject}</a>
                 <a class="author ellipsis" href="{user_link}" target="_blank" c="1"><img src="{user_avatar}">{username}</a>
                 <div class="content">{content}</div>
@@ -182,7 +182,7 @@
         
         'share_title_template_blog_withimg' => '分享了日志',
         'share_body_template_blog_withimg' =>	'
-            <div class="share-element-blog">
+            <div class="share-element-article">
                 <div class="image"><img src="{image}"></div>
                 <a class="subject ellipsis" href="{url}" target="_blank">{subject}</a>
                 <a class="author ellipsis" href="{user_link}" target="_blank" c="1"><img src="{user_avatar}">{username}</a>
