@@ -181,12 +181,12 @@ function add_comment($message, $id, $idtype, $cid = 0) {
         case 'sid':
             $fs['title_template'] = 'comment_share';
             $fs['title_data'] = [
-                'to_uid' => $tospace['uid'],
-                'to_uname' => $tospace['username'],
-                'to_ulink' => 'home.php?mod=space&uid='.$tospace['uid'],
-                'to_uavatar' => avatar($tospace['uid'],'small',true),
-                'share_url'  => 'home.php?mod=space&uid='.$tospace['uid'].'&do=share&id='.$id,
-                'share_act'  => str_replace(lang('spacecp', 'share_action'), '', lang('share','share_title_template_'.$share['type'])),
+                'to_uid'     => $tospace['uid'],
+                'to_uname'   => $tospace['username'],
+                'to_ulink'   => 'home.php?mod=space&uid=' . $tospace['uid'],
+                'to_uavatar' => avatar($tospace['uid'], 'small', true),
+                'share_url'  => 'home.php?mod=space&uid=' . $tospace['uid'] . '&do=share&id=' . $id,
+                'share_act'  => str_replace(lang('spacecp', 'share_action'), '', lang('share', 'share_title_template_' . $share['type'])),
             ];
             break;
             
@@ -231,7 +231,7 @@ function add_comment($message, $id, $idtype, $cid = 0) {
                 'to_uavatar'   => avatar($tospace['uid'], 'small', true),
                 'blog_url'     => 'home.php?mod=space&uid=' . $tospace['uid'] . '&do=blog&id=' . $id,
                 'blog_sub'     => $blog['subject'],
-                'blog_content' => getstr($blog['message'], 39, 0, 0, 0, -1),
+                'blog_content' => getstr($blog['message'], 50, 0, 0, 0, -1),
             ];
     
             if(!empty($blog['pic'])){

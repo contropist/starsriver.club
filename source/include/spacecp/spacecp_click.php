@@ -117,7 +117,7 @@
                         
                         'blog_url'     => $blogurl,
                         'blog_sub'     => $item['subject'],
-                        'blog_content' => getstr($item['message'], 39, 0, 0, 0, -1),
+                        'blog_content' => getstr($item['message'], 50, 0, 0, 0, -1),
                     ],
                 ];
    
@@ -159,7 +159,7 @@
             
                         'article_url'     => $article_url,
                         'article_subject' => $item['title'],
-                        'article_content' => getstr($item['content'], 39, 0, 0, 0, -1),
+                        'article_content' => getstr($item['content'], 50, 0, 0, 0, -1),
                     ],
                 ];
     

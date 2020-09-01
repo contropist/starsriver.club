@@ -447,7 +447,7 @@ $lang = array(
     'nav_follow'                    => '推荐关注',
     'nav_add_hotuser'               => '添加推荐',
     'nav_add_follow'                => '添加推荐',
-    'nav_add_defaultuser'           => '添加好友',
+    'nav_add_defaultuser'           => '添加推荐',
 
     'nav_repeat' => '马甲',
 

@@ -574,7 +574,7 @@ if($_GET['op'] == 'delete') {
 		$arr['username'] = $_G['username'];
 		$arr['dateline'] = $_G['timestamp'];
 
-		/* feed list upgrade */
+		/* feed list upgrade - feed-share */
 		if($arr['status'] == 0 && ckprivacy('share', 'feed')) {
 			require_once libfile('function/feed');
             feed_add([

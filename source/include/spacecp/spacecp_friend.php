@@ -38,6 +38,7 @@ if($op == 'add') {
 	}
 
 	$tospace = getuserbyuid($uid);
+	
 	if(empty($tospace)) {
 		showmessage('space_does_not_exist');
 	}
@@ -68,11 +69,39 @@ if($op == 'add') {
 			friend_add($uid, $_POST['gid']);
 
 			if(ckprivacy('friend', 'feed')) {
-				require_once libfile('function/feed');
+                
+                $avatar1 = avatar($_G['uid'], '', true);
+                $avatar2 = avatar($tospace['uid'], '', true);
+                
+                require_once libfile('function/feed');
                 feed_add([
                     'icon'           => 'friend',
-                    'title_template' => 'feed_friend_title',
-                    'title_data'     => ['touser' => "<a href=\"home.php?mod=space&uid=$tospace[uid]\">$tospace[username]</a>"],
+                    'title_template' => 'friend',
+                    'title_data' => [
+                        
+                        'uid'        => $_G['uid'],
+                        'uname'      => $_G['username'],
+                        'ulink'      => 'home.php?mod=space&uid=' . $_G['uid'],
+                        'uavatar'    => $avatar1,
+                        
+                        'to_uid'     => $tospace['uid'],
+                        'to_uname'   => $tospace['username'],
+                        'to_ulink'   => 'home.php?mod=space&uid=' . $tospace['uid'],
+                        'to_uavatar' => $avatar2,
+                    ],
+                    'body_template'  => 'friend',
+                    'body_data'      => [
+                        
+                        'uid'        => $_G['uid'],
+                        'uname'      => $_G['username'],
+                        'ulink'      => 'home.php?mod=space&uid=' . $_G['uid'],
+                        'uavatar'    => $avatar1,
+                        
+                        'to_uid'     => $tospace['uid'],
+                        'to_uname'   => $tospace['username'],
+                        'to_ulink'   => 'home.php?mod=space&uid=' . $tospace['uid'],
+                        'to_uavatar' => $avatar2,
+                    ],
                 ]);
             }
 

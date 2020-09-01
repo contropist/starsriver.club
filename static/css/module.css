@@ -7965,8 +7965,8 @@
             white-space: nowrap;
         }
         .app-userspace .timeline .n-right .s-top .title .icon{
-            margin: 2px 10px 2px 0;
-            min-width: 28px;
+            margin: 2px 8px 2px 0;
+            min-width: 25px;
             height: 22px;
         }
         .app-userspace .timeline .n-right .s-top .title .icon img{
@@ -7988,10 +7988,15 @@
             height: 22px;
             line-height: 22px;
         }
-        .app-userspace .timeline .n-right .s-top .title .highlight{
-            font-weight: 700;
+        .app-userspace .timeline .n-right .s-top .title .highlight-pink{
             font-size: 15px;
             color: var(--color-heart-pink);
+        }
+        .app-userspace .timeline .n-right .s-top .title .highlight-gold{
+            font-weight: 700;
+            font-size: 15px;
+            color: #ffdb00;
+            text-shadow: 1px 1px 1px #d86d22;
         }
         .app-userspace .timeline .n-right .s-top .censor{
             background: var(--color-heart-pink) !important;
@@ -8661,6 +8666,28 @@
         .app-userspace .timeline .feed-element-evaluate-article.withimg .detail{
             width: 70%;
             background: none;
+        }
+
+        .app-userspace .timeline .feed-element-friend{
+            display: flex;
+            flex-flow: row nowrap;
+        }
+        .app-userspace .timeline .feed-element-friend .friend-A{
+            width: 50%;
+            justify-content: center;
+        }
+        .app-userspace .timeline .feed-element-friend .user-tag{
+            display: inline-flex;
+            flex-flow: column nowrap;
+        }
+        .app-userspace .timeline .feed-element-friend .user-tag .avatar{
+            position: relative;
+            width: 96px;
+            height: 96px;
+        }
+
+        .app-userspace .timeline .feed-element-charge{
+
         }
     /*endregion*/
 
