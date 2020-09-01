@@ -61,13 +61,13 @@
         'feed_template_doing_title' => '更新了记录',
         
         'feed_template_profile_title' => '更新了个人资料',
-        'feed_profile_update_base'    => '更新了自己的基本资料',
-        'feed_profile_update_contact' => '更新了自己的联系方式',
-        'feed_profile_update_edu'     => '更新了自己的教育情况',
-        'feed_profile_update_work'    => '更新了自己的工作信息',
-        'feed_profile_update_info'    => '更新了自己的个人信息',
-        'feed_profile_update_bbs'     => '更新了自己的论坛信息',
-        'feed_profile_update_verify'  => '更新了自己的认证信息',
+        'feed_profile_update_base'    => '我更新了自己的基本资料',
+        'feed_profile_update_contact' => '我更新了自己的联系方式',
+        'feed_profile_update_edu'     => '我更新了自己的教育情况',
+        'feed_profile_update_work'    => '我更新了自己的工作信息',
+        'feed_profile_update_info'    => '我更新了自己的个人信息',
+        'feed_profile_update_bbs'     => '我更新了自己的论坛信息',
+        'feed_profile_update_verify'  => '我更新了自己的认证信息',
 
         /*
         * feed-ranklist-show
