@@ -1650,7 +1650,8 @@
         word-wrap: break-word;
     }
     .prettyprint *::selection{
-        background: var(--code-selection-backcolor)
+        background: var(--code-selection-backcolor);
+        color: revert !important;
     }
     .prettyprint code {
         padding: 0;
@@ -3174,19 +3175,16 @@
         width: 52px;
         margin: 10px 0 0 10px;
     }
-    .Mas.edge .mas-guide .start span{
+    .Mas.edge .mas-guide .start span,
+    .Mas.edge .mas-guide .start span i{
         display: var(--logo-text-display);
-        margin: 10px 0 0 0;
-        line-height: 54px;
-        font-size: 24px;
+        line-height: 72px;
+        font-family: Electrolize !important;
+        font-size: 25px;
         font-weight: 700;
-        letter-spacing: -2px;
         color: #000;
     }
     .Mas.edge .mas-guide .start span i{
-        font-size: 24px;
-        font-weight: 700;
-        letter-spacing: -2px;
         color: #e30000;
     }
     .Mas.edge .mas-guide .nav-vertical > ul{

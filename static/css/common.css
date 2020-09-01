@@ -407,7 +407,7 @@
     nav.white-blur{
         background: rgba(255,255,255,.35);
 
-        --nav-logo-color:#393939;
+        --nav-logo-color:#000000;
         --nav-logo-color2:#FF1919;
 
         --nav-li-text-color :#333333;
@@ -423,7 +423,7 @@
     .scroll-overhead nav{
         background: #ffffff;
 
-        --nav-logo-color:#666666;
+        --nav-logo-color:#000000;
         --nav-logo-color2:#FF1919;
 
         --nav-li-text-color :#666666;
@@ -482,8 +482,8 @@
         display: inline-block;
         padding: 0 20px 0 0;
         color: var(--nav-logo-color);
-        font-family: Organo !important;
-        font-size: 28px;
+        font-family: Electrolize !important;
+        font-size: 25px;
         font-weight: 700;
     }
     nav .logo span{
@@ -749,8 +749,8 @@
         color: #fff !important;
     }
     .header-us .head > .menu .username{
-        font-size: 14px;
-        font-weight: 800 !important;
+        font-size: 16px;
+        font-weight: 700 !important;
         color: #000;
     }
     .header-us .head > .menu .userlevel{

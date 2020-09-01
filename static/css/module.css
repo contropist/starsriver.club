@@ -6930,7 +6930,7 @@
             padding: 10px 30px 20px 30px;
             color: #000;
             word-break: break-word;
-            line-height: 16px;
+            line-height: 20px;
         }
 
         .app-dynamic .share-element-thread {
@@ -7177,7 +7177,7 @@
             border-radius: 0;
         }
         .app-dynamic .album-list li .album-info .album-name{
-            font-family: Jokerman !important;
+            font-family: Limelight !important;
             position: absolute;
             bottom: 0;
             right: 0;
@@ -7193,7 +7193,7 @@
             text-overflow: ellipsis;
         }
         .app-dynamic .album-list li .album-info .album-num{
-            font-family: Jokerman !important;
+            font-family: Limelight !important;
             position: relative;
             display: inline-block;
             width: calc(100% - 120px);
@@ -7738,9 +7738,10 @@
     /*region @timeline*/
         .app-userspace .timeline{
             --max-width: 720px;
-            --line-tip-fontsize: 31px;
+            --line-tip-fontsize: 36px;
             --line-tip-lineheight: 72px;
 
+            --node-first-padding: 64px;
             --node-left-width: 200px;
             --node-left-padding: 0 15px 0 0;
             --node-left-rightdrag: 100%;
@@ -7757,7 +7758,7 @@
             --timeA-after-leftdrag: calc(100% + 12px);
 
             --timeB-padding: 0;
-            --timeB-fontsize: 24px;
+            --timeB-fontsize: 22px;
             --timeB-after-leftdrag: calc(100% + 7px);
 
             --ut-avatar-leftdrag: 100%;
@@ -7767,9 +7768,10 @@
 .WL-3P  .app-userspace .timeline,
 .WL-4P  .app-userspace .timeline{
             --max-width: 520px;
-            --line-tip-fontsize: 20px;
-            --line-tip-lineheight: 72px;
+            --line-tip-fontsize: 23px;
+            --line-tip-lineheight: 46px;
 
+            --node-first-padding: 42px;
             --node-left-width: 2px;
             --node-left-padding: 0 0 0 20px;
             --node-left-rightdrag: auto;
@@ -7811,11 +7813,11 @@
             line-height: var(--line-tip-lineheight);
             padding-left: var(--node-left-width);
             color: var(--line-color);
-            font-family: bahnschrift !important;
+            font-family: Teko Light !important;
             font-style: italic;
             font-size: var(--line-tip-fontsize);
             text-align: center;
-            text-shadow: 2px 1px 0px rgba(0,0,0,.05);
+            text-shadow: 1px 1px 0px rgba(0,0,0,.08);
         }
         .app-userspace .timeline::before{
             content: '...Future Will Be Better...';
@@ -7835,10 +7837,10 @@
             min-height: 160px;
         }
         .app-userspace .timeline .node:first-of-type{
-            padding-top: 64px;
+            padding-top: var(--node-first-padding);
         }
         .app-userspace .timeline .node:last-of-type{
-            padding-bottom: 64px;
+            padding-bottom: var(--node-first-padding);
         }
         .app-userspace .timeline .node.dayMark{
             z-index: 1;
@@ -7863,12 +7865,12 @@
             width: var(--timeA-width);
             height: 50px;
             line-height: 50px;
-            padding: 2px 15px;
+            padding: 0 15px;
             background: #fff;
             border-radius: 4px;
             box-shadow: var(--timeA-shadow);
             color: #7890b1;
-            font-family: bahnschrift !important;
+            font-family: Barlow Medium !important;
             font-size: var(--timeA-fontsize);
             word-break: break-word;
         }
@@ -7900,14 +7902,14 @@
             position: relative;
             margin-top: 15px;
             padding: var(--timeB-padding);
-            font-family: bahnschrift !important;
+            font-family: Barlow Medium !important;
             color: var(--color-text-dark);
             font-size: var(--timeB-fontsize);
         }
         .app-userspace .timeline .n-left .time-B::after{
             content: '';
             position: absolute;
-            top: 1px;
+            top: 2px;
             left: var(--timeB-after-leftdrag);
             width: 6px;
             height: 17px;
@@ -8318,7 +8320,7 @@
             padding: 10px 30px 20px 30px;
             color: #000;
             word-break: break-word;
-            line-height: 16px;
+            line-height: 20px;
         }
 
         .app-userspace .timeline .share-element-thread {
@@ -8584,7 +8586,7 @@
             padding: 10px 30px 20px 30px;
             color: #000;
             word-break: break-word;
-            line-height: 16px;
+            line-height: 20px;
         }
 
         .app-userspace .timeline .feed-element-imageGrid{
