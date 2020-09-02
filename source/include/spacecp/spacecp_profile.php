@@ -321,11 +321,11 @@ if (submitcheck('profilesubmit')) {
             C::t('common_member_verify')->insert(array('uid' => $_G['uid']));
         }
         if ($_G['setting']['verify'][$vid]['available']) {
-            manage_addnotify('verify_' . $vid, 0, array(
+            manage_addnotify('verify_' . $vid, 0, [
                 'langkey'    => 'manage_verify_field',
                 'verifyname' => $_G['setting']['verify'][$vid]['title'],
-                'doid'       => $vid
-            ));
+                'doid'       => $vid,
+            ]);
         }
     }
 

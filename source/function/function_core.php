@@ -946,7 +946,7 @@ function aidencode($aid, $type = 0, $tid = 0) {
 	return rawurlencode(base64_encode($s));
 }
 
-function getforumimg($aid, $nocache = 0, $w = 256, $h = 256, $type = '') {
+function getforumimg($aid, $nocache = 0, $w = 480, $h = 480, $type = '') {
 	global $_G;
 	$key = dsign($aid.'|'.$w.'|'.$h);
 	return 'forum.php?mod=image&aid='.$aid.'&size='.$w.'x'.$h.'&key='.rawurlencode($key).($nocache ? '&nocache=yes' : '').($type ? '&type='.$type : '');

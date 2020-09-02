@@ -37,6 +37,7 @@ class extend_thread_activity extends extend_thread_base {
 		$this->activity['class'] = censor(dhtmlspecialchars(trim($_GET['activityclass'])));
 		$this->activity['starttimefrom'] = @strtotime($_GET['starttimefrom'][$this->activitytime]);
 		$this->activity['starttimeto'] = $this->activitytime ? @strtotime($_GET['starttimeto']) : 0;
+		$this->activity['city'] = censor(dhtmlspecialchars(trim($_GET['activitycity'])));
 		$this->activity['place'] = censor(dhtmlspecialchars(trim($_GET['activityplace'])));
 		$this->activity['cost'] = intval($_GET['cost']);
 		$this->activity['gender'] = intval($_GET['gender']);
@@ -78,20 +79,42 @@ class extend_thread_activity extends extend_thread_base {
 	}
 
 	public function before_feed() {
-		$message = !$this->param['price'] && !$this->param['readperm'] ? $this->param['message'] : '';
-		$this->feed['icon'] = 'activity';
-		$this->feed['title_template'] = 'feed_thread_activity_title';
-		$this->feed['body_template'] = 'feed_thread_activity_message';
-		$this->feed['body_data'] = array(
-			'subject' => "<a href=\"forum.php?mod=viewthread&tid={$this->tid}\">{$this->param['subject']}</a>",
-			'starttimefrom' => $_GET['starttimefrom'][$this->activitytime],
-			'activityplace'=> $this->activity['place'],
-			'message' => messagecutstr($message, 150),
-		);
-		if($_GET['activityaid']) {
-			$this->feed['images'] = array(getforumimg($_GET['activityaid']));
-			$this->feed['image_links'] = array("forum.php?mod=viewthread&do=tradeinfo&tid={$this->tid}&pid={$this->pid}");
-		}
+        global $_G;
+        
+        $this->feed = [
+            'icon'           => 'activity',
+            'title_template' => 'thread_activity',
+            'title_data'     => [
+                'tid'   => $this->tid,
+                'tsub'  => $this->param['subject'],
+                'tlink' => 'forum.php?mod=viewthread&tid=' . $this->tid,
+            ],
+            'body_template'  => 'thread_activity',
+            'body_data'      => [
+                'tid'   => $this->tid,
+                'tsub'  => $this->param['subject'],
+                'tlink' => 'forum.php?mod=viewthread&tid=' . $this->tid,
+                
+                'uid'     => $_G['uid'],
+                'uname'   => $_G['username'],
+                'ulink'   => 'home.php?mod=space&uid=' . $_G['uid'],
+                'uavatar' => avatar($_G['uid'], 'small', true),
+                
+                'starttime' => $_GET['starttimefrom'][$this->activitytime],
+                'endtime'   => $_GET['starttimeto'][$this->activitytime],
+                'city'      => $this->activity['city'],
+                'location'  => $this->activity['place'],
+                'message'   => messagecutstr(!$this->param['readperm'] ? $this->param['message'] : '', 150),
+            ],
+        ];
+        
+        if ($_GET['activityaid']) {
+            $this->feed['body_data']['imgs'][0] = [
+                'img'     => getforumimg($_GET['activityaid']),
+                'img_id'  => $this->pid,
+                'img_url' => 'forum.php?mod=viewthread&do=tradeinfo&tid=' . $this->tid . '&pid=' . $this->pid,
+            ];
+        }
 	}
 
 	public function before_editpost($parameters) {

@@ -218,7 +218,8 @@
                             $setarr['body_data']['imgs'][] = [
                                 'img' => pic_get($pic['filepath'], 'album', $pic['thumb'], $pic['remote']),
                                 'img_id' => $pic['picid'],
-                                'img_url' => 'home.php?mod=space&uid='.$pic['uid'].'&do=album&picid='.$pic['picid']
+                                'img_url' => 'home.php?mod=space&uid='.$pic['uid'].'&do=album&picid='.$pic['picid'],
+                                'img_name' => $pic['title'] ? $pic['title'] : $pic['filename']
                             ];
                     
                             $key++;

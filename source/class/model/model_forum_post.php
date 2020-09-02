@@ -309,7 +309,8 @@ class model_forum_post extends discuz_model {
 		$this->feed['id'] = $this->pid;
 		$this->feed['idtype'] = 'pid';
 		if($this->feed['icon']) {
-			postfeed($this->feed);
+            require_once libfile('function/feed');
+            feed_add($this->feed);
 		}
 	}
 

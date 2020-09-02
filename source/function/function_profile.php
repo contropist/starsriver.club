@@ -225,13 +225,17 @@ function profile_check($fieldid, &$value, $space=[]) {
 	if(empty($_G['cache']['profilesetting'])) {
 		loadcache('profilesetting');
 	}
+	
 	if(empty($_G['profilevalidate'])) {
 		include libfile('spacecp/profilevalidate', 'include');
 		$_G['profilevalidate'] = $profilevalidate;
 	}
 
 	$field = $_G['cache']['profilesetting'][$fieldid];
-	if(empty($field) || !$field['available']) {
+	
+    $field['choices'] = !empty($field['choices']) ? explode("\n", $field['choices']) : [];
+    
+    if(empty($field) || !$field['available']) {
 		return false;
 	}
 
@@ -256,6 +260,7 @@ function profile_check($fieldid, &$value, $space=[]) {
 	}
 
 	include_once libfile('function/home');
+	
 	if(in_array($fieldid, array('birthday', 'birthmonth', 'birthyear', 'gender'))) {
 		$value = intval($value);
 		return true;
@@ -263,11 +268,7 @@ function profile_check($fieldid, &$value, $space=[]) {
 		$value = getstr($value);
 		return true;
 	}
-
-	if($field['choices']) {
-		$field['choices'] = explode("\n", $field['choices']);
-	}
-
+	
 	if($field['formtype'] == 'text' || $field['formtype'] == 'textarea') {
 		if($field['size'] && strlen($value) > $field['size']) {
 			return false;
@@ -280,18 +281,23 @@ function profile_check($fieldid, &$value, $space=[]) {
         $value = getstr($value);
 
     } elseif($field['formtype'] == 'checkbox' || $field['formtype'] == 'list') {
+        
+        if($field['required'] && empty($arr)){
+            return false;
+        }
+        
 		$arr = [];
+  
 		foreach ($value as $op) {
 			if(in_array($op, $field['choices'])) {
 				$arr[] = $op;
 			}
 		}
+		
         if($field['size'] && (count($arr) > $field['size'])) {
             return false;
         }
-        if($field['required'] && empty($arr)){
-            return false;
-        }
+        
 		$value = implode("\n", $arr);
 
 	} elseif($field['formtype'] == 'radio' || $field['formtype'] == 'select') {

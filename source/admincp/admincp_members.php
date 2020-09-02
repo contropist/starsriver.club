@@ -11,6 +11,8 @@ if(!defined('IN_DISCUZ') || !defined('IN_ADMINCP')) {
 	exit('Access Denied');
 }
 
+global $_G;
+
 @set_time_limit(600);
 if($operation != 'export') {
 	cpheader();
@@ -171,21 +173,70 @@ EOF;
 			$detail = $detail."\n";
 		}
 	}
-	$title = array('realname' => '', 'gender' => '', 'birthyear' => '', 'birthmonth' => '', 'birthday' => '', 'constellation' => '',
-		'zodiac' => '', 'telephone' => '', 'mobile' => '', 'idcardtype' => '', 'idcard' => '', 'address' => '', 'zipcode' => '','nationality' => '',
-		'birthprovince' => '', 'birthcity' => '', 'birthdist' => '', 'birthcommunity' => '', 'resideprovince' => '', 'residecity' => '', 'residedist' => '',
-		'residecommunity' => '', 'residesuite' => '', 'graduateschool' => '', 'education' => '', 'company' => '', 'occupation' => '',
-		'position' => '', 'revenue' => '', 'affectivestatus' => '', 'lookingfor' => '', 'bloodtype' => '', 'height' => '', 'weight' => '',
-		'alipay' => '', 'icq' => '', 'qq' => '', 'yahoo' => '', 'msn' => '', 'taobao' => '', 'site' => '', 'bio' => '', 'interest' => '',
-		'field1' => '', 'field2' => '', 'field3' => '', 'field4' => '', 'field5' => '', 'field6' => '', 'field7' => '', 'field8' => '');
-	foreach(C::t('common_member_profile_setting')->range() as $value) {
+    $title = [
+        'realname'        => '',
+        'gender'          => '',
+        'birthyear'       => '',
+        'birthmonth'      => '',
+        'birthday'        => '',
+        'constellation'   => '',
+        'zodiac'          => '',
+        'telephone'       => '',
+        'mobile'          => '',
+        'idcardtype'      => '',
+        'idcard'          => '',
+        'address'         => '',
+        'zipcode'         => '',
+        'nationality'     => '',
+        'birthprovince'   => '',
+        'birthcity'       => '',
+        'birthdist'       => '',
+        'birthcommunity'  => '',
+        'resideprovince'  => '',
+        'residecity'      => '',
+        'residedist'      => '',
+        'residecommunity' => '',
+        'residesuite'     => '',
+        'graduateschool'  => '',
+        'education'       => '',
+        'company'         => '',
+        'occupation'      => '',
+        'position'        => '',
+        'revenue'         => '',
+        'affectivestatus' => '',
+        'lookingfor'      => '',
+        'bloodtype'       => '',
+        'height'          => '',
+        'weight'          => '',
+        'alipay'          => '',
+        'icq'             => '',
+        'qq'              => '',
+        'yahoo'           => '',
+        'msn'             => '',
+        'taobao'          => '',
+        'site'            => '',
+        'bio'             => '',
+        'interest'        => '',
+        'field1'          => '',
+        'field2'          => '',
+        'field3'          => '',
+        'field4'          => '',
+        'field5'          => '',
+        'field6'          => '',
+        'field7'          => '',
+        'field8'          => '',
+    ];
+	
+    foreach(C::t('common_member_profile_setting')->range() as $value) {
 		if(isset($title[$value['fieldid']])) {
 			$title[$value['fieldid']] = $value['title'];
 		}
 	}
+ 
 	foreach($title as $k => $v) {
 		$subject .= ($v ? $v : $k).",";
 	}
+	
 	$detail = "UID,".$lang['username'].",".$subject."\n".$detail;
 	$filename = date('Ymd', TIMESTAMP).'.csv';
 
@@ -1866,11 +1917,19 @@ EOF;
 	$uid = $member['uid'];
 	if(!empty($_G['setting']['connect']['allow']) && $do == 'bindlog') {
 		$member = array_merge($member, C::t('#qqconnect#common_member_connect')->fetch($uid));
-		showsubmenu("$lang[members_edit] - $member[username]", array(
-			array('connect_member_info', 'members&operation=edit&uid='.$uid,  0),
-			array('connect_member_bindlog', 'members&operation=edit&do=bindlog&uid='.$uid,  1),
-		));
-		if($member['conopenid']) {
+        showsubmenu("$lang[members_edit] - $member[username]", [
+            [
+                'connect_member_info',
+                'members&operation=edit&uid=' . $uid,
+                0,
+            ],
+            [
+                'connect_member_bindlog',
+                'members&operation=edit&do=bindlog&uid=' . $uid,
+                1,
+            ],
+        ]);
+        if ($member['conopenid']) {
 			showtableheader();
 			showtitle('connect_member_bindlog_uin');
 			showsubtitle(array('connect_member_bindlog_username', 'connect_member_bindlog_date', 'connect_member_bindlog_type'));
@@ -2049,12 +2108,14 @@ EOF;
 
 		$fieldadd = '';
 		$fieldarr = [];
+		
 		include_once libfile('function/profile');
 		foreach($_POST as $field_key=>$field_val) {
-			if(isset($fields[$field_key]) && (profile_check($field_key, $field_val) || $_G['adminid'] == 1)) {
+			if(!empty($fields[$field_key]) && profile_check($field_key, $field_val)) {
 				$fieldarr[$field_key] = $field_val;
 			}
 		}
+		
 		if($_GET['deletefile'] && is_array($_GET['deletefile'])) {
 			foreach($_GET['deletefile'] as $key => $value) {
 				if(isset($fields[$key]) && $_G['cache']['profilesetting'][$key]['formtype'] == 'file') {
@@ -2112,15 +2173,42 @@ EOF;
 				connectunbind($member);
 			}
 		}
-        $memberupdate = array_merge($memberupdate, array('regdate'=>$regdatenew, 'emailstatus'=>$emailstatusnew, 'status'=>$status, 'freeze'=>$freeze, 'timeoffset'=>$_GET['timeoffsetnew']));
-		C::t('common_member'.$tableext)->update($uid, $memberupdate);
-		C::t('common_member_field_home'.$tableext)->update($uid, array('addsize' => $addsize, 'addfriend' => $addfriend));
-		C::t('common_member_count'.$tableext)->update($uid, array('posts' => $_GET['postsnew'], 'digestposts' => $_GET['digestpostsnew']));
-		C::t('common_member_status'.$tableext)->update($uid, array('regip' => $_GET['regipnew'], 'lastvisit' => $lastvisitnew, 'lastip' => $_GET['lastipnew'], 'invisible' => $_GET['invisiblenew']));
-		C::t('common_member_field_forum'.$tableext)->update($uid, array('customstatus' => $_GET['cstatusnew'], 'sightml' => $sightmlnew));
-		if(!empty($fieldarr)) {
+        $memberupdate = array_merge($memberupdate, [
+            'regdate'     => $regdatenew,
+            'emailstatus' => $emailstatusnew,
+            'status'      => $status,
+            'freeze'      => $freeze,
+            'timeoffset'  => $_GET['timeoffsetnew'],
+        ]);
+		
+        C::t('common_member' . $tableext)->update($uid, $memberupdate);
+        
+        C::t('common_member_field_home' . $tableext)->update($uid, [
+            'addsize'   => $addsize,
+            'addfriend' => $addfriend,
+        ]);
+        
+        C::t('common_member_count' . $tableext)->update($uid, [
+            'posts'       => $_GET['postsnew'],
+            'digestposts' => $_GET['digestpostsnew'],
+        ]);
+        
+        C::t('common_member_status' . $tableext)->update($uid, [
+            'regip'     => $_GET['regipnew'],
+            'lastvisit' => $lastvisitnew,
+            'lastip'    => $_GET['lastipnew'],
+            'invisible' => $_GET['invisiblenew'],
+        ]);
+        
+        C::t('common_member_field_forum' . $tableext)->update($uid, [
+            'customstatus' => $_GET['cstatusnew'],
+            'sightml'      => $sightmlnew,
+        ]);
+        
+        if (!empty($fieldarr)) {
 			C::t('common_member_profile'.$tableext)->update($uid, $fieldarr);
 		}
+  
 		cpmsg('members_edit_succeed', 'action=members&operation=edit&uid='.$uid, 'succeed');
 
 	}
@@ -2317,66 +2405,163 @@ EOF;
 	}
 
 } elseif($operation == 'profile') {
-
-	$fieldid = $_GET['fieldid'] ? $_GET['fieldid'] : '';
-	shownav('user', 'nav_members_profile');
-	if($fieldid) {
-		$_G['setting']['privacy'] = !empty($_G['setting']['privacy']) ? $_G['setting']['privacy'] : [];
-		$_G['setting']['privacy'] = is_array($_G['setting']['privacy']) ? $_G['setting']['privacy'] : dunserialize($_G['setting']['privacy']);
-
-		$field = C::t('common_member_profile_setting')->fetch($fieldid);
-		$fixedfields1 = array('uid', 'constellation', 'zodiac');
-		$fixedfields2 = array('gender', 'birthday', 'birthcity', 'residecity');
-		$field['isfixed1'] = in_array($fieldid, $fixedfields1);
-		$field['isfixed2'] = $field['isfixed1'] || in_array($fieldid, $fixedfields2);
-		$field['customable'] = preg_match('/^field[1-8]$/i', $fieldid);
-		$profilegroup = C::t('common_setting')->fetch('profilegroup', true);
-		$profilevalidate = [];
-		include libfile('spacecp/profilevalidate', 'include');
-		$field['validate'] = $field['validate'] ? $field['validate'] : ($profilevalidate[$fieldid] ? $profilevalidate[$fieldid] : '');
-		if(!submitcheck('editsubmit')) {
-			showsubmenu($lang['members_profile'].'-'.$field['title'], array(
-				array('members_profile_list', 'members&operation=profile', 0),
-				array($lang['edit'], 'members&operation=profile&fieldid='.$_GET['fieldid'], 1)
-			));
-			showformheader('members&operation=profile&fieldid='.$fieldid);
-			showtableheader();
-			if($field['customable']) {
-				showsetting('members_profile_edit_name', 'title', $field['title'], 'text');
-				showsetting('members_profile_edit_desc', 'description', $field['description'], 'text');
-			} else {
-				showsetting('members_profile_edit_name', '', '', ' '.$field['title']);
-				showsetting('members_profile_edit_desc', '', '', ' '.$field['description']);
-			}
-			if(!$field['isfixed2']) {
+    
+    $fieldid = $_GET['fieldid'] ? $_GET['fieldid'] : '';
+    shownav('user', 'nav_members_profile');
+    if ($fieldid) {
+        $_G['setting']['privacy'] = !empty($_G['setting']['privacy']) ? $_G['setting']['privacy'] : [];
+        $_G['setting']['privacy'] = is_array($_G['setting']['privacy']) ? $_G['setting']['privacy'] : dunserialize($_G['setting']['privacy']);
+        
+        $field = C::t('common_member_profile_setting')->fetch($fieldid);
+        $fixedfields1 = [
+            'uid',
+            'constellation',
+            'zodiac',
+        ];
+        $fixedfields2 = [
+            'gender',
+            'birthday',
+            'birthcity',
+            'residecity',
+        ];
+        $field['isfixed1'] = in_array($fieldid, $fixedfields1);
+        $field['isfixed2'] = $field['isfixed1'] || in_array($fieldid, $fixedfields2);
+        $field['customable'] = preg_match('/^field[1-8]$/i', $fieldid);
+        $profilegroup = C::t('common_setting')->fetch('profilegroup', true);
+        $profilevalidate = [];
+        include libfile('spacecp/profilevalidate', 'include');
+        $field['validate'] = $field['validate'] ? $field['validate'] : ($profilevalidate[$fieldid] ? $profilevalidate[$fieldid] : '');
+        
+        if (!submitcheck('editsubmit')) {
+            showsubmenu($lang['members_profile'] . '-' . $field['title'], [
+                [
+                    'members_profile_list',
+                    'members&operation=profile',
+                    0,
+                ],
+                [
+                    $lang['edit'],
+                    'members&operation=profile&fieldid=' . $_GET['fieldid'],
+                    1,
+                ],
+            ]);
+            showformheader('members&operation=profile&fieldid=' . $fieldid);
+            showtableheader();
+            if ($field['customable']) {
+                showsetting('members_profile_edit_name', 'title', $field['title'], 'text');
+                showsetting('members_profile_edit_desc', 'description', $field['description'], 'text');
+            } else {
+                showsetting('members_profile_edit_name', '', '', ' ' . $field['title']);
+                showsetting('members_profile_edit_desc', '', '', ' ' . $field['description']);
+            }
+            if (!$field['isfixed2']) {
 				if($field['fieldid'] == 'realname') {
-					showsetting('members_profile_edit_form_type', array('formtype', array(
-						array('text', $lang['members_profile_edit_text'], array('valuenumber' => '', 'fieldchoices' => 'none', 'fieldvalidate'=>''))
-					)), $field['formtype'], 'mradio');
-				} else {
-					showsetting('members_profile_edit_form_type', array('formtype', array(
-							array('text', $lang['members_profile_edit_text'], array('valuenumber' => '', 'fieldchoices' => 'none', 'fieldvalidate'=>'')),
-							array('textarea', $lang['members_profile_edit_textarea'], array('valuenumber' => '', 'fieldchoices' => 'none', 'fieldvalidate'=>'')),
-							array('radio', $lang['members_profile_edit_radio'], array('valuenumber' => 'none', 'fieldchoices' => '', 'fieldvalidate'=>'none')),
-							array('checkbox', $lang['members_profile_edit_checkbox'], array('valuenumber' => '', 'fieldchoices' => '', 'fieldvalidate'=>'none')),
-							array('select', $lang['members_profile_edit_select'], array('valuenumber' => 'none', 'fieldchoices' => '', 'fieldvalidate'=>'none')),
-							array('list', $lang['members_profile_edit_list'], array('valuenumber' => '', 'fieldchoices' => '')),
-							array('file', $lang['members_profile_edit_file'], array('valuenumber' => '', 'fieldchoices' => 'none', 'fieldvalidate'=>'none'))
-						)), $field['formtype'], 'mradio');
-				}
-				showtagheader('tbody', 'valuenumber', !in_array($field['formtype'], array('radio', 'select')), 'sub');
-				showsetting('members_profile_edit_value_number', 'size', $field['size'], 'text');
-				showtagfooter('tbody');
-
-				showtagheader('tbody', 'fieldchoices', !in_array($field['formtype'], array('file','text', 'textarea')), 'sub');
-				showsetting('members_profile_edit_choices', 'choices', $field['choices'], 'textarea');
-				showtagfooter('tbody');
-
-				showtagheader('tbody', 'fieldvalidate', in_array($field['formtype'], array('text', 'textarea')), 'sub');
-				showsetting('members_profile_edit_validate', 'validate', $field['validate'], 'text');
-				showtagfooter('tbody');
-			}
-			if(!$field['isfixed1']) {
+                    showsetting('members_profile_edit_form_type', [
+                        'formtype',
+                        [
+                            [
+                                'text',
+                                $lang['members_profile_edit_text'],
+                                [
+                                    'valuenumber'   => '',
+                                    'fieldchoices'  => 'none',
+                                    'fieldvalidate' => '',
+                                ],
+                            ],
+                        ],
+                    ], $field['formtype'], 'mradio');
+                } else {
+                    showsetting('members_profile_edit_form_type', [
+                        'formtype',
+                        [
+                            [
+                                'text',
+                                $lang['members_profile_edit_text'],
+                                [
+                                    'valuenumber'   => '',
+                                    'fieldchoices'  => 'none',
+                                    'fieldvalidate' => '',
+                                ],
+                            ],
+                            [
+                                'textarea',
+                                $lang['members_profile_edit_textarea'],
+                                [
+                                    'valuenumber'   => '',
+                                    'fieldchoices'  => 'none',
+                                    'fieldvalidate' => '',
+                                ],
+                            ],
+                            [
+                                'radio',
+                                $lang['members_profile_edit_radio'],
+                                [
+                                    'valuenumber'   => 'none',
+                                    'fieldchoices'  => '',
+                                    'fieldvalidate' => 'none',
+                                ],
+                            ],
+                            [
+                                'checkbox',
+                                $lang['members_profile_edit_checkbox'],
+                                [
+                                    'valuenumber'   => '',
+                                    'fieldchoices'  => '',
+                                    'fieldvalidate' => 'none',
+                                ],
+                            ],
+                            [
+                                'select',
+                                $lang['members_profile_edit_select'],
+                                [
+                                    'valuenumber'   => 'none',
+                                    'fieldchoices'  => '',
+                                    'fieldvalidate' => 'none',
+                                ],
+                            ],
+                            [
+                                'list',
+                                $lang['members_profile_edit_list'],
+                                [
+                                    'valuenumber'  => '',
+                                    'fieldchoices' => '',
+                                ],
+                            ],
+                            [
+                                'file',
+                                $lang['members_profile_edit_file'],
+                                [
+                                    'valuenumber'   => '',
+                                    'fieldchoices'  => 'none',
+                                    'fieldvalidate' => 'none',
+                                ],
+                            ],
+                        ],
+                    ], $field['formtype'], 'mradio');
+                }
+                showtagheader('tbody', 'valuenumber', !in_array($field['formtype'], [
+                    'radio',
+                    'select',
+                ]), 'sub');
+                showsetting('members_profile_edit_value_number', 'size', $field['size'], 'text');
+                showtagfooter('tbody');
+    
+                showtagheader('tbody', 'fieldchoices', !in_array($field['formtype'], [
+                    'file',
+                    'text',
+                    'textarea',
+                ]), 'sub');
+                showsetting('members_profile_edit_choices', 'choices', $field['choices'], 'textarea');
+                showtagfooter('tbody');
+    
+                showtagheader('tbody', 'fieldvalidate', in_array($field['formtype'], [
+                    'text',
+                    'textarea',
+                ]), 'sub');
+                showsetting('members_profile_edit_validate', 'validate', $field['validate'], 'text');
+                showtagfooter('tbody');
+            }
+            if (!$field['isfixed1']) {
 				showsetting('members_profile_edit_available', 'available', $field['available'], 'radio');
 				showsetting('members_profile_edit_unchangeable', 'unchangeable', $field['unchangeable'], 'radio');
 				showsetting('members_profile_edit_needverify', 'needverify', $field['needverify'], 'radio');
@@ -2428,15 +2613,15 @@ EOF;
 			showformfooter();
 
 		} else {
-
-			$setarr = array(
-				'invisible' => intval($_POST['invisible']),
-				'showincard' => intval($_POST['showincard']),
-				'showinregister' => intval($_POST['showinregister']),
-				'allowsearch' => intval($_POST['allowsearch']),
-				'displayorder' => intval($_POST['displayorder'])
-			);
-			if($field['customable']) {
+            
+            $setarr = [
+                'invisible'      => intval($_POST['invisible']),
+                'showincard'     => intval($_POST['showincard']),
+                'showinregister' => intval($_POST['showinregister']),
+                'allowsearch'    => intval($_POST['allowsearch']),
+                'displayorder'   => intval($_POST['displayorder']),
+            ];
+            if($field['customable']) {
 				$_POST['title'] = dhtmlspecialchars(trim($_POST['title']));
 				if(empty($_POST['title'])) {
 					cpmsg('members_profile_edit_title_empty_error', 'action=members&operation=profile&fieldid='.$fieldid, 'error');
@@ -2494,32 +2679,49 @@ EOF;
 					unset($profilegroup[$type]['field'][$fieldid]);
 				}
 			}
-			C::t('common_setting')->update('profilegroup', $profilegroup);
-			require_once libfile('function/cache');
-			if(!isset($_G['setting']['privacy']['profile']) || $_G['setting']['privacy']['profile'][$fieldid] != $_POST['privacy']) {
-				$_G['setting']['privacy']['profile'][$fieldid] = $_POST['privacy'];
-				C::t('common_setting')->update('privacy', $_G['setting']['privacy']);
-			}
-			updatecache(array('profilesetting','fields_required', 'fields_optional', 'fields_register', 'setting'));
-			include_once libfile('function/block');
-			loadcache('profilesetting', true);
-			blockclass_cache();
-			cpmsg('members_profile_edit_succeed', 'action=members&operation=profile', 'succeed');
-		}
-	} else {
+			
+            C::t('common_setting')->update('profilegroup', $profilegroup);
+			
+            require_once libfile('function/cache');
+            
+            if (!isset($_G['setting']['privacy']['profile']) || $_G['setting']['privacy']['profile'][$fieldid] != $_POST['privacy']) {
+                $_G['setting']['privacy']['profile'][$fieldid] = $_POST['privacy'];
+                C::t('common_setting')->update('privacy', $_G['setting']['privacy']);
+            }
+            
+            updatecache([
+                'profilesetting',
+                'fields_required',
+                'fields_optional',
+                'fields_register',
+                'setting',
+            ]);
+            
+            include_once libfile('function/block');
+            
+            loadcache('profilesetting', true);
+            
+            blockclass_cache();
+            
+            cpmsg('members_profile_edit_succeed', 'action=members&operation=profile', 'succeed');
+        }
+		
+    } else {
 
 		$list = [];
+		
 		foreach(C::t('common_member_profile_setting')->range() as $fieldid => $value) {
-			$list[$fieldid] = array(
-				'title'=>$value['title'],
-				'displayorder'=>$value['displayorder'],
-				'available'=>$value['available'],
-				'invisible'=>$value['invisible'],
-				'showincard'=>$value['showincard'],
-				'showinregister'=>$value['showinregister']);
-		}
-
-		unset($list['birthyear']);
+            $list[$fieldid] = [
+                'title'          => $value['title'],
+                'displayorder'   => $value['displayorder'],
+                'available'      => $value['available'],
+                'invisible'      => $value['invisible'],
+                'showincard'     => $value['showincard'],
+                'showinregister' => $value['showinregister'],
+            ];
+        }
+        
+        unset($list['birthyear']);
 		unset($list['birthmonth']);
 		unset($list['birthprovince']);
 		unset($list['birthdist']);
@@ -2530,30 +2732,64 @@ EOF;
 		unset($list['idcardtype']);
 
 		if(!submitcheck('ordersubmit')) {
-			$_GET['anchor'] = in_array($_GET['action'], array('members', 'setting')) ? $_GET['action'] : 'members';
-			$current = array($_GET['anchor'] => 1);
-			$profilenav = array(
-					array('members_profile_list', 'members&operation=profile', $current['members']),
-					array('members_profile_group', 'setting&operation=profile', $current['setting']),
-				);
-			showsubmenu($lang['members_profile'], $profilenav);
-			showtips('members_profile_tips');
-			showformheader('members&operation=profile');
-			showtableheader('', '', 'id="profiletable_header"');
-			$tdstyle = array('class="td22"', 'class="td28" width="100"', 'class="td28" width="100"', 'class="td28" width="100"', 'class="td28" width="100"', 'class="td28"', 'class="td28"');
-			showsubtitle(array('members_profile_edit_name', 'members_profile_edit_display_order', 'members_profile_edit_available', 'members_profile_edit_profile_view', 'members_profile_edit_card_view', 'members_profile_edit_reg_view', ''), 'header tbm', $tdstyle);
-			showtablefooter();
-			echo '<script>floatbottom(\'profiletable_header\');</script>';
-			showtableheader('members_profile', 'nobottom', 'id="porfiletable"');
-			showsubtitle(array('members_profile_edit_name', 'members_profile_edit_display_order', 'members_profile_edit_available', 'members_profile_edit_profile_view', 'members_profile_edit_card_view', 'members_profile_edit_reg_view', ''), 'header', $tdstyle);
-			foreach($list as $fieldid => $value) {
-				$value['available'] = '<input type="checkbox" class="checkbox" name="available['.$fieldid.']" '.($value['available'] ? 'checked="checked" ' : '').'value="1">';
-				$value['invisible'] = '<input type="checkbox" class="checkbox" name="invisible['.$fieldid.']" '.(!$value['invisible'] ? 'checked="checked" ' : '').'value="1">';
-				$value['showincard'] = '<input type="checkbox" class="checkbox" name="showincard['.$fieldid.']" '.($value['showincard'] ? 'checked="checked" ' : '').'value="1">';
-				$value['showinregister'] = '<input type="checkbox" class="checkbox" name="showinregister['.$fieldid.']" '.($value['showinregister'] ? 'checked="checked" ' : '').'value="1">';
-				$value['displayorder'] = '<input type="text" name="displayorder['.$fieldid.']" value="'.$value['displayorder'].'" size="5">';
-				$value['edit'] = '<a href="'.ADMINSCRIPT.'?action=members&operation=profile&fieldid='.$fieldid.'" title="" class="act">'.$lang['edit'].'</a>';
-				showtablerow('', [], $value);
+            $_GET['anchor'] = in_array($_GET['action'], ['members', 'setting',]) ? $_GET['action'] : 'members';
+            $current = [$_GET['anchor'] => 1];
+            
+            $profilenav = [
+                [
+                    'members_profile_list',
+                    'members&operation=profile',
+                    $current['members'],
+                ],
+                [
+                    'members_profile_group',
+                    'setting&operation=profile',
+                    $current['setting'],
+                ],
+            ];
+            
+            showsubmenu($lang['members_profile'], $profilenav);
+            showtips('members_profile_tips');
+            showformheader('members&operation=profile');
+            showtableheader('', '', 'id="profiletable_header"');
+            $tdstyle = [
+                'class="td22"',
+                'class="td28" width="100"',
+                'class="td28" width="100"',
+                'class="td28" width="100"',
+                'class="td28" width="100"',
+                'class="td28"',
+                'class="td28"',
+            ];
+            showsubtitle([
+                'members_profile_edit_name',
+                'members_profile_edit_display_order',
+                'members_profile_edit_available',
+                'members_profile_edit_profile_view',
+                'members_profile_edit_card_view',
+                'members_profile_edit_reg_view',
+                '',
+            ], 'header tbm', $tdstyle);
+            showtablefooter();
+            echo '<script>floatbottom(\'profiletable_header\');</script>';
+            showtableheader('members_profile', 'nobottom', 'id="porfiletable"');
+            showsubtitle([
+                'members_profile_edit_name',
+                'members_profile_edit_display_order',
+                'members_profile_edit_available',
+                'members_profile_edit_profile_view',
+                'members_profile_edit_card_view',
+                'members_profile_edit_reg_view',
+                '',
+            ], 'header', $tdstyle);
+            foreach ($list as $fieldid => $value) {
+                $value['available'] = '<input type="checkbox" class="checkbox" name="available[' . $fieldid . ']" ' . ($value['available'] ? 'checked="checked" ' : '') . 'value="1">';
+                $value['invisible'] = '<input type="checkbox" class="checkbox" name="invisible[' . $fieldid . ']" ' . (!$value['invisible'] ? 'checked="checked" ' : '') . 'value="1">';
+                $value['showincard'] = '<input type="checkbox" class="checkbox" name="showincard[' . $fieldid . ']" ' . ($value['showincard'] ? 'checked="checked" ' : '') . 'value="1">';
+                $value['showinregister'] = '<input type="checkbox" class="checkbox" name="showinregister[' . $fieldid . ']" ' . ($value['showinregister'] ? 'checked="checked" ' : '') . 'value="1">';
+                $value['displayorder'] = '<input type="text" name="displayorder[' . $fieldid . ']" value="' . $value['displayorder'] . '" size="5">';
+                $value['edit'] = '<a href="' . ADMINSCRIPT . '?action=members&operation=profile&fieldid=' . $fieldid . '" title="" class="act">' . $lang['edit'] . '</a>';
+                showtablerow('', [], $value);
 			}
 			showsubmit('ordersubmit');
 			showtablefooter();
@@ -2568,34 +2804,40 @@ EOF;
 					'showinregister' => intval($_GET['showinregister'][$fieldid]),
 				);
 				C::t('common_member_profile_setting')->update($fieldid, $setarr);
-
-				if($fieldid == 'birthday') {
-					C::t('common_member_profile_setting')->update('birthmonth', $setarr);
-					C::t('common_member_profile_setting')->update('birthyear', $setarr);
-				} elseif($fieldid == 'birthcity') {
-					C::t('common_member_profile_setting')->update('birthprovince', $setarr);
-					$setarr['required'] = 0;
-					C::t('common_member_profile_setting')->update('birthdist', $setarr);
-					C::t('common_member_profile_setting')->update('birthcommunity', $setarr);
-				} elseif($fieldid == 'residecity') {
-					C::t('common_member_profile_setting')->update('resideprovince', $setarr);
-					$setarr['required'] = 0;
-					C::t('common_member_profile_setting')->update('residedist', $setarr);
-					C::t('common_member_profile_setting')->update('residecommunity', $setarr);
-				} elseif($fieldid == 'idcard') {
-					C::t('common_member_profile_setting')->update('idcardtype', $setarr);
-				}
-
-			}
-			require_once libfile('function/cache');
-			updatecache(array('profilesetting', 'fields_required', 'fields_optional', 'fields_register', 'setting'));
-			include_once libfile('function/block');
-			loadcache('profilesetting', true);
-			blockclass_cache();
-			cpmsg('members_profile_edit_succeed', 'action=members&operation=profile', 'succeed');
-		}
-	}
-
+                
+                if ($fieldid == 'birthday') {
+                    C::t('common_member_profile_setting')->update('birthmonth', $setarr);
+                    C::t('common_member_profile_setting')->update('birthyear', $setarr);
+                } elseif ($fieldid == 'birthcity') {
+                    C::t('common_member_profile_setting')->update('birthprovince', $setarr);
+                    $setarr['required'] = 0;
+                    C::t('common_member_profile_setting')->update('birthdist', $setarr);
+                    C::t('common_member_profile_setting')->update('birthcommunity', $setarr);
+                } elseif ($fieldid == 'residecity') {
+                    C::t('common_member_profile_setting')->update('resideprovince', $setarr);
+                    $setarr['required'] = 0;
+                    C::t('common_member_profile_setting')->update('residedist', $setarr);
+                    C::t('common_member_profile_setting')->update('residecommunity', $setarr);
+                } elseif ($fieldid == 'idcard') {
+                    C::t('common_member_profile_setting')->update('idcardtype', $setarr);
+                }
+                
+            }
+            require_once libfile('function/cache');
+            updatecache([
+                'profilesetting',
+                'fields_required',
+                'fields_optional',
+                'fields_register',
+                'setting',
+            ]);
+            include_once libfile('function/block');
+            loadcache('profilesetting', true);
+            blockclass_cache();
+            cpmsg('members_profile_edit_succeed', 'action=members&operation=profile', 'succeed');
+        }
+    }
+    
 } elseif($operation == 'stat') {
 
 	if($_GET['do'] == 'stepstat' && $_GET['t'] > 0 && $_GET['i'] > 0) {

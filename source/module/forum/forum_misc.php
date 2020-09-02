@@ -14,7 +14,6 @@ define('NOROBOT', TRUE);
 
 require_once libfile('function/post');
 
-$feed = [];
 if($_GET['action'] == 'paysucceed') {
 	$orderid = trim($_GET['orderid']);
 	$url = !empty($orderid) ? 'forum.php?mod=trade&orderid='.$orderid : 'home.php?mod=spacecp&ac=credit';
@@ -243,7 +242,7 @@ if($_GET['action'] == 'paysucceed') {
 		showmessage('postcomment_error');
 	}
 	$extra = !empty($_GET['extra']) ? rawurlencode($_GET['extra']) : '';
-	list($seccodecheck, $secqaacheck) = seccheck('post', 'reply');
+	[$seccodecheck, $secqaacheck] = seccheck('post', 'reply');
 
 	include template('forum/comment');
 
@@ -506,37 +505,43 @@ if($_GET['action'] == 'votepoll' && submitcheck('pollsubmit', 1)) {
 		showmessage('thread_poll_invalid', NULL, [], array('login' => 1));
 	}
 
-	$pollarray = C::t('forum_poll')->fetch($_G['tid']);
-	$overt = $pollarray['overt'];
-	if(!$pollarray) {
+	$poll = C::t('forum_poll')->fetch($_G['tid']);
+	
+	$overt = $poll['overt'];
+	
+	if(!$poll) {
 		showmessage('poll_not_found');
-	} elseif($pollarray['expiration'] && $pollarray['expiration'] < TIMESTAMP) {
+	} elseif($poll['expiration'] && $poll['expiration'] < TIMESTAMP) {
 		showmessage('poll_overdue', NULL, [], array('login' => 1));
-	} elseif($pollarray['maxchoices'] && $pollarray['maxchoices'] < count($_GET['pollanswers'])) {
-		showmessage('poll_choose_most', NULL, array('maxchoices' => $pollarray['maxchoices']), array('login' => 1));
+	} elseif($poll['maxchoices'] && $poll['maxchoices'] < count($_GET['pollanswers'])) {
+		showmessage('poll_choose_most', NULL, array('maxchoices' => $poll['maxchoices']), array('login' => 1));
 	}
 
 	$voterids = $_G['uid'] ? $_G['uid'] : $_G['clientip'];
-
-	$polloptionid = [];
-	$query = C::t('forum_polloption')->fetch_all_by_tid($_G['tid']);
-	foreach($query as $pollarray) {
-		if(strexists("\t".$pollarray['voterids']."\t", "\t".$voterids."\t")) {
-			showmessage('thread_poll_voted', NULL, [], array('login' => 1));
-		}
-		$polloptionid[] = $pollarray['polloptionid'];
-	}
-
-	$polloptionids = [];
+    $options = C::t('forum_polloption')->fetch_all_by_tid($_G['tid']);
+    
+    $options_id = [];
+    $options_title = [];
+    foreach ($options as $pollarray) {
+        if (strexists("\t" . $pollarray['voterids'] . "\t", "\t" . $voterids . "\t")) {
+            showmessage('thread_poll_voted', null, [], ['login' => 1]);
+        }
+        $options_id[] = $pollarray['polloptionid'];
+        $options_title[$pollarray['polloptionid']] = $pollarray['polloption'];
+    }
+    
+    $my_polls_id = [];
+    $my_polls_title = [];
 	foreach($_GET['pollanswers'] as $key => $id) {
-		if(!in_array($id, $polloptionid)) {
+		if(!in_array($id, $options_id)) {
 			showmessage('parameters_error');
 		}
-		unset($polloptionid[$key]);
-		$polloptionids[] = $id;
+		unset($options_id[$key]);
+		$my_polls_id[]    = $id;
+        $my_polls_title[] = $options_title[$id];
 	}
     
-    C::t('forum_polloption')->update_vote($polloptionids, $voterids . "\t", 1);
+    C::t('forum_polloption')->update_vote($my_polls_id, $voterids . "\t", 1);
     C::t('forum_thread')->update($_G['tid'], ['lastpost' => $_G['timestamp']], true);
     C::t('forum_poll')->update_vote($_G['tid']);
     C::t('forum_pollvoter')->insert([
@@ -546,22 +551,65 @@ if($_GET['action'] == 'votepoll' && submitcheck('pollsubmit', 1)) {
         'options'  => implode("\t", $_GET['pollanswers']),
         'dateline' => $_G['timestamp'],
     ]);
+    
     updatecreditbyaction('joinpoll');
 
 	$space = [];
 	space_merge($space, 'field_home');
-    
+ 
     if ($overt && !empty($space['privacy']['feed']['newreply'])) {
-        $feed['icon'] = 'poll';
-        $feed['title_template'] = 'feed_thread_votepoll_title';
-        $feed['title_data'] = [
-            'subject'   => "<a href=\"forum.php?mod=viewthread&tid=$_G[tid]\">$thread[subject]</a>",
-            'author'    => "<a href=\"home.php?mod=space&uid=$thread[authorid]\">$thread[author]</a>",
-            'hash_data' => "tid{$_G[tid]}",
+        $avatar = avatar($thread['authorid'],'',true);
+        
+        $feed = [
+            'icon'           => 'poll',
+            'title_template' => 'thread_poll_vote',
+            'title_data'     => [
+                'hash_data' => 'tid' . $_G['tid'],
+                'tid'       => $_G['tid'],
+                'tsub'      => $thread['subject'],
+                'tlink'     => 'forum.php?mod=viewthread&tid=' . $_G['tid'],
+        
+                'uid'       => $thread['authorid'],
+                'uname'     => $thread['author'],
+                'ulink'     => 'home.php?mod=space&uid=' . $thread['authorid'],
+                'uavatar' => $avatar,
+            ],
+            'body_template'  => 'thread_poll_vote',
+            'body_data'      => [
+                'tid'     => $_G['tid'],
+                'tsub'    => $thread['subject'],
+                'tlink'   => 'forum.php?mod=viewthread&tid=' . $_G['tid'],
+        
+                'uid'     => $thread['authorid'],
+                'uname'   => $thread['author'],
+                'ulink'   => 'home.php?mod=space&uid=' . $thread['authorid'],
+                'uavatar' => $avatar,
+                
+                'option' => implode("，", $my_polls_title),
+            ],
+            'id'             => $_G['tid'],
+            'idtype'         => 'tid',
         ];
-        $feed['id'] = $_G['tid'];
-        $feed['idtype'] = 'tid';
-        postfeed($feed);
+        
+        if($poll['isimage']){
+            require_once libfile('function/home');
+            $imgop = C::t('forum_polloption_image')->fetch_all_by_tid($_G['tid']);
+            foreach ($imgop as $img_info) {
+                if(in_array($img_info['poid'], $my_polls_id)){
+                    $feed['body_data']['imgs'][] = [
+                        'img'      => pic_get($img_info['attachment'], 'forum', $img_info['thumb'], $img_info['remote']),
+                        'img_id'   => $img_info['pid'],
+                        'img_url'  => 'forum.php?mod=viewthread&tid=' . $_G['tid'],
+                        'img_name' => $options_title[$img_info['poid']] ? $options_title[$img_info['poid']] : $img_info['filename'],
+                    ];
+                }
+            }
+            $feed['body_data']['imgnum'] = sizeof($feed['body_data']['imgs']);
+            $feed['body_data']['retemplate'] = 'thread_poll_vote_withimg';
+        }
+        
+        require_once libfile('function/feed');
+        feed_add($feed);
     }
     
     if(!empty($_G['inajax'])) {
@@ -571,11 +619,11 @@ if($_GET['action'] == 'votepoll' && submitcheck('pollsubmit', 1)) {
 	}
 
 } elseif($_GET['action'] == 'viewvote') {
-	if($_G[forum_thread][special] != 1) {
+	if($_G['forum_thread']['special'] != 1) {
 		showmessage('thread_poll_none');
 	}
 	require_once libfile('function/post');
-	$polloptionid = is_numeric($_GET['polloptionid']) ? $_GET['polloptionid'] : '';
+	$options_id = is_numeric($_GET['polloptionid']) ? $_GET['polloptionid'] : '';
 
 	$page = intval($_GET['page']) ? intval($_GET['page']) : 1;
 	$perpage = 100;
@@ -583,10 +631,12 @@ if($_GET['action'] == 'votepoll' && submitcheck('pollsubmit', 1)) {
 	$overt = $pollinfo['overt'];
 
 	$polloptions = [];
+	
 	$query = C::t('forum_polloption')->fetch_all_by_tid($_G['tid']);
+	
 	foreach($query as $options) {
-		if(empty($polloptionid)) {
-			$polloptionid = $options['polloptionid'];
+		if(empty($options_id)) {
+			$options_id = $options['polloptionid'];
 		}
 		$options['polloption'] = preg_replace("/\[url=(https?){1}:\/\/([^\[\"']+?)\](.+?)\[\/url\]/i",
 			"<a href=\"\\1://\\2\" target=\"_blank\">\\3</a>", $options['polloption']);
@@ -595,7 +645,7 @@ if($_GET['action'] == 'votepoll' && submitcheck('pollsubmit', 1)) {
 
 	$arrvoterids = [];
 	if($overt || $_G['adminid'] == 1 || $thread['authorid'] == $_G['uid']) {
-		$polloptioninfo = C::t('forum_polloption')->fetch($polloptionid);
+		$polloptioninfo = C::t('forum_polloption')->fetch($options_id);
 		$voterids = $polloptioninfo['voterids'];
 		$arrvoterids = explode("\t", trim($voterids));
 	} else {
@@ -605,7 +655,7 @@ if($_GET['action'] == 'votepoll' && submitcheck('pollsubmit', 1)) {
 	if(!empty($arrvoterids)) {
 		$count = count($arrvoterids);
 		$multi = $perpage * ($page - 1);
-		$multipage = multi($count, $perpage, $page, "forum.php?mod=misc&action=viewvote&tid=$_G[tid]&polloptionid=$polloptionid".( $_GET[handlekey] ? "&handlekey=".$_GET[handlekey] : '' ));
+		$multipage = multi($count, $perpage, $page, "forum.php?mod=misc&action=viewvote&tid=$_G[tid]&polloptionid=$options_id".( $_GET[handlekey] ? "&handlekey=".$_GET[handlekey] : '' ));
 		$arrvoterids = array_slice($arrvoterids, $multi, $perpage);
 	}
 	$voterlist = $voter = [];
@@ -1074,15 +1124,18 @@ if($_GET['action'] == 'votepoll' && submitcheck('pollsubmit', 1)) {
 	}
 
 	if(submitcheck('activitysubmit')) {
+	 
 		$activity = C::t('forum_activity')->fetch($_G['tid']);
+		
 		if($activity['expiration'] && $activity['expiration'] < TIMESTAMP) {
 			showmessage('activity_stop', NULL, [], array('login' => 1));
 		}
-		$applyinfo = [];
+		
 		$applyinfo = C::t('forum_activityapply')->fetch_info_for_user($_G['uid'], $_G['tid']);
 		if($applyinfo && $applyinfo['verified'] < 2) {
 			showmessage('activity_repeat_apply', NULL, [], array('login' => 1));
 		}
+		
 		$payvalue = intval($_GET['payvalue']);
 		$payment = $_GET['payment'] ? $payvalue : -1;
 		$message = cutstr(dhtmlspecialchars($_GET['message']), 200);
@@ -1116,49 +1169,97 @@ if($_GET['action'] == 'votepoll' && submitcheck('pollsubmit', 1)) {
 			}
 			$ufielddata = !empty($ufielddata) ? serialize($ufielddata) : '';
 		}
+		
 		if($_G['setting']['activitycredit'] && $activity['credit'] && empty($applyinfo['verified'])) {
 			checklowerlimit(array('extcredits'.$_G['setting']['activitycredit'] => '-'.$activity['credit']));
 			updatemembercount($_G['uid'], array($_G['setting']['activitycredit'] => '-'.$activity['credit']), true, 'ACC', $_G['tid']);
 		}
+		
 		if($applyinfo && $applyinfo['verified'] == 2) {
-			$newinfo = array(
-				'tid' => $_G['tid'],
-				'username' => $_G['username'],
-				'uid' => $_G['uid'],
-				'message' => $message,
-				'verified' => $verified,
-				'dateline' => $_G['timestamp'],
-				'payment' => $payment,
-				'ufielddata' => $ufielddata
-			);
-			C::t('forum_activityapply')->update($applyinfo['applyid'], $newinfo);
+            C::t('forum_activityapply')->update($applyinfo['applyid'], [
+                'tid'        => $_G['tid'],
+                'username'   => $_G['username'],
+                'uid'        => $_G['uid'],
+                'message'    => $message,
+                'verified'   => $verified,
+                'dateline'   => $_G['timestamp'],
+                'payment'    => $payment,
+                'ufielddata' => $ufielddata,
+            ]);
 		} else {
-			$data = array('tid' => $_G['tid'], 'username' => $_G['username'], 'uid' => $_G['uid'], 'message' => $message, 'verified' => $verified, 'dateline' => $_G['timestamp'], 'payment' => $payment, 'ufielddata' => $ufielddata);
-			C::t('forum_activityapply')->insert($data);
-		}
-
-		$applynumber = C::t('forum_activityapply')->fetch_count_for_thread($_G['tid']);
-		C::t('forum_activity')->update($_G['tid'], array('applynumber' => $applynumber));
-
-		if($thread['authorid'] != $_G['uid']) {
-			notification_add($thread['authorid'], 'activity', 'activity_notice', array(
-				'tid' => $_G['tid'],
-				'subject' => $thread['subject'],
-			));
-			$space = [];
+            C::t('forum_activityapply')->insert([
+                'tid'        => $_G['tid'],
+                'username'   => $_G['username'],
+                'uid'        => $_G['uid'],
+                'message'    => $message,
+                'verified'   => $verified,
+                'dateline'   => $_G['timestamp'],
+                'payment'    => $payment,
+                'ufielddata' => $ufielddata,
+            ]);
+        }
+        
+        $applynumber = C::t('forum_activityapply')->fetch_count_for_thread($_G['tid']);
+        
+        C::t('forum_activity')->update($_G['tid'], ['applynumber' => $applynumber]);
+        
+        if($thread['authorid'] != $_G['uid']) {
+            
+            notification_add($thread['authorid'], 'activity', 'activity_notice', [
+                'tid'     => $_G['tid'],
+                'subject' => $thread['subject'],
+            ]);
+            
+            $space = [];
+            
 			space_merge($space, 'field_home');
 
 			if(!empty($space['privacy']['feed']['newreply'])) {
-                $feed['icon'] = 'activity';
-                $feed['title_template'] = 'feed_reply_activity_title';
-                $feed['title_data'] = [
-                    'subject'   => "<a href=\"forum.php?mod=viewthread&tid=$_G[tid]\">$thread[subject]</a>",
-                    'hash_data' => "tid{$_G[tid]}",
-                ];
-                $feed['id'] = $_G['tid'];
-                $feed['idtype'] = 'tid';
+			    
+                $avatar = avatar($thread['authorid'],'',true);
+                $tlink  = 'forum.php?mod=viewthread&tid=' . $_G['tid'];
+                $ulink  = 'home.php?mod=space&uid=' . $thread['authorid'];
                 
-                postfeed($feed);
+                $feed = [
+                    'icon' => 'activity',
+                    'title_template' => 'thread_activity_reply',
+                    'title_data' => [
+                        'hash_data' => 'tid'.$_G['tid'],
+        
+                        'tid'     => $_G['tid'],
+                        'tsub'    => $thread['subject'],
+                        'tlink'   => $tlink,
+                    ],
+                    'body_template' => 'thread_activity_reply',
+                    'body_data' => [
+                        'tid'     => $_G['tid'],
+                        'tsub'    => $thread['subject'],
+                        'tlink'   => $tlink,
+        
+                        'uid'     => $thread['authorid'],
+                        'uname'   => $thread['author'],
+                        'ulink'   => $ulink,
+                        'uavatar' => $avatar,
+                        
+                        'starttime' => date('Y-m-d', $activity['starttimefrom']),
+                        'endtime'   => date('Y-m-d', $activity['starttimeto']),
+                        'location'  => $activity['place'],
+                    ],
+                    'body_general' => $message,
+                    'id' => $_G['tid'],
+                    'idtype' => 'tid'
+                ];
+                
+                if ($activity['aid']) {
+                    $feed['body_data']['imgs'][0] = [
+                        'img'      => getforumimg($activity['aid']),
+                        'img_url'  => $tlink,
+                        'img_name' => $thread['subject'],
+                    ];
+                }
+                
+                require_once libfile('function/feed');
+                feed_add($feed);
 			}
 		}
 		showmessage('activity_completion', "forum.php?mod=viewthread&tid=$_G[tid]".($_GET['from'] ? '&from='.$_GET['from'] : ''), [], array('showdialog' => 1, 'showmsg' => true, 'locationtime' => true, 'alert' => 'right'));
@@ -1542,7 +1643,7 @@ if($_GET['action'] == 'votepoll' && submitcheck('pollsubmit', 1)) {
 		}
 		$winnerchecked = array($debate['winner'] => ' checked="checked"');
 
-		list($debate['bestdebater']) = preg_split("/\s/", $debate['bestdebater']);
+		[$debate['bestdebater']] = preg_split("/\s/", $debate['bestdebater']);
 
 		include template('forum/debate_umpire');
 	} else {
@@ -1560,7 +1661,7 @@ if($_GET['action'] == 'votepoll' && submitcheck('pollsubmit', 1)) {
 		if(!($bestdebaterstand = C::t('forum_debatepost')->get_stand_by_bestuid($_G['tid'], $bestdebateruid, array($debate['uid'], $_G['uid'])))) {
 			showmessage('debate_umpire_bestdebater_invalid');
 		}
-		list($bestdebatervoters, $bestdebaterreplies) = C::t('forum_debatepost')->get_numbers_by_bestuid($_G['tid'], $bestdebateruid);
+		[$bestdebatervoters, $bestdebaterreplies] = C::t('forum_debatepost')->get_numbers_by_bestuid($_G['tid'], $bestdebateruid);
 
 		$umpirepoint = dhtmlspecialchars($_GET['umpirepoint']);
 		$bestdebater = dhtmlspecialchars($_GET['bestdebater']);

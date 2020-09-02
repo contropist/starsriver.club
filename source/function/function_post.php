@@ -67,7 +67,7 @@ function getattach_row($attach, &$attachs, &$imgattachs) {
 	if($attach['isimage'] < 1) {
 		if($attach['isimage']) {
 			$attach['url'] = $attach['remote'] ? $_G['setting']['ftp']['attachurl'] : $_G['setting']['attachurl'];
-			$attach['width'] = $attach['width'] > 300 ? 300 : $attach['width'];
+			$attach['width'] = $attach['width'] > 480 ? 480 : $attach['width'];
 		}
 		if($attach['pid']) {
 			$attachs['used'][] = $attach;
@@ -76,7 +76,7 @@ function getattach_row($attach, &$attachs, &$imgattachs) {
 		}
 	} else {
 		$attach['url'] = ($attach['remote'] ? $_G['setting']['ftp']['attachurl'] : $_G['setting']['attachurl']).'/forum';
-		$attach['width'] = $attach['width'] > 300 ? 300 : $attach['width'];
+		$attach['width'] = $attach['width'] > 480 ? 480 : $attach['width'];
 		if($attach['pid']) {
 			$imgattachs['used'][] = $attach;
 		} else {
@@ -532,26 +532,6 @@ function deletethreadcaches($tids) {
 
 function disuploadedfile($file) {
 	return function_exists('is_uploaded_file') && (is_uploaded_file($file) || is_uploaded_file(str_replace('\\\\', '\\', $file)));
-}
-
-function postfeed($feed) {
-	global $_G;
-	if($feed) {
-		require_once libfile('function/feed');
-        feed_add([
-            'icon'           => $feed['icon'],
-            'title_template' => $feed['title_template'],
-            'title_data'     => $feed['title_data'],
-            'body_template'  => $feed['body_template'],
-            'body_data'      => $feed['body_data'],
-            'body_general'   => $feed['body_general'],
-            'images'         => $feed['images'],
-            'images_link'    => $feed['image_links'],
-            'id'             => $feed['id'],
-            'idtype'         => $feed['idtype'],
-            'type'           => $feed['type'],
-        ]);
-	}
 }
 
 function messagesafeclear($message) {
