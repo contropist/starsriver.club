@@ -24,6 +24,7 @@
         'feed_reply_title'                 => '回复了 {author} 的话题 {subject}',
         'feed_reply_title_anonymous'       => '回复了话题 {subject}',
         'feed_reply_message'               => '',
+        
         'feed_reply_reward_title'          => '回复了关于 {subject} 的悬赏',
         'feed_reply_reward_message'        => '',
 
@@ -50,6 +51,7 @@
         
         'feed_template_default_title' => '动态更新',
         'feed_template_default_body'  => '',
+        
         'feed_template_doing_title' => '更新了记录',
         
         'feed_template_profile_title' => '更新了个人资料',

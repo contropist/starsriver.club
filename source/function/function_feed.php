@@ -119,6 +119,7 @@
         $feed['icon_image'] = IMGURL . "/feed/feed-type-icon/{$feed['icon']}.svg";
         
         $feed['new'] = 0;
+        
         if ($_G['cookie']['home_readfeed'] && $feed['dateline'] + 300 > $_G['cookie']['home_readfeed']) {
             $feed['new'] = 1;
         }
@@ -164,6 +165,7 @@
                                 'blogid' => $value['blogid'],
                                 'subject' => $value['subject'],
                                 'content' => getstr($content, 150, 0, 0, 0, -1),
+                                
                                 'uid' => $value['uid'],
                                 'username'   => $value['username'],
                                 'user_link'   => $userurl,
@@ -260,9 +262,11 @@
                                 'username'    => $value['username'],
                                 'user_link'   => $userurl,
                                 'user_avatar' => avatar($value['uid'],'small',true),
+                                
                                 'image'       => $value['title'] ? $value['title'] : $value['filename'],
                                 'image_togo'  => $imgurl,
                                 'image_link'  => pic_get($value['filepath'], 'album', $value['thumb'], $value['remote']),
+                                
                                 'album'       => $album['albumname'],
                                 'album_link'  => $albumurl,
                             ],
