@@ -1,5 +1,4 @@
 <IfModule mod_rewrite.c>
-	# 将 RewriteEngine 模式打开
 	RewriteEngine On
 
 	# 修改以下语句中的 /discuz 为你的论坛目录地址，如果程序放在根目录中，请将 /discuz 修改为 /
