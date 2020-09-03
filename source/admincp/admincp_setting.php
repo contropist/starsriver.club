@@ -3160,8 +3160,8 @@ EOT;
 	}
 
 	if($operation == 'attach') {
-		$settingnew['thumbwidth'] = intval($settingnew['thumbwidth']) > 0 ? intval($settingnew['thumbwidth']) : 200;
-		$settingnew['thumbheight'] = intval($settingnew['thumbheight']) > 0 ? intval($settingnew['thumbheight']) : 300;
+		$settingnew['thumbwidth'] = intval($settingnew['thumbwidth']) > 0 ? intval($settingnew['thumbwidth']) : 480;
+		$settingnew['thumbheight'] = intval($settingnew['thumbheight']) > 0 ? intval($settingnew['thumbheight']) : 480;
 		$settingnew['maxthumbwidth'] = intval($settingnew['maxthumbwidth']);
 		$settingnew['maxthumbheight'] = intval($settingnew['maxthumbheight']);
 		if($settingnew['maxthumbwidth'] < 300 || $settingnew['maxthumbheight'] < 300) {

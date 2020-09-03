@@ -119,7 +119,6 @@ if($need_count) {
 		if($tids) {
 			$query = C::t('forum_poll')->fetch_all($tids);
 			foreach($query as $value) {
-				$value['pollpreview'] = explode("\t", trim($value['pollpreview']));
 				$list[$value['tid']]['poll'] = $value;
 			}
 		}

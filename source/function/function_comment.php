@@ -207,6 +207,15 @@ function add_comment($message, $id, $idtype, $cid = 0) {
         
                 'image_link' => pic_get($pic['filepath'], 'album', $pic['thumb'], $pic['remote']),
                 'image_togo' => 'home.php?mod=space&uid=' . $tospace['uid'] . '&do=album&picid=' . $pic['picid'],
+
+                'expend0'  => '',
+                'expend1'  => '',
+                'expend2'  => '',
+                'expend3'  => '',
+                'expend4'  => '',
+                'expend5'  => '',
+                'expend6'  => '',
+                'expend7'  => '',
             ];
             $fs['target_ids'] = $album['target_ids'];
             $fs['friend'] = $album['friend'];
@@ -232,6 +241,15 @@ function add_comment($message, $id, $idtype, $cid = 0) {
                 'blog_url'     => 'home.php?mod=space&uid=' . $tospace['uid'] . '&do=blog&id=' . $id,
                 'blog_sub'     => $blog['subject'],
                 'blog_content' => getstr($blog['message'], 50, 0, 0, 0, -1),
+
+                'expend0'  => '',
+                'expend1'  => '',
+                'expend2'  => '',
+                'expend3'  => '',
+                'expend4'  => '',
+                'expend5'  => '',
+                'expend6'  => '',
+                'expend7'  => '',
             ];
     
             if(!empty($blog['pic'])){

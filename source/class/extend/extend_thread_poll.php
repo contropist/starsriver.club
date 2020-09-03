@@ -14,7 +14,8 @@ if(!defined('IN_DISCUZ')) {
 class extend_thread_poll extends extend_thread_base {
 
 	public $pollarray;
-	public $polloptionpreview;
+	
+	public $pollimgs;
 
 	public function before_newthread($parameters){
 
@@ -57,7 +58,8 @@ class extend_thread_poll extends extend_thread_base {
 	}
 
 	public function after_newthread() {
-		foreach($this->pollarray['options'] as $ppkey => $polloptvalue) {
+	    
+        foreach($this->pollarray['options'] as $ppkey => $polloptvalue) {
 			$polloptvalue = dhtmlspecialchars(trim($polloptvalue));
 			$polloptionid = C::t('forum_polloption')->insert(array('tid' => $this->tid, 'polloption' => $polloptvalue), true);
 			if($this->pollarray['pollimage'][$ppkey]) {
@@ -65,37 +67,87 @@ class extend_thread_poll extends extend_thread_base {
 				$this->pollarray['isimage'] = 1;
 			}
 		}
-		$this->polloptionpreview = '';
-		$query = C::t('forum_polloption')->fetch_all_by_tid($this->tid, 1, 2);
-		foreach($query as $option) {
-			$polloptvalue = preg_replace("/\[url=(https?){1}:\/\/([^\[\"']+?)\](.+?)\[\/url\]/i", "<a href=\"\\1://\\2\" target=\"_blank\">\\3</a>", $option['polloption']);
-			$this->polloptionpreview .= $polloptvalue."\t";
-		}
-
-		$this->polloptionpreview = daddslashes($this->polloptionpreview);
-
-		$data = array('tid' => $this->tid, 'multiple' => $this->pollarray['multiple'], 'visible' => $this->pollarray['visible'], 'maxchoices' => $this->pollarray['maxchoices'], 'expiration' => $this->pollarray['expiration'], 'overt' => $this->pollarray['overt'], 'pollpreview' => $polloptionpreview, 'isimage' => $this->pollarray['isimage']);
-		C::t('forum_poll')->insert($data);
+        
+        C::t('forum_poll')->insert([
+            'tid'         => $this->tid,
+            'multiple'    => $this->pollarray['multiple'],
+            'visible'     => $this->pollarray['visible'],
+            'maxchoices'  => $this->pollarray['maxchoices'],
+            'expiration'  => $this->pollarray['expiration'],
+            'overt'       => $this->pollarray['overt'],
+            'isimage'     => $this->pollarray['isimage'],
+        ]);
 	}
 
 	public function before_feed() {
-		$pvs = explode("\t", messagecutstr($this->polloptionpreview, 150));
-		$s = '';
-		$i = 1;
-		foreach($pvs as $pv) {
-			$s .= $i.'. '.$pv.'<br>';
-		}
-		$s .= '&nbsp;&nbsp;&nbsp;...';
-		$this->feed['icon'] = 'poll';
-		$this->feed['title_template'] = 'feed_thread_poll_title';
-		$this->feed['body_template'] = 'feed_thread_poll_message';
-		$this->feed['body_data'] = array(
-			'subject' => "<a href=\"forum.php?mod=viewthread&tid={$this->tid}\">".$this->param['subject']."</a>",
-			'message' => $s
-		);
-	}
-
-	public function before_editpost($parameters) {
+	    
+	    global $_G;
+        
+        $poll_options = C::t('forum_polloption')->fetch_all_by_tid($this->tid);
+        $poll_images = C::t('forum_polloption_image')->fetch_all_by_tid($this->tid);
+        $poll_ipop = [];
+        $poll_ul = '';
+        
+        foreach ($poll_options as $option){
+            $poll_ipop[$option['polloptionid']]['str'] = $option['polloption'];
+            $poll_ul .= '<li>'.$option['polloption'].'</li>';
+        }
+        
+        foreach ($poll_images as $img){
+            $poll_ipop[$img['poid']]['image'] = $img;
+        }
+        
+        $this->feed = [
+            'icon'           => 'poll',
+            'title_template' => 'thread_poll',
+            'title_data'     => [
+                'tid'   => $this->tid,
+                'tsub'  => $this->param['subject'],
+                'tlink' => 'forum.php?mod=viewthread&tid=' . $this->tid,
+            ],
+            'body_template'  => 'thread_poll',
+            'body_data'      => [
+                'tid'   => $this->tid,
+                'tsub'  => $this->param['subject'],
+                'tlink' => 'forum.php?mod=viewthread&tid=' . $this->tid,
+                
+                'uid'     => $_G['uid'],
+                'ulink'   => 'home.php?mod=space&uid=' . $_G['uid'],
+                'uname'   => $_G['username'],
+                'uavatar' => avatar($_G['uid'], 'small', true),
+                
+                'message' => messagecutstr(!$this->param['readperm'] ? $this->param['message'] : '', 300),
+                'option'  => '<ul class="feed-element-poll-options">' . $poll_ul . '</ul>',
+                
+                'expend0'  => '',
+                'expend1'  => '',
+                'expend2'  => '',
+                'expend3'  => '',
+                'expend4'  => '',
+                'expend5'  => '',
+                'expend6'  => '',
+                'expend7'  => '',
+            ],
+        ];
+        
+        if ($this->pollarray['isimage']) {
+            require_once libfile('function/home');
+            foreach ($poll_ipop as $option) {
+                if (!empty($option['image'])) {
+                    $img_info = $option['image'];
+                    $this->feed['body_data']['imgs'][] = [
+                        'img'      => pic_get($img_info['attachment'], 'forum', $img_info['thumb'], $img_info['remote']),
+                        'img_id'   => $img_info['pid'],
+                        'img_url'  => 'forum.php?mod=viewthread&tid=' . $this->tid,
+                        'img_name' => $option['str'] ? $option['str'] : $img_info['filename'],
+                    ];
+                }
+            }
+            $this->feed['body_data']['imgnum'] = sizeof($this->feed['body_data']['imgs']);
+        }
+    }
+    
+    public function before_editpost($parameters) {
 		$isfirstpost = $this->post['first'] ? 1 : 0;
 		$isorigauthor = $this->member['uid'] && $this->member['uid'] == $this->post['authorid'];
 		if($isfirstpost) {
@@ -167,20 +219,16 @@ class extend_thread_poll extends extend_thread_base {
 							}
 						}
 					}
-					$polloptionpreview = '';
-					$query = C::t('forum_polloption')->fetch_all_by_tid($this->thread['tid'], 1, 2);
-					foreach($query as $option) {
-						$polloptvalue = preg_replace("/\[url=(https?){1}:\/\/([^\[\"']+?)\](.+?)\[\/url\]/i", "<a href=\"\\1://\\2\" target=\"_blank\">\\3</a>", $option['polloption']);
-						$polloptionpreview .= $polloptvalue."\t";
-					}
-
-					$polloptionpreview = daddslashes($polloptionpreview);
-
-					$data = array('multiple' => $pollarray['multiple'], 'visible' => $pollarray['visible'], 'maxchoices' => $pollarray['maxchoices'], 'expiration' => $pollarray['expiration'], 'overt' => $pollarray['overt'], 'pollpreview' => $polloptionpreview);
-					if($pollarray['isimage']) {
-						$data['isimage'] = 1;
-					}
-					C::t('forum_poll')->update($this->thread['tid'], $data);
+					
+					C::t('forum_poll')->update($this->thread['tid'], [
+                        'multiple'    => $pollarray['multiple'],
+                        'visible'     => $pollarray['visible'],
+                        'maxchoices'  => $pollarray['maxchoices'],
+                        'expiration'  => $pollarray['expiration'],
+                        'overt'       => $pollarray['overt'],
+                        'isimage'     => $pollarray['isimage'] ? 1 : 0,
+                    ]);
+					
 				} else {
 					$this->param['threadupdatearr']['special'] = 0;
 					C::t('forum_poll')->delete($this->thread['tid']);

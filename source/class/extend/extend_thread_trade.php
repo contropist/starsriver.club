@@ -130,7 +130,16 @@ class extend_thread_trade extends extend_thread_base {
 				'itemname'=> "<a href=\"forum.php?mod=viewthread&do=tradeinfo&tid=".$this->tid."&pid=$pid\">$_GET[item_name]</a>",
 				'itemprice'=> $_GET['item_price'],
 				'itemcredit'=> $_GET['item_credit'],
-				'creditunit'=> $this->setting['extcredits'][$this->setting['creditstransextra'][5]]['unit'].$this->setting['extcredits'][$this->setting['creditstransextra'][5]]['title']
+				'creditunit'=> $this->setting['extcredits'][$this->setting['creditstransextra'][5]]['unit'].$this->setting['extcredits'][$this->setting['creditstransextra'][5]]['title'],
+                
+                'expend0'  => '',
+                'expend1'  => '',
+                'expend2'  => '',
+                'expend3'  => '',
+                'expend4'  => '',
+                'expend5'  => '',
+                'expend6'  => '',
+                'expend7'  => '',
 			);
 			if($_GET['tradeaid']) {
 				$this->feed['images'] = array(getforumimg($_GET['tradeaid']));
@@ -240,6 +249,14 @@ class extend_thread_trade extends extend_thread_base {
 					'itemprice'=> $_GET['item_price'],
 					'itemcredit'=> $_GET['item_credit'],
 					'creditunit'=> $extcredits[$creditstransextra[5]]['unit'].$extcredits[$creditstransextra[5]]['title'],
+                    'expend0'  => '',
+                    'expend1'  => '',
+                    'expend2'  => '',
+                    'expend3'  => '',
+                    'expend4'  => '',
+                    'expend5'  => '',
+                    'expend6'  => '',
+                    'expend7'  => '',
 				);
 				if($_GET['tradeaid']) {
 					$this->feed['images'] = array(getforumimg($_GET['tradeaid']));

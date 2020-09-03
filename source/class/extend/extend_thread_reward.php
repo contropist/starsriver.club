@@ -52,6 +52,15 @@ class extend_thread_reward extends extend_thread_base {
 			'subject'=> "<a href=\"forum.php?mod=viewthread&tid={$this->tid}\">".$this->param['subject']."</a>",
 			'rewardprice'=> $this->rewardprice,
 			'extcredits' => $this->setting['extcredits'][$this->setting['creditstransextra']['2']]['title'],
+            
+            'expend0'  => '',
+            'expend1'  => '',
+            'expend2'  => '',
+            'expend3'  => '',
+            'expend4'  => '',
+            'expend5'  => '',
+            'expend6'  => '',
+            'expend7'  => '',
 		);
 	}
 

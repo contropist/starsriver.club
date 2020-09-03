@@ -418,7 +418,7 @@ class table_forum_thread extends discuz_table
 		}
 		$wheresql = ' WHERE '.implode(' AND ', $wherearr);
 		$ordersql = !empty($order) ? ' ORDER BY '.DB::order($order, 'DESC') : '';
-		return DB::fetch_all("SELECT t.tid, t.fid, t.author, t.authorid, t.subject, t.dateline, t.favtimes, t.sharetimes, t.heats,  p.pollpreview, p.voters FROM %t t LEFT JOIN %t p ON p.tid=t.tid $wheresql $ordersql ".DB::limit($start, $limit), $parameter, $this->_pk);
+		return DB::fetch_all("SELECT t.tid, t.fid, t.author, t.authorid, t.subject, t.dateline, t.favtimes, t.sharetimes, t.heats, p.voters FROM %t t LEFT JOIN %t p ON p.tid=t.tid $wheresql $ordersql ".DB::limit($start, $limit), $parameter, $this->_pk);
 	}
 	public function fetch_all_rank_activity($dateline, $notfid, $order = 'dateline', $start = 0, $limit = 0) {
 		$parameter = array($this->get_table_name(), 'forum_activity');

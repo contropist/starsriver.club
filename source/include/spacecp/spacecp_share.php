@@ -379,19 +379,46 @@ if($_GET['op'] == 'delete') {
             if (preg_match("/\.(mp4|mkv|avi|webm|3gp|wmv|mpg|vob|mov)$/i", $link)) {
                 $type = 'video';
                 $arr['body_data'] = [
-                    'url' => $link
+                    'url' => $link,
+                    
+                    'expend0'  => '',
+                    'expend1'  => '',
+                    'expend2'  => '',
+                    'expend3'  => '',
+                    'expend4'  => '',
+                    'expend5'  => '',
+                    'expend6'  => '',
+                    'expend7'  => '',
                 ];
             } elseif (preg_match("/\.(mp3|wma|ogg|ape|flac|aac|ac3|mmf|amr|m4a|m4r|wav|wavpack|mp2)$/i", $link)) {
                 $type = 'music';
                 $arr['body_data'] = [
                     'url' => $link,
-                    'name' => pathinfo($link)['filename']
+                    'name' => pathinfo($link)['filename'],
+                    
+                    'expend0'  => '',
+                    'expend1'  => '',
+                    'expend2'  => '',
+                    'expend3'  => '',
+                    'expend4'  => '',
+                    'expend5'  => '',
+                    'expend6'  => '',
+                    'expend7'  => '',
                 ];
             } elseif (preg_match("/\.(webp|jpg|jpeg|png|ico|bmp|gif|tif|tga)$/i", $link)) {
                 $type = 'pic';
                 $arr['body_data'] = [
                     'url' => $link,
-                    'name' => pathinfo($link)['filename']
+                    'name' => pathinfo($link)['filename'],
+
+                    'expend0'  => '',
+                    'expend1'  => '',
+                    'expend2'  => '',
+                    'expend3'  => '',
+                    'expend4'  => '',
+                    'expend5'  => '',
+                    'expend6'  => '',
+                    'expend7'  => '',
                 ];
             } elseif (preg_match("/\<iframe\s.*src=\"(.*?)\".*\>.*\<\/iframe\>/is", $link, $linkmatch)) {
                 $hostmatchs = [];
@@ -417,7 +444,16 @@ if($_GET['op'] == 'delete') {
                 if(in_array($hostmatchs[1],$support_url)){
                     $type = 'iframe';
                     $arr['body_data'] = [
-                        'url' => $linkmatch[1]
+                        'url' => $linkmatch[1],
+
+                        'expend0'  => '',
+                        'expend1'  => '',
+                        'expend2'  => '',
+                        'expend3'  => '',
+                        'expend4'  => '',
+                        'expend5'  => '',
+                        'expend6'  => '',
+                        'expend7'  => '',
                     ];
                 } else {
                     showmessage('iframe_incorrect_format');
@@ -435,7 +471,16 @@ if($_GET['op'] == 'delete') {
 
                 $arr['body_data'] = [
                     'url' => $link,
-                    'name' => sub_url($link, 45)
+                    'name' => sub_url($link, 45),
+
+                    'expend0'  => '',
+                    'expend1'  => '',
+                    'expend2'  => '',
+                    'expend3'  => '',
+                    'expend4'  => '',
+                    'expend5'  => '',
+                    'expend6'  => '',
+                    'expend7'  => '',
                 ];
 
                 require_once libfile('function/discuzcode');
@@ -452,7 +497,16 @@ if($_GET['op'] == 'delete') {
                         'title' => geturltitle($link),
                         'url' => $link,
                         'imgurl' =>   $flashvar['imgurl'],
-                        'flashvar' => $flashvar['flv']
+                        'flashvar' => $flashvar['flv'],
+
+                        'expend0'  => '',
+                        'expend1'  => '',
+                        'expend2'  => '',
+                        'expend3'  => '',
+                        'expend4'  => '',
+                        'expend5'  => '',
+                        'expend6'  => '',
+                        'expend7'  => '',
                     ];
                 }
             }

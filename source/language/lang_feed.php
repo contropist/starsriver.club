@@ -1,12 +1,5 @@
 <?php
-    
-    /**
-     *      [Discuz!] (C)2001-2099 Comsenz Inc.
-     *      This is NOT a freeware, use is subject to license terms
-     *
-     *      $Id: lang_feed.php 27449 2012-02-01 05:32:35Z zhangguosheng $
-     */
-    
+
     if (!defined('IN_DISCUZ')) {
         exit('Access Denied');
     }
@@ -30,27 +23,26 @@
 
         'feed_thread_title'                => '发表了新话题',
         'feed_thread_message'              => '<div class="thread"><span class="title">{subject}</span><div class="article">{message}</div></div>',
-        'feed_thread_poll_title'           => '发起了新投票',
-        'feed_thread_poll_message'         => '<div class="thread"><span class="title">{subject}</span><div class="article">{message}</div></div>',
         'feed_thread_goods_title'          => '出售了一个新商品',
         'feed_thread_goods_message_1'      => '<b>{itemname}</b><br>售价 {itemprice} 元 附加 {itemcredit}{creditunit}',
         'feed_thread_goods_message_2'      => '<b>{itemname}</b><br>售价 {itemprice} 元',
         'feed_thread_goods_message_3'      => '<b>{itemname}</b><br>售价 {itemcredit}{creditunit}',
         'feed_thread_reward_title'         => '发起了新悬赏',
         'feed_thread_reward_message'       => '<b>{subject}</b><br>悬赏 {rewardprice}{extcredits}',
-        'feed_thread_debate_title'         => '发起了新辩论',
-        'feed_thread_debate_message'       => '<b>{subject}</b><br>红方：{affirmpoint}<br>蓝方：{negapoint}<br>{message}',
-        'feed_thread_debatevote_title_1'   => '以红方身份参与了关于 {subject} 的辩论',
-        'feed_thread_debatevote_title_2'   => '以蓝方身份参与了关于 {subject} 的辩论',
-        'feed_thread_debatevote_title_3'   => '以中立身份参与了关于 {subject} 的辩论',
-        'feed_thread_debatevote_message_1' => '',
-        'feed_thread_debatevote_message_2' => '',
-        'feed_thread_debatevote_message_3' => '',
         
-        /* 参数注释标志：@-title或body T-仅title B-仅body */
+        /*
+         * 参数注释标志：
+         * @ - title或body
+         * T - 仅title
+         * B - 仅body
+         *
+         * 通用扩展参数::为【避免】【系统更新】和【模板更新】导致【早期数据库】中【参数不足】问题，预留给后期增加参数使用。
+         * B {expend0~8}
+         *
+         * */
         
         'feed_template_default_title' => '动态更新',
-        'feed_template_default_body'  => '',
+        'feed_template_default_body'  => '我更新了自己的动态',
         
         'feed_template_doing_title' => '更新了记录',
         
@@ -63,7 +55,136 @@
         'feed_profile_update_bbs'     => '我更新了自己的论坛信息',
         'feed_profile_update_verify'  => '我更新了自己的认证信息',
 
+
+        /*
+        * feed-thread-debate
+        *
+        * @ {tid}     :帖子ID
+        * @ {tsub}    :帖子标题
+        * @ {tink}    :帖子链接
+         *
+        * B {uid}      :用户ID
+        * B {uname}    :用户名
+        * B {ulink}    :用户空间链接
+        * B {uavatar}  :用户头像源链接
+         *
+        * B {message}      :简介
+        * B {affirmpoint}  :红方观点
+        * B {negapoint}    :蓝方观点
+        *
+        * */
+        'feed_template_thread_debate_title' => '我发起了辩论<a class="link ellipsis" href="{tlink}" target="_blank">{tsub}</a>',
+        'feed_template_thread_debate_body'  => '
+            <div class="feed-element-debate">
+                <a class="user-tag" href="{ulink}" target="_blank" c="1">
+                    <s class="avatar"><img class="avatar-main" src="{uavatar}"></s>
+                    <s class="username">{uname}</s>
+                </a>
+                <a class="thread-title" href="{tlink}" target="_blank">{tsub}</a>
+                <div class="content">{message}</div>
+                <div class="attitude">
+                    <i>红方：{affirmpoint}</i>
+                    <i>蓝方：{negapoint}</i>
+                </div>
+            </div>',
         
+        
+        /*
+        * feed-thread-debate.vote
+        *
+        * @ {tid}     :帖子ID
+        * @ {tsub}    :帖子标题
+        * @ {tink}    :帖子链接
+         *
+        * T {stand}    :立场
+         *
+        * B {uid}      :用户ID
+        * B {uname}    :用户名
+        * B {ulink}    :用户空间链接
+        * B {uavatar}  :用户头像源链接
+        *
+        * */
+        'feed_vote'   => '中立',
+        'feed_vote_1' => '红方',
+        'feed_vote_2' => '蓝方',
+        'feed_template_thread_debate_vote_title'   => '以{stand}立场加入了辩论 <a class="link ellipsis" href="{tlink}" target="_blank">{tsub}</a>',
+        'feed_template_thread_debate_vote_body' => '
+            <div class="feed-element-debate-vote">
+                <a class="user-tag" href="{ulink}" target="_blank" c="1">
+                    <s class="avatar"><img class="avatar-main" src="{uavatar}"></s>
+                    <s class="username">{uname}</s>
+                </a>
+                <a class="thread-title" href="{tlink}" target="_blank">{tsub}</a>
+            </div>',
+        
+
+        /*
+        * feed-thread-poll
+        *
+        * @ {tid}     :帖子ID
+        * @ {tsub}    :帖子标题
+        * @ {tink}    :帖子链接
+         *
+        * B {uid}      :用户ID
+        * B {uname}    :用户名
+        * B {ulink}    :用户空间链接
+        * B {uavatar}  :用户头像源链接
+         *
+        * B {option}   :投票介绍
+        * B {message}  :投票选项
+        *
+        * */
+        'feed_template_thread_poll_title' => '我发起了投票<a class="link ellipsis" href="{tlink}" target="_blank">{tsub}</a>',
+        'feed_template_thread_poll_body'  => '
+            <div class="feed-element-poll">
+                <a class="user-tag" href="{ulink}" target="_blank" c="1">
+                    <s class="avatar"><img class="avatar-main" src="{uavatar}"></s>
+                    <s class="username">{uname}</s>
+                </a>
+                <a class="thread-title" href="{tlink}" target="_blank">{tsub}</a>
+                <div class="content">{message}</div>
+                <div class="options">{option}</div>
+            </div>',
+
+
+        /*
+        * feed-thread-poll.vote
+        *
+        * @ {tid}     :帖子ID
+        * @ {tsub}    :帖子标题
+        * @ {tink}    :帖子链接
+         *
+        * B {uid}      :用户ID
+        * B {uname}    :用户名
+        * B {ulink}    :用户空间链接
+        * B {uavatar}  :用户头像源链接
+         *
+        * B {option}   :投出的票
+        *
+        * */
+        'feed_template_thread_poll_vote_title' => '我参与了投票<a class="link ellipsis" href="{tlink}" target="_blank">{tsub}</a>',
+        'feed_template_thread_poll_vote_body'  => '
+            <div class="feed-element-poll-vote">
+                <a class="user-tag" href="{ulink}" target="_blank" c="1">
+                    <s class="avatar"><img class="avatar-main" src="{uavatar}"></s>
+                    <s class="username">{uname}</s>
+                </a>
+                <a class="thread-title" href="{tlink}" target="_blank">{tsub}</a>
+                <div class="options">我将选票投给了：{option}</div>
+            </div>',
+
+        'feed_template_thread_poll_vote_withimg_title' => '我参与了图片投票<a class="link ellipsis" href="{tlink}" target="_blank">{tsub}</a>',
+        'feed_template_thread_poll_vote_withimg_body'  => '
+            <div class="feed-element-votepoll">
+                <a class="user-tag" href="{ulink}" target="_blank" c="1">
+                    <s class="avatar"><img class="avatar-main" src="{uavatar}"></s>
+                    <s class="username">{uname}</s>
+                </a>
+                <a class="thread-title" href="{tlink}" target="_blank">{tsub}</a>
+                <div class="options">我将选票投给了：{option}</div>
+            </div>',
+
+
         /*
         * feed-thread-activity
         *
@@ -83,11 +204,11 @@
         * B {message}    :活动介绍
         *
         * */
-        'feed_template_thread_activity_title' => '发起了新活动<a class="link ellipsis" href="{tlink}" target="_blank">{tsub}</a>',
+        'feed_template_thread_activity_title' => '我发起了活动<a class="link ellipsis" href="{tlink}" target="_blank">{tsub}</a>',
         'feed_template_thread_activity_body'  => '
             <div class="feed-element-activity">
                 <a class="subject ellipsis" href="{tlink}" target="_blank">{tsub}</a>
-                <a class="user-tag" href="{ulink}" target="_blank">
+                <a class="user-tag" href="{ulink}" target="_blank" c="1">
                     <s class="avatar"><img class="avatar-main" src="{uavatar}"></s>
                     <s class="username">{uname}</s>
                 </a>
@@ -115,11 +236,11 @@
         * B {location}  :活动地点
         *
         * */
-        'feed_template_thread_activity_reply_title' => '报名了活动<a class="link ellipsis" href="{tlink}" target="_blank">{tsub}</a>',
+        'feed_template_thread_activity_reply_title' => '我报名了活动<a class="link ellipsis" href="{tlink}" target="_blank">{tsub}</a>',
         'feed_template_thread_activity_reply_body'  => '
             <div class="feed-element-activity">
                 <a class="subject ellipsis" href="{tlink}" target="_blank">{tsub}</a>
-                <a class="user-tag" href="{ulink}" target="_blank">
+                <a class="user-tag" href="{ulink}" target="_blank" c="1">
                     <s class="avatar"><img class="avatar-main" src="{uavatar}"></s>
                     <s class="username">{uname}</s>
                 </a>
@@ -128,43 +249,7 @@
                     <div class="activity-info-loca"><i class="loca"></i>活动地点：{location}</div>
                 </div>
             </div>',
-
-
-        /*
-        * feed-thread-poll.vote
-        *
-        * @ {tid}     :帖子ID
-        * @ {tsub}    :帖子标题
-        * @ {tink}    :帖子链接
-         *
-        * @ {uid}      :用户ID
-        * @ {uname}    :用户名
-        * @ {ulink}    :用户空间链接
-        * @ {uavatar}  :用户头像源链接
-        *
-        * */
-        'feed_template_thread_poll_vote_title' => '参与了投票<a class="link ellipsis" href="{tlink}" target="_blank">{tsub}</a>',
-        'feed_template_thread_poll_vote_body'  => '
-            <div class="feed-element-votepoll">
-                <a class="user-tag" href="{ulink}" target="_blank">
-                    <s class="avatar"><img class="avatar-main" src="{uavatar}"></s>
-                    <s class="username">{uname}</s>
-                </a>
-                <a class="thread-title" href="{tlink}" target="_blank">{tsub}</a>
-                <div class="options">{option}</div>
-            </div>',
-
-        'feed_template_thread_poll_vote_withimg_title' => '参与了投票<a class="link ellipsis" href="{tlink}" target="_blank">{tsub}</a>',
-        'feed_template_thread_poll_vote_withimg_body'  => '
-            <div class="feed-element-votepoll">
-                <a class="user-tag" href="{ulink}" target="_blank">
-                    <s class="avatar"><img class="avatar-main" src="{uavatar}"></s>
-                    <s class="username">{uname}</s>
-                </a>
-                <a class="thread-title" href="{tlink}" target="_blank">{tsub}</a>
-                <div class="options">{option}</div>
-            </div>',
-
+        
 
         /*
         * feed-ranklist-show
@@ -177,8 +262,8 @@
         * @ {uavatar}  :用户头像源链接
         *
         * */
-        'feed_template_showcredit_title'      => '给<a class="link ellipsis" href="{ulink}" target="_blank" c="1">{uname}</a>充电<i class="highlight-gold">{credit}</i>，助力<a class="link" href="misc.php?mod=ranklist&type=member" target="_blank">续航榜</a>排名',
-        'feed_template_showcredit_self_title' => '为自己充电<i class="highlight-gold">{credit}</i>，提升了<a class="link" href="misc.php?mod=ranklist&type=member" target="_blank">续航榜</a>中的名次',
+        'feed_template_showcredit_title'      => '我给<a class="link ellipsis" href="{ulink}" target="_blank" c="1">{uname}</a>充电<i class="highlight-gold">{credit}</i>，助力<a class="link" href="misc.php?mod=ranklist&type=member" target="_blank">续航榜</a>排名',
+        'feed_template_showcredit_self_title' => '我为自己充电<i class="highlight-gold">{credit}</i>，提升了<a class="link" href="misc.php?mod=ranklist&type=member" target="_blank">续航榜</a>中的名次',
         'feed_template_showcredit_body'       => '
             <div class="feed-element-charge">
                 <div class="feed-decrater">
@@ -234,87 +319,11 @@
             </div>',
 
         
-        
 /* ↑ ↑ ↑ ↑  Unfinished  ↑ ↑ ↑ ↑*/
 
 /***********************************************************************************************************************/
 
 /* ↓ ↓ ↓ ↓  Finished  ↓ ↓ ↓ ↓ */
-        
-        
-        /*
-        * feed-click.image
-        *
-        * @ {to_uid}      :用户ID
-        * @ {to_uname}    :用户名
-        * @ {to_ulink}    :用户空间链接
-        * @ {to_uavatar}  :用户头像源链接
-        * @ {image}       :图像名称
-        * @ {image_togo}  :图像来源
-        *
-         *
-        * T {click}       :click类型
-         *
-        * B {image_link}  :图像源链接
-        *
-        * */
-        'feed_template_click_pic_title'  => '给<a class="link ellipsis" href="{to_ulink}" target="_blank" c="1">{to_uname}</a>的图片<a class="link ellipsis" href="{image_togo}" target="_blank">{image}</a> 送上了<i class="highlight-pink">「{click}」</i>',
-        'feed_template_click_pic_body'   => '
-            <div class="feed-element-image">
-                <a class="image" href="{image_togo}" target="_blank">
-                    <img src="{image_link}" />
-                </a>
-                <a class="user-tag" href="{to_ulink}" target="_blank">
-                    <s class="avatar"><img class="avatar-main" src="{to_uavatar}"></s>
-                    <s class="username">{to_uname}</s>
-                </a>
-            </div>',
-
-
-        /*
-        * feed-click.blog
-        *
-        * @ {to_uid}      :用户ID
-        * @ {to_uname}    :用户名
-        * @ {to_ulink}    :用户空间链接
-        * @ {to_uavatar}  :用户头像源链接
-        * @ {blog_url}      :博客链接
-        * @ {blog_sub}      :博客标题
-         *
-        * T {click}       :click类型
-         *
-        * B {blog_content}  :博客内容截取
-        * B {image}         :博客封面图
-        *
-        * */
-        'feed_template_click_blog_title' => '给<a class="link ellipsis" href="{to_ulink}" target="_blank" c="1">{to_uname}</a>的日志<a class="link ellipsis" href="{blog_url}" target="_blank">{blog_sub}</a>送上了<i class="highlight-pink">「{click}」</i>',
-        'feed_template_click_blog_body'  => '
-            <div class="feed-element-evaluate-article">
-                <div class="detail">
-                    <a class="subject ellipsis" href="{blog_url}" target="_blank">{blog_sub}</a>
-                    <a class="user-tag ellipsis" href="{to_ulink}" target="_blank">
-                        <s class="avatar"><img class="avatar-main" src="{to_uavatar}"></s>
-                        <s class="username">{to_uname}</s>
-                    </a>
-                    <div class="content">{blog_content}</div>
-                </div>
-            </div>',
-
-        'feed_template_click_blog_withimg_title' => '给<a class="link ellipsis" href="{to_ulink}" target="_blank" c="1">{to_uname}</a>的日志<a class="link ellipsis" href="{blog_url}" target="_blank">{blog_sub}</a>送上了<i class="highlight-pink">「{click}」</i>',
-        'feed_template_click_blog_withimg_body'  => '
-            <div class="feed-element-evaluate-article withimg">
-                <div class="image rec-img" style="background-image: url(\'{image}\')">
-                    <img src="' . LIBURL . '/img/row-e-col/1.1.png">
-                </div>
-                <div class="detail">
-                    <a class="subject ellipsis" href="{blog_url}" target="_blank">{blog_sub}</a>
-                    <a class="user-tag ellipsis" href="{to_ulink}" target="_blank">
-                        <s class="avatar"><img class="avatar-main" src="{to_uavatar}"></s>
-                        <s class="username">{to_uname}</s>
-                    </a>
-                    <div class="content">{blog_content}</div>
-                </div>
-            </div>',
 
 
         /*
@@ -364,46 +373,69 @@
 
 
         /*
-        * feed-comment.space.wall
-        *
-        * T {to_uid}      :用户ID
-        * T {to_uname}    :用户名
-        * T {to_ulink}    :用户空间链接
-        * T {to_uavatar}  :用户头像源链接
-        *
-        * */
-        'feed_template_comment_space_title' => '在<a class="link ellipsis" href="{to_ulink}" target="_blank" c="1">{to_uname}</a>的空间留言道',
-
-
-        /*
-        * feed-comment.share
-        *
-        * T {to_uid}      :用户ID
-        * T {to_uname}    :用户名
-        * T {to_ulink}    :用户空间链接
-        * T {to_uavatar}  :用户头像源链接
-         *
-        * T {share_url}   :分享链接
-        * T {share_act}   :分享名
-        *
-        * */
-        'feed_template_comment_share_title' => '评论了<a class="link ellipsis" href="{to_ulink}" target="_blank" c="1">{to_uname}</a>分享的<a class="link ellipsis" href="{share_url}" target="_blank">{share_act}</a>',
-
-
-        /*
-        * feed-comment.image
+        * feed-click.blog
         *
         * @ {to_uid}      :用户ID
         * @ {to_uname}    :用户名
         * @ {to_ulink}    :用户空间链接
         * @ {to_uavatar}  :用户头像源链接
+        * @ {blog_url}      :博客链接
+        * @ {blog_sub}      :博客标题
          *
-        * B {image_togo}  :图像来源
+        * T {click}       :click类型
+         *
+        * B {blog_content}  :博客内容截取
+        * B {image}         :博客封面图
+        *
+        * */
+        'feed_template_click_blog_title' => '给<a class="link ellipsis" href="{to_ulink}" target="_blank" c="1">{to_uname}</a>的日志<a class="link ellipsis" href="{blog_url}" target="_blank">{blog_sub}</a>送上了<i class="highlight-pink">「{click}」</i>',
+        'feed_template_click_blog_body'  => '
+            <div class="feed-element-evaluate-article">
+                <div class="detail">
+                    <a class="subject ellipsis" href="{blog_url}" target="_blank">{blog_sub}</a>
+                    <a class="user-tag ellipsis" href="{to_ulink}" target="_blank">
+                        <s class="avatar"><img class="avatar-main" src="{to_uavatar}"></s>
+                        <s class="username">{to_uname}</s>
+                    </a>
+                    <div class="content">{blog_content}</div>
+                </div>
+            </div>',
+
+        'feed_template_click_blog_withimg_title' => '给<a class="link ellipsis" href="{to_ulink}" target="_blank" c="1">{to_uname}</a>的日志<a class="link ellipsis" href="{blog_url}" target="_blank">{blog_sub}</a>送上了<i class="highlight-pink">「{click}」</i>',
+        'feed_template_click_blog_withimg_body'  => '
+            <div class="feed-element-evaluate-article withimg">
+                <div class="image rec-img" style="background-image: url(\'{image}\')">
+                    <img src="' . LIBURL . '/img/row-e-col/1.1.png">
+                </div>
+                <div class="detail">
+                    <a class="subject ellipsis" href="{blog_url}" target="_blank">{blog_sub}</a>
+                    <a class="user-tag ellipsis" href="{to_ulink}" target="_blank">
+                        <s class="avatar"><img class="avatar-main" src="{to_uavatar}"></s>
+                        <s class="username">{to_uname}</s>
+                    </a>
+                    <div class="content">{blog_content}</div>
+                </div>
+            </div>',
+        
+        
+        /*
+        * feed-click.image
+        *
+        * @ {to_uid}      :用户ID
+        * @ {to_uname}    :用户名
+        * @ {to_ulink}    :用户空间链接
+        * @ {to_uavatar}  :用户头像源链接
+        * @ {image}       :图像名称
+        * @ {image_togo}  :图像来源
+        *
+         *
+        * T {click}       :click类型
+         *
         * B {image_link}  :图像源链接
         *
         * */
-        'feed_template_comment_image_title' => '评论了<a class="link ellipsis" href="{to_ulink}" target="_blank" c="1">{to_uname}</a>的图片',
-        'feed_template_comment_image_body'  => '
+        'feed_template_click_pic_title'  => '给<a class="link ellipsis" href="{to_ulink}" target="_blank" c="1">{to_uname}</a>的图片<a class="link ellipsis" href="{image_togo}" target="_blank">{image}</a> 送上了<i class="highlight-pink">「{click}」</i>',
+        'feed_template_click_pic_body'   => '
             <div class="feed-element-image">
                 <a class="image" href="{image_togo}" target="_blank">
                     <img src="{image_link}" />
@@ -414,6 +446,35 @@
                 </a>
             </div>',
 
+
+        /*
+        * feed-magic.thunder
+        *
+        * @ {uid}         :用户ID
+        * @ {username}    :用户名
+         *
+        * B {user_avatar}  :用户头像源链接
+        *
+        * */
+        'feed_template_magic_thunder_title' => '<a class="link ellipsis" href="home.php?mod=space&uid={uid}" style="margin-left: 0" target="_blank" c="1">{username}</a> 发出了“雷鸣之声”',
+        'feed_template_magic_thunder_body'  => '
+            <div class="feed-element-magic-thunder">
+                <a class="avatar" href="home.php?mod=space&uid={uid}" target="_blank"><img class="avatar-main" src="{user_avatar}"></a>
+                <i class="hello">初来乍到，请多多指教！我是 {username}</i>
+            </div>',
+
+        
+        /*
+        * feed-comment.space.wall
+        *
+        * T {to_uid}      :用户ID
+        * T {to_uname}    :用户名
+        * T {to_ulink}    :用户空间链接
+        * T {to_uavatar}  :用户头像源链接
+        *
+        * */
+        'feed_template_comment_space_title' => '在<a class="link ellipsis" href="{to_ulink}" target="_blank" c="1">{to_uname}</a>的空间留言道',
+        
 
         /*
         * feed-comment.blog
@@ -461,24 +522,47 @@
 
 
         /*
-        * feed-magic-thunder
+        * feed-comment.share
         *
-        * @ {uid}         :用户ID
-        * @ {username}    :用户名
+        * T {to_uid}      :用户ID
+        * T {to_uname}    :用户名
+        * T {to_ulink}    :用户空间链接
+        * T {to_uavatar}  :用户头像源链接
          *
-        * B {user_avatar}  :用户头像源链接
+        * T {share_url}   :分享链接
+        * T {share_act}   :分享名
         *
         * */
-        'feed_template_magic_thunder_title' => '<a class="link ellipsis" href="home.php?mod=space&uid={uid}" style="margin-left: 0" target="_blank" c="1">{username}</a> 发出了“雷鸣之声”',
-        'feed_template_magic_thunder_body'  => '
-            <div class="feed-element-magic-thunder">
-                <a class="avatar" href="home.php?mod=space&uid={uid}" target="_blank"><img class="avatar-main" src="{user_avatar}"></a>
-                <i class="hello">初来乍到，请多多指教！我是 {username}</i>
+        'feed_template_comment_share_title' => '评论了<a class="link ellipsis" href="{to_ulink}" target="_blank" c="1">{to_uname}</a>分享的<a class="link ellipsis" href="{share_url}" target="_blank">{share_act}</a>',
+
+
+        /*
+        * feed-comment.image
+        *
+        * @ {to_uid}      :用户ID
+        * @ {to_uname}    :用户名
+        * @ {to_ulink}    :用户空间链接
+        * @ {to_uavatar}  :用户头像源链接
+         *
+        * B {image_togo}  :图像来源
+        * B {image_link}  :图像源链接
+        *
+        * */
+        'feed_template_comment_image_title' => '评论了<a class="link ellipsis" href="{to_ulink}" target="_blank" c="1">{to_uname}</a>的图片',
+        'feed_template_comment_image_body'  => '
+            <div class="feed-element-image">
+                <a class="image" href="{image_togo}" target="_blank">
+                    <img src="{image_link}" />
+                </a>
+                <a class="user-tag" href="{to_ulink}" target="_blank">
+                    <s class="avatar"><img class="avatar-main" src="{to_uavatar}"></s>
+                    <s class="username">{to_uname}</s>
+                </a>
             </div>',
 
 
         /*
-        * feed-blog
+        * feed-space.blog
         *
         * B {uid}          :用户ID
         * B {username}     :用户名
@@ -528,7 +612,7 @@
 
 
         /*
-        * feed-album
+        * feed-space.album
         *
         * B {album}      :画廊名称
         * B {album_link} :画廊链接
@@ -542,7 +626,7 @@
 
 
         /*
-        * feed-pic
+        * feed-space.pic
         *
         * @ {image}        :图像名称
          *

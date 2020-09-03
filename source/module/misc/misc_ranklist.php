@@ -74,7 +74,6 @@ function getranklist_poll($num = 20, $view = 'heats', $orderby = 'all') {
         $poll['rank'] = $rank;
         $poll['avatar'] = avatar($poll['authorid'], 'small');
         $poll['dateline'] = dgmdate($poll['dateline']);
-        $poll['pollpreview'] = explode("\t", trim($poll['pollpreview']));
         $data[] = $poll;
     }
     return $data;

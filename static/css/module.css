@@ -8088,16 +8088,16 @@
                 transform: translate3d(0, 600px, 0);
             }
 
-            .app-userspace .page{
-                box-shadow: 0 0 0 1px rgba(0,0,0,.1);
-                transition: .2s ease-in-out;
-                transform: translate3d(0, 0, 0);
-            }
             .app-userspace .page.sleep{
                 transform: translate3d(0, 100px, 0);
             }
         }
         @media screen and (max-width:720px) {
+            .app-userspace .page{
+                box-shadow: 0 0 0 1px var(--color-lightgray);
+                transition: .2s ease-in-out;
+                transform: translate3d(0, 0, 0);
+            }
             .app-userspace .page .pg > a{
                 display: none;
             }
@@ -8689,7 +8689,19 @@
         .app-userspace .timeline .feed-element-charge{
 
         }
-        .app-userspace .timeline .feed-element-votepoll{
+        .app-userspace .timeline .feed-element-poll{
+
+        }
+        .app-userspace .timeline .feed-element-poll-vote{
+
+        }
+        .app-userspace .timeline .feed-element-debate{
+
+        }
+        .app-userspace .timeline .feed-element-debate-vote{
+
+        }
+        .app-userspace .timeline .feed-element-activity{
 
         }
         .app-userspace .timeline .feed-element-activity{

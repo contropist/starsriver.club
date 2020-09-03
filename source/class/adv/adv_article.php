@@ -17,9 +17,15 @@ class adv_article {
 	var $name = 'article_name';
 	var $description = 'article_desc';
 	var $copyright = '<a href="http://www.Discuz.com" target="_blank">Discuz Inc.</a>';
-	var $targets = array('portal');
-	var $imagesizes = array('250x60', '250x250', '250x300', '658x40', '658x60');
-	var $categoryvalue = [];
+    var $targets = ['portal'];
+    var $imagesizes = [
+        '250x60',
+        '250x250',
+        '250x300',
+        '658x40',
+        '658x60',
+    ];
+    var $categoryvalue = [];
 
 	function getsetting() {
 		global $_G;

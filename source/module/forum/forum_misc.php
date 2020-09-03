@@ -568,11 +568,6 @@ if($_GET['action'] == 'votepoll' && submitcheck('pollsubmit', 1)) {
                 'tid'       => $_G['tid'],
                 'tsub'      => $thread['subject'],
                 'tlink'     => 'forum.php?mod=viewthread&tid=' . $_G['tid'],
-        
-                'uid'       => $thread['authorid'],
-                'uname'     => $thread['author'],
-                'ulink'     => 'home.php?mod=space&uid=' . $thread['authorid'],
-                'uavatar' => $avatar,
             ],
             'body_template'  => 'thread_poll_vote',
             'body_data'      => [
@@ -586,6 +581,15 @@ if($_GET['action'] == 'votepoll' && submitcheck('pollsubmit', 1)) {
                 'uavatar' => $avatar,
                 
                 'option' => implode("，", $my_polls_title),
+
+                'expend0'  => '',
+                'expend1'  => '',
+                'expend2'  => '',
+                'expend3'  => '',
+                'expend4'  => '',
+                'expend5'  => '',
+                'expend6'  => '',
+                'expend7'  => '',
             ],
             'id'             => $_G['tid'],
             'idtype'         => 'tid',

@@ -68,8 +68,8 @@ if($_GET['operation'] == 'upload') {
 		if($attach['isimage']) {
 			require_once libfile('class/image');
 			$image = new image();
-			$thumbimgwidth = 300;
-			$thumbimgheight = 300;
+			$thumbimgwidth = 480;
+			$thumbimgheight = 480;
 			$attach['thumb'] = $image->Thumb($attach['target'], '', $thumbimgwidth, $thumbimgheight, 2);
 			$image->Watermark($attach['target'], '', 'forum');
 			$imginfo = @getimagesize($attach['target']);
@@ -192,8 +192,8 @@ if($_GET['operation'] == 'upload') {
 		if($attach['isimage'] && empty($_G['setting']['portalarticleimgthumbclosed'])) {
 			require_once libfile('class/image');
 			$image = new image();
-			$thumbimgwidth = $_G['setting']['portalarticleimgthumbwidth'] ? $_G['setting']['portalarticleimgthumbwidth'] : 300;
-			$thumbimgheight = $_G['setting']['portalarticleimgthumbheight'] ? $_G['setting']['portalarticleimgthumbheight'] : 300;
+			$thumbimgwidth = $_G['setting']['portalarticleimgthumbwidth'] ? $_G['setting']['portalarticleimgthumbwidth'] : 480;
+			$thumbimgheight = $_G['setting']['portalarticleimgthumbheight'] ? $_G['setting']['portalarticleimgthumbheight'] : 480;
 			$attach['thumb'] = $image->Thumb($attach['target'], '', $thumbimgwidth, $thumbimgheight, 2);
 			$image->Watermark($attach['target'], '', 'portal');
 		}
