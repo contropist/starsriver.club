@@ -5,12 +5,13 @@
     }
     
     $lang = [
-        'feed_attach'                 => '内容附件',
-        'feed_poll'                   => '发起了新投票',
-        'feed_comment_poll'           => '评论了 {touser} 的投票 {poll}',
-        'feed_comment_event'          => '在 {touser} 组织的活动 {event} 中留言了',
-        'feed_task'                   => '完成了有奖任务 {task}',
-        'feed_task_credit'            => '完成了有奖任务 {task}，领取了 {credit} 个奖励积分',
+    
+        'feed_attach'        => '内容附件',
+        'feed_poll'          => '发起了新投票',
+        'feed_comment_poll'  => '评论了 {touser} 的投票 {poll}',
+        'feed_comment_event' => '在 {touser} 组织的活动 {event} 中留言了',
+        'feed_task'          => '完成了有奖任务 {task}',
+        'feed_task_credit'   => '完成了有奖任务 {task}，领取了 {credit} 个奖励积分',
         
         'feed_add_attachsize' => '用 {credit} 个积分兑换了 {size} 附件空间，可以上传更多的图片啦(<a href="home.php?mod=spacecp&ac=credit&op=addsize">我也来兑换</a>)',
         
@@ -29,20 +30,8 @@
          * B {expend0~8}
          *
          * */
-        
-        'feed_template_default_title' => '动态更新',
-        'feed_template_default_body'  => '我更新了自己的动态',
-        
-        'feed_template_doing_title' => '更新了记录',
-        
-        'feed_template_profile_title' => '更新了个人资料',
-        'feed_profile_update_base'    => '我更新了自己的基本资料',
-        'feed_profile_update_contact' => '我更新了自己的联系方式',
-        'feed_profile_update_edu'     => '我更新了自己的教育情况',
-        'feed_profile_update_work'    => '我更新了自己的工作信息',
-        'feed_profile_update_info'    => '我更新了自己的个人信息',
-        'feed_profile_update_bbs'     => '我更新了自己的论坛信息',
-        'feed_profile_update_verify'  => '我更新了自己的认证信息',
+        'feed_template_need_payoff_body' => '<div class="feed-element-ban"><a class="link redirect" href="{tlink}">此帖为付费内容，需转至原文后查看</a></div>',
+        'feed_template_need_perm_body'   => '<div class="feed-element-ban"><a class="link redirect" href="{tlink}">此贴为权限内容，需转至原文查看</a></div>',
 
         
         /*
@@ -65,7 +54,6 @@
             <div class="feed-element-thread">
                 <div class="content">{message}</div>
             </div>',
-
 
 
         /*
@@ -103,6 +91,7 @@
         * B {ulink}    :用户空间链接
         * B {uavatar}  :用户头像源链接
          *
+        * B {message}     :问题摘要
         * B {price}       :悬赏值
         * B {extcredits}  :货币单位
         *
@@ -741,4 +730,26 @@
                     <s class="username">{username}</s>
                 </a>
             </div>',
+
+        
+        /*
+        * feed-space.doing
+        *
+        * */
+        'feed_template_doing_title' => '更新了记录',
+
+        
+        /*
+        * feed-space.profile
+        *
+        * */
+        'feed_template_profile_title' => '更新了个人资料',
+        'feed_profile_update_base'    => '我刚刚更新了自己的基本资料',
+        'feed_profile_update_contact' => '我刚刚更新了自己的联系方式',
+        'feed_profile_update_edu'     => '我刚刚更新了自己的教育情况',
+        'feed_profile_update_work'    => '我刚刚更新了自己的工作信息',
+        'feed_profile_update_info'    => '我刚刚更新了自己的个人信息',
+        'feed_profile_update_bbs'     => '我刚刚更新了自己的论坛信息',
+        'feed_profile_update_verify'  => '我刚刚更新了自己的认证信息',
+
     ];

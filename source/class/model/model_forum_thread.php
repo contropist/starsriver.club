@@ -248,15 +248,12 @@ class model_forum_thread extends discuz_model
 					C::t('forum_forum')->update($this->forum['fup'], array('lastpost' => $lastpost));
 				}
 			}
-
 			if($this->param['isgroup']) {
 				C::t('forum_forumfield')->update($this->forum['fid'], array('lastupdate' => TIMESTAMP));
 				require_once libfile('function/grouplog');
 				updategroupcreditlog($this->forum['fid'], $this->member['uid']);
 			}
-
 			C::t('forum_sofa')->insert(array('tid' => $this->tid,'fid' => $this->forum['fid']));
-
 			return 'post_newthread_succeed';
 
 		}
@@ -269,17 +266,17 @@ class model_forum_thread extends discuz_model
 	    
 		if($this->forum('allowfeed') && !$this->param['isanonymous']) {
 			if(empty($this->feed)) {
+			 
 				if(!empty($this->param['message'])){
-                    $content = !$this->param['price'] && !$this->param['readperm'] ? $this->param['message'] : '';
-                    $message = messagecutstr(messagesafeclear($content), 150);
+                    $message = messagecutstr(messagesafeclear($this->param['message']), 200);
                 } else {
                     $message = '';
                 }
-				
+                
                 $this->feed = [
                     'icon'           => 'thread',
                     'title_template' => 'thread',
-                    'title_data' => [
+                    'title_data'     => [
                         'tid'   => $this->tid,
                         'tsub'  => $this->param['subject'],
                         'tlink' => 'forum.php?mod=viewthread&tid=' . $this->tid,
@@ -289,7 +286,7 @@ class model_forum_thread extends discuz_model
                         'tid'   => $this->tid,
                         'tsub'  => $this->param['subject'],
                         'tlink' => 'forum.php?mod=viewthread&tid=' . $this->tid,
-
+                        
                         'uid'     => $_G['uid'],
                         'uname'   => $_G['username'],
                         'ulink'   => 'home.php?mod=space&uid=' . $_G['uid'],
@@ -308,18 +305,24 @@ class model_forum_thread extends discuz_model
                     ],
                 ];
                 
-                if(!empty(getglobal('forum_attachexist'))) {
-                    $attach_imgs = C::t('forum_attachment_n')->fetch_all_by_id('tid:' . $this->tid, 'pid', $this->pid, '', [1, -1], false, false, 9);
-                    if (!empty($attach_imgs)) {
-                        foreach ($attach_imgs as $img_data){
-                            $this->feed['body_data']['imgs'][] = [
-                                'img'     => getforumimg($img_data['aid']),
-                                'img_url' => 'forum.php?mod=viewthread&tid=' . $this->tid,
-                            ];
+                if ($this->param['price']) {
+                    $this->feed['body_template'] = 'need_payoff';
+                } elseif ($this->param['readperm']) {
+                    $this->feed['body_template'] = 'need_perm';
+                } else {
+                    if (!empty(getglobal('forum_attachexist'))) {
+                        $attach_imgs = C::t('forum_attachment_n')->fetch_all_by_id('tid:' . $this->tid, 'pid', $this->pid, '', [1, -1,], false, false, 9);
+                        if (!empty($attach_imgs)) {
+                            foreach ($attach_imgs as $img_data) {
+                                $this->feed['body_data']['imgs'][] = [
+                                    'img' => getforumimg($img_data['aid']),
+                                    'img_url' => 'forum.php?mod=viewthread&tid=' . $this->tid,
+                                ];
+                            }
+                            $this->feed['body_data']['imgnum'] = sizeof($this->feed['body_data']['imgs']);
                         }
-                        $this->feed['body_data']['imgnum'] = sizeof($this->feed['body_data']['imgs']);
+                        unset($attach_imgs);
                     }
-                    unset($attach_imgs);
                 }
             }
 			
@@ -334,17 +337,46 @@ class model_forum_thread extends discuz_model
 		}
 	}
 	protected function _init_parameters($parameters){
-
-		$varname = array(
-			'member', 'group', 'forum', 'extramessage',
-			'subject', 'sticktopic', 'save', 'ordertype', 'hiddenreplies',
-			'allownoticeauthor', 'readperm', 'price', 'typeid', 'sortid',
-			'publishdate', 'digest', 'moderated', 'tstatus', 'isgroup', 'imgcontent', 'imgcontentwidth',
-			'replycredit', 'closed', 'special', 'tags',
-			'message','clientip', 'invisible', 'isanonymous', 'usesig',
-			'htmlon', 'bbcodeoff', 'smileyoff', 'parseurloff', 'pstatus', 'geoloc',
-		);
-		foreach($varname as $name) {
+        
+        $varname = [
+            'member',
+            'group',
+            'forum',
+            'extramessage',
+            'subject',
+            'sticktopic',
+            'save',
+            'ordertype',
+            'hiddenreplies',
+            'allownoticeauthor',
+            'readperm',
+            'price',
+            'typeid',
+            'sortid',
+            'publishdate',
+            'digest',
+            'moderated',
+            'tstatus',
+            'isgroup',
+            'imgcontent',
+            'imgcontentwidth',
+            'replycredit',
+            'closed',
+            'special',
+            'tags',
+            'message',
+            'clientip',
+            'invisible',
+            'isanonymous',
+            'usesig',
+            'htmlon',
+            'bbcodeoff',
+            'smileyoff',
+            'parseurloff',
+            'pstatus',
+            'geoloc',
+        ];
+        foreach($varname as $name) {
 			if(!isset($this->param[$name]) && isset($parameters[$name])) {
 				$this->param[$name] = $parameters[$name];
 			}

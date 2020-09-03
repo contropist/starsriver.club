@@ -65,7 +65,8 @@
                     'uname'   => $_G['username'],
                     'ulink'   => 'home.php?mod=space&uid=' . $_G['uid'],
                     'uavatar' => avatar($_G['uid'], 'small', true),
-                    
+
+                    'message'    => messagecutstr($message, 150),
                     'price'      => $this->rewardprice,
                     'extcredits' => $this->setting['extcredits'][$this->setting['creditstransextra']['2']]['title'],
                     
@@ -78,7 +79,7 @@
                     'expend6' => '',
                     'expend7' => '',
                 ],
-                'body_general'   => messagecutstr($message, 300),
+                'body_general'   => messagecutstr($message, 150),
             ];
         }
         

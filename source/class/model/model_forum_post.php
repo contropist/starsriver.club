@@ -275,24 +275,19 @@ class model_forum_post extends discuz_model {
 		if(!$this->feed) {
 			if($this->forum['allowfeed'] && !$this->param['isanonymous']) {
 				if($this->thread['authorid'] != $this->member['uid']) {
-				 
-					$post_url = "forum.php?mod=redirect&goto=findpost&pid=".$this->pid."&ptid=".$this->thread['tid'];
+                    
+                    $plink  = 'forum.php?mod=redirect&goto=findpost&pid=' . $this->pid . '&ptid=' . $this->thread['tid'];
+                    $ulink  = 'home.php?mod=space&uid=' . $this->thread['authorid'];
                     $avatar = avatar($this->thread['authorid'], 'small', true);
                     
                     if (!empty($this->param['message'])) {
-                        $content = !$this->param['price'] && !$this->param['readperm'] ? $this->param['message'] : '';
-                        $message = messagecutstr(messagesafeclear($content), 150);
+                        $message = messagecutstr(messagesafeclear($this->param['message']), 200);
                     } else {
-                        $content = '';
                         $message = '';
                     }
                     
-                    if (!empty($this->thread['message'])) {
-                        $thread = !$this->thread['price'] && !$this->thread['readperm'] ? $this->thread['message'] : '';
-                        $thread = messagecutstr(messagesafeclear($thread), 150);
-                    } else {
-                        $thread = '';
-                    }
+                    $thread_info = C::t('forum_thread')->fetch($this->thread['tid']);
+                    $thread_data = C::t('forum_post')->fetch_all_by_tid(0, $this->thread['tid'], false, '', 0, 0, 1);
                     
                     $this->feed = [
                         'icon'           => 'post',
@@ -300,22 +295,22 @@ class model_forum_post extends discuz_model {
                         'title_data'     => [
                             'tid'   => $this->thread['tid'],
                             'tsub'  => $this->thread['subject'],
-                            'tlink' => $post_url,
+                            'tlink' => $plink,
                             
                             'uid'     => $this->thread['authorid'],
                             'uname'   => $this->thread['author'],
-                            'ulink'   => 'home.php?mod=space&uid=' . $this->thread['authorid'],
+                            'ulink'   => $ulink,
                             'uavatar' => $avatar,
                         ],
                         'body_template'  => 'thread_reply',
                         'body_data'      => [
                             'tid'   => $this->thread['tid'],
                             'tsub'  => $this->thread['subject'],
-                            'tlink' => $post_url,
+                            'tlink' => $plink,
                             
                             'uid'     => $this->thread['authorid'],
                             'uname'   => $this->thread['author'],
-                            'ulink'   => 'home.php?mod=space&uid=' . $this->thread['authorid'],
+                            'ulink'   => $ulink,
                             'uavatar' => $avatar,
                             
                             'message' => $message,
@@ -328,23 +323,29 @@ class model_forum_post extends discuz_model {
                             'expend5' => '',
                             'expend6' => '',
                             'expend7' => '',
+
+                            /* Thread data */
+                            'original_type' = 'thread',
+                            'original_data' => [
+
+                            ],
                         ],
                         'body_general'   => $message,
                     ];
                     
-					if(!empty(getglobal('forum_attachexist'))) {
+                    if(!empty(getglobal('forum_attachexist'))) {
                         $attach_imgs = C::t('forum_attachment_n')->fetch_all_by_id('tid:' . $this->thread['tid'], 'pid', $this->pid, '', [1, -1], false, false, 9);
                         if (!empty($attach_imgs)) {
                             foreach ($attach_imgs as $img_data){
                                 $this->feed['body_data']['imgs'][] = [
                                     'img'     => getforumimg($img_data['aid']),
-                                    'img_url' => $post_url,
+                                    'img_url' => $plink,
                                 ];
                             }
                             $this->feed['body_data']['imgnum'] = sizeof($this->feed['body_data']['imgs']);
                         }
                         unset($attach_imgs);
-					}
+                    }
 				}
 			}
 		}

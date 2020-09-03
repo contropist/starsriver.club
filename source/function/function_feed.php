@@ -90,8 +90,8 @@
                 $feed['body_template'] = $feed['body_data']['retemplate'];
             }
             
-            $feed['title_template'] = $feed['title_template'] ? lang('feed', 'feed_template_' . $feed['title_template'] . '_title') : lang('feed', 'feed_template_default_title');
-            $feed['body_template']  = $feed['body_template']  ? lang('feed', 'feed_template_' . $feed['body_template'] . '_body')   : lang('feed', 'feed_template_default_body');
+            $feed['title_template'] = $feed['title_template'] ? lang('feed', 'feed_template_' . $feed['title_template'] . '_title') : '';
+            $feed['body_template']  = $feed['body_template']  ? lang('feed', 'feed_template_' . $feed['body_template'] . '_body') : '';
             
             if ($feed['title_data']) {
                 $searchs = ['{actor}'];
