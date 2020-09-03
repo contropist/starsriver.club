@@ -325,7 +325,7 @@ class model_forum_post extends discuz_model {
                             'expend7' => '',
 
                             /* Thread data */
-                            'original_type' = 'thread',
+                            'original_type' => 'thread',
                             'original_data' => [
 
                             ],
