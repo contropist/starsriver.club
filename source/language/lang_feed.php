@@ -18,8 +18,6 @@
         'feed_reply_title_anonymous'       => '回复了话题 {subject}',
         'feed_reply_message'               => '',
         
-        'feed_reply_reward_title'          => '回复了关于 {subject} 的悬赏',
-        'feed_reply_reward_message'        => '',
 
         'feed_thread_title'                => '发表了新话题',
         'feed_thread_message'              => '<div class="thread"><span class="title">{subject}</span><div class="article">{message}</div></div>',
@@ -27,8 +25,6 @@
         'feed_thread_goods_message_1'      => '<b>{itemname}</b><br>售价 {itemprice} 元 附加 {itemcredit}{creditunit}',
         'feed_thread_goods_message_2'      => '<b>{itemname}</b><br>售价 {itemprice} 元',
         'feed_thread_goods_message_3'      => '<b>{itemname}</b><br>售价 {itemcredit}{creditunit}',
-        'feed_thread_reward_title'         => '发起了新悬赏',
-        'feed_thread_reward_message'       => '<b>{subject}</b><br>悬赏 {rewardprice}{extcredits}',
         
         /*
          * 参数注释标志：
@@ -54,6 +50,58 @@
         'feed_profile_update_info'    => '我更新了自己的个人信息',
         'feed_profile_update_bbs'     => '我更新了自己的论坛信息',
         'feed_profile_update_verify'  => '我更新了自己的认证信息',
+        
+        
+        /*
+        * feed-thread-reward.reply
+        *
+        * @ {tid}     :帖子ID
+        * @ {tsub}    :帖子标题
+        * @ {tink}    :帖子链接
+         *
+        * B {uid}      :用户ID
+        * B {uname}    :用户名
+        * B {ulink}    :用户空间链接
+        * B {uavatar}  :用户头像源链接
+         *
+        * B {price}       :悬赏值
+        * B {extcredits}  :货币单位
+        *
+        * */
+        'feed_template_thread_reward_title' => '我发起了悬赏<a class="link ellipsis" href="{tlink}" target="_blank">{tsub}</a>',
+        'feed_template_thread_reward_body'  => '
+            <div class="feed-element-reward-reply">
+                <a class="user-tag" href="{ulink}" target="_blank" c="1">
+                    <s class="avatar"><img class="avatar-main" src="{uavatar}"></s>
+                    <s class="username">{uname}</s>
+                </a>
+                <a class="thread-title" href="{tlink}" target="_blank">{tsub}</a>
+                <div class="reward">悬赏 {price}{extcredits}</div>
+            </div>',
+
+
+        /*
+        * feed-thread-reward.reply
+        *
+        * @ {tid}     :帖子ID
+        * @ {tsub}    :帖子标题
+        * @ {tink}    :帖子链接
+         *
+        * @ {uid}      :用户ID
+        * @ {uname}    :用户名
+        * @ {ulink}    :用户空间链接
+        * @ {uavatar}  :用户头像源链接
+        *
+        * */
+        'feed_template_thread_reward_reply_title' => '回复了 <a class="link ellipsis" href="{ulink}" target="_blank" c="1">{uname}</a> 的悬赏 <a class="link ellipsis" href="{tlink}" target="_blank">{tsub}</a>',
+        'feed_template_thread_reward_reply_body'  => '
+            <div class="feed-element-reward-reply">
+                <a class="user-tag" href="{ulink}" target="_blank" c="1">
+                    <s class="avatar"><img class="avatar-main" src="{uavatar}"></s>
+                    <s class="username">{uname}</s>
+                </a>
+                <a class="thread-title" href="{tlink}" target="_blank">{tsub}</a>
+            </div>',
 
 
         /*
