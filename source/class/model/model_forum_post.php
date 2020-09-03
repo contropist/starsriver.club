@@ -17,13 +17,7 @@ class model_forum_post extends discuz_model {
 	public $thread;
 
 	public $post;
-
-
-
-
-
-
-
+	
 	public $pid = 0;
 
 	public $feed = [];
@@ -95,7 +89,7 @@ class model_forum_post extends discuz_model {
 		$this->param['isanonymous'] = $this->group['allowanonymous'] && !empty($this->param['isanonymous'])? 1 : 0;
 		$author = empty($this->param['isanonymous']) ? $this->member['username'] : '';
 
-		list(, $this->param['modnewreplies']) = threadmodstatus($this->param['subject']."\t".$this->param['message'].$this->param['extramessage']);
+		[, $this->param['modnewreplies']] = threadmodstatus($this->param['subject']."\t".$this->param['message'].$this->param['extramessage']);
 
 		if($this->thread['displayorder'] == -4) {
 			$this->param['modnewreplies'] = 0;
@@ -116,31 +110,31 @@ class model_forum_post extends discuz_model {
 				$status = setstatus($modbit, $modvalue, $status);
 			}
 		}
-
-		$this->pid = insertpost(array(
-			'fid' => $this->forum['fid'],
-			'tid' => $this->thread['tid'],
-			'first' => '0',
-			'author' => $this->member['username'],
-			'authorid' => $this->member['uid'],
-			'subject' => $this->param['subject'],
-			'dateline' => $this->param['timestamp'] ? $this->param['timestamp'] : getglobal('timestamp'),
-			'message' => $this->param['message'],
-			'useip' => $this->param['clientip'] ? $this->param['clientip'] : getglobal('clientip'),
-			'port' => $this->param['remoteport'] ? $this->param['remoteport'] : getglobal('remoteport'),
-			'invisible' => $pinvisible,
-			'anonymous' => $this->param['isanonymous'],
-			'usesig' => $usesig,
-			'htmlon' => $htmlon,
-			'bbcodeoff' => $bbcodeoff,
-			'smileyoff' => $smileyoff,
-			'parseurloff' => $parseurloff,
-			'attachment' => '0',
-			'status' => $status,
-		));
-
-
-		$this->param['updatethreaddata'] = $heatthreadset ? $heatthreadset : [];
+        
+        $this->pid = insertpost([
+            'fid'         => $this->forum['fid'],
+            'tid'         => $this->thread['tid'],
+            'first'       => '0',
+            'author'      => $this->member['username'],
+            'authorid'    => $this->member['uid'],
+            'subject'     => $this->param['subject'],
+            'dateline'    => $this->param['timestamp'] ? $this->param['timestamp'] : getglobal('timestamp'),
+            'message'     => $this->param['message'],
+            'useip'       => $this->param['clientip'] ? $this->param['clientip'] : getglobal('clientip'),
+            'port'        => $this->param['remoteport'] ? $this->param['remoteport'] : getglobal('remoteport'),
+            'invisible'   => $pinvisible,
+            'anonymous'   => $this->param['isanonymous'],
+            'usesig'      => $usesig,
+            'htmlon'      => $htmlon,
+            'bbcodeoff'   => $bbcodeoff,
+            'smileyoff'   => $smileyoff,
+            'parseurloff' => $parseurloff,
+            'attachment'  => '0',
+            'status'      => $status,
+        ]);
+        
+        
+        $this->param['updatethreaddata'] = $heatthreadset ? $heatthreadset : [];
 		$this->param['maxposition'] = C::t('forum_post')->fetch_maxposition_by_tid($this->thread['posttableid'], $this->thread['tid']);
 		$this->param['updatethreaddata'][] = DB::field('maxposition', $this->param['maxposition']);
 
@@ -148,7 +142,7 @@ class model_forum_post extends discuz_model {
 		useractionlog($this->member['uid'], 'pid');
 
 		if($this->param['geoloc'] && IN_MOBILE == 2) {
-			list($mapx, $mapy, $location) = explode('|', $this->param['geoloc']);
+			[$mapx, $mapy, $location] = explode('|', $this->param['geoloc']);
 			if($mapx && $mapy && $location) {
 				C::t('forum_post_location')->insert(array(
 					'pid' => $this->pid,
@@ -163,7 +157,7 @@ class model_forum_post extends discuz_model {
 
 		$nauthorid = 0;
 		if(!empty($this->param['noticeauthor']) && !$this->param['isanonymous'] && !$this->param['modnewreplies']) {
-			list($ac, $nauthorid) = explode('|', authcode($this->param['noticeauthor'], 'DECODE'));
+			[$ac, $nauthorid] = explode('|', authcode($this->param['noticeauthor'], 'DECODE'));
 			if($nauthorid != $this->member['uid']) {
 				if($ac == 'q') {
 					notification_add($nauthorid, 'post', 'reppost_noticeauthor', array(
@@ -227,10 +221,8 @@ class model_forum_post extends discuz_model {
 				C::t('forum_thread')->update($this->thread['tid'], $this->param['updatethreaddata'], false, false, 0, true);
 			}
 			C::t('forum_forum')->update_forum_counter($this->forum['fid'], 0, 0, 1, 1);
-
-
+			
 			manage_addnotify('verifypost');
-
 
 			return 'post_reply_mod_succeed';
 
@@ -283,23 +275,75 @@ class model_forum_post extends discuz_model {
 		if(!$this->feed) {
 			if($this->forum['allowfeed'] && !$this->param['isanonymous']) {
 				if($this->thread['authorid'] != $this->member['uid']) {
+				 
 					$post_url = "forum.php?mod=redirect&goto=findpost&pid=".$this->pid."&ptid=".$this->thread['tid'];
-
-					$this->feed['icon'] = 'post';
-					$this->feed['title_template'] = !empty($this->thread['author']) ? 'feed_reply_title' : 'feed_reply_title_anonymous';
-					$this->feed['title_data'] = array(
-						'subject' => "<a href=\"$post_url\">".$this->thread['subject']."</a>",
-						'author' => "<a href=\"home.php?mod=space&uid=".$this->thread['authorid']."\">".$this->thread['author']."</a>"
-					);
-					$forum_attachexist = getglobal('forum_attachexist');
-					if(!empty($forum_attachexist)) {
-						$imgattach = C::t('forum_attachment_n')->fetch_max_image('tid:'.$this->thread['tid'], 'pid', $this->pid);
-						$firstaid = $imgattach['aid'];
-						unset($imgattach);
-						if($firstaid) {
-							$this->feed['images'] = array(getforumimg($firstaid));
-							$this->feed['image_links'] = array($post_url);
-						}
+                    $avatar = avatar($this->thread['authorid'], 'small', true);
+                    
+                    if (!empty($this->param['message'])) {
+                        $content = !$this->param['price'] && !$this->param['readperm'] ? $this->param['message'] : '';
+                        $message = messagecutstr(messagesafeclear($content), 150);
+                    } else {
+                        $content = '';
+                        $message = '';
+                    }
+                    
+                    if (!empty($this->thread['message'])) {
+                        $thread = !$this->thread['price'] && !$this->thread['readperm'] ? $this->thread['message'] : '';
+                        $thread = messagecutstr(messagesafeclear($thread), 150);
+                    } else {
+                        $thread = '';
+                    }
+                    
+                    $this->feed = [
+                        'icon'           => 'post',
+                        'title_template' => !empty($this->thread['author']) ? 'thread_reply' : 'thread_reply_a',
+                        'title_data'     => [
+                            'tid'   => $this->thread['tid'],
+                            'tsub'  => $this->thread['subject'],
+                            'tlink' => $post_url,
+                            
+                            'uid'     => $this->thread['authorid'],
+                            'uname'   => $this->thread['author'],
+                            'ulink'   => 'home.php?mod=space&uid=' . $this->thread['authorid'],
+                            'uavatar' => $avatar,
+                        ],
+                        'body_template'  => 'thread_reply',
+                        'body_data'      => [
+                            'tid'   => $this->thread['tid'],
+                            'tsub'  => $this->thread['subject'],
+                            'tlink' => $post_url,
+                            
+                            'uid'     => $this->thread['authorid'],
+                            'uname'   => $this->thread['author'],
+                            'ulink'   => 'home.php?mod=space&uid=' . $this->thread['authorid'],
+                            'uavatar' => $avatar,
+                            
+                            'message' => $message,
+                            
+                            'expend0' => '',
+                            'expend1' => '',
+                            'expend2' => '',
+                            'expend3' => '',
+                            'expend4' => '',
+                            'expend5' => '',
+                            'expend6' => '',
+                            'expend7' => '',
+                        ],
+                        'body_general'   => $message,
+                    ];
+                    
+					if(!empty(getglobal('forum_attachexist'))) {
+                        $attach_imgs = C::t('forum_attachment_n')->fetch_all_by_id('tid:' . $this->thread['tid'], 'pid', $this->pid, '', [1, -1], false, false, 9);
+                        if (!empty($attach_imgs)) {
+                            foreach ($attach_imgs as $img_data){
+                                $this->feed['body_data']['imgs'][] = [
+                                    'img'     => getforumimg($img_data['aid']),
+                                    'img_url' => $post_url,
+                                ];
+                            }
+                            $this->feed['body_data']['imgnum'] = sizeof($this->feed['body_data']['imgs']);
+                        }
+                        unset($attach_imgs);
 					}
 				}
 			}
@@ -337,7 +381,7 @@ class model_forum_post extends discuz_model {
 		$isorigauthor = $this->member['uid'] && $this->member['uid'] == $this->post['authorid'];
 		$this->param['audit'] = $this->post['invisible'] == -2 || $this->thread['displayorder'] == -2 ? $this->param['audit'] : 0;
 
-		list($this->param['modnewthreads'], $this->param['modnewreplies']) = threadmodstatus($this->param['subject']."\t".$this->param['message'].$this->param['extramessage']);
+		[$this->param['modnewthreads'], $this->param['modnewreplies']] = threadmodstatus($this->param['subject']."\t".$this->param['message'].$this->param['extramessage']);
 
 		if($post_invalid = checkpost($this->param['subject'], $this->param['message'], $isfirstpost && ($this->param['special'] || $this->param['sortid']))) {
 			showmessage($post_invalid, '', array('minpostsize' => $this->setting['minpostsize'], 'maxpostsize' => $this->setting['maxpostsize']));
@@ -479,19 +523,19 @@ class model_forum_post extends discuz_model {
 
 		$this->param['message'] = preg_replace('/\[attachimg\](\d+)\[\/attachimg\]/is', '[attach]\1[/attach]', $this->param['message']);
 		$this->param['parseurloff'] = !empty($this->param['parseurloff']);
-		$setarr = array(
-			'message' => $this->param['message'],
-			'usesig' => $this->param['usesig'],
-			'htmlon' => $this->param['htmlon'],
-			'bbcodeoff' => $this->param['bbcodeoff'],
-			'parseurloff' => $this->param['parseurloff'],
-			'smileyoff' => $this->param['smileyoff'],
-			'subject' => $this->param['subject'],
-			'tags' => $tagstr,
-			'port'=>getglobal('remoteport')
-		);
-
-		$setarr['status'] = $this->post['status'];
+		$setarr = [
+            'message'     => $this->param['message'],
+            'usesig'      => $this->param['usesig'],
+            'htmlon'      => $this->param['htmlon'],
+            'bbcodeoff'   => $this->param['bbcodeoff'],
+            'parseurloff' => $this->param['parseurloff'],
+            'smileyoff'   => $this->param['smileyoff'],
+            'subject'     => $this->param['subject'],
+            'tags'        => $tagstr,
+            'port'        => getglobal('remoteport'),
+        ];
+        
+        $setarr['status'] = $this->post['status'];
 		if($this->param['modstatus']) {
 			foreach($this->param['modstatus'] as $modbit => $modvalue) {
 				$setarr['status'] = setstatus($modbit, $modvalue, $setarr['status']);

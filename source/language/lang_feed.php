@@ -14,13 +14,6 @@
         
         'feed_add_attachsize' => '用 {credit} 个积分兑换了 {size} 附件空间，可以上传更多的图片啦(<a href="home.php?mod=spacecp&ac=credit&op=addsize">我也来兑换</a>)',
         
-        'feed_reply_title'                 => '回复了 {author} 的话题 {subject}',
-        'feed_reply_title_anonymous'       => '回复了话题 {subject}',
-        'feed_reply_message'               => '',
-        
-
-        'feed_thread_title'                => '发表了新话题',
-        'feed_thread_message'              => '<div class="thread"><span class="title">{subject}</span><div class="article">{message}</div></div>',
         'feed_thread_goods_title'          => '出售了一个新商品',
         'feed_thread_goods_message_1'      => '<b>{itemname}</b><br>售价 {itemprice} 元 附加 {itemcredit}{creditunit}',
         'feed_thread_goods_message_2'      => '<b>{itemname}</b><br>售价 {itemprice} 元',
@@ -50,10 +43,56 @@
         'feed_profile_update_info'    => '我更新了自己的个人信息',
         'feed_profile_update_bbs'     => '我更新了自己的论坛信息',
         'feed_profile_update_verify'  => '我更新了自己的认证信息',
-        
+
         
         /*
-        * feed-thread-reward.reply
+        * feed-thread
+        *
+        * @ {tid}     :帖子ID
+        * @ {tsub}    :帖子标题
+        * @ {tink}    :帖子链接
+         *
+        * B {uid}      :用户ID
+        * B {uname}    :用户名
+        * B {ulink}    :用户空间链接
+        * B {uavatar}  :用户头像源链接
+         *
+        * B {message}  :帖子摘要
+        *
+        * */
+        'feed_template_thread_title' => '发表了帖子<a class="link ellipsis" href="{tlink}" target="_blank">{tsub}</a>',
+        'feed_template_thread_body'  => '
+            <div class="feed-element-thread">
+                <div class="content">{message}</div>
+            </div>',
+
+
+
+        /*
+        * feed-thread.reply
+        *
+        * @ {tid}     :帖子ID
+        * @ {tsub}    :帖子标题
+        * @ {tink}    :帖子链接
+         *
+        * @ {uid}      :用户ID
+        * @ {uname}    :用户名
+        * @ {ulink}    :用户空间链接
+        * @ {uavatar}  :用户头像源链接
+         *
+        * B {message}  :回贴摘要
+        *
+        * */
+        'feed_template_thread_reply_title'   => '在 <a class="link ellipsis" href="{ulink}" target="_blank" c="1">{uname}</a> 的帖子 <a class="link ellipsis" href="{tlink}" target="_blank">{tsub}</a>中回复道',
+        'feed_template_thread_reply_a_title' => '在帖子 <a class="link ellipsis" href="{tlink}" target="_blank">{tsub}</a>中回复道',
+        'feed_template_thread_reply_body'    => '
+            <div class="feed-element-thread-reply">
+            
+            </div>',
+
+
+        /*
+        * feed-thread-reward
         *
         * @ {tid}     :帖子ID
         * @ {tsub}    :帖子标题
@@ -70,7 +109,7 @@
         * */
         'feed_template_thread_reward_title' => '我发起了悬赏<a class="link ellipsis" href="{tlink}" target="_blank">{tsub}</a>',
         'feed_template_thread_reward_body'  => '
-            <div class="feed-element-reward-reply">
+            <div class="feed-element-reward">
                 <a class="user-tag" href="{ulink}" target="_blank" c="1">
                     <s class="avatar"><img class="avatar-main" src="{uavatar}"></s>
                     <s class="username">{uname}</s>
@@ -116,7 +155,7 @@
         * B {ulink}    :用户空间链接
         * B {uavatar}  :用户头像源链接
          *
-        * B {message}      :简介
+        * B {message}      :摘要
         * B {affirmpoint}  :红方观点
         * B {negapoint}    :蓝方观点
         *
@@ -223,7 +262,7 @@
 
         'feed_template_thread_poll_vote_withimg_title' => '我参与了图片投票<a class="link ellipsis" href="{tlink}" target="_blank">{tsub}</a>',
         'feed_template_thread_poll_vote_withimg_body'  => '
-            <div class="feed-element-votepoll">
+            <div class="feed-element-poll-vote">
                 <a class="user-tag" href="{ulink}" target="_blank" c="1">
                     <s class="avatar"><img class="avatar-main" src="{uavatar}"></s>
                     <s class="username">{uname}</s>

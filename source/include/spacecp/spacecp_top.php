@@ -71,6 +71,15 @@
                     'uname'   => $friend['fusername'],
                     'ulink'   => 'home.php?mod=space&uid=' . $fuid,
                     'uavatar' => $avatar,
+
+                    'expend0' => '',
+                    'expend1' => '',
+                    'expend2' => '',
+                    'expend3' => '',
+                    'expend4' => '',
+                    'expend5' => '',
+                    'expend6' => '',
+                    'expend7' => '',
                 ],
             ]);
         }
@@ -128,6 +137,15 @@
                     'uname'   => $_G['username'],
                     'ulink'   => 'home.php?mod=space&uid=' . $_G['uid'],
                     'uavatar' => $avatar,
+
+                    'expend0' => '',
+                    'expend1' => '',
+                    'expend2' => '',
+                    'expend3' => '',
+                    'expend4' => '',
+                    'expend5' => '',
+                    'expend6' => '',
+                    'expend7' => '',
                 ],
                 'body_general'   => $_POST['note'],
             ]);

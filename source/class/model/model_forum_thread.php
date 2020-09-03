@@ -48,7 +48,7 @@ class model_forum_thread extends discuz_model
 		if(!$this->param['sortid'] && !$this->param['special'] && trim($this->param['message']) == '') {
 			return $this->showmessage('post_sm_isnull');
 		}
-		list($this->param['modnewthreads'], $this->param['modnewreplies']) = threadmodstatus($this->param['subject']."\t".$this->param['message'].$this->param['extramessage']);
+		[$this->param['modnewthreads'], $this->param['modnewreplies']] = threadmodstatus($this->param['subject']."\t".$this->param['message'].$this->param['extramessage']);
 
 		if(($post_invalid = checkpost($this->param['subject'], $this->param['message'], ($this->param['special'] || $this->param['sortid'])))) {
 			return $this->showmessage($post_invalid, '', array('minpostsize' => $this->setting['minpostsize'], 'maxpostsize' => $this->setting['maxpostsize']));
@@ -113,32 +113,32 @@ class model_forum_thread extends discuz_model
 
 		$this->param['publishdate'] = !$this->param['modnewthreads'] ? $this->param['publishdate'] : TIMESTAMP;
 
-		$newthread = array(
-			'fid' => $this->forum['fid'],
-			'posttableid' => 0,
-			'readperm' => $this->param['readperm'],
-			'price' => $this->param['price'],
-			'typeid' => $this->param['typeid'],
-			'sortid' => $this->param['sortid'],
-			'author' => $author,
-			'authorid' => $this->member['uid'],
-			'subject' => $this->param['subject'],
-			'dateline' => $this->param['publishdate'],
-			'lastpost' => $this->param['publishdate'],
-			'lastposter' => $author,
-			'displayorder' => $this->param['displayorder'],
-			'digest' => $this->param['digest'],
-			'special' => $this->param['special'],
-			'attachment' => 0,
-			'moderated' => $this->param['moderated'],
-			'status' => $this->param['tstatus'],
-			'isgroup' => $this->param['isgroup'],
-			'replycredit' => $this->param['replycredit'],
-			'closed' => $this->param['closed'] ? 1 : 0
-		);
-		$this->tid = C::t('forum_thread')->insert($newthread, true);
-		C::t('forum_newthread')->insert(array(
-		    'tid' => $this->tid,
+		$newthread = [
+            'fid'          => $this->forum['fid'],
+            'posttableid'  => 0,
+            'readperm'     => $this->param['readperm'],
+            'price'        => $this->param['price'],
+            'typeid'       => $this->param['typeid'],
+            'sortid'       => $this->param['sortid'],
+            'author'       => $author,
+            'authorid'     => $this->member['uid'],
+            'subject'      => $this->param['subject'],
+            'dateline'     => $this->param['publishdate'],
+            'lastpost'     => $this->param['publishdate'],
+            'lastposter'   => $author,
+            'displayorder' => $this->param['displayorder'],
+            'digest'       => $this->param['digest'],
+            'special'      => $this->param['special'],
+            'attachment'   => 0,
+            'moderated'    => $this->param['moderated'],
+            'status'       => $this->param['tstatus'],
+            'isgroup'      => $this->param['isgroup'],
+            'replycredit'  => $this->param['replycredit'],
+            'closed'       => $this->param['closed'] ? 1 : 0,
+        ];
+        $this->tid = C::t('forum_thread')->insert($newthread, true);
+        C::t('forum_newthread')->insert(array(
+            'tid' => $this->tid,
 		    'fid' => $this->forum['fid'],
 		    'dateline' => $this->param['publishdate'],
 		));
@@ -211,7 +211,7 @@ class model_forum_thread extends discuz_model
 
 
 		if($this->param['geoloc'] && IN_MOBILE == 2) {
-			list($mapx, $mapy, $location) = explode('|', $this->param['geoloc']);
+			[$mapx, $mapy, $location] = explode('|', $this->param['geoloc']);
 			if($mapx && $mapy && $location) {
 				C::t('forum_post_location')->insert(array(
 					'pid' => $this->pid,
@@ -264,45 +264,64 @@ class model_forum_thread extends discuz_model
 	}
 
 	public function feed() {
+	    
+	    global $_G;
+	    
 		if($this->forum('allowfeed') && !$this->param['isanonymous']) {
 			if(empty($this->feed)) {
+				if(!empty($this->param['message'])){
+                    $content = !$this->param['price'] && !$this->param['readperm'] ? $this->param['message'] : '';
+                    $message = messagecutstr(messagesafeclear($content), 150);
+                } else {
+                    $message = '';
+                }
+				
                 $this->feed = [
-                    'icon'           => '',
-                    'title_template' => '',
-                    'title_data'     => [],
-                    'body_template'  => '',
-                    'body_data'      => [],
-                    'images'         => [],
+                    'icon'           => 'thread',
+                    'title_template' => 'thread',
+                    'title_data' => [
+                        'tid'   => $this->tid,
+                        'tsub'  => $this->param['subject'],
+                        'tlink' => 'forum.php?mod=viewthread&tid=' . $this->tid,
+                    ],
+                    'body_template'  => 'thread',
+                    'body_data'      => [
+                        'tid'   => $this->tid,
+                        'tsub'  => $this->param['subject'],
+                        'tlink' => 'forum.php?mod=viewthread&tid=' . $this->tid,
+
+                        'uid'     => $_G['uid'],
+                        'uname'   => $_G['username'],
+                        'ulink'   => 'home.php?mod=space&uid=' . $_G['uid'],
+                        'uavatar' => avatar($_G['uid'], 'small', true),
+                        
+                        'message' => $message,
+                        
+                        'expend0' => '',
+                        'expend1' => '',
+                        'expend2' => '',
+                        'expend3' => '',
+                        'expend4' => '',
+                        'expend5' => '',
+                        'expend6' => '',
+                        'expend7' => '',
+                    ],
                 ];
                 
-                $message = !$this->param['price'] && !$this->param['readperm'] ? $this->param['message'] : '';
-				$message = messagesafeclear($message);
-				$this->feed['icon'] = 'thread';
-				$this->feed['title_template'] = 'feed_thread_title';
-				$this->feed['body_template'] = 'feed_thread_message';
-				$this->feed['body_data'] = array(
-					'subject' => "<a href=\"forum.php?mod=viewthread&tid={$this->tid}\">{$this->param['subject']}</a>",
-					'message' => messagecutstr($message, 150),
-                    'expend0'  => '',
-                    'expend1'  => '',
-                    'expend2'  => '',
-                    'expend3'  => '',
-                    'expend4'  => '',
-                    'expend5'  => '',
-                    'expend6'  => '',
-                    'expend7'  => '',
-				);
-				if(getglobal('forum_attachexist')) {//					$firstaid = DB::result_first("SELECT aid FROM ".DB::table(getattachtablebytid($tid))." WHERE pid='$pid' AND dateline>'0' AND isimage='1' ORDER BY dateline LIMIT 1");
-					$imgattach = C::t('forum_attachment_n')->fetch_max_image('tid:'.$this->tid, 'pid', $this->pid);
-					$firstaid = $imgattach['aid'];
-					unset($imgattach);
-					if($firstaid) {
-						$this->feed['images'] = array(getforumimg($firstaid));
-						$this->feed['image_links'] = array("forum.php?mod=viewthread&do=tradeinfo&tid={$this->tid}&pid={$this->pid}");
-					}
-				}
-
-			}
+                if(!empty(getglobal('forum_attachexist'))) {
+                    $attach_imgs = C::t('forum_attachment_n')->fetch_all_by_id('tid:' . $this->tid, 'pid', $this->pid, '', [1, -1], false, false, 9);
+                    if (!empty($attach_imgs)) {
+                        foreach ($attach_imgs as $img_data){
+                            $this->feed['body_data']['imgs'][] = [
+                                'img'     => getforumimg($img_data['aid']),
+                                'img_url' => 'forum.php?mod=viewthread&tid=' . $this->tid,
+                            ];
+                        }
+                        $this->feed['body_data']['imgnum'] = sizeof($this->feed['body_data']['imgs']);
+                    }
+                    unset($attach_imgs);
+                }
+            }
 			
 			$this->feed['title_data']['hash_data'] = 'tid'.$this->tid;
 			$this->feed['id'] = $this->tid;

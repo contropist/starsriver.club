@@ -105,6 +105,15 @@ class extend_thread_activity extends extend_thread_base {
                 'city'      => $this->activity['city'],
                 'location'  => $this->activity['place'],
                 'message'   => messagecutstr(!$this->param['readperm'] ? $this->param['message'] : '', 150),
+                
+                'expend0' => '',
+                'expend1' => '',
+                'expend2' => '',
+                'expend3' => '',
+                'expend4' => '',
+                'expend5' => '',
+                'expend6' => '',
+                'expend7' => '',
             ],
         ];
         

@@ -108,7 +108,7 @@
                             'tid'   => $this->thread['tid'],
                             'tsub'  => $this->thread['subject'],
                             'tlink' => 'forum.php?mod=viewthread&tid=' . $this->thread['tid'],
-                            
+    
                             'uid'     => $this->thread['authorid'],
                             'uname'   => $this->thread['author'],
                             'ulink'   => 'home.php?mod=space&uid=' . $this->thread['authorid'],

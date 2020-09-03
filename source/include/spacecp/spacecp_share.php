@@ -90,6 +90,15 @@ if($_GET['op'] == 'delete') {
                     'userlink' => 'home.php?mod=space&uid=' . $id,
                     'reside' => $userprofile['resideprovince'] . $userprofile['residecity'],
                     'spacenote' => $tospace['spacenote'] ? getstr($tospace['spacenote'], 50, 0, 0, 0, -1) : lang('template','should_write_that'),
+
+                    'expend0' => '',
+                    'expend1' => '',
+                    'expend2' => '',
+                    'expend3' => '',
+                    'expend4' => '',
+                    'expend5' => '',
+                    'expend6' => '',
+                    'expend7' => '',
                 ],
             ];
     
@@ -129,7 +138,16 @@ if($_GET['op'] == 'delete') {
                     'username' => $blog['username'],
                     'user_avatar' => avatar($blog['uid'], 'small', true),
                     'user_link' => 'home.php?mod=space&uid='.$blog['uid'],
-                    'content'  => getstr($blog['message'], 150, 0, 0, 0, -1)
+                    'content'  => getstr($blog['message'], 150, 0, 0, 0, -1),
+                    
+                    'expend0' => '',
+                    'expend1' => '',
+                    'expend2' => '',
+                    'expend3' => '',
+                    'expend4' => '',
+                    'expend5' => '',
+                    'expend6' => '',
+                    'expend7' => '',
                 ]
             ];
             
@@ -170,12 +188,23 @@ if($_GET['op'] == 'delete') {
                 'fromuid' => $album['uid'],
                 'body_data' => [
                     'owner' => $album['username'],
+                    'owner_link' => 'home.php?mod=space&uid='.$album['uid'],
+                    'owner_avatar' => avatar($album['uid'], 'middle', true),
+
                     'album' => $album['albumname'],
                     'album_desc' => $album['depict'],
                     'album_link' => "home.php?mod=space&uid=$album[uid]&do=album&id=$album[albumid]",
+                    
                     'image_link' => pic_cover_get($album['pic'], $album['picflag']),
-                    'owner_link' => 'home.php?mod=space&uid='.$album['uid'],
-                    'owner_avatar' => avatar($album['uid'], 'middle', true),
+                    
+                    'expend0' => '',
+                    'expend1' => '',
+                    'expend2' => '',
+                    'expend3' => '',
+                    'expend4' => '',
+                    'expend5' => '',
+                    'expend6' => '',
+                    'expend7' => '',
                 ],
             ];
 
@@ -224,15 +253,27 @@ if($_GET['op'] == 'delete') {
                 'itemid' => $id,
                 'fromuid' => $pic['uid'],
                 'body_data' => [
-                    'retemplate' => 'album_pic', //Template relink
+                    'retemplate' => 'album_pic',
+                    
                     'owner' => $pic['username'],
+                    'owner_link' => 'home.php?mod=space&uid=' . $pic['uid'],
+                    'owner_avatar' => avatar($pic['uid'], 'middle', true),
+
                     'album' => $pic['albumname'],
+                    'album_link' => 'home.php?mod=space&uid=' . $pic['uid'] . '&do=album&id=' . $pic['albumid'],
+
                     'image' => getstr($pic['title'] ? $pic['title'] : $pic['filename'], 100, 0, 0, 0, -1),
                     'image_link' => pic_get($pic['filepath'], 'album', $pic['thumb'], $pic['remote']),
                     'image_togo' => 'home.php?mod=space&uid=' . $pic['uid'] . '&do=album&picid=' . $pic['picid'],
-                    'album_link' => 'home.php?mod=space&uid=' . $pic['uid'] . '&do=album&id=' . $pic['albumid'],
-                    'owner_link' => 'home.php?mod=space&uid=' . $pic['uid'],
-                    'owner_avatar' => avatar($pic['uid'], 'middle', true),
+                    
+                    'expend0' => '',
+                    'expend1' => '',
+                    'expend2' => '',
+                    'expend3' => '',
+                    'expend4' => '',
+                    'expend5' => '',
+                    'expend6' => '',
+                    'expend7' => '',
                 ],
             ];
             
@@ -277,6 +318,15 @@ if($_GET['op'] == 'delete') {
                     'author_avatar' => avatar($thread['authorid'], 'small', true),
                     'author_link'  => 'home.php?mod=space&uid='.$thread['authorid'],
                     'message' => $post['message'] ? getstr($post['message'], 150, 0, 0, 0, -1) : lang('template','should_redirect'),
+
+                    'expend0' => '',
+                    'expend1' => '',
+                    'expend2' => '',
+                    'expend3' => '',
+                    'expend4' => '',
+                    'expend5' => '',
+                    'expend6' => '',
+                    'expend7' => '',
                 ]
             ];
             
@@ -325,7 +375,16 @@ if($_GET['op'] == 'delete') {
                     'username' => $article['username'],
                     'user_avatar' => avatar($article['uid'], 'small', true),
                     'user_link' => 'home.php?mod=space&uid='.$article['uid'],
-                    'summary' => getstr($article['summary'], 150, 0, 0, 0, -1)
+                    'summary' => getstr($article['summary'], 150, 0, 0, 0, -1),
+                    
+                    'expend0' => '',
+                    'expend1' => '',
+                    'expend2' => '',
+                    'expend3' => '',
+                    'expend4' => '',
+                    'expend5' => '',
+                    'expend6' => '',
+                    'expend7' => '',
                 ]
             ];
             

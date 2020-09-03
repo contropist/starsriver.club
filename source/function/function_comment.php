@@ -238,6 +238,7 @@ function add_comment($message, $id, $idtype, $cid = 0) {
                 'to_uname'     => $tospace['username'],
                 'to_ulink'     => 'home.php?mod=space&uid=' . $tospace['uid'],
                 'to_uavatar'   => avatar($tospace['uid'], 'small', true),
+                
                 'blog_url'     => 'home.php?mod=space&uid=' . $tospace['uid'] . '&do=blog&id=' . $id,
                 'blog_sub'     => $blog['subject'],
                 'blog_content' => getstr($blog['message'], 50, 0, 0, 0, -1),

@@ -952,7 +952,6 @@
                             'icon'           => 'friend',
                             'title_template' => 'invite',
                             'title_data'     => [
-                                
                                 'uid'        => $inviter['uid'],
                                 'uname'      => $inviter['username'],
                                 'ulink'      => 'home.php?mod=space&uid=' . $inviter['uid'],
@@ -965,7 +964,6 @@
                             ],
                             'body_template'  => 'friend',
                             'body_data'      => [
-                                
                                 'uid'        => $inviter['uid'],
                                 'uname'      => $inviter['username'],
                                 'ulink'      => 'home.php?mod=space&uid=' . $inviter['uid'],
@@ -975,6 +973,15 @@
                                 'to_uname'   => $_G['username'],
                                 'to_ulink'   => 'home.php?mod=space&uid=' . $_G['uid'],
                                 'to_uavatar' => $avatar2,
+
+                                'expend0' => '',
+                                'expend1' => '',
+                                'expend2' => '',
+                                'expend3' => '',
+                                'expend4' => '',
+                                'expend5' => '',
+                                'expend6' => '',
+                                'expend7' => '',
                             ],
                             'uid'            => $inviter['uid'],
                             'username'       => $inviter['username'],

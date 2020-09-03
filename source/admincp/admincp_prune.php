@@ -224,7 +224,7 @@ if(submitcheck('searchsubmit', 1)) {
 			$groupsname = $groupsfid = $postlist = array();
 			$postlist = C::t('forum_post')->fetch_all_prune_by_search($posttable, $isgroup, $keywords, $len_message, $fid, $authorid, $starttime, $endtime, $useip, true, ($page - 1) * $perpage, $perpage);
 			foreach($postlist as $key => $post) {
-					$postfids[$post[fid]] = $post['fid'];
+					$postfids[$post['fid']] = $post['fid'];
 				$post['dateline'] = dgmdate($post['dateline']);
 				$post['subject'] = cutstr($post['subject'], 30);
 				$post['message'] = dhtmlspecialchars(cutstr($post['message'], 50));
@@ -233,7 +233,7 @@ if(submitcheck('searchsubmit', 1)) {
 			if($postfids) {
 				$query = C::t('forum_forum')->fetch_all_by_fid($postfids);
 				foreach($query as $row) {
-					$forumnames[$row[fid]] = $row['name'];
+					$forumnames[$row['fid']] = $row['name'];
 				}
 			}
 			if($postlist) {

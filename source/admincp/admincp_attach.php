@@ -145,7 +145,7 @@ EOT;
 
 	if($_GET['delete']) {
 
-		$tids = $pids = array();
+		$tids = $pids = [];
 		for($attachi = 0;$attachi < 10;$attachi++) {
 			foreach(C::t('forum_attachment_n')->fetch_all($attachi, $_GET['delete']) as $attach) {
 				dunlink($attach);

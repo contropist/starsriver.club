@@ -118,6 +118,15 @@
                         'blog_url'     => $blogurl,
                         'blog_sub'     => $item['subject'],
                         'blog_content' => getstr($item['message'], 50, 0, 0, 0, -1),
+
+                        'expend0' => '',
+                        'expend1' => '',
+                        'expend2' => '',
+                        'expend3' => '',
+                        'expend4' => '',
+                        'expend5' => '',
+                        'expend6' => '',
+                        'expend7' => '',
                     ],
                 ];
    
@@ -160,6 +169,15 @@
                         'article_url'     => $article_url,
                         'article_subject' => $item['title'],
                         'article_content' => getstr($item['content'], 50, 0, 0, 0, -1),
+
+                        'expend0' => '',
+                        'expend1' => '',
+                        'expend2' => '',
+                        'expend3' => '',
+                        'expend4' => '',
+                        'expend5' => '',
+                        'expend6' => '',
+                        'expend7' => '',
                     ],
                 ];
     
@@ -200,6 +218,15 @@
                         'image'      => $item['title'] ? $item['title'] : $item['filename'],
                         'image_link' => pic_get($item['filepath'], 'album', $item['thumb'], $item['remote']),
                         'image_togo' => "home.php?mod=space&uid=$item[uid]&do=album&picid=$item[picid]",
+
+                        'expend0' => '',
+                        'expend1' => '',
+                        'expend2' => '',
+                        'expend3' => '',
+                        'expend4' => '',
+                        'expend5' => '',
+                        'expend6' => '',
+                        'expend7' => '',
                     ],
                 ];
                 

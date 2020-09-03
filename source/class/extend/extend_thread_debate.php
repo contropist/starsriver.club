@@ -60,9 +60,9 @@
                     'ulink'   => 'home.php?mod=space&uid=' . $_G['uid'],
                     'uavatar' => avatar($_G['uid'], 'small', true),
                     
-                    'message'     => messagecutstr($message, 150),
-                    'affirmpoint' => messagecutstr($this->affirmpoint, 150),
-                    'negapoint'   => messagecutstr($this->negapoint, 150),
+                    'message'     => messagecutstr($message, 120),
+                    'affirmpoint' => messagecutstr($this->affirmpoint, 50),
+                    'negapoint'   => messagecutstr($this->negapoint, 50),
                     
                     'expend0' => '',
                     'expend1' => '',
@@ -83,6 +83,7 @@
             if ($this->forum['allowfeed'] && !$this->param['isanonymous']) {
             
                 $message = !$this->param['readperm'] ? $this->param['message'] : '';
+                $message = messagesafeclear($message);
             
                 if ($this->param['special'] == 5 && $this->thread['authorid'] != $this->member['uid']) {
                 
@@ -121,7 +122,7 @@
                             'expend6' => '',
                             'expend7' => '',
                         ],
-                        'body_general' => messagecutstr($message, 300)
+                        'body_general' => messagecutstr($message, 100)
                     ];
                 }
             }

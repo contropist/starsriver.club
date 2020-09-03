@@ -101,6 +101,15 @@ if($op == 'add') {
                         'to_uname'   => $tospace['username'],
                         'to_ulink'   => 'home.php?mod=space&uid=' . $tospace['uid'],
                         'to_uavatar' => $avatar2,
+
+                        'expend0' => '',
+                        'expend1' => '',
+                        'expend2' => '',
+                        'expend3' => '',
+                        'expend4' => '',
+                        'expend5' => '',
+                        'expend6' => '',
+                        'expend7' => '',
                     ],
                 ]);
             }
