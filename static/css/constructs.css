@@ -3012,6 +3012,8 @@
     .imageGrid .image{
         background: center;
         background-size: cover;
+    }
+    .imageGrid .image img{
         opacity: 0;
     }
     .imageGrid.grid-1{
