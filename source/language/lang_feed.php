@@ -12,7 +12,6 @@
         'feed_comment_event' => '在 {touser} 组织的活动 {event} 中留言了',
         'feed_task'          => '完成了有奖任务 {task}',
         'feed_task_credit'   => '完成了有奖任务 {task}，领取了 {credit} 个奖励积分',
-        
         'feed_add_attachsize' => '用 {credit} 个积分兑换了 {size} 附件空间，可以上传更多的图片啦(<a href="home.php?mod=spacecp&ac=credit&op=addsize">我也来兑换</a>)',
         
         'feed_thread_goods_title'          => '出售了一个新商品',
@@ -30,10 +29,56 @@
          * B {expend0~8}
          *
          * */
-        'feed_template_need_payoff_body' => '<div class="feed-element-ban"><a class="link redirect" href="{tlink}">此帖为付费内容，需转至原文后查看</a></div>',
-        'feed_template_need_perm_body'   => '<div class="feed-element-ban"><a class="link redirect" href="{tlink}">此贴为权限内容，需转至原文查看</a></div>',
-
         
+        
+        /*
+        * feed-thread
+        *
+        * @ {tid}     :帖子ID
+        * @ {tsub}    :帖子标题
+        * @ {tink}    :帖子链接
+         *
+        * B {uid}      :用户ID
+        * B {uname}    :用户名
+        * B {ulink}    :用户空间链接
+        * B {uavatar}  :用户头像源链接
+        *
+        * */
+        'feed_template_need_payoff_body' => '<div class="feed-element-ban"><a class="link redirect" href="{tlink}">此帖为付费内容，需转至原文后查看</a></div>',
+        'feed_template_need_perm_body'   => '<div class="feed-element-ban"><a class="link redirect" href="{tlink}">此贴要求一定的等级权限，需转至原文查看</a></div>',
+        'feed_template_post_baned_body'  => '<div class="feed-element-ban"><a class="link redirect" href="{tlink}">此内容被屏蔽</a></div>',
+        
+        'feed_template_quote_need_payoff_body' => '
+            <div class="feed-element-ban">
+                <a class="user-tag" href="{ulink}" target="_blank" c="1">
+                    <s class="avatar"><img class="avatar-main" src="{uavatar}"></s>
+                    <s class="username">{uname}</s>
+                </a>
+                <a class="thread-title" href="{tlink}" target="_blank">{tsub}</a>
+                <a class="link redirect" href="{tlink}">此帖为付费内容，需转至原文后查看</a>
+            </div>',
+        
+        'feed_template_quote_need_perm_body'   => '
+            <div class="feed-element-ban">
+                <a class="user-tag" href="{ulink}" target="_blank" c="1">
+                    <s class="avatar"><img class="avatar-main" src="{uavatar}"></s>
+                    <s class="username">{uname}</s>
+                </a>
+                <a class="thread-title" href="{tlink}" target="_blank">{tsub}</a>
+                <a class="link redirect" href="{tlink}">此贴要求一定的等级权限，需转至原文查看</a>
+            </div>',
+        
+        'feed_template_quote_post_baned_body'  => '
+            <div class="feed-element-ban">
+                <a class="user-tag" href="{ulink}" target="_blank" c="1">
+                    <s class="avatar"><img class="avatar-main" src="{uavatar}"></s>
+                    <s class="username">{uname}</s>
+                </a>
+                <a class="thread-title" href="{tlink}" target="_blank">{tsub}</a>
+                <a class="link redirect" href="{tlink}">此内容被屏蔽</a>
+            </div>',
+
+
         /*
         * feed-thread
         *
@@ -324,6 +369,31 @@
                     <div class="activity-info-time"><i class="time"></i>开始时间：{starttime}</div>
                     <div class="activity-info-loca"><i class="loca"></i>活动地点：{location}</div>
                 </div>
+            </div>',
+
+
+        /*
+        * feed-thread.sample
+        *
+        * B {tid}     :帖子ID
+        * B {tsub}    :帖子标题
+        * B {tink}    :帖子链接
+         *
+        * B {uid}      :用户ID
+        * B {uname}    :用户名
+        * B {ulink}    :用户空间链接
+        * B {uavatar}  :用户头像源链接
+         *
+        * B {message}  :回贴摘要
+        *
+        * */
+        'feed_template_thread_sample_body' => '
+            <div class="feed-element-thread-sample">
+                <a class="user-tag" href="{ulink}" target="_blank" c="1">
+                    <s class="avatar"><img class="avatar-main" src="{uavatar}"></s>
+                    <s class="username">{uname}</s>
+                </a>
+                <div class="content">{message}</div>
             </div>',
         
 

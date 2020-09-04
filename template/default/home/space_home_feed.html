@@ -58,10 +58,10 @@
                             <!--{/if}-->
 
                             <!--{if $feed['body_data']['imgs']}-->
-                                <div class="feed-element-imageGrid imageGrid grid-{$feed['body_data']['imgnum']}">
+                                <div class="feed-element-imageGrid imageGrid grid-{eval echo count($feed['body_data']['imgs']);}">
                                     <!--{eval $counter = 1;}-->
                                     <!--{loop $feed['body_data']['imgs'] $image_element}-->
-                                        <a class="image rec-img nth-of-{$counter}" href="{$image_element['img_url']}" style="background-image: url('$image_element['img']')" title="{$image_element['img_name']}">
+                                        <a class="image rec-img nth-of-{$counter}" href="{$image_element['img_url']}" style="background-image: url('$image_element['img']')" target="_blank" title="{$image_element['img_name']}">
                                             <img src="{LIBURL}/img/row-e-col/1.1.png"></i>
                                         </a>
                                         <!--{eval $counter += 1;}-->

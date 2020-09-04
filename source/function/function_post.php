@@ -99,9 +99,7 @@ function getattach_img($tid, $pid, $limit,&$setto) {
             ];
         }
     }
-    
     $setto['imgs'] = $imgs;
-    $setto['imgnum'] = count($imgs);
     
     return true;
 }

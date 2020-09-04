@@ -94,23 +94,16 @@
             $feed['body_template']  = $feed['body_template']  ? lang('feed', 'feed_template_' . $feed['body_template'] . '_body') : '';
             
             if ($feed['title_data']) {
-                $searchs = ['{actor}'];
-                $replaces = [empty($actors) ? '<a href="home.php?mod=space&uid='.$feed['uid'].'" target="_blank">'.$feed['username'].'</a>' : implode(lang('core', 'dot'), $actors)];
-                foreach (array_keys($feed['title_data']) as $key) {
-                    $searchs[] = '{' . $key . '}';
-                    $replaces[] = $feed['title_data'][$key];
-                }
-                $feed['title_template'] = str_replace($searchs, $replaces, $feed['title_template']);
+                mkfeed_template($feed, $feed['title_template'],$feed['title_data'], $actors);
             }
             
             if ($feed['body_data']) {
-                $searchs = ['{actor}'];
-                $replaces = [empty($actors) ? '<a href="home.php?mod=space&uid='.$feed['uid'].'" target="_blank">'.$feed['username'].'</a>' : implode(lang('core', 'dot'), $actors)];
-                foreach (array_keys($feed['body_data']) as $key) {
-                    $searchs[] = '{' . $key . '}';
-                    $replaces[] = $feed['body_data'][$key];
-                }
-                $feed['body_template'] = str_replace($searchs, $replaces, $feed['body_template']);
+                mkfeed_template($feed, $feed['body_template'],$feed['body_data'], $actors);
+            }
+            
+            if($feed['body_data']['original']){
+                $feed['body_data']['original']['template']  = $feed['body_data']['original']['template']  ? lang('feed', 'feed_template_' . $feed['body_data']['original']['template'] . '_body') : '';
+                mkfeed_template($feed, $feed['body_data']['original']['template'],$feed['body_data']['original']['data']);
             }
             
             $feed['magic_class'] = !empty($feed['body_data']['magic_thunder']) ? 'magic-thunder' : '';
@@ -126,6 +119,17 @@
         
         return $feed;
     }
+    
+    function mkfeed_template(&$feed, &$template, &$data, $actors = []) {
+        $searchs = ['{actor}'];
+        $replaces = [empty($actors) ? '<a class="user-tag" href="home.php?mod=space&uid='.$feed['uid'].'" target="_blank"><s class="avatar">'.avatar($feed['uid'],'').'</s><s class="username">'.$feed['username'].'</s></a>' : implode(lang('core', 'dot'), $actors)];
+        foreach (array_keys($data) as $key) {
+            $searchs[] = '{' . $key . '}';
+            $replaces[] = $data[$key];
+        }
+        $template = str_replace($searchs, $replaces, $template);
+    }
+    
     
     function feed_publish($id, $idtype, $add = 0) {
         
@@ -230,8 +234,6 @@
                             break;
                         }
                     }
-                    
-                    $setarr['body_data']['imgnum'] = !empty($setarr['body_data']['imgs']) ? count($setarr['body_data']['imgs']) : 0;
                 }
                 break;
                 

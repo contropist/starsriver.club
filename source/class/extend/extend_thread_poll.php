@@ -143,7 +143,6 @@ class extend_thread_poll extends extend_thread_base {
                     ];
                 }
             }
-            $this->feed['body_data']['imgnum'] = count($this->feed['body_data']['imgs']);
         }
     }
     
