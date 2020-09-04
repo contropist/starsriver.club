@@ -532,26 +532,26 @@ if(!submitcheck('modsubmit')) {
 							$stickmodify = 1;
 						}
 						if($_GET['type'] == 'redirect') {
-
-							$insertdata = array(
-									'fid' => $thread['fid'],
-									'readperm' => $thread['readperm'],
-									'author' => $thread['author'],
-									'authorid' => $thread['authorid'],
-									'subject' => $thread['subject'],
-									'dateline' => $thread['dateline'],
-									'lastpost' => $thread['dblastpost'],
-									'lastposter' => $thread['lastposter'],
-									'views' => 0,
-									'replies' => 0,
-									'displayorder' => 0,
-									'digest' => 0,
-									'closed' => $thread['tid'],
-									'special' => 0,
-									'attachment' => 0,
-									'typeid' => $_GET['threadtypeid']
-								);
-							$newtid = C::t('forum_thread')->insert($insertdata, true);
+                            
+                            $insertdata = [
+                                'fid'          => $thread['fid'],
+                                'readperm'     => $thread['readperm'],
+                                'author'       => $thread['author'],
+                                'authorid'     => $thread['authorid'],
+                                'subject'      => $thread['subject'],
+                                'dateline'     => $thread['dateline'],
+                                'lastpost'     => $thread['dblastpost'],
+                                'lastposter'   => $thread['lastposter'],
+                                'views'        => 0,
+                                'replies'      => 0,
+                                'displayorder' => 0,
+                                'digest'       => 0,
+                                'closed'       => $thread['tid'],
+                                'special'      => 0,
+                                'attachment'   => 0,
+                                'typeid'       => $_GET['threadtypeid'],
+                            ];
+                            $newtid = C::t('forum_thread')->insert($insertdata, true);
 							if($newtid) {
 								C::t('forum_threadclosed')->insert(array('tid' => $thread['tid'], 'redirect' => $newtid), true, true);
 							}
@@ -648,26 +648,26 @@ if(!submitcheck('modsubmit')) {
 
 					if($allowmove) {
 						$moderate[] = $tid;
-
-						$newthread = array(
-								'fid' => $moveto,
-								'readperm' => $thread['readperm'],
-								'author' => $thread['author'],
-								'authorid' => $thread['authorid'],
-								'subject' => $thread['subject'],
-								'dateline' => $thread['dateline'],
-								'lastpost' => TIMESTAMP,
-								'lastposter' => $thread['lastposter'],
-								'views' => $thread['views'],
-								'replies' => $thread['replies'],
-								'displayorder' => 0,
-								'digest' => $thread['digest'],
-								'closed' => $thread['tid'],
-								'special' => $thread['special'],
-								'attachment' => $thread['attachment'],
-								'isgroup' => $thread['isgroup']
-							);
-						$newtid = C::t('forum_thread')->insert($newthread, true);
+                        
+                        $newthread = [
+                            'fid'          => $moveto,
+                            'readperm'     => $thread['readperm'],
+                            'author'       => $thread['author'],
+                            'authorid'     => $thread['authorid'],
+                            'subject'      => $thread['subject'],
+                            'dateline'     => $thread['dateline'],
+                            'lastpost'     => TIMESTAMP,
+                            'lastposter'   => $thread['lastposter'],
+                            'views'        => $thread['views'],
+                            'replies'      => $thread['replies'],
+                            'displayorder' => 0,
+                            'digest'       => $thread['digest'],
+                            'closed'       => $thread['tid'],
+                            'special'      => $thread['special'],
+                            'attachment'   => $thread['attachment'],
+                            'isgroup'      => $thread['isgroup'],
+                        ];
+                        $newtid = C::t('forum_thread')->insert($newthread, true);
 						C::t('forum_thread')->update($thread['tid'], array('closed'=>$newtid, 'moderated'=>1), true);
 					}
 				}

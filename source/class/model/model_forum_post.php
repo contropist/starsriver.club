@@ -1,11 +1,13 @@
 <?php
-
-/**
- *      [Discuz!] (C)2001-2099 Comsenz Inc.
- *      This is NOT a freeware, use is subject to license terms
- *
- *      $Id: model_forum_post.php 34819 2014-08-11 06:46:20Z nemohou $
- */
+    
+    /*
+    * [starsriver] 2010-2110 @copyright reserved by
+    *
+    * Author Neko_Yurino
+    * Email  starsriver@yahoo.com
+    * Date   2020/9/4 - 14:30
+    *
+    */
 
 if(!defined('IN_DISCUZ')) {
 	exit('Access Denied');
@@ -275,7 +277,7 @@ class model_forum_post extends discuz_model {
 		if(!$this->feed) {
 			if($this->forum['allowfeed'] && !$this->param['isanonymous']) {
 				if($this->thread['authorid'] != $this->member['uid']) {
-                    
+				    
                     $plink  = 'forum.php?mod=redirect&goto=findpost&pid=' . $this->pid . '&ptid=' . $this->thread['tid'];
                     $ulink  = 'home.php?mod=space&uid=' . $this->thread['authorid'];
                     $avatar = avatar($this->thread['authorid'], 'small', true);
@@ -285,9 +287,6 @@ class model_forum_post extends discuz_model {
                     } else {
                         $message = '';
                     }
-                    
-                    $thread_info = C::t('forum_thread')->fetch($this->thread['tid']);
-                    $thread_data = C::t('forum_post')->fetch_all_by_tid(0, $this->thread['tid'], false, '', 0, 0, 1);
                     
                     $this->feed = [
                         'icon'           => 'post',
@@ -303,18 +302,15 @@ class model_forum_post extends discuz_model {
                             'uavatar' => $avatar,
                         ],
                         'body_template'  => 'thread_reply',
-                        'body_data'      => [
+                        'body_data' => [
                             'tid'   => $this->thread['tid'],
                             'tsub'  => $this->thread['subject'],
                             'tlink' => $plink,
-                            
-                            'uid'     => $this->thread['authorid'],
-                            'uname'   => $this->thread['author'],
-                            'ulink'   => $ulink,
-                            'uavatar' => $avatar,
-                            
+    
                             'message' => $message,
-                            
+    
+                            'original' => [],
+    
                             'expend0' => '',
                             'expend1' => '',
                             'expend2' => '',
@@ -323,30 +319,17 @@ class model_forum_post extends discuz_model {
                             'expend5' => '',
                             'expend6' => '',
                             'expend7' => '',
-
-                            /* Thread data */
-                            'original_type' => 'thread',
-                            'original_data' => [
-
-                            ],
                         ],
-                        'body_general'   => $message,
                     ];
                     
                     if(!empty(getglobal('forum_attachexist'))) {
-                        $attach_imgs = C::t('forum_attachment_n')->fetch_all_by_id('tid:' . $this->thread['tid'], 'pid', $this->pid, '', [1, -1], false, false, 9);
-                        if (!empty($attach_imgs)) {
-                            foreach ($attach_imgs as $img_data){
-                                $this->feed['body_data']['imgs'][] = [
-                                    'img'     => getforumimg($img_data['aid']),
-                                    'img_url' => $plink,
-                                ];
-                            }
-                            $this->feed['body_data']['imgnum'] = sizeof($this->feed['body_data']['imgs']);
-                        }
-                        unset($attach_imgs);
+                        getattach_img($this->thread['tid'],$this->pid,9,$this->feed['body_data']);
                     }
-				}
+                    
+                    // Thread data
+                    require_once libfile('function/thread');
+                    getThread_sample($this->thread['tid'], $this->feed['body_data']['original']);
+                }
 			}
 		}
 

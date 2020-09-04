@@ -311,17 +311,7 @@ class model_forum_thread extends discuz_model
                     $this->feed['body_template'] = 'need_perm';
                 } else {
                     if (!empty(getglobal('forum_attachexist'))) {
-                        $attach_imgs = C::t('forum_attachment_n')->fetch_all_by_id('tid:' . $this->tid, 'pid', $this->pid, '', [1, -1,], false, false, 9);
-                        if (!empty($attach_imgs)) {
-                            foreach ($attach_imgs as $img_data) {
-                                $this->feed['body_data']['imgs'][] = [
-                                    'img' => getforumimg($img_data['aid']),
-                                    'img_url' => 'forum.php?mod=viewthread&tid=' . $this->tid,
-                                ];
-                            }
-                            $this->feed['body_data']['imgnum'] = sizeof($this->feed['body_data']['imgs']);
-                        }
-                        unset($attach_imgs);
+                        getattach_img($this->tid,$this->pid,9,$this->feed['body_data']);
                     }
                 }
             }

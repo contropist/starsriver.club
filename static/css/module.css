@@ -8719,6 +8719,12 @@
         .app-userspace .timeline .feed-element-activity{
 
         }
+        .app-userspace .timeline .feed-element-org-quote{
+            margin-top: var(--box-edge);
+            padding: 20px;
+            border-radius: 5px;
+            background: var(--color-lightgray);
+        }
     /*endregion*/
 
     /*region #userspace::feed*/

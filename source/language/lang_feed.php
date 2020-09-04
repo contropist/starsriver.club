@@ -75,7 +75,7 @@
         'feed_template_thread_reply_a_title' => '在帖子 <a class="link ellipsis" href="{tlink}" target="_blank">{tsub}</a>中回复道',
         'feed_template_thread_reply_body'    => '
             <div class="feed-element-thread-reply">
-            
+                <div class="content">{message}</div>
             </div>',
 
 

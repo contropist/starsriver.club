@@ -608,7 +608,7 @@ if($_GET['action'] == 'votepoll' && submitcheck('pollsubmit', 1)) {
                     ];
                 }
             }
-            $feed['body_data']['imgnum'] = sizeof($feed['body_data']['imgs']);
+            $feed['body_data']['imgnum'] = count($feed['body_data']['imgs']);
             $feed['body_data']['retemplate'] = 'thread_poll_vote_withimg';
         }
         

@@ -53,7 +53,9 @@
                                 <div class="message">$feed[body_general]</div>
                             <!--{/if}-->
 
-                            <!--{if $feed['body_template']}-->$feed[body_template]<!--{/if}-->
+                            <!--{if $feed['body_template']}-->
+                                $feed[body_template]
+                            <!--{/if}-->
 
                             <!--{if $feed['body_data']['imgs']}-->
                                 <div class="feed-element-imageGrid imageGrid grid-{$feed['body_data']['imgnum']}">
@@ -66,6 +68,8 @@
                                     <!--{/loop}-->
                                 </div>
                             <!--{/if}-->
+
+                            <!--{template home/space_home_feed_mod_org_quote}-->
 
                             <!--{if $user_list[$feed['hash_data']]}-->
                                 <p>{lang other_participants}:<!--{eval echo implode(', ', $user_list[$feed['hash_data']]);}--></p>

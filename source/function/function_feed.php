@@ -231,7 +231,7 @@
                         }
                     }
                     
-                    $setarr['body_data']['imgnum'] = !empty($setarr['body_data']['imgs']) ? sizeof($setarr['body_data']['imgs']) : 0;
+                    $setarr['body_data']['imgnum'] = !empty($setarr['body_data']['imgs']) ? count($setarr['body_data']['imgs']) : 0;
                 }
                 break;
                 

@@ -85,6 +85,27 @@ function getattach_row($attach, &$attachs, &$imgattachs) {
 	}
 }
 
+function getattach_img($tid, $pid, $limit,&$setto) {
+	$imgs = [];
+    $attach_imgs = C::t('forum_attachment_n')->fetch_all_by_id('tid:' . $tid, 'pid', $pid, '', [1, -1], false, false, $limit);
+    if (!empty($attach_imgs)) {
+        foreach ($attach_imgs as $img_data){
+            $imgs[] = [
+                'img'      => getforumimg($img_data['aid']),
+                'img_type' => 'attach',
+                'img_id'   => $img_data['aid'],
+                'img_url'  => 'forum.php?mod=redirect&goto=findpost&pid=' . $pid . '&ptid=' . $tid,
+                'img_name' => $img_data['filename'],
+            ];
+        }
+    }
+    
+    $setto['imgs'] = $imgs;
+    $setto['imgnum'] = count($imgs);
+    
+    return true;
+}
+
 function parseattachmedia($attach) {
 	$attachurl = 'attach://'.$attach['aid'].'.'.$attach['ext'];
 	switch(strtolower($attach['ext'])) {
@@ -671,5 +692,3 @@ function setthreadcover($pid, $tid = 0, $aid = 0, $countimg = 0, $imgurl = '') {
 		return true;
 	}
 }
-
-?>

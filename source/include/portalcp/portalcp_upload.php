@@ -128,20 +128,20 @@ if($attachs) {
 				}
 			}
 		}
-
-		$setarr = array(
-			'uid' => $_G['uid'],
-			'filename' => $attach['name'],
-			'attachment' => $attach['attachment'],
-			'filesize' => $attach['size'],
-			'isimage' => $attach['isimage'],
-			'thumb' => $attach['thumb'],
-			'remote' => $attach['remote'],
-			'filetype' => $attach['extension'],
-			'dateline' => $_G['timestamp'],
-			'aid' => $aid
-		);
-		$setarr['attachid'] = C::t('portal_attachment')->insert($setarr, true);
+        
+        $setarr = [
+            'uid'        => $_G['uid'],
+            'filename'   => $attach['name'],
+            'attachment' => $attach['attachment'],
+            'filesize'   => $attach['size'],
+            'isimage'    => $attach['isimage'],
+            'thumb'      => $attach['thumb'],
+            'remote'     => $attach['remote'],
+            'filetype'   => $attach['extension'],
+            'dateline'   => $_G['timestamp'],
+            'aid'        => $aid,
+        ];
+        $setarr['attachid'] = C::t('portal_attachment')->insert($setarr, true);
 		if($downremotefile) {
 			$attach['url'] = ($attach['remote'] ? $_G['setting']['ftp']['attachurl'] : $_G['setting']['attachurl']).'portal/';
 			$imagereplace['newimageurl'][] = $attach['url'].$attach['attachment'];

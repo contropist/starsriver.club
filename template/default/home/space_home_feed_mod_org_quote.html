@@ -1,0 +1,27 @@
+<!--{if $feed['body_data']['original']}-->
+    <!--{eval $original = $feed['body_data']['original']['data'];}-->
+
+    <!--{if $feed['body_data']['original']['type'] == 'thread'}-->
+        <div class="feed-element-org-quote">
+            <div class="feed-element-thread">
+                <a class="user-tag" href="$original['ulink']}">
+                    <s>{$original['uname']}</s>
+                    <s><!--{avatar($original['uid'],'small')}--></s>
+                </a>
+                <!--{if $original['message']}-->
+                    <div class="message">{$original['message']}</div>
+                <!--{/if}-->
+            </div>
+            <div class="feed-element-imageGrid imageGrid grid-{$original['imgnum']}">
+                <!--{eval $counter = 1;}-->
+                <!--{loop $original['imgs'] $image_element}-->
+                    <a class="image rec-img nth-of-{$counter}" href="{$image_element['img_url']}" style="background-image: url('$image_element['img']')" title="{$image_element['img_name']}">
+                        <img src="{LIBURL}/img/row-e-col/1.1.png"></i>
+                    </a>
+                    <!--{eval $counter += 1;}-->
+                <!--{/loop}-->
+            </div>
+        </div>
+    <!--{/if}-->
+
+<!--{/if}-->
