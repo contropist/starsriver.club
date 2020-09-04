@@ -14,10 +14,6 @@
         'feed_task_credit'   => '完成了有奖任务 {task}，领取了 {credit} 个奖励积分',
         'feed_add_attachsize' => '用 {credit} 个积分兑换了 {size} 附件空间，可以上传更多的图片啦(<a href="home.php?mod=spacecp&ac=credit&op=addsize">我也来兑换</a>)',
         
-        'feed_thread_goods_title'          => '出售了一个新商品',
-        'feed_thread_goods_message_1'      => '<b>{itemname}</b><br>售价 {itemprice} 元 附加 {itemcredit}{creditunit}',
-        'feed_thread_goods_message_2'      => '<b>{itemname}</b><br>售价 {itemprice} 元',
-        'feed_thread_goods_message_3'      => '<b>{itemname}</b><br>售价 {itemcredit}{creditunit}',
         
         /*
          * 参数注释标志：
@@ -32,7 +28,7 @@
         
         
         /*
-        * feed-thread
+        * feed-thread.ban
         *
         * @ {tid}     :帖子ID
         * @ {tsub}    :帖子标题
@@ -369,6 +365,39 @@
                     <div class="activity-info-time"><i class="time"></i>开始时间：{starttime}</div>
                     <div class="activity-info-loca"><i class="loca"></i>活动地点：{location}</div>
                 </div>
+            </div>',
+
+        
+        /*
+        * feed-thread-goods
+        *
+        * B {tid}     :帖子ID
+        * B {tsub}    :帖子标题
+        * B {tink}    :帖子链接
+         *
+        * B {uid}      :用户ID
+        * B {uname}    :用户名
+        * B {ulink}    :用户空间链接
+        * B {uavatar}  :用户头像源链接
+         *
+        * B {message}  :回贴摘要
+        *
+        * */
+        'feed_template_thread_goods_title'  => '我挂起了一件商品',
+        'feed_template_thread_goods_1_body' => '
+            <div class="feed-element-trade">
+                <b>{itemname}</b><br>售价 {itemprice} 元 附加 {itemcredit}{creditunit}
+                <div class="content">{message}</div>
+            </div>',
+        'feed_template_thread_goods_2_body' => '
+            <div class="feed-element-trade">
+                <b>{itemname}</b><br>售价 {itemprice} 元
+                <div class="content">{message}</div>
+            </div>',
+        'feed_template_thread_goods_3_body' => '
+            <div class="feed-element-trade">
+                <b>{itemname}</b><br>售价 {itemcredit}{creditunit}
+                <div class="content">{message}</div>
             </div>',
 
 
