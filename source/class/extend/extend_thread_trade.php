@@ -90,7 +90,6 @@
             ($this->group['allowpostattach'] || $this->group['allowpostimage']) && ($_GET['attachnew'] || $_GET['tradeaid']) && updateattach($this->param['displayorder'] == -4 || $this->param['modnewthreads'], $this->tid, $pid, $_GET['attachnew']);
             require_once libfile('function/trade');
             $author = !$this->param['isanonymous'] ? $this->member['username'] : '';
-            
             trade_create([
                 'tid'             => $this->tid,
                 'pid'             => $pid,
@@ -169,22 +168,13 @@
                 ];
   
                 if ($_GET['tradeaid']) {
-                    
                     $this->feed['body_data']['imgs'][] = [
                         'img'     => getforumimg($_GET['tradeaid']),
                         'img_url' => 'forum.php?mod=viewthread&do=tradeinfo&tid=' . $this->tid . '&pid=' . $pid,
                     ];
-                    
-                    $attachment = C::t('forum_attachment_n')->fetch('tid:' . $this->tid, $_GET['tradeaid']);
-                    if (in_array($attachment['filetype'], ['image/gif', 'image/jpeg', 'image/jpg', 'image/png',])) {
-                        $imgurl = $this->setting['attachurl'] . 'forum/' . ($attachment['thumb'] && $attachment['filetype'] != 'image/gif' ? getimgthumbname($attachment['attachment']) : $attachment['attachment']);
-                        if ($attachment['attachment']) {
-                            $this->feed['body_data']['imgs'][] = [
-                                'img'     => $imgurl,
-                                'img_url' => 'forum.php?mod=viewthread&tid=' . $this->tid,
-                            ];
-                        }
-                    }
+                    $attach_imgs = [];
+                    getattach_img($this->tid,$pid,5,$attach_imgs);
+                    $this->feed['body_data']['imgs'] = array_merge($this->feed['body_data']['imgs'],$attach_imgs);
                 }
             }
         }
@@ -206,10 +196,16 @@
         }
         
         public function before_replyfeed() {
-            
+            //This function only uses to add another goods in same thread
             if ($this->forum['allowfeed'] && !$this->param['isanonymous']) {
                 
                 if ($this->param['special'] == 2 && !empty($_GET['trade'])) {
+    
+                    if (!empty($this->param['message'])) {
+                        $message = messagecutstr(messagesafeclear($this->param['message']), 200);
+                    } else {
+                        $message = '';
+                    }
                     
                     $creditstransextra = $this->setting['creditstransextra'];
                     $extcredits = $this->setting['extcredits'];
@@ -233,12 +229,14 @@
                             'tid'   => $this->thread['tid'],
                             'tsub'  => $this->thread['subject'],
                             'tlink' => 'forum.php?mod=viewthread&do=tradeinfo&tid=' . $this->thread['tid'] . '&pid=' . $this->pid,
-            
+                            
                             'itemname'   => dhtmlspecialchars($_GET['item_name']),
                             'itemprice'  => $_GET['item_price'],
                             'itemcredit' => $_GET['item_credit'],
                             'creditunit' => $extcredits[$creditstransextra[5]]['unit'] . $extcredits[$creditstransextra[5]]['title'],
-            
+
+                            'message' => $message,
+
                             'expend0' => '',
                             'expend1' => '',
                             'expend2' => '',
@@ -255,6 +253,9 @@
                             'img'     => getforumimg($_GET['tradeaid']),
                             'img_url' => 'forum.php?mod=viewthread&do=tradeinfo&tid=' . $this->thread['tid'] . '&pid=' . $this->pid,
                         ];
+                        $attach_imgs = [];
+                        getattach_img($this->thread['tid'],$this->pid,5,$attach_imgs);
+                        $this->feed['body_data']['imgs'] = array_merge($this->feed['body_data']['imgs'],$attach_imgs);
                     }
                 }
             }

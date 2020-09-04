@@ -311,7 +311,7 @@ class model_forum_thread extends discuz_model
                     $this->feed['body_template'] = 'need_perm';
                 } else {
                     if (!empty(getglobal('forum_attachexist'))) {
-                        getattach_img($this->tid,$this->pid,9,$this->feed['body_data']);
+                        getattach_img($this->tid,$this->pid,9,$this->feed['body_data']['imgs']);
                     }
                 }
             }

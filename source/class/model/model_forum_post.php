@@ -323,7 +323,7 @@ class model_forum_post extends discuz_model {
                     ];
                     
                     if(!empty(getglobal('forum_attachexist'))) {
-                        getattach_img($this->thread['tid'],$this->pid,9,$this->feed['body_data']);
+                        getattach_img($this->thread['tid'],$this->pid,9,$this->feed['body_data']['imgs']);
                     }
                     
                     // Thread data

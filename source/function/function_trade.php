@@ -62,58 +62,57 @@ function trade_create($trade) {
 		case 'virtual'	: $item_transport = 3; break;
 		case 'logistics': $item_transport = 4; break;
 	}
-
-	$seller = dhtmlspecialchars($seller);
-	$item_name = dhtmlspecialchars($item_name);
-	$item_locus = dhtmlspecialchars($item_locus);
-	$item_number = intval($item_number);
-	$item_quality = intval($item_quality);
-	$item_transport = intval($item_transport);
-	$postage_mail = intval($postage_mail);
-	$postage_express = intval($postage_express);
-	$postage_ems = intval($postage_ems);
-	$item_type = intval($item_type);
-	$typeid = intval($typeid);
-	$item_costprice = floatval($item_costprice);
-	if(!$item_price || $item_price <= 0) {
-		$item_price = $postage_mail = $postage_express = $postage_ems = '';
-	}
-
-	if(empty($pid)) {
+    
+    $seller = dhtmlspecialchars($seller);
+    $item_name = dhtmlspecialchars($item_name);
+    $item_locus = dhtmlspecialchars($item_locus);
+    $item_number = intval($item_number);
+    $item_quality = intval($item_quality);
+    $item_transport = intval($item_transport);
+    $postage_mail = intval($postage_mail);
+    $postage_express = intval($postage_express);
+    $postage_ems = intval($postage_ems);
+    $item_type = intval($item_type);
+    $typeid = intval($typeid);
+    $item_costprice = floatval($item_costprice);
+    if (!$item_price || $item_price <= 0) {
+        $item_price = $postage_mail = $postage_express = $postage_ems = '';
+    }
+    
+    if(empty($pid)) {
 		$pid = C::t('forum_post')->fetch_threadpost_by_tid_invisible($tid);
 		$pid = $pid['pid'];
 	}
 	if(!$item_price && $item_credit) {
 		$seller == '';
 	}
-	C::t('forum_trade')->insert(array(
-		'tid' => $tid,
-		'pid' => $pid,
-		'typeid' => $typeid,
-		'sellerid' => $_G['uid'],
-		'seller' => $author,
-		'tenpayaccount' => $tenpayaccount,
-		'account' => $seller,
-		'subject' => $item_name,
-		'price' => $item_price,
-		'amount' => $item_number,
-		'quality' => $item_quality,
-		'locus' => $item_locus,
-		'transport' => $item_transport,
-		'ordinaryfee' => $postage_mail,
-		'expressfee' => $postage_express,
-		'emsfee' => $postage_ems,
-		'itemtype' => $item_type,
-		'dateline' => $_G['timestamp'],
-		'expiration' => $expiration,
-		'lastupdate' => $_G['timestamp'],
-		'totalitems' => '0',
-		'tradesum' => '0',
-		'closed' => $closed,
-		'costprice'=>$item_costprice,
-		'aid'=>$aid,'credit'=>$item_credit,
-		'costcredit'=>$item_costcredit
-	));
+    C::t('forum_trade')->insert([
+        'tid'           => $tid,
+        'pid'           => $pid,
+        'typeid'        => $typeid,
+        'sellerid'      => $_G['uid'],
+        'seller'        => $author,
+        'tenpayaccount' => $tenpayaccount,
+        'account'       => $seller,
+        'subject'       => $item_name,
+        'price'         => $item_price,
+        'amount'        => $item_number,
+        'quality'       => $item_quality,
+        'locus'         => $item_locus,
+        'transport'     => $item_transport,
+        'ordinaryfee'   => $postage_mail,
+        'expressfee'    => $postage_express,
+        'emsfee'        => $postage_ems,
+        'itemtype'      => $item_type,
+        'dateline'      => $_G['timestamp'],
+        'expiration'    => $expiration,
+        'lastupdate'    => $_G['timestamp'],
+        'totalitems'    => '0',
+        'tradesum'      => '0',
+        'closed'        => $closed,
+        'costprice'     => $item_costprice,
+        'aid'           => $aid,
+        'credit'        => $item_credit,
+        'costcredit'    => $item_costcredit,
+    ]);
 }
-
-?>

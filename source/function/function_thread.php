@@ -64,7 +64,7 @@
             $data['data']['message'] = $message;
     
             if ($thread['attachment']) {
-                getattach_img($thread['tid'], $thread['pid'], 9, $data['data']);
+                getattach_img($thread['tid'], $thread['pid'], 9, $data['data']['imgs']);
             }
         }
     }

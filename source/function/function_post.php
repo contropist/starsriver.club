@@ -99,7 +99,7 @@ function getattach_img($tid, $pid, $limit,&$setto) {
             ];
         }
     }
-    $setto['imgs'] = $imgs;
+    $setto = $imgs;
     
     return true;
 }

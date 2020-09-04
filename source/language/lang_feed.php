@@ -386,18 +386,28 @@
         'feed_template_thread_goods_title'  => '我挂起了一件商品',
         'feed_template_thread_goods_1_body' => '
             <div class="feed-element-trade">
-                <b>{itemname}</b><br>售价 {itemprice} 元 附加 {itemcredit}{creditunit}
-                <div class="content">{message}</div>
+                <a class="goods-name" href="{tlink}">{itemname}</a>
+                <div class="goods-info">
+                    <span>售价 {itemprice} 元</span>
+                    <span>附加 {itemcredit}{creditunit}</span>
+                    <div class="content">{message}</div>
+                </div>
             </div>',
         'feed_template_thread_goods_2_body' => '
             <div class="feed-element-trade">
-                <b>{itemname}</b><br>售价 {itemprice} 元
-                <div class="content">{message}</div>
+                <a class="goods-name" href="{tlink}">{itemname}</a>
+                <div class="goods-info">
+                    <span>售价 {itemprice} 元</span>
+                    <div class="content">{message}</div>
+                </div>
             </div>',
         'feed_template_thread_goods_3_body' => '
             <div class="feed-element-trade">
-                <b>{itemname}</b><br>售价 {itemcredit}{creditunit}
-                <div class="content">{message}</div>
+                <a class="goods-name" href="{tlink}">{itemname}</a>
+                <div class="goods-info">
+                    <span>附加 {itemcredit}{creditunit}</span>
+                    <div class="content">{message}</div>
+                </div>
             </div>',
 
 
