@@ -3012,6 +3012,7 @@
     .imageGrid .image{
         background: center;
         background-size: cover;
+        opacity: 0;
     }
     .imageGrid.grid-1{
         grid-template-columns: 1fr;
