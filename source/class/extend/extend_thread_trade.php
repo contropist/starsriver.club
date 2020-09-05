@@ -105,14 +105,14 @@
                 'item_number'     => $_GET['item_number'],
                 'item_quality'    => $_GET['item_quality'],
                 'item_locus'      => $_GET['item_locus'],
-                'transport'       => $_GET['transport'],
-                'postage_mail'    => $_GET['postage_mail'],
-                'postage_express' => $_GET['postage_express'],
-                'postage_ems'     => $_GET['postage_ems'],
                 'item_type'       => $_GET['item_type'],
                 'item_costprice'  => $_GET['item_costprice'],
                 'item_credit'     => $_GET['item_credit'],
                 'item_costcredit' => $_GET['item_costcredit'],
+                'transport'       => $_GET['transport'],
+                'postage_mail'    => $_GET['postage_mail'],
+                'postage_express' => $_GET['postage_express'],
+                'postage_ems'     => $_GET['postage_ems'],
             ]);
             
             if (!empty($_GET['tradeaid'])) {

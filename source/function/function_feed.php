@@ -61,14 +61,14 @@
             'username'       => $data['username'] ? $data['username'] : $_G['username'],
             'friend'         => $data['friend'],
         ];
-        
+        /*
         if ($feedarr['hash_data']) {
             $oldfeed = C::t('home_feed')->fetch_feedid_by_hashdata($feedarr['uid'], $feedarr['hash_data']);
             if ($oldfeed) {
                 return 0;
             }
         }
-        
+        */
         return C::t('home_feed')->insert($feedarr, $data['returnid']);
     }
     
