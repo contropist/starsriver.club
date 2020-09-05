@@ -1,61 +1,82 @@
 <?php
-
-/**
- *      [Discuz!] (C)2001-2099 Comsenz Inc.
- *      This is NOT a freeware, use is subject to license terms
- *
- *      $Id: forum_image.php 32531 2013-02-06 10:15:19Z zhangguosheng $
- */
-
-if(!defined('IN_DISCUZ') || empty($_GET['aid']) || empty($_GET['size']) || empty($_GET['key'])) {
-	header('location: '.$_G['siteurl'].'static/image/common/none.gif');
-	exit;
-}
-
-$nocache = !empty($_GET['nocache']) ? 1 : 0;
-$daid = intval($_GET['aid']);
-$type = !empty($_GET['type']) ? $_GET['type'] : 'fixwr';
-list($w, $h) = explode('x', $_GET['size']);
-$dw = intval($w);
-$dh = intval($h);
-$thumbfile = 'image/'.helper_attach::makethumbpath($daid, $dw, $dh);$attachurl = helper_attach::attachpreurl();
-if(!$nocache) {
-	if(file_exists($_G['setting']['attachdir'].$thumbfile)) {
-		dheader('location: '.$attachurl.$thumbfile);
-	}
-}
-
-define('NOROBOT', TRUE);
-
-$id = !empty($_GET['atid']) ? $_GET['atid'] : $daid;
-if(dsign($id.'|'.$dw.'|'.$dh) != $_GET['key']) {
-	dheader('location: '.$_G['siteurl'].'static/image/common/none.gif');
-}
-
-if($attach = C::t('forum_attachment_n')->fetch('aid:'.$daid, $daid, array(1, -1))) {
-	if(!$dw && !$dh && $attach['tid'] != $id) {
-	       dheader('location: '.$_G['siteurl'].'static/image/common/none.gif');
-	}
-        dheader('Expires: '.gmdate('D, d M Y H:i:s', TIMESTAMP + 3600).' GMT');
-	if($attach['remote']) {
-		$filename = $_G['setting']['ftp']['attachurl'].'forum/'.$attach['attachment'];
-	} else {
-		$filename = $_G['setting']['attachdir'].'forum/'.$attach['attachment'];
-	}
-	require_once libfile('class/image');
-	$img = new image;
-	if($img->Thumb($filename, $thumbfile, $w, $h, $type)) {
-		if($nocache) {
-			dheader('Content-Type: image');
-			@readfile($_G['setting']['attachdir'].$thumbfile);
-			@unlink($_G['setting']['attachdir'].$thumbfile);
-		} else {
-			dheader('location: '.$attachurl.$thumbfile);
-		}
-	} else {
-		dheader('Content-Type: image');
-		@readfile($filename);
-	}
-}
-
-?>
+/********************************************************************
+ * Copyright (c) 2020 All Right Reserved By [StarsRiver]            *
+ *                                                                  *
+ * Author  Zhangyu                                                  *
+ * Email   starsriver@yahoo.com                                     *
+ ********************************************************************/
+    
+    if (!defined('IN_DISCUZ')) {
+        exit;
+    }
+    
+    global $_G;
+    
+    $image_not_exist = IMGURL . '/common/no-img/image-broken.svg';
+    
+    if (empty($_GET['aid']) || empty($_GET['size']) || empty($_GET['key'])) {
+        header('location: ' . $image_not_exist);
+        exit;
+    }
+    
+    $type = !empty($_GET['type']) ? $_GET['type'] : 'fixwr';
+    
+    [$w, $h] = explode('x', $_GET['size']);
+    
+    $w = intval($w);
+    $h = intval($h);
+    
+    $cache = empty($_GET['nocache']) ? 1 : 0;
+    $aid = intval($_GET['aid']);
+    
+    $attachurl = helper_attach::attachpreurl();
+    $thumbfile = 'image/' . helper_attach::makethumbpath($aid, $w, $h);
+    $localfile = $_G['setting']['attachdir'] . $thumbfile;
+    
+    if ($cache && file_exists($_G['setting']['attachdir'] . $thumbfile)) {
+        dheader('location: ' . $attachurl . $thumbfile);
+    }
+    
+    define('NOROBOT', true);
+    
+    $id = !empty($_GET['atid']) ? $_GET['atid'] : $aid;
+    
+    if (dsign($id . '|' . $w . '|' . $h) != $_GET['key']) {
+        dheader('location: ' . $image_not_exist);
+    }
+    
+    if ($attach = C::t('forum_attachment_n')->fetch('aid:' . $aid, $aid, [1, -1,])) {
+        
+        if (!$w && !$h && $attach['tid'] != $id) {
+            dheader('location: ' . $image_not_exist);
+        } else {
+            
+            dheader('Expires: ' . gmdate('D, d M Y H:i:s', TIMESTAMP + 3600) . ' GMT');
+            
+            if ($attach['remote']) {
+                $filename = $_G['setting']['ftp']['attachurl'] . 'forum/' . $attach['attachment'];
+            } else {
+                $filename = $_G['setting']['attachdir'] . 'forum/' . $attach['attachment'];
+            }
+            
+            require_once libfile('class/image');
+            
+            $img = new image;
+            
+            if ($img->Thumb($filename, $thumbfile, $w, $h, $type)) {
+                if (!$cache) {
+                    dheader('Content-Type: image');
+                    @readfile($_G['setting']['attachdir'] . $thumbfile);
+                    @unlink($_G['setting']['attachdir'] . $thumbfile);
+                } else {
+                    dheader('location: ' . $attachurl . $thumbfile);
+                }
+            } else {
+                dheader('Content-Type: image');
+                @readfile($filename);
+            }
+        }
+    } else {
+        @unlink($_G['setting']['attachdir'] . $thumbfile);
+        dheader('location: ' . $image_not_exist);
+    }

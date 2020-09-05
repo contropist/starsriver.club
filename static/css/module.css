@@ -1,3 +1,10 @@
+/********************************************************************
+ * Copyright (c) 2020 All Right Reserved By [StarsRiver]            *
+ *                                                                  *
+ * Author  Zhangyu                                                  *
+ * Email   starsriver@yahoo.com                                     *
+ ********************************************************************/
+
 /*---------------
 |     社区模块   |
 |----------------
@@ -8596,10 +8603,6 @@
 
         .app-userspace .timeline .feed-element-imageGrid{
             margin-top: 5px;
-        }
-        .app-userspace .timeline .feed-element-imageGrid .image{
-            overflow: hidden;
-            border-radius: 3px;
         }
 
         .app-userspace .timeline .feed-element-magic-thunder{

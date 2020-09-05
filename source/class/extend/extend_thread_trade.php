@@ -1,11 +1,10 @@
 <?php
-    
-    /**
-     *      [Discuz!] (C)2001-2099 Comsenz Inc.
-     *      This is NOT a freeware, use is subject to license terms
-     *
-     *      $Id: extend_thread_trade.php 34221 2013-11-15 09:10:23Z nemohou $
-     */
+/********************************************************************
+ * Copyright (c) 2020 All Right Reserved By [StarsRiver]            *
+ *                                                                  *
+ * Author  Zhangyu                                                  *
+ * Email   starsriver@yahoo.com                                     *
+ ********************************************************************/
     
     if (!defined('IN_DISCUZ')) {
         exit('Access Denied');
@@ -63,9 +62,23 @@
             if (!$this->tid) {
                 return;
             }
+            
+            // Goods is a comment to trade-thread,
+            //   That's means ones Thread is posted, the Goods will post at the same time.
+            //   And normaly the value of Goods_pid will be greater 1 or more than Thread_pid.
+            //
+            // If we use a variable (local)$pid as Goods_pid and use variable (global)$this->pid as Thread_pid,
+            //   Ones we post a new Trade-Thread, the attachments' pid will be equal with Thread_pid, so that
+            //   the attachments will display on thread page rather than goods page.
+            //
+            // So, after Thread is post and saved after the Function before_newthread(); excuted,
+            //   I set $this->pid to Goods_pid, so that Attachment will be display as we hope.
+            //
+            // Here, in this function I replace $pid with $this->pid
+    
             $this->trademessage = preg_replace('/\[attachimg\](\d+)\[\/attachimg\]/is', '[attach]\1[/attach]', $this->trademessage);
             
-            $pid = insertpost([
+            $this->pid = insertpost([
                 'tid'         => $this->tid,
                 'fid'         => $this->forum['fid'],
                 'first'       => '0',
@@ -87,12 +100,16 @@
                 'status'      => (defined('IN_MOBILE') ? 8 : 0),
             ]);
             
-            ($this->group['allowpostattach'] || $this->group['allowpostimage']) && ($_GET['attachnew'] || $_GET['tradeaid']) && updateattach($this->param['displayorder'] == -4 || $this->param['modnewthreads'], $this->tid, $pid, $_GET['attachnew']);
             require_once libfile('function/trade');
+ 
+            if(($this->group['allowpostattach'] || $this->group['allowpostimage']) && ($_GET['attachnew'] || $_GET['tradeaid'])){
+                updateattach($this->param['displayorder'] == -4 || $this->param['modnewthreads'], $this->tid, $this->pid, $_GET['attachnew']);
+            }
+            
             $author = !$this->param['isanonymous'] ? $this->member['username'] : '';
             trade_create([
                 'tid'             => $this->tid,
-                'pid'             => $pid,
+                'pid'             => $this->pid,
                 'aid'             => $_GET['tradeaid'],
                 'item_expiration' => $_GET['item_expiration'],
                 'thread'          => $this->thread,
@@ -116,22 +133,26 @@
             ]);
             
             if (!empty($_GET['tradeaid'])) {
-                convertunusedattach($_GET['tradeaid'], $this->tid, $pid);
+                convertunusedattach($_GET['tradeaid'], $this->tid, $this->pid);
             }
         }
         
         public function before_feed() {
-            
+
             if ($this->forum['allowfeed'] && !$this->param['isanonymous']) {
+                
+                $goods_url = 'forum.php?mod=viewthread&do=tradeinfo&tid=' . $this->tid . '&pid=' . $this->pid;
+                $extcredits = $this->setting['extcredits'];
+                $transextra = $this->setting['creditstransextra'];
     
-                if (!empty($this->param['message'])) {
-                    $message = messagecutstr(messagesafeclear($this->param['message']), 200);
+                if (!empty($this->trademessage)) {
+                    $message = messagecutstr(messagesafeclear($this->trademessage), 200);
                 } else {
                     $message = '';
                 }
     
                 if ($_GET['item_price'] > 0) {
-                    if ($this->setting['creditstransextra'][5] != -1 && $_GET['item_credit']) {
+                    if ($transextra[5] != -1 && $_GET['item_credit']) {
                         $body_template = 'thread_goods_1';
                     } else {
                         $body_template = 'thread_goods_2';
@@ -147,12 +168,12 @@
                     'body_data'      => [
                         'tid'   => $this->tid,
                         'tsub'  => $this->param['subject'],
-                        'tlink' => 'forum.php?mod=viewthread&do=tradeinfo&tid=' . $this->tid . '&pid=' . $pid,
+                        'tlink' => $goods_url,
                         
                         'itemname'   => $_GET['item_name'],
                         'itemprice'  => $_GET['item_price'],
                         'itemcredit' => $_GET['item_credit'],
-                        'creditunit' => $this->setting['extcredits'][$this->setting['creditstransextra'][5]]['unit'] . $this->setting['extcredits'][$this->setting['creditstransextra'][5]]['title'],
+                        'creditunit' => $extcredits[$transextra[5]]['unit'] . $extcredits[$transextra[5]]['title'],
             
                         'message' => $message,
                         
@@ -166,15 +187,35 @@
                         'expend7' => '',
                     ],
                 ];
-  
+                
+                $image_show_num = 6;
+                
                 if ($_GET['tradeaid']) {
-                    $this->feed['body_data']['imgs'][] = [
-                        'img'     => getforumimg($_GET['tradeaid']),
-                        'img_url' => 'forum.php?mod=viewthread&do=tradeinfo&tid=' . $this->tid . '&pid=' . $pid,
-                    ];
-                    $attach_imgs = [];
-                    getattach_img($this->tid,$pid,5,$attach_imgs);
-                    $this->feed['body_data']['imgs'] = array_merge($this->feed['body_data']['imgs'],$attach_imgs);
+    
+                    $attach_keys = [$_GET['tradeaid']];
+    
+                    if($_GET['attachnew']) {
+                        $attach_keys = array_merge($attach_keys, array_keys($_GET['attachnew']));
+                    }
+    
+                    $counter = 0;
+                    foreach ($attach_keys as $attach_aid){
+                        if($counter < $image_show_num){
+                            $counter += 1;
+                            $this->feed['body_data']['imgs'][] = [
+                                'img'     => getforumimg($attach_aid),
+                                'img_url' => $goods_url,
+                            ];
+                        } else {
+                            break;
+                        }
+                    }
+        
+                    if (0 < $need_more = $image_show_num - count($this->feed['body_data']['imgs'])) {
+                        $attach_imgs = [];
+                        getattach_img($this->tid, $this->pid, $need_more, $attach_imgs, $attach_keys);
+                        $this->feed['body_data']['imgs'] = array_merge($this->feed['body_data']['imgs'], $attach_imgs);
+                    }
                 }
             }
         }
@@ -194,69 +235,104 @@
                 showmessage('post_newthread_succeed', "forum.php?mod=viewthread&tid=" . $this->tid . "&extra=$extra", $values);
             }
         }
-        
+    
         public function before_replyfeed() {
-            //This function only uses to add another goods in same thread
+            
             if ($this->forum['allowfeed'] && !$this->param['isanonymous']) {
                 
-                if ($this->param['special'] == 2 && !empty($_GET['trade'])) {
-    
-                    if (!empty($this->param['message'])) {
-                        $message = messagecutstr(messagesafeclear($this->param['message']), 200);
-                    } else {
-                        $message = '';
-                    }
-                    
-                    $creditstransextra = $this->setting['creditstransextra'];
-                    $extcredits = $this->setting['extcredits'];
-                    
-                    if ($_GET['item_price'] > 0) {
-                        if ($creditstransextra[5] != -1 && $_GET['item_credit']) {
-                            $body_template = 'thread_goods_1';
-                        } else {
-                            $body_template = 'thread_goods_2';
-                        }
-                    } else {
-                        $body_template = 'thread_goods_3';
-                    }
-    
-                    $this->feed = [
-                        'icon'           => 'goods',
-                        'title_template' => 'thread_goods',
-                        'body_template'  => $body_template,
-                        'body_data'      => [
+                $goods_url = 'forum.php?mod=viewthread&do=tradeinfo&tid=' . $this->thread['tid'] . '&pid=' . $this->pid;
             
-                            'tid'   => $this->thread['tid'],
-                            'tsub'  => $this->thread['subject'],
-                            'tlink' => 'forum.php?mod=viewthread&do=tradeinfo&tid=' . $this->thread['tid'] . '&pid=' . $this->pid,
-                            
-                            'itemname'   => dhtmlspecialchars($_GET['item_name']),
-                            'itemprice'  => $_GET['item_price'],
-                            'itemcredit' => $_GET['item_credit'],
-                            'creditunit' => $extcredits[$creditstransextra[5]]['unit'] . $extcredits[$creditstransextra[5]]['title'],
-
-                            'message' => $message,
-
-                            'expend0' => '',
-                            'expend1' => '',
-                            'expend2' => '',
-                            'expend3' => '',
-                            'expend4' => '',
-                            'expend5' => '',
-                            'expend6' => '',
-                            'expend7' => '',
-                        ],
-                    ];
-                    
-                    if ($_GET['tradeaid']) {
-                        $this->feed['body_data']['imgs'][] = [
-                            'img'     => getforumimg($_GET['tradeaid']),
-                            'img_url' => 'forum.php?mod=viewthread&do=tradeinfo&tid=' . $this->thread['tid'] . '&pid=' . $this->pid,
-                        ];
-                        $attach_imgs = [];
-                        getattach_img($this->thread['tid'],$this->pid,5,$attach_imgs);
-                        $this->feed['body_data']['imgs'] = array_merge($this->feed['body_data']['imgs'],$attach_imgs);
+                $extcredits = $this->setting['extcredits'];
+                $transextra = $this->setting['creditstransextra'];
+            
+                if (!empty($this->param['message'])) {
+                    $message = messagecutstr(messagesafeclear($this->param['message']), 200);
+                } else {
+                    $message = '';
+                }
+            
+                if ($_GET['item_price'] > 0) {
+                    if ($transextra[5] != -1 && $_GET['item_credit']) {
+                        $body_template = 'thread_goods_1';
+                    } else {
+                        $body_template = 'thread_goods_2';
                     }
+                } else {
+                    $body_template = 'thread_goods_3';
+                }
+            
+                $this->feed = [
+                    'icon'           => 'goods',
+                    'title_template' => 'thread_goods',
+                    'body_template'  => $body_template,
+                    'body_data'      => [
+                    
+                        'tid'   => $this->thread['tid'],
+                        'tsub'  => $this->thread['subject'],
+                        'tlink' => $goods_url,
+                    
+                        'itemname'   => dhtmlspecialchars($_GET['item_name']),
+                        'itemprice'  => $_GET['item_price'],
+                        'itemcredit' => $_GET['item_credit'],
+                        'creditunit' => $extcredits[$transextra[5]]['unit'] . $extcredits[$transextra[5]]['title'],
+                    
+                        'message' => $message,
+                    
+                        'expend0' => '',
+                        'expend1' => '',
+                        'expend2' => '',
+                        'expend3' => '',
+                        'expend4' => '',
+                        'expend5' => '',
+                        'expend6' => '',
+                        'expend7' => '',
+                    ],
+                ];
+            
+                $image_show_num = 6;
+            
+                if ($_GET['tradeaid']) {
+                
+                    $attach_keys = [$_GET['tradeaid']];
+                
+                    if($_GET['attachnew']) {
+                        $attach_keys = array_merge($attach_keys, array_keys($_GET['attachnew']));
+                    }
+                
+                    $counter = 0;
+                    foreach ($attach_keys as $attach_aid){
+                        if($counter < $image_show_num){
+                            $counter += 1;
+                            $this->feed['body_data']['imgs'][] = [
+                                'img'     => getforumimg($attach_aid),
+                                'img_url' => $goods_url,
+                            ];
+                        } else {
+                            break;
+                        }
+                    }
+                
+                    if (0 < $need_more = $image_show_num - count($this->feed['body_data']['imgs'])) {
+                        $attach_imgs = [];
+                        getattach_img($this->thread['tid'], $this->pid, $need_more, $attach_imgs, $attach_keys);
+                        $this->feed['body_data']['imgs'] = array_merge($this->feed['body_data']['imgs'], $attach_imgs);
+                    }
+                }
+            }
+        }
+    
+        public function after_replyfeed() {
+            global $extra;
+            if ($this->param['special'] == 2 && $this->group['allowposttrade'] && $this->thread['authorid'] == $this->member['uid']) {
+                if (!empty($_GET['continueadd'])) {
+                    dheader("location: forum.php?mod=post&action=reply&fid=" . $this->forum['fid'] . "&firstpid=" . $this->pid . "&tid=" . $this->thread['tid'] . "&addtrade=yes");
+                } else {
+                    if ($this->param['modnewreplies']) {
+                        $url = "forum.php?mod=viewthread&tid=" . $this->thread['tid'];
+                    } else {
+                        $url = "forum.php?mod=viewthread&tid=" . $this->thread['tid'] . "&pid=" . $this->pid . "&page=" . $this->param['page'] . "&extra=" . $extra . "#pid" . $this->pid;
+                    }
+                    return $this->showmessage('trade_add_succeed', $url, $this->param['showmsgparam']);
                 }
             }
         }
@@ -325,22 +401,6 @@
             
             if (!$this->forum['allowfeed'] || !$_GET['addfeed']) {
                 $this->after_replyfeed();
-            }
-        }
-        
-        public function after_replyfeed() {
-            global $extra;
-            if ($this->param['special'] == 2 && $this->group['allowposttrade'] && $this->thread['authorid'] == $this->member['uid']) {
-                if (!empty($_GET['continueadd'])) {
-                    dheader("location: forum.php?mod=post&action=reply&fid=" . $this->forum['fid'] . "&firstpid=" . $this->pid . "&tid=" . $this->thread['tid'] . "&addtrade=yes");
-                } else {
-                    if ($this->param['modnewreplies']) {
-                        $url = "forum.php?mod=viewthread&tid=" . $this->thread['tid'];
-                    } else {
-                        $url = "forum.php?mod=viewthread&tid=" . $this->thread['tid'] . "&pid=" . $this->pid . "&page=" . $this->param['page'] . "&extra=" . $extra . "#pid" . $this->pid;
-                    }
-                    return $this->showmessage('trade_add_succeed', $url, $this->param['showmsgparam']);
-                }
             }
         }
         
@@ -454,5 +514,3 @@
             }
         }
     }
-
-?>

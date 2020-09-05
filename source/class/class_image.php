@@ -1,4 +1,10 @@
 <?php
+/********************************************************************
+ * Copyright (c) 2020 All Right Reserved By [StarsRiver]            *
+ *                                                                  *
+ * Author  Zhangyu                                                  *
+ * Email   starsriver@yahoo.com                                     *
+ ********************************************************************/
 
 /**
  *      [Discuz!] (C)2001-2099 Comsenz Inc.
@@ -63,7 +69,7 @@ class image {
 		}
 		$this->param['thumbheight'] = intval($thumbheight);
 		$this->param['thumbtype'] = $thumbtype;
-		if($thumbwidth < 100 && $thumbheight < 100) {
+		if($thumbwidth < 240 && $thumbheight < 240) {
 			$this->param['thumbquality'] = 100;
 		}
 

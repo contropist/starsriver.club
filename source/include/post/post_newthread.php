@@ -1,4 +1,10 @@
 <?php
+/********************************************************************
+ * Copyright (c) 2020 All Right Reserved By [StarsRiver]            *
+ *                                                                  *
+ * Author  Zhangyu                                                  *
+ * Email   starsriver@yahoo.com                                     *
+ ********************************************************************/
     
     /**
      *      [Discuz!] (C)2001-2099 Comsenz Inc.
@@ -195,13 +201,7 @@
         $params['price'] = $_GET['price'];
         
         
-        if (in_array($special, [
-            1,
-            2,
-            3,
-            4,
-            5,
-        ])) {
+        if (in_array($special, [1, 2, 3, 4, 5,])) {
             $specials = [
                 1 => 'extend_thread_poll',
                 2 => 'extend_thread_trade',
@@ -227,13 +227,14 @@
                 if ($special == 2) {
                     $modthread->attach_before_method('feed', [
                         'class'  => $specials[$special],
-                        'method' => 'before_replyfeed',
+                        'method' => 'before_feed',
                     ]);
                 }
             }
         }
         
         if ($special == 1) {
+        } elseif ($special == 2) {
         } elseif ($special == 3) {
         } elseif ($special == 4) {
         } elseif ($special == 5) {

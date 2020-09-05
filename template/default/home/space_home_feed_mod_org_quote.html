@@ -1,3 +1,10 @@
+<!--*****************************************************************
+  * Copyright (c) 2020 All Right Reserved By [StarsRiver]           *
+  *                                                                 *
+  * Author  Zhangyu                                                 *
+  * Email   starsriver@yahoo.com                                    *
+  *****************************************************************-->
+
 <!--{if $feed['body_data']['original']}-->
     <!--{eval $original = $feed['body_data']['original'];}-->
     <div class="feed-element-org-quote">
@@ -8,14 +15,16 @@
             <!--{/if}-->
         <!--{/if}-->
 
-        <div class="feed-element-imageGrid imageGrid grid-{eval echo count($original['data']['imgs']);}">
-            <!--{eval $counter = 1;}-->
-            <!--{loop $original['data']['imgs'] $image_element}-->
-            <a class="image rec-img nth-of-{$counter}" href="{$image_element['img_url']}" style="background-image: url('$image_element['img']')" target="_blank" title="{$image_element['img_name']}">
-                <img src="{LIBURL}/img/row-e-col/1.1.png"></i>
-            </a>
-            <!--{eval $counter += 1;}-->
-            <!--{/loop}-->
-        </div>
+        <!--{if count($original['data']['imgs']) > 0}-->
+            <div class="feed-element-imageGrid imageGrid grid-{eval echo count($original['data']['imgs']);}">
+                <!--{eval $counter = 1;}-->
+                <!--{loop $original['data']['imgs'] $image_element}-->
+                <a class="image rec-img nth-of-{$counter}" href="{$image_element['img_url']}" style="background-image: url('$image_element['img']')" target="_blank" title="{$image_element['img_name']}">
+                    <img src="{LIBURL}/img/row-e-col/1.1.png"></i>
+                </a>
+                <!--{eval $counter += 1;}-->
+                <!--{/loop}-->
+            </div>
+        <!--{/if}-->
     </div>
 <!--{/if}-->

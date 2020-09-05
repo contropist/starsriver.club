@@ -1,13 +1,11 @@
 <?php
     
-    /*
-    * [starsriver] 2010-2110 @copyright reserved by
-    *
-    * Author Neko_Yurino
-    * Email  starsriver@yahoo.com
-    * Date   2020/9/4 - 14:30
-    *
-    */
+/********************************************************************
+ * Copyright (c) 2020 All Right Reserved By [StarsRiver]            *
+ *                                                                  *
+ * Author  Zhangyu                                                  *
+ * Email   starsriver@yahoo.com                                     *
+ ********************************************************************/
     
     if (!defined('IN_DISCUZ')) {
         exit('Access Denied');
@@ -38,18 +36,18 @@
             'tid'   => $thread['tid'],
             'tsub'  => $thread['subject'],
             'tlink' => 'forum.php?mod=viewthread&tid=' . $thread['tid'],
-    
-            'uid'   => $thread['authorid'],
-            'uname' => $thread['author'],
-            'ulink' => 'home.php?mod=space&uid='.$thread['authorid'],
-            'uavatar' => avatar($thread['authorid'],'small',true),
+            
+            'uid'     => $thread['authorid'],
+            'uname'   => $thread['author'],
+            'ulink'   => 'home.php?mod=space&uid=' . $thread['authorid'],
+            'uavatar' => avatar($thread['authorid'], 'small', true),
             
             'message' => '',
             
             'imgs'   => [],
             'imgnum' => 0,
         ];
-    
+        
         if ($thread['price']) {
             $data['template'] = 'quote_need_payoff';
         } elseif ($thread['readperm']) {
@@ -58,11 +56,11 @@
             $data['template'] = 'quote_post_baned';
         } else {
             $message = !empty($thread['message']) ? messagecutstr(messagesafeclear($thread['message']), 200) : '';
-    
+            
             $data['template'] = 'thread_sample';
-    
+            
             $data['data']['message'] = $message;
-    
+            
             if ($thread['attachment']) {
                 getattach_img($thread['tid'], $thread['pid'], 9, $data['data']['imgs']);
             }

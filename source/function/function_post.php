@@ -1,4 +1,10 @@
 <?php
+/********************************************************************
+ * Copyright (c) 2020 All Right Reserved By [StarsRiver]            *
+ *                                                                  *
+ * Author  Zhangyu                                                  *
+ * Email   starsriver@yahoo.com                                     *
+ ********************************************************************/
 
 /**
  *      [Discuz!] (C)2001-2099 Comsenz Inc.
@@ -85,18 +91,21 @@ function getattach_row($attach, &$attachs, &$imgattachs) {
 	}
 }
 
-function getattach_img($tid, $pid, $limit,&$setto) {
+function getattach_img($tid, $pid, $limit,&$setto, $expire = []) {
 	$imgs = [];
-    $attach_imgs = C::t('forum_attachment_n')->fetch_all_by_id('tid:' . $tid, 'pid', $pid, '', [1, -1], false, false, $limit);
+	
+    $attach_imgs = C::t('forum_attachment_n')->fetch_all_by_id('tid:' . $tid, 'pid', $pid, '', [1, -1], false, false, $limit + count($expire));
     if (!empty($attach_imgs)) {
         foreach ($attach_imgs as $img_data){
-            $imgs[] = [
-                'img'      => getforumimg($img_data['aid']),
-                'img_type' => 'attach',
-                'img_id'   => $img_data['aid'],
-                'img_url'  => 'forum.php?mod=redirect&goto=findpost&pid=' . $pid . '&ptid=' . $tid,
-                'img_name' => $img_data['filename'],
-            ];
+            if(!in_array($img_data['aid'],$expire)){
+                $imgs[] = [
+                    'img'      => getforumimg($img_data['aid']),
+                    'img_type' => 'attach',
+                    'img_id'   => $img_data['aid'],
+                    'img_url'  => 'forum.php?mod=redirect&goto=findpost&pid=' . $pid . '&ptid=' . $tid,
+                    'img_name' => $img_data['filename'],
+                ];
+            }
         }
     }
     $setto = $imgs;
@@ -133,8 +142,6 @@ function parseattachmedia($attach) {
         case 'webm':
 		case 'mpeg':
 		case 'mov':
-		case 'flv':
-		case 'swf':
 			return '[media='.$attach['ext'].',400,300]'.$attachurl.'[/media]';
 		default:
 			return '';
@@ -334,7 +341,7 @@ function updateattach($modnewthreads, $tid, $pid, $attachnew, $attachupdate = []
 	}
 
 	$attachcount = C::t('forum_attachment_n')->count_by_id('tid:'.$tid, $pid ? 'pid' : 'tid', $pid ? $pid : $tid);
-	$attachment = 0;
+	
 	if($attachcount) {
 		if(C::t('forum_attachment_n')->count_image_by_id('tid:'.$tid, $pid ? 'pid' : 'tid', $pid ? $pid : $tid)) {
 			$attachment = 2;
@@ -360,8 +367,6 @@ function checkflood() {
 			return true;
 		}
 		return false;
-
-
 	}
 	return FALSE;
 }

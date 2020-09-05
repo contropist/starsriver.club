@@ -1,3 +1,10 @@
+/********************************************************************
+ * Copyright (c) 2020 All Right Reserved By [StarsRiver]            *
+ *                                                                  *
+ * Author  Zhangyu                                                  *
+ * Email   starsriver@yahoo.com                                     *
+ ********************************************************************/
+
 /*---------------
 |   Components  |
 |----------------
@@ -3005,13 +3012,19 @@
 
 /*region @imageGrid*/
     .imageGrid{
+        --grid-gap: 2px;
         display: grid;
-        grid-gap: 3px;
+        grid-gap: var(--grid-gap);
         grid-template-columns: repeat(4, 1fr);
+        background: #fff;
+        padding: var(--grid-gap);
+        border-radius: 2px;
     }
     .imageGrid .image{
         background: center;
         background-size: cover;
+        background-color: #f4f5f7;
+        border-radius: var(--grid-gap);
     }
     .imageGrid .image img{
         opacity: 0;
