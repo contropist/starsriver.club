@@ -5,14 +5,7 @@
  * Author  Zhangyu                                                  *
  * Email   starsriver@yahoo.com                                     *
  ********************************************************************/
-    
-    /**
-     *      [Discuz!] (C)2001-2099 Comsenz Inc.
-     *      This is NOT a freeware, use is subject to license terms
-     *
-     *      $Id: post_newreply.php 33709 2013-08-06 09:06:56Z andyzheng $
-     */
-    
+
     if (!defined('IN_DISCUZ')) {
         exit('Access Denied');
     }
@@ -499,7 +492,6 @@
         }
         
         if ($modpost->pid && !$modpost->param('modnewreplies')) {
-            
             if (!empty($_GET['addfeed'])) {
                 $modpost->replyfeed();
             }

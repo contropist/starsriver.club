@@ -1,4 +1,10 @@
 <?php
+/********************************************************************
+ * Copyright (c) 2020 All Right Reserved By [StarsRiver]            *
+ *                                                                  *
+ * Author  Zhangyu                                                  *
+ * Email   starsriver@yahoo.com                                     *
+ ********************************************************************/
 
 /**
  *      [Discuz!] (C)2001-2099 Comsenz Inc.
@@ -106,13 +112,13 @@ function deletepost($ids, $idtype = 'pid', $credit = false, $posttableid = false
         $hookparam = func_get_args();
         hookscript('deletepost', 'global', 'funcs', array('param' => $hookparam, 'step' => 'check'), 'deletepost');
     }
-    if (!$ids || !in_array($idtype, array('authorid', 'tid', 'pid'))) {
+    if (!$ids || !in_array($idtype, ['authorid', 'tid', 'pid',])) {
         return 0;
     }
 
     loadcache('posttableids');
-    $posttableids = !empty($_G['cache']['posttableids']) ? ($posttableid !== false && in_array($posttableid, $_G['cache']['posttableids']) ? array($posttableid) : $_G['cache']['posttableids']) : array('0');
-
+    $posttableids = !empty($_G['cache']['posttableids']) ? ($posttableid !== false && in_array($posttableid, $_G['cache']['posttableids']) ? [$posttableid] : $_G['cache']['posttableids']) : ['0'];
+    
     $count = count($ids);
     $idsstr = dimplode($ids);
 
@@ -263,10 +269,15 @@ function deletethread($tids, $membercount = false, $credit = false, $ponly = fal
     $count = count($tids);
     $arrtids = $tids;
     $tids = dimplode($tids);
-
-    loadcache(array('threadtableids', 'posttableids'));
+    
+    loadcache([
+        'threadtableids',
+        'posttableids',
+    ]);
+    
     $threadtableids = !empty($_G['cache']['threadtableids']) ? $_G['cache']['threadtableids'] : [];
-    $posttableids = !empty($_G['cache']['posttableids']) ? $_G['cache']['posttableids'] : array('0');
+    $posttableids = !empty($_G['cache']['posttableids']) ? $_G['cache']['posttableids'] : ['0'];
+    
     if (!in_array(0, $threadtableids)) {
         $threadtableids = array_merge(array(0), $threadtableids);
     }
@@ -276,6 +287,7 @@ function deletethread($tids, $membercount = false, $credit = false, $ponly = fal
     C::t('forum_newthread')->delete_by_tids($arrtids);
 
     $cachefids = $atids = $fids = $postids = $threadtables = $_G['deleteauthorids'] = [];
+    
     foreach ($threadtableids as $tableid) {
         foreach (C::t('forum_thread')->fetch_all_by_tid($arrtids, 0, 0, $tableid) as $row) {
             $atids[] = $row['tid'];
@@ -293,11 +305,15 @@ function deletethread($tids, $membercount = false, $credit = false, $ponly = fal
     }
 
     if ($credit || $membercount) {
+        
         $losslessdel = $_G['setting']['losslessdel'] > 0 ? TIMESTAMP - $_G['setting']['losslessdel'] * 86400 : 0;
 
         $postlist = $uidarray = $tuidarray = $ruidarray = [];
         foreach ($postids as $posttableid => $posttabletids) {
-            foreach (C::t('forum_post')->fetch_all_by_tid($posttableid, $posttabletids, false) as $post) {
+            
+            $posts = C::t('forum_post')->fetch_all_by_tid($posttableid, $posttabletids, false);
+            
+            foreach ($posts as $post) {
                 if ($post['invisible'] != -1 && $post['invisible'] != -5) {
                     $postlist[] = $post;
                 }
@@ -312,9 +328,9 @@ function deletethread($tids, $membercount = false, $credit = false, $ponly = fal
             if ($post['dateline'] < $losslessdel) {
                 if ($membercount) {
                     if ($post['first']) {
-                        updatemembercount($post['authorid'], array('threads' => -1, 'post' => -1), false);
+                        updatemembercount($post['authorid'], ['threads' => -1, 'post'    => -1,], false);
                     } else {
-                        updatemembercount($post['authorid'], array('posts' => -1), false);
+                        updatemembercount($post['authorid'], ['posts' => -1], false);
                     }
                 }
             } else {
@@ -329,7 +345,7 @@ function deletethread($tids, $membercount = false, $credit = false, $ponly = fal
             if ($credit || $membercount) {
                 if ($post['authorid'] > 0 && $post['replycredit'] > 0) {
                     if ($replycredit_rule[$post['tid']]['extcreditstype']) {
-                        updatemembercount($post['authorid'], array($replycredit_rule[$post['tid']]['extcreditstype'] => (int)('-' . $post['replycredit'])));
+                        updatemembercount($post['authorid'], [$replycredit_rule[$post['tid']]['extcreditstype'] => (int)('-' . $post['replycredit'])]);
                     }
                 }
             }
@@ -381,7 +397,12 @@ function deletethread($tids, $membercount = false, $credit = false, $ponly = fal
                 $collection_thread = C::t('forum_collectionthread')->fetch_by_ctid_dateline($collection['ctid']);
                 if ($collection_thread) {
                     $thread = C::t('forum_thread')->fetch($collection_thread['tid']);
-                    $lastpost = array('lastpost' => $thread['tid'], 'lastsubject' => $thread['subject'], 'lastposttime' => $thread['dateline'], 'lastposter' => $thread['authorid']);
+                    $lastpost = [
+                        'lastpost'     => $thread['tid'],
+                        'lastsubject'  => $thread['subject'],
+                        'lastposttime' => $thread['dateline'],
+                        'lastposter'   => $thread['authorid'],
+                    ];
                 }
             }
             C::t('forum_collection')->update_by_ctid($collection['ctid'], -$decthread, 0, 0, 0, 0, 0, $lastpost);
@@ -397,16 +418,18 @@ function deletethread($tids, $membercount = false, $credit = false, $ponly = fal
         }
         C::t('forum_thread')->update($arrtids, array('displayorder' => -1, 'digest' => 0, 'moderated' => 1));
         foreach ($postids as $posttableid => $oneposttids) {
-            C::t('forum_post')->update_by_tid($posttableid, $oneposttids, array('invisible' => '-1'));
+            C::t('forum_post')->update_by_tid($posttableid, $oneposttids, ['invisible' => '-1']);
         }
         return $count;
     }
 
     C::t('forum_replycredit')->delete($arrtids);
     C::t('forum_post_location')->delete_by_tid($arrtids);
-    C::t('common_credit_log')->delete_by_operation_relatedid(array('RCT', 'RCA', 'RCB'), $arrtids);
     C::t('forum_threadhidelog')->delete_by_tid($arrtids);
+    C::t('common_credit_log')->delete_by_operation_relatedid(['RCT', 'RCA', 'RCB'], $arrtids);
+    
     deletethreadcover($arrtids);
+    
     foreach ($threadtables as $tableid) {
         C::t('forum_thread')->delete_by_tid($arrtids, false, $tableid);
     }
@@ -425,25 +448,52 @@ function deletethread($tids, $membercount = false, $credit = false, $ponly = fal
                 continue;
             }
             foreach (C::t('forum_thread')->count_posts_by_fid($fid) as $row) {
-                C::t('forum_forum_threadtable')->insert(array('fid' => $fid, 'threadtableid' => $tableid, 'threads' => $row['threads'], 'posts' => $row['posts']), false, true);
+                C::t('forum_forum_threadtable')->insert([
+                    'fid'           => $fid,
+                    'threadtableid' => $tableid,
+                    'threads'       => $row['threads'],
+                    'posts'         => $row['posts'],
+                ], false, true);
             }
         }
     }
-
-    foreach (array('forum_forumrecommend', 'forum_polloption', 'forum_poll', 'forum_polloption_image', 'forum_activity', 'forum_activityapply', 'forum_debate', 'forum_debatepost', 'forum_threadmod', 'forum_relatedthread', 'forum_pollvoter', 'forum_threadimage', 'forum_threadpreview') as $table) {
+    
+    foreach ([
+                 'forum_forumrecommend',
+                 'forum_poll',
+                 'forum_polloption_image',
+                 'forum_pollvoter',
+                 'forum_polloption',
+        
+                 'forum_activity',
+                 'forum_activityapply',
+                 'forum_debate',
+                 'forum_debatepost',
+                 'forum_threadmod',
+                 'forum_threadimage',
+                 'forum_threadpreview',
+                 'forum_relatedthread',
+             ] as $table) {
         C::t($table)->delete_by_tid($arrtids);
     }
+    /*
+    foreach ($arrtids as $post_tid){
+        $post_tid_pids = C::t('home_post')->fetch_all_by_id($arrtids, 'tid');
+    }
+    */
+    C::t('home_feed')->delete_by_id_idtype($arrtids, 'tid');
+    C::t('common_tagitem')->delete(0, $arrtids, 'tid');
     C::t('forum_typeoptionvar')->delete_by_tid($arrtids);
     C::t('forum_poststick')->delete_by_tid($arrtids);
     C::t('forum_filter_post')->delete_by_tid($arrtids);
     C::t('forum_hotreply_member')->delete_by_tid($arrtids);
     C::t('forum_hotreply_number')->delete_by_tid($arrtids);
-    C::t('home_feed')->delete_by_id_idtype($arrtids, 'tid');
-    C::t('common_tagitem')->delete(0, $arrtids, 'tid');
     C::t('forum_threadrush')->delete($arrtids);
+    
     if ($_G['setting']['plugins']['func'][HOOKTYPE]['deletethread']) {
-        hookscript('deletethread', 'global', 'funcs', array('param' => $hookparam, 'step' => 'delete'), 'deletethread');
+        hookscript('deletethread', 'global', 'funcs', ['param' => $hookparam, 'step'  => 'delete',], 'deletethread');
     }
+    
     return $count;
 }
 

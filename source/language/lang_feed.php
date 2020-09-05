@@ -379,14 +379,13 @@
         *
         * B {tid}     :帖子ID
         * B {tsub}    :帖子标题
-        * B {tink}    :帖子链接
+        * B {tink}    :商品链接
          *
-        * B {uid}      :用户ID
-        * B {uname}    :用户名
-        * B {ulink}    :用户空间链接
-        * B {uavatar}  :用户头像源链接
-         *
-        * B {message}  :回贴摘要
+        * B {itemname}    :商品名称
+        * B {itemprice}   :商品售价-货币
+        * B {itemcredit}  :商品售价-积分
+        * B {creditunit}  :积分单位
+        * B {message}     :商品摘要
         *
         * */
         'feed_template_thread_goods_title'  => '我挂起了一件商品',
