@@ -4133,6 +4133,9 @@
 
 /*region Plate::glass-box*/
     .plate.glass-box{
+
+        --glass-box-element-border-radius: 12px;
+
         position: fixed;
         top: 48px;
         bottom: 36px;
@@ -4165,9 +4168,7 @@
         font-size: 16px;
         text-indent: 4px;
         letter-spacing: 4px;
-        border-radius: inherit;
-        border-bottom-left-radius: 0;
-        border-bottom-right-radius: 0;
+        border-radius: var(--glass-box-element-border-radius) var(--glass-box-element-border-radius) 0 0;
     }
     .plate.glass-box .nav-vertical .title .icon{
         font-size: 18px;
