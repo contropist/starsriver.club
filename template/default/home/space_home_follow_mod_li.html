@@ -31,7 +31,7 @@
                 <div class="title">
                     <a class="icon feed-type"><img src="{IMGURL}/feed/feed-type-icon/topic.svg"></a>
                     <!--{if !empty($thread) && $thread['displayorder'] >= 0}-->
-                        <a class="link" href="forum.php?mod=viewthread&tid=$content['tid']&extra=page%3D1" target="_blank">$thread['subject']</a>
+                        <a class="link ellipsis" style="margin-left:0;" href="forum.php?mod=viewthread&tid=$content['tid']&extra=page%3D1" target="_blank">$thread['subject']</a>
                         <!--{if $_G['cache']['forums'][$thread['fid']]['name']}-->
                         <a class="tag" href="forum.php?mod=forumdisplay&fid=$thread['fid']">$_G['cache']['forums'][$thread['fid']]['name']</a>
                         <!--{/if}-->
