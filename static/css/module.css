@@ -7994,7 +7994,7 @@
             margin-bottom: var(--box-edge);
             padding: var(--node-right-s-center-padding);
         }
-        .app-userspace .timeline .n-right .s-center .message{
+        .app-userspace .timeline .n-right .s-center > .message{
             color: #000;
             word-break: break-word;
             white-space: pre-wrap;
@@ -8002,8 +8002,8 @@
             border-left: 3px solid #aac1e2;
             background: #f9f9f9;
         }
-        .app-userspace .timeline .n-right .s-center .message + [class^="feed-element-"],
-        .app-userspace .timeline .n-right .s-center .message + [class^="share-element"]{
+        .app-userspace .timeline .n-right .s-center > .message + [class^="feed-element-"],
+        .app-userspace .timeline .n-right .s-center > .message + [class^="share-element"]{
             margin-top: var(--box-edge);
         }
         .app-userspace .timeline .n-right .s-center .flow-comment-list{
