@@ -1,4 +1,10 @@
 <?php
+/********************************************************************
+ * Copyright (c) 2020 All Right Reserved By [StarsRiver]            *
+ *                                                                  *
+ * Author  Zhangyu                                                  *
+ * Email   starsriver@yahoo.com                                     *
+ ********************************************************************/
 
 /**
  *      [Discuz!] (C)2001-2099 Comsenz Inc.
@@ -467,8 +473,8 @@ function fparsemedia($params, $url) {
 	if($flv = parseflv($url, 0, 0)) {
 		return fmakeflv($flv);
 	}
-	if(in_array(count($params), array(3, 4))) {
-		$type = $params[0];
+	if(in_array(count($params), [3, 4])) {
+        $type = $params[0];
 		$url = str_replace(array('<', '>'), '', str_replace('\\"', '\"', $url));
 		switch($type) {
 			case 'mp3':

@@ -1,9 +1,9 @@
-/*----------
-|   Basic  |
-|-----------
-|  This Is A Simple Bootstrap Write For WebPages Of StarsRiver
-|  This Is Not A Free Soft Coded For StarsRiver Writed By ZhangYu CopyRight 2017-2050
------------------------------------------------------------------------------------------------------------------------*/
+/********************************************************************
+ * Copyright (c) 2020 All Right Reserved By [StarsRiver]            *
+ *                                                                  *
+ * Author  Zhangyu                                                  *
+ * Email   starsriver@yahoo.com                                     *
+ ********************************************************************/
 
 /*region Scroll Fix*/
 @-webkit-viewport {
@@ -38,7 +38,16 @@
 }
 
 * {
-    scrollbar-arrow: hidden;
+    font-family: Roboto, sans-serif, Material, Feather, Awesome, Icomoon, Discuz-Editor !important;
+    margin: 0;
+    padding: 0;
+    font-size: 14px;
+    font-weight: 400;
+    outline: none !important;
+    vertical-align: top;
+    text-decoration: none !important;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    -webkit-font-smoothing: subpixel-antialiased;
     scrollbar-arrow-color: #fff;
     scrollbar-face-color: #e6e6e6;
     scrollbar-darkshadow-color: #fff;
@@ -46,6 +55,16 @@
     scrollbar-3dlight-color: #fff;
     scrollbar-shadow-color: #fff;
     scrollbar-track-color: #fff;
+}
+
+
+/*endregion*/
+
+
+/*region Clean*/
+
+body {
+    margin-bottom: 50px;
 }
 
 body,
@@ -59,28 +78,6 @@ body::-webkit-scrollbar,
     width: 0;
 }
 
-/*endregion*/
-
-
-/*region Clean*/
-* {
-    font-family: Roboto, Helvetica Neue, sans-serif, Material, Feather, Awesome, Icomoon, Discuz-Editor !important;
-    margin: 0;
-    padding: 0;
-    font-size: 14px;
-    font-weight: 400;
-    outline: none !important;
-    vertical-align: top;
-    text-decoration: none !important;
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-    -webkit-font-smoothing: subpixel-antialiased;
-}
-
-body {
-    overflow-x: hidden;
-    background: #fff;
-    margin-bottom: 50px;
-}
 
 a {
     color: #393939;

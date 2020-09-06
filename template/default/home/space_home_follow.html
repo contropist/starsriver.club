@@ -14,16 +14,18 @@
                 <!--{/loop}-->
 
                 <!--{if count($list['feed']) > 19 && ($archiver || $primary)}-->
-                <li>
-                    <div id="loadingfeed"><a onclick="loadmore();return false;">{lang follow_more}</a></div>
-                    <iframe id="downloadframe" name="downloadframe" width="0" height="0" marginwidth="0" frameborder="0" src="about:blank"></iframe>
-                    <script>
-                        function succeedhandle_attachpay(url, msg, values) {
-                            hideWindow('attachpay');
-                            window.location.href = url;
-                            //$('downloadframe').src = url;
-                        }
-                    </script>
+                <li class="node">
+                    <div class="n-right">
+                        <div id="loadingfeed"><a onclick="loadmore();return false;">{lang follow_more}</a></div>
+                        <iframe id="downloadframe" name="downloadframe" width="0" height="0" marginwidth="0" frameborder="0" src="about:blank"></iframe>
+                        <script>
+                            function succeedhandle_attachpay(url, msg, values) {
+                                hideWindow('attachpay');
+                                window.location.href = url;
+                                //$('downloadframe').src = url;
+                            }
+                        </script>
+                    </div>
                 </li>
                 <!--{/if}-->
             </ul>

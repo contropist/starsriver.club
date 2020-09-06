@@ -1227,8 +1227,7 @@
     .pag {
         display: inline-block;
         padding: 0 6px;
-        border: 1px solid;
-        border-color: #bbb;
+        border: 1px solid #bbb;
         color: #888;
         margin:0 2px;
         font-size: 12px;
@@ -3021,9 +3020,8 @@
         border-radius: calc(var(--grid-gap) * 2);
     }
     .imageGrid .image{
-        background: center;
+        background: #f4f5f7 center;
         background-size: cover;
-        background-color: #f4f5f7;
         border-radius: var(--grid-gap);
     }
     .imageGrid .image img{
@@ -3109,6 +3107,7 @@
         --menu-text-color: var(--color-text-gray);
         --menu-text-color-active: #fff;
         --menu-text-display: none;
+        --menu-text-wrap: nowrap !important;
         --menu-text-weight: 400;
         --mas-guide-downside-display: visible;
         --mas-guide-downside-opacity: 1;
@@ -3141,6 +3140,7 @@
         --menu-text-color-active: var(--color-main-theme-dark);
         --menu-text-weight: 700;
         --menu-text-display: inline-block;
+        --menu-text-wrap: nowrap !important;
         --mas-guide-downside-display: visible;
         --mas-guide-downside-opacity: 1;
         --mas-guide-switch-display: hidden;
@@ -3149,6 +3149,7 @@
 
     .WD-V .Mas.edge{
         --menu-text-display: inline-block !important;
+        --menu-text-wrap: pre-wrap !important;
     }
 
     .Mas.edge .mas-guide{
@@ -3229,6 +3230,7 @@
         box-sizing: border-box;
         padding: var(--menu-padding);
         text-align: var(--menu-text-align);
+        white-space: var(--menu-text-wrap);
     }
     .Mas.edge .mas-guide .nav-vertical > ul > li a i{
         display: inline-block;
@@ -3358,13 +3360,16 @@
 /*endregion*/
 
 /*region Plate::milk*/
+    .plate.milk {
+        --milk-element-border-radius: 10px;
+    }
     .plate.milk .nav-vertical,
     .plate.milk .vessel{
         box-sizing: border-box;
         background: #fff;
         box-shadow: 0 3px 12px rgb(227, 239, 247);
         padding: 10px;
-        border-radius: 10px;
+        border-radius: var(--milk-element-border-radius);
     }
     .plate.milk .nav-vertical{
         margin: 0 5px 15px 5px;
@@ -3379,9 +3384,7 @@
         font-size: 20px;
         text-indent: 10px;
         letter-spacing: 10px;
-        border-radius: inherit;
-        border-bottom-left-radius: 0;
-        border-bottom-right-radius: 0;
+        border-radius: var(--milk-element-border-radius) var(--milk-element-border-radius) 0 0;
         margin-bottom: 10px;
     }
     .plate.milk .nav-vertical ul li a{
@@ -3477,12 +3480,15 @@
 /*endregion*/
 
 /*region Plate::cloud*/
+    .plate.cloud {
+        --cloud-element-border-radius: 12px;
+    }
     .plate.cloud .nav-vertical,
     .plate.cloud .vessel{
         box-sizing: border-box;
         background: #fff;
         border: 1px solid #e9eaec;
-        border-radius: 12px;
+        border-radius: var(--cloud-element-border-radius);
     }
     .plate.cloud .nav-vertical{
         display: block;
@@ -3497,9 +3503,7 @@
         font-size: 15px;
         text-indent: 4px;
         letter-spacing: 4px;
-        border-radius: inherit;
-        border-bottom-left-radius: 0;
-        border-bottom-right-radius: 0;
+        border-radius:  var(--cloud-element-border-radius) var(--cloud-element-border-radius) 0 0;
         margin-bottom: 10px;
     }
     .plate.cloud .nav-vertical ul{
@@ -4002,11 +4006,14 @@
 /*endregion*/
 
 /*region Plate::soft*/
+    .plate.soft {
+        --soft-element-border-radius: 8px;
+    }
     .plate.soft .nav-vertical,
     .plate.soft .vessel{
         box-sizing: border-box;
         background: #fff;
-        border-radius: 8px;
+        border-radius: var(--soft-element-border-radius);
         box-shadow: 0 1px 2px rgba(0,0,0,.05);
         position: relative;
         display: inline-block;
@@ -4038,9 +4045,7 @@
         font-size: 16px;
         text-indent: 4px;
         letter-spacing: 4px;
-        border-radius: inherit;
-        border-bottom-left-radius: 0;
-        border-bottom-right-radius: 0;
+        border-radius: var(--soft-element-border-radius) var(--soft-element-border-radius) 0 0;
     }
     .plate.soft .nav-vertical ul{
         width:100%;
