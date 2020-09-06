@@ -3018,7 +3018,7 @@
         grid-template-columns: repeat(4, 1fr);
         background: #fff;
         padding: var(--grid-gap);
-        border-radius: 2px;
+        border-radius: calc(var(--grid-gap) * 2);
     }
     .imageGrid .image{
         background: center;
