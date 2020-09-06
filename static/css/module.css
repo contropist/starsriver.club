@@ -1365,11 +1365,11 @@
             width:24px;
             height:24px;
             background-color: transparent !important;
-            background: url("{IMGURL}/common/icon/check.svg");
+            background: url({IMGURL}/common/icon/check.svg);
         }
         .poll-pool .poll-item.pic input[type="checkbox"]:checked + label,
         .poll-pool .poll-item.pic input[type="radio"]:checked + label{
-            background: url("{IMGURL}/common/icon/checked.svg");
+            background: url({IMGURL}/common/icon/checked.svg);
         }
 /*endregion*/
 
@@ -6333,7 +6333,7 @@
             min-height: 72px;
             background: #f2f2f2;
             border-radius: 8px 8px 0 0;
-            background-image: url(//static.starscdn.com/repository/bbs.starsriver/img/common/banner/header-banner.png);
+            background-image: url({IMGURL}/common/banner/header-banner.png);
             background-repeat: no-repeat;
             background-position: center;
             background-size: auto 100%;
@@ -6830,7 +6830,7 @@
             flex-flow: row wrap;
             width: 100%;
             padding: 10px;
-            background-image: url("{IMGURL}/common/background/album-button-back.svg");
+            background-image: url({IMGURL}/common/background/album-button-back.svg);
             background-size: 8px;
             border: 3px solid #eeeef5;
             border-radius: 10px;
@@ -7160,7 +7160,7 @@
             overflow: hidden;
             font-size: 0;
             background: #fafbfc;
-            background-image: url("{IMGURL}/common/background/album-button-back.svg");
+            background-image: url({IMGURL}/common/background/album-button-back.svg);
             background-size: 48px;
         }
         .app-dynamic .album-list li .album-info .album-cover{
@@ -8246,7 +8246,7 @@
             flex-flow: row wrap;
             width: 100%;
             padding: 10px;
-            background-image: url("{IMGURL}/common/background/album-button-back.svg");
+            background-image: url({IMGURL}/common/background/album-button-back.svg);
             background-size: 8px;
             border: 3px solid #eeeef5;
             border-radius: 10px;
@@ -9016,7 +9016,7 @@
             box-shadow: 0 0 0 2px var(--color-lightgray);
         }
         .app-userspace #userspace_wall .wall .decrater-c .card-tag.magicflicker{
-            background-image: url('{IMGURL}/magic/flicker-bg0.jpg') !important;
+            background-image: url({IMGURL}/magic/flicker-bg0.jpg) !important;
             background-size: 101% !important;
             background-position: center !important;
         }
