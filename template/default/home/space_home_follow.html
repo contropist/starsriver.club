@@ -1,330 +1,385 @@
-<!--{template home/space_home_follow_mod_form}-->
+<div class="whitespace cn">
+    <!--{template home/space_home_follow_mod_form}-->
 
-<!--{if in_array($do, array('feed', 'view'))}-->
-	<!--{if in_array($do, array('feed', 'view'))}-->
-		<!--{if !empty($list['feed'])}-->
-			<div id="followlist">
-				<!--{eval $beforeuser = 0; $hiddennum = 0; $carray = array();}-->
-				<!--{loop $list['feed'] $feed}-->
-					<!--{template home/space_home_follow_mod_li}-->
-				<!--{/loop}-->
-			</div>
-			<div class="loading">
-				<!--{if count($list['feed']) > 19 && ($archiver || $primary)}-->
-					<div id="loadingfeed"><a onclick="loadmore();return false;">{lang follow_more}</a></div>
-				<!--{/if}-->
-				<iframe id="downloadframe" name="downloadframe" width="0" height="0" marginwidth="0" frameborder="0" src="about:blank"></iframe>
-				<script>
-                    function succeedhandle_attachpay(url, msg, values) {
-                        hideWindow('attachpay');
-                        window.location.href = url;
-                        //$('downloadframe').src = url;
+    <!--{if in_array($do, ['feed', 'view'])}-->
+        <!--{if !empty($list['feed'])}-->
+            <ul class="timeline" id="follow_list">
+                <!--{eval $beforeuser = 0; $hiddennum = 0; $carray = array();}-->
+
+                <!--{eval $followday = '';}-->
+                <!--{eval $followmin = '';}-->
+
+                <!--{loop $list['feed'] $feed}-->
+                    <!--{template home/space_home_follow_mod_li}-->
+                <!--{/loop}-->
+
+                <!--{if count($list['feed']) > 19 && ($archiver || $primary)}-->
+                <li>
+                    <div id="loadingfeed"><a onclick="loadmore();return false;">{lang follow_more}</a></div>
+                    <iframe id="downloadframe" name="downloadframe" width="0" height="0" marginwidth="0" frameborder="0" src="about:blank"></iframe>
+                    <script>
+                        function succeedhandle_attachpay(url, msg, values) {
+                            hideWindow('attachpay');
+                            window.location.href = url;
+                            //$('downloadframe').src = url;
+                        }
+                    </script>
+                </li>
+                <!--{/if}-->
+            </ul>
+        <!--{else}-->
+            <div class="vessel withedge">
+                <div class="global_nothing">
+                    <!--{if $viewself}-->{lang follow_following_null}<!--{else}-->{lang follow_no_content}<!--{/if}-->
+                    <!--{if $do == 'feed' && $view == 'special'}--><p>{lang follow_add_special_tip}<a href="home.php?mod=follow&do=following&uid=$uid">{lang follow_add_special_following}</a></p><!--{/if}-->
+                </div>
+            </div>
+            <!--{if !empty($recommend) && $showrecommend && $view != 'special'}-->
+                <!--{eval $showrecommend = false;}-->
+                <h3>{lang follow_recommend}</h3>
+                <!--{loop $recommend $ruid $rusername}-->
+                <div class="vessel withedge">
+                    <a href="home.php?mod=space&uid=$ruid" class="avatar" c="1" shref="home.php?mod=space&uid=$ruid"><!--{avatar($ruid,small)}--></a>
+                    <a href="home.php?mod=space&uid=$ruid" style="text-decoration: none !important;">$rusername</a>
+                    <!--{if helper_access::check_module('follow')}-->
+                    <a id="stared_{$ruid}" href="home.php?mod=spacecp&ac=follow&op=add&hash={FORMHASH}&fuid=$ruid&from=block" onclick="ajaxget(this.href);doane(event);" style="text-decoration: none !important;">{lang follow_add}</a>
+                    <!--{/if}-->
+                </div>
+                <!--{/loop}-->
+            <!--{/if}-->
+        <!--{/if}-->
+        <!--{if count($list['feed']) > 19 && ($archiver || $primary)}-->
+            <script>
+                var scrollY = 0;
+                var page = 2;
+                var feedInfo = {scrollY: 0, archiver: $archiver, primary: $primary, query: true, scrollNum:1};
+                var loadingfeed = $('loadingfeed');
+
+                function loadmore() {
+                    var currentScroll = document.documentElement.scrollTop || document.body.scrollTop;
+                    var sHeight = document.documentElement.scrollHeight;
+                    if(currentScroll >= scrollY && currentScroll > (sHeight/5-5) && (feedInfo.primary ||feedInfo.archiver) && feedInfo.query) {
+                        /*
+                        if(feedInfo.scrollNum) {
+                            loadingfeed.className="flw_loading hm vm";
+                            loadingfeed.innerHTML = "<img src=\"{STATICURL}image/common/loading.gif\" class=\"vm\" /> {lang follow_loading}";
+                        }
+                        */
+                        feedInfo.query = false;
+                        var archiver = 0;
+                        if(feedInfo.primary) {
+                            archiver = 0;
+                        } else if(feedInfo.archiver) {
+                            archiver = 1;
+                        }
+                        var url = 'home.php?mod=spacecp&ac=follow&op=getfeed&archiver='+archiver+'&page='+page+'&inajax=1'<!--{if $do == 'feed'}-->+'&viewtype=$view'<!--{elseif $do == 'view'}-->+'&uid=$uid&banavatar=1'<!--{/if}-->;
+                        var x = new Ajax();
+                        x.get(url, function(s) {
+                            if(trim(s) == 'false') {
+                                if(!archiver) {
+                                    feedInfo.primary = false;
+                                    loadmore();
+                                    page = 1;
+                                } else {
+                                    feedInfo.archiver = false;
+                                    page = 1;
+                                }
+                            } else {
+                                $('followlist').innerHTML = $('followlist').innerHTML + s;
+                            }
+                            if(!feedInfo.primary && !feedInfo.archiver) {
+                                loadingfeed.className = "";
+                                loadingfeed.innerHTML = "";
+                            }
+                            feedInfo.query = true;
+                        });
+                        page++;
+                        if(feedInfo.scrollNum) {
+                            feedInfo.scrollNum--;
+                        } else if(!feedInfo.scrollNum) {
+                            window.onscroll = null;
+                        }
+
                     }
-				</script>
-			</div>
-		<!--{else}-->
-			<div class="vessel withedge">
-				<div class="global_nothing">
-					<!--{if $viewself}-->{lang follow_following_null}<!--{else}-->{lang follow_no_content}<!--{/if}-->
-					<!--{if $do == 'feed' && $view == 'special'}--><p>{lang follow_add_special_tip}<a href="home.php?mod=follow&do=following&uid=$uid">{lang follow_add_special_following}</a></p><!--{/if}-->
-				</div>
-			</div>
-			<!--{if !empty($recommend) && $showrecommend && $view != 'special'}-->
-				<!--{eval $showrecommend = false;}-->
-				<h3>{lang follow_recommend}</h3>
-				<!--{loop $recommend $ruid $rusername}-->
-				<div class="vessel withedge">
-					<a href="home.php?mod=space&uid=$ruid" class="avatar" c="1" shref="home.php?mod=space&uid=$ruid"><!--{avatar($ruid,small)}--></a>
-					<a href="home.php?mod=space&uid=$ruid" style="text-decoration: none !important;">$rusername</a>
-					<!--{if helper_access::check_module('follow')}-->
-					<a id="stared_{$ruid}" href="home.php?mod=spacecp&ac=follow&op=add&hash={FORMHASH}&fuid=$ruid&from=block" onclick="ajaxget(this.href);doane(event);" style="text-decoration: none !important;">{lang follow_add}</a>
-					<!--{/if}-->
-				</div>
-				<!--{/loop}-->
-			<!--{/if}-->
-		<!--{/if}-->
-		<!--{if count($list['feed']) > 19 && ($archiver || $primary)}-->
-			<script>
-				var scrollY = 0;
-				var page = 2;
-				var feedInfo = {scrollY: 0, archiver: $archiver, primary: $primary, query: true, scrollNum:1};
-				var loadingfeed = $('loadingfeed');
+                    scrollY = currentScroll;
+                }
 
-				function loadmore() {
-					var currentScroll = document.documentElement.scrollTop || document.body.scrollTop;
-					var sHeight = document.documentElement.scrollHeight;
-					if(currentScroll >= scrollY && currentScroll > (sHeight/5-5) && (feedInfo.primary ||feedInfo.archiver) && feedInfo.query) {
-						/*
-						if(feedInfo.scrollNum) {
-							loadingfeed.className="flw_loading hm vm";
-							loadingfeed.innerHTML = "<img src=\"{STATICURL}image/common/loading.gif\" class=\"vm\" /> {lang follow_loading}";
-						}
-						*/
-						feedInfo.query = false;
-						var archiver = 0;
-						if(feedInfo.primary) {
-							archiver = 0;
-						} else if(feedInfo.archiver) {
-							archiver = 1;
-						}
-						var url = 'home.php?mod=spacecp&ac=follow&op=getfeed&archiver='+archiver+'&page='+page+'&inajax=1'<!--{if $do == 'feed'}-->+'&viewtype=$view'<!--{elseif $do == 'view'}-->+'&uid=$uid&banavatar=1'<!--{/if}-->;
-						var x = new Ajax();
-						x.get(url, function(s) {
-							if(trim(s) == 'false') {
-								if(!archiver) {
-									feedInfo.primary = false;
-									loadmore();
-									page = 1;
-								} else {
-									feedInfo.archiver = false;
-									page = 1;
-								}
-							} else {
-								$('followlist').innerHTML = $('followlist').innerHTML + s;
-							}
-							if(!feedInfo.primary && !feedInfo.archiver) {
-								loadingfeed.className = "";
-								loadingfeed.innerHTML = "";
-							}
-							feedInfo.query = true;
-						});
-						page++;
-						if(feedInfo.scrollNum) {
-							feedInfo.scrollNum--;
-						} else if(!feedInfo.scrollNum) {
-							window.onscroll = null;
-						}
+                window.onload = function() {
+                    scrollY =  document.documentElement.scrollTop || document.body.scrollTop;
+                    window.onscroll = loadmore;
+                }
+            </script>
+        <!--{/if}-->
+        <script>
+            var boxflag = {};
+            var parentReplyId = '';
+            function quickreply(fid, tid, feedid) {
+                $('relaybox_'+feedid).style.display = 'none';
+                var replyboxid = 'replybox_'+feedid;
+                if(parentReplyId && parentReplyId !== feedid) {
+                    var oldbox = $('replybox_'+parentReplyId);
+                    oldbox.innerHTML = '';
+                    oldbox.style.display = 'none';
+                }
+                if($(replyboxid).style.display === '' && boxflag[replyboxid]) {
+                    $(replyboxid).style.display = 'none';
+                } else {
+                    boxflag[replyboxid] = true;
+                    ajaxget('forum.php?mod=ajax&action=quickreply&tid='+tid+'&fid='+fid+'&handlekey=qreply_'+feedid+'&feedid='+feedid, replyboxid);
+                    $(replyboxid).style.display = '';
+                }
+                parentReplyId = feedid;
+            }
+            function quickrelay(feedid, tid) {
+                $('replybox_'+feedid).style.display = 'none';
+                var replyboxid = 'relaybox_'+feedid;
+                if($(replyboxid).style.display === '') {
+                    $(replyboxid).style.display = 'none';
+                } else {
+                    ajaxget('home.php?mod=spacecp&ac=follow&op=relay&feedid='+feedid+'&tid='+tid+'&handlekey=qrelay_'+feedid, replyboxid);
+                    $(replyboxid).style.display = '';
+                }
+            }
+        </script>
 
-					}
-					scrollY = currentScroll;
-				}
+    <!--{elseif in_array($do, ['following', 'follower'])}-->
+        <!--{if $list}-->
+            <div class="clear-objgap">
+                <!--{if $do=='following'}-->
+                    <span class="vessel withedge vessel-title">
+                        <!--{if $viewself}-->{lang me}<!--{else}--><!--{if $viewedusername}-->$viewedusername<!--{else}-->{lang user_unseted}<!--{/if}--><!--{/if}-->
+                        {lang de}{lang star}
+                    </span>
+                    <!--{loop $list $fuid $fuser}-->
+                        <div class="vessel harf">
+                            <div class="starer clear-objgap">
+                                <div class="user">
+                                    <a class="avatar" href="{if $fuser['fusername']}home.php?mod=space&uid=$fuser['followuid']{else}javascript:;{/if}"><!--{avatar($fuser['followuid'],small)}--></a>
+                                    <span class="username" >
+                                        <!--{if $viewself && $fuser[followuid] != $_G[uid]}--><a class="setbk icon-price-tags" href="home.php?mod=spacecp&ac=follow&op=bkname&fuid=$fuser['followuid']&handlekey=followbkame_$fuser['followuid']" id="fbkname_$fuser['followuid']" onclick="showWindow('followbkame_{$fuser['followuid']}', this.href, 'get', 0);"></a><!--{/if}-->
+                                        <a class="name" href="{if $fuser['fusername']}home.php?mod=space&uid=$fuser['followuid']{else}javascript:;{/if}" id="followbkame_{$fuser['followuid']}" data-name="{if $fuser['fusername']}$fuser['fusername']{else}{lang user_unseted}{/if}"><!--{if $fuser['bkname']}-->$fuser[bkname]<!--{else}--><!--{if $fuser['fusername']}-->$fuser['fusername']<!--{else}-->{lang user_unseted}<!--{/if}--><!--{/if}--></a>
+                                    </span>
+                                </div>
+                                <div class="fun">
+                                    <!--{if $viewself}-->
+                                        <a class="star on" id="stared_{$fuser['followuid']}" href="home.php?mod=spacecp&ac=follow&op=del&fuid=$fuser['followuid']" onclick="ajaxget(this.href);doane(event);">{lang stared}</a>
+                                    <!--{elseif $fuser[followuid] != $_G[uid]}-->
+                                        <!--{if $fuser['mutual']}-->
+                                            <!--{if $fuser['mutual'] > 0}-->{lang follow_follower_mutual}<!--{else}-->{lang did_not_follow_to_me}<!--{/if}-->
+                                            <a class="star on" id="stared_{$fuser['followuid']}" href="home.php?mod=spacecp&ac=follow&op=del&fuid=$fuser['followuid']" onclick="ajaxget(this.href);doane(event);">{lang stared}</a>
+                                        <!--{elseif helper_access::check_module('follow')}-->
+                                            <a class="star" id="stared_{$fuser['followuid']}" href="home.php?mod=spacecp&ac=follow&op=add&hash={FORMHASH}&fuid=$fuser['followuid']" onclick="ajaxget(this.href);doane(event);">{lang star}</a>
+                                        <!--{/if}-->
+                                    <!--{/if}-->
 
-				window.onload = function() {
-					scrollY =  document.documentElement.scrollTop || document.body.scrollTop;
-					window.onscroll = loadmore;
-				}
-			</script>
-		<!--{/if}-->
-	<!--{/if}-->
-
-	<script>
-		var boxflag = {};
-		var parentReplyId = '';
-		function quickreply(fid, tid, feedid) {
-			$('relaybox_'+feedid).style.display = 'none';
-			var replyboxid = 'replybox_'+feedid;
-			if(parentReplyId && parentReplyId != feedid) {
-				var oldbox = $('replybox_'+parentReplyId);
-				oldbox.innerHTML = '';
-				oldbox.style.display = 'none';
-			}
-			if($(replyboxid).style.display == '' && boxflag[replyboxid]) {
-				$(replyboxid).style.display = 'none';
-			} else {
-				boxflag[replyboxid] = true;
-				ajaxget('forum.php?mod=ajax&action=quickreply&tid='+tid+'&fid='+fid+'&handlekey=qreply_'+feedid+'&feedid='+feedid, replyboxid);
-				$(replyboxid).style.display = '';
-			}
-			parentReplyId = feedid;
-		}
-		function quickrelay(feedid, tid) {
-			$('replybox_'+feedid).style.display = 'none';
-			var replyboxid = 'relaybox_'+feedid;
-			if($(replyboxid).style.display == '') {
-				$(replyboxid).style.display = 'none';
-			} else {
-				ajaxget('home.php?mod=spacecp&ac=follow&op=relay&feedid='+feedid+'&tid='+tid+'&handlekey=qrelay_'+feedid, replyboxid);
-				$(replyboxid).style.display = '';
-			}
-		}
-	</script>
-
-<!--{elseif in_array($do, array('following', 'follower'))}-->
-	<!--{if $list}-->
-		<div class="clear-objgap">
-			<!--{if $do=='following'}-->
-				<span class="vessel withedge vessel-title">
-					<!--{if $viewself}-->{lang me}<!--{else}--><!--{if $viewedusername}-->$viewedusername<!--{else}-->{lang user_unseted}<!--{/if}--><!--{/if}-->
-					{lang de}{lang star}
-				</span>
-				<!--{loop $list $fuid $fuser}-->
-					<div class="vessel harf">
-						<div class="starer clear-objgap">
-							<div class="user">
-								<a class="avatar" href="{if $fuser['fusername']}home.php?mod=space&uid=$fuser['followuid']{else}javascript:;{/if}"><!--{avatar($fuser['followuid'],small)}--></a>
-								<span class="username" >
-									<!--{if $viewself && $fuser[followuid] != $_G[uid]}--><a class="setbk icon-price-tags" href="home.php?mod=spacecp&ac=follow&op=bkname&fuid=$fuser['followuid']&handlekey=followbkame_$fuser['followuid']" id="fbkname_$fuser['followuid']" onclick="showWindow('followbkame_{$fuser['followuid']}', this.href, 'get', 0);"></a><!--{/if}-->
-									<a class="name" href="{if $fuser['fusername']}home.php?mod=space&uid=$fuser['followuid']{else}javascript:;{/if}" id="followbkame_{$fuser['followuid']}" data-name="{if $fuser['fusername']}$fuser['fusername']{else}{lang user_unseted}{/if}"><!--{if $fuser['bkname']}-->$fuser[bkname]<!--{else}--><!--{if $fuser['fusername']}-->$fuser['fusername']<!--{else}-->{lang user_unseted}<!--{/if}--><!--{/if}--></a>
-								</span>
-							</div>
-							<div class="fun">
-								<!--{if $viewself}-->
-									<a class="star on" id="stared_{$fuser['followuid']}" href="home.php?mod=spacecp&ac=follow&op=del&fuid=$fuser['followuid']" onclick="ajaxget(this.href);doane(event);">{lang stared}</a>
-								<!--{elseif $fuser[followuid] != $_G[uid]}-->
-									<!--{if $fuser['mutual']}-->
-										<!--{if $fuser['mutual'] > 0}-->{lang follow_follower_mutual}<!--{else}-->{lang did_not_follow_to_me}<!--{/if}-->
-										<a class="star on" id="stared_{$fuser['followuid']}" href="home.php?mod=spacecp&ac=follow&op=del&fuid=$fuser['followuid']" onclick="ajaxget(this.href);doane(event);">{lang stared}</a>
-									<!--{elseif helper_access::check_module('follow')}-->
-										<a class="star" id="stared_{$fuser['followuid']}" href="home.php?mod=spacecp&ac=follow&op=add&hash={FORMHASH}&fuid=$fuser['followuid']" onclick="ajaxget(this.href);doane(event);">{lang star}</a>
-									<!--{/if}-->
-								<!--{/if}-->
-
-								<!--{if $viewself && $fuser[followuid] != $_G[uid]}-->
-									<!--{if helper_access::check_module('follow')}-->
-										<a class="{if $fuser['status'] == 1}star-sp on awe-heart{else}star-sp awe-heart-o{/if}" id="star_sp_{$fuser['followuid']}" href="home.php?mod=spacecp&ac=follow&op=add&hash={FORMHASH}&special={if $fuser['status'] == 1}2{else}1{/if}&fuid=$fuser['followuid']" onclick="ajaxget(this.href);doane(event);" title="{lang follow_special_following}"></a>
-									<!--{/if}-->
-								<!--{/if}-->
-							</div>
-							<div class="status">
-								<span>
-									<i>{lang follow_follower}</i>
-									<a href="home.php?mod=follow&do=follower&uid=$fuser['followuid']"><!--{if $memberinfo[$fuid]['follower']}-->$memberinfo[$fuid]['follower']<!--{else}-->--<!--{/if}--></a>
-								</span>
-								<b></b>
-								<span>
-									<i>{lang follow_add}</i>
-									<a href="home.php?mod=follow&do=following&uid=$fuser['followuid']"><!--{if $memberinfo[$fuid]['following']}-->$memberinfo[$fuid]['following']<!--{else}-->--<!--{/if}--></a>
-								</span>
-								<div class="misk" hide>
-									<!--{if !empty($fuser['recentnote'])}-->{lang follow_recent_note}: $fuser[recentnote]<!--{/if}-->
-								</div>
-							</div>
-						</div>
-					</div>
-				<!--{/loop}-->
-			<!--{else}-->
-				<span class="vessel withedge vessel-title">
-					<!--{if $viewself}-->{lang me}<!--{else}--><!--{if $viewedusername}-->$viewedusername<!--{else}-->{lang user_unseted}<!--{/if}--><!--{/if}-->
-					{lang de}{lang follower}
-				</span>
-				<!--{loop $list $fuid $fuser}-->
-					<div class="vessel harf">
-						<div class="starer clear-objgap">
-							<div class="user">
-								<a class="avatar" href="home.php?mod=space&uid=$fuser['uid']" c="1"><!--{avatar($fuser['uid'],small)}--></a>
-								<span class="username">
-									<a class="name" href="home.php?mod=space&uid=$fuser['uid']">$fuser['username']</a>
-								</span>
-							</div>
-							<div class="fun">
-								<!--{if $fuser[uid] == $_G[uid]}-->
-									<a class="star on" href="javascript:;">{lang self}</a>
-								<!--{else}-->
-									<!--{if $fuser['mutual']}-->
-										<a class="star on" id="stared_{$fuser['uid']}" href="home.php?mod=spacecp&ac=follow&op=del&fuid=$fuser['uid']"  onclick="ajaxget(this.href);doane(event);"><!--{if $fuser['mutual'] > 0}-->{lang follow_follower_mutual}<!--{else}-->{lang stared}<!--{/if}--></a>
-									<!--{elseif helper_access::check_module('follow')}-->
-										<a class="star" id="stared_{$fuser['uid']}" href="home.php?mod=spacecp&ac=follow&op=add&hash={FORMHASH}&fuid=$fuser['uid']" onclick="ajaxget(this.href);doane(event);">{lang star}</a>
-									<!--{/if}-->
-								<!--{/if}-->
-							</div>
-							<div class="status">
-								<span>
-									<i>{lang follow_follower}</i>
-									<a href="home.php?mod=follow&do=follower&uid=$fuser['uid']"><!--{if $memberinfo[$fuid]['follower']}-->$memberinfo[$fuid]['follower']<!--{else}-->--<!--{/if}--></a>
-								</span>
-								<b></b>
-								<span>
-									<i>{lang follow_add}</i>
-									<a href="home.php?mod=follow&do=following&uid=$fuser['uid']"><!--{if $memberinfo[$fuid]['following']}-->$memberinfo[$fuid]['following']<!--{else}-->--<!--{/if}--></a>
-								</span>
-								<div class="misk" hide>
-									{lang follow_recent_note}: $fuser[recentnote]
-									<!--{if $memberprofile[$fuid]['resideprovince'] || $memberprofile[$fuid]['residecity']}-->{lang comefrom}: $memberprofile[$fuid]['resideprovince'] $memberprofile[$fuid]['residecity'] <!--{/if}-->
-								</div>
-							</div>
-						</div>
-					</div>
-				<!--{/loop}-->
-			<!--{/if}-->
-		</div>
-		<!--{if !empty($multi)}--><div>$multi</div><!--{/if}-->
-		<br>
-	<!--{else}-->5
-		<div class="vessel withedge">
-			<div class="global_nothing" id="nofollowmsg">
-				<!--{if $viewself}-->
-					<!--{if $do=='following'}-->{lang follow_you_following_none}<!--{else}-->{lang follow_you_follower_none1}<!--{/if}-->
-				<!--{else}-->
-					<!--{if $do=='following'}-->{lang follow_user_following_none}<!--{else}-->{lang follow_user_follower_none}<!--{/if}-->
-				<!--{/if}-->
-			</div>
-		</div>
-	<!--{/if}-->
-<!--{/if}-->
+                                    <!--{if $viewself && $fuser[followuid] != $_G[uid]}-->
+                                        <!--{if helper_access::check_module('follow')}-->
+                                            <a class="{if $fuser['status'] == 1}star-sp on awe-heart{else}star-sp awe-heart-o{/if}" id="star_sp_{$fuser['followuid']}" href="home.php?mod=spacecp&ac=follow&op=add&hash={FORMHASH}&special={if $fuser['status'] == 1}2{else}1{/if}&fuid=$fuser['followuid']" onclick="ajaxget(this.href);doane(event);" title="{lang follow_special_following}"></a>
+                                        <!--{/if}-->
+                                    <!--{/if}-->
+                                </div>
+                                <div class="status">
+                                    <span>
+                                        <i>{lang follow_follower}</i>
+                                        <a href="home.php?mod=follow&do=follower&uid=$fuser['followuid']"><!--{if $memberinfo[$fuid]['follower']}-->$memberinfo[$fuid]['follower']<!--{else}-->--<!--{/if}--></a>
+                                    </span>
+                                    <b></b>
+                                    <span>
+                                        <i>{lang follow_add}</i>
+                                        <a href="home.php?mod=follow&do=following&uid=$fuser['followuid']"><!--{if $memberinfo[$fuid]['following']}-->$memberinfo[$fuid]['following']<!--{else}-->--<!--{/if}--></a>
+                                    </span>
+                                    <div class="misk" hide>
+                                        <!--{if !empty($fuser['recentnote'])}-->{lang follow_recent_note}: $fuser[recentnote]<!--{/if}-->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <!--{/loop}-->
+                <!--{else}-->
+                    <span class="vessel withedge vessel-title">
+                        <!--{if $viewself}-->{lang me}<!--{else}--><!--{if $viewedusername}-->$viewedusername<!--{else}-->{lang user_unseted}<!--{/if}--><!--{/if}-->
+                        {lang de}{lang follower}
+                    </span>
+                    <!--{loop $list $fuid $fuser}-->
+                        <div class="vessel harf">
+                            <div class="starer clear-objgap">
+                                <div class="user">
+                                    <a class="avatar" href="home.php?mod=space&uid=$fuser['uid']" c="1"><!--{avatar($fuser['uid'],small)}--></a>
+                                    <span class="username">
+                                        <a class="name" href="home.php?mod=space&uid=$fuser['uid']">$fuser['username']</a>
+                                    </span>
+                                </div>
+                                <div class="fun">
+                                    <!--{if $fuser[uid] == $_G[uid]}-->
+                                        <a class="star on" href="javascript:;">{lang self}</a>
+                                    <!--{else}-->
+                                        <!--{if $fuser['mutual']}-->
+                                            <a class="star on" id="stared_{$fuser['uid']}" href="home.php?mod=spacecp&ac=follow&op=del&fuid=$fuser['uid']"  onclick="ajaxget(this.href);doane(event);"><!--{if $fuser['mutual'] > 0}-->{lang follow_follower_mutual}<!--{else}-->{lang stared}<!--{/if}--></a>
+                                        <!--{elseif helper_access::check_module('follow')}-->
+                                            <a class="star" id="stared_{$fuser['uid']}" href="home.php?mod=spacecp&ac=follow&op=add&hash={FORMHASH}&fuid=$fuser['uid']" onclick="ajaxget(this.href);doane(event);">{lang star}</a>
+                                        <!--{/if}-->
+                                    <!--{/if}-->
+                                </div>
+                                <div class="status">
+                                    <span>
+                                        <i>{lang follow_follower}</i>
+                                        <a href="home.php?mod=follow&do=follower&uid=$fuser['uid']"><!--{if $memberinfo[$fuid]['follower']}-->$memberinfo[$fuid]['follower']<!--{else}-->--<!--{/if}--></a>
+                                    </span>
+                                    <b></b>
+                                    <span>
+                                        <i>{lang follow_add}</i>
+                                        <a href="home.php?mod=follow&do=following&uid=$fuser['uid']"><!--{if $memberinfo[$fuid]['following']}-->$memberinfo[$fuid]['following']<!--{else}-->--<!--{/if}--></a>
+                                    </span>
+                                    <div class="misk" hide>
+                                        {lang follow_recent_note}: $fuser[recentnote]
+                                        <!--{if $memberprofile[$fuid]['resideprovince'] || $memberprofile[$fuid]['residecity']}-->{lang comefrom}: $memberprofile[$fuid]['resideprovince'] $memberprofile[$fuid]['residecity'] <!--{/if}-->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <!--{/loop}-->
+                <!--{/if}-->
+            </div>
+            <!--{if !empty($multi)}--><div>$multi</div><!--{/if}-->
+            <br>
+        <!--{else}-->
+            <div class="vessel withedge">
+                <div class="global_nothing" id="nofollowmsg">
+                    <!--{if $viewself}-->
+                        <!--{if $do=='following'}-->{lang follow_you_following_none}<!--{else}-->{lang follow_you_follower_none1}<!--{/if}-->
+                    <!--{else}-->
+                        <!--{if $do=='following'}-->{lang follow_user_following_none}<!--{else}-->{lang follow_user_follower_none}<!--{/if}-->
+                    <!--{/if}-->
+                </div>
+            </div>
+        <!--{/if}-->
+    <!--{/if}-->
 
 
-<!--{if $showguide && $do == 'feed'}-->
-	<div id="nv_menu" style="display:none; position: fixed; top:50%; margin-top: -250px;">
-		<div>
-			<img src="{STATICURL}image/common/flw_guide.png"/>
-			<button style="margin: -50px 0 20px 430px;" onclick="hideMenu()"><span>{lang follow_i_know}</span></button>
-		</div>
-	</div>
-	<script>
-		showMenu({'ctrlid':'nv','pos':'13','cover':'1'});
-	</script>
-<!--{/if}-->
+    <!--{if $showguide && $do == 'feed'}-->
+        <div id="nv_menu" style="display:none; position: fixed; top:50%; margin-top: -250px;">
+            <div>
+                <img src="{STATICURL}image/common/flw_guide.png"/>
+                <button style="margin: -50px 0 20px 430px;" onclick="hideMenu()"><span>{lang follow_i_know}</span></button>
+            </div>
+        </div>
+        <script>
+            showMenu({'ctrlid':'nv','pos':'13','cover':'1'});
+        </script>
+    <!--{/if}-->
 
-<script>
-	function succeedhandle_followmod(url, msg, values) {
-		var numObj = $('followernum_'+values['fuid']);
-		if(numObj) {followernum = parseInt(numObj.innerHTML);}
-		if(values['type'] === 'add') {
-			if(values['from'] === 'head') {
-				if($('followflag')) $('followflag').style.display = '';
-				if($('unfollowflag')) $('unfollowflag').style.display = 'none';
-			} else if($('stared_'+values['fuid'])) {
-				$('stared_'+values['fuid']).innerHTML = '{lang stared}';
-				if(values['from'] !== 'block') {
-					$('stared_'+values['fuid']).className = 'star on';
-				}
-				$('stared_'+values['fuid']).href = 'home.php?mod=spacecp&ac=follow&op=del&fuid='+values['fuid']+(values['from'] == 'block' ? '&from=block' : '');
+    <script>
+        function succeedhandle_followmod(url, msg, values) {
+            var numObj = $('followernum_'+values['fuid']);
+            if(numObj) {followernum = parseInt(numObj.innerHTML);}
+            if(values['type'] === 'add') {
+                if(values['from'] === 'head') {
+                    if($('followflag')) $('followflag').style.display = '';
+                    if($('unfollowflag')) $('unfollowflag').style.display = 'none';
+                } else if($('stared_'+values['fuid'])) {
+                    $('stared_'+values['fuid']).innerHTML = '{lang stared}';
+                    if(values['from'] !== 'block') {
+                        $('stared_'+values['fuid']).className = 'star on';
+                    }
+                    $('stared_'+values['fuid']).href = 'home.php?mod=spacecp&ac=follow&op=del&fuid='+values['fuid']+(values['from'] == 'block' ? '&from=block' : '');
 
-			}
-			if(numObj) {
-				numObj.innerHTML = followernum + 1;
-			}
+                }
+                if(numObj) {
+                    numObj.innerHTML = followernum + 1;
+                }
 
-		} else if(values['type'] === 'del') {
-			if(values['from'] === 'head') {
-				if($('followflag')) $('followflag').style.display = 'none';
-				if($('unfollowflag')) $('unfollowflag').style.display = '';
-				if($('followbkame_'+values['fuid'])){
-				    $('followbkame_'+values['fuid']).innerHTML = $('followbkame_'+values['fuid']).getAttribute('data-name');
-				}
-			} else if($('stared_'+values['fuid']))  {
-				$('stared_'+values['fuid']).innerHTML = '{lang star}';
-				if(values['from'] !== 'block') {
-					$('stared_'+values['fuid']).className = 'star';
-				}
-				$('stared_'+values['fuid']).href = 'home.php?mod=spacecp&ac=follow&op=add&hash={FORMHASH}&fuid='+values['fuid']+(values['from'] === 'block' ? '&from=block' : '');
-			}
-			if(numObj) {
-				numObj.innerHTML = followernum - 1;
-			}
-		} else if(values['type'] === 'special') {
-			if(values['from'] == 'head') {
-				var specialObj = $('specialflag_'+values['fuid']);
-				if(values['special'] === 1) {
-					specialObj.className = 'flw_specialfo';
-					specialObj.innerHTML = '{lang follow_add_special_following}';
-				} else {
-					specialObj.className = 'flw_specialunfo';
-					specialObj.innerHTML = '{lang follow_del_special_following}';
-				}
-				specialObj.title = specialObj.innerHTML;
-				specialObj.href = 'home.php?mod=spacecp&ac=follow&op=add&hash={FORMHASH}&special='+values['special']+'&fuid='+values['fuid']+'&from=head';
-			} else {
-				$('star_sp_'+values['fuid']).className = values['special'] === '1' ? 'star-sp awe-heart-o' : 'star-sp on awe-heart';
-				$('star_sp_'+values['fuid']).href = 'home.php?mod=spacecp&ac=follow&op=add&hash={FORMHASH}&special='+values['special']+'&fuid='+values['fuid'];
-			}
-		}
-	}
-	function changefeed(tid, pid, flag, obj) {
-		var x = new Ajax();
-		var o = obj.parentNode;
-		x.get('forum.php?mod=ajax&action=getpostfeed&inajax=1&tid='+tid+'&pid='+pid+'&type=changefeed&flag='+flag, function(s){
-			o.innerHTML = s;
-		});
-	}
-</script>
+            } else if(values['type'] === 'del') {
+                if(values['from'] === 'head') {
+                    if($('followflag')) $('followflag').style.display = 'none';
+                    if($('unfollowflag')) $('unfollowflag').style.display = '';
+                    if($('followbkame_'+values['fuid'])){
+                        $('followbkame_'+values['fuid']).innerHTML = $('followbkame_'+values['fuid']).getAttribute('data-name');
+                    }
+                } else if($('stared_'+values['fuid']))  {
+                    $('stared_'+values['fuid']).innerHTML = '{lang star}';
+                    if(values['from'] !== 'block') {
+                        $('stared_'+values['fuid']).className = 'star';
+                    }
+                    $('stared_'+values['fuid']).href = 'home.php?mod=spacecp&ac=follow&op=add&hash={FORMHASH}&fuid='+values['fuid']+(values['from'] === 'block' ? '&from=block' : '');
+                }
+                if(numObj) {
+                    numObj.innerHTML = followernum - 1;
+                }
+            } else if(values['type'] === 'special') {
+                if(values['from'] == 'head') {
+                    var specialObj = $('specialflag_'+values['fuid']);
+                    if(values['special'] === 1) {
+                        specialObj.className = 'flw_specialfo';
+                        specialObj.innerHTML = '{lang follow_add_special_following}';
+                    } else {
+                        specialObj.className = 'flw_specialunfo';
+                        specialObj.innerHTML = '{lang follow_del_special_following}';
+                    }
+                    specialObj.title = specialObj.innerHTML;
+                    specialObj.href = 'home.php?mod=spacecp&ac=follow&op=add&hash={FORMHASH}&special='+values['special']+'&fuid='+values['fuid']+'&from=head';
+                } else {
+                    $('star_sp_'+values['fuid']).className = values['special'] === '1' ? 'star-sp awe-heart-o' : 'star-sp on awe-heart';
+                    $('star_sp_'+values['fuid']).href = 'home.php?mod=spacecp&ac=follow&op=add&hash={FORMHASH}&special='+values['special']+'&fuid='+values['fuid'];
+                }
+            }
+        }
+        function changefeed(tid, pid, flag, obj) {
+            var x = new Ajax();
+            var o = obj.parentNode;
+            x.get('forum.php?mod=ajax&action=getpostfeed&inajax=1&tid='+tid+'&pid='+pid+'&type=changefeed&flag='+flag, function(s){
+                o.innerHTML = s;
+            });
+        }
+    </script>
+
+    <script>
+        addEvent(document,'DOMContentLoaded',function () {
+            let postform = SR('#fastpostform')[0],
+                page = SR('#pager_follow')[0],
+                scrltem = 0,
+                positionfix = function (){
+                    if(SRGlobal.Window.Width <= 1680){
+                        postform.style = '';
+                        if(SRGlobal.Window.Scroll.DirY === 'down'){
+                            scrltem = SRGlobal.Window.Scroll.Top;
+                            if(page) page.addClass('sleep');
+                            if(postform) postform.addClass('sleep');
+                        } else if(scrltem - SRGlobal.Window.Scroll.Top > Math.min(640, MasElements.viewer.scrollHeight - SRGlobal.Window.Height - 20)) {
+                            if(page) page.delClass('sleep');
+                            if(postform) postform.delClass('sleep');
+                        }
+                    }
+                },
+                Tl = SR('.timeline')[0],
+                Ts = SR('.time-A'),
+                Th = Ts[0].Css.height,
+                TsOn = function (){
+                    for (let i=0 ; i <Ts.length; i++){
+                        if(Ts[i].parentNode.Css.top < 82 && (isUndefined(Ts[i+1]) || Ts[i+1].parentNode.Css.top > 82)){
+                            Ts[i].style = 'position: fixed; top: 82px;';
+                            Ts[i].parentNode.style = 'padding-top:' + Th + 'px;';
+                        } else {
+                            Ts[i].style = Ts[i].parentNode.style = '';
+                        }
+                    }
+                };
+
+            if(MasElements.viewer.scrollHeight <= SRGlobal.Window.Height){
+                Tl.style.marginBottom = '200px';
+            }
+
+            if(page) {
+                page.addClass('sleep');
+            }
+
+            if(postform) {
+                postform.addClass('sleep');
+                addEvent(MasElements.viewer,'scroll',positionfix);
+            }
+
+            if(Tl) {
+                addEvent(MasElements.viewer,'scroll',TsOn);
+            }
+        });
+    </script>
+</div>

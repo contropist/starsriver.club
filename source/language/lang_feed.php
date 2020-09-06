@@ -443,6 +443,7 @@
         * B {tid}     :帖子ID
         * B {tsub}    :帖子标题
         * B {tink}    :帖子链接
+        * B {tdate}   :帖子时间
          *
         * B {uid}      :用户ID
         * B {uname}    :用户名

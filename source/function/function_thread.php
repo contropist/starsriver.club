@@ -36,6 +36,7 @@
             'tid'   => $thread['tid'],
             'tsub'  => $thread['subject'],
             'tlink' => 'forum.php?mod=viewthread&tid=' . $thread['tid'],
+            'tdate' => $thread['dateline'],
             
             'uid'     => $thread['authorid'],
             'uname'   => $thread['author'],

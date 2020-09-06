@@ -128,7 +128,8 @@
 	</form>
 	<script>
 		function succeedhandle_{$_GET[handlekey]}(url, msg, values) {
-			$('feed_li_'+values.feedid).style.display = 'none';
+			let feedElement = $('feed_li_'+values.feedid);
+            feedElement.parentNode.removeChild(feedElement);
 		}
 	</script>
 <!--{/if}-->

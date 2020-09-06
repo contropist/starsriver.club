@@ -1,4 +1,10 @@
 <?php
+/********************************************************************
+ * Copyright (c) 2020 All Right Reserved By [StarsRiver]            *
+ *                                                                  *
+ * Author  Zhangyu                                                  *
+ * Email   starsriver@yahoo.com                                     *
+ ********************************************************************/
 
 /**
  *      [Discuz!] (C)2001-2099 Comsenz Inc.
@@ -332,6 +338,7 @@ $lang = [
     'update_doing' => '更新记录',
     'update_profile' => '更新资料',
     'user_ban' => '禁封用户',
+    'user_black_home' => '用户已进小黑屋',
     'user_edit' => '编辑用户',
     'view_message' => '查看留言',
     'anonymity' => '匿名',

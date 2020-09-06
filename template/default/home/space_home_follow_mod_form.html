@@ -1,6 +1,5 @@
 <!--{if in_array($do, array('feed', 'view'))}-->
 	<!--{if helper_access::check_module('follow') && ( $do == 'feed' || ( $do == 'view' && $viewself))}-->
-		<div class="vessel withedge">
 			<script src="{$_G[setting][jspath]}forum.js?{VERHASH}"></script>
 			<script src="{$_G[setting][jspath]}forum_moderate.js?{VERHASH}"></script>
 			<script>
@@ -10,7 +9,7 @@
 			</script>
 			<!--{eval $dmfid = $_G['setting']['followforumid'] && !empty($defaultforum) ? $_G['setting']['followforumid'] : 0;}-->
 
-			<form class="flow-deliver" method="post" id="fastpostform" action="home.php?mod=spacecp&ac=follow&op=newthread&topicsubmit=yes&infloat=yes&handlekey=fastnewpost&inajax=1" onsubmit="return fastpostvalidate(this);">
+			<form class="flow-deliver" id="fastpostform" method="post" action="home.php?mod=spacecp&ac=follow&op=newthread&topicsubmit=yes&infloat=yes&handlekey=fastnewpost&inajax=1" onsubmit="return fastpostvalidate(this);">
 				<input type="hidden" name="formhash" value="{FORMHASH}" />
 				<input type="hidden" name="usesig" value="$usesigcheck" />
 				<input type="hidden" name="adddynamic" value="1" />
@@ -159,7 +158,7 @@
                     var fid = listObj.value;
                     if(fid) {
                         var dforum = $('fid');
-                        //判断是否已经在列表中
+
                         var haveoption = false;
                         for(var i = 0; i < dforum.options.length; i++) {
                             if(dforum.options[i].value === fid) {
@@ -290,6 +289,5 @@
 
                 }
 			</script>
-		</div>
 	<!--{/if}-->
 <!--{/if}-->

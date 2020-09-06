@@ -96,7 +96,7 @@
 	<!--{/if}-->
 	<script>
 		function succeedhandle_$_GET[handlekey](url, msg, values) {
-			var obj = $('feed_'+ values['feedid'] +'_li');
+			var obj = $('feed_li_'+ values['feedid']);
 			obj.parentNode.removeChild(obj);
 			hideWindow('$_GET['handlekey']');
 		}
