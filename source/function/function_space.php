@@ -1,4 +1,10 @@
 <?php
+/********************************************************************
+ * Copyright (c) 2020 All Right Reserved By [StarsRiver]            *
+ *                                                                  *
+ * Author  Zhangyu                                                  *
+ * Email   starsriver@yahoo.com                                     *
+ ********************************************************************/
 
 /**
  *      [Discuz!] (C)2001-2099 Comsenz Inc.
@@ -644,22 +650,18 @@ function mkfeedhtml($value) {
         $html .= "<div class=\"feed_item_$value[icon]\" $style>$value[body_template]</div>";
     }
 	
-	$html .= "<div class=\"images\">";
-
-	if ($value['image_1']) {
-		$html .= "<a href=\"$value[image_1_link]\"{$value[target]}><img src=\"$value[image_1]\" alt=\"\" class=\"tn\" /></a>";
-	}
-	if ($value['image_2']) {
-		$html .= "<a href=\"$value[image_2_link]\"{$value[target]}><img src=\"$value[image_2]\" alt=\"\" class=\"tn\" /></a>";
-	}
-	if ($value['image_3']) {
-		$html .= "<a href=\"$value[image_3_link]\"{$value[target]}><img src=\"$value[image_3]\" alt=\"\" class=\"tn\" /></a>";
-	}
-	if ($value['image_4']) {
-		$html .= "<a href=\"$value[image_4_link]\"{$value[target]}><img src=\"$value[image_4]\" alt=\"\" class=\"tn\" /></a>";
-	}
+    if($value['body_data']['imgs']){
+        $counter = 0;
+        $imgshtml = '';
+        foreach ($value['body_data']['imgs'] as $image){
+            $counter += 1;
+            $imgshtml .= '<a class="image rec-img nth-of-'.$counter.'" href="'.$image['img_url'].'" style="background-image: url('.$image['img'].')" target="_blank" title="'.$image['img_name'].'"><img src="'.LIBURL.'/img/row-e-col/1.1.png"></a>';
+        }
+        $html .= '<div class="feed-element-imageGrid imageGrid grid-'.$counter.'">';
+        $html .= $imgshtml;
+        $html .= "</div>";
+    }
 	
-	$html .= "</div>";
 	$html .= "</div>";
 	$html .= "</li>";
 	return $html;

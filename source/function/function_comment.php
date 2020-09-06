@@ -1,4 +1,10 @@
 <?php
+/********************************************************************
+ * Copyright (c) 2020 All Right Reserved By [StarsRiver]            *
+ *                                                                  *
+ * Author  Zhangyu                                                  *
+ * Email   starsriver@yahoo.com                                     *
+ ********************************************************************/
 
 /**
  *      [Discuz!] (C)2001-2099 Comsenz Inc.
@@ -369,8 +375,6 @@ function add_comment($message, $id, $idtype, $cid = 0) {
                     'body_template'  => $fs['body_template'],
                     'body_data'      => $fs['body_data'],
                     'body_general'   => $fs['body_general'],
-                    'images'         => $fs['images'],
-                    'images_link'    => $fs['image_links'],
                     'target_ids'     => $fs['target_ids'],
                     'friend'         => $fs['friend'],
                 ]);

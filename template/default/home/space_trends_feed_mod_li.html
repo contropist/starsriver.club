@@ -1,3 +1,10 @@
+<!--*****************************************************************
+  * Copyright (c) 2020 All Right Reserved By [StarsRiver]           *
+  *                                                                 *
+  * Author  Zhangyu                                                 *
+  * Email   starsriver@yahoo.com                                    *
+  *****************************************************************-->
+
 <div class="vessel withedge">
     <div class="actstruct feed">
         <a class="avatar" href="{if $user[uid]}home.php?mod=space&uid=$feed[uid]{/if}" target="_blank" c="1"><!--{avatar($feed[uid],small)}--></a>
@@ -33,16 +40,21 @@
                 <!--{/if}-->
 
                 <!--{if $feed['body_template']}-->$feed[body_template]<!--{/if}-->
-                    <div class="clear-objgap">
-                        <!--{if $feed['image_1']}--><a class="album-img" href="$feed[image_1_link]" {$feed[target]}><img src="$feed[image_1]"/></a><!--{/if}-->
-                        <!--{if $feed['image_2']}--><a class="album-img" href="$feed[image_2_link]" {$feed[target]}><img src="$feed[image_2]"/></a><!--{/if}-->
-                        <!--{if $feed['image_3']}--><a class="album-img" href="$feed[image_3_link]" {$feed[target]}><img src="$feed[image_3]"/></a><!--{/if}-->
-                        <!--{if $feed['image_4']}--><a class="album-img" href="$feed[image_4_link]" {$feed[target]}><img src="$feed[image_4]"/></a><!--{/if}-->
-                    </div>
 
-                <!--{if !empty($feed['body_data']['musicvar'])}-->
-                    <a class="share-item-music" onclick="audioload('{$feed['body_data']['musicvar']}')"><i class="icon-play2"></i>{$feed['body_data']['musicname']}</a>
+                <!--{if $feed['body_data']['imgs']}-->
+                <div class="feed-element-imageGrid imageGrid grid-{eval echo count($feed['body_data']['imgs']);}">
+                    <!--{eval $counter = 1;}-->
+                    <!--{loop $feed['body_data']['imgs'] $image_element}-->
+                    <a class="image rec-img nth-of-{$counter}" href="{$image_element['img_url']}" style="background-image: url({$image_element['img']})" target="_blank" title="{$image_element['img_name']}">
+                        <img src="{LIBURL}/img/row-e-col/1.1.png"></i>
+                    </a>
+                    <!--{eval $counter += 1;}-->
+                    <!--{/loop}-->
+                </div>
                 <!--{/if}-->
+
+                <!--{template home/space_trends_feed_mod_org_quote}-->
+
                 <!--{if $user_list[$feed['hash_data']]}-->
                 <p>{lang other_participants}:<!--{eval echo implode(', ', $user_list[$feed['hash_data']]);}--></p>
                 <!--{/if}-->

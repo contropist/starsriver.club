@@ -1,4 +1,10 @@
 <?php
+/********************************************************************
+ * Copyright (c) 2020 All Right Reserved By [StarsRiver]            *
+ *                                                                  *
+ * Author  Zhangyu                                                  *
+ * Email   starsriver@yahoo.com                                     *
+ ********************************************************************/
 
 /**
  *      [Discuz!] (C)2001-2099 Comsenz Inc.
@@ -188,17 +194,15 @@ if(!submitcheck('modsubmit') && !$_GET['fast']) {
             
             feed_add([
                 'icon'           => 'share',
+                'type'           => $share['type'],
                 'title_template' => $share['title_template'],
                 'title_data'     => ['hash_data' => $feed_hash_data],
                 'body_template'  => $share['body_template'],
                 'body_data'      => dunserialize($share['body_data']),
                 'body_general'   => $share['body_general'],
-                'images'         => [$share['image']],
-                'images_link'    => [$share['image_link']],
                 'idtype'         => 0,
                 'uid'            => $share['uid'],
                 'username'       => $share['username'],
-                'type'           => $share['type'],
             ]);
 		}
 		updatemoderate('sid', $moderation['validate'], 2);

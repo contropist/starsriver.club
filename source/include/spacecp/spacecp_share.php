@@ -1,4 +1,10 @@
 <?php
+/********************************************************************
+ * Copyright (c) 2020 All Right Reserved By [StarsRiver]            *
+ *                                                                  *
+ * Author  Zhangyu                                                  *
+ * Email   starsriver@yahoo.com                                     *
+ ********************************************************************/
 
 /**
  *      [Discuz!] (C)2001-2099 Comsenz Inc.
@@ -687,19 +693,16 @@ if($_GET['op'] == 'delete') {
 		$arr['username'] = $_G['username'];
 		$arr['dateline'] = $_G['timestamp'];
 
-		/* feed list upgrade - feed-share */
 		if($arr['status'] == 0 && ckprivacy('share', 'feed')) {
 			require_once libfile('function/feed');
             feed_add([
                 'icon'           => 'share',
+                'type'           => $type,
                 'title_template' => $arr['title_template'],
                 'title_data'     => ['hash_data' => $feed_hash_data],
                 'body_template'  => $arr['body_template'],
                 'body_data'      => $arr['body_data'],
                 'body_general'   => $arr['body_general'],
-                'images'         => [$arr['image']],
-                'images_link'    => [$arr['image_link']],
-                'type'           => $type,
             ]);
 		}
 

@@ -1,4 +1,10 @@
 <?php
+/********************************************************************
+ * Copyright (c) 2020 All Right Reserved By [StarsRiver]            *
+ *                                                                  *
+ * Author  Zhangyu                                                  *
+ * Email   starsriver@yahoo.com                                     *
+ ********************************************************************/
 
 /*
 	[UCenter] (C)2001-2099 Comsenz Inc.
@@ -340,27 +346,28 @@ function uc_app_ls() {
 }
 
 function uc_feed_add($icon, $uid, $username, $title_template='', $title_data='', $body_template='', $body_data='', $body_general='', $target_ids='', $images = array()) {
-	return call_user_func(UC_API_FUNC, 'feed', 'add',
-		array(  'icon'=>$icon,
-			'appid'=>UC_APPID,
-			'uid'=>$uid,
-			'username'=>$username,
-			'title_template'=>$title_template,
-			'title_data'=>$title_data,
-			'body_template'=>$body_template,
-			'body_data'=>$body_data,
-			'body_general'=>$body_general,
-			'target_ids'=>$target_ids,
-			'image_1'=>$images[0]['url'],
-			'image_1_link'=>$images[0]['link'],
-			'image_2'=>$images[1]['url'],
-			'image_2_link'=>$images[1]['link'],
-			'image_3'=>$images[2]['url'],
-			'image_3_link'=>$images[2]['link'],
-			'image_4'=>$images[3]['url'],
-			'image_4_link'=>$images[3]['link']
-		)
-	);
+    
+    $feed = [
+        'icon'           => $icon,
+        'appid'          => UC_APPID,
+        'uid'            => $uid,
+        'username'       => $username,
+        'title_template' => $title_template,
+        'title_data'     => $title_data,
+        'body_template'  => $body_template,
+        'body_data'      => $body_data,
+        'body_general'   => $body_general,
+        'target_ids'     => $target_ids,
+    ];
+    
+    $feed['body_data']['imgs'] = [
+        ['img' => $images[0]['url'], 'img_url' => $images[0]['link']],
+        ['img' => $images[1]['url'], 'img_url' => $images[1]['link']],
+        ['img' => $images[2]['url'], 'img_url' => $images[2]['link']],
+        ['img' => $images[3]['url'], 'img_url' => $images[3]['link']],
+    ];
+    
+	return call_user_func(UC_API_FUNC, 'feed', 'add', $feed);
 }
 
 function uc_feed_get($limit = 100, $delete = TRUE) {

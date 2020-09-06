@@ -1,4 +1,10 @@
 <?php
+/********************************************************************
+ * Copyright (c) 2020 All Right Reserved By [StarsRiver]            *
+ *                                                                  *
+ * Author  Zhangyu                                                  *
+ * Email   starsriver@yahoo.com                                     *
+ ********************************************************************/
 
 /*
 	[UCenter] (C)2001-2099 Comsenz Inc.
@@ -22,7 +28,6 @@ class feedcontrol extends base {
 
 	function onadd() {
 		$this->load('misc');
-		$appid = intval($this->input('appid'));
 		$icon = $this->input('icon');
 		$uid = intval($this->input('uid'));
 		$username = $this->input('username');
@@ -33,23 +38,25 @@ class feedcontrol extends base {
 		$body_template = $this->_parsetemplate($this->input('body_template'));
 		$body_general = $this->input('body_general');
 		$target_ids = $this->input('target_ids');
-		$image_1 = $this->input('image_1');
-		$image_1_link = $this->input('image_1_link');
-		$image_2 = $this->input('image_2');
-		$image_2_link = $this->input('image_2_link');
-		$image_3 = $this->input('image_3');
-		$image_3_link = $this->input('image_3_link');
-		$image_4 = $this->input('image_4');
-		$image_4_link = $this->input('image_4_link');
 
 		$hash_template = md5($title_template.$body_template);
 		$hash_data = md5($title_template.$title_data.$body_template.$body_data);
 		$dateline = $this->time;
-		$this->db->query("INSERT INTO ".UC_DBTABLEPRE."feeds SET appid='$appid', icon='$icon', uid='$uid', username='$username',
-			title_template='$title_template', title_data='$title_data', body_template='$body_template', body_data='$body_data', body_general='$body_general',
-			image_1='$image_1', image_1_link='$image_1_link', image_2='$image_2', image_2_link='$image_2_link',
-			image_3='$image_3', image_3_link='$image_3_link', image_4='$image_4', image_4_link='$image_4_link',
-			hash_template='$hash_template', hash_data='$hash_data', target_ids='$target_ids', dateline='$dateline'");
+		$this->db->query(
+		    "INSERT INTO ".UC_DBTABLEPRE." feeds SET
+                hash_template='$hash_template',
+                hash_data='$hash_data',
+                icon='$icon',
+                uid='$uid',
+                username='$username',
+                title_template='$title_template',
+                title_data='$title_data',
+                body_template='$body_template',
+                body_data='$body_data',
+                body_general='$body_general',
+                target_ids='$target_ids',
+                dateline='$dateline'"
+            );
 		return $this->db->insert_id();
 	}
 

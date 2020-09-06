@@ -1,6 +1,12 @@
 <?php
-    
-    if (!defined('IN_DISCUZ')) {
+/********************************************************************
+ * Copyright (c) 2020 All Right Reserved By [StarsRiver]            *
+ *                                                                  *
+ * Author  Zhangyu                                                  *
+ * Email   starsriver@yahoo.com                                     *
+ ********************************************************************/
+
+if (!defined('IN_DISCUZ')) {
         exit('Access Denied');
     }
     
@@ -21,8 +27,6 @@
             'body_template'  => !empty($arr['body_template']) ? $arr['body_template'] : '',
             'body_data'      => !empty($arr['body_data']) ? $arr['body_data'] : [],
             'body_general'   => !empty($arr['body_general']) ? $arr['body_general'] : '',
-            'images'         => !empty($arr['images']) ? $arr['images'] : [],
-            'images_link'    => !empty($arr['images_link']) ? $arr['images_link'] : [],
             'id'             => !empty($arr['id']) ? $arr['id'] : 0,
             'idtype'         => !empty($arr['idtype']) ? $arr['idtype'] : '',
             'target_ids'     => !empty($arr['target_ids']) ? $arr['target_ids'] : '',
@@ -46,14 +50,6 @@
             'body_data'      => serialize($data['body_data']),
             'body_template'  => $data['body_template'],
             'body_general'   => $data['body_general'],
-            'image_1'        => empty($data['images'][0]) ? '' : $data['images'][0],
-            'image_1_link'   => empty($data['images_link'][0]) ? '' : $data['images_link'][0],
-            'image_2'        => empty($data['images'][1]) ? '' : $data['images'][1],
-            'image_2_link'   => empty($data['images_link'][1]) ? '' : $data['images_link'][1],
-            'image_3'        => empty($data['images'][2]) ? '' : $data['images'][2],
-            'image_3_link'   => empty($data['images_link'][2]) ? '' : $data['images_link'][2],
-            'image_4'        => empty($data['images'][3]) ? '' : $data['images'][3],
-            'image_4_link'   => empty($data['images_link'][3]) ? '' : $data['images_link'][3],
             'id'             => $data['id'],
             'idtype'         => $data['idtype'],
             'target_ids'     => $data['target_ids'],

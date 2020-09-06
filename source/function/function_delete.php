@@ -480,7 +480,7 @@ function deletethread($tids, $membercount = false, $credit = false, $ponly = fal
     }
 
     C::t('home_feed')->delete_by_hash($arrtids, 'tid');
-    C::t('home_feed')->delete_by_id_idtype($arrtids, 'tid');
+    //C::t('home_feed')->delete_by_id_idtype($arrtids, 'tid');
     C::t('common_tagitem')->delete(0, $arrtids, 'tid');
     C::t('forum_typeoptionvar')->delete_by_tid($arrtids);
     C::t('forum_poststick')->delete_by_tid($arrtids);

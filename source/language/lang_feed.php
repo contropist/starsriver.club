@@ -36,6 +36,18 @@
         /*
         * feed-thread.ban
         *
+        * T {content}     :帖子ID
+         *
+        * B {content}      :用户ID
+        *
+        * */
+        'feed_template_sitefeed_title' => '系统动态：{content}',
+        'feed_template_sitefeed_body'   => '<div class="feed-element-sitefeed">{content}</div>',
+
+        
+        /*
+        * feed-thread.ban
+        *
         * @ {tid}     :帖子ID
         * @ {tsub}    :帖子标题
         * @ {tink}    :帖子链接

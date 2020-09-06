@@ -1,3 +1,10 @@
+<!--*****************************************************************
+  * Copyright (c) 2020 All Right Reserved By [StarsRiver]           *
+  *                                                                 *
+  * Author  Zhangyu                                                 *
+  * Email   starsriver@yahoo.com                                    *
+  *****************************************************************-->
+
 <div class="whitespace cn">
     <!--{if $space[self] && helper_access::check_module('doing')}-->
         <!--{template home/space_route_doing_mod_deliverer}-->
@@ -61,7 +68,7 @@
                                 <div class="feed-element-imageGrid imageGrid grid-{eval echo count($feed['body_data']['imgs']);}">
                                     <!--{eval $counter = 1;}-->
                                     <!--{loop $feed['body_data']['imgs'] $image_element}-->
-                                        <a class="image rec-img nth-of-{$counter}" href="{$image_element['img_url']}" style="background-image: url('$image_element['img']')" target="_blank" title="{$image_element['img_name']}">
+                                        <a class="image rec-img nth-of-{$counter}" href="{$image_element['img_url']}" style="background-image: url({$image_element['img']})" target="_blank" title="{$image_element['img_name']}">
                                             <img src="{LIBURL}/img/row-e-col/1.1.png"></i>
                                         </a>
                                         <!--{eval $counter += 1;}-->

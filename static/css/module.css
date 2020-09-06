@@ -8734,6 +8734,9 @@
             border-radius: 5px;
             background: var(--color-lightgray);
         }
+        .app-userspace .timeline .feed-element-sitefeed{
+
+        }
     /*endregion*/
 
     /*region #userspace::feed*/

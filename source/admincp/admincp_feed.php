@@ -1,4 +1,10 @@
 <?php
+/********************************************************************
+ * Copyright (c) 2020 All Right Reserved By [StarsRiver]            *
+ *                                                                  *
+ * Author  Zhangyu                                                  *
+ * Email   starsriver@yahoo.com                                     *
+ ********************************************************************/
     
     /**
      *      [Discuz!] (C)2001-2099 Comsenz Inc.
@@ -122,38 +128,70 @@ EOF;
             if (empty($feedid)) {
                 $_G['uid'] = 0;
                 require_once libfile('function/feed');
+                
                 $feedid = feed_add([
-                    'icon' => 'sitefeed',
-                    'title_template' => trim($feednew['title_template']),
-                    'body_template' => trim($feednew['body_template']),
-                    'body_general' => trim($feednew['body_general']),
-                    'images' => [
-                        trim($feednew['image_1']),
-                        trim($feednew['image_2']),
-                        trim($feednew['image_3']),
-                        trim($feednew['image_4']),
+                    'icon'           => 'sitefeed',
+                    'title_template' => 'sitefeed',
+                    'title_data' => [
+                        'content' => trim($feednew['title_template'])
                     ],
-                    'images_link' => [
-                        trim($feednew['image_1_link']),
-                        trim($feednew['image_2_link']),
-                        trim($feednew['image_3_link']),
-                        trim($feednew['image_4_link']),
+                    'body_template'  => 'sitefeed',
+                    'body_data'      => [
+                        'content' => trim($feednew['body_template']),
+                        'imgs' => [
+                            [
+                                'img'     => trim($feednew['image_1']),
+                                'img_url' => trim($feednew['image_1_link']),
+                            ],
+                            [
+                                'img'     => trim($feednew['image_2']),
+                                'img_url' => trim($feednew['image_2_link']),
+                            ],
+                            [
+                                'img'     => trim($feednew['image_3']),
+                                'img_url' => trim($feednew['image_3_link']),
+                            ],
+                            [
+                                'img'     => trim($feednew['image_4']),
+                                'img_url' => trim($feednew['image_4_link']),
+                            ],
+                        ],
                     ],
-                    'id' => 1,
+                    'body_general'   => trim($feednew['body_general']),
+                    'id'             => 1,
                 ]);
                 
             } else {
                 if (empty($feednew['feeduid'])) {
                     $setarr['body_general'] = trim($feednew['body_general']);
                 }
-                $setarr['image_1'] = trim($feednew['image_1']);
-                $setarr['image_1_link'] = trim($feednew['image_1_link']);
-                $setarr['image_2'] = trim($feednew['image_2']);
-                $setarr['image_2_link'] = trim($feednew['image_2_link']);
-                $setarr['image_3'] = trim($feednew['image_3']);
-                $setarr['image_3_link'] = trim($feednew['image_3_link']);
-                $setarr['image_4'] = trim($feednew['image_4']);
-                $setarr['image_4_link'] = trim($feednew['image_4_link']);
+    
+                $setarr['title_data'] = serialize([
+                    'content' => trim($feednew['title_template'])
+                ]);
+                
+                $setarr['body_data'] = serialize([
+                    'content' => trim($feednew['body_template']),
+                    'imgs' => [
+                        [
+                            'img'     => trim($feednew['image_1']),
+                            'img_url' => trim($feednew['image_1_link']),
+                        ],
+                        [
+                            'img'     => trim($feednew['image_2']),
+                            'img_url' => trim($feednew['image_2_link']),
+                        ],
+                        [
+                            'img'     => trim($feednew['image_3']),
+                            'img_url' => trim($feednew['image_3_link']),
+                        ],
+                        [
+                            'img'     => trim($feednew['image_4']),
+                            'img_url' => trim($feednew['image_4_link']),
+                        ],
+    
+                    ]
+                ]);
                 
                 $setarr['dateline'] = $newtimestamp;
                 $setarr['hot'] = intval($feednew['hot']);
