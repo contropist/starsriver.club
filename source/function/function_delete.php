@@ -414,7 +414,10 @@ function deletethread($tids, $membercount = false, $credit = false, $ponly = fal
     }
     if ($ponly) {
         if ($_G['setting']['plugins']['func'][HOOKTYPE]['deletethread']) {
-            hookscript('deletethread', 'global', 'funcs', array('param' => $hookparam, 'step' => 'delete'), 'deletethread');
+            hookscript('deletethread', 'global', 'funcs', [
+                'param' => $hookparam,
+                'step'  => 'delete',
+            ], 'deletethread');
         }
         C::t('forum_thread')->update($arrtids, array('displayorder' => -1, 'digest' => 0, 'moderated' => 1));
         foreach ($postids as $posttableid => $oneposttids) {
@@ -464,7 +467,6 @@ function deletethread($tids, $membercount = false, $credit = false, $ponly = fal
                  'forum_polloption_image',
                  'forum_pollvoter',
                  'forum_polloption',
-        
                  'forum_activity',
                  'forum_activityapply',
                  'forum_debate',
@@ -476,11 +478,8 @@ function deletethread($tids, $membercount = false, $credit = false, $ponly = fal
              ] as $table) {
         C::t($table)->delete_by_tid($arrtids);
     }
-    /*
-    foreach ($arrtids as $post_tid){
-        $post_tid_pids = C::t('home_post')->fetch_all_by_id($arrtids, 'tid');
-    }
-    */
+
+    C::t('home_feed')->delete_by_hash($arrtids, 'tid');
     C::t('home_feed')->delete_by_id_idtype($arrtids, 'tid');
     C::t('common_tagitem')->delete(0, $arrtids, 'tid');
     C::t('forum_typeoptionvar')->delete_by_tid($arrtids);

@@ -1,4 +1,10 @@
 <?php
+/********************************************************************
+ * Copyright (c) 2020 All Right Reserved By [StarsRiver]            *
+ *                                                                  *
+ * Author  Zhangyu                                                  *
+ * Email   starsriver@yahoo.com                                     *
+ ********************************************************************/
 
 /**
  *      [Discuz!] (C)2001-2099 Comsenz Inc.
@@ -101,7 +107,6 @@ class table_home_feed extends discuz_table
 			return null;
 		}
 		$condition = [];
-
 		$condition[] = DB::field('id', $ids);
 		$condition[] = DB::field('idtype', $idtype);
 
@@ -124,6 +129,17 @@ class table_home_feed extends discuz_table
 			return null;
 		}
 		DB::delete($this->_table, DB::field('icon', $icon));
+	}
+
+	public function delete_by_hash($hashids, $type) {
+		if(!$hashids || !$type) {
+			return null;
+		}
+		$hash_data = [];
+		foreach ($hashids as $id){
+            $hash_data[] = $type.$id;
+        }
+		DB::delete($this->_table, DB::field('hash_data', $hash_data));
 	}
 
 	public function delete($feedid, $uid = '') {
@@ -241,5 +257,3 @@ class table_home_feed extends discuz_table
 		}
 	}
 }
-
-?>

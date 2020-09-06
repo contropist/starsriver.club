@@ -54,13 +54,11 @@
             $data['template'] = 'quote_need_perm';
         } elseif ($thread['status']) {
             $data['template'] = 'quote_post_baned';
+        } elseif (empty($thread['message'])) {
+            $data['template'] = 'quote_post_no_msg';
         } else {
-            $message = !empty($thread['message']) ? messagecutstr(messagesafeclear($thread['message']), 200) : '';
-            
             $data['template'] = 'thread_sample';
-            
-            $data['data']['message'] = $message;
-            
+            $data['data']['message'] = messagecutstr(messagesafeclear($thread['message']), 200);
             if ($thread['attachment']) {
                 getattach_img($thread['tid'], $thread['pid'], 9, $data['data']['imgs']);
             }

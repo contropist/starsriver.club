@@ -79,6 +79,15 @@
                 <a class="thread-title" href="{tlink}" target="_blank">{tsub}</a>
                 <a class="link redirect" href="{tlink}">此内容被屏蔽</a>
             </div>',
+        'feed_template_quote_post_no_msg_body'  => '
+            <div class="feed-element-ban">
+                <a class="user-tag" href="{ulink}" target="_blank" c="1">
+                    <s class="avatar"><img class="avatar-main" src="{uavatar}"></s>
+                    <s class="username">{uname}</s>
+                </a>
+                <a class="thread-title" href="{tlink}" target="_blank">{tsub}</a>
+                <a class="link redirect" href="{tlink}">文章内无文字信息，未获取到摘要，更多内容需转至原文查看</a>
+            </div>',
 
 
         /*
