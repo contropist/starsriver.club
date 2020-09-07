@@ -8021,7 +8021,7 @@
         .app-userspace .timeline .n-right .s-end .icon {
             background: var(--color-lightgray);
             color: var(--color-text-lightgray);
-            width: 30px;
+            min-width: 30px;
             height: 30px;
             margin-left: 10px;
             border-radius: 15px;
@@ -8032,6 +8032,12 @@
         .app-userspace .timeline .n-right .s-end .icon:hover {
             background: var(--color-sky-blue);
             color: #fff;
+        }
+        .app-userspace .timeline .n-right .s-end .icon.on-count {
+            padding: 0 10px;
+        }
+        .app-userspace .timeline .n-right .s-end .icon.on-count:before {
+            margin-right: 5px;
         }
 
         .app-userspace .flow-deliver{

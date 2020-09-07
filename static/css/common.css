@@ -1,9 +1,9 @@
-/*---------------
-|   Site Start  |
-|----------------
-|  Below Is The Web Maintheme
-|  This Is Not A Free Soft Coded For StarsRiver Writed By ZhangYu CopyRight 2017-2050
------------------------------------------------------------------------------------------------------------------------*/
+/********************************************************************
+ * Copyright (c) 2020 All Right Reserved By [StarsRiver]            *
+ *                                                                  *
+ * Author  Zhangyu                                                  *
+ * Email   starsriver@yahoo.com                                     *
+ ********************************************************************/
 
 .please-wait-later{
     text-align: center;
@@ -4462,7 +4462,7 @@
     }
     .flow-comment-list ol .reply-item .username{
         font-weight: 700;
-        color: #6d757a;
+        color: #999c9d;
         padding-right: 10px;
     }
     .flow-comment-list ol .reply-item .message{

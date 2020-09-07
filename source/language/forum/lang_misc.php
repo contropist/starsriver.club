@@ -1,4 +1,10 @@
 <?php
+/********************************************************************
+ * Copyright (c) 2020 All Right Reserved By [StarsRiver]            *
+ *                                                                  *
+ * Author  Zhangyu                                                  *
+ * Email   starsriver@yahoo.com                                     *
+ ********************************************************************/
 
 /**
  *      [Discuz!] (C)2001-2099 Comsenz Inc.
@@ -321,7 +327,7 @@ $lang = array
 
 	'seccode' => '验证码',
 	'seccode_update' => '换一个',
-	'seccode_player' => '<span style="padding:2px"><img border="0" style="vertical-align:middle" src="static/image/common/seccodeplayer.gif" /> <a onclick="window.document.seccodeplayer_{idhash}.SetVariable(\'isPlay\', 1)">播放验证码</a></span>',
+	'seccode_player' => '<span style="padding:2px"><img style="vertical-align:middle" src="static/image/common/seccodeplayer.gif" /> <a onclick="window.document.seccodeplayer_{idhash}.SetVariable(\'isPlay\', 1)">播放验证码</a></span>',
 	'secqaa' => '验证问答',
 
 	'mobileoem_creditrule' => '掌上论坛签到',

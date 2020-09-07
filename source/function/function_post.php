@@ -582,6 +582,7 @@ function messagesafeclear($message) {
 	}
 	$language = lang('forum/misc');
 	$message = preg_replace(array($language['post_edithtml_regexp'],$language['post_editnobbcode_regexp'],$language['post_edit_regexp']), '', $message);
+	
 	return $message;
 }
 

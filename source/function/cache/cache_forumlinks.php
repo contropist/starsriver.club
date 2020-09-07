@@ -1,4 +1,10 @@
 <?php
+/********************************************************************
+ * Copyright (c) 2020 All Right Reserved By [StarsRiver]            *
+ *                                                                  *
+ * Author  Zhangyu                                                  *
+ * Email   starsriver@yahoo.com                                     *
+ ********************************************************************/
 
 /**
  *      [Discuz!] (C)2001-2099 Comsenz Inc.
@@ -25,9 +31,8 @@ function build_cache_forumlinks() {
 					$tightlink_content .= '
 					<div class="coposite">
 						<a href="'.$flink['url'].'" target="_blank">
-							<img src="'.$flink['logo'].'" border="0" alt="'.strip_tags($flink['name']).'" />
-						</a>			
-						
+							<img src="'.$flink['logo'].'" alt="'.strip_tags($flink['name']).'" />
+						</a>
 					</div>';
 				}
 			}

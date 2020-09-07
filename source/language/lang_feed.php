@@ -411,6 +411,7 @@
                 <a class="user-tag" href="{ulink}" target="_blank" c="1">
                     <s class="avatar"><img class="avatar-main" src="{uavatar}"></s>
                     <s class="username">{uname}</s>
+                    <s class="time">{tdate}</s>
                 </a>
                 <div class="content">{message}</div>
             </div>',

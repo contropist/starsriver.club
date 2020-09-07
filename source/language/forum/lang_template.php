@@ -1,4 +1,10 @@
 <?php
+/********************************************************************
+ * Copyright (c) 2020 All Right Reserved By [StarsRiver]            *
+ *                                                                  *
+ * Author  Zhangyu                                                  *
+ * Email   starsriver@yahoo.com                                     *
+ ********************************************************************/
 
 /**
  *      [Discuz!] (C)2001-2099 Comsenz Inc.
@@ -78,7 +84,7 @@ $lang = array (
   'search' => '搜索',
   'description' => '描述',
   'save_to_album' => '存画廊',
-  'post_meanwhile_relay' => '同时转播',
+  'post_meanwhile_relay' => '转发',
   'reply' => '回复',
   'view_all_replies' => '查看全部',
   'all' => '全部',

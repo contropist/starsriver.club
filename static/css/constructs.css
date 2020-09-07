@@ -3017,12 +3017,12 @@
         grid-template-columns: repeat(4, 1fr);
         background: #fff;
         padding: var(--grid-gap);
-        border-radius: calc(var(--grid-gap) * 2);
+        border-radius: calc(var(--grid-gap) * 3);
     }
     .imageGrid .image{
         background: #f4f5f7 center;
         background-size: cover;
-        border-radius: var(--grid-gap);
+        border-radius: calc(var(--grid-gap) * 2);
     }
     .imageGrid .image img{
         opacity: 0;

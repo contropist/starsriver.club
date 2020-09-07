@@ -12,20 +12,21 @@
     
     $_G['post_attach'] = [];
     
-    function fcodedisp($code, $type = 'codehtml') {
+    function fcodedisp($html, $type = 'codehtml') {
         global $_G;
         $_G['forum_discuzcode']['pcodecount']++;
-        $_G['forum_discuzcode'][$type][$_G['forum_discuzcode']['pcodecount']] = $code;
+        $_G['forum_discuzcode'][$type][$_G['forum_discuzcode']['pcodecount']] = $html;
         $_G['forum_discuzcode']['codecount']++;
         return "[\tD_" . $_G['forum_discuzcode']['pcodecount'] . "\t]";
     }
     
     function followcode($message, $tid = 0, $pid = 0, $length = 0, $allowimg = true) {
+        
         global $_G;
         
         include_once libfile('function/post');
-        $message = strip_tags($message);
-        $message = messagesafeclear($message);
+        
+        $message = messagesafeclear(strip_tags($message));
         
         if ((strpos($message, '[/code]') || strpos($message, '[/CODE]')) !== false) {
             $message = preg_replace("/\s?\[code\](.+?)\[\/code\]\s?/is", "", $message);
@@ -45,7 +46,9 @@
                 'caller' => 'followcode',
             ], 'discuzcode');
         }
+        
         $_G['delattach'] = [];
+        
         $message = fparsesmiles($message);
         
         if (strpos($msglower, 'attach://') !== false) {
@@ -55,36 +58,25 @@
         if (strpos($msglower, 'ed2k://') !== false) {
             $message = preg_replace("/ed2k:\/\/(.+?)\//", '', $message);
         }
+        
         if (strpos($msglower, '[/i]') !== false) {
             $message = preg_replace("/\s*\[i=s\][\n\r]*(.+?)[\n\r]*\[\/i\]\s*/is", '', $message);
         }
         
         $message = str_replace('[/p]', "\n", $message);
+        
         $message = str_replace([
             '[/color]',
             '[/backcolor]',
-            '[/size]',
-            '[/font]',
-            '[/align]',
-            '[b]',
-            '[/b]',
-            '[s]',
-            '[/s]',
+            '[/size]', '[/font]', '[/align]',
+            '[b]', '[/b]',
+            '[s]', '[/s]',
             '[hr]',
             '[i=s]',
-            '[i]',
-            '[/i]',
-            '[u]',
-            '[/u]',
-            '[list]',
-            '[list=1]',
-            '[list=a]',
-            '[list=A]',
-            "\r\n[*]",
-            '[*]',
-            '[/list]',
-            '[indent]',
-            '[/indent]',
+            '[i]', '[/i]',
+            '[u]', '[/u]',
+            '[list]', '[list=1]', '[list=a]', '[list=A]', "\r\n[*]", '[*]', '[/list]',
+            '[indent]', '[/indent]',
             '[/float]',
         ], '', preg_replace([
             "/\[color=([#\w]+?)\]/i",
@@ -151,28 +143,36 @@
         if ($parsetype != 1 && strpos($msglower, '[swf]') !== false) {
             $message = preg_replace_callback("/\[swf\]\s*([^\[\<\r\n]+?)\s*\[\/swf\]/is", 'followcode_callback_bbcodeurl_1', $message);
         }
-        $flag = $length ? 1 : 0;
-        if ($tid) {
-            $extra = "onclick=\"changefeed($tid, $pid, $flag, this)\"";
-        }
         
+        $flag = $length ? 1 : 0;
+        
+        if ($tid) {
+            $extra = 'onclick="changefeed('.$tid.', '.$pid.', '.$flag.', this)"';
+        }
+    
+        // Clean illegal attachment mark [\n]
+        $message = clearnl($message);
+        
+        // Make attachment tags( [attach]\n[/attach] ) to attach mark [\n]
         if ($tid && $pid) {
+            
             $_G['post_attach'] = C::t('forum_attachment_n')->fetch_all_by_id(getattachtableid($tid), 'pid', $pid);
+            
             foreach ($_G['post_attach'] as $aid => $attach) {
-                if (!empty($_G['delattach']) && in_array($aid, $_G['delattach'])) {
+                if ((!empty($_G['delattach']) && in_array($aid, $_G['delattach']))) {
                     continue;
+                } else {
+                    $message = preg_replace("/\[attach\]$attach[aid]\[\/attach\]/i", fparseattach($attach['aid'], $length), $message);
                 }
-                $message = "[attach]$attach[aid][/attach]" . $message;
-                $message = preg_replace("/\[attach\]$attach[aid]\[\/attach\]/i", fparseattach($attach['aid'], $length, $extra), $message, 1);
             }
         }
         
+        // Clean empty attachment tags
         if (strpos($msglower, '[/attach]') !== false) {
             $message = preg_replace("/\[attach\]\s*([^\[\<\r\n]+?)\s*\[\/attach\]/is", '', $message);
         }
         
-        $message = clearnl($message);
-        
+        // Cut string
         if ($length) {
             $sppos = strpos($message, chr(0) . chr(0) . chr(0));
             if ($sppos !== false) {
@@ -182,31 +182,88 @@
             if (strpos($checkstr, '[') && strpos(strrchr($checkstr, "["), ']') === false) {
                 $length = strpos($message, ']', strrpos($checkstr, strrchr($checkstr, "[")));
             }
-            $message = cutstr($message, $length + 1, '...<a class="unfold"' . $extra . '>' . lang('space', 'follow_view_fulltext') . '</a>');
+            $message = cutstr($message, $length + 1, '...');
+            
+            $expender = '<a class="folder unfold"' . $extra . '>' . lang('space', 'follow_view_fulltext') . '</a>';
         } elseif ($allowimg && !empty($extra)) {
-            $message .= '<a class="fold"' . $extra . '>' . lang('space', 'follow_retract') . '</a>';
+            $expender = '<a class="folder fold"' . $extra . '>' . lang('space', 'follow_retract') . '</a>';
         }
         
+        // Make attachment tags to html entity and Samplize
+        $counter = [
+            'img'    => 0,
+            'audio'  => 0,
+            'video'  => 0,
+            'media'  => 0,
+            'attach' => 0,
+        ];
+
+        $html = $imageHtml = $mediaHtml = $videoHtml = $audioHtml = $attachHtml = '';
+
         for ($i = 0; $i <= $_G['forum_discuzcode']['pcodecount']; $i++) {
-            $code = '';
-            if (isset($_G['forum_discuzcode']['codehtml'][$i]) && !empty($_G['forum_discuzcode']['codehtml'][$i])) {
-                $code = $_G['forum_discuzcode']['codehtml'][$i];
-            } elseif (!$length) {
-                if (isset($_G['forum_discuzcode']['audio'][$i]) && !empty($_G['forum_discuzcode']['audio'][$i])) {
-                    $code = $_G['forum_discuzcode']['audio'][$i];
-                } elseif (isset($_G['forum_discuzcode']['video'][$i]) && !empty($_G['forum_discuzcode']['video'][$i])) {
-                    $code = $_G['forum_discuzcode']['video'][$i];
-                } elseif (isset($_G['forum_discuzcode']['media'][$i]) && !empty($_G['forum_discuzcode']['media'][$i])) {
-                    $code = $_G['forum_discuzcode']['media'][$i];
-                } elseif (isset($_G['forum_discuzcode']['image'][$i]) && !empty($_G['forum_discuzcode']['image'][$i])) {
-                    $code = $_G['forum_discuzcode']['image'][$i];
-                } elseif (isset($_G['forum_discuzcode']['attach'][$i]) && !empty($_G['forum_discuzcode']['attach'][$i])) {
-                    $code = $_G['forum_discuzcode']['attach'][$i];
-                }
+            if (!empty($_G['forum_discuzcode']['audio'][$i])) {
+                
+                $counter['audio'] += 1;
+                $audioHtml .= '<li class="nth-of-' . $counter['audio'] . '">' . $_G['forum_discuzcode']['audio'][$i] . '</li>';
+                $html = $_G['forum_discuzcode']['audio'][$i];
+                
+            } elseif (!empty($_G['forum_discuzcode']['video'][$i])) {
+        
+                $counter['video'] += 1;
+                $videoHtml .= '<li class="nth-of-' . $counter['video'] . '">' . $_G['forum_discuzcode']['video'][$i] . '</li>';
+                $html = $_G['forum_discuzcode']['video'][$i];
+                
+            } elseif (!empty($_G['forum_discuzcode']['media'][$i])) {
+        
+                $counter['media'] += 1;
+                $mediaHtml .= '<li class="nth-of-' . $counter['media'] . '">' . $_G['forum_discuzcode']['media'][$i] . '</li>';
+                $html = $_G['forum_discuzcode']['media'][$i];
+                
+            } elseif (!empty($_G['forum_discuzcode']['image'][$i]) && $counter['img'] < 9) {
+        
+                $counter['img'] += 1;
+                $imageHtml .= '<a class="image rec-img nth-of-'.$counter['img'].'" style="background-image: url(' . $_G['forum_discuzcode']['image'][$i] . ')"><img src="' . LIBURL . '/img/row-e-col/1.1.png"/></a>';
+                $html = '<div class="thread-element-img"><img src="'.$_G['forum_discuzcode']['image'][$i].'" /></div>';
+                
+            } elseif (!empty($_G['forum_discuzcode']['attach'][$i])) {
+        
+                $counter['attach'] += 1;
+                $attachHtml .= '<li class="nth-of-' . $counter['attach'] . '">' . $_G['forum_discuzcode']['attach'][$i] . '</li>';
+                $html = $_G['forum_discuzcode']['attach'][$i];
             }
-            $message = str_replace("[\tD_$i\t]", $code, $message);
+    
+            if (!empty($_G['forum_discuzcode']['codehtml'][$i])) {
+                $html = $_G['forum_discuzcode']['codehtml'][$i];
+            } elseif ($length) {
+                $html = '';
+            }
+            
+            $message = str_replace("[\tD_$i\t]", $html, $message);
         }
+        
+        if ($length) {
+        
+            if (!empty($audioHtml)) {
+                $message .= '<div class="thread-element-audio audioGrid grid-'.$counter['audio'].'" ><ul>' . $audioHtml . '</ul></div>';
+            }
+            if (!empty($videoHtml)) {
+                $message .= '<div class="thread-element-video mediaGrid grid-4-3 grid-'.$counter['video'].'"><ul>' . $videoHtml . '</ul></div>';
+            }
+            if (!empty($mediaHtml)) {
+                $message .= '<div class="thread-element-media mediaGrid grid-4-3 grid-'.$counter['media'].'"><ul>' . $mediaHtml . '</ul></div>';
+            }
+            if (!empty($imageHtml)) {
+                $message = '<div class="thread-element-imgs imageGrid grid-'.$counter['img'].'">' . $imageHtml . '</div><div class="thread-element-content">' . $message .'</div>';
+            }
+            if (!empty($attachHtml)) {
+                $message .= '<div class="thread-element-attachs"><span class="title">' . lang('feed', 'feed_attach') . '</span><ul>' . $attachHtml . '</ul></div>';
+            }
+        }
+    
+        // Clean empty attachment mark
         $message = clearnl($message);
+    
+        // Highlight extra contents
         if (!empty($_GET['highlight'])) {
             $highlightarray = explode('+', $_GET['highlight']);
             $sppos = strrpos($message, chr(0) . chr(0) . chr(0));
@@ -221,47 +278,14 @@
                 $message = $message . chr(0) . chr(0) . chr(0) . $specialextra;
             }
         }
-        
+    
+        // Clean memory
         unset($msglower);
         
-        if ($length) {
-            $count = 0;
-            $imagecode = $mediacode = $videocode = $audiocode = $mediahtml = '';
-            for ($i = 0; $i <= $_G['forum_discuzcode']['pcodecount']; $i++) {
-                if (isset($_G['forum_discuzcode']['audio'][$i]) && !empty($_G['forum_discuzcode']['audio'][$i])) {
-                    $audiocode .= '<li>' . $_G['forum_discuzcode']['audio'][$attachcodei] . '</li>';
-                } elseif (isset($_G['forum_discuzcode']['video'][$i]) && !empty($_G['forum_discuzcode']['video'][$i])) {
-                    $videocode .= '<li>' . $_G['forum_discuzcode']['video'][$i] . '</li>';
-                } elseif (isset($_G['forum_discuzcode']['media'][$i]) && !empty($_G['forum_discuzcode']['media'][$i])) {
-                    $mediacode .= '<li>' . $_G['forum_discuzcode']['media'][$i] . '</li>';
-                } elseif (isset($_G['forum_discuzcode']['image'][$i]) && !empty($_G['forum_discuzcode']['image'][$i]) && $count < 4) {
-                    $imagecode .= $_G['forum_discuzcode']['image'][$i];
-                    $count++;
-                } elseif (isset($_G['forum_discuzcode']['attach'][$i]) && !empty($_G['forum_discuzcode']['attach'][$i])) {
-                    $attachcode .= '<li>' . $_G['forum_discuzcode']['attach'][$i] . '</li>';
-                }
-            }
-            if (!empty($audiocode)) {
-                $message .= '<div class="music"><ul>' . $audiocode . '</ul></div>';
-            }
-            if (!empty($videocode)) {
-                $message .= '<div class="video"><ul>' . $videocode . '</ul></div>';
-            }
-            if (!empty($mediacode)) {
-                $message .= '<div class="video"><ul>' . $mediacode . '</ul></div>';
-            }
-            if (!empty($imagecode)) {
-                $message = $imagecode . $message;
-            }
-            if (!empty($attachcode)) {
-                $message .= '<div class="attach"><span class="title">' . lang('feed', 'feed_attach') . '</span><ul>' . $attachcode . '</ul></div>';
-            }
-        }
-        return $htmlon ? $message : nl2br(str_replace([
-            "\t",
-            '   ',
-            '  ',
-        ], ' ', $message));
+        // Add [expend] button
+        $message .= $expender;
+        
+        return $htmlon ? $message : nl2br(str_replace(["\t", '   ', '  ',], ' ', $message));
     }
     
     function followcode_callback_hideattach_1($matches) {
@@ -347,7 +371,7 @@
         return fcodedisp($html);
     }
     
-    function fparseattach($aid, $length = 0, $extra = '') {
+    function fparseattach($aid, $length = 0) {
         global $_G;
         
         $html = '';
@@ -361,8 +385,7 @@
             if ($attach['isimage'] && !$attach['price'] && !$attach['readperm']) {
                 $nothumb = $length ? 0 : 1;
                 $src = $attach['url'] . (!$attach['thumb'] ? $attach['attachment'] : getimgthumbname($attach['attachment']));
-                $html = bbcodeurl($src, '<img id="aimg_' . $rimg_id . '" src="' . $src . '" alt="' . $attach['filename'] . '"/>');
-                
+                $html = $src;
                 return fcodedisp($html, 'image');
             } else {
                 if ($attach['price'] || $attach['readperm']) {
@@ -384,7 +407,7 @@
         $url = $matches[0];
         if (fileext($url) != 'flv') {
             $rimg_id = 'swf_' . random(5);
-            $html = bbcodeurl($url, '<img src="' . IMGDIR . '/flash.gif" alt="' . lang('space', 'follow_click_play') . '" onclick="javascript:showFlash(\'flash\', \'' . $url . '\', this, \'' . $rimg_id . '\');" class="tn" style="cursor: pointer;" />');
+            $html = '<img src="' . IMGDIR . '/flash.gif" alt="' . lang('space', 'follow_click_play') . '" onclick="javascript:showFlash(\'flash\', \'' . $url . '\', this, \'' . $rimg_id . '\');"/>';
             return fcodedisp($html, 'media');
         } else {
             $url = STATICURL . 'image/common/flvplayer.swf?&autostart=true&file=' . urlencode($matches[0]);
@@ -413,15 +436,7 @@
             $rows = explode("\n", $message);
             $html = '<table cellspacing="0" class="t_table" ' . ($width == '' ? null : 'style="width:' . $width . '"') . ($bgcolor ? ' bgcolor="' . $bgcolor . '">' : '>');
             foreach ($rows as $row) {
-                $html .= '<tr><td>' . str_replace([
-                        '\|',
-                        '|',
-                        '\n',
-                    ], [
-                        '&#124;',
-                        '</td><td>',
-                        "\n",
-                    ], $row) . '</td></tr>';
+                $html .= '<tr><td>' . str_replace(['\|', '|', '\n',], ['&#124;', '</td><td>', "\n",], $row) . '</td></tr>';
             }
             $html .= '</table>';
         } else {
@@ -479,8 +494,6 @@
             $html = '<a href="' . $url . '" target="_blank">' . $url . '</a>';
             return $html;
         }
-        
-        
     }
     
     function fmakeflv($flv) {
@@ -539,9 +552,8 @@
     
     function fparseimg($src, $extra = '') {
         global $_G;
-        
         $rimg_id = random(5);
-        $html = bbcodeurl($src, '<img id="iimg_' . $rimg_id . '" src="' . $src . '" border="0" alt=""/>');
+        $html = bbcodeurl($src, '<img id="iimg_' . $rimg_id . '" src="' . $src . '" alt=""/>');
         return fcodedisp($html, 'image');
     }
     
@@ -555,7 +567,7 @@
                     if (substr($_G['cache']['smilies']['replacearray'][$key], 0, 1) == '<') {
                         break;
                     }
-                    $_G['cache']['smilies']['replacearray'][$key] = '<img src="' . STATICURL . 'image/smiley/' . $_G['cache']['smileytypes'][$_G['cache']['smilies']['typearray'][$key]]['directory'] . '/' . $smiley . '" smilieid="' . $key . '" border="0" class="s" alt="" />';
+                    $_G['cache']['smilies']['replacearray'][$key] = '<img class="smilie" src="' . STATICURL . 'image/smiley/' . $_G['cache']['smileytypes'][$_G['cache']['smilies']['typearray'][$key]]['directory'] . '/' . $smiley . '" smilieid="' . $key . '"/>';
                 }
                 $enablesmiles = true;
             }
@@ -563,5 +575,3 @@
         $enablesmiles && $message = preg_replace($_G['cache']['smilies']['searcharray'], $_G['cache']['smilies']['replacearray'], $message, $_G['setting']['maxsmilies']);
         return $message;
     }
-
-?>

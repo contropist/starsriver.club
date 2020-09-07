@@ -1,4 +1,10 @@
 <?php
+/********************************************************************
+ * Copyright (c) 2020 All Right Reserved By [StarsRiver]            *
+ *                                                                  *
+ * Author  Zhangyu                                                  *
+ * Email   starsriver@yahoo.com                                     *
+ ********************************************************************/
 
 /**
  *      [Discuz!] (C)2001-2099 Comsenz Inc.
@@ -58,17 +64,6 @@ function codedisp($code) {
 	$_G['forum_discuzcode']['codehtml'][$_G['forum_discuzcode']['pcodecount']] = tpl_codedisp($code);
 	$_G['forum_discuzcode']['codecount']++;
 	return "[\tDISCUZ_CODE_".$_G['forum_discuzcode']['pcodecount']."\t]";
-}
-
-function karmaimg($rate, $ratetimes) {
-	$karmaimg = '';
-	if($rate && $ratetimes) {
-		$image = $rate > 0 ? 'agree.gif' : 'disagree.gif';
-		for($i = 0; $i < ceil(abs($rate) / $ratetimes); $i++) {
-			$karmaimg .= '<img src="'.$_G['style']['imgdir'].'/'.$image.'" border="0" alt="" />';
-		}
-	}
-	return $karmaimg;
 }
 
 function discuzcode($message, $smileyoff = false, $bbcodeoff = false, $htmlon = 0, $allowsmilies = 1, $allowbbcode = 1, $allowimgcode = 1, $allowhtml = 0, $jammer = 0, $parsetype = '0', $authorid = '0', $allowmediacode = '0', $pid = 0, $lazyload = 0, $pdateline = 0, $first = 0) {
@@ -487,12 +482,15 @@ function parsemedia($params, $url) {
 
 function bbcodeurl($url, $tags) {
 	if(!preg_match("/<.+?>/s", $url)) {
-		if(!in_array(strtolower(substr($url, 0, 6)), array('http:/', 'https:', 'ftp://', 'rtsp:/', 'mms://')) && !preg_match('/^static\//', $url) && !preg_match('/^data\//', $url)) {
-			$url = 'http://'.$url;
+        if (!in_array(strtolower(substr($url, 0, 6)), ['http:/', 'https:', 'ftp://', 'rtsp:/', 'mms://',]) &&
+            !preg_match('/^static\//', $url) &&
+            !preg_match('/^data\//', $url)
+        ) {
+            $url = 'http://'.$url;
 		}
-		return str_replace(array('submit', 'member.php?mod=logging'), array('', ''), str_replace('{url}', addslashes($url), $tags));
-	} else {
-		return '&nbsp;'.$url;
+        return str_replace(['submit', 'member.php?mod=logging',], ['', '',], str_replace('{url}', addslashes($url), $tags));
+    } else {
+        return $url;
 	}
 }
 
@@ -588,7 +586,7 @@ function parseimg($width, $height, $src, $lazyload, $pid, $extra = '') {
 			$img .= guestviewthumbstyle();
 			$styleoutput = true;
 		}
-		$img .= '<div class="thread-img-preview px4-radius">
+		$img .= '<div class="thread-element-img-preview px4-radius">
                     <img id="aimg_'.$rimg_id.'" class="guestviewthumb_cur" '.$attrsrc.'="{url}" border="0" alt="" />
                     <canvas id="aimg_'.$rimg_id.'_canvas"></canvas>
                     <p class="preview-tip" onclick="showWindow(\'login\', \'{loginurl}\'+\'&referer=\'+encodeURIComponent(location))">'.lang('template', 'noprem_viewimg').'</p>
@@ -597,10 +595,10 @@ function parseimg($width, $height, $src, $lazyload, $pid, $extra = '') {
 	} else {
 		if(defined('IN_MOBILE')) {
 			//$img = '<img'.($width > 0 ? ' width="'.$width.'"' : '').($height > 0 ? ' height="'.$height.'"' : '').' src="{url}" border="0" alt="" />';
-			$img = '<div class="thread-img"><img src="{url}" border="0" alt="" /></div>';
+			$img = '<div class="thread-element-img"><img src="{url}"/></div>';
 		} else {
 			//$img = '<img id="aimg_'.$rimg_id.'" onclick="zoom(this, this.src, 0, 0, '.($_G['setting']['showexif'] ? 1 : 0).')" class="zoom"'.($width > 0 ? ' width="'.$width.'"' : '').($height > 0 ? ' height="'.$height.'"' : '').' '.$attrsrc.'="{url}" '.($extra ? $extra.' ' : '').'border="0" alt="" />';
-			$img = '<div class="thread-img"><img id="aimg_'.$rimg_id.'" onclick="zoom(this, this.src, 0, 0, '.($_G['setting']['showexif'] ? 1 : 0).')" class="zoom" '.$attrsrc.'="{url}" alt="" /></div>';
+			$img = '<div class="thread-element-img"><img id="aimg_'.$rimg_id.'" onclick="zoom(this, this.src, 0, 0, '.($_G['setting']['showexif'] ? 1 : 0).')" class="zoom" '.$attrsrc.'="{url}" alt="" /></div>';
 		}
 	}
 	$code = bbcodeurl($src, $img);
@@ -617,7 +615,7 @@ function parsesmiles(&$message) {
 		$enablesmiles = false;
 		if(!empty($_G['cache']['smilies']) && is_array($_G['cache']['smilies'])) {
 			foreach($_G['cache']['smilies']['replacearray'] AS $key => $smiley) {
-				$_G['cache']['smilies']['replacearray'][$key] = '<img src="'.STATICURL.'image/smiley/'.$_G['cache']['smileytypes'][$_G['cache']['smilies']['typearray'][$key]]['directory'].'/'.$smiley.'" smilieid="'.$key.'" border="0" alt="" />';
+				$_G['cache']['smilies']['replacearray'][$key] = '<img class="smilie" src="'.STATICURL.'image/smiley/'.$_G['cache']['smileytypes'][$_G['cache']['smilies']['typearray'][$key]]['directory'].'/'.$smiley.'" smilieid="'.$key.'"/>';
 			}
 			$enablesmiles = true;
 		}

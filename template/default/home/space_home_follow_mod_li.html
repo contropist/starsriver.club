@@ -50,7 +50,7 @@
             </div>
             <div class="s-center">
                 <!--{if $feed['note']}-->
-                    <div class="message">$feed['note']</div>
+                    $feed['note']
                 <!--{/if}-->
                 <div class="follow-element {if $feed['note']}feed-element-org-quote{/if}">
                     <!--{if !empty($thread) && $thread['displayorder'] >= 0}-->
@@ -74,9 +74,9 @@
             <div class="s-end">
                 <!--{if !empty($thread) && $thread['displayorder'] >= 0}-->
                     <!--{if helper_access::check_module('follow')}-->
-                    <a class="icon mt-share share" id="relay_$feed[feedid]" onclick="quickrelay($feed['feedid'], $thread['tid']);"><span>$content['relay']</span></a>
+                    <a class="icon on-count mt-share share" id="relay_$feed[feedid]" onclick="quickrelay($feed['feedid'], $thread['tid']);"><span>$content['relay']</span></a>
                     <!--{/if}-->
-                    <a class="icon mt-textsms reply" onclick="quickreply($thread['fid'], $thread['tid'], $feed['feedid'])"><span>$thread['replies']</span></a>
+                    <a class="icon on-count mt-textsms reply" onclick="quickreply($thread['fid'], $thread['tid'], $feed['feedid'])"><span>$thread['replies']</span></a>
                 <!--{/if}-->
             </div>
 
