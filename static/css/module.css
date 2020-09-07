@@ -3477,7 +3477,7 @@
 |----------------
 |  群组的全部样式表都在这里
 -----------------------------------------------------------------------------------------------------------------------*/
-/** group **/
+/** group, group::group, group::forumdisplay **/
 /*region 群组通用*/
     .input-group .animal{
         transform: scale(.5);
@@ -3656,10 +3656,10 @@
         margin: 10px 3px;
         opacity: .8;
     }
-    .groups .more cite:hover{;
+    .groups .more cite:hover{
         background: var(--color-onnanoko-pink);
     }
-    .groups .more cite:hover *{;
+    .groups .more cite:hover *{
         color: #fff;
     }
     .groups .more i{
@@ -8024,7 +8024,8 @@
             max-height: 300px;
         }
         .app-userspace .timeline .n-right .s-end {
-            text-align: right;
+            display: flex;
+            justify-content: flex-end;
         }
         .app-userspace .timeline .n-right .s-end .icon {
             background: var(--color-lightgray);
