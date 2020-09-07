@@ -39,10 +39,10 @@
 
 * {
     font-family: Roboto, sans-serif, Material, Feather, Awesome, Icomoon, Discuz-Editor !important;
-    margin: 0;
-    padding: 0;
     font-size: 14px;
     font-weight: 400;
+    margin: 0;
+    padding: 0;
     outline: none !important;
     vertical-align: top;
     text-decoration: none !important;
@@ -82,7 +82,6 @@ body::-webkit-scrollbar,
 a {
     color: #393939;
     text-decoration: none;
-    display: inline-block;
     text-overflow: ellipsis !important;
 }
 

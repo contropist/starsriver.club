@@ -70,38 +70,6 @@
             </div>
         </div>
     </div>
-    <!--{if $_G['group']['allowcommentcollection']}-->
-	<div class="dialog fade" id="collection_rater" data-type="modal" data-target="#collection_rater" data-action="hide">
-		<form class="dialog-modal collection-rate" action="forum.php?mod=collection&action=comment&ctid={$_G['collection']['ctid']}" method="POST" onsubmit="$('btnCommentSubmit').disabled=true;ajaxpost(this.id, 'ajaxreturn');" id="form_addComment" name="form_addComment">
-			<input type="hidden" name="inajax" value="1">
-			<input type="hidden" name="ratescore" id="ratescore"/>
-			<input type="hidden" name="handlekey" value="k_addComment">
-			<div class="dialog-header">
-				<i class="dialog-close" data-type="modal" data-target="#collection_rater" data-action="hide">×</i>
-			</div>
-			<div class="dialog-body">
-				<div class="dialog-content">
-					<img class="cover" src="{if $_G['collection']['cover']}{$_G['setting']['attachurl']}/collection/{$_G['collection']['cover']}{else}{IMGURL}/common/no-img/no-img.svg{/if}">
-					<span class="name ellipsis">$_G['collection']['name']</span>
-                    <!--{if !$memberrate}-->
-						<span class="log">{lang collection_ratecollection}</span>
-						<span class="stars" id="rater"></span>
-						<script>starrate('#rater','#ratescore');</script>
-                    <!--{else}-->
-						<span class="log">{lang collection_rated}</span>
-						<span class="stars" id="rater_rated"></span>
-						<script>$('rater_rated').innerHTML = ratestars($memberrate)</script>
-                    <!--{/if}-->
-					<textarea name="message" placeholder=""></textarea>
-				</div>
-			</div>
-			<div class="dialog-footer">
-				<button class="submit" type="submit" id="btnCommentSubmit">{lang collection_comment_submit}</button>
-				<span id='ajaxreturn' style='display:none;'></span>
-			</div>
-		</form>
-	</div>
-    <!--{/if}-->
 </div>
 <div class="collection-nav">
     <ul class="container">
@@ -112,5 +80,36 @@
         <li class="rater-triggle glass" data-type="modal" data-target="#collection_rater" data-action="show"><i class="ft-edit"></i>{lang collection_torate}</li>
         <!--{/if}-->
     </ul>
-
 </div>
+<!--{if $_G['group']['allowcommentcollection']}-->
+<div class="dialog fade" id="collection_rater" data-type="modal" data-target="#collection_rater" data-action="hide">
+    <form class="dialog-modal collection-rate" action="forum.php?mod=collection&action=comment&ctid={$_G['collection']['ctid']}" method="POST" onsubmit="$('btnCommentSubmit').disabled=true;ajaxpost(this.id, 'ajaxreturn');" id="form_addComment" name="form_addComment">
+        <input type="hidden" name="inajax" value="1">
+        <input type="hidden" name="ratescore" id="ratescore"/>
+        <input type="hidden" name="handlekey" value="k_addComment">
+        <div class="dialog-header">
+            <i class="dialog-close" data-type="modal" data-target="#collection_rater" data-action="hide">×</i>
+        </div>
+        <div class="dialog-body">
+            <div class="dialog-content">
+                <img class="cover" src="{if $_G['collection']['cover']}{$_G['setting']['attachurl']}/collection/{$_G['collection']['cover']}{else}{IMGURL}/common/no-img/no-img.svg{/if}">
+                <span class="name ellipsis">$_G['collection']['name']</span>
+                <!--{if !$memberrate}-->
+                <span class="log">{lang collection_ratecollection}</span>
+                    <span class="stars" id="rater"></span>
+                    <script>starrate('#rater','#ratescore');</script>
+                <!--{else}-->
+                    <span class="log">{lang collection_rated}</span>
+                    <span class="stars" id="rater_rated"></span>
+                    <script>$('rater_rated').innerHTML = ratestars($memberrate)</script>
+                <!--{/if}-->
+                <textarea name="message" placeholder=""></textarea>
+            </div>
+        </div>
+        <div class="dialog-footer">
+            <button class="submit" type="submit" id="btnCommentSubmit">{lang collection_comment_submit}</button>
+            <span id='ajaxreturn' style='display:none;'></span>
+        </div>
+    </form>
+</div>
+<!--{/if}-->

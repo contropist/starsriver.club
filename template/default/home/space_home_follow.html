@@ -326,11 +326,12 @@
                 }
             }
         }
+
         function changefeed(tid, pid, flag, obj) {
-            var x = new Ajax();
-            var o = obj.parentNode;
-            x.get('forum.php?mod=ajax&action=getpostfeed&inajax=1&tid='+tid+'&pid='+pid+'&type=changefeed&flag='+flag, function(s){
-                o.innerHTML = s;
+            let request = new Ajax();
+            let ele = SR('#thread_sample_' + tid)[0];
+            request.get('forum.php?mod=ajax&action=getpostfeed&inajax=1&tid='+tid+'&pid='+pid+'&type=changefeed&flag='+flag, function(s){
+                ele.innerHTML = s;
             });
         }
     </script>

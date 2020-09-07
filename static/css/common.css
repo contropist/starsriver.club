@@ -581,7 +581,7 @@
         z-index: 0;
         position: relative;
         width: 100%;
-        min-width: 960px;
+        min-width: var(--wap-width);
         min-height: 120px;
         max-height: 420px;
     }
@@ -960,6 +960,7 @@
 
   /* 主题设置样式 */
     #maintheme-btn{
+        display: inline-block;
         width: 64px;
         height: 64px;
         margin-top: 10px;

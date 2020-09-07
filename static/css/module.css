@@ -3540,6 +3540,7 @@
     }
 
     [id*='_group_btn']{
+        display: inline-block;
         width: 100%;
         height: 36px;
         line-height: 32px;
@@ -3555,6 +3556,7 @@
         font-size: 13px;
     }
     #create_group_btn {
+        display: inline-block;
         text-align:  center;
         height: 48px;
         line-height: 46px;
@@ -3616,6 +3618,7 @@
     }
     .groups .group-categorys li a,
     .groups .group-categorys li i{
+        display: inline-block;
         font-size: 12px;
     }
     .groups select{
@@ -4230,6 +4233,7 @@
 /** forum::guide **/
 /*region 导读*/
     [id*='_guide_btn']{
+        display: inline-block;
         width: 100%;
         height: 36px;
         line-height: 32px;
@@ -4706,6 +4710,7 @@
         box-shadow: 1px 1px 3px rgba(0,0,0,.2);
     }
     .collection-info .detail .func .admin a{
+        display: inline-block;
         border-radius: 50px;
         height: 32px;
         width: 32px;
@@ -4713,7 +4718,7 @@
         color: #fff;
         text-align: center;
         overflow: hidden;
-        margin-right: 2px;
+        margin-right: 10px;
         font-size: 18px;
     }
     .collection-info .detail .func .admin a:last-of-type{
@@ -6100,6 +6105,7 @@
         border-radius: 4px;
     }
     .app-ranklist #ranklist_user .body ul a {
+        display: inline-block;
         width: 45px;
         height: 45px;
         box-sizing: border-box;
@@ -7361,12 +7367,13 @@
             margin: calc(12px);
         }
         .app-userspace .user-menu .username{
+            display: inline-block;
+            width: 120px;
+            line-height: 72px;
+            overflow: hidden;
             font-size: 16px;
             font-weight: 700;
             color: var(--color-text-gray);
-            line-height: 72px;
-            width: 120px;
-            overflow: hidden;
             text-overflow: ellipsis;
         }
         .app-userspace .user-menu .thumb{
@@ -7666,6 +7673,7 @@
         }
         .app-userspace .space-head > .bank .btn-group a{
             position: relative;
+            display: inline-block;
             width: 36px;
             height: 36px;
             font-size: 16px;
@@ -8769,6 +8777,28 @@
         }
     /*endregion*/
 
+
+    /*region @follow-element*/
+        .app-userspace .follow-element{
+            display: flex;
+            flex-flow: column nowrap;
+        }
+        .app-userspace .follow-element .thread-element-content{
+            line-height: 22px;
+            word-break: break-word;
+            white-space: pre-wrap;
+        }
+        .app-userspace .follow-element .thread-element-content a{
+            display: contents;
+            color: var(--color-main-theme-dark);
+            border-bottom: 1px dashed;
+        }
+        .app-userspace .follow-element .folder{
+            display: contents;
+        }
+    /*endregion*/
+
+
     /*region #userspace::feed*/
         .app-userspace #userspace_feed .timeline .n-right .s-top .title .passwd{
             background: var(--color-mod-warning);
@@ -9049,7 +9079,6 @@
         }
         .app-userspace #userspace_wall .wall .decrater-c .card-message{
             padding: 10px 5px 0 5px;
-            border-top: 2px dotted var(--box-border-color);
             color: var(--color-text-dark);
             overflow: auto;
             word-break: break-word;
@@ -9068,6 +9097,7 @@
             width: 20px;
         }
         .app-userspace #userspace_wall .wall .decrater-c .card-btm{
+            margin-top: 10px;
             padding: 10px 5px 0 5px;
             border-top: 2px dotted var(--box-border-color);
             box-sizing: content-box;

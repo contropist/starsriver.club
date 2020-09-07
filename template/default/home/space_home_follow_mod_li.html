@@ -52,7 +52,7 @@
                 <!--{if $feed['note']}-->
                     $feed['note']
                 <!--{/if}-->
-                <div class="follow-element {if $feed['note']}feed-element-org-quote{/if}">
+                <div class="follow-element {if $feed['note']}feed-element-org-quote{/if}" id="thread_sample_{$content['tid']}">
                     <!--{if !empty($thread) && $thread['displayorder'] >= 0}-->
                         <!--{if $feed['note']}-->
                             <div class="user-tag">
