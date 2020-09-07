@@ -1,4 +1,10 @@
 <?php
+/********************************************************************
+ * Copyright (c) 2020 All Right Reserved By [StarsRiver]            *
+ *                                                                  *
+ * Author  Zhangyu                                                  *
+ * Email   starsriver@yahoo.com                                     *
+ ********************************************************************/
 
 /**
  *      [Discuz!] (C)2001-2099 Comsenz Inc.
@@ -574,13 +580,10 @@ if($_GET['action'] == 'votepoll' && submitcheck('pollsubmit', 1)) {
                 'tid'     => $_G['tid'],
                 'tsub'    => $thread['subject'],
                 'tlink'   => 'forum.php?mod=viewthread&tid=' . $_G['tid'],
-        
-                'uid'     => $thread['authorid'],
-                'uname'   => $thread['author'],
-                'ulink'   => 'home.php?mod=space&uid=' . $thread['authorid'],
-                'uavatar' => $avatar,
                 
                 'option' => implode("，", $my_polls_title),
+                
+                'original' => [],
 
                 'expend0'  => '',
                 'expend1'  => '',
@@ -611,6 +614,11 @@ if($_GET['action'] == 'votepoll' && submitcheck('pollsubmit', 1)) {
             $feed['body_data']['retemplate'] = 'thread_poll_vote_withimg';
         }
         
+        // Thread data
+        require_once libfile('function/thread');
+        getThread_sample($_G['tid'], $this->feed['body_data']['original']);
+        
+        // feed update
         require_once libfile('function/feed');
         feed_add($feed);
     }
@@ -1238,11 +1246,10 @@ if($_GET['action'] == 'votepoll' && submitcheck('pollsubmit', 1)) {
                         'tid'     => $_G['tid'],
                         'tsub'    => $thread['subject'],
                         'tlink'   => $tlink,
-        
-                        'uid'     => $thread['authorid'],
-                        'uname'   => $thread['author'],
-                        'ulink'   => $ulink,
-                        'uavatar' => $avatar,
+
+                        'original' => [],
+
+                        'message' => $message,
                         
                         'starttime' => date('Y-m-d', $activity['starttimefrom']),
                         'endtime'   => date('Y-m-d', $activity['starttimeto']),
@@ -1257,7 +1264,6 @@ if($_GET['action'] == 'votepoll' && submitcheck('pollsubmit', 1)) {
                         'expend6' => '',
                         'expend7' => '',
                     ],
-                    'body_general' => $message,
                     'id' => $_G['tid'],
                     'idtype' => 'tid'
                 ];
@@ -1270,6 +1276,11 @@ if($_GET['action'] == 'votepoll' && submitcheck('pollsubmit', 1)) {
                     ];
                 }
                 
+                // Thread data
+                require_once libfile('function/thread');
+                getThread_sample($_G['tid'], $this->feed['body_data']['original']);
+                
+                // feed update
                 require_once libfile('function/feed');
                 feed_add($feed);
 			}

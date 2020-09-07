@@ -167,11 +167,6 @@
         'feed_template_thread_reward_title' => '我发起了悬赏<a class="link ellipsis" href="{tlink}" target="_blank">{tsub}</a>',
         'feed_template_thread_reward_body'  => '
             <div class="feed-element-reward">
-                <a class="user-tag" href="{ulink}" target="_blank" c="1">
-                    <s class="avatar"><img class="avatar-main" src="{uavatar}"></s>
-                    <s class="username">{uname}</s>
-                </a>
-                <a class="thread-title" href="{tlink}" target="_blank">{tsub}</a>
                 <div class="reward">悬赏 {price}{extcredits}</div>
             </div>',
 
@@ -183,20 +178,13 @@
         * @ {tsub}    :帖子标题
         * @ {tink}    :帖子链接
          *
-        * @ {uid}      :用户ID
-        * @ {uname}    :用户名
-        * @ {ulink}    :用户空间链接
-        * @ {uavatar}  :用户头像源链接
+        * @ {message} :回答
         *
         * */
         'feed_template_thread_reward_reply_title' => '回复了 <a class="link ellipsis" href="{ulink}" target="_blank" c="1">{uname}</a> 的悬赏 <a class="link ellipsis" href="{tlink}" target="_blank">{tsub}</a>',
         'feed_template_thread_reward_reply_body'  => '
             <div class="feed-element-reward-reply">
-                <a class="user-tag" href="{ulink}" target="_blank" c="1">
-                    <s class="avatar"><img class="avatar-main" src="{uavatar}"></s>
-                    <s class="username">{uname}</s>
-                </a>
-                <a class="thread-title" href="{tlink}" target="_blank">{tsub}</a>
+                <a class="content">{message}</a>
             </div>',
 
 
@@ -220,10 +208,6 @@
         'feed_template_thread_debate_title' => '我发起了辩论<a class="link ellipsis" href="{tlink}" target="_blank">{tsub}</a>',
         'feed_template_thread_debate_body'  => '
             <div class="feed-element-debate">
-                <a class="user-tag" href="{ulink}" target="_blank" c="1">
-                    <s class="avatar"><img class="avatar-main" src="{uavatar}"></s>
-                    <s class="username">{uname}</s>
-                </a>
                 <a class="thread-title" href="{tlink}" target="_blank">{tsub}</a>
                 <div class="content">{message}</div>
                 <div class="attitude">
@@ -242,10 +226,7 @@
          *
         * T {stand}    :立场
          *
-        * B {uid}      :用户ID
-        * B {uname}    :用户名
-        * B {ulink}    :用户空间链接
-        * B {uavatar}  :用户头像源链接
+        * B {message}  :辩论词
         *
         * */
         'feed_vote'   => '中立',
@@ -254,11 +235,7 @@
         'feed_template_thread_debate_vote_title'   => '以{stand}立场加入了辩论 <a class="link ellipsis" href="{tlink}" target="_blank">{tsub}</a>',
         'feed_template_thread_debate_vote_body' => '
             <div class="feed-element-debate-vote">
-                <a class="user-tag" href="{ulink}" target="_blank" c="1">
-                    <s class="avatar"><img class="avatar-main" src="{uavatar}"></s>
-                    <s class="username">{uname}</s>
-                </a>
-                <a class="thread-title" href="{tlink}" target="_blank">{tsub}</a>
+                <div class="content">{message}</div>
             </div>',
         
 
@@ -281,10 +258,6 @@
         'feed_template_thread_poll_title' => '我发起了投票<a class="link ellipsis" href="{tlink}" target="_blank">{tsub}</a>',
         'feed_template_thread_poll_body'  => '
             <div class="feed-element-poll">
-                <a class="user-tag" href="{ulink}" target="_blank" c="1">
-                    <s class="avatar"><img class="avatar-main" src="{uavatar}"></s>
-                    <s class="username">{uname}</s>
-                </a>
                 <a class="thread-title" href="{tlink}" target="_blank">{tsub}</a>
                 <div class="content">{message}</div>
                 <div class="options">{option}</div>
@@ -309,22 +282,12 @@
         'feed_template_thread_poll_vote_title' => '我参与了投票<a class="link ellipsis" href="{tlink}" target="_blank">{tsub}</a>',
         'feed_template_thread_poll_vote_body'  => '
             <div class="feed-element-poll-vote">
-                <a class="user-tag" href="{ulink}" target="_blank" c="1">
-                    <s class="avatar"><img class="avatar-main" src="{uavatar}"></s>
-                    <s class="username">{uname}</s>
-                </a>
-                <a class="thread-title" href="{tlink}" target="_blank">{tsub}</a>
                 <div class="options">我将选票投给了：{option}</div>
             </div>',
 
         'feed_template_thread_poll_vote_withimg_title' => '我参与了图片投票<a class="link ellipsis" href="{tlink}" target="_blank">{tsub}</a>',
         'feed_template_thread_poll_vote_withimg_body'  => '
             <div class="feed-element-poll-vote">
-                <a class="user-tag" href="{ulink}" target="_blank" c="1">
-                    <s class="avatar"><img class="avatar-main" src="{uavatar}"></s>
-                    <s class="username">{uname}</s>
-                </a>
-                <a class="thread-title" href="{tlink}" target="_blank">{tsub}</a>
                 <div class="options">我将选票投给了：{option}</div>
             </div>',
 
@@ -352,10 +315,6 @@
         'feed_template_thread_activity_body'  => '
             <div class="feed-element-activity">
                 <a class="subject ellipsis" href="{tlink}" target="_blank">{tsub}</a>
-                <a class="user-tag" href="{ulink}" target="_blank" c="1">
-                    <s class="avatar"><img class="avatar-main" src="{uavatar}"></s>
-                    <s class="username">{uname}</s>
-                </a>
                 <div class="activity-info">
                     <div class="activity-info-time"><i class="time"></i>开始时间：{starttime}</div>
                     <div class="activity-info-loca"><i class="loca"></i>活动地点：{city} - {location}</div>
@@ -370,10 +329,7 @@
         * @ {tsub}    :帖子标题
         * @ {tink}    :帖子链接
          *
-        * B {uid}      :用户ID
-        * B {uname}    :用户名
-        * B {ulink}    :用户空间链接
-        * B {uavatar}  :用户头像源链接
+        * B {message}   :参加理由
          *
         * B {starttime} :活动开始时间
         * B {endtime}   :活动结束时间
@@ -383,11 +339,8 @@
         'feed_template_thread_activity_reply_title' => '我报名了活动<a class="link ellipsis" href="{tlink}" target="_blank">{tsub}</a>',
         'feed_template_thread_activity_reply_body'  => '
             <div class="feed-element-activity">
+                <div class="reason">{message}</div>
                 <a class="subject ellipsis" href="{tlink}" target="_blank">{tsub}</a>
-                <a class="user-tag" href="{ulink}" target="_blank" c="1">
-                    <s class="avatar"><img class="avatar-main" src="{uavatar}"></s>
-                    <s class="username">{uname}</s>
-                </a>
                 <div class="activity-info">
                     <div class="activity-info-time"><i class="time"></i>开始时间：{starttime}</div>
                     <div class="activity-info-loca"><i class="loca"></i>活动地点：{location}</div>

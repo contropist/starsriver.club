@@ -1,4 +1,10 @@
 <?php
+/********************************************************************
+ * Copyright (c) 2020 All Right Reserved By [StarsRiver]            *
+ *                                                                  *
+ * Author  Zhangyu                                                  *
+ * Email   starsriver@yahoo.com                                     *
+ ********************************************************************/
     
     /**
      *      [Discuz!] (C)2001-2099 Comsenz Inc.
@@ -83,7 +89,7 @@
             if ($this->forum['allowfeed'] && !$this->param['isanonymous']) {
             
                 $message = !$this->param['readperm'] ? $this->param['message'] : '';
-                $message = messagesafeclear($message);
+                $message =  messagecutstr(messagesafeclear($message), 100);
             
                 if ($this->param['special'] == 5 && $this->thread['authorid'] != $this->member['uid']) {
                 
@@ -105,11 +111,10 @@
                             'tid'   => $this->thread['tid'],
                             'tsub'  => $this->thread['subject'],
                             'tlink' => 'forum.php?mod=viewthread&tid=' . $this->thread['tid'],
-        
-                            'uid'     => $this->thread['authorid'],
-                            'uname'   => $this->thread['author'],
-                            'ulink'   => 'home.php?mod=space&uid=' . $this->thread['authorid'],
-                            'uavatar' => avatar($this->thread['authorid'], 'small', true),
+
+                            'message' => $message,
+
+                            'original' => [],
         
                             'stand' => $role,
         
@@ -122,8 +127,15 @@
                             'expend6' => '',
                             'expend7' => '',
                         ],
-                        'body_general' => messagecutstr($message, 100)
                     ];
+                    
+                    if(!empty(getglobal('forum_attachexist'))) {
+                        getattach_img($this->thread['tid'],$this->pid,9,$this->feed['body_data']['imgs']);
+                    }
+    
+                    // Thread data
+                    require_once libfile('function/thread');
+                    getThread_sample($this->thread['tid'], $this->feed['body_data']['original']);
                 }
             }
         }

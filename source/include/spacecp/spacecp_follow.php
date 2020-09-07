@@ -1,4 +1,11 @@
 <?php
+/********************************************************************
+ * Copyright (c) 2020 All Right Reserved By [StarsRiver]            *
+ *                                                                  *
+ * Author  Zhangyu                                                  *
+ * Email   starsriver@yahoo.com                                     *
+ ********************************************************************/
+
 /**
  *      [Discuz!] (C)2001-2099 Comsenz Inc.
  *      This is NOT a freeware, use is subject to license terms
@@ -191,11 +198,11 @@ if($op == 'add') {
 		if(empty($preview)) {
 			require_once libfile('function/discuzcode');
 			require_once libfile('function/followcode');
-			$feedcontent = array(
-					'tid' => $tid,
-					'content' => followcode($post['message'], $post['tid'], $post['pid'], 1000),
-			);
-			C::t('forum_threadpreview')->insert($feedcontent);
+            $feedcontent = [
+                'tid'     => $tid,
+                'content' => followcode($post['message'], $post['tid'], $post['pid'], 1000),
+            ];
+            C::t('forum_threadpreview')->insert($feedcontent);
 			C::t('forum_thread')->update_status_by_tid($tid, '512');
 		} else {
 			C::t('forum_threadpreview')->update_relay_by_tid($tid, 1);

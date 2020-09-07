@@ -1,4 +1,10 @@
 <?php
+/********************************************************************
+ * Copyright (c) 2020 All Right Reserved By [StarsRiver]            *
+ *                                                                  *
+ * Author  Zhangyu                                                  *
+ * Email   starsriver@yahoo.com                                     *
+ ********************************************************************/
 
 /**
  *      [Discuz!] (C)2001-2099 Comsenz Inc.
@@ -94,17 +100,17 @@ if($_GET['operation'] == 'upload') {
 	}
 	if(!$errorcode) {
 		$aid = intval($_GET['aid']);
-		$setarr = array(
-				'uid' => $_G['uid'],
-				'filename' => $attach['name'],
-				'attachment' => $attach['attachment'],
-				'filesize' => $attach['size'],
-				'thumb' => $attach['thumb'],
-				'remote' => $attach['remote'],
-				'dateline' => $_G['timestamp'],
-				'width' => $attach['width']
-		);
-		$image = [];
+        $setarr = [
+            'uid'        => $_G['uid'],
+            'filename'   => $attach['name'],
+            'attachment' => $attach['attachment'],
+            'filesize'   => $attach['size'],
+            'thumb'      => $attach['thumb'],
+            'remote'     => $attach['remote'],
+            'dateline'   => $_G['timestamp'],
+            'width'      => $attach['width'],
+        ];
+        $image = [];
 		if($aid) {
 			$image = C::t('forum_polloption_image')->fetch($aid);
 		}

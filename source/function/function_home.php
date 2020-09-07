@@ -1,4 +1,10 @@
 <?php
+/********************************************************************
+ * Copyright (c) 2020 All Right Reserved By [StarsRiver]            *
+ *                                                                  *
+ * Author  Zhangyu                                                  *
+ * Email   starsriver@yahoo.com                                     *
+ ********************************************************************/
 
 /**
  *      [Discuz!] (C)2001-2099 Comsenz Inc.
@@ -533,6 +539,7 @@ function getfollowfeed($uid, $viewtype, $archiver = false, $start = 0, $perpage 
 	global $_G;
 
 	$list = [];
+	
 	if(isset($_G['follwusers'][$uid])) {
 		$list['user'] = $_G['follwusers'][$uid];
 	} else {
@@ -546,7 +553,9 @@ function getfollowfeed($uid, $viewtype, $archiver = false, $start = 0, $perpage 
 			$_G['follwusers'][$uid] = $list['user'];
 		}
 	}
-	$uids = in_array($viewtype, array('other', 'self')) ? $uid : array_keys($list['user']);
+	
+	$uids = in_array($viewtype, ['other', 'self',]) ? $uid : array_keys($list['user']);
+	
 	if(!empty($uids) || in_array($viewtype, array('other', 'self'))) {
 		$list['feed'] = C::t('home_follow_feed')->fetch_all_by_uid($uids, $archiver, $start, $perpage);
 		if($list['feed']) {

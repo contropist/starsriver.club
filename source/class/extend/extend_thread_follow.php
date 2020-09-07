@@ -1,4 +1,10 @@
 <?php
+/********************************************************************
+ * Copyright (c) 2020 All Right Reserved By [StarsRiver]            *
+ *                                                                  *
+ * Author  Zhangyu                                                  *
+ * Email   starsriver@yahoo.com                                     *
+ ********************************************************************/
 
 /**
  *      [Discuz!] (C)2001-2099 Comsenz Inc.
@@ -21,11 +27,11 @@ class extend_thread_follow extends extend_thread_base {
 			$values = [];
 			require_once libfile('function/discuzcode');
 			require_once libfile('function/followcode');
-			$feedcontent = array(
-				'tid' => $tid,
-				'content' => followcode($this->param['message'], $tid, $pid, 1000),
-			);
-			C::t('forum_threadpreview')->insert($feedcontent);
+            $feedcontent = [
+                'tid'     => $tid,
+                'content' => followcode($this->param['message'], $tid, $pid, 1000),
+            ];
+            C::t('forum_threadpreview')->insert($feedcontent);
 			C::t('forum_thread')->update_status_by_tid($tid, '512');
 			$followfeed = array(
 				'uid' => $uid,
@@ -51,11 +57,11 @@ class extend_thread_follow extends extend_thread_base {
 			$firstpost = C::t('forum_post')->fetch_threadpost_by_tid_invisible($this->thread['tid']);
 
 			if(empty($feedcontent)) {
-				$feedcontent = array(
-					'tid' => $this->thread['tid'],
-					'content' => followcode($firstpost['message'], $this->thread['tid'], $this->pid, 1000),
-				);
-				C::t('forum_threadpreview')->insert($feedcontent);
+                $feedcontent = [
+                    'tid'     => $this->thread['tid'],
+                    'content' => followcode($firstpost['message'], $this->thread['tid'], $this->pid, 1000),
+                ];
+                C::t('forum_threadpreview')->insert($feedcontent);
 				C::t('forum_thread')->update_status_by_tid($this->thread['tid'], '512');
 			} else {
 				C::t('forum_threadpreview')->update_relay_by_tid($this->thread['tid'], 1);

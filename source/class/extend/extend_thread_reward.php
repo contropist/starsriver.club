@@ -1,6 +1,12 @@
 <?php
+/********************************************************************
+ * Copyright (c) 2020 All Right Reserved By [StarsRiver]            *
+ *                                                                  *
+ * Author  Zhangyu                                                  *
+ * Email   starsriver@yahoo.com                                     *
+ ********************************************************************/
 
-    if (!defined('IN_DISCUZ')) {
+if (!defined('IN_DISCUZ')) {
         exit('Access Denied');
     }
     
@@ -89,6 +95,7 @@
                 if ($this->param['special'] == 3 && $this->thread['authorid'] != $this->member['uid']) {
                     
                     $message = !$this->param['readperm'] ? $this->param['message'] : '';
+                    $message = messagecutstr(messagesafeclear($message), 300);
                     
                     $this->feed = [
                         'icon'           => 'reward',
@@ -109,11 +116,10 @@
                             'tid'   => $this->thread['tid'],
                             'tsub'  => $this->thread['subject'],
                             'tlink' => 'forum.php?mod=viewthread&tid=' . $this->thread['tid'],
-    
-                            'uid'     => $this->thread['authorid'],
-                            'uname'   => $this->thread['author'],
-                            'ulink'   => 'home.php?mod=space&uid=' . $this->thread['authorid'],
-                            'uavatar' => avatar($this->thread['authorid'], 'small', true),
+
+                            'message' => $message,
+
+                            'original' => [],
                             
                             'expend0' => '',
                             'expend1' => '',
@@ -124,8 +130,15 @@
                             'expend6' => '',
                             'expend7' => '',
                         ],
-                        'body_general'   => messagecutstr($message, 300),
                     ];
+                    
+                    if(!empty(getglobal('forum_attachexist'))) {
+                        getattach_img($this->thread['tid'],$this->pid,9,$this->feed['body_data']['imgs']);
+                    }
+    
+                    // Thread data
+                    require_once libfile('function/thread');
+                    getThread_sample($this->thread['tid'], $this->feed['body_data']['original']);
                 }
             }
         }
