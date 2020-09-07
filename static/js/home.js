@@ -1,3 +1,10 @@
+/********************************************************************
+ * Copyright (c) 2020 All Right Reserved By [StarsRiver]            *
+ *                                                                  *
+ * Author  Zhangyu                                                  *
+ * Email   starsriver@yahoo.com                                     *
+ ********************************************************************/
+
 /*
 	[StarsRiver!] (C)2001-2099 Comsenz Inc.
 	This is NOT a freeware, use is subject to license terms
@@ -238,137 +245,6 @@ function quick_validate(obj) {
 		obj.form.submit();
 		return true;
 	}
-}
-
-function stopMusic(preID, playerID) {
-	var musicFlash = preID.toString() + '_' + playerID.toString();
-	if($(musicFlash)) {
-		$(musicFlash).SetVariable('closePlayer', 1);
-	}
-}
-function showFlash(host, flashvar, obj, shareid) {
-	var flashAddr = {
-		'youku.com' : 'http://player.youku.com/player.php/sid/FLASHVAR=/v.swf',
-		'ku6.com' : 'http://player.ku6.com/refer/FLASHVAR/v.swf',
-		'youtube.com' : 'http://www.youtube.com/v/FLASHVAR',
-		'5show.com' : 'http://www.5show.com/swf/5show_player.swf?flv_id=FLASHVAR',
-		'sina.com.cn' : 'http://vhead.blog.sina.com.cn/player/outer_player.swf?vid=FLASHVAR',
-		'sohu.com' : 'http://v.blog.sohu.com/fo/v4/FLASHVAR',
-		'mofile.com' : 'http://tv.mofile.com/cn/xplayer.swf?v=FLASHVAR',
-		'music' : 'FLASHVAR',
-		'flash' : 'FLASHVAR'
-	};
-	var flash = '<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,19,0" width="480" height="400">'
-	    + '<param name="movie" value="FLASHADDR" />'
-	    + '<param name="quality" value="high" />'
-	    + '<param name="bgcolor" value="#FFFFFF" />'
-	    + '<param name="allowScriptAccess" value="never" />'
-	    + '<param name="allowNetworking" value="internal" />'
-	    + '<embed width="480" height="400" menu="false" quality="high" allowScriptAccess="never" allowNetworking="internal" src="FLASHADDR" type="application/x-shockwave-flash" />'
-	    + '</object>';
-	var videoFlash = '<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="480" height="450">'
-		+ '<param value="transparent" name="wmode"/>'
-		+ '<param value="FLASHADDR" name="movie" />'
-		+ '<param name="allowScriptAccess" value="never" />'
-		+ '<param name="allowNetworking" value="none" />'
-		+ '<embed src="FLASHADDR" wmode="transparent" allowfullscreen="true" type="application/x-shockwave-flash" width="480" height="450" allowScriptAccess="never" allowNetworking="internal"></embed>'
-		+ '</object>';
-	var musicFlash = '<object id="audioplayer_SHAREID" height="24" width="290" data="' + STATICURL + 'image/common/player.swf" type="application/x-shockwave-flash">'
-		+ '<param value="' + STATICURL + 'image/common/player.swf" name="movie"/>'
-		+ '<param value="autostart=yes&bg=0xCDDFF3&leftbg=0x357DCE&lefticon=0xF2F2F2&rightbg=0xF06A51&rightbghover=0xAF2910&righticon=0xF2F2F2&righticonhover=0xFFFFFF&text=0x357DCE&slider=0x357DCE&track=0xFFFFFF&border=0xFFFFFF&loader=0xAF2910&soundFile=FLASHADDR" name="FlashVars"/>'
-		+ '<param value="high" name="quality"/>'
-		+ '<param value="false" name="menu"/>'
-		+ '<param value="#FFFFFF" name="bgcolor"/>'
-	    + '</object>';
-	var musicMedia = '<object height="64" width="290" data="FLASHADDR" type="audio/x-ms-wma">'
-	    + '<param value="FLASHADDR" name="src"/>'
-	    + '<param value="1" name="autostart"/>'
-	    + '<param value="true" name="controller"/>'
-	    + '</object>';
-	var flashHtml = videoFlash;
-	var videoMp3 = true;
-	if('' == flashvar) {
-		alert('音乐地址错误，不能为空');
-		return false;
-	}
-	if('music' == host) {
-		var mp3Reg = new RegExp('.mp3$', 'ig');
-		var flashReg = new RegExp('.swf$', 'ig');
-		flashHtml = musicMedia;
-		videoMp3 = false;
-		if(mp3Reg.test(flashvar)) {
-			videoMp3 = true;
-			flashHtml = musicFlash;
-		} else if(flashReg.test(flashvar)) {
-			videoMp3 = true;
-			flashHtml = flash;
-		}
-	}
-	flashvar = encodeURI(flashvar);
-	if(flashAddr[host]) {
-		var flash = flashAddr[host].replace('FLASHVAR', flashvar);
-		flashHtml = flashHtml.replace(/FLASHADDR/g, flash);
-		flashHtml = flashHtml.replace(/SHAREID/g, shareid);
-	}
-
-	if(!obj) {
-		$('flash_div_' + shareid).innerHTML = flashHtml;
-		return true;
-	}
-	if($('flash_div_' + shareid)) {
-		$('flash_div_' + shareid).style.display = '';
-		$('flash_hide_' + shareid).style.display = '';
-		obj.style.display = 'none';
-		return true;
-	}
-	if(flashAddr[host]) {
-		var flashObj = document.createElement('div');
-		flashObj.id = 'flash_div_' + shareid;
-		obj.parentNode.insertBefore(flashObj, obj);
-		flashObj.innerHTML = flashHtml;
-		obj.style.display = 'none';
-		var hideObj = document.createElement('div');
-		hideObj.id = 'flash_hide_' + shareid;
-		var nodetxt = document.createTextNode("收起");
-		hideObj.appendChild(nodetxt);
-		obj.parentNode.insertBefore(hideObj, obj);
-		hideObj.style.cursor = 'pointer';
-		hideObj.onclick = function() {
-			if(true == videoMp3) {
-				stopMusic('audioplayer', shareid);
-				flashObj.parentNode.removeChild(flashObj);
-				hideObj.parentNode.removeChild(hideObj);
-			} else {
-				flashObj.style.display = 'none';
-				hideObj.style.display = 'none';
-			}
-			obj.style.display = '';
-		};
-	}
-}
-
-function userapp_open() {
-	var x = new Ajax();
-	x.get('home.php?mod=spacecp&ac=common&op=getuserapp&inajax=1', function(s){
-		$('my_userapp').innerHTML = s;
-		$('a_app_more').className = 'fold';
-		$('a_app_more').innerHTML = '收起';
-		$('a_app_more').onclick = function() {
-			userapp_close();
-		};
-	});
-}
-
-function userapp_close() {
-	var x = new Ajax();
-	x.get('home.php?mod=spacecp&ac=common&op=getuserapp&subop=off&inajax=1', function(s){
-		$('my_userapp').innerHTML = s;
-		$('a_app_more').className = 'unfold';
-		$('a_app_more').innerHTML = '展开';
-		$('a_app_more').onclick = function() {
-			userapp_open();
-		};
-	});
 }
 
 function startMarquee(h, speed, delay, sid) {
