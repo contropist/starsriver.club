@@ -136,9 +136,6 @@
         if (strpos($msglower, '[/audio]') !== false) {
             $message = preg_replace_callback("/\[audio(=1)*\]\s*([^\[\<\r\n]+?)\s*\[\/audio\]/is", 'followcode_callback_fparseaudio_2', $message);
         }
-        if (strpos($msglower, '[/flash]') !== false) {
-            $message = preg_replace_callback("/\[flash(=(\d+),(\d+))?\]\s*([^\[\<\r\n]+?)\s*\[\/flash\]/is", 'followcode_callback_fparseflash_4', $message);
-        }
         
         if ($parsetype != 1 && strpos($msglower, '[swf]') !== false) {
             $message = preg_replace_callback("/\[swf\]\s*([^\[\<\r\n]+?)\s*\[\/swf\]/is", 'followcode_callback_bbcodeurl_1', $message);
@@ -149,7 +146,7 @@
         if ($tid) {
             $extra = 'onclick="changefeed('.$tid.', '.$pid.', '.$flag.', this)"';
         }
-    
+        
         // Clean illegal attachment mark [\n]
         $message = clearnl($message);
         
@@ -197,9 +194,9 @@
             'media'  => 0,
             'attach' => 0,
         ];
-
+        
         $html = $imageHtml = $mediaHtml = $videoHtml = $audioHtml = $attachHtml = '';
-
+        
         for ($i = 0; $i <= $_G['forum_discuzcode']['pcodecount']; $i++) {
             if (!empty($_G['forum_discuzcode']['audio'][$i])) {
                 
@@ -208,30 +205,30 @@
                 $html = $_G['forum_discuzcode']['audio'][$i];
                 
             } elseif (!empty($_G['forum_discuzcode']['video'][$i])) {
-        
+                
                 $counter['video'] += 1;
                 $videoHtml .= '<li class="nth-of-' . $counter['video'] . '">' . $_G['forum_discuzcode']['video'][$i] . '</li>';
                 $html = $_G['forum_discuzcode']['video'][$i];
                 
             } elseif (!empty($_G['forum_discuzcode']['media'][$i])) {
-        
+                
                 $counter['media'] += 1;
                 $mediaHtml .= '<li class="nth-of-' . $counter['media'] . '">' . $_G['forum_discuzcode']['media'][$i] . '</li>';
                 $html = $_G['forum_discuzcode']['media'][$i];
                 
             } elseif (!empty($_G['forum_discuzcode']['image'][$i]) && $counter['img'] < 9) {
-        
+                
                 $counter['img'] += 1;
                 $imageHtml .= '<a class="image rec-img nth-of-'.$counter['img'].'" style="background-image: url(' . $_G['forum_discuzcode']['image'][$i] . ')"><img src="' . LIBURL . '/img/row-e-col/1.1.png"/></a>';
                 $html = '<div class="thread-element-img"><img src="'.$_G['forum_discuzcode']['image'][$i].'" /></div>';
                 
             } elseif (!empty($_G['forum_discuzcode']['attach'][$i])) {
-        
+                
                 $counter['attach'] += 1;
                 $attachHtml .= '<li class="nth-of-' . $counter['attach'] . '">' . $_G['forum_discuzcode']['attach'][$i] . '</li>';
                 $html = $_G['forum_discuzcode']['attach'][$i];
             }
-    
+            
             if (!empty($_G['forum_discuzcode']['codehtml'][$i])) {
                 $html = $_G['forum_discuzcode']['codehtml'][$i];
             } elseif ($length) {
@@ -242,7 +239,7 @@
         }
         
         if ($length) {
-        
+            
             if (!empty($audioHtml)) {
                 $message .= '<div class="thread-element-audio audioGrid grid-'.$counter['audio'].'" ><ul>' . $audioHtml . '</ul></div>';
             }
@@ -259,10 +256,10 @@
                 $message .= '<div class="thread-element-attachs"><span class="title">' . lang('feed', 'feed_attach') . '</span><ul>' . $attachHtml . '</ul></div>';
             }
         }
-    
+        
         // Clean empty attachment mark
         $message = clearnl($message);
-    
+        
         // Highlight extra contents
         if (!empty($_GET['highlight'])) {
             $highlightarray = explode('+', $_GET['highlight']);
@@ -278,7 +275,7 @@
                 $message = $message . chr(0) . chr(0) . chr(0) . $specialextra;
             }
         }
-    
+        
         // Clean memory
         unset($msglower);
         
@@ -312,12 +309,24 @@
         return fparseaudio($matches[2]);
     }
     
-    function followcode_callback_fparseflash_4($matches) {
-        return fparseflash($matches[4]);
-    }
-    
     function followcode_callback_bbcodeurl_1($matches) {
         return bbcodeurl($matches[1], ' <img src="' . STATICURL . 'image/filetype/flash.gif" align="absmiddle" alt="" /> <a href="{url}" target="_blank">Flash: {url}</a> ');
+    }
+    
+    function fparsetable_callback_parsetrtd_12($matches) {
+        return parsetrtd($matches[1], 0, 0, $matches[2]);
+    }
+    
+    function fparsetable_callback_parsetrtd_1($matches) {
+        return parsetrtd('td', 0, 0, $matches[1]);
+    }
+    
+    function fparsetable_callback_parsetrtd_1234($matches) {
+        return parsetrtd($matches[1], $matches[2], $matches[3], $matches[4]);
+    }
+    
+    function fparsetable_callback_parsetrtd_123($matches) {
+        return parsetrtd('td', $matches[1], $matches[2], $matches[3]);
     }
     
     function followcode_callback_highlightword_21($matches, $action = 0) {
@@ -402,19 +411,6 @@
         return '';
     }
     
-    function fparseflash($url) {
-        preg_match("/((https?){1}:\/\/|www\.)[^\[\"']+/i", $url, $matches);
-        $url = $matches[0];
-        if (fileext($url) != 'flv') {
-            $rimg_id = 'swf_' . random(5);
-            $html = '<img src="' . IMGDIR . '/flash.gif" alt="' . lang('space', 'follow_click_play') . '" onclick="javascript:showFlash(\'flash\', \'' . $url . '\', this, \'' . $rimg_id . '\');"/>';
-            return fcodedisp($html, 'media');
-        } else {
-            $url = STATICURL . 'image/common/flvplayer.swf?&autostart=true&file=' . urlencode($matches[0]);
-            return fmakeflv($url);
-        }
-    }
-    
     function fparseemail($email, $text) {
         global $_G;
         
@@ -459,22 +455,6 @@
         
     }
     
-    function fparsetable_callback_parsetrtd_12($matches) {
-        return parsetrtd($matches[1], 0, 0, $matches[2]);
-    }
-    
-    function fparsetable_callback_parsetrtd_1($matches) {
-        return parsetrtd('td', 0, 0, $matches[1]);
-    }
-    
-    function fparsetable_callback_parsetrtd_1234($matches) {
-        return parsetrtd($matches[1], $matches[2], $matches[3], $matches[4]);
-    }
-    
-    function fparsetable_callback_parsetrtd_123($matches) {
-        return parsetrtd('td', $matches[1], $matches[2], $matches[3]);
-    }
-    
     function fparseaudio($url) {
         $url = addslashes($url);
         if (!in_array(strtolower(substr($url, 0, 6)), [
@@ -496,65 +476,21 @@
         }
     }
     
-    function fmakeflv($flv) {
-        $randomid = 'video_' . random(3);
-        $flv = is_array($flv) ? $flv : ['flv' => $flv];
-        if (!preg_match("/^((https?){1}:\/\/|www\.)[^\[\"']+$/i", $flv['flv'])) {
-            return fcodedisp('', 'video');
-        }
-        if (!empty($flv['imgurl'])) {
-            if (!preg_match("/^((https?){1}:\/\/|www\.)[^\[\"']+$/i", $flv['imgurl'])) {
-                $html = '';
-            } else {
-                $html = '<table class="wb lb dc" title="' . lang('space', 'follow_click_play') . '" onclick="javascript:showFlash(\'flash\', \'' . $flv['flv'] . '\', this, \'' . $randomid . '\');"><tr><td class="vdtn hm" style="background: url(' . $flv['imgurl'] . ') no-repeat;    border: 1px solid #CDCDCD; cursor: pointer; height: 95px; width: 126px;"><img src="' . IMGDIR . '/vds.png" alt="' . lang('space', 'follow_click_play') . '" />	</td></tr></table>';
-            }
-        } else {
-            $html = '<img src="' . IMGDIR . '/vd.gif" alt="' . lang('space', 'follow_click_play') . '" onclick="javascript:showFlash(\'flash\', \'' . $flv['flv'] . '\', this, \'' . $randomid . '\');" class="tn" style="cursor: pointer;" />';
-        }
-        return fcodedisp($html, 'video');
-    }
-    
     function fparsemedia($params, $url) {
         $params = explode(',', $params);
         
         $url = addslashes($url);
         $html = '';
-        if ($flv = parseflv($url, 0, 0)) {
-            return fmakeflv($flv);
-        }
-        if (in_array(count($params), [
-            3,
-            4,
-        ])) {
+        
+        if (in_array(count($params), [3, 4])) {
             $type = $params[0];
-            $url = str_replace([
-                '<',
-                '>',
-            ], '', str_replace('\\"', '\"', $url));
+            $url = str_replace(['<', '>',], '', str_replace('\\"', '\"', $url));
             switch ($type) {
-                case 'mp3':
-                    return fparseaudio($url);
-                    break;
-                case 'flv':
-                    $url = STATICURL . 'image/common/flvplayer.swf?&autostart=true&file=' . urlencode($url);
-                    return fmakeflv($url);
-                    break;
-                case 'swf':
-                    return fparseflash($url);
-                    break;
-                default:
-                    $html = '<a href="' . $url . '" target="_blank">' . $url . '</a>';
-                    break;
+                case 'mp3':return fparseaudio($url);
+                default:$html = '<a href="' . $url . '" target="_blank">' . $url . '</a>';break;
             }
         }
         return fcodedisp($html, 'media');
-    }
-    
-    function fparseimg($src, $extra = '') {
-        global $_G;
-        $rimg_id = random(5);
-        $html = bbcodeurl($src, '<img id="iimg_' . $rimg_id . '" src="' . $src . '" alt=""/>');
-        return fcodedisp($html, 'image');
     }
     
     function fparsesmiles(&$message) {
