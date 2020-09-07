@@ -522,13 +522,14 @@
         font-weight: 700;
     }
     .cupy-nav li a.create{
-        font-size: 14px;
-        color: #fff;
+        display: inline-block;
         border: 1px solid rgba(238,34,102,0.62);
         border-radius: 60px;
         margin-top: -4px;
         padding: 0 17px;
         height: 32px;
+        font-size: 14px;
+        color: #fff;
         line-height: 32px;
         background: var(--color-onnanoko-pink);
         font-weight: 400;
