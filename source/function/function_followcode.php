@@ -152,9 +152,7 @@
         
         // Make attachment tags( [attach]\n[/attach] ) to attach mark [\n]
         if ($tid && $pid) {
-            
             $_G['post_attach'] = C::t('forum_attachment_n')->fetch_all_by_id(getattachtableid($tid), 'pid', $pid);
-            
             foreach ($_G['post_attach'] as $aid => $attach) {
                 if ((!empty($_G['delattach']) && in_array($aid, $_G['delattach']))) {
                     continue;
