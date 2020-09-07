@@ -8829,6 +8829,7 @@
         }
         #comment_face_menu li img{
             width: 100%;;
+            image-rendering: -webkit-optimize-contrast !important;
         }
 
         .app-userspace #userspace_wall{
@@ -9063,10 +9064,11 @@
         }
         .app-userspace #userspace_wall .wall .decrater-c .card-tag .username{
             display: inline-block;
+            width: calc(100% - 34px);
+            padding: 0 0 0 5px;
+            overflow: hidden;
             line-height: 28px;
             color: var(--color-text-dark);
-            width: calc(100% - 34px);
-            overflow: hidden;
             white-space: nowrap;
             text-overflow: ellipsis;
             font-weight: 700;
