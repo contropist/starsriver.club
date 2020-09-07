@@ -11,7 +11,7 @@
         exit('Access Denied');
     }
     
-    function getThread_sample($tid, &$data) {
+    function getThread_sample($tid, &$data, $expire = []) {
         
         require_once libfile('function/post');
         
@@ -61,7 +61,7 @@
             $data['template'] = 'thread_sample';
             $data['data']['message'] = messagecutstr(messagesafeclear($thread['message']), 200);
             if ($thread['attachment']) {
-                getattach_img($thread['tid'], $thread['pid'], 9, $data['data']['imgs']);
+                getattach_img($thread['tid'], $thread['pid'], 9, $data['data']['imgs'],$expire);
             }
         }
     }

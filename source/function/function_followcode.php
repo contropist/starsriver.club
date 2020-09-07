@@ -41,7 +41,7 @@
             $_G['discuzcodemessage'] = &$message;
             $param = func_get_args();
             hookscript('discuzcode', 'global', 'funcs', [
-                'param' => $param,
+                'param'  => $param,
                 'caller' => 'followcode',
             ], 'discuzcode');
         }
