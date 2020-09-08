@@ -49,7 +49,7 @@
             'imgnum' => 0,
         ];
         
-        if ($thread['price']) {
+        if ($thread['price'] > 0) {
             $data['template'] = 'quote_need_payoff';
         } elseif ($thread['readperm']) {
             $data['template'] = 'quote_need_perm';

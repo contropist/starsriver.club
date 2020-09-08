@@ -100,11 +100,11 @@
             $poll_options = C::t('forum_polloption')->fetch_all_by_tid($this->tid);
             $poll_images = C::t('forum_polloption_image')->fetch_all_by_tid($this->tid);
             $poll_ipop = [];
-            $poll_ul = '';
+            $poll_lis = '';
             
             foreach ($poll_options as $option) {
                 $poll_ipop[$option['polloptionid']]['str'] = $option['polloption'];
-                $poll_ul .= '<li>' . $option['polloption'] . '</li>';
+                $poll_lis .= '<li>' . $option['polloption'] . '</li>';
             }
             
             foreach ($poll_images as $img) {
@@ -131,7 +131,7 @@
                     'uavatar' => avatar($_G['uid'], 'small', true),
                     
                     'message' => messagecutstr(!$this->param['readperm'] ? $this->param['message'] : '', 300),
-                    'option'  => '<ul class="feed-element-poll-options">' . $poll_ul . '</ul>',
+                    'option'  => $poll_lis,
                     
                     'expend0' => '',
                     'expend1' => '',

@@ -5,7 +5,7 @@
 <!--{eval $followminN = date('ymdi',$feed['dateline']);}-->
 
 <!--{if !empty($thread) && $thread['displayorder'] >= 0 || !empty($feed['note'])}-->
-    <li class="node {if $followday != $followdayN}dayMark{/if} {if $lastviewtime && $feed[dateline] > $lastviewtime}unread{/if}" id="feed_li_$feed['feedid']">
+    <li class="node {if $followday != $followdayN}dayMark{/if} {if $lastviewtime && $feed[dateline] > $lastviewtime}unread{/if}" id="feed_li_{$feed['feedid']}">
         <div class="n-left">
             <!--{if $followday != $followdayN}-->
                 <!--{eval $followday = $followdayN;}-->
@@ -33,7 +33,7 @@
                     <!--{if !empty($thread) && $thread['displayorder'] >= 0}-->
                         <a class="link ellipsis" style="margin-left:0;" href="forum.php?mod=viewthread&tid=$content['tid']&extra=page%3D1" target="_blank">$thread['subject']</a>
                         <!--{if $_G['cache']['forums'][$thread['fid']]['name']}-->
-                        <a class="tag" href="forum.php?mod=forumdisplay&fid=$thread['fid']">$_G['cache']['forums'][$thread['fid']]['name']</a>
+                        <a class="tag" href="forum.php?mod=forumdisplay&fid=$thread['fid']" target="_blank">$_G['cache']['forums'][$thread['fid']]['name']</a>
                         <!--{/if}-->
                     <!--{else}-->
                         {lang follow_thread_deleted}

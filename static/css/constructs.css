@@ -131,7 +131,7 @@
         border:1px solid #f0f0f0;
         margin: 5px 0;
         word-wrap: break-word;
-        word-break: break-all;
+        white-space: pre-wrap;
         box-sizing: border-box;
         border-radius: 4px;
     }
@@ -2113,6 +2113,9 @@
 
 /*region Base*/
     :root{
+
+        --context-lineheight: 24px;
+
         --color-back-default: #f5f5f9;
         --color-main-theme: #39c5bb;
         --color-main-theme-dark: #269e96;
@@ -3020,6 +3023,7 @@
         border-radius: calc(var(--grid-gap) * 3);
     }
     .imageGrid .image{
+        display: inline-flex !important;
         background: #f4f5f7 center;
         background-size: cover;
         border-radius: calc(var(--grid-gap) * 2);
@@ -3281,13 +3285,13 @@
         box-sizing: border-box;
         margin-bottom: 90px;
     }
-    .Mas.edge .mas-viewer .mas-viewer-container .whitespace{
-        display: inline-block;
+    .Mas.edge .mas-viewer .mas-viewer-container .place-holder{
+        display: flex;
         width: 100%;
         overflow: auto;
         box-sizing: border-box;
     }
-    .Mas.edge .mas-viewer .mas-viewer-container .whitespace.cn{
+    .Mas.edge .mas-viewer .mas-viewer-container .place-holder.cn{
         padding: 0 15px;
     }
     .Mas.edge .mas-viewer .mas-viewer-container .nav-horizon{
@@ -3298,12 +3302,13 @@
     .Mas.edge .mas-viewer .mas-viewer-container .nav-horizon > ul{
         --nav-height: 48px;
         display: inline-block;
-        background: #fff;
-        min-width: 100%;
+        width: 100%;
         height: var(--nav-height);
-        box-sizing: border-box;
         padding: 0 15px;
+        box-sizing: border-box;
+        background: #fff;
         white-space: nowrap;
+        overflow: auto;
     }
     .Mas.edge .mas-viewer .mas-viewer-container .nav-horizon > ul > li{
         display: inline-block;

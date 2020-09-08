@@ -597,14 +597,15 @@ IconIndex=1
         }
         
         $my_polls_id = [];
-        $my_polls_title = [];
+        $my_polls_title = '';
         foreach ($_GET['pollanswers'] as $key => $id) {
             if (!in_array($id, $options_id)) {
                 showmessage('parameters_error');
             }
             unset($options_id[$key]);
             $my_polls_id[] = $id;
-            $my_polls_title[] = $options_title[$id];
+            $my_polls_title .= '<li>'.$options_title[$id].'</li>';
+            
         }
         
         C::t('forum_polloption')->update_vote($my_polls_id, $voterids . "\t", 1);
@@ -641,7 +642,7 @@ IconIndex=1
                     'tsub'  => $thread['subject'],
                     'tlink' => 'forum.php?mod=viewthread&tid=' . $_G['tid'],
                     
-                    'option' => implode("，", $my_polls_title),
+                    'option' => $my_polls_title,
                     
                     'original' => [],
                     
@@ -1315,11 +1316,13 @@ IconIndex=1
                             'original' => [],
                             
                             'message' => $message,
-                            
-                            'starttime' => date('Y-m-d', $activity['starttimefrom']),
-                            'endtime'   => date('Y-m-d', $activity['starttimeto']),
-                            'location'  => $activity['place'],
-                            
+
+                            'starttime'   => date('Y-m-d H;i', $activity['starttimefrom']),
+                            'endtime'     => date('Y-m-d H:i', $activity['starttimeto']),
+                            'endtimemark' => $activity['starttimeto'] ? 'active' : '',
+                            'city'        => $activity['city'],
+                            'location'    => $activity['place'],
+
                             'expend0' => '',
                             'expend1' => '',
                             'expend2' => '',

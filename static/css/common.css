@@ -859,6 +859,7 @@
         border-left:0 !important;
     }
     .header-us .head > .menu .status a{
+        display: inline-block;
         line-height: 14px;
         padding:10px;
         color: #5b626b;

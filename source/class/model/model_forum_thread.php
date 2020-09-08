@@ -1,4 +1,10 @@
 <?php
+/********************************************************************
+ * Copyright (c) 2020 All Right Reserved By [StarsRiver]            *
+ *                                                                  *
+ * Author  Zhangyu                                                  *
+ * Email   starsriver@yahoo.com                                     *
+ ********************************************************************/
 
 /**
  *      [Discuz!] (C)2001-2099 Comsenz Inc.
@@ -305,7 +311,7 @@ class model_forum_thread extends discuz_model
                     ],
                 ];
                 
-                if ($this->param['price']) {
+                if ($this->param['price'] > 0) {
                     $this->feed['body_template'] = 'need_payoff';
                 } elseif ($this->param['readperm']) {
                     $this->feed['body_template'] = 'need_perm';

@@ -88,6 +88,7 @@
                     'cost'          => $this->activity['cost'],
                     'starttimefrom' => $this->activity['starttimefrom'],
                     'starttimeto'   => $this->activity['starttimeto'],
+                    'city'          => $this->activity['city'],
                     'place'         => $this->activity['place'],
                     'class'         => $this->activity['class'],
                     'gender'        => $this->activity['gender'],
@@ -122,13 +123,14 @@
                     'uname'   => $_G['username'],
                     'ulink'   => 'home.php?mod=space&uid=' . $_G['uid'],
                     'uavatar' => avatar($_G['uid'], 'small', true),
-                    
-                    'starttime' => $_GET['starttimefrom'][$this->activitytime],
-                    'endtime'   => $_GET['starttimeto'][$this->activitytime],
-                    'city'      => $this->activity['city'],
-                    'location'  => $this->activity['place'],
-                    'message'   => messagecutstr(!$this->param['readperm'] ? $this->param['message'] : '', 150),
-                    
+
+                    'starttime'   => date('Y-m-d H:i',$this->activity['starttimefrom']),
+                    'endtime'     => date('Y-m-d H:i',$this->activity['starttimeto']),
+                    'endtimemark' => $this->activity['starttimeto'] ? 'active' : '',
+                    'city'        => $this->activity['city'],
+                    'location'    => $this->activity['place'],
+                    'message'     => messagecutstr(!$this->param['readperm'] ? $this->param['message'] : '', 150),
+
                     'expend0' => '',
                     'expend1' => '',
                     'expend2' => '',
@@ -150,7 +152,7 @@
             
             if(!empty(getglobal('forum_attachexist'))) {
                 $imgs = [];
-                getattach_img($this->tid,$this->pid,5,$imgs,[$_GET['activityaid']]);
+                getattach_img($this->tid,$this->pid,5,$imgs);
                 $this->feed['body_data']['imgs'] = array_merge($this->feed['body_data']['imgs'], $imgs);
             }
         }

@@ -1,0 +1,35 @@
+<!--{if helper_access::check_module('wall')}-->
+<form class="commentform" id="quickcommentform_{$space[uid]}" action="home.php?mod=spacecp&ac=comment" method="post" autocomplete="off" onsubmit="ajaxpost('quickcommentform_{$space[uid]}', 'return_qcwall_$space[uid]');doane(event);">
+    <s class="decrater-a"></s>
+    <s class="decrater-b"></s>
+    <div class="decrater-c">
+        <div class="tool">
+            <b class="dots disabled"><i class="dot"></i><i class="dot"></i><i class="dot"></i></b>
+        </div>
+        <div class="menu">
+            <a id="comment_face" title="{lang insert_emoticons}" onclick="showFace(this.id, 'comment_message');return false;"><i class="icon-smile2"></i></a>
+            <!--{hook/space_wall_face_extra}-->
+            <!--{if $_G['setting']['magicstatus'] && $_G['setting']['magics']['doodle']}-->
+            <a id="a_magic_doodle" title="{$_G[setting][magics][doodle]}" href="home.php?mod=magic&mid=doodle&showid=comment_doodle&target=comment_message" onclick="showWindow(this.id, this.href, 'get', '0')"><i class="awe-paint-brush"></i></a>
+            <!--{/if}-->
+        </div>
+        <!--{if $_G['uid'] || $_G['group']['allowcomment']}-->
+            <textarea id="comment_message" onkeydown="ctrlEnter(event, 'commentsubmit_btn');" name="message" rows="5"></textarea>
+        <!--{elseif $_G['connectguest']}-->
+            <div class="nop">{lang connect_fill_profile_to_comment}</div>
+        <!--{else}-->
+            <div class="nop">{lang login_to_wall} <a href="member.php?mod=logging&action=login" onclick="showWindow('login', this.href)">{lang login}</a> | <a href="member.php?mod={$_G[setting][regname]}">$_G['setting']['reglinkname']</a></div>
+        <!--{/if}-->
+        <div class="post-res" id="return_qcwall_{$space[uid]}"></div>
+        <button class="btn-shadow" type="submit" name="commentsubmit_btn"value="true" id="commentsubmit_btn"><strong>{lang leave_comments}</strong></button>
+    </div>
+
+    <input type="hidden" name="formhash" value="{FORMHASH}" />
+    <input type="hidden" name="referer" value="home.php?mod=space&uid=$wall[uid]&do=wall" />
+    <input type="hidden" name="id" value="$space[uid]" />
+    <input type="hidden" name="idtype" value="uid" />
+    <input type="hidden" name="handlekey" value="qcwall_{$space[uid]}" />
+    <input type="hidden" name="commentsubmit" value="true" />
+    <input type="hidden" name="quickcomment" value="true" />
+</form>
+<!--{/if}-->

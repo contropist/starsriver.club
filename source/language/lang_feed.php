@@ -11,410 +11,6 @@
     }
     
     $lang = [
-    
-        'feed_attach'        => '内容附件',
-        'feed_poll'          => '发起了新投票',
-        'feed_comment_poll'  => '评论了 {touser} 的投票 {poll}',
-        'feed_comment_event' => '在 {touser} 组织的活动 {event} 中留言了',
-        'feed_task'          => '完成了有奖任务 {task}',
-        'feed_task_credit'   => '完成了有奖任务 {task}，领取了 {credit} 个奖励积分',
-        'feed_add_attachsize' => '用 {credit} 个积分兑换了 {size} 附件空间，可以上传更多的图片啦(<a href="home.php?mod=spacecp&ac=credit&op=addsize">我也来兑换</a>)',
-        
-        
-        /*
-         * 参数注释标志：
-         * @ - title或body
-         * T - 仅title
-         * B - 仅body
-         *
-         * 通用扩展参数::为【避免】【系统更新】和【模板更新】导致【早期数据库】中【参数不足】问题，预留给后期增加参数使用。
-         * B {expend0~8}
-         *
-         * */
-        
-        
-        /*
-        * feed-thread.ban
-        *
-        * T {content}     :帖子ID
-         *
-        * B {content}      :用户ID
-        *
-        * */
-        'feed_template_sitefeed_title' => '系统动态：{content}',
-        'feed_template_sitefeed_body'   => '<div class="feed-element-sitefeed">{content}</div>',
-
-        
-        /*
-        * feed-thread.ban
-        *
-        * @ {tid}     :帖子ID
-        * @ {tsub}    :帖子标题
-        * @ {tink}    :帖子链接
-         *
-        * B {uid}      :用户ID
-        * B {uname}    :用户名
-        * B {ulink}    :用户空间链接
-        * B {uavatar}  :用户头像源链接
-        *
-        * */
-        'feed_template_need_payoff_body' => '<div class="feed-element-ban"><a class="link redirect" href="{tlink}">此帖为付费内容，需转至原文后查看</a></div>',
-        'feed_template_need_perm_body'   => '<div class="feed-element-ban"><a class="link redirect" href="{tlink}">此贴要求一定的等级权限，需转至原文查看</a></div>',
-        'feed_template_post_baned_body'  => '<div class="feed-element-ban"><a class="link redirect" href="{tlink}">此内容被屏蔽</a></div>',
-        
-        'feed_template_quote_need_payoff_body' => '
-            <div class="feed-element-ban">
-                <a class="user-tag" href="{ulink}" target="_blank" c="1">
-                    <s class="avatar"><img class="avatar-main" src="{uavatar}"></s>
-                    <s class="username">{uname}</s>
-                </a>
-                <a class="thread-title" href="{tlink}" target="_blank">{tsub}</a>
-                <a class="link redirect" href="{tlink}">此帖为付费内容，需转至原文后查看</a>
-            </div>',
-        
-        'feed_template_quote_need_perm_body'   => '
-            <div class="feed-element-ban">
-                <a class="user-tag" href="{ulink}" target="_blank" c="1">
-                    <s class="avatar"><img class="avatar-main" src="{uavatar}"></s>
-                    <s class="username">{uname}</s>
-                </a>
-                <a class="thread-title" href="{tlink}" target="_blank">{tsub}</a>
-                <a class="link redirect" href="{tlink}">此贴要求一定的等级权限，需转至原文查看</a>
-            </div>',
-        
-        'feed_template_quote_post_baned_body'  => '
-            <div class="feed-element-ban">
-                <a class="user-tag" href="{ulink}" target="_blank" c="1">
-                    <s class="avatar"><img class="avatar-main" src="{uavatar}"></s>
-                    <s class="username">{uname}</s>
-                </a>
-                <a class="thread-title" href="{tlink}" target="_blank">{tsub}</a>
-                <a class="link redirect" href="{tlink}">此内容被屏蔽</a>
-            </div>',
-        'feed_template_quote_post_no_msg_body'  => '
-            <div class="feed-element-ban">
-                <a class="user-tag" href="{ulink}" target="_blank" c="1">
-                    <s class="avatar"><img class="avatar-main" src="{uavatar}"></s>
-                    <s class="username">{uname}</s>
-                </a>
-                <a class="thread-title" href="{tlink}" target="_blank">{tsub}</a>
-                <a class="link redirect" href="{tlink}">文章内无文字信息，未获取到摘要，更多内容需转至原文查看</a>
-            </div>',
-
-
-        /*
-        * feed-thread
-        *
-        * @ {tid}     :帖子ID
-        * @ {tsub}    :帖子标题
-        * @ {tink}    :帖子链接
-         *
-        * B {uid}      :用户ID
-        * B {uname}    :用户名
-        * B {ulink}    :用户空间链接
-        * B {uavatar}  :用户头像源链接
-         *
-        * B {message}  :帖子摘要
-        *
-        * */
-        'feed_template_thread_title' => '发表了帖子<a class="link ellipsis" href="{tlink}" target="_blank">{tsub}</a>',
-        'feed_template_thread_body'  => '
-            <div class="feed-element-thread">
-                <div class="content">{message}</div>
-            </div>',
-
-
-        /*
-        * feed-thread.reply
-        *
-        * @ {tid}     :帖子ID
-        * @ {tsub}    :帖子标题
-        * @ {tink}    :帖子链接
-         *
-        * @ {uid}      :用户ID
-        * @ {uname}    :用户名
-        * @ {ulink}    :用户空间链接
-        * @ {uavatar}  :用户头像源链接
-         *
-        * B {message}  :回贴摘要
-        *
-        * */
-        'feed_template_thread_reply_title'   => '在 <a class="link ellipsis" href="{ulink}" target="_blank" c="1">{uname}</a> 的帖子 <a class="link ellipsis" href="{tlink}" target="_blank">{tsub}</a>中回复道',
-        'feed_template_thread_reply_a_title' => '在帖子 <a class="link ellipsis" href="{tlink}" target="_blank">{tsub}</a>中回复道',
-        'feed_template_thread_reply_body'    => '
-            <div class="feed-element-thread-reply">
-                <div class="content">{message}</div>
-            </div>',
-
-
-        /*
-        * feed-thread-reward
-        *
-        * @ {tid}     :帖子ID
-        * @ {tsub}    :帖子标题
-        * @ {tink}    :帖子链接
-         *
-        * B {uid}      :用户ID
-        * B {uname}    :用户名
-        * B {ulink}    :用户空间链接
-        * B {uavatar}  :用户头像源链接
-         *
-        * B {message}     :问题摘要
-        * B {price}       :悬赏值
-        * B {extcredits}  :货币单位
-        *
-        * */
-        'feed_template_thread_reward_title' => '我发起了悬赏<a class="link ellipsis" href="{tlink}" target="_blank">{tsub}</a>',
-        'feed_template_thread_reward_body'  => '
-            <div class="feed-element-reward">
-                <div class="reward">悬赏 {price}{extcredits}</div>
-            </div>',
-
-
-        /*
-        * feed-thread-reward.reply
-        *
-        * @ {tid}     :帖子ID
-        * @ {tsub}    :帖子标题
-        * @ {tink}    :帖子链接
-         *
-        * @ {message} :回答
-        *
-        * */
-        'feed_template_thread_reward_reply_title' => '回复了 <a class="link ellipsis" href="{ulink}" target="_blank" c="1">{uname}</a> 的悬赏 <a class="link ellipsis" href="{tlink}" target="_blank">{tsub}</a>',
-        'feed_template_thread_reward_reply_body'  => '
-            <div class="feed-element-reward-reply">
-                <a class="content">{message}</a>
-            </div>',
-
-
-        /*
-        * feed-thread-debate
-        *
-        * @ {tid}     :帖子ID
-        * @ {tsub}    :帖子标题
-        * @ {tink}    :帖子链接
-         *
-        * B {uid}      :用户ID
-        * B {uname}    :用户名
-        * B {ulink}    :用户空间链接
-        * B {uavatar}  :用户头像源链接
-         *
-        * B {message}      :摘要
-        * B {affirmpoint}  :红方观点
-        * B {negapoint}    :蓝方观点
-        *
-        * */
-        'feed_template_thread_debate_title' => '我发起了辩论<a class="link ellipsis" href="{tlink}" target="_blank">{tsub}</a>',
-        'feed_template_thread_debate_body'  => '
-            <div class="feed-element-debate">
-                <a class="thread-title" href="{tlink}" target="_blank">{tsub}</a>
-                <div class="content">{message}</div>
-                <div class="attitude">
-                    <i>红方：{affirmpoint}</i>
-                    <i>蓝方：{negapoint}</i>
-                </div>
-            </div>',
-        
-        
-        /*
-        * feed-thread-debate.vote
-        *
-        * @ {tid}     :帖子ID
-        * @ {tsub}    :帖子标题
-        * @ {tink}    :帖子链接
-         *
-        * T {stand}    :立场
-         *
-        * B {message}  :辩论词
-        *
-        * */
-        'feed_vote'   => '中立',
-        'feed_vote_1' => '红方',
-        'feed_vote_2' => '蓝方',
-        'feed_template_thread_debate_vote_title'   => '以{stand}立场加入了辩论 <a class="link ellipsis" href="{tlink}" target="_blank">{tsub}</a>',
-        'feed_template_thread_debate_vote_body' => '
-            <div class="feed-element-debate-vote">
-                <div class="content">{message}</div>
-            </div>',
-        
-
-        /*
-        * feed-thread-poll
-        *
-        * @ {tid}     :帖子ID
-        * @ {tsub}    :帖子标题
-        * @ {tink}    :帖子链接
-         *
-        * B {uid}      :用户ID
-        * B {uname}    :用户名
-        * B {ulink}    :用户空间链接
-        * B {uavatar}  :用户头像源链接
-         *
-        * B {option}   :投票介绍
-        * B {message}  :投票选项
-        *
-        * */
-        'feed_template_thread_poll_title' => '我发起了投票<a class="link ellipsis" href="{tlink}" target="_blank">{tsub}</a>',
-        'feed_template_thread_poll_body'  => '
-            <div class="feed-element-poll">
-                <a class="thread-title" href="{tlink}" target="_blank">{tsub}</a>
-                <div class="content">{message}</div>
-                <div class="options">{option}</div>
-            </div>',
-
-
-        /*
-        * feed-thread-poll.vote
-        *
-        * @ {tid}     :帖子ID
-        * @ {tsub}    :帖子标题
-        * @ {tink}    :帖子链接
-         *
-        * B {uid}      :用户ID
-        * B {uname}    :用户名
-        * B {ulink}    :用户空间链接
-        * B {uavatar}  :用户头像源链接
-         *
-        * B {option}   :投出的票
-        *
-        * */
-        'feed_template_thread_poll_vote_title' => '我参与了投票<a class="link ellipsis" href="{tlink}" target="_blank">{tsub}</a>',
-        'feed_template_thread_poll_vote_body'  => '
-            <div class="feed-element-poll-vote">
-                <div class="options">我将选票投给了：{option}</div>
-            </div>',
-
-        'feed_template_thread_poll_vote_withimg_title' => '我参与了图片投票<a class="link ellipsis" href="{tlink}" target="_blank">{tsub}</a>',
-        'feed_template_thread_poll_vote_withimg_body'  => '
-            <div class="feed-element-poll-vote">
-                <div class="options">我将选票投给了：{option}</div>
-            </div>',
-
-
-        /*
-        * feed-thread-activity
-        *
-        * @ {tid}     :帖子ID
-        * @ {tsub}    :帖子标题
-        * @ {tink}    :帖子链接
-         *
-        * B {uid}      :用户ID
-        * B {uname}    :用户名
-        * B {ulink}    :用户空间链接
-        * B {uavatar}  :用户头像源链接
-         *
-        * B {starttime}  :活动开始时间
-        * B {endtime}    :活动结束时间
-        * B {city}       :活动所在城市
-        * B {location}   :活动地点
-        * B {message}    :活动介绍
-        *
-        * */
-        'feed_template_thread_activity_title' => '我发起了活动<a class="link ellipsis" href="{tlink}" target="_blank">{tsub}</a>',
-        'feed_template_thread_activity_body'  => '
-            <div class="feed-element-activity">
-                <a class="subject ellipsis" href="{tlink}" target="_blank">{tsub}</a>
-                <div class="activity-info">
-                    <div class="activity-info-time"><i class="time"></i>开始时间：{starttime}</div>
-                    <div class="activity-info-loca"><i class="loca"></i>活动地点：{city} - {location}</div>
-                    <div class="activity-info-msg">{message}</div>
-                </div>
-            </div>',
-
-        /*
-        * feed-thread-activity.reply
-        *
-        * @ {tid}     :帖子ID
-        * @ {tsub}    :帖子标题
-        * @ {tink}    :帖子链接
-         *
-        * B {message}   :参加理由
-         *
-        * B {starttime} :活动开始时间
-        * B {endtime}   :活动结束时间
-        * B {location}  :活动地点
-        *
-        * */
-        'feed_template_thread_activity_reply_title' => '我报名了活动<a class="link ellipsis" href="{tlink}" target="_blank">{tsub}</a>',
-        'feed_template_thread_activity_reply_body'  => '
-            <div class="feed-element-activity">
-                <div class="reason">{message}</div>
-                <a class="subject ellipsis" href="{tlink}" target="_blank">{tsub}</a>
-                <div class="activity-info">
-                    <div class="activity-info-time"><i class="time"></i>开始时间：{starttime}</div>
-                    <div class="activity-info-loca"><i class="loca"></i>活动地点：{location}</div>
-                </div>
-            </div>',
-
-        
-        /*
-        * feed-thread-goods
-        *
-        * B {tid}     :帖子ID
-        * B {tsub}    :帖子标题
-        * B {tink}    :商品链接
-         *
-        * B {itemname}    :商品名称
-        * B {itemprice}   :商品售价-货币
-        * B {itemcredit}  :商品售价-积分
-        * B {creditunit}  :积分单位
-        * B {message}     :商品摘要
-        *
-        * */
-        'feed_template_thread_goods_title'  => '我挂起了一件商品',
-        'feed_template_thread_goods_1_body' => '
-            <div class="feed-element-trade">
-                <a class="goods-name" href="{tlink}">{itemname}</a>
-                <div class="goods-info">
-                    <span>售价 {itemprice} 元</span>
-                    <span>附加 {itemcredit}{creditunit}</span>
-                    <div class="content">{message}</div>
-                </div>
-            </div>',
-        'feed_template_thread_goods_2_body' => '
-            <div class="feed-element-trade">
-                <a class="goods-name" href="{tlink}">{itemname}</a>
-                <div class="goods-info">
-                    <span>售价 {itemprice} 元</span>
-                    <div class="content">{message}</div>
-                </div>
-            </div>',
-        'feed_template_thread_goods_3_body' => '
-            <div class="feed-element-trade">
-                <a class="goods-name" href="{tlink}">{itemname}</a>
-                <div class="goods-info">
-                    <span>附加 {itemcredit}{creditunit}</span>
-                    <div class="content">{message}</div>
-                </div>
-            </div>',
-
-
-        /*
-        * feed-thread.sample
-        *
-        * B {tid}     :帖子ID
-        * B {tsub}    :帖子标题
-        * B {tink}    :帖子链接
-        * B {tdate}   :帖子时间
-         *
-        * B {uid}      :用户ID
-        * B {uname}    :用户名
-        * B {ulink}    :用户空间链接
-        * B {uavatar}  :用户头像源链接
-         *
-        * B {message}  :回贴摘要
-        *
-        * */
-        'feed_template_thread_sample_body' => '
-            <div class="feed-element-thread-sample">
-                <a class="user-tag" href="{ulink}" target="_blank" c="1">
-                    <s class="avatar"><img class="avatar-main" src="{uavatar}"></s>
-                    <s class="username">{uname}</s>
-                    <s class="time">{tdate}</s>
-                </a>
-                <div class="content">{message}</div>
-            </div>',
         
 
         /*
@@ -428,8 +24,8 @@
         * @ {uavatar}  :用户头像源链接
         *
         * */
-        'feed_template_showcredit_title'      => '我给<a class="link ellipsis" href="{ulink}" target="_blank" c="1">{uname}</a>充电<i class="highlight-gold">{credit}</i>，助力<a class="link" href="misc.php?mod=ranklist&type=member" target="_blank">续航榜</a>排名',
-        'feed_template_showcredit_self_title' => '我为自己充电<i class="highlight-gold">{credit}</i>，提升了<a class="link" href="misc.php?mod=ranklist&type=member" target="_blank">续航榜</a>中的名次',
+        'feed_template_showcredit_title'      => '给<a class="link ellipsis" href="{ulink}" target="_blank" c="1">{uname}</a>充电<i class="highlight-gold">{credit}</i>，助力<a class="link" href="misc.php?mod=ranklist&type=member" target="_blank">续航榜</a>排名',
+        'feed_template_showcredit_self_title' => '为自己充电<i class="highlight-gold">{credit}</i>，提升了<a class="link" href="misc.php?mod=ranklist&type=member" target="_blank">续航榜</a>中的名次',
         'feed_template_showcredit_body'       => '
             <div class="feed-element-charge">
                 <div class="feed-decrater">
@@ -490,6 +86,403 @@
 /***********************************************************************************************************************/
 
 /* ↓ ↓ ↓ ↓  Finished  ↓ ↓ ↓ ↓ */
+
+        'feed_attach'        => '内容附件',
+        'feed_poll'          => '发起了新投票',
+        'feed_comment_poll'  => '评论了 {touser} 的投票 {poll}',
+        'feed_comment_event' => '在 {touser} 组织的活动 {event} 中留言了',
+        'feed_task'          => '完成了有奖任务 {task}',
+        'feed_task_credit'   => '完成了有奖任务 {task}，领取了 {credit} 个奖励积分',
+        'feed_add_attachsize' => '用 {credit} 个积分兑换了 {size} 附件空间，可以上传更多的图片啦(<a href="home.php?mod=spacecp&ac=credit&op=addsize">我也来兑换</a>)',
+
+
+        /*
+         * 参数注释标志：
+         * @ - title或body
+         * T - 仅title
+         * B - 仅body
+         *
+         * 通用扩展参数::为【避免】【系统更新】和【模板更新】导致【早期数据库】中【参数不足】问题，预留给后期增加参数使用。
+         * B {expend0~8}
+         *
+         * */
+
+
+        /*
+        * feed-thread.ban
+        *
+        * T {content}     :帖子ID
+         *
+        * B {content}      :用户ID
+        *
+        * */
+        'feed_template_sitefeed_title' => '系统动态：{content}',
+        'feed_template_sitefeed_body'   => '<div class="feed-element-sitefeed">{content}</div>',
+
+
+        /*
+        * feed-thread.ban
+        *
+        * @ {tid}     :帖子ID
+        * @ {tsub}    :帖子标题
+        * @ {tink}    :帖子链接
+         *
+        * B {uid}      :用户ID
+        * B {uname}    :用户名
+        * B {ulink}    :用户空间链接
+        * B {uavatar}  :用户头像源链接
+        *
+        * */
+        'feed_template_need_payoff_body' => '<div class="feed-element-thread-ban"><a class="btn-shadow redirect-needed" href="{tlink}">此帖为付费内容，需转至原文后查看</a></div>',
+        'feed_template_need_perm_body'   => '<div class="feed-element-thread-ban"><a class="btn-shadow redirect-needed" href="{tlink}">此贴要求一定的等级权限，需转至原文查看</a></div>',
+        'feed_template_post_baned_body'  => '<div class="feed-element-thread-ban"><a class="btn-shadow redirect-needed" href="{tlink}">此内容被屏蔽</a></div>',
+
+        'feed_template_quote_need_payoff_body' => '
+            <div class="feed-element-thread-ban">
+                <a class="user-tag" href="{ulink}" target="_blank" c="1">
+                    <s class="avatar"><img class="avatar-main" src="{uavatar}"></s>
+                    <s class="username ellipsis">{uname}</s>
+                </a>
+                <a class="btn-shadow redirect-needed" href="{tlink}">此帖为付费内容，需转至原文后查看</a>
+            </div>',
+
+        'feed_template_quote_need_perm_body'   => '
+            <div class="feed-element-thread-ban">
+                <a class="user-tag" href="{ulink}" target="_blank" c="1">
+                    <s class="avatar"><img class="avatar-main" src="{uavatar}"></s>
+                    <s class="username ellipsis">{uname}</s>
+                </a>
+                <a class="btn-shadow redirect-needed" href="{tlink}">此贴要求一定的等级权限，需转至原文查看</a>
+            </div>',
+
+        'feed_template_quote_post_baned_body'  => '
+            <div class="feed-element-thread-ban">
+                <a class="user-tag" href="{ulink}" target="_blank" c="1">
+                    <s class="avatar"><img class="avatar-main" src="{uavatar}"></s>
+                    <s class="username ellipsis">{uname}</s>
+                </a>
+                <a class="btn-shadow redirect-needed" href="{tlink}">此内容被屏蔽</a>
+            </div>',
+        'feed_template_quote_post_no_msg_body'  => '
+            <div class="feed-element-thread-ban">
+                <a class="user-tag" href="{ulink}" target="_blank" c="1">
+                    <s class="avatar"><img class="avatar-main" src="{uavatar}"></s>
+                    <s class="username ellipsis">{uname}</s>
+                </a>
+                <a class="btn-shadow redirect-needed" href="{tlink}">文章内无文字信息，嵌套内容需转至原文查看</a>
+            </div>',
+
+        
+        /*
+        * feed-thread.sample
+        *
+        * B {tid}     :帖子ID
+        * B {tsub}    :帖子标题
+        * B {tink}    :帖子链接
+        * B {tdate}   :帖子时间
+         *
+        * B {uid}      :用户ID
+        * B {uname}    :用户名
+        * B {ulink}    :用户空间链接
+        * B {uavatar}  :用户头像源链接
+         *
+        * B {message}  :回贴摘要
+        *
+        * */
+        'feed_template_thread_sample_body' => '
+            <div class="feed-element-thread-sample">
+                <a class="user-tag" href="{ulink}" target="_blank" c="1">
+                    <s class="avatar"><img class="avatar-main" src="{uavatar}"></s>
+                    <s class="username ellipsis">{uname}</s>
+                    <s class="date">发布于 {tdate}</s>
+                </a>
+                <div class="content">{message}</div>
+            </div>',
+
+        
+        /*
+        * feed-thread
+        *
+        * @ {tid}     :帖子ID
+        * @ {tsub}    :帖子标题
+        * @ {tink}    :帖子链接
+         *
+        * B {uid}      :用户ID
+        * B {uname}    :用户名
+        * B {ulink}    :用户空间链接
+        * B {uavatar}  :用户头像源链接
+         *
+        * B {message}  :帖子摘要
+        *
+        * */
+        'feed_template_thread_title' => '发表了帖子<a class="link ellipsis" href="{tlink}" target="_blank">{tsub}</a>',
+        'feed_template_thread_body'  => '
+            <div class="feed-element-thread">
+                <div class="content">{message}</div>
+            </div>',
+
+
+        /*
+        * feed-thread.reply
+        *
+        * @ {tid}     :帖子ID
+        * @ {tsub}    :帖子标题
+        * @ {tink}    :帖子链接
+         *
+        * @ {uid}      :用户ID
+        * @ {uname}    :用户名
+        * @ {ulink}    :用户空间链接
+        * @ {uavatar}  :用户头像源链接
+         *
+        * B {message}  :回贴摘要
+        *
+        * */
+        'feed_template_thread_reply_title'   => '在 <a class="link ellipsis" href="{ulink}" target="_blank" c="1">{uname}</a> 的帖子 <a class="link ellipsis" href="{tlink}" target="_blank">{tsub}</a>中回复道',
+        'feed_template_thread_reply_a_title' => '在帖子 <a class="link ellipsis" href="{tlink}" target="_blank">{tsub}</a>中回复道',
+        'feed_template_thread_reply_body'    => '
+            <div class="feed-element-thread-reply">
+                <div class="content">{message}</div>
+            </div>',
+
+
+        /*
+        * feed-thread-reward
+        *
+        * @ {tid}     :帖子ID
+        * @ {tsub}    :帖子标题
+        * @ {tlink}    :帖子链接
+         *
+        * B {uid}      :用户ID
+        * B {uname}    :用户名
+        * B {ulink}    :用户空间链接
+        * B {uavatar}  :用户头像源链接
+         *
+        * B {message}     :问题摘要
+        * B {price}       :悬赏值
+        * B {extcredits}  :货币单位
+        *
+        * */
+        'feed_template_thread_reward_title' => '发起了提问<a class="link ellipsis" href="{tlink}" target="_blank">{tsub}</a>',
+        'feed_template_thread_reward_body'  => '
+            <div class="feed-element-thread-reward">
+                <a class="reward" href="{tlink}" target="_blank">悬赏 {price} {extcredits}</a>
+            </div>',
+
+
+        /*
+        * feed-thread-reward.reply
+        *
+        * @ {tid}     :帖子ID
+        * @ {tsub}    :帖子标题
+        * @ {tink}    :帖子链接
+         *
+        * @ {message} :回答
+        *
+        * */
+        'feed_template_thread_reward_reply_title' => '回答了 <a class="link ellipsis" href="{ulink}" target="_blank" c="1">{uname}</a> 的提问 <a class="link ellipsis" href="{tlink}" target="_blank">{tsub}</a>',
+        'feed_template_thread_reward_reply_body'  => '
+            <div class="feed-element-thread-reward-reply">
+                <div class="content">{message}</div>
+            </div>',
+
+        
+        /*
+        * feed-thread-debate
+        *
+        * @ {tid}     :帖子ID
+        * @ {tsub}    :帖子标题
+        * @ {tink}    :帖子链接
+         *
+        * B {uid}      :用户ID
+        * B {uname}    :用户名
+        * B {ulink}    :用户空间链接
+        * B {uavatar}  :用户头像源链接
+         *
+        * B {message}      :摘要
+        * B {affirmpoint}  :红方观点
+        * B {negapoint}    :蓝方观点
+        *
+        * */
+        'feed_template_thread_debate_title' => '发起了辩论<a class="link ellipsis" href="{tlink}" target="_blank">{tsub}</a>',
+        'feed_template_thread_debate_body'  => '
+            <div class="feed-element-thread-debate">
+                <div class="content">{message}</div>
+                <div class="attitude">
+                    <i>红方：{affirmpoint}</i>
+                    <i>蓝方：{negapoint}</i>
+                </div>
+            </div>',
+
+
+        /*
+        * feed-thread-debate.vote
+        *
+        * @ {tid}     :帖子ID
+        * @ {tsub}    :帖子标题
+        * @ {tink}    :帖子链接
+         *
+        * T {stand}    :立场
+         *
+        * B {message}  :辩论词
+        *
+        * */
+        'feed_vote'   => '中立',
+        'feed_vote_1' => '红方',
+        'feed_vote_2' => '蓝方',
+        'feed_template_thread_debate_vote_title'   => '以 <i class="highlight-strong">{stand}</i> 立场加入了辩论 <a class="link ellipsis" href="{tlink}" target="_blank">{tsub}</a>',
+        'feed_template_thread_debate_vote_body' => '
+            <div class="feed-element-thread-debate-vote">
+                <div class="content">{message}</div>
+            </div>',
+
+
+        /*
+        * feed-thread-poll
+        *
+        * @ {tid}     :帖子ID
+        * @ {tsub}    :帖子标题
+        * @ {tink}    :帖子链接
+         *
+        * B {uid}      :用户ID
+        * B {uname}    :用户名
+        * B {ulink}    :用户空间链接
+        * B {uavatar}  :用户头像源链接
+         *
+        * B {option}   :投票介绍
+        * B {message}  :投票选项
+        *
+        * */
+        'feed_template_thread_poll_title' => '发起投票<a class="link ellipsis" href="{tlink}" target="_blank">{tsub}</a>',
+        'feed_template_thread_poll_body'  => '
+            <div class="feed-element-thread-poll">
+                <div class="content">{message}</div>
+                <div class="options">本次投票有以下选项可选：<ul class="feed-element-poll-options">{option}</ul></div>
+            </div>',
+
+
+        /*
+        * feed-thread-poll.vote
+        *
+        * @ {tid}     :帖子ID
+        * @ {tsub}    :帖子标题
+        * @ {tink}    :帖子链接
+         *
+        * B {uid}      :用户ID
+        * B {uname}    :用户名
+        * B {ulink}    :用户空间链接
+        * B {uavatar}  :用户头像源链接
+         *
+        * B {option}   :投出的票
+        *
+        * */
+        'feed_template_thread_poll_vote_title' => '参与投票<a class="link ellipsis" href="{tlink}" target="_blank">{tsub}</a>',
+        'feed_template_thread_poll_vote_body'  => '
+            <div class="feed-element-thread-poll-vote">
+                <div class="options">我将选票投给了：<ul class="feed-element-poll-options">{option}</ul></div>
+            </div>',
+
+        'feed_template_thread_poll_vote_withimg_title' => '我参与了图片投票<a class="link ellipsis" href="{tlink}" target="_blank">{tsub}</a>',
+        'feed_template_thread_poll_vote_withimg_body'  => '
+            <div class="feed-element-thread-poll-vote">
+                <div class="options">我将选票投给了：<ul class="feed-element-poll-options">{option}</ul></div>
+            </div>',
+
+        
+        /*
+        * feed-thread-activity
+        *
+        * @ {tid}     :帖子ID
+        * @ {tsub}    :帖子标题
+        * @ {tink}    :帖子链接
+         *
+        * B {uid}      :用户ID
+        * B {uname}    :用户名
+        * B {ulink}    :用户空间链接
+        * B {uavatar}  :用户头像源链接
+         *
+        * B {starttime}    :活动开始时间
+        * B {endtime}      :活动结束时间
+        * B {endtimemark}  :活动结束时间标志
+        * B {city}         :活动所在城市
+        * B {location}     :活动地点
+        * B {message}      :活动介绍
+        *
+        * */
+        'feed_template_thread_activity_title' => '发起活动<a class="link ellipsis" href="{tlink}" target="_blank">{tsub}</a>',
+        'feed_template_thread_activity_body'  => '
+            <div class="feed-element-thread-activity">
+                <div class="content">{message}</div>
+                <div class="feed-element-thread-activity-info">
+                    <div class="time"><i class="icon ft-clock"></i>时间：{starttime}<i class="time-E {endtimemark}"> - {endtime}</i></div>
+                    <div class="loca"><i class="icon ft-compass"></i>地点：{city} - {location}</div>
+                </div>
+            </div>',
+
+        /*
+        * feed-thread-activity.reply
+        *
+        * @ {tid}     :帖子ID
+        * @ {tsub}    :帖子标题
+        * @ {tink}    :帖子链接
+         *
+        * B {message}   :参加理由
+         *
+        * B {starttime}    :活动开始时间
+        * B {endtime}      :活动结束时间
+        * B {endtimemark}  :活动结束时间标志
+        * B {location}     :活动地点
+        *
+        * */
+        'feed_template_thread_activity_reply_title' => '报名活动<a class="link ellipsis" href="{tlink}" target="_blank">{tsub}</a>',
+        'feed_template_thread_activity_reply_body'  => '
+            <div class="feed-element-thread-activity">
+                <div class="content">{message}</div>
+                <div class="feed-element-thread-activity-info">
+                    <div class="time"><i class="icon ft-clock"></i>时间：{starttime}<i class="time-E {endtimemark}"> - {endtime}</i></div>
+                    <div class="loca"><i class="icon ft-compass"></i>地点：{city} - {location}</div>
+                </div>
+            </div>',
+
+
+        /*
+        * feed-thread-goods
+        *
+        * B {tid}     :帖子ID
+        * B {tsub}    :帖子标题
+        * B {tink}    :商品链接
+         *
+        * B {itemname}    :商品名称
+        * B {itemprice}   :商品售价-货币
+        * B {itemcredit}  :商品售价-积分
+        * B {creditunit}  :积分单位
+        * B {message}     :商品摘要
+        *
+        * */
+        'feed_template_thread_goods_title'  => '我挂起了一件商品',
+        'feed_template_thread_goods_1_body' => '
+            <div class="feed-element-thread-trade">
+                <div class="goods-info">
+                    <a class="goods-info-name" href="{tlink}">{itemname}</a>
+                    <span class="goods-info-price">售价{itemprice}元，附加{itemcredit}{creditunit}</span>
+                </div>
+                <div class="content">{message}</div>
+            </div>',
+        'feed_template_thread_goods_2_body' => '
+            <div class="feed-element-thread-trade">
+                <div class="goods-info">
+                    <a class="goods-info-name" href="{tlink}">{itemname}</a>
+                    <span class="goods-info-price">售价{itemprice} 元</span>
+                </div>
+                <div class="content">{message}</div>
+            </div>',
+        'feed_template_thread_goods_3_body' => '
+            <div class="feed-element-thread-trade">
+                <div class="goods-info">
+                    <a class="goods-info-name" href="{tlink}">{itemname}</a>
+                    <span class="goods-info-price">售价{itemcredit}{creditunit}</span>
+                </div>
+                <div class="content">{message}</div>
+            </div>',
 
 
         /*

@@ -75,7 +75,9 @@
         }
         
         $vuid = $view == 'other' ? 0 : $_G['uid'];
+        
         $list = getfollowfeed($vuid, $view, false, $start, $perpage);
+        
         if ((empty($list['feed']) || count($list['feed']) < 20) && (!empty($list['user']) || $view == 'other')) {
             $primary = 0;
             $alist = getfollowfeed($vuid, $view, true, $start, $perpage);

@@ -1,12 +1,11 @@
-<div class="whitespace cn">
-    <!--{template home/space_home_follow_mod_form}-->
+<div class="place-holder cn">
+    <!--{subtemplate home/space_home_follow_mod_form}-->
 
     <!--{if in_array($do, ['feed', 'view'])}-->
 
         <!--{if !empty($list['feed'])}-->
             <ul class="timeline" id="follow_list">
-                <!--{eval $beforeuser = 0; $hiddennum = 0; $carray = array();}-->
-
+                <!--{eval $beforeuser = 0; $hiddennum = 0; $carray = [];}-->
                 <!--{eval $followday = '';}-->
                 <!--{eval $followmin = '';}-->
 
@@ -15,28 +14,25 @@
                 <!--{/loop}-->
 
                 <!--{if count($list['feed']) > 19 && ($archiver || $primary)}-->
-                <li class="node">
-                    <div class="n-right">
-                        <div id="loadingfeed"><a onclick="loadmore();return false;">{lang follow_more}</a></div>
-                        <iframe id="downloadframe" name="downloadframe" width="0" height="0" marginwidth="0" frameborder="0" src="about:blank"></iframe>
-                        <script>
-                            function succeedhandle_attachpay(url, msg, values) {
-                                hideWindow('attachpay');
-                                window.location.href = url;
-                                //$('downloadframe').src = url;
-                            }
-                        </script>
-                    </div>
-                </li>
+                    <li class="node">
+                        <div class="n-right">
+                            <div id="loadingfeed"><a onclick="loadmore();return false;">{lang follow_more}</a></div>
+                            <iframe class="hide" id="downloadframe" name="downloadframe" src="about:blank"></iframe>
+                            <script>
+                                function succeedhandle_attachpay(url, msg, values) {
+                                    hideWindow('attachpay');
+                                    window.location.href = url;
+                                    //$('downloadframe').src = url;
+                                }
+                            </script>
+                        </div>
+                    </li>
                 <!--{/if}-->
             </ul>
         <!--{else}-->
-            <div class="vessel withedge">
-                <div class="global_nothing">
-                    <!--{if $viewself}-->{lang follow_following_null}<!--{else}-->{lang follow_no_content}<!--{/if}-->
-                    <!--{if $do == 'feed' && $view == 'special'}--><p>{lang follow_add_special_tip}<a href="home.php?mod=follow&do=following&uid=$uid">{lang follow_add_special_following}</a></p><!--{/if}-->
-                </div>
-            </div>
+
+            <!--{subtemplate home/space_home_mod_timeline_empty}-->
+
             <!--{if !empty($recommend) && $showrecommend && $view != 'special'}-->
                 <!--{eval $showrecommend = false;}-->
                 <h3>{lang follow_recommend}</h3>
@@ -51,6 +47,57 @@
                 <!--{/loop}-->
             <!--{/if}-->
         <!--{/if}-->
+        <script>
+            addEvent(document,'DOMContentLoaded',function () {
+                let postform = SR('#fastpostform')[0],
+                    page = SR('#pager_follow')[0],
+                    scrltem = 0,
+                    positionfix = function (){
+                        if(SRGlobal.Window.Width <= 1680){
+                            postform.style = '';
+                            if(SRGlobal.Window.Scroll.DirY === 'down'){
+                                scrltem = SRGlobal.Window.Scroll.Top;
+                                if(page) page.addClass('sleep');
+                                if(postform) postform.addClass('sleep');
+                            } else if(scrltem - SRGlobal.Window.Scroll.Top > Math.min(640, MasElements.viewer.scrollHeight - SRGlobal.Window.Height - 20)) {
+                                if(page) page.delClass('sleep');
+                                if(postform) postform.delClass('sleep');
+                            }
+                        }
+                    },
+                    Tl = SR('.timeline')[0],
+                    Ts = SR('.time-A'),
+                    Th = Ts[0].Css.height,
+                    TsOn = function (){
+                        for (let i=0 ; i <Ts.length; i++){
+                            if(Ts[i].parentNode.Css.top < 82 && (isUndefined(Ts[i+1]) || Ts[i+1].parentNode.Css.top > 82)){
+                                Ts[i].style = 'position: fixed; top: 82px;';
+                                Ts[i].parentNode.style = 'padding-top:' + Th + 'px;';
+                            } else {
+                                Ts[i].style = Ts[i].parentNode.style = '';
+                            }
+                        }
+                    };
+
+                if(MasElements.viewer.scrollHeight <= SRGlobal.Window.Height){
+                    Tl.style.marginBottom = '200px';
+                }
+
+                if(page) {
+                    page.addClass('sleep');
+                }
+
+                if(postform) {
+                    postform.addClass('sleep');
+                    addEvent(MasElements.viewer,'scroll',positionfix);
+                }
+
+                if(Tl) {
+                    addEvent(MasElements.viewer,'scroll',TsOn);
+                }
+            });
+        </script>
+
         <!--{if count($list['feed']) > 19 && ($archiver || $primary)}-->
             <script>
                 var scrollY = 0;
@@ -113,6 +160,7 @@
                 }
             </script>
         <!--{/if}-->
+
         <script>
             var boxflag = {};
             var parentReplyId = '';
@@ -334,56 +382,5 @@
                 ele.innerHTML = s;
             });
         }
-    </script>
-
-    <script>
-        addEvent(document,'DOMContentLoaded',function () {
-            let postform = SR('#fastpostform')[0],
-                page = SR('#pager_follow')[0],
-                scrltem = 0,
-                positionfix = function (){
-                    if(SRGlobal.Window.Width <= 1680){
-                        postform.style = '';
-                        if(SRGlobal.Window.Scroll.DirY === 'down'){
-                            scrltem = SRGlobal.Window.Scroll.Top;
-                            if(page) page.addClass('sleep');
-                            if(postform) postform.addClass('sleep');
-                        } else if(scrltem - SRGlobal.Window.Scroll.Top > Math.min(640, MasElements.viewer.scrollHeight - SRGlobal.Window.Height - 20)) {
-                            if(page) page.delClass('sleep');
-                            if(postform) postform.delClass('sleep');
-                        }
-                    }
-                },
-                Tl = SR('.timeline')[0],
-                Ts = SR('.time-A'),
-                Th = Ts[0].Css.height,
-                TsOn = function (){
-                    for (let i=0 ; i <Ts.length; i++){
-                        if(Ts[i].parentNode.Css.top < 82 && (isUndefined(Ts[i+1]) || Ts[i+1].parentNode.Css.top > 82)){
-                            Ts[i].style = 'position: fixed; top: 82px;';
-                            Ts[i].parentNode.style = 'padding-top:' + Th + 'px;';
-                        } else {
-                            Ts[i].style = Ts[i].parentNode.style = '';
-                        }
-                    }
-                };
-
-            if(MasElements.viewer.scrollHeight <= SRGlobal.Window.Height){
-                Tl.style.marginBottom = '200px';
-            }
-
-            if(page) {
-                page.addClass('sleep');
-            }
-
-            if(postform) {
-                postform.addClass('sleep');
-                addEvent(MasElements.viewer,'scroll',positionfix);
-            }
-
-            if(Tl) {
-                addEvent(MasElements.viewer,'scroll',TsOn);
-            }
-        });
     </script>
 </div>

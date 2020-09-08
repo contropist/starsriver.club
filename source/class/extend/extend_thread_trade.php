@@ -170,7 +170,7 @@
                         'tsub'  => $this->param['subject'],
                         'tlink' => $goods_url,
                         
-                        'itemname'   => $_GET['item_name'],
+                        'itemname'   => messagecutstr(dhtmlspecialchars($_GET['item_name']), 30),
                         'itemprice'  => $_GET['item_price'],
                         'itemcredit' => $_GET['item_credit'],
                         'creditunit' => $extcredits[$transextra[5]]['unit'] . $extcredits[$transextra[5]]['title'],
@@ -271,7 +271,7 @@
                         'tsub'  => $this->thread['subject'],
                         'tlink' => $goods_url,
                     
-                        'itemname'   => dhtmlspecialchars($_GET['item_name']),
+                        'itemname'   => messagecutstr(dhtmlspecialchars($_GET['item_name']), 30),
                         'itemprice'  => $_GET['item_price'],
                         'itemcredit' => $_GET['item_credit'],
                         'creditunit' => $extcredits[$transextra[5]]['unit'] . $extcredits[$transextra[5]]['title'],
