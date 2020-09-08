@@ -24,22 +24,22 @@
         * @ {uavatar}  :用户头像源链接
         *
         * */
-        'feed_template_showcredit_title'      => '给<a class="link ellipsis" href="{ulink}" target="_blank" c="1">{uname}</a>充电<i class="highlight-gold">{credit}</i>，助力<a class="link" href="misc.php?mod=ranklist&type=member" target="_blank">续航榜</a>排名',
-        'feed_template_showcredit_self_title' => '为自己充电<i class="highlight-gold">{credit}</i>，提升了<a class="link" href="misc.php?mod=ranklist&type=member" target="_blank">续航榜</a>中的名次',
+        'feed_template_showcredit_title'      => '给<a class="link ellipsis" href="{ulink}" target="_blank" c="1">{uname}</a>充电<i class="highlight-gold">{credit}</i>，助力<a class="link ellipsis" href="misc.php?mod=ranklist&type=member" target="_blank">续航榜</a>排名',
+        'feed_template_showcredit_self_title' => '为自己充电<i class="highlight-gold">{credit}</i>，提升了<a class="link ellipsis" href="misc.php?mod=ranklist&type=member" target="_blank">续航榜</a>中的名次',
         'feed_template_showcredit_body'       => '
             <div class="feed-element-charge">
-                <div class="feed-decrater">
-                    <i>{credit}</i>
-                    <i>{credit}</i>
-                    <i>{credit}</i>
-                    <i>{credit}</i>
-                    <i>{credit}</i>
-                    <i>{credit}</i>
-                    <i>{credit}</i>
-                    <i>{credit}</i>
-                    <i>{credit}</i>
-                    <i>{credit}</i>
-                    <i>{credit}</i>
+                <div class="feed-decrater animation-sublimation">
+                    <i>+{credit}</i>
+                    <i>+{credit}</i>
+                    <i>+{credit}</i>
+                    <i>+{credit}</i>
+                    <i>+{credit}</i>
+                    <i>+{credit}</i>
+                    <i>+{credit}</i>
+                    <i>+{credit}</i>
+                    <i>+{credit}</i>
+                    <i>+{credit}</i>
+                    <i>+{credit}</i>
                 </div>
                 <a class="user-tag" href="{ulink}" target="_blank">
                     <s class="avatar"><img class="avatar-main" src="{uavatar}"></s>
@@ -462,24 +462,24 @@
         'feed_template_thread_goods_1_body' => '
             <div class="feed-element-thread-trade">
                 <div class="goods-info">
-                    <a class="goods-info-name" href="{tlink}">{itemname}</a>
-                    <span class="goods-info-price">售价{itemprice}元，附加{itemcredit}{creditunit}</span>
+                    <a class="goods-info-name" href="{tlink}" target="_blank">{itemname}</a>
+                    <a class="goods-info-price" href="{tlink}" target="_blank">售价{itemprice}元，附加{itemcredit}{creditunit}</a>
                 </div>
                 <div class="content">{message}</div>
             </div>',
         'feed_template_thread_goods_2_body' => '
             <div class="feed-element-thread-trade">
                 <div class="goods-info">
-                    <a class="goods-info-name" href="{tlink}">{itemname}</a>
-                    <span class="goods-info-price">售价{itemprice} 元</span>
+                    <a class="goods-info-name" href="{tlink}" target="_blank">{itemname}</a>
+                    <a class="goods-info-price" href="{tlink}" target="_blank">售价{itemprice} 元</a>
                 </div>
                 <div class="content">{message}</div>
             </div>',
         'feed_template_thread_goods_3_body' => '
             <div class="feed-element-thread-trade">
                 <div class="goods-info">
-                    <a class="goods-info-name" href="{tlink}">{itemname}</a>
-                    <span class="goods-info-price">售价{itemcredit}{creditunit}</span>
+                    <a class="goods-info-name" href="{tlink}" target="_blank">{itemname}</a>
+                    <a class="goods-info-price" href="{tlink}" target="_blank">售价{itemcredit}{creditunit}</a>
                 </div>
                 <div class="content">{message}</div>
             </div>',
@@ -538,8 +538,8 @@
         * @ {to_uname}    :用户名
         * @ {to_ulink}    :用户空间链接
         * @ {to_uavatar}  :用户头像源链接
-        * @ {blog_url}      :博客链接
-        * @ {blog_sub}      :博客标题
+        * @ {blog_url}    :博客链接
+        * @ {blog_sub}    :博客标题
          *
         * T {click}       :click类型
          *

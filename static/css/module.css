@@ -7311,12 +7311,10 @@
         left: -500px;
         z-index: -50;
         opacity: .02;
-        animation-name: rotate;
-        animation-duration: 320s;
-        animation-timing-function: linear;
+        animation: rotate 320s linear infinite;
         animation-direction: revert;
         animation-play-state: running;
-        animation-iteration-count: infinite;
+        pointer-events: none !important;
     }
 
     /*region @space-head*/
@@ -7954,29 +7952,30 @@
             line-height: 26px;
             margin-bottom: var(--box-edge);
         }
-        .app-userspace .timeline .n-right .s-top .title{
+        .app-userspace .timeline .n-right .s-top > .title{
             display: inline-flex;
             width: 90%;
             font-size: 15px;
             line-height: 26px;
             color: var(--color-text-gray);
+            overflow: hidden;
             white-space: nowrap;
         }
-        .app-userspace .timeline .n-right .s-top .title .icon{
-            margin: 2px 8px 2px 0;
-            min-width: 25px;
-            height: 22px;
+        .app-userspace .timeline .n-right .s-top > .title .icon{
+            margin: 2px 5px 2px 0;
+            min-width: 28px;
+            height: 24px;
         }
-        .app-userspace .timeline .n-right .s-top .title .icon img{
-            height: 22px;
+        .app-userspace .timeline .n-right .s-top > .title .icon img{
+            height: 24px;
         }
-        .app-userspace .timeline .n-right .s-top .title .link{
+        .app-userspace .timeline .n-right .s-top > .title .link{
             margin: 0 5px;
             color: var(--color-main-theme-dark);
             font-size: 15px;
             font-weight: 700;
         }
-        .app-userspace .timeline .n-right .s-top .title .tag{
+        .app-userspace .timeline .n-right .s-top > .title .tag{
             padding: 0 5px;
             font-size: 14px;
             background: var(--color-main-theme);
@@ -7986,22 +7985,22 @@
             height: 22px;
             line-height: 22px;
         }
-        .app-userspace .timeline .n-right .s-top .title .highlight-pink{
+        .app-userspace .timeline .n-right .s-top > .title .highlight-pink{
             font-size: 15px;
             color: var(--color-heart-pink);
         }
-        .app-userspace .timeline .n-right .s-top .title .highlight-gold{
+        .app-userspace .timeline .n-right .s-top > .title .highlight-gold{
             font-weight: 700;
             font-size: 15px;
             color: #ffdb00;
             text-shadow: 1px 1px 1px #d86d22;
         }
-        .app-userspace .timeline .n-right .s-top .title .highlight-strong{
+        .app-userspace .timeline .n-right .s-top > .title .highlight-strong{
             font-weight: 700;
             margin: 0 5px;
             color: #000;
         }
-        .app-userspace .timeline .n-right .s-top .censor{
+        .app-userspace .timeline .n-right .s-top > .censor{
             background: var(--color-heart-pink) !important;
             font-size: 12px !important;
         }
@@ -8024,21 +8023,22 @@
         .app-userspace .timeline .n-right .s-center > .message + [class^="share-element"]{
             margin-top: var(--box-edge);
         }
-        .app-userspace .timeline .n-right .s-center .flow-comment-list{
+        .app-userspace .timeline .n-right .s-center > .flow-comment-list{
             position: relative;
             margin-top: var(--box-edge);
             border-left: 2px dashed var(--line-color);
             padding-left: 10px;
         }
-        .app-userspace .timeline .n-right .s-center .flow-comment-list .height-limited{
+        .app-userspace .timeline .n-right .s-center > .flow-comment-list .height-limited{
             max-height: 300px;
         }
         .app-userspace .timeline .n-right .s-end {
             display: flex;
             justify-content: flex-end;
         }
-        .app-userspace .timeline .n-right .s-end .icon {
+        .app-userspace .timeline .n-right .s-end > .icon {
             display: inline-flex;
+            justify-content: center;
             background: var(--color-lightgray);
             color: var(--color-text-lightgray);
             min-width: 30px;
@@ -8047,19 +8047,18 @@
             border-radius: 15px;
             font-size: 18px;
             line-height: 30px;
-            text-align: center;
         }
-        .app-userspace .timeline .n-right .s-end .icon:hover {
+        .app-userspace .timeline .n-right .s-end > .icon:hover {
             background: var(--color-sky-blue);
             color: #fff;
         }
-        .app-userspace .timeline .n-right .s-end .icon.on-count {
+        .app-userspace .timeline .n-right .s-end > .icon.on-count {
             padding: 0 10px;
         }
-        .app-userspace .timeline .n-right .s-end .icon.on-count:before {
+        .app-userspace .timeline .n-right .s-end > .icon.on-count:before {
             margin-right: 5px;
         }
-        .app-userspace .timeline .n-right .s-end .icon span {
+        .app-userspace .timeline .n-right .s-end > .icon span {
             font-size: 12px;
         }
 
@@ -8083,14 +8082,14 @@
         .app-userspace .page{
             z-index: 3;
             position: fixed;
-            left: var(--width-mas-guide);
-            bottom: 20px;
+            left: calc(var(--width-mas-guide) + 760px);
+            bottom: 39px;
             background: #fff;
-            padding: 13px 80px 14px 10px;
+            padding: 20px;
             box-shadow: 0 0 10px rgba(0,0,0,.1);
             box-sizing: border-box;
-            width: calc(100% - var(--width-mas-guide));
-            height: 71px;
+            width: 460px;
+            border-radius: 4px;
         }
         .app-userspace .page .viewmore{
             line-height: 32px;
@@ -8109,6 +8108,15 @@
         }
 
         @media screen and (max-width:1470px) {
+            .app-userspace .page{
+                left: var(--width-mas-guide);
+                bottom: 20px;
+                padding: 13px 80px 14px 10px;
+                width: calc(100% - var(--width-mas-guide));
+                height: 71px;
+                border-radius: 0;
+            }
+
             .app-userspace .timeline{
                 margin: 0 auto;
             }
@@ -8167,7 +8175,6 @@
                 display: inline-block;
             }
         }
-
     /*endregion*/
 
     /*region @share-element*/
@@ -8553,12 +8560,18 @@
         }
 
         .app-userspace .feed-element-sitefeed{
-
+            bottom: 0;
         }
 
         .app-userspace .feed-element-friend{
+            --avatar-size: 96px;
             display: flex;
             flex-flow: row nowrap;
+        }
+.WL-0   .app-userspace .feed-element-friend,
+.WL-3P  .app-userspace .feed-element-friend,
+.WL-4P  .app-userspace .feed-element-friend{
+            --avatar-size: 72px;
         }
         .app-userspace .feed-element-friend .friend-A{
             width: 50%;
@@ -8570,12 +8583,47 @@
         }
         .app-userspace .feed-element-friend .user-tag .avatar{
             position: relative;
-            width: 96px;
-            height: 96px;
+            width: var(--avatar-size);
+            height: var(--avatar-size);
         }
 
         .app-userspace .feed-element-charge{
+            --avatar-size: 96px;
+            display: flex;
+            justify-content: center;
+            position: relative;
+        }
+.WL-0   .app-userspace .feed-element-charge,
+.WL-3P  .app-userspace .feed-element-charge,
+.WL-4P  .app-userspace .feed-element-charge{
+            --avatar-size: 72px;
+        }
+        .app-userspace .feed-element-charge .user-tag{
+            display: flex;
+            flex-flow: column;
+            align-items: center;
+            width: 200px;
+        }
+        .app-userspace .feed-element-charge .user-tag .avatar{
+            position: relative;
+            width: var(--avatar-size);
+            height: var(--avatar-size);
+        }
+        .app-userspace .feed-element-charge .user-tag .username{
+            text-align: center;
+        }
+        .app-userspace .feed-element-charge .user-tag .avatar-decrater{
 
+        }
+        .app-userspace .feed-element-charge .feed-decrater{
+            opacity: .5;
+        }
+        .app-userspace .feed-element-charge .feed-decrater i{
+            font-family: Limelight,sans-serif !important;
+            font-weight: 700;
+            font-size: 18px;
+            color: #ffdb00;
+            text-shadow: 1px 1px 1px #d86d22;
         }
 
         .app-userspace .feed-element-magic-thunder{
@@ -8657,8 +8705,8 @@
             overflow: hidden;
         }
 .WL-0   .app-userspace .feed-element-article .image,
-.WL-4P  .app-userspace .feed-element-article .image,
-.WL-3P  .app-userspace .feed-element-article .image{
+.WL-3P  .app-userspace .feed-element-article .image,
+.WL-4P  .app-userspace .feed-element-article .image{
             max-height:110px;
         }
         .app-userspace .feed-element-article .image img{
@@ -8838,7 +8886,7 @@
             font-weight: 700;
             font-size: 14px;
             background: #ffdb00;
-            box-shadow: 0px 1px 0px 1px #f2a36c;
+            box-shadow: 0px 1px 0px 1px #ffb886;
             border-radius: 22px;
         }
 
@@ -8915,9 +8963,9 @@
             padding: 0 5px;
         }
         .app-userspace .feed-element-thread-trade .goods-info-name{
-            font-size: 20px;
+            font-size: 18px;
             font-weight: 700;
-            color: #000;
+            color: #000000;
         }
         .app-userspace .feed-element-thread-trade .goods-info-price{
             display: inline-block;
@@ -8926,7 +8974,7 @@
             font-weight: 700;
             font-size: 15px;
             background: #ffdb00;
-            box-shadow: 0px 1px 0px 1px #f2a36c;
+            box-shadow: 0px 1px 0px 1px #ffb886;
             border-radius: 22px;
             white-space: nowrap;
             height: 30px;

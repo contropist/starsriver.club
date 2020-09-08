@@ -1,3 +1,10 @@
+/********************************************************************
+ * Copyright (c) 2020 All Right Reserved By [StarsRiver]            *
+ *                                                                  *
+ * Author  Zhangyu                                                  *
+ * Email   starsriver@yahoo.com                                     *
+ ********************************************************************/
+
 /***********\
     Tool    |
 \***********/
@@ -216,7 +223,7 @@
             shadow = document.createElement('div'),
             title = document.createElement('div'),
             track = document.createElement('ul'),
-            loader = '<div class="pacman"><p></p><p></p><p></p><p></p><p></p></div>';
+            loader = '<div class="animation-pacman"><p></p><p></p><p></p><p></p><p></p></div>';
 
         slider.id = 'slider_' + s.rid;
         thumber.className = 'thumbs trans-ease-slow';

@@ -1880,7 +1880,7 @@
         width: 100% !important;
         border-radius: 0 !important;
     }
-    [id^="slider_"] .track .pacman{
+    [id^="slider_"] .track .animation-pacman{
         position: absolute;
         width: 83px;
         top: 50%;

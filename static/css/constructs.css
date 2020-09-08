@@ -2351,6 +2351,15 @@
         100%{transform:translateY(0); opacity: 1}
     }
 
+    /* Flow up */
+    @keyframes flowup {
+        0% {transform:translate3d(0,100%,0); opacity: 0}
+        25% {transform:translate3d(0,-50%,0); opacity: .8}
+        50% {transform:translate3d(0,-200%,0); opacity: 1}
+        75%{transform:translate3d(0,-350%,0); opacity: .8}
+        100%{transform:translate3d(0,-500%,0); opacity: 0}
+    }
+
     /* Star */
     @keyframes star {
         0% {transform:scale(1);}
@@ -2377,63 +2386,65 @@
     .line-scale > p:nth-child(1), .line-scale > p:nth-child(5) {  animation-delay: 0s !important; }
 
     /* Pacman  */
-    @keyframes rotate_pacman_half_up {
+    @keyframes animation-pacman-comp-half-up {
         0% {  transform: rotate(270deg); }
         50% {  transform: rotate(360deg); }
         100% {  transform: rotate(270deg); }
     }
-    @keyframes rotate_pacman_half_down {
+    @keyframes animation-pacman-comp-half-down {
         0% {  transform: rotate(90deg); }
         50% {  transform: rotate(0deg); }
         100% {  transform: rotate(90deg); }
     }
-    @keyframes pacman-balls {
+    @keyframes animation-pacman-comp-balls {
         75% {  opacity: 0.7; }
         100% {  transform: translate(-100px, -6.25px); }
     }
-    .pacman {
+
+    .animation-pacman {
+        pointer-events: none;
         position: relative;
         --entity-color: #fff;
     }
-    .pacman > p:nth-child(2) {
-        animation: pacman-balls 1s -0.99s infinite linear;
+    .animation-pacman > p:nth-child(2) {
+        animation: animation-pacman-comp-balls 1s -0.99s infinite linear;
     }
-    .pacman > p:nth-child(3) {
-        animation: pacman-balls 1s -0.66s infinite linear;
+    .animation-pacman > p:nth-child(3) {
+        animation: animation-pacman-comp-balls 1s -0.66s infinite linear;
     }
-    .pacman > p:nth-child(4) {
-        animation: pacman-balls 1s -0.33s infinite linear;
+    .animation-pacman > p:nth-child(4) {
+        animation: animation-pacman-comp-balls 1s -0.33s infinite linear;
     }
-    .pacman > p:nth-child(5) {
-        animation: pacman-balls 1s 0s infinite linear;
+    .animation-pacman > p:nth-child(5) {
+        animation: animation-pacman-comp-balls 1s 0s infinite linear;
     }
-    .pacman > p:first-of-type {
+    .animation-pacman > p:first-of-type {
         width: 0;
         height: 0;
         border: 25px solid var(--entity-color);
         border-right: 25px solid transparent;
         border-radius: 25px;
-        -webkit-animation: rotate_pacman_half_up 0.5s 0s infinite;
-        animation: rotate_pacman_half_up 0.5s 0s infinite;
+        -webkit-animation: animation-pacman-comp-half-up 0.5s 0s infinite;
+        animation: animation-pacman-comp-half-up 0.5s 0s infinite;
         position: relative !important;
         left: -30px;
     }
-    .pacman > p:nth-child(2) {
+    .animation-pacman > p:nth-child(2) {
         width: 0;
         height: 0;
         border: 25px solid var(--entity-color);
         border-right: 25px solid transparent;
         border-radius: 25px;
-        -webkit-animation: rotate_pacman_half_down 0.5s 0s infinite;
-        animation: rotate_pacman_half_down 0.5s 0s infinite;
+        -webkit-animation: animation-pacman-comp-half-down 0.5s 0s infinite;
+        animation: animation-pacman-comp-half-down 0.5s 0s infinite;
         margin-top: -50px;
         position: relative !important;
         left: -30px;
     }
-    .pacman > p:nth-child(3),
-    .pacman > p:nth-child(4),
-    .pacman > p:nth-child(5),
-    .pacman > p:nth-child(6) {
+    .animation-pacman > p:nth-child(3),
+    .animation-pacman > p:nth-child(4),
+    .animation-pacman > p:nth-child(5),
+    .animation-pacman > p:nth-child(6) {
         background-color: var(--entity-color);
         border-radius: 100%;
         margin: 2px;
@@ -2445,6 +2456,31 @@
         top: 25px;
         left: 70px;
     }
+
+    /* sublimation up */
+    .animation-sublimation{
+        position: absolute;
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: space-around;
+        width: 100%;
+        bottom: 0;
+        pointer-events: none !important;
+    }
+    .animation-sublimation i{
+        animation: flowup 2s linear infinite;
+    }
+    .animation-sublimation i:nth-child(0){animation-delay: -1.6s;}
+    .animation-sublimation i:nth-child(1){animation-delay: -0.5s;}
+    .animation-sublimation i:nth-child(2){animation-delay: -1.9s;}
+    .animation-sublimation i:nth-child(3){animation-delay: -0.7s;}
+    .animation-sublimation i:nth-child(4){animation-delay: -1.4s;}
+    .animation-sublimation i:nth-child(5){animation-delay: -0.3s;}
+    .animation-sublimation i:nth-child(6){animation-delay: -1.7s;}
+    .animation-sublimation i:nth-child(7){animation-delay: -0.5s;}
+    .animation-sublimation i:nth-child(8){animation-delay: -1.8s;}
+    .animation-sublimation i:nth-child(9){animation-delay: -0.6s;}
+    .animation-sublimation i:nth-child(10){animation-delay: -1.3s;}
 /*endregion*/
 
 /*region Hover Animation*/
@@ -2687,7 +2723,7 @@
 
 /*region Common*/
     body{
-        --loading-trans-animation: .15s ease-in-out;
+        --loading-trans-animation: .4s ease-in-out;
         --wap-width: 1140px;
     }
 
