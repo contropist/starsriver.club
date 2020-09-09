@@ -1,9 +1,9 @@
-/*----------
-|   Basic  |
-|-----------
-|  This Is A Simple Bootstrap Write For WebPages Of StarsRiver
-|  This Is Not A Free Soft Coded For StarsRiver Writed By ZhangYu CopyRight 2017-2050
------------------------------------------------------------------------------------------------------------------------*/
+/********************************************************************
+ * Copyright (c) 2020 All Right Reserved By [StarsRiver]            *
+ *                                                                  *
+ * Author  Zhangyu                                                  *
+ * Email   starsriver@yahoo.com                                     *
+ ********************************************************************/
 
 /*region Scroll Fix*/
 @-webkit-viewport {
@@ -94,10 +94,12 @@ body {
     box-shadow: 0 3px 15px rgba(101,119,134,0.3) , 0 0 30px #fff;
 }
 .login form .formhead {
-    font-size: 22px;
+    font-family: Electrolize,sans-serif !important;
+    font-size: 25px;
     font-weight: 700;
     color: #39c5bb;
     margin-top: 0;
+    margin-bottom: 10px;
 }
 
 .login form .administratorname,

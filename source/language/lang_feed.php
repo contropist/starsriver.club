@@ -25,25 +25,15 @@
         *
         * */
         'feed_template_showcredit_title'      => '给<a class="link ellipsis" href="{ulink}" target="_blank" c="1">{uname}</a>充电<i class="highlight-gold">{credit}</i>，助力<a class="link ellipsis" href="misc.php?mod=ranklist&type=member" target="_blank">续航榜</a>排名',
-        'feed_template_showcredit_self_title' => '为自己充电<i class="highlight-gold">{credit}</i>，提升了<a class="link ellipsis" href="misc.php?mod=ranklist&type=member" target="_blank">续航榜</a>中的名次',
+        'feed_template_showcredit_self_title' => '自充电<i class="highlight-gold">{credit}</i>，提升了<a class="link ellipsis" href="misc.php?mod=ranklist&type=member" target="_blank">续航榜</a>名次',
         'feed_template_showcredit_body'       => '
             <div class="feed-element-charge">
-                <div class="feed-decrater animation-sublimation">
-                    <i>+{credit}</i>
-                    <i>+{credit}</i>
-                    <i>+{credit}</i>
-                    <i>+{credit}</i>
-                    <i>+{credit}</i>
-                    <i>+{credit}</i>
-                    <i>+{credit}</i>
-                    <i>+{credit}</i>
-                    <i>+{credit}</i>
-                    <i>+{credit}</i>
-                    <i>+{credit}</i>
+                <div class="feed-element-charge-decrator">
+                    <img class="background" src="'.IMGURL.'/feed/feed-element-decoration/电力充足.svg">
                 </div>
                 <a class="user-tag" href="{ulink}" target="_blank">
                     <s class="avatar"><img class="avatar-main" src="{uavatar}"></s>
-                    <s class="username">{uname}</s>
+                    <s class="username ellipsis">{uname}</s>
                 </a>
             </div>',
 

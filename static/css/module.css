@@ -8587,43 +8587,57 @@
             height: var(--avatar-size);
         }
 
+
+         /* Special 电力充足 */
         .app-userspace .feed-element-charge{
             --avatar-size: 96px;
-            display: flex;
-            justify-content: center;
+            --username-size: 20px;
+
             position: relative;
+            display: flex;
+            flex-flow: row;
+            justify-content: center;
+            align-content: center;
+            align-items: center;
+            animation: spark 6s cubic-bezier(0, -100, 0, 100) infinite;
+            animation-delay: -1s;
         }
 .WL-0   .app-userspace .feed-element-charge,
-.WL-3P  .app-userspace .feed-element-charge,
-.WL-4P  .app-userspace .feed-element-charge{
+.WL-3P  .app-userspace .feed-element-charge{
             --avatar-size: 72px;
+            --username-size: 14px;
         }
         .app-userspace .feed-element-charge .user-tag{
+            position: absolute;
+            width: 100%;
             display: flex;
             flex-flow: column;
             align-items: center;
-            width: 200px;
+            transform: translate3d(0,5px, 0);
         }
         .app-userspace .feed-element-charge .user-tag .avatar{
             position: relative;
             width: var(--avatar-size);
             height: var(--avatar-size);
         }
+        .app-userspace .feed-element-charge .user-tag .avatar-main{
+            box-shadow: 0 0 0 5px rgba(93, 135, 148, .12);
+        }
         .app-userspace .feed-element-charge .user-tag .username{
+            width: 32%;
+            font-family: MatissePro EB, sans-serif !important;
+            font-size: var(--username-size);
             text-align: center;
+            text-transform: uppercase;
+            color: var(--color-main-theme-dark);
         }
-        .app-userspace .feed-element-charge .user-tag .avatar-decrater{
-
+        .app-userspace .feed-element-charge-decrator{
+            width: 100%;
         }
-        .app-userspace .feed-element-charge .feed-decrater{
-            opacity: .5;
-        }
-        .app-userspace .feed-element-charge .feed-decrater i{
-            font-family: Limelight,sans-serif !important;
-            font-weight: 700;
-            font-size: 18px;
-            color: #ffdb00;
-            text-shadow: 1px 1px 1px #d86d22;
+        .app-userspace .feed-element-charge-decrator .background{
+            width: 100%;
+            border-radius: 10px;
+            animation: spark 12s cubic-bezier(0, -100, 0, 100) infinite;
         }
 
         .app-userspace .feed-element-magic-thunder{
@@ -8925,13 +8939,12 @@
         }
 
         .app-userspace .feed-element-thread-activity-info{
-            margin-top: 10px;
+            margin: 10px 0;
             line-height: 20px;
-            background: var(--color-vlightgray);
-            border: 1px solid var(--color-lightgray);
             padding: 5px 10px;
-            border-radius: 4px;
+            border-radius: 10px 10px 0 0;
             overflow: auto;
+            box-shadow: 0 -3px 6px rgba(62, 101, 114, 0.13);
         }
         .app-userspace .feed-element-thread-activity-info > div{
             display: flex;

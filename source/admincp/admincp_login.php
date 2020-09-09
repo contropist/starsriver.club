@@ -1,51 +1,62 @@
 <?php
+/********************************************************************
+ * Copyright (c) 2020 All Right Reserved By [StarsRiver]            *
+ *                                                                  *
+ * Author  Zhangyu                                                  *
+ * Email   starsriver@yahoo.com                                     *
+ ********************************************************************/
+    
+    /**
+     *      [Discuz!] (C)2001-2099 Comsenz Inc.
+     *      This is NOT a freeware, use is subject to license terms
+     *
+     *      $Id: admincp_login.php 36284 2016-12-12 00:47:50Z nemohou $
+     */
+    
+    global $_G;
+    
+    if (!defined('IN_DISCUZ') || !defined('IN_ADMINCP')) {
+        exit('Access Denied');
+    }
+    
+    if ($this->core->var['inajax']) {
+        ajaxshowheader();
+        ajaxshowfooter();
+    }
+    
+    if ($this->cpaccess == -3) {
+        html_login_header(false);
+    } else {
+        html_login_header();
+    }
+    
+    
+    if ($this->cpaccess == -3) {
+        echo '<p class="logintips">' . lang('admincp_login', 'login_cp_noaccess') . '</p>';
+        
+        
+    } elseif ($this->cpaccess == -1) {
+        $ltime = $this->sessionlife - (TIMESTAMP - $this->adminsession['dateline']);
+        echo '<p class="logintips">' . lang('admincp_login', 'login_cplock', ['ltime' => $ltime]) . '</p>';
+        
+    } elseif ($this->cpaccess == -4) {
+        $ltime = $this->sessionlife - (TIMESTAMP - $this->adminsession['dateline']);
+        echo '<p class="logintips">' . lang('admincp_login', 'login_user_lock') . '</p>';
+        
+    } else {
+        html_login_form();
+    }
+    
+    html_login_footer();
+    
+    function html_login_header($form = true) {
+        global $_G;
+    
+        $charset = CHARSET;
+        $title = lang('admincp_login', 'login_title');
+        $tips = lang('admincp_login', 'login_tips');
+        echo <<<EOT
 
-/**
- *      [Discuz!] (C)2001-2099 Comsenz Inc.
- *      This is NOT a freeware, use is subject to license terms
- *
- *      $Id: admincp_login.php 36284 2016-12-12 00:47:50Z nemohou $
- */
-
-if(!defined('IN_DISCUZ') || !defined('IN_ADMINCP')) {
-	exit('Access Denied');
-}
-
-if($this->core->var['inajax']) {
-	ajaxshowheader();
-	ajaxshowfooter();
-}
-
-if($this->cpaccess == -3) {
-	html_login_header(false);
-} else {
-	html_login_header();
-}
-
-
-if($this->cpaccess == -3) {
-	echo  '<p class="logintips">'.lang('admincp_login', 'login_cp_noaccess').'</p>';
-
-
-}elseif($this->cpaccess == -1) {
-	$ltime = $this->sessionlife - (TIMESTAMP - $this->adminsession['dateline']);
-	echo  '<p class="logintips">'.lang('admincp_login', 'login_cplock', array('ltime' => $ltime)).'</p>';
-
-}elseif($this->cpaccess == -4) {
-	$ltime = $this->sessionlife - (TIMESTAMP - $this->adminsession['dateline']);
-	echo  '<p class="logintips">'.lang('admincp_login', 'login_user_lock').'</p>';
-
-} else {
-	html_login_form();
-}
-
-html_login_footer();
-
-function html_login_header($form = true) {
-	$charset = CHARSET;
-	$title = lang('admincp_login', 'login_title');
-	$tips = lang('admincp_login', 'login_tips');
-	echo <<<EOT
 <!DOCTYPE html>
 <html>
 <head>
@@ -58,34 +69,38 @@ function html_login_header($form = true) {
 <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 <title>StarsRiver 管理中心 - 登录</title>
 <link rel="stylesheet" href="static/image/admincp/src/css/login.css" type="text/css" media="all" />
+<link rel="stylesheet" href="{$_G['config']['output']['fonturl']}/GoogleFonts.css" />
+
 </head>
 <body>
+
 EOT;
-	if($form) {
-		echo <<<EOT
+        if ($form) {
+            echo <<<EOT
 <script>
 	if(self.parent.frames.length != 0) {
 		self.parent.location=document.location;
 	}
 </script>
 EOT;
-	}
-}
-function html_login_footer($halt = true) {
-	$version = getglobal('setting/version');
-	$halt && exit();
-}
-
-function html_login_form() {
-	global $_G;
-	$isguest = !getglobal('uid');
-	$lang = lang('admincp_login');
-	$loginuser = $isguest ? '<input placeholder="管理员账户"  name="admin_username" tabindex="1" type="text" class="txt" autocomplete="off"/>' : '<a class="administratorname">'.getglobal('member/username').'</a>';
-	$sid = getglobal('sid');
-	$_SERVER['QUERY_STRING'] = str_replace('&amp;', '&', dhtmlspecialchars($_SERVER['QUERY_STRING']));
-	$extra = ADMINSCRIPT.'?'.(getgpc('action') && getgpc('frames') ? 'frames=yes&' : '').$_SERVER['QUERY_STRING'];
-	$forcesecques = '<option value="0">'.($_G['config']['admincp']['forcesecques'] || $_G['group']['forcesecques'] ? $lang['forcesecques'] : $lang['security_question_0']).'</option>';
-	echo <<<EOT
+        }
+    }
+    
+    function html_login_footer($halt = true) {
+        $version = getglobal('setting/version');
+        $halt && exit();
+    }
+    
+    function html_login_form() {
+        global $_G;
+        $isguest = !getglobal('uid');
+        $lang = lang('admincp_login');
+        $loginuser = $isguest ? '<input placeholder="管理员账户"  name="admin_username" tabindex="1" type="text" class="txt" autocomplete="off"/>' : '<a class="administratorname">' . getglobal('member/username') . '</a>';
+        $sid = getglobal('sid');
+        $_SERVER['QUERY_STRING'] = str_replace('&amp;', '&', dhtmlspecialchars($_SERVER['QUERY_STRING']));
+        $extra = ADMINSCRIPT . '?' . (getgpc('action') && getgpc('frames') ? 'frames=yes&' : '') . $_SERVER['QUERY_STRING'];
+        $forcesecques = '<option value="0">' . ($_G['config']['admincp']['forcesecques'] || $_G['group']['forcesecques'] ? $lang['forcesecques'] : $lang['security_question_0']) . '</option>';
+        echo <<<EOT
 	<div class="login">
         <div class="background">
             <img class="layout1" src="{$_G['config']['output']['imgurl']}/illusion/website-template-005.svg" />
@@ -110,7 +125,5 @@ function html_login_form() {
         </form>
     </div>
 EOT;
-		echo '<script>document.getElementById(\'loginform\').admin_'.($isguest ? 'username' : 'password').'.focus();</script>';
-}
-
-?>
+        echo '<script>document.getElementById(\'loginform\').admin_' . ($isguest ? 'username' : 'password') . '.focus();</script>';
+    }

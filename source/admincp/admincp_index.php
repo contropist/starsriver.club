@@ -1,4 +1,10 @@
 <?php
+/********************************************************************
+ * Copyright (c) 2020 All Right Reserved By [StarsRiver]            *
+ *                                                                  *
+ * Author  Zhangyu                                                  *
+ * Email   starsriver@yahoo.com                                     *
+ ********************************************************************/
 
 /**
  *      [Discuz!] (C)2001-2099 Comsenz Inc.
@@ -150,7 +156,6 @@ if ($isfounder) {
 $app_name = 'wctrl-index';
 
 echo '<div class="app wctrl-index">';
-
 
 
 /* SR::论坛文件校验 */
@@ -340,5 +345,3 @@ echo make_vessel([
 ]);
 
 echo '</div></div>';
-
-?>
