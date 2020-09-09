@@ -7813,6 +7813,8 @@
             font-size: var(--line-tip-fontsize);
             text-align: center;
             text-shadow: 1px 1px 0px rgba(0,0,0,.08);
+            white-space: nowrap;
+            overflow: hidden;
         }
         .app-userspace .timeline::before{
             content: '...Future Will Be Better...';
@@ -7868,6 +7870,7 @@
             font-family: Barlow Medium !important;
             font-size: var(--timeA-fontsize);
             word-break: break-word;
+            white-space: nowrap;
         }
         .app-userspace .timeline .n-left .time-A::before{
             content: '';
