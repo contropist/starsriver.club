@@ -7303,7 +7303,7 @@
 /*endregion*/
 
 /*region userspace应用 */
-    .mas-decrator{
+    .mas-decorator{
         position: fixed;
         width: 2400px;
         height: 2400px;
@@ -8564,29 +8564,68 @@
         }
 
         .app-userspace .feed-element-friend{
-            --avatar-size: 96px;
+            --avatar-size: 72px;
+            --decorator-bubble-size: 120px;
+            --decorator-emotion-size: 60px;
+            --decorator-emotion-margin-top: 10px;
+
+            position: relative;
             display: flex;
-            flex-flow: row nowrap;
+            flex-flow: row;
+            justify-content: center;
         }
 .WL-0   .app-userspace .feed-element-friend,
 .WL-3P  .app-userspace .feed-element-friend,
 .WL-4P  .app-userspace .feed-element-friend{
-            --avatar-size: 72px;
+            --avatar-size: 54px;
+            --decorator-bubble-size: 90px;
+            --decorator-emotion-size: 45px;
+            --decorator-emotion-margin-top: 6px;
+        }
+        .app-userspace .feed-element-friend [class^="friend-"]{
+            position: relative;
+            padding-bottom: calc(var(--avatar-size) - 25px);
+        }
+        .app-userspace .feed-element-friend .avatar{
+            position: absolute;
+            min-width: var(--avatar-size);
+            height: var(--avatar-size);
+            bottom: 0;
         }
         .app-userspace .feed-element-friend .friend-A{
-            width: 50%;
+            transform: translate3d(17px, 20px, 10px);
+        }
+        .app-userspace .feed-element-friend .friend-A .avatar{
+            transform: translate3d(-18px, -40px, 10px);
+            right: calc(var(--decorator-bubble-size) - var(--decorator-emotion-size) / 2);
+        }
+        .app-userspace .feed-element-friend .friend-B{
+            transform: translate3d(-2px, -5px, 10px);
+        }
+        .app-userspace .feed-element-friend .friend-B .avatar{
+            transform: translate3d(12px, -13px, 10px);
+            left: calc(var(--decorator-bubble-size) - var(--decorator-emotion-size) / 2);
+        }
+        .app-userspace .feed-element-friend .talk-bubble{
+            position: relative;
+            width: var(--decorator-bubble-size);
+            display: flex;
             justify-content: center;
         }
-        .app-userspace .feed-element-friend .user-tag{
-            display: inline-flex;
-            flex-flow: column nowrap;
-        }
-        .app-userspace .feed-element-friend .user-tag .avatar{
+        .app-userspace .feed-element-friend .talk-bubble .bubble{
             position: relative;
-            width: var(--avatar-size);
-            height: var(--avatar-size);
+            width: 100%;
+            filter: drop-shadow(1px 2px 8px rgba(6, 48, 71, .3));
         }
-
+        .app-userspace .feed-element-friend .talk-bubble .emotion{
+            position: absolute;
+            max-width: var(--decorator-emotion-size);
+            max-height: var(--decorator-emotion-size);
+            margin-top: var(--decorator-emotion-margin-top);
+        }
+        .app-userspace .feed-element-friend .talk-bubble .username{
+            display: none;
+        }
 
          /* Special 电力充足 */
         .app-userspace .feed-element-charge{
@@ -8631,10 +8670,10 @@
             text-transform: uppercase;
             color: var(--color-main-theme-dark);
         }
-        .app-userspace .feed-element-charge-decrator{
+        .app-userspace .feed-element-charge-decorator{
             width: 100%;
         }
-        .app-userspace .feed-element-charge-decrator .background {
+        .app-userspace .feed-element-charge-decorator .background {
             width: 100%;
             border-radius: 10px;
             animation: spark 12s cubic-bezier(0, -100, 0, 100) infinite, blur 2.6s infinite, jitter .3s infinite;

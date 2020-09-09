@@ -11,71 +11,6 @@
     }
     
     $lang = [
-        
-
-        /*
-        * feed-ranklist-show
-        *
-        * @ {credit}      :新增点数
-         *
-        * @ {uid}      :用户ID
-        * @ {uname}    :用户名
-        * @ {ulink}    :用户空间链接
-        * @ {uavatar}  :用户头像源链接
-        *
-        * */
-        'feed_template_showcredit_title'      => '给<a class="link ellipsis" href="{ulink}" target="_blank" c="1">{uname}</a>充电<i class="highlight-gold">{credit}</i>，助力<a class="link ellipsis" href="misc.php?mod=ranklist&type=member" target="_blank">续航榜</a>排名',
-        'feed_template_showcredit_self_title' => '自充电<i class="highlight-gold">{credit}</i>，提升了<a class="link ellipsis" href="misc.php?mod=ranklist&type=member" target="_blank">续航榜</a>名次',
-        'feed_template_showcredit_body'       => '
-            <div class="feed-element-charge">
-                <div class="feed-element-charge-decrator">
-                    <img class="background" src="'.IMGURL.'/feed/feed-element-decoration/电力充足.svg">
-                </div>
-                <a class="user-tag" href="{ulink}" target="_blank" >
-                    <s class="avatar"><img class="avatar-main" src="{uavatar}"></s>
-                    <s class="username ellipsis">{uname}</s>
-                </a>
-            </div>',
-
-
-        /*
-        * feed-friden
-        *
-        * @ {to_uid}      :好友ID
-        * @ {to_uname}    :好友名
-        * @ {to_ulink}    :好友空间链接
-        * @ {to_uavatar}  :好友头像源链接
-         *
-        * @ {uid}      :用户ID
-        * @ {uname}    :用户名
-        * @ {ulink}    :用户空间链接
-        * @ {uavatar}  :用户头像源链接
-        *
-        * */
-        'feed_template_invite_title'     => '邀请了<a class="link ellipsis" href="{to_ulink}" target="_blank" c="1">{to_uname}</a>并与之成为好友',
-        'feed_template_friend_title'     => '我和<a class="link ellipsis" href="{to_ulink}" target="_blank" c="1">{to_uname}</a>成为了好友',
-        'feed_template_friend_body'      => '
-            <div class="feed-element-friend">
-                <div class="friend-A">
-                    <a class="user-tag" href="{ulink}" target="_blank">
-                        <s class="avatar"><img class="avatar-main" src="{uavatar}"></s>
-                        <s class="username">{uname}</s>
-                    </a>
-                </div>
-                <div class="friend-A">
-                    <a class="user-tag" href="{to_ulink}" target="_blank">
-                        <s class="avatar"><img class="avatar-main" src="{to_uavatar}"></s>
-                        <s class="username">{to_uname}</s>
-                    </a>
-                </div>
-            </div>',
-
-        
-/* ↑ ↑ ↑ ↑  Unfinished  ↑ ↑ ↑ ↑*/
-
-/***********************************************************************************************************************/
-
-/* ↓ ↓ ↓ ↓  Finished  ↓ ↓ ↓ ↓ */
 
         'feed_attach'        => '内容附件',
         'feed_poll'          => '发起了新投票',
@@ -96,7 +31,7 @@
          * B {expend0~8}
          *
          * */
-
+        
 
         /*
         * feed-thread.ban
@@ -594,24 +529,7 @@
                     <s class="username">{to_uname}</s>
                 </a>
             </div>',
-
-
-        /*
-        * feed-magic.thunder
-        *
-        * @ {uid}         :用户ID
-        * @ {username}    :用户名
-         *
-        * B {user_avatar}  :用户头像源链接
-        *
-        * */
-        'feed_template_magic_thunder_title' => '<a class="link ellipsis" href="home.php?mod=space&uid={uid}" style="margin-left: 0" target="_blank" c="1">{username}</a> 发出了“雷鸣之声”',
-        'feed_template_magic_thunder_body'  => '
-            <div class="feed-element-magic-thunder">
-                <a class="avatar" href="home.php?mod=space&uid={uid}" target="_blank"><img class="avatar-main" src="{user_avatar}"></a>
-                <i class="hello">初来乍到，请多多指教！我是 {username}</i>
-            </div>',
-
+        
         
         /*
         * feed-comment.space.wall
@@ -825,4 +743,82 @@
         'feed_profile_update_bbs'     => '我刚刚更新了自己的论坛信息',
         'feed_profile_update_verify'  => '我刚刚更新了自己的认证信息',
 
+        
+        /*
+        * feed-magic.thunder
+        *
+        * @ {uid}         :用户ID
+        * @ {username}    :用户名
+         *
+        * B {user_avatar}  :用户头像源链接
+        *
+        * */
+        'feed_template_magic_thunder_title' => '<a class="link ellipsis" href="home.php?mod=space&uid={uid}" style="margin-left: 0" target="_blank" c="1">{username}</a> 发出了“雷鸣之声”',
+        'feed_template_magic_thunder_body'  => '
+            <div class="feed-element-magic-thunder">
+                <a class="avatar" href="home.php?mod=space&uid={uid}" target="_blank"><img class="avatar-main" src="{user_avatar}"></a>
+                <i class="hello">初来乍到，请多多指教！我是 {username}</i>
+            </div>',
+
+        
+        /*
+        * feed-ranklist-show
+        *
+        * @ {credit}      :新增点数
+         *
+        * @ {uid}      :用户ID
+        * @ {uname}    :用户名
+        * @ {ulink}    :用户空间链接
+        * @ {uavatar}  :用户头像源链接
+        *
+        * */
+        'feed_template_showcredit_title'      => '给<a class="link ellipsis" href="{ulink}" target="_blank" c="1">{uname}</a>充电<i class="highlight-gold">{credit}</i>，助力<a class="link ellipsis" href="misc.php?mod=ranklist&type=member" target="_blank">续航榜</a>排名',
+        'feed_template_showcredit_self_title' => '自充电<i class="highlight-gold">{credit}</i>，提升了<a class="link ellipsis" href="misc.php?mod=ranklist&type=member" target="_blank">续航榜</a>名次',
+        'feed_template_showcredit_body'       => '
+            <div class="feed-element-charge">
+                <div class="feed-element-charge-decorator">
+                    <img class="background" src="'.IMGURL.'/feed/feed-element-decoration/电力充足.svg">
+                </div>
+                <a class="user-tag" href="{ulink}" target="_blank" >
+                    <s class="avatar"><img class="avatar-main" src="{uavatar}"></s>
+                    <s class="username ellipsis">{uname}</s>
+                </a>
+            </div>',
+
+        
+        /*
+        * feed-friden
+        *
+        * @ {to_uid}      :好友ID
+        * @ {to_uname}    :好友名
+        * @ {to_ulink}    :好友空间链接
+        * @ {to_uavatar}  :好友头像源链接
+         *
+        * @ {uid}      :用户ID
+        * @ {uname}    :用户名
+        * @ {ulink}    :用户空间链接
+        * @ {uavatar}  :用户头像源链接
+        *
+        * */
+        'feed_template_invite_title'     => '邀请了<a class="link ellipsis" href="{to_ulink}" target="_blank" c="1">{to_uname}</a>并与之成为好友',
+        'feed_template_friend_title'     => '我和<a class="link ellipsis" href="{to_ulink}" target="_blank" c="1">{to_uname}</a>成为了好友',
+        'feed_template_friend_body'      => '
+            <div class="feed-element-friend">
+                <div class="friend-A">
+                    <a class="avatar" href="{ulink}" target="_blank"><img class="avatar-main" src="{uavatar}"></a>
+                    <span class="talk-bubble">
+                        <img class="bubble" src="'.IMGURL.'/feed/feed-element-decoration/talk-bubble-square-1.svg" />
+                        <img class="emotion" src="'.IMGURL.'/expression/nekopara/note_mark.png" />
+                        <s class="username">{uname}</s>
+                    </span>
+                </div>
+                <div class="friend-B">
+                    <a class="avatar" href="{to_ulink}" target="_blank"><img class="avatar-main" src="{to_uavatar}"></a>
+                    <span class="talk-bubble">
+                        <img class="bubble" src="'.IMGURL.'/feed/feed-element-decoration/talk-bubble-square-2.svg" />
+                        <img class="emotion" src="'.IMGURL.'/expression/nekopara/exclamation_mark.png" />
+                        <s class="username">{to_uname}</s>
+                    </span>
+                </div>
+            </div>',
     ];
