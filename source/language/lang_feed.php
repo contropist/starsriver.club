@@ -31,7 +31,7 @@
                 <div class="feed-element-charge-decrator">
                     <img class="background" src="'.IMGURL.'/feed/feed-element-decoration/电力充足.svg">
                 </div>
-                <a class="user-tag" href="{ulink}" target="_blank">
+                <a class="user-tag" href="{ulink}" target="_blank" >
                     <s class="avatar"><img class="avatar-main" src="{uavatar}"></s>
                     <s class="username ellipsis">{uname}</s>
                 </a>

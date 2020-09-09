@@ -2367,6 +2367,33 @@
         100%{transform:scale(1);}
     }
 
+    /* blur */
+    @keyframes blur {
+        0%   {filter: blur(2px)}
+        15%  {filter: blur(0)}
+        21%  {filter: blur(3px)}
+        46%  {filter: blur(0)}
+        72%  {filter: blur(2px)}
+        78%  {filter: blur(0)}
+        92%  {filter: blur(3px)}
+        100% {filter: blur(0)}
+    }
+
+    /* Jitter */
+    @keyframes jitter {
+        0%   {transform: translate3d(3px,-2px,0)}
+        15%  {transform: translate3d(1px,3px,0)}
+        21%  {transform: translate3d(-2px,1px,0)}
+        46%  {transform: translate3d(2px,-1px,0)}
+        53%  {transform: translate3d(-3px,0px,0)}
+        72%  {transform: translate3d(1px,2px,0)}
+        78%  {transform: translate3d(-1px,-2px,0)}
+        85%  {transform: translate3d(1px,-3px,0)}
+        92%  {transform: translate3d(3px,1px,0)}
+        95%  {transform: translate3d(-2px,2px,0)}
+        100% {transform: translate3d(-1px,-2px,0)}
+    }
+
     /* Spark */
     @keyframes spark {
         0%  {opacity: 1}

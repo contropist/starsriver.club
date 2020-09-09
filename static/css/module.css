@@ -8634,10 +8634,10 @@
         .app-userspace .feed-element-charge-decrator{
             width: 100%;
         }
-        .app-userspace .feed-element-charge-decrator .background{
+        .app-userspace .feed-element-charge-decrator .background {
             width: 100%;
             border-radius: 10px;
-            animation: spark 12s cubic-bezier(0, -100, 0, 100) infinite;
+            animation: spark 12s cubic-bezier(0, -100, 0, 100) infinite, blur 2.6s infinite, jitter .3s infinite;
         }
 
         .app-userspace .feed-element-magic-thunder{
