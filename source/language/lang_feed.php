@@ -800,24 +800,22 @@
         * @ {uavatar}  :用户头像源链接
         *
         * */
-        'feed_template_invite_title'     => '邀请了<a class="link ellipsis" href="{to_ulink}" target="_blank" c="1">{to_uname}</a>并与之成为好友',
-        'feed_template_friend_title'     => '我和<a class="link ellipsis" href="{to_ulink}" target="_blank" c="1">{to_uname}</a>成为了好友',
+        'feed_template_invite_title'     => '邀请了<a class="link ellipsis" href="{to_ulink}" target="_blank">{to_uname}</a>并与之成为好友',
+        'feed_template_friend_title'     => '我和<a class="link ellipsis" href="{to_ulink}" target="_blank">{to_uname}</a>成为了好友',
         'feed_template_friend_body'      => '
             <div class="feed-element-friend">
-                <div class="friend-A">
-                    <a class="avatar" href="{ulink}" target="_blank"><img class="avatar-main" src="{uavatar}"></a>
+                <div class="friend-A" title="{uname}">
+                    <a class="avatar" href="{ulink}" target="_blank"><img class="avatar-main" src="{uavatar}" c="1"></a>
                     <span class="talk-bubble">
                         <img class="bubble" src="'.IMGURL.'/feed/feed-element-decoration/talk-bubble-square-1.svg" />
                         <img class="emotion" src="'.IMGURL.'/expression/nekopara/note_mark.png" />
-                        <s class="username">{uname}</s>
                     </span>
                 </div>
-                <div class="friend-B">
-                    <a class="avatar" href="{to_ulink}" target="_blank"><img class="avatar-main" src="{to_uavatar}"></a>
+                <div class="friend-B" title="{to_uname}">
+                    <a class="avatar" href="{to_ulink}" target="_blank"><img class="avatar-main" src="{to_uavatar}" c="1"></a>
                     <span class="talk-bubble">
                         <img class="bubble" src="'.IMGURL.'/feed/feed-element-decoration/talk-bubble-square-2.svg" />
                         <img class="emotion" src="'.IMGURL.'/expression/nekopara/exclamation_mark.png" />
-                        <s class="username">{to_uname}</s>
                     </span>
                 </div>
             </div>',

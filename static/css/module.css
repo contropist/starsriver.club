@@ -8592,39 +8592,44 @@
             height: var(--avatar-size);
             bottom: 0;
         }
+        .app-userspace .feed-element-friend .avatar-main{
+            box-shadow: 0 0 0 6px #fff, 0 0 20px rgba(16, 39, 47, .39);
+        }
         .app-userspace .feed-element-friend .friend-A{
-            transform: translate3d(17px, 20px, 10px);
+            transform: translate3d(0,5px,10px) scale(.8);
         }
         .app-userspace .feed-element-friend .friend-A .avatar{
-            transform: translate3d(-18px, -40px, 10px);
-            right: calc(var(--decorator-bubble-size) - var(--decorator-emotion-size) / 2);
+            transform: translate3d(-12px,0px,0);
+            left: calc(-1 * var(--decorator-emotion-size) / 2);
         }
         .app-userspace .feed-element-friend .friend-B{
-            transform: translate3d(-2px, -5px, 10px);
+            transform: translate3d(-20px, -10px, 10px);
         }
         .app-userspace .feed-element-friend .friend-B .avatar{
-            transform: translate3d(12px, -13px, 10px);
-            left: calc(var(--decorator-bubble-size) - var(--decorator-emotion-size) / 2);
+            transform: translate3d(10px,7px,0);
+            right: calc(-1 * var(--decorator-emotion-size) / 2);
+
         }
         .app-userspace .feed-element-friend .talk-bubble{
             position: relative;
             width: var(--decorator-bubble-size);
             display: flex;
             justify-content: center;
+            animation: knock 2s infinite;
+        }
+        .app-userspace .feed-element-friend .friend-B .talk-bubble{
+            animation-delay: 1s;
         }
         .app-userspace .feed-element-friend .talk-bubble .bubble{
             position: relative;
             width: 100%;
-            filter: drop-shadow(1px 2px 8px rgba(6, 48, 71, .3));
+            filter: drop-shadow(1px 2px 8px rgba(125,48,71,.2));
         }
         .app-userspace .feed-element-friend .talk-bubble .emotion{
             position: absolute;
             max-width: var(--decorator-emotion-size);
             max-height: var(--decorator-emotion-size);
             margin-top: var(--decorator-emotion-margin-top);
-        }
-        .app-userspace .feed-element-friend .talk-bubble .username{
-            display: none;
         }
 
          /* Special 电力充足 */
