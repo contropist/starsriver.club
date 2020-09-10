@@ -137,9 +137,6 @@
             $message = preg_replace_callback("/\[audio(=1)*\]\s*([^\[\<\r\n]+?)\s*\[\/audio\]/is", 'followcode_callback_fparseaudio_2', $message);
         }
         
-        if ($parsetype != 1 && strpos($msglower, '[swf]') !== false) {
-            $message = preg_replace_callback("/\[swf\]\s*([^\[\<\r\n]+?)\s*\[\/swf\]/is", 'followcode_callback_bbcodeurl_1', $message);
-        }
         
         // Clean illegal attachment mark [\n]
         $message = clearnl($message);
@@ -235,6 +232,8 @@
             $message = str_replace("[\tD_$i\t]", $html, $message);
         }
         
+        $message = '<div class="thread-element-content">' . $message .'</div>';
+        
         if ($length) {
             
             if (!empty($audioHtml)) {
@@ -246,16 +245,16 @@
             if (!empty($mediaHtml)) {
                 $message .= '<div class="thread-element-media mediaGrid grid-4-3 grid-'.$counter['media'].'"><ul>' . $mediaHtml . '</ul></div>';
             }
-            if (!empty($imageHtml)) {
-                $message = '<div class="thread-element-content">' . $message .'</div><div class="thread-element-imgs imageGrid grid-'.$counter['img'].'">' . $imageHtml . '</div>';
-            }
             if (!empty($attachHtml)) {
                 $message .= '<div class="thread-element-attachs"><span class="title">' . lang('feed', 'feed_attach') . '</span><ul>' . $attachHtml . '</ul></div>';
             }
-        } else {
-            $message = '<div class="thread-element-content">' . $message .'</div>';
+            if (!empty($imageHtml)) {
+                $message .= '<div class="thread-element-imgs imageGrid grid-'.$counter['img'].'">' . $imageHtml . '</div>';
+            }
         }
-        
+    
+        $message = '<div class="thread-elements-container">' . $message .'</div>';
+    
         // Clean empty attachment mark
         $message = clearnl($message);
         
@@ -306,10 +305,6 @@
     
     function followcode_callback_fparseaudio_2($matches) {
         return fparseaudio($matches[2]);
-    }
-    
-    function followcode_callback_bbcodeurl_1($matches) {
-        return bbcodeurl($matches[1], ' <img src="' . STATICURL . 'image/filetype/flash.gif" align="absmiddle" alt="" /> <a href="{url}" target="_blank">Flash: {url}</a> ');
     }
     
     function fparsetable_callback_parsetrtd_12($matches) {

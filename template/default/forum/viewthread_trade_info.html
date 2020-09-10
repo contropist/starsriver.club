@@ -117,25 +117,14 @@
     <!--{hook/viewthread_tradeinfo_extra}-->
 <!--{else}-->
     <div class="bale">
-        <div class="photo px4-radius">
-            <!--{if $trade['thumb']}-->
-                <img class="pointer trans-ease-slow" src="$trade[thumb]" onclick="zoom(this, '$trade[attachurl]')" alt="$trade[subject]" />
-            <!--{else}-->
-                <img class="pointer trans-ease-slow" src="{STATICURL}image/common/nophoto.gif" alt="$trade[subject]" />
-            <!--{/if}-->
+        <div class="photo px4-radius" style="background-image: url({if $trade['thumb']}$trade[thumb]{else}{STATICURL}image/common/nophoto.gif{/if})">
+            <img class="pointer rec-img " src="{LIBURL}/img/row-e-col/1.1.png" {if $trade['thumb']}onclick="zoom(this, '$trade[attachurl]')" alt="$trade[subject]"{/if} />
             <!--{if $trade['displayorder'] > 0}-->
                 <b class="hot px4-radius">{lang post_trade_sticklist}</b>
             <!--{/if}-->
             <!--{if $usertrades}-->
                 <div class="bale-switch pxa-radius"></div>
                 <div class="bale-others trans-ease-slow">
-                    <div class="bg blur trans-ease-slow">
-                        <!--{if $trade['thumb']}-->
-                        <img class="pointer" src="$trade[thumb]" onclick="zoom(this, '$trade[attachurl]')" alt="$trade[subject]" />
-                        <!--{else}-->
-                        <img src="{STATICURL}image/common/nophoto.gif" alt="$trade[subject]" />
-                        <!--{/if}-->
-                    </div>
                     <div class="list trans-ease-slow">
                         <div class="title">{lang trade_other_goods}</div>
                         <!--{loop $usertrades $usertrade}-->
