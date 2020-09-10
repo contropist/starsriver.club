@@ -5,14 +5,6 @@
  * Author  Zhangyu                                                  *
  * Email   starsriver@yahoo.com                                     *
  ********************************************************************/
-    
-    /**
-     *      [Discuz!] (C)2001-2099 Comsenz Inc.
-     *      This is NOT a freeware, use is subject to license terms
-     *
-     *      $Id: admincp_login.php 36284 2016-12-12 00:47:50Z nemohou $
-     */
-    
     global $_G;
     
     if (!defined('IN_DISCUZ') || !defined('IN_ADMINCP')) {
@@ -69,7 +61,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 <title>StarsRiver 管理中心 - 登录</title>
 <link rel="stylesheet" href="static/image/admincp/src/css/login.css" type="text/css" media="all" />
-<link rel="stylesheet" href="{$_G['config']['output']['fonturl']}/GoogleFonts.css" />
+<link rel="stylesheet" href="{$_G['config']['output']['fonturl']}/OpenFonts.css" />
 
 </head>
 <body>
