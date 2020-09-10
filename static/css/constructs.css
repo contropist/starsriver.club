@@ -2127,6 +2127,7 @@
         --color-vlightgray: rgb(250 250 250);
         --color-lightgray: rgb(242 242 242);
         --color-slightgray: rgb(229 229 229);
+
         --color-heart-pink: #ff4e66;
         --color-charry-pink: #FF7F8F;
         --color-onnanoko-pink: #ee2266;
@@ -2134,6 +2135,7 @@
         --color-file-yel: #FF9D2E;
         --color-sky-blue: #00aeef;
         --color-miku-green: #39c5bb;
+
         --color-text-success: #0e9a19;
         --color-text-warning: var(--color-mod-warning);
         --color-text-danger: var(--color-mod-danger);
@@ -2835,13 +2837,13 @@
         box-sizing: border-box;
     }
     [html-accessory]{
+        z-index: 999;
         position: absolute;
         overflow: visible !important;
-        display: inline-block;
+        display: block;
         top: 0;
         left:0;
         height: 0;
-        width: 0;
     }
     [html-cache], [html-buffer]{
         display: none;

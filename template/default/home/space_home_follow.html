@@ -8,7 +8,6 @@
                 <!--{eval $beforeuser = 0; $hiddennum = 0; $carray = [];}-->
                 <!--{eval $followday = '';}-->
                 <!--{eval $followmin = '';}-->
-
                 <!--{loop $list['feed'] $feed}-->
                     <!--{template home/space_home_follow_mod_li}-->
                 <!--{/loop}-->
@@ -357,7 +356,7 @@
                     numObj.innerHTML = followernum - 1;
                 }
             } else if(values['type'] === 'special') {
-                if(values['from'] == 'head') {
+                if(values['from'] === 'head') {
                     var specialObj = $('specialflag_'+values['fuid']);
                     if(values['special'] === 1) {
                         specialObj.className = 'flw_specialfo';
@@ -375,7 +374,7 @@
             }
         }
 
-        function changefeed(tid, pid, flag, obj) {
+        function changefeed(tid, pid, flag) {
             let request = new Ajax();
             let ele = SR('#thread_sample_' + tid)[0];
             request.get('forum.php?mod=ajax&action=getpostfeed&inajax=1&tid='+tid+'&pid='+pid+'&type=changefeed&flag='+flag, function(s){

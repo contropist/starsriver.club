@@ -62,7 +62,7 @@
 					<!--{if empty($_G['setting']['pluginhooks']['follow_upload_extend'])}-->
 						<!--{subtemplate common/upload}-->
 						<script>
-							var upload = new SWFUpload({
+							let upload = new SWFUpload({
 								// Backend Settings
 								upload_url: "{$_G[siteurl]}misc.php?mod=swfupload&action=swfupload&operation=upload&fid={$dmfid}",
 								post_params: {"uid" : "$_G[uid]", "hash":"$swfconfig[hash]"},
@@ -286,7 +286,6 @@
                         //var msg = '你的文章已发布，<a href="'+url+'">点击这里查看文章</a>'
                         //showDialog(msg, 'notice', null, null, 0, null, null, null, null, 3);
                     }
-
                 }
 			</script>
 	<!--{/if}-->

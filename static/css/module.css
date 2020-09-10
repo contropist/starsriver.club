@@ -9088,13 +9088,26 @@
             white-space: pre-wrap;
             line-height: var(--context-lineheight);
         }
-        .app-userspace .follow-element a{
+        .app-userspace .follow-element a:not(.image, [class*="smilie"]){
             display: contents;
             color: var(--color-main-theme-dark);
             border-bottom: 1px dashed;
         }
         .app-userspace .follow-element .folder{
-            display: contents;
+            display: block;
+            width: 120px;
+            margin: 10px auto 0 auto;
+            padding: 10px;
+            color: #fff;
+            text-align: center;
+            border-radius: 8px;
+            background: var(--color-sky-blue);
+            opacity: .7;
+            transition: .1s ease-in-out;
+        }
+        .app-userspace .follow-element .folder:hover{
+            opacity: 1;
+            box-shadow: 0 5px 15px rgb(1 172 255 / 26%);
         }
     /*endregion*/
 

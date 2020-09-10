@@ -1,5 +1,5 @@
 <?php
-    /********************************************************************
+/********************************************************************
  * Copyright (c) 2020 All Right Reserved By [StarsRiver]            *
  *                                                                  *
  * Author  Zhangyu                                                  *
@@ -141,12 +141,6 @@
             $message = preg_replace_callback("/\[swf\]\s*([^\[\<\r\n]+?)\s*\[\/swf\]/is", 'followcode_callback_bbcodeurl_1', $message);
         }
         
-        $flag = $length ? 1 : 0;
-        
-        if ($tid) {
-            $extra = 'onclick="changefeed('.$tid.', '.$pid.', '.$flag.', this)"';
-        }
-        
         // Clean illegal attachment mark [\n]
         $message = clearnl($message);
         
@@ -168,6 +162,11 @@
         }
         
         // Cut string
+    
+        if ($tid) {
+            $extra = 'onclick="changefeed('.$tid.', '.$pid.', '.$length.', this)"';
+        }
+        
         if ($length) {
             $sppos = strpos($message, chr(0) . chr(0) . chr(0));
             if ($sppos !== false) {
@@ -248,11 +247,13 @@
                 $message .= '<div class="thread-element-media mediaGrid grid-4-3 grid-'.$counter['media'].'"><ul>' . $mediaHtml . '</ul></div>';
             }
             if (!empty($imageHtml)) {
-                $message = '<div class="thread-element-imgs imageGrid grid-'.$counter['img'].'">' . $imageHtml . '</div><div class="thread-element-content">' . $message .'</div>';
+                $message = '<div class="thread-element-content">' . $message .'</div><div class="thread-element-imgs imageGrid grid-'.$counter['img'].'">' . $imageHtml . '</div>';
             }
             if (!empty($attachHtml)) {
                 $message .= '<div class="thread-element-attachs"><span class="title">' . lang('feed', 'feed_attach') . '</span><ul>' . $attachHtml . '</ul></div>';
             }
+        } else {
+            $message = '<div class="thread-element-content">' . $message .'</div>';
         }
         
         // Clean empty attachment mark
@@ -268,7 +269,7 @@
             }
             followcode_callback_highlightword_21($highlightarray, 1);
             $message = preg_replace_callback("/(^|>)([^<]+)(?=<|$)/sU", 'followcode_callback_highlightword_21', $message);
-            $message = preg_replace("/<highlight>(.*)<\/highlight>/siU", "<strong><font color=\"#FF0000\">\\1</font></strong>", $message);
+            $message = preg_replace("/<highlight>(.*)<\/highlight>/siU", "<s class='thread-inner-element-text-highlight'>\\1</s>", $message);
             if ($sppos !== false) {
                 $message = $message . chr(0) . chr(0) . chr(0) . $specialextra;
             }
