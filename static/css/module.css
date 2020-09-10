@@ -8697,11 +8697,17 @@
         }
         .app-userspace .feed-element-charge-decorator{
             width: 100%;
+            animation: spark 12s cubic-bezier(0, -100, 0, 100) infinite, blur 2.6s infinite, jitter .3s infinite;
         }
         .app-userspace .feed-element-charge-decorator .background {
             width: 100%;
             border-radius: 10px;
-            animation: spark 12s cubic-bezier(0, -100, 0, 100) infinite, blur 2.6s infinite, jitter .3s infinite;
+        }
+        .app-userspace .feed-element-charge-decorator .bubbles i{
+            width: 5px;
+            height: 20px;
+            border-radius: 5px;
+            background: rgba(123, 202, 198, 0.6);
         }
 
         .app-userspace .feed-element-magic-thunder{
