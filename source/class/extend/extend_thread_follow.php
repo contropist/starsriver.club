@@ -6,13 +6,6 @@
  * Email   starsriver@yahoo.com                                     *
  ********************************************************************/
 
-/**
- *      [Discuz!] (C)2001-2099 Comsenz Inc.
- *      This is NOT a freeware, use is subject to license terms
- *
- *      $Id: extend_thread_follow.php 34174 2013-10-28 07:18:04Z nemohou $
- */
-
 if(!defined('IN_DISCUZ')) {
 	exit('Access Denied');
 }

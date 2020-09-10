@@ -325,6 +325,7 @@ if (!defined('IN_DISCUZ')) {
         public function replyfeed() {
             if (!$this->feed) {
                 if ($this->forum['allowfeed'] && !$this->param['isanonymous']) {
+                    
                     if ($this->thread['authorid'] != $this->member['uid']) {
                         
                         $plink = 'forum.php?mod=redirect&goto=findpost&pid=' . $this->pid . '&ptid=' . $this->thread['tid'];
@@ -371,9 +372,7 @@ if (!defined('IN_DISCUZ')) {
                             ],
                         ];
                         
-                        if (!empty(getglobal('forum_attachexist'))) {
-                            getattach_img($this->thread['tid'], $this->pid, 9, $this->feed['body_data']['imgs']);
-                        }
+                        getattach_img($this->thread['tid'], $this->pid, 9, $this->feed['body_data']['imgs']);
                         
                         // Thread data
                         require_once libfile('function/thread');

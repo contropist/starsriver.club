@@ -73,6 +73,9 @@
                     'expend7' => '',
                 ],
             ];
+    
+            getattach_img($this->tid,$this->pid,9,$this->feed['body_data']['imgs']);
+            
         }
         
         public function before_replyfeed() {
@@ -122,9 +125,7 @@
                         ],
                     ];
                     
-                    if(!empty(getglobal('forum_attachexist'))) {
-                        getattach_img($this->thread['tid'],$this->pid,9,$this->feed['body_data']['imgs']);
-                    }
+                    getattach_img($this->thread['tid'],$this->pid,9,$this->feed['body_data']['imgs']);
     
                     // Thread data
                     require_once libfile('function/thread');

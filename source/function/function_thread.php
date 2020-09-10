@@ -49,7 +49,7 @@
             'imgnum' => 0,
         ];
         
-        if ($thread['price'] > 0) {
+        if ($thread['price'] && $thread['special'] != 3) {
             $data['template'] = 'quote_need_payoff';
         } elseif ($thread['readperm']) {
             $data['template'] = 'quote_need_perm';
@@ -60,8 +60,6 @@
         } else {
             $data['template'] = 'thread_sample';
             $data['data']['message'] = messagecutstr(messagesafeclear($thread['message']), 200);
-            if ($thread['attachment']) {
-                getattach_img($thread['tid'], $thread['pid'], 9, $data['data']['imgs'],$expire);
-            }
+            getattach_img($thread['tid'], $thread['pid'], 9, $data['data']['imgs'],$expire);
         }
     }

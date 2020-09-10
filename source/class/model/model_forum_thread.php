@@ -316,9 +316,7 @@ class model_forum_thread extends discuz_model
                 } elseif ($this->param['readperm']) {
                     $this->feed['body_template'] = 'need_perm';
                 } else {
-                    if (!empty(getglobal('forum_attachexist'))) {
-                        getattach_img($this->tid,$this->pid,9,$this->feed['body_data']['imgs']);
-                    }
+                    getattach_img($this->tid,$this->pid,9,$this->feed['body_data']['imgs']);
                 }
             }
 			

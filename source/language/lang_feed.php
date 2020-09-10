@@ -190,7 +190,11 @@
         'feed_template_thread_reward_title' => '发起了提问<a class="link ellipsis" href="{tlink}" target="_blank">{tsub}</a>',
         'feed_template_thread_reward_body'  => '
             <div class="feed-element-thread-reward">
-                <a class="reward" href="{tlink}" target="_blank">悬赏 {price} {extcredits}</a>
+                <div class="reward-info">
+                    <a class="reward-info-name" href="{tlink}" target="_blank">{tsub}</a>
+                    <a class="reward-info-price" href="{tlink}" target="_blank">悬赏 {price} {extcredits}</a>
+                </div>
+                <div class="content">{message}</div>
             </div>',
 
 
@@ -343,6 +347,7 @@
                 </div>
             </div>',
 
+        
         /*
         * feed-thread-activity.reply
         *

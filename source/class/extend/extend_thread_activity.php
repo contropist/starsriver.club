@@ -6,13 +6,6 @@
  * Email   starsriver@yahoo.com                                     *
  ********************************************************************/
     
-    /**
-     *      [Discuz!] (C)2001-2099 Comsenz Inc.
-     *      This is NOT a freeware, use is subject to license terms
-     *
-     *      $Id: extend_thread_activity.php 35202 2015-02-04 08:07:39Z hypowang $
-     */
-    
     if (!defined('IN_DISCUZ')) {
         exit('Access Denied');
     }
@@ -149,12 +142,10 @@
                     'img_url' => 'forum.php?mod=viewthread&do=tradeinfo&tid=' . $this->tid . '&pid=' . $this->pid,
                 ];
             }
-            
-            if(!empty(getglobal('forum_attachexist'))) {
-                $imgs = [];
-                getattach_img($this->tid,$this->pid,5,$imgs);
-                $this->feed['body_data']['imgs'] = array_merge($this->feed['body_data']['imgs'], $imgs);
-            }
+    
+            $attach_imgs = [];
+            getattach_img($this->tid,$this->pid,5,$attach_imgs);
+            $this->feed['body_data']['imgs'] = array_merge($this->feed['body_data']['imgs'], $attach_imgs);
         }
         
         public function before_editpost($parameters) {

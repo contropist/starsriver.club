@@ -2391,12 +2391,12 @@
     /* Jitter */
     @keyframes jitter {
         0%   {transform: translate3d(3px,-2px,0);}
-        15%  {transform: translate3d(1px,3px,0) scale(0.97)}
+        15%  {transform: translate3d(1px,3px,0) scale(0.98)}
         21%  {transform: translate3d(-2px,1px,0)}
         46%  {transform: translate3d(2px,-1px,0)}
         53%  {transform: translate3d(-3px,0px,0)}
         72%  {transform: translate3d(1px,2px,0)}
-        78%  {transform: translate3d(-1px,-2px,0) scale(0.98)}
+        78%  {transform: translate3d(-1px,-2px,0) scale(0.99)}
         85%  {transform: translate3d(1px,-3px,0)}
         92%  {transform: translate3d(3px,1px,0)}
         95%  {transform: translate3d(-2px,2px,0)}
