@@ -804,6 +804,7 @@
         'feed_template_friend_title'     => '我和<a class="link ellipsis" href="{to_ulink}" target="_blank">{to_uname}</a>成为了好友',
         'feed_template_friend_body'      => '
             <div class="feed-element-friend">
+                <div class="feed-element-friend-decorator"><img class="background" src="'.IMGURL.'/feed/feed-element-decoration/outdoor.svg" /></div>
                 <div class="friend-A" title="{uname}">
                     <a class="avatar" href="{ulink}" target="_blank"><img class="avatar-main" src="{uavatar}" c="1"></a>
                     <span class="talk-bubble">

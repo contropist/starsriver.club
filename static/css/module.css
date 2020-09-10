@@ -8587,6 +8587,7 @@
         }
         .app-userspace .feed-element-friend [class^="friend-"]{
             position: relative;
+            padding-top: 39px;
             padding-bottom: calc(var(--avatar-size) - 25px);
         }
         .app-userspace .feed-element-friend .avatar{
@@ -8596,22 +8597,7 @@
             bottom: 0;
         }
         .app-userspace .feed-element-friend .avatar-main{
-            box-shadow: 0 0 0 6px #fff, 0 0 20px rgba(16, 39, 47, .39);
-        }
-        .app-userspace .feed-element-friend .friend-A{
-            transform: translate3d(0,5px,10px) scale(.8);
-        }
-        .app-userspace .feed-element-friend .friend-A .avatar{
-            transform: translate3d(-12px,0px,0);
-            left: calc(-1 * var(--decorator-emotion-size) / 2);
-        }
-        .app-userspace .feed-element-friend .friend-B{
-            transform: translate3d(-20px, -10px, 10px);
-        }
-        .app-userspace .feed-element-friend .friend-B .avatar{
-            transform: translate3d(10px,7px,0);
-            right: calc(-1 * var(--decorator-emotion-size) / 2);
-
+            box-shadow: 0 0 0 6px rgba(255,255,255,.6);
         }
         .app-userspace .feed-element-friend .talk-bubble{
             position: relative;
@@ -8620,19 +8606,50 @@
             justify-content: center;
             animation: knock 2s infinite;
         }
-        .app-userspace .feed-element-friend .friend-B .talk-bubble{
-            animation-delay: 1s;
-        }
-        .app-userspace .feed-element-friend .talk-bubble .bubble{
+        .app-userspace .feed-element-friend .bubble{
             position: relative;
             width: 100%;
-            filter: drop-shadow(1px 2px 8px rgba(125,48,71,.2));
+            filter: drop-shadow(0px 3px 3px rgba(71,81,65,.5));
         }
-        .app-userspace .feed-element-friend .talk-bubble .emotion{
+        .app-userspace .feed-element-friend .emotion{
             position: absolute;
             max-width: var(--decorator-emotion-size);
             max-height: var(--decorator-emotion-size);
             margin-top: var(--decorator-emotion-margin-top);
+        }
+        .app-userspace .feed-element-friend .friend-A{
+            transform: translate3d(0,0,0) scale(.8);
+        }
+        .app-userspace .feed-element-friend .friend-A .avatar{
+            left: calc(-1 * var(--avatar-size) / 2);
+        }
+        .app-userspace .feed-element-friend .friend-A .talk-bubble{
+            transform-origin: 0 100%;
+        }
+        .app-userspace .feed-element-friend .friend-B{
+            transform: translate3d(-20px, -20px, 0);
+        }
+        .app-userspace .feed-element-friend .friend-B .avatar{
+            transform: translate3d(0,7px,0);
+            right: calc(-1 * var(--avatar-size) / 2);
+
+        }
+        .app-userspace .feed-element-friend .friend-B .talk-bubble{
+            transform-origin: 100% 100%;
+            animation-delay: 1s;
+        }
+        .app-userspace .feed-element-friend-decorator{
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            border-radius: 10px;
+        }
+        .app-userspace .feed-element-friend-decorator .background {
+            position: absolute;
+            width: 100%;
+            bottom: 0;
+            opacity: .5;
         }
 
          /* Special 电力充足 */
