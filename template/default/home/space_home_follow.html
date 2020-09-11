@@ -200,90 +200,93 @@
     </div>
 <!--{elseif in_array($do, ['following', 'follower'])}-->
     <!--{if $list}-->
-        <!--{if $do=='following'}-->
-            <!--{loop $list $fuid $fuser}-->
-                <div class="starer">
-                    <div class="user">
-                        <a class="avatar" href="{if $fuser['fusername']}home.php?mod=space&uid=$fuser['followuid']{else}javascript:;{/if}"><!--{avatar($fuser['followuid'],small)}--></a>
-                        <span class="username" >
-                            <!--{if $viewself && $fuser[followuid] != $_G[uid]}--><a class="setbk icon-price-tags" href="home.php?mod=spacecp&ac=follow&op=bkname&fuid=$fuser['followuid']&handlekey=followbkame_$fuser['followuid']" id="fbkname_$fuser['followuid']" onclick="showWindow('followbkame_{$fuser['followuid']}', this.href, 'get', 0);"></a><!--{/if}-->
-                            <a class="name" href="{if $fuser['fusername']}home.php?mod=space&uid=$fuser['followuid']{else}javascript:;{/if}" id="followbkame_{$fuser['followuid']}" data-name="{if $fuser['fusername']}$fuser['fusername']{else}{lang user_unseted}{/if}"><!--{if $fuser['bkname']}-->$fuser[bkname]<!--{else}--><!--{if $fuser['fusername']}-->$fuser['fusername']<!--{else}-->{lang user_unseted}<!--{/if}--><!--{/if}--></a>
-                        </span>
-                    </div>
-                    <div class="fun">
-                        <!--{if $viewself}-->
-                            <a class="star on" id="stared_{$fuser['followuid']}" href="home.php?mod=spacecp&ac=follow&op=del&fuid=$fuser['followuid']" onclick="ajaxget(this.href);doane(event);">{lang stared}</a>
-                        <!--{elseif $fuser[followuid] != $_G[uid]}-->
-                            <!--{if $fuser['mutual']}-->
-                                <!--{if $fuser['mutual'] > 0}-->{lang follow_follower_mutual}<!--{else}-->{lang did_not_follow_to_me}<!--{/if}-->
+        <div class="panel">
+            <ol class="panel-container">
+                <!--{if $do=='following'}-->
+                    <!--{loop $list $fuid $fuser}-->
+                    <li class="box size-3-0 starer">
+                        <div class="user">
+                            <a class="avatar" href="{if $fuser['fusername']}home.php?mod=space&uid=$fuser['followuid']{else}javascript:;{/if}"><!--{avatar($fuser['followuid'],small)}--></a>
+                            <span class="username" >
+                                <!--{if $viewself && $fuser[followuid] != $_G[uid]}--><a class="setbk icon-price-tags" href="home.php?mod=spacecp&ac=follow&op=bkname&fuid=$fuser['followuid']&handlekey=followbkame_$fuser['followuid']" id="fbkname_$fuser['followuid']" onclick="showWindow('followbkame_{$fuser['followuid']}', this.href, 'get', 0);"></a><!--{/if}-->
+                                <a class="name" href="{if $fuser['fusername']}home.php?mod=space&uid=$fuser['followuid']{else}javascript:;{/if}" id="followbkame_{$fuser['followuid']}" data-name="{if $fuser['fusername']}$fuser['fusername']{else}{lang user_unseted}{/if}"><!--{if $fuser['bkname']}-->$fuser[bkname]<!--{else}--><!--{if $fuser['fusername']}-->$fuser['fusername']<!--{else}-->{lang user_unseted}<!--{/if}--><!--{/if}--></a>
+                            </span>
+                        </div>
+                        <div class="fun">
+                            <!--{if $viewself}-->
                                 <a class="star on" id="stared_{$fuser['followuid']}" href="home.php?mod=spacecp&ac=follow&op=del&fuid=$fuser['followuid']" onclick="ajaxget(this.href);doane(event);">{lang stared}</a>
-                            <!--{elseif helper_access::check_module('follow')}-->
-                                <a class="star" id="stared_{$fuser['followuid']}" href="home.php?mod=spacecp&ac=follow&op=add&hash={FORMHASH}&fuid=$fuser['followuid']" onclick="ajaxget(this.href);doane(event);">{lang star}</a>
+                            <!--{elseif $fuser[followuid] != $_G[uid]}-->
+                                <!--{if $fuser['mutual']}-->
+                                    <!--{if $fuser['mutual'] > 0}-->{lang follow_follower_mutual}<!--{else}-->{lang did_not_follow_to_me}<!--{/if}-->
+                                    <a class="star on" id="stared_{$fuser['followuid']}" href="home.php?mod=spacecp&ac=follow&op=del&fuid=$fuser['followuid']" onclick="ajaxget(this.href);doane(event);">{lang stared}</a>
+                                <!--{elseif helper_access::check_module('follow')}-->
+                                    <a class="star" id="stared_{$fuser['followuid']}" href="home.php?mod=spacecp&ac=follow&op=add&hash={FORMHASH}&fuid=$fuser['followuid']" onclick="ajaxget(this.href);doane(event);">{lang star}</a>
+                                <!--{/if}-->
                             <!--{/if}-->
-                        <!--{/if}-->
 
-                        <!--{if $viewself && $fuser[followuid] != $_G[uid]}-->
-                            <!--{if helper_access::check_module('follow')}-->
-                                <a class="{if $fuser['status'] == 1}star-sp on awe-heart{else}star-sp awe-heart-o{/if}" id="star_sp_{$fuser['followuid']}" href="home.php?mod=spacecp&ac=follow&op=add&hash={FORMHASH}&special={if $fuser['status'] == 1}2{else}1{/if}&fuid=$fuser['followuid']" onclick="ajaxget(this.href);doane(event);" title="{lang follow_special_following}"></a>
+                            <!--{if $viewself && $fuser[followuid] != $_G[uid]}-->
+                                <!--{if helper_access::check_module('follow')}-->
+                                    <a class="{if $fuser['status'] == 1}star-sp on awe-heart{else}star-sp awe-heart-o{/if}" id="star_sp_{$fuser['followuid']}" href="home.php?mod=spacecp&ac=follow&op=add&hash={FORMHASH}&special={if $fuser['status'] == 1}2{else}1{/if}&fuid=$fuser['followuid']" onclick="ajaxget(this.href);doane(event);" title="{lang follow_special_following}"></a>
+                                <!--{/if}-->
                             <!--{/if}-->
-                        <!--{/if}-->
-                    </div>
-                    <div class="status">
-                        <span>
-                            <i>{lang follow_follower}</i>
-                            <a href="home.php?mod=follow&do=follower&uid=$fuser['followuid']"><!--{if $memberinfo[$fuid]['follower']}-->$memberinfo[$fuid]['follower']<!--{else}-->--<!--{/if}--></a>
-                        </span>
-                        <b></b>
-                        <span>
-                            <i>{lang follow_add}</i>
-                            <a href="home.php?mod=follow&do=following&uid=$fuser['followuid']"><!--{if $memberinfo[$fuid]['following']}-->$memberinfo[$fuid]['following']<!--{else}-->--<!--{/if}--></a>
-                        </span>
-                        <div class="misk" hide>
-                            <!--{if !empty($fuser['recentnote'])}-->{lang follow_recent_note}: $fuser[recentnote]<!--{/if}-->
                         </div>
-                    </div>
-                </div>
-            <!--{/loop}-->
-        <!--{else}-->
-            <!--{loop $list $fuid $fuser}-->
-                <div class="starer">
-                    <div class="user">
-                        <a class="avatar" href="home.php?mod=space&uid=$fuser['uid']" c="1"><!--{avatar($fuser['uid'],small)}--></a>
-                        <span class="username">
-                            <a class="name" href="home.php?mod=space&uid=$fuser['uid']">$fuser['username']</a>
-                        </span>
-                    </div>
-                    <div class="fun">
-                        <!--{if $fuser[uid] == $_G[uid]}-->
-                            <a class="star on" href="javascript:;">{lang self}</a>
-                        <!--{else}-->
-                            <!--{if $fuser['mutual']}-->
-                                <a class="star on" id="stared_{$fuser['uid']}" href="home.php?mod=spacecp&ac=follow&op=del&fuid=$fuser['uid']"  onclick="ajaxget(this.href);doane(event);"><!--{if $fuser['mutual'] > 0}-->{lang follow_follower_mutual}<!--{else}-->{lang stared}<!--{/if}--></a>
-                            <!--{elseif helper_access::check_module('follow')}-->
-                                <a class="star" id="stared_{$fuser['uid']}" href="home.php?mod=spacecp&ac=follow&op=add&hash={FORMHASH}&fuid=$fuser['uid']" onclick="ajaxget(this.href);doane(event);">{lang star}</a>
+                        <div class="status">
+                            <span>
+                                <i>{lang follow_follower}</i>
+                                <a href="home.php?mod=follow&do=follower&uid=$fuser['followuid']"><!--{if $memberinfo[$fuid]['follower']}-->$memberinfo[$fuid]['follower']<!--{else}-->--<!--{/if}--></a>
+                            </span>
+                            <b></b>
+                            <span>
+                                <i>{lang follow_add}</i>
+                                <a href="home.php?mod=follow&do=following&uid=$fuser['followuid']"><!--{if $memberinfo[$fuid]['following']}-->$memberinfo[$fuid]['following']<!--{else}-->--<!--{/if}--></a>
+                            </span>
+                            <div class="misk" hide>
+                                <!--{if !empty($fuser['recentnote'])}-->{lang follow_recent_note}: $fuser[recentnote]<!--{/if}-->
+                            </div>
+                        </div>
+                    </li>
+                    <!--{/loop}-->
+                <!--{else}-->
+                    <!--{loop $list $fuid $fuser}-->
+                    <li class="box size-3-0 starer">
+                        <div class="user">
+                            <a class="avatar" href="home.php?mod=space&uid=$fuser['uid']" c="1"><!--{avatar($fuser['uid'],small)}--></a>
+                            <span class="username">
+                                <a class="name" href="home.php?mod=space&uid=$fuser['uid']">$fuser['username']</a>
+                            </span>
+                        </div>
+                        <div class="fun">
+                            <!--{if $fuser[uid] == $_G[uid]}-->
+                                <a class="star on" href="javascript:;">{lang self}</a>
+                            <!--{else}-->
+                                <!--{if $fuser['mutual']}-->
+                                    <a class="star on" id="stared_{$fuser['uid']}" href="home.php?mod=spacecp&ac=follow&op=del&fuid=$fuser['uid']"  onclick="ajaxget(this.href);doane(event);"><!--{if $fuser['mutual'] > 0}-->{lang follow_follower_mutual}<!--{else}-->{lang stared}<!--{/if}--></a>
+                                <!--{elseif helper_access::check_module('follow')}-->
+                                    <a class="star" id="stared_{$fuser['uid']}" href="home.php?mod=spacecp&ac=follow&op=add&hash={FORMHASH}&fuid=$fuser['uid']" onclick="ajaxget(this.href);doane(event);">{lang star}</a>
+                                <!--{/if}-->
                             <!--{/if}-->
-                        <!--{/if}-->
-                    </div>
-                    <div class="status">
-                        <span>
-                            <i>{lang follow_follower}</i>
-                            <a href="home.php?mod=follow&do=follower&uid=$fuser['uid']"><!--{if $memberinfo[$fuid]['follower']}-->$memberinfo[$fuid]['follower']<!--{else}-->--<!--{/if}--></a>
-                        </span>
-                        <b></b>
-                        <span>
-                            <i>{lang follow_add}</i>
-                            <a href="home.php?mod=follow&do=following&uid=$fuser['uid']"><!--{if $memberinfo[$fuid]['following']}-->$memberinfo[$fuid]['following']<!--{else}-->--<!--{/if}--></a>
-                        </span>
-                        <div class="misk" hide>
-                            {lang follow_recent_note}: $fuser[recentnote]
-                            <!--{if $memberprofile[$fuid]['resideprovince'] || $memberprofile[$fuid]['residecity']}-->{lang comefrom}: $memberprofile[$fuid]['resideprovince'] $memberprofile[$fuid]['residecity'] <!--{/if}-->
                         </div>
-                    </div>
-                </div>
-            <!--{/loop}-->
-        <!--{/if}-->
-        <!--{if !empty($multi)}--><div>$multi</div><!--{/if}-->
-        <br>
+                        <div class="status">
+                            <span>
+                                <i>{lang follow_follower}</i>
+                                <a href="home.php?mod=follow&do=follower&uid=$fuser['uid']"><!--{if $memberinfo[$fuid]['follower']}-->$memberinfo[$fuid]['follower']<!--{else}-->--<!--{/if}--></a>
+                            </span>
+                            <b></b>
+                            <span>
+                                <i>{lang follow_add}</i>
+                                <a href="home.php?mod=follow&do=following&uid=$fuser['uid']"><!--{if $memberinfo[$fuid]['following']}-->$memberinfo[$fuid]['following']<!--{else}-->--<!--{/if}--></a>
+                            </span>
+                            <div class="misk" hide>
+                                {lang follow_recent_note}: $fuser[recentnote]
+                                <!--{if $memberprofile[$fuid]['resideprovince'] || $memberprofile[$fuid]['residecity']}-->{lang comefrom}: $memberprofile[$fuid]['resideprovince'] $memberprofile[$fuid]['residecity'] <!--{/if}-->
+                            </div>
+                        </div>
+                    </li>
+                    <!--{/loop}-->
+                <!--{/if}-->
+                <!--{if !empty($multi)}-->$multi<!--{/if}-->
+            </ol>
+        </div>
     <!--{else}-->
         <div class="global_nothing" id="nofollowmsg">
             <!--{if $viewself}-->

@@ -8751,6 +8751,9 @@
     /*region #userspace::follow*/
         .app-userspace #userspace_follow .starer{
             background: #fff;
+            padding: 0;
+            border-radius: 6px;
+            box-shadow: 0 3px 4px rgba(0,0,0,.2);
         }
         .app-userspace #userspace_follow .starer .user, .app-userspace #userspace_follow .starer .fun {
             display: inline-block;
