@@ -3045,7 +3045,7 @@
     [class*='WL-'] .Mas .mas-guide,
     [class*='WL-'] .Mas .mas-viewer{
         opacity: 1 !important;
-        transition: .07s ease-in-out;
+        transition: .15s ease-in-out;
     }
 /*endregion*/
 
