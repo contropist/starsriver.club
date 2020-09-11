@@ -2996,7 +2996,7 @@
         top: 0;
         left: 0;
         z-index: 2;
-        transition: .39s 0s ease-in-out;
+        transition: .2s 0s ease-in-out;
     }
     .Mas .mas-guide .mas-guide-switch {
         position: absolute;
@@ -3009,7 +3009,7 @@
         box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.8), 1px 1px 4px rgba(0, 0, 0, 0.2);
         border-radius: 50%;
         cursor: pointer;
-        transition: .39s ease-in-out;
+        transition: .1s ease-in-out;
     }
     .scroll-overhead .Mas .mas-guide .mas-guide-switch {
         color: #3e3e3e;
@@ -3021,7 +3021,7 @@
         visibility: hidden;
     }
     .Mas .mas-cover {
-        transition: .39s ease;
+        transition: .07s ease;
         visibility: hidden;
         z-index: 1;
         position: absolute;
@@ -3047,7 +3047,7 @@
     [class*='WL-'] .Mas .mas-guide,
     [class*='WL-'] .Mas .mas-viewer{
         opacity: 1 !important;
-        transition: .15s ease-in-out;
+        transition: .1s ease-in-out;
     }
 /*endregion*/
 
