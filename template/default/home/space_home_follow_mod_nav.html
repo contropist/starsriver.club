@@ -1,0 +1,9 @@
+<!--{eval $who = $viewself ? lang('home/template','me') : ($viewedusername ? $viewedusername : lang('template','user_unseted'));}-->
+
+<div class="place-holder nav-horizon">
+    <ul class="secondary edge">
+        <li class="$nav_actives['view']"><a href="home.php?mod=follow&do=view&uid={$uid}">{$who}{lang de}{lang follow}<span><!--{if $space['feeds']}-->$space['feeds']<!--{else}-->--<!--{/if}--></span></a></li>
+        <li class="$nav_actives['following']"><a href="home.php?mod=follow&do=following&uid={$uid}">{$who}{lang de}{lang follow_add}<span><!--{if $space['following']}-->$space['following']<!--{else}-->--<!--{/if}--></span></a></li>
+        <li class="$nav_actives['follower']"><a href="home.php?mod=follow&do=follower&uid={$uid}">{$who}{lang de}{lang follow_follower}<span><!--{if $space['follower']}-->$space['follower']<!--{else}-->--<!--{/if}--></span></a></li>
+    </ul>
+</div>

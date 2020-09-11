@@ -200,7 +200,7 @@ if($op == 'add') {
 			require_once libfile('function/followcode');
             $feedcontent = [
                 'tid'     => $tid,
-                'content' => followcode($post['message'], $post['tid'], $post['pid'], 1000),
+                'content' => followcode($post['message'], $post['tid'], $post['pid'], 640),
             ];
             C::t('forum_threadpreview')->insert($feedcontent);
 			C::t('forum_thread')->update_status_by_tid($tid, '512');

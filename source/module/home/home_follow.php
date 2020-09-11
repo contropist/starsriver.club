@@ -166,13 +166,9 @@
             }
         }
         
-        $navactives = ['feed' => ' class="active"'];
         $actives = [$view => 'active'];
         
-        [
-            $seccodecheck,
-            $secqaacheck,
-        ] = seccheck('publish');
+        [$seccodecheck, $secqaacheck] = seccheck('publish');
         
     } elseif ($do == 'view') {
         $list = getfollowfeed($uid, 'self', false, $start, $perpage);
@@ -198,6 +194,7 @@
         ] = seccheck('publish');
         
     } elseif ($do == 'follower') {
+        
         $count = C::t('home_follow')->count_follow_user($uid, 1);
         if ($viewself && !empty($_G['member']['newprompt_num']['follower'])) {
             $newfollower = C::t('home_notification')->fetch_all_by_uid($uid, -1, 'follower', 0, $_G['member']['newprompt_num']['follower']);
@@ -215,8 +212,10 @@
         if (helper_access::check_module('follow')) {
             $followerlist = C::t('home_follow')->fetch_all_following_by_uid($uid, 0, 9);
         }
-        $navactives = [$do => ' class="active"'];
+        
+        
     } elseif ($do == 'following') {
+        
         $count = C::t('home_follow')->count_follow_user($uid);
         if ($count) {
             $status = $_GET['status'] ? 1 : 0;
@@ -226,7 +225,6 @@
         if (helper_access::check_module('follow')) {
             $followerlist = C::t('home_follow')->fetch_all_follower_by_uid($uid, 9);
         }
-        $navactives = [$do => ' class="active"'];
     }
     
     if (($do == 'follower' || $do == 'following') && $list) {
@@ -287,5 +285,7 @@
     if ($_GET['uid']) {
         $viewedusername = getuserbyuid($_GET['uid'])['username'];
     }
+    
+    $nav_actives = [$do => 'active'];
     
     include template('nest:home/space_route_follow');

@@ -6,13 +6,6 @@
  * Email   starsriver@yahoo.com                                     *
  ********************************************************************/
     
-    /**
-     *      [Discuz!] (C)2001-2099 Comsenz Inc.
-     *      This is NOT a freeware, use is subject to license terms
-     *
-     *      $Id: function_home.php 36284 2016-12-12 00:47:50Z nemohou $
-     */
-    
     if (!defined('IN_DISCUZ')) {
         exit('Access Denied');
     }
@@ -590,10 +583,7 @@
             }
         }
         
-        $uids = in_array($viewtype, [
-            'other',
-            'self',
-        ]) ? $uid : array_keys($list['user']);
+        $uids = in_array($viewtype, ['other', 'self']) ? $uid : array_keys($list['user']);
         
         if (!empty($uids) || in_array($viewtype, ['other', 'self'])) {
             $list['feed'] = C::t('home_follow_feed')->fetch_all_by_uid($uids, $archiver, $start, $perpage);
@@ -612,6 +602,16 @@
                 $list['threads'] = C::t('forum_thread')->fetch_all_by_tid(C::t('home_follow_feed')->get_tids());
             }
         }
+        
+        foreach ($list['feed'] as $key => $feeditem){
+            $threaditem = $list['threads'][$list['content'][$feeditem['tid']]['tid']];
+            if(empty($feeditem['note']) && (empty($threaditem) || $threaditem['displayorder'] < 0 )){
+                unset($list['threads'][$list['content'][$feeditem['tid']]['tid']]);
+                unset($list['content'][$feeditem['tid']]);
+                unset($list['feed'][$key]);
+            }
+        }
+        
         return $list;
     }
     

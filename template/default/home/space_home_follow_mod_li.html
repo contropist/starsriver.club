@@ -4,87 +4,82 @@
 <!--{eval $followdayN = date('ymd',$feed['dateline']);}-->
 <!--{eval $followminN = date('ymdi',$feed['dateline']);}-->
 
-<!--{if !empty($thread) && $thread['displayorder'] >= 0 || !empty($feed['note'])}-->
-    <li class="node {if $followday != $followdayN}dayMark{/if} {if $lastviewtime && $feed[dateline] > $lastviewtime}unread{/if}" id="feed_li_{$feed['feedid']}">
-        <div class="n-left">
-            <!--{if $followday != $followdayN}-->
-                <!--{eval $followday = $followdayN;}-->
-                <i class="time-A"><!--{date($feed['dateline'],'Y/m/d')}--></i>
-            <!--{/if}-->
-
-            <!--{if $followmin != $followminN}-->
-                <!--{eval $followmin = $followminN;}-->
-                <i class="time-B"><!--{date($feed['dateline'],'H:i')}--></i>
-                <div class="user-tag">
-                    <!--{if $_GET[banavatar]}-->
-                        <a class="avatar"><img class="avatar-main" src="{IMGURL}/common/background-mark/ban.svg"></a>
-                        <a class="username">{lang user_black_home}</a>
-                    <!--{else}-->
-                        <a class="avatar" href="home.php?mod=space&uid=$feed[uid]" target="_blank" c="1"><!--{avatar($feed[uid],'small')}--></a>
-                        <a class="username" href="home.php?mod=space&uid=$feed[uid]" target="_blank"><!--{if $feed[uid]}-->$feed[username]<!--{else}-->--<!--{/if}--></a>
-                    <!--{/if}-->
-                </div>
-            <!--{/if}-->
-        </div>
-        <div class="n-right">
-            <div class="s-top">
-                <div class="title">
-                    <a class="icon feed-type"><img src="{IMGURL}/feed/feed-type-icon/topic.svg"></a>
-                    <!--{if !empty($thread) && $thread['displayorder'] >= 0}-->
-                        <a class="link ellipsis" style="margin-left:0;" href="forum.php?mod=viewthread&tid=$content['tid']&extra=page%3D1" target="_blank">$thread['subject']</a>
-                        <!--{if $_G['cache']['forums'][$thread['fid']]['name']}-->
-                        <a class="tag" href="forum.php?mod=forumdisplay&fid=$thread['fid']" target="_blank">$_G['cache']['forums'][$thread['fid']]['name']</a>
-                        <!--{/if}-->
-                    <!--{else}-->
-                        {lang follow_thread_deleted}
-                    <!--{/if}-->
-                </div>
-                <!--{if $feed[uid] == $_G[uid] || $_G['adminid'] == 1}-->
-                    <div class="tool">
-                        <b class="dots"><i class="dot"></i><i class="dot"></i><i class="dot"></i></b>
-                        <span class="tooltip lt" data-ignore='1'>
-                            <a href="home.php?mod=spacecp&ac=follow&feedid=$feed[feedid]&op=delete" id="c_delete_$feed['feedid']" onclick="showWindow(this.id, this.href, 'get', 0);">{lang delete}</a>
-                        </span>
-                    </div>
+<li class="node {if $followday != $followdayN}dayMark{/if} {if $lastviewtime && $feed[dateline] > $lastviewtime}unread{/if}" id="feed_li_{$feed['feedid']}">
+    <div class="n-left">
+        <!--{if $followday != $followdayN}-->
+            <!--{eval $followday = $followdayN;}-->
+            <i class="time-A"><!--{date($feed['dateline'],'Y/m/d')}--></i>
+        <!--{/if}-->
+        <!--{if $followmin != $followminN}-->
+            <!--{eval $followmin = $followminN;}-->
+            <i class="time-B"><!--{date($feed['dateline'],'H:i')}--></i>
+            <div class="user-tag">
+                <!--{if $_GET[banavatar]}-->
+                    <a class="avatar"><img class="avatar-main" src="{IMGURL}/common/background-mark/ban.svg"></a>
+                    <a class="username">{lang user_black_home}</a>
+                <!--{else}-->
+                    <a class="avatar" href="home.php?mod=space&uid=$feed[uid]" target="_blank" c="1"><!--{avatar($feed[uid],'small')}--></a>
+                    <a class="username" href="home.php?mod=space&uid=$feed[uid]" target="_blank"><!--{if $feed[uid]}-->$feed[username]<!--{else}-->--<!--{/if}--></a>
                 <!--{/if}-->
             </div>
-            <div class="s-center">
-                <!--{if $feed['note']}-->
-                    $feed['note']
-                <!--{/if}-->
-                <div class="follow-element {if $feed['note']}feed-element-org-quote{/if}" id="thread_sample_{$content['tid']}">
-                    <!--{if !empty($thread) && $thread['displayorder'] >= 0}-->
-                        <!--{if $feed['note']}-->
-                            <div class="user-tag">
-                                <a class="avatar"><!--{avatar($feed[uid],'small')}--></a>
-                                <a class="username" href="home.php?mod=space&uid=$feed[uid]">$thread['author']</a>
-                                <i class="time">{lang poston} <!--{date($thread['dateline'], 'u')}--></i>
-                            </div>
-                        <!--{/if}-->
-                        $content['content']
-                    <!--{else}-->
-                        {lang follow_thread_deleted}
-                    <!--{/if}-->
-                </div>
-                <div class="flow-comment-list">
-                    <div id="replybox_$feed['feedid']" style="display: none;"></div>
-                    <div id="relaybox_$feed['feedid']" style="display: none;"></div>
-                </div>
-            </div>
-            <div class="s-end">
+        <!--{/if}-->
+    </div>
+    <div class="n-right">
+        <div class="s-top">
+            <div class="title">
+                <a class="icon feed-type"><img src="{IMGURL}/feed/feed-type-icon/topic.svg"></a>
                 <!--{if !empty($thread) && $thread['displayorder'] >= 0}-->
-                    <!--{if helper_access::check_module('follow')}-->
-                    <a class="icon on-count mt-share share" id="relay_$feed[feedid]" onclick="quickrelay($feed['feedid'], $thread['tid']);"><span>$content['relay']</span></a>
+                    <a class="link ellipsis" style="margin-left:0;" href="forum.php?mod=viewthread&tid=$content['tid']&extra=page%3D1" target="_blank">$thread['subject']</a>
+                    <!--{if $_G['cache']['forums'][$thread['fid']]['name']}-->
+                    <a class="tag" href="forum.php?mod=forumdisplay&fid=$thread['fid']" target="_blank">$_G['cache']['forums'][$thread['fid']]['name']</a>
                     <!--{/if}-->
-                    <a class="icon on-count mt-textsms reply" onclick="quickreply($thread['fid'], $thread['tid'], $feed['feedid'])"><span>$thread['replies']</span></a>
+                <!--{else}-->
+                    {lang follow_thread_deleted}
                 <!--{/if}-->
             </div>
-
+            <!--{if $feed[uid] == $_G[uid] || $_G['adminid'] == 1}-->
+                <div class="tool">
+                    <b class="dots"><i class="dot"></i><i class="dot"></i><i class="dot"></i></b>
+                    <span class="tooltip lt" data-ignore='1'>
+                        <a href="home.php?mod=spacecp&ac=follow&feedid=$feed[feedid]&op=delete" id="c_delete_$feed['feedid']" onclick="showWindow(this.id, this.href, 'get', 0);">{lang delete}</a>
+                    </span>
+                </div>
+            <!--{/if}-->
         </div>
-    </li>
-<!--{else}-->
-	<!--{eval $hiddennum++;}-->
-<!--{/if}-->
+        <div class="s-center">
+            <!--{if $feed['note']}-->
+                $feed['note']
+            <!--{/if}-->
+            <div class="follow-element {if $feed['note']}feed-element-org-quote{/if}" id="thread_sample_{$content['tid']}">
+                <!--{if !empty($thread) && $thread['displayorder'] >= 0}-->
+                    <!--{if $feed['note']}-->
+                        <div class="user-tag">
+                            <a class="avatar"><!--{avatar($feed[uid],'small')}--></a>
+                            <a class="username" href="home.php?mod=space&uid=$feed[uid]">$thread['author']</a>
+                            <i class="date">{lang poston} <!--{date($thread['dateline'], 'u')}--></i>
+                        </div>
+                    <!--{/if}-->
+                    $content['content']
+                <!--{else}-->
+                    {lang follow_thread_deleted}
+                <!--{/if}-->
+            </div>
+            <div class="flow-comment-list">
+                <div id="replybox_$feed['feedid']" style="display: none;"></div>
+                <div id="relaybox_$feed['feedid']" style="display: none;"></div>
+            </div>
+        </div>
+        <div class="s-end">
+            <!--{if !empty($thread) && $thread['displayorder'] >= 0}-->
+                <!--{if helper_access::check_module('follow')}-->
+                <a class="icon on-count mt-share share" id="relay_$feed[feedid]" onclick="quickrelay($feed['feedid'], $thread['tid']);"><span>$content['relay']</span></a>
+                <!--{/if}-->
+                <a class="icon on-count mt-textsms reply" onclick="quickreply($thread['fid'], $thread['tid'], $feed['feedid'])"><span>$thread['replies']</span></a>
+            <!--{/if}-->
+        </div>
+    </div>
+</li>
+
 <!--{if !isset($carray[$feed['cid']])}-->
 	<!--{eval $carray[$feed['cid']] = $feed['cid'];}-->
 <!--{/if}-->

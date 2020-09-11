@@ -1,4 +1,10 @@
 <?php
+/********************************************************************
+ * Copyright (c) 2020 All Right Reserved By [StarsRiver]            *
+ *                                                                  *
+ * Author  Zhangyu                                                  *
+ * Email   starsriver@yahoo.com                                     *
+ ********************************************************************/
 
 if(!defined('IN_DISCUZ')) {
 	exit('Access Denied');
@@ -10,7 +16,6 @@ function media_youku($url, $width, $height) {
 	$ctx = stream_context_create(array('http' => array('timeout' => 10)));
 	if(preg_match("/^https?:\/\/v.youku.com\/v_show\/id_([^\/]+)(.html|)/i", $url, $matches)) {
 		$params = explode('.', $matches[1]);
-		$flv = 'https://player.youku.com/player.php/sid/'.$params[0].'/v.swf';
 		$iframe = 'https://player.youku.com/embed/'.$params[0];
 		if(!$width && !$height) {
 			$api = 'http://v.youku.com/player/getPlayList/VideoIDS/'.$params[0];
@@ -22,5 +27,5 @@ function media_youku($url, $width, $height) {
 			}
 		}
 	}
-	return array($flv, $iframe, $url, $imgurl);
+	return array($iframe, $url, $imgurl);
 }

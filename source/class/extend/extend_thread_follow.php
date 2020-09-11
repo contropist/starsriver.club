@@ -52,7 +52,7 @@ class extend_thread_follow extends extend_thread_base {
 			if(empty($feedcontent)) {
                 $feedcontent = [
                     'tid'     => $this->thread['tid'],
-                    'content' => followcode($firstpost['message'], $this->thread['tid'], $this->pid, 1000),
+                    'content' => followcode($firstpost['message'], $this->thread['tid'], $this->pid, 640),
                 ];
                 C::t('forum_threadpreview')->insert($feedcontent);
 				C::t('forum_thread')->update_status_by_tid($this->thread['tid'], '512');
@@ -82,7 +82,7 @@ class extend_thread_follow extends extend_thread_base {
 			require_once libfile('function/followcode');
 			$feed = C::t('forum_threadpreview')->fetch($this->thread['tid']);
 			if($feed) {
-				C::t('forum_threadpreview')->update($this->thread['tid'], array('content' => followcode($this->param['message'], $this->thread['tid'], $this->post['pid'], 1000)));
+				C::t('forum_threadpreview')->update($this->thread['tid'], array('content' => followcode($this->param['message'], $this->thread['tid'], $this->post['pid'], 640)));
 			}
 		}
 	}

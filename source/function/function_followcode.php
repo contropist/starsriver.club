@@ -17,7 +17,7 @@
         $_G['forum_discuzcode']['pcodecount']++;
         $_G['forum_discuzcode'][$type][$_G['forum_discuzcode']['pcodecount']] = $html;
         $_G['forum_discuzcode']['codecount']++;
-        return "[\tD_" . $_G['forum_discuzcode']['pcodecount'] . "\t]";
+        return "[\tattach:" . $_G['forum_discuzcode']['pcodecount'] . "\t]";
     }
     
     function followcode($message, $tid = 0, $pid = 0, $length = 0, $allowimg = true) {
@@ -229,7 +229,7 @@
                 $html = '';
             }
             
-            $message = str_replace("[\tD_$i\t]", $html, $message);
+            $message = str_replace("[\tattach:$i\t]", $html, $message);
         }
         
         $message = '<div class="thread-element-content">' . $message .'</div>';
@@ -280,7 +280,7 @@
         // Add [expend] button
         $message .= $expender;
         
-        return $htmlon ? $message : nl2br(str_replace(["\t", '   ', '  ',], ' ', $message));
+        return $htmlon ? $message : nl2br(str_replace(["\t", '   ', '  '], ' ', $message));
     }
     
     function followcode_callback_hideattach_1($matches) {
@@ -337,7 +337,7 @@
         
         $message = preg_replace("/[\r\n|\n|\r]\s*[\r\n|\n|\r]/i", "\n", $message);
         $message = preg_replace("/^[\r\n|\n|\r]{1,}/i", "", $message);
-        $message = preg_replace("/[\r\n|\n|\r]{2,}/i", "\n", $message);
+        $message = preg_replace("/[\r\n|\n|\r]{2,}/i", "", $message);
         
         return $message;
     }

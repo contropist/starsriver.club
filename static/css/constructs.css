@@ -121,6 +121,67 @@
     }
 /*endregion*/
 
+/*region thread-element*/
+    kaf[type='text'].bold {
+        font-weight: 700 !important;
+    }
+    kaf[type='text'].italic {
+        font-style: italic !important;
+    }
+    kaf[type='text'].underline {
+        text-decoration: underline !important;
+    }
+    kaf[type='text'].overline {
+        text-decoration: overline !important;
+    }
+    kaf[type='para'] {
+        display: block;
+    }
+    kaf[type='para'].quote {
+        margin: 0 10px;
+        border-left: 3px solid var(--color-main-theme-shadow);
+        padding: 10px;
+    }
+    ul.lister-type-number li{
+        list-style-type: decimal;
+        margin-left: 20px;
+    }
+    ul.lister-type-dotted li{
+        list-style-type: disc;
+        margin-left: 20px;
+    }
+    ul.lister-type-square li{
+        list-style-type: square;
+        margin-left: 20px;
+    }
+
+    .thread-elements-container{
+        display: flex;
+        flex-flow: column nowrap;
+    }
+    .thread-elements-container .thread-element-content{
+        word-break: break-word;
+        white-space: pre-wrap;
+        line-height: var(--context-lineheight);
+    }
+    .thread-elements-container .thread-element-content a{
+        display: initial;
+        color: var(--color-main-theme-dark);
+        border-bottom: 1px dashed;
+    }
+    .thread-elements-container .thread-element-img{
+        display: flex;
+        flex-flow: row;
+        justify-content: center;
+        margin: 5px 0;
+    }
+    .thread-elements-container .thread-element-img img{
+        border-radius: 4px;
+        box-shadow: 0 3px 20px rgba(20,40,60,.15);
+    }
+
+/*endregion*/
+
 /*region Blockquote*/
     blockquote {
         display: inline-block;
@@ -3431,9 +3492,24 @@
         display: inline-block;
         padding: 0 15px;
     }
+    .Mas.edge .mas-viewer .mas-viewer-container .nav-horizon > ul > li a span{
+        display: inline-block;
+        margin-left: 5px;
+        padding: 0 7px;
+        border-radius: 10px;
+        background: var(--color-slightgray);
+        color: #000;
+        font-size: 12px;
+        line-height: 18px;
+        vertical-align: baseline;
+    }
     .Mas.edge .mas-viewer .mas-viewer-container .nav-horizon > ul > li.active a{
         font-weight: 700;
         color: var(--color-sky-blue);
+    }
+    .Mas.edge .mas-viewer .mas-viewer-container .nav-horizon > ul > li.active a span{
+        background: var(--color-sky-blue);
+        color: #fff;
     }
     .Mas.edge .mas-viewer .mas-viewer-container .nav-horizon > ul >li.active a::after{
         content: '';
