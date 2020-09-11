@@ -4279,9 +4279,6 @@
         line-height: 36px;
     }
     .flow-deliver .subline > *{
-        margin: var(--smilies-marging);
-    }
-    .flow-deliver .subline > *.r{
         margin: var(--float-right-margin);
     }
     .flow-deliver .subline label{
@@ -4327,6 +4324,9 @@
     .flow-deliver .subline [id*='seccode_']{
         border-radius: 8px;
         margin: -1px 0 0 0;
+    }
+    .flow-deliver .subline .toolbar{
+        margin: 0 10px 0 0 !important;
     }
     .flow-deliver .subline .toolbar a{
         position: relative;

@@ -30,7 +30,6 @@
                 <!--{/if}-->
             </ul>
         <!--{else}-->
-            <!--{subtemplate home/space_home_mod_timeline_empty}-->
             <!--{if !empty($recommend) && $showrecommend && $view != 'special'}-->
                 <!--{eval $showrecommend = false;}-->
                 <h3>{lang follow_recommend}</h3>
@@ -43,6 +42,8 @@
                     <!--{/if}-->
                 </div>
                 <!--{/loop}-->
+            <!--{else}-->
+                <!--{subtemplate home/space_home_mod_timeline_empty}-->
             <!--{/if}-->
         <!--{/if}-->
 
@@ -204,7 +205,7 @@
             <ol class="panel-container">
                 <!--{if $do=='following'}-->
                     <!--{loop $list $fuid $fuser}-->
-                    <li class="box size-3-0 starer">
+                    <li class="box starer">
                         <div class="user">
                             <a class="avatar" href="{if $fuser['fusername']}home.php?mod=space&uid=$fuser['followuid']{else}javascript:;{/if}"><!--{avatar($fuser['followuid'],small)}--></a>
                             <span class="username" >
@@ -248,7 +249,7 @@
                     <!--{/loop}-->
                 <!--{else}-->
                     <!--{loop $list $fuid $fuser}-->
-                    <li class="box size-3-0 starer">
+                    <li class="box starer">
                         <div class="user">
                             <a class="avatar" href="home.php?mod=space&uid=$fuser['uid']" c="1"><!--{avatar($fuser['uid'],small)}--></a>
                             <span class="username">
@@ -298,18 +299,25 @@
     <!--{/if}-->
     <script>
         function succeedhandle_followmod(url, msg, values) {
-            var numObj = $('followernum_'+values['fuid']);
+
+            let followflag = SR('#followflag')[0],
+                unfollowflag = SR('#unfollowflag')[0],
+                stared = SR('#stared_' + values['fuid'])[0],
+                star = SR('#star_sp_' + values['fuid'])[0],
+                followbkame = SR('#followbkame_' + values['fuid'])[0],
+                numObj = $('followernum_'+values['fuid']);
+
             if(numObj) {followernum = parseInt(numObj.innerHTML);}
             if(values['type'] === 'add') {
                 if(values['from'] === 'head') {
-                    if($('followflag')) $('followflag').style.display = '';
-                    if($('unfollowflag')) $('unfollowflag').style.display = 'none';
-                } else if($('stared_'+values['fuid'])) {
-                    $('stared_'+values['fuid']).innerHTML = '{lang stared}';
+                    if(followflag) followflag.style.display = '';
+                    if(unfollowflag) unfollowflag.style.display = 'none';
+                } else if(stared) {
+                    stared.innerHTML = '{lang stared}';
                     if(values['from'] !== 'block') {
-                        $('stared_'+values['fuid']).className = 'star on';
+                        stared.className = 'star on';
                     }
-                    $('stared_'+values['fuid']).href = 'home.php?mod=spacecp&ac=follow&op=del&fuid='+values['fuid']+(values['from'] == 'block' ? '&from=block' : '');
+                    stared.href = 'home.php?mod=spacecp&ac=follow&op=del&fuid='+values['fuid']+(values['from'] === 'block' ? '&from=block' : '');
 
                 }
                 if(numObj) {
@@ -318,17 +326,17 @@
 
             } else if(values['type'] === 'del') {
                 if(values['from'] === 'head') {
-                    if($('followflag')) $('followflag').style.display = 'none';
-                    if($('unfollowflag')) $('unfollowflag').style.display = '';
-                    if($('followbkame_'+values['fuid'])){
-                        $('followbkame_'+values['fuid']).innerHTML = $('followbkame_'+values['fuid']).getAttribute('data-name');
+                    if(followflag) followflag.style.display = 'none';
+                    if(unfollowflag) unfollowflag.style.display = '';
+                    if(followbkame){
+                        followbkame.innerHTML = followbkame.getAttribute('data-name');
                     }
-                } else if($('stared_'+values['fuid']))  {
-                    $('stared_'+values['fuid']).innerHTML = '{lang star}';
+                } else if(stared)  {
+                    stared.innerHTML = '{lang star}';
                     if(values['from'] !== 'block') {
-                        $('stared_'+values['fuid']).className = 'star';
+                        stared.className = 'star';
                     }
-                    $('stared_'+values['fuid']).href = 'home.php?mod=spacecp&ac=follow&op=add&hash={FORMHASH}&fuid='+values['fuid']+(values['from'] === 'block' ? '&from=block' : '');
+                    stared.href = 'home.php?mod=spacecp&ac=follow&op=add&hash={FORMHASH}&fuid='+values['fuid']+(values['from'] === 'block' ? '&from=block' : '');
                 }
                 if(numObj) {
                     numObj.innerHTML = followernum - 1;
@@ -346,8 +354,8 @@
                     specialObj.title = specialObj.innerHTML;
                     specialObj.href = 'home.php?mod=spacecp&ac=follow&op=add&hash={FORMHASH}&special='+values['special']+'&fuid='+values['fuid']+'&from=head';
                 } else {
-                    $('star_sp_'+values['fuid']).className = values['special'] === '1' ? 'star-sp awe-heart-o' : 'star-sp on awe-heart';
-                    $('star_sp_'+values['fuid']).href = 'home.php?mod=spacecp&ac=follow&op=add&hash={FORMHASH}&special='+values['special']+'&fuid='+values['fuid'];
+                    star.className = values['special'] === '1' ? 'star-sp awe-heart-o' : 'star-sp on awe-heart';
+                    star.href = 'home.php?mod=spacecp&ac=follow&op=add&hash={FORMHASH}&special='+values['special']+'&fuid='+values['fuid'];
                 }
             }
         }

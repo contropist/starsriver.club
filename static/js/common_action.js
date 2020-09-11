@@ -1,3 +1,10 @@
+/********************************************************************
+ * Copyright (c) 2020 All Right Reserved By [StarsRiver]            *
+ *                                                                  *
+ * Author  Zhangyu                                                  *
+ * Email   starsriver@yahoo.com                                     *
+ ********************************************************************/
+
 /***********\
      申明    |
 \***********/
@@ -182,15 +189,15 @@
                 windowSize = 'WL-4K';
             } else if (SRGlobal.Window.Width > 2550) {
                 windowSize = 'WL-2K';
-            } else if (SRGlobal.Window.Width > 1910) {
+            } else if (SRGlobal.Window.Width > 1780) {
                 windowSize = 'WL-1K';
-            } else if (SRGlobal.Window.Width > 1320) {
+            } else if (SRGlobal.Window.Width > 1360) {
                 windowSize = 'WL-13P';
-            } else if (SRGlobal.Window.Width > 760) {
+            } else if (SRGlobal.Window.Width > 760 + MasGuideWidth) {
                 windowSize = 'WL-7P';
-            } else if (SRGlobal.Window.Width > 470 + MasGuideWidth) {
+            } else if (SRGlobal.Window.Width > 500 + MasGuideWidth) {
                 windowSize = 'WL-4P';
-            } else if (SRGlobal.Window.Width > 350 + MasGuideWidth) {
+            } else if (SRGlobal.Window.Width > 360 + MasGuideWidth) {
                 windowSize = 'WL-3P';
             }
 

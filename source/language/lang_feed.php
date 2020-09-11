@@ -342,7 +342,7 @@
             <div class="feed-element-thread-activity">
                 <div class="content">{message}</div>
                 <div class="feed-element-thread-activity-info">
-                    <div class="time"><i class="icon ft-clock"></i>时间：{starttime}<i class="time-E {endtimemark}"> - {endtime}</i></div>
+                    <div class="time"><i class="icon ft-clock"></i>时间：{starttime}<i class="time-E {endtimemark}">&nbsp;到 {endtime}</i></div>
                     <div class="loca"><i class="icon ft-compass"></i>地点：{city} - {location}</div>
                 </div>
             </div>',
@@ -368,7 +368,7 @@
             <div class="feed-element-thread-activity">
                 <div class="content">{message}</div>
                 <div class="feed-element-thread-activity-info">
-                    <div class="time"><i class="icon ft-clock"></i>时间：{starttime}<i class="time-E {endtimemark}"> - {endtime}</i></div>
+                    <div class="time"><i class="icon ft-clock"></i>时间：{starttime}<i class="time-E {endtimemark}">&nbsp;到 {endtime}</i></div>
                     <div class="loca"><i class="icon ft-compass"></i>地点：{city} - {location}</div>
                 </div>
             </div>',

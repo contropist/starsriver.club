@@ -9,7 +9,7 @@
 			</script>
 			<!--{eval $dmfid = $_G['setting']['followforumid'] && !empty($defaultforum) ? $_G['setting']['followforumid'] : 0;}-->
 
-			<form class="flow-deliver" id="fastpostform" method="post" action="home.php?mod=spacecp&ac=follow&op=newthread&topicsubmit=yes&infloat=yes&handlekey=fastnewpost&inajax=1" onsubmit="return fastpostvalidate(this);">
+			<form class="flow-deliver nop" id="fastpostform" method="post" action="home.php?mod=spacecp&ac=follow&op=newthread&topicsubmit=yes&infloat=yes&handlekey=fastnewpost&inajax=1" onsubmit="return fastpostvalidate(this);">
 				<input type="hidden" name="formhash" value="{FORMHASH}" />
 				<input type="hidden" name="usesig" value="$usesigcheck" />
 				<input type="hidden" name="adddynamic" value="1" />
@@ -34,7 +34,7 @@
                             var ATTACHNUM = {'imageused':0,'imageunused':0,'attachused':0,'attachunused':0}, ATTACHUNUSEDAID = [], IMGUNUSEDAID = [];
 						</script>
 					</div>
-					<button class="submit r" {if $_G['uid']}type="submit" {else}type="button" onclick="showWindow('login', 'member.php?mod=logging&action=login&guestmessage=yes'){/if}"name="topicsubmit_btn" id="fastpostsubmit" value="topicsubmitbtn" >{lang publish}</button>
+					<button class="submit" {if $_G['uid']}type="submit" {else}type="button" onclick="showWindow('login', 'member.php?mod=logging&action=login&guestmessage=yes'){/if}"name="topicsubmit_btn" id="fastpostsubmit" value="topicsubmitbtn" >{lang publish}</button>
 					<!--{if $secqaacheck || $seccodecheck}--><!--{subtemplate common/seccheck}--><!--{/if}-->
 				</div>
 
