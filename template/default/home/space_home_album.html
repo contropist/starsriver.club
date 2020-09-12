@@ -28,7 +28,7 @@
         <div class="mas-nop">{lang global_nothing}</div>
 	<!--{/if}-->
 <!--{else}-->
-    <div class="panel">
+    <div class="album-item-list panel">
         <ul class="panel-container">
             <!--{if $pricount}-->
                 <li class="box size-10-0">
@@ -36,31 +36,31 @@
                 </li>
             <!--{/if}-->
             <!--{if $space[self] && $_GET['view']=='me'}-->
-                <li class="box album">
-                    <a class="album-info rec-img" href="home.php?mod=space&uid=$value[uid]&do=album&id=-1">
+                <li class="box album-item">
+                    <a class="album-item-info rec-img" href="home.php?mod=space&uid=$value[uid]&do=album&id=-1">
                         <div class="imageGrid grid-{eval echo count($album0['imgs'])}">
                             <!--{eval $album_0_counter = 0;}-->
                             <!--{loop $album0['imgs'] $value}-->
                                 <!--{eval $album_0_counter += 1;}-->
                                 <i class="image rec-img nth-of-{$album_0_counter}" style="background-image: url({$value})">
-                                    <img src="{LIBURL}/img/row-e-col/1.1.png">
+                                    <img src="{LIBURL}/img/row-e-col/1.1.png" alt="">
                                 </i>
                             <!--{/loop}-->
                         </div>
-                        <img class="rec-img-core" src="{LIBURL}/img/row-e-col/1.1.png">
-                        <span class="album-num"><!--{if $album0['picnum']}-->$album0['picnum']<!--{else}-->0<!--{/if}-->&nbsp;{lang album_pics}</span>
-                        <span class="album-name">{lang default_album}</span>
+                        <img class="rec-img-core" src="{LIBURL}/img/row-e-col/1.1.png" alt="">
+                        <span class="album-item-info-num"><!--{if $album0['picnum']}-->$album0['picnum']<!--{else}-->0<!--{/if}-->&nbsp;{lang album_pics}</span>
+                        <span class="album-item-info-name">{lang default_album}</span>
                     </a>
                 </li>
             <!--{/if}-->
             <!--{if $list}-->
                 <!--{loop $list $key $value}-->
                     <!--{eval $pwdkey = 'view_pwd_album_'.$value['albumid'];}-->
-                    <li class="box album" style="background-image: url($value[pic])">
-                        <a class="album-info rec-img" href="home.php?mod=space&uid=$value[uid]&do=album&id=$value[albumid]" onclick="{if $_G['adminid'] !== 1 && $value[uid]!==$_G[uid] && $value[friend]==='4' && $value[password] && empty($_G[cookie][$pwdkey])}showWindow('list_album_$value[albumid]', this.href, 'get', 0);{/if}" title="{lang update}：{date($value[updatetime], 'Y-n-j H:i')}">
-                            <img class="rec-img-core" src="{LIBURL}/img/row-e-col/1.1.png">
-                            <span class="album-num"><!--{if $value[picnum]}-->$value[picnum]<!--{else}-->0<!--{/if}-->&nbsp;{lang album_pics}</span>
-                            <span class="album-name"><!--{if $value[albumname]}-->$value[albumname]<!--{else}-->{lang default_album}<!--{/if}--></span>
+                    <li class="album-item box" style="background-image: url($value[pic])">
+                        <a class="album-item-info rec-img" href="home.php?mod=space&uid=$value[uid]&do=album&id=$value[albumid]" onclick="{if $_G['adminid'] !== 1 && $value[uid]!==$_G[uid] && $value[friend]==='4' && $value[password] && empty($_G[cookie][$pwdkey])}showWindow('list_album_$value[albumid]', this.href, 'get', 0);{/if}" title="{lang update}：{date($value[updatetime], 'Y-n-j H:i')}">
+                            <img class="rec-img-core" src="{LIBURL}/img/row-e-col/1.1.png" alt="">
+                            <span class="album-item-info-num"><!--{if $value[picnum]}-->$value[picnum]<!--{else}-->0<!--{/if}-->&nbsp;{lang album_pics}</span>
+                            <span class="album-item-info-name">$value[albumname]</span>
                         </a>
                     </li>
                 <!--{/loop}-->

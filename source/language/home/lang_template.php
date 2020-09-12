@@ -290,7 +290,7 @@ $lang = [
     'start_playing' => '幻灯播放',
     'stop_playing' => '停止播放',
     'upload_at' => '上传于',
-    'album_pics' => '张图片',
+    'album_pics' => '图片',
     'favorite' => '收藏',
     'next_album' => '下一组',
     'no_pics' => '(=\'X\'=) 该画廊下还没有图片',

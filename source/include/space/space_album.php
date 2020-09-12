@@ -28,7 +28,7 @@
     
     if ($id) {
         
-        $perpage = 20;
+        $perpage = 60;
         $perpage = mob_perpage($perpage);
         
         $start = ($page - 1) * $perpage;
