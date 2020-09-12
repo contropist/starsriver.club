@@ -7876,6 +7876,15 @@
         pointer-events: none !important;
     }
 
+    .app-userspace .pg{
+        margin: 8px;
+        padding: 15px;
+        background: #fff;
+        box-sizing: content-box;
+        border-radius: 5px;
+        border: 1px solid var(--box-border-color);
+    }
+
     /*region @space-head*/
         .app-userspace {
             --box-border-color:  rgba(115, 115, 115,  .12);
@@ -8792,7 +8801,7 @@
             margin: 0 auto;
         }
         .app-userspace #userspace_follow .starer .user{
-            padding: 10px 0 10px 15px;
+            padding: 10px 0 10px 5px;
             text-align: center;
         }
         .app-userspace #userspace_follow .starer .user *{
@@ -8830,7 +8839,7 @@
 
         .app-userspace #userspace_follow .starer .fun {
             text-align: center;
-            padding: 32px 15px 10px 0;
+            padding: 32px 10px 10px 0;
         }
         .app-userspace #userspace_follow .starer .fun *{
             text-align: center;
@@ -8844,7 +8853,7 @@
         .app-userspace #userspace_follow .starer .fun .star{
             color: #fff;
             padding: 2px 0;
-            width: 68px;
+            width: 65px;
             background: #489ae0;
             border: 2px solid #489ae0;
         }
@@ -8960,14 +8969,6 @@
             width: calc(100% - 16px);
             margin: 8px;
             position: relative;
-        }
-        .app-userspace #userspace_wall .wall .pg{
-            margin: 8px;
-            padding: 15px;
-            background: #fff;
-            box-sizing: content-box;
-            border-radius: 5px;
-            border: 1px solid var(--box-border-color);
         }
 
         .app-userspace #userspace_wall .wall .commentform{

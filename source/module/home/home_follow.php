@@ -94,6 +94,7 @@
             $archiver = $primary = 0;
             $showguide = false;
         }
+        
         if ($showguide) {
             if (!empty($_G['cookie']['lastshowtime'])) {
                 $time = explode('|', $_G['cookie']['lastshowtime']);
@@ -266,16 +267,10 @@
     }
     
     if ($do == 'feed') {
-        $navigation = '<em class="direct"></em><a href="home.php?mod=follow&view=' . $view . '">' . lang('space', 'follow_view_' . $view) . '</a>';
         $navtitle = lang('space', 'follow_view_' . $view);
     } elseif ($do == 'view') {
-        $navigation = '<em class="direct"></em><a href="home.php?mod=space&uid=' . $uid . '">' . $space['username'] . '</a>';
-        if ($type != 'feed') {
-            $navigation .= '<em class="direct"></em>' . lang('space', 'follow_view_type_feed') . '</a>';
-        }
         $navtitle = lang('space', 'follow_view_feed', ['who' => $space['username']]);
     } else {
-        $navigation = '<em class="direct"></em><a href="home.php?mod=space&uid=' . $uid . '">' . $space['username'] . '</a><em class="direct"></em>' . lang('space', 'follow_view_' . ($viewself ? 'my' : 'do') . '_' . $do);
         $navtitle = lang('space', 'follow_view_' . ($viewself ? 'my' : 'do') . '_' . $do);
     }
     $metakeywords = $navtitle;
@@ -287,5 +282,8 @@
     }
     
     $nav_actives = [$do => 'active'];
+    
+    //count fix
+    $space['feeds'] = count($list['feed']);
     
     include template('nest:home/space_route_follow');

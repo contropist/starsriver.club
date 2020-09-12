@@ -288,8 +288,71 @@
                 <!--{if !empty($multi)}-->$multi<!--{/if}-->
             </ol>
         </div>
+        <script>
+            function succeedhandle_followmod(url, msg, values) {
+
+                let followflag = SR('#followflag')[0],
+                    unfollowflag = SR('#unfollowflag')[0],
+                    stared = SR('#stared_' + values['fuid'])[0],
+                    star = SR('#star_sp_' + values['fuid'])[0],
+                    followbkame = SR('#followbkame_' + values['fuid'])[0],
+                    numObj = $('followernum_'+values['fuid']);
+
+                if(numObj) {followernum = parseInt(numObj.innerHTML);}
+                if(values['type'] === 'add') {
+                    if(values['from'] === 'head') {
+                        if(followflag) followflag.style.display = '';
+                        if(unfollowflag) unfollowflag.style.display = 'none';
+                    } else if(stared) {
+                        stared.innerHTML = '{lang stared}';
+                        if(values['from'] !== 'block') {
+                            stared.className = 'star on';
+                        }
+                        stared.href = 'home.php?mod=spacecp&ac=follow&op=del&fuid='+values['fuid']+(values['from'] === 'block' ? '&from=block' : '');
+
+                    }
+                    if(numObj) {
+                        numObj.innerHTML = followernum + 1;
+                    }
+
+                } else if(values['type'] === 'del') {
+                    if(values['from'] === 'head') {
+                        if(followflag) followflag.style.display = 'none';
+                        if(unfollowflag) unfollowflag.style.display = '';
+                        if(followbkame){
+                            followbkame.innerHTML = followbkame.getAttribute('data-name');
+                        }
+                    } else if(stared)  {
+                        stared.innerHTML = '{lang star}';
+                        if(values['from'] !== 'block') {
+                            stared.className = 'star';
+                        }
+                        stared.href = 'home.php?mod=spacecp&ac=follow&op=add&hash={FORMHASH}&fuid='+values['fuid']+(values['from'] === 'block' ? '&from=block' : '');
+                    }
+                    if(numObj) {
+                        numObj.innerHTML = followernum - 1;
+                    }
+                } else if(values['type'] === 'special') {
+                    if(values['from'] === 'head') {
+                        var specialObj = $('specialflag_'+values['fuid']);
+                        if(values['special'] === 1) {
+                            specialObj.className = 'flw_specialfo';
+                            specialObj.innerHTML = '{lang follow_add_special_following}';
+                        } else {
+                            specialObj.className = 'flw_specialunfo';
+                            specialObj.innerHTML = '{lang follow_del_special_following}';
+                        }
+                        specialObj.title = specialObj.innerHTML;
+                        specialObj.href = 'home.php?mod=spacecp&ac=follow&op=add&hash={FORMHASH}&special='+values['special']+'&fuid='+values['fuid']+'&from=head';
+                    } else {
+                        star.className = values['special'] === '1' ? 'star-sp awe-heart-o' : 'star-sp on awe-heart';
+                        star.href = 'home.php?mod=spacecp&ac=follow&op=add&hash={FORMHASH}&special='+values['special']+'&fuid='+values['fuid'];
+                    }
+                }
+            }
+        </script>
     <!--{else}-->
-        <div class="global_nothing" id="nofollowmsg">
+        <div class="mas-nop" id="nofollowmsg">
             <!--{if $viewself}-->
                 <!--{if $do=='following'}-->{lang follow_you_following_none}<!--{else}-->{lang follow_you_follower_none1}<!--{/if}-->
             <!--{else}-->
@@ -297,69 +360,6 @@
             <!--{/if}-->
         </div>
     <!--{/if}-->
-    <script>
-        function succeedhandle_followmod(url, msg, values) {
-
-            let followflag = SR('#followflag')[0],
-                unfollowflag = SR('#unfollowflag')[0],
-                stared = SR('#stared_' + values['fuid'])[0],
-                star = SR('#star_sp_' + values['fuid'])[0],
-                followbkame = SR('#followbkame_' + values['fuid'])[0],
-                numObj = $('followernum_'+values['fuid']);
-
-            if(numObj) {followernum = parseInt(numObj.innerHTML);}
-            if(values['type'] === 'add') {
-                if(values['from'] === 'head') {
-                    if(followflag) followflag.style.display = '';
-                    if(unfollowflag) unfollowflag.style.display = 'none';
-                } else if(stared) {
-                    stared.innerHTML = '{lang stared}';
-                    if(values['from'] !== 'block') {
-                        stared.className = 'star on';
-                    }
-                    stared.href = 'home.php?mod=spacecp&ac=follow&op=del&fuid='+values['fuid']+(values['from'] === 'block' ? '&from=block' : '');
-
-                }
-                if(numObj) {
-                    numObj.innerHTML = followernum + 1;
-                }
-
-            } else if(values['type'] === 'del') {
-                if(values['from'] === 'head') {
-                    if(followflag) followflag.style.display = 'none';
-                    if(unfollowflag) unfollowflag.style.display = '';
-                    if(followbkame){
-                        followbkame.innerHTML = followbkame.getAttribute('data-name');
-                    }
-                } else if(stared)  {
-                    stared.innerHTML = '{lang star}';
-                    if(values['from'] !== 'block') {
-                        stared.className = 'star';
-                    }
-                    stared.href = 'home.php?mod=spacecp&ac=follow&op=add&hash={FORMHASH}&fuid='+values['fuid']+(values['from'] === 'block' ? '&from=block' : '');
-                }
-                if(numObj) {
-                    numObj.innerHTML = followernum - 1;
-                }
-            } else if(values['type'] === 'special') {
-                if(values['from'] === 'head') {
-                    var specialObj = $('specialflag_'+values['fuid']);
-                    if(values['special'] === 1) {
-                        specialObj.className = 'flw_specialfo';
-                        specialObj.innerHTML = '{lang follow_add_special_following}';
-                    } else {
-                        specialObj.className = 'flw_specialunfo';
-                        specialObj.innerHTML = '{lang follow_del_special_following}';
-                    }
-                    specialObj.title = specialObj.innerHTML;
-                    specialObj.href = 'home.php?mod=spacecp&ac=follow&op=add&hash={FORMHASH}&special='+values['special']+'&fuid='+values['fuid']+'&from=head';
-                } else {
-                    star.className = values['special'] === '1' ? 'star-sp awe-heart-o' : 'star-sp on awe-heart';
-                    star.href = 'home.php?mod=spacecp&ac=follow&op=add&hash={FORMHASH}&special='+values['special']+'&fuid='+values['fuid'];
-                }
-            }
-        }
-    </script>
 <!--{/if}-->
 
 <!--{if $showguide && $do == 'feed'}-->
