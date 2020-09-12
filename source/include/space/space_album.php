@@ -126,7 +126,7 @@
             $metadescription = $album['albumname'];
         }
         
-        include_once template("nest:home/space_album_view");
+        include_once template("nest:home/space_home_album_view");
         
     } elseif ($picid) {
         $query = C::t('home_pic')->fetch_all_by_uid($space['uid'], 0, 1, $picid);
@@ -291,7 +291,7 @@
         $metakeywords = $pic['title'] ? $pic['title'] : $album['albumname'];
         $metadescription = $pic['title'] ? $pic['title'] : $albumname['albumname'];
         
-        include_once template("nest:home/space_album_pic");
+        include_once template("nest:home/space_home_album_pic");
         
     } else {
         

@@ -387,6 +387,8 @@
                     MasElements.viewerBannerImg.style.display = '';
                 };
                 MasElements.viewerBannerImg.src = MasElements.viewerBannerImg.data('src');
+            } else {
+                body.addClass('scroll-overhead');
             }
         },
 

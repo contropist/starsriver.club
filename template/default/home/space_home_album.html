@@ -57,7 +57,7 @@
                 <!--{loop $list $key $value}-->
                     <!--{eval $pwdkey = 'view_pwd_album_'.$value['albumid'];}-->
                     <li class="box album" style="background-image: url($value[pic])">
-                        <a class="album-info rec-img" href="home.php?mod=space&uid=$value[uid]&do=album&id=$value[albumid]" onclick="{if $_G['adminid'] !== 1 && $value[uid]!==$_G[uid] && $value[friend]==='4' && $value[password] && empty($_G[cookie][$pwdkey])}showWindow('list_album_$value[albumid]', this.href, 'get', 0);{/if}" title="{lang update}：<!--{date($value[updatetime], 'Y-n-j H:i')}-->" target="_blank">
+                        <a class="album-info rec-img" href="home.php?mod=space&uid=$value[uid]&do=album&id=$value[albumid]" onclick="{if $_G['adminid'] !== 1 && $value[uid]!==$_G[uid] && $value[friend]==='4' && $value[password] && empty($_G[cookie][$pwdkey])}showWindow('list_album_$value[albumid]', this.href, 'get', 0);{/if}" title="{lang update}：{date($value[updatetime], 'Y-n-j H:i')}">
                             <img class="rec-img-core" src="{LIBURL}/img/row-e-col/1.1.png">
                             <span class="album-num"><!--{if $value[picnum]}-->$value[picnum]<!--{else}-->0<!--{/if}-->&nbsp;{lang album_pics}</span>
                             <span class="album-name"><!--{if $value[albumname]}-->$value[albumname]<!--{else}-->{lang default_album}<!--{/if}--></span>

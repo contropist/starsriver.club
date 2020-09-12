@@ -293,7 +293,7 @@ $lang = [
     'album_pics' => '张图片',
     'favorite' => '收藏',
     'next_album' => '下一组',
-    'no_pics' => '该画廊下还没有图片',
+    'no_pics' => '(=\'X\'=) 该画廊下还没有图片',
     'previous_album' => '上一组',
     'switch_pics' => '其它画廊',
     'system_cat' => '系统分类',

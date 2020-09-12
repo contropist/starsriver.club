@@ -3139,7 +3139,7 @@
     }
     .panel > .panel-container{
         position: relative;
-        display: block !important;
+        display: inline-block !important;
         margin:0 var(--default-box-margin-width);
         width: calc(100% - var(--default-box-margin-width) * 2);
         font-size: 0;
