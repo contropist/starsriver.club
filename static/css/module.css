@@ -8940,6 +8940,11 @@
     /*endregion*/
 
     /*region #userspace::album*/
+        .app-userspace #userspace_album [class^='hi-'] {
+            margin: 0 !important;
+            width: 100%;
+        }
+
         .app-userspace #userspace_album .box{
             padding: 0;
         }
@@ -8947,8 +8952,8 @@
             position: relative;
             background-position: center;
             background-size: cover;
-            box-shadow: inset 0 -30px 90px rgb(19, 42, 70, .39);
             border-radius: 4px;
+            overflow: hidden;
         }
 .WL-0   .app-userspace #userspace_album .album{
             width: calc(50% - var(--default-box-margin-width) * 2);
@@ -8975,6 +8980,22 @@
             width: calc(10% - var(--default-box-margin-width) * 2);
         }
 
+        .app-userspace #userspace_album .imageGrid{
+            --grid-gap: 1px;
+
+            z-index: 0;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            border: 0;
+        }
+        .app-userspace #userspace_album .rec-img-core{
+            z-index: 1;
+            position: relative;
+            box-shadow: inset 0 -30px 40px rgba(19, 42, 70, .39);
+            transition: .2s cubic-bezier(0, 0.77, 0.5, 1.31);
+        }
         .app-userspace #userspace_album .album-info{
             display: block;
             width: 100%;
@@ -8982,6 +9003,7 @@
         }
         .app-userspace #userspace_album .album-num,
         .app-userspace #userspace_album .album-name {
+            z-index: 2;
             position: absolute;
             width: 100%;
             left: 0;
@@ -9004,10 +9026,6 @@
             font-size: 14px;
             height: 18px;
             line-height: 18px;
-        }
-
-        .app-userspace #userspace_album [class^='hi-'] {
-            margin: 0 !important;
         }
     /*endregion*/
 
