@@ -1,16 +1,21 @@
 <!--{if $picmode}-->
 	<!--{if $pricount}-->
-		<p class="vessel alert hi-warning">{lang hide_pic}</p>
+        <div class="panel">
+            <ul class="panel-container">
+                <li class="box size-10-0">
+                    <div class="hi-info with-border">{lang hide_pic}</div>
+                </li>
+            </ul>
+        </div>
 	<!--{/if}-->
 	<!--{if $count}-->
+        <!--[** search unfinished **]-->
 		<div class="img-list" id="hotpic">
 			<ul id="hotpic_source" hide>
 				<!--{loop $list $key $value}-->
 				<li>
 					<a class="image" href="home.php?mod=space&uid=$value[uid]&do=album&picid=$value[picid]" target="_blank"><!--{if $value[pic]}--><img src="$value[pic]" alt="" /><!--{/if}--></a>
 					<div class="pic-info">
-						<a class="avatar" href="home.php?mod=space&uid=$value[uid]" target="_blank"><!--{avatar($value[uid],'small')}--></a>
-						<a class="username" href="home.php?mod=space&uid=$value[uid]" target="_blank">$value[username]</a>
 						<a class="albumname r" href="home.php?mod=space&uid=$value[uid]&do=album&id=$value[albumid]" target="_blank">$value[albumname]</a>
 					</div>
 				</li>
@@ -18,89 +23,40 @@
 			</ul>
 			<script>swaterfall('#hotpic','#hotpic_source','vessel picitem',2);</script>
 		</div>
-		<!--{if $multi}--><div class="vessel withedge"><div class="pg">$multi</div></div><!--{/if}-->
+		<!--{if $multi}--><div class="pgs">$multi</div><!--{/if}-->
 	<!--{else}-->
-		<div class="vessel withedge">
-			<div class="global_nothing">{lang global_nothing}</div>
-		</div>
+        <div class="mas-nop">{lang global_nothing}</div>
 	<!--{/if}-->
 <!--{else}-->
-	<!--{if $pricount}-->
-		<p class="vessel alert hi-warning">{lang hide_pic}</p>
-	<!--{/if}-->
-	<!--{if $count}-->
-		<ul class="album-list">
-			<!--{if $space[self] && $_GET['view']=='me'}-->
-				<li class="vessel">
-					<a class="album-info" href="home.php?mod=space&uid=$value[uid]&do=album&id=-1">
-						<i class="album-cover ft-instagram"></i>
-						<i class="album-num {if $value[picnum] > 1000}bignum{/if}">--</i>
-						<i class="album-name">{lang default_album}</i>
-					</a>
-					<div class="user-info">
-						<a class="avatar" href="home.php?mod=space&uid=$value[uid]" target="_blank"><!--{avatar($value[uid],'small')}--></a>
-						<a class="username" href="home.php?mod=space&uid=$value[uid]" target="_blank">$value[username]</a>
-						<div class="tool r">
-							<b class="dots"><i class="dot"></i><i class="dot"></i><i class="dot"></i></b>
-							<span class="tooltip lt" data-ignore='1'>
-								<a href="home.php?mod=spacecp&ac=album&op=editpic&albumid=$value[albumid]">{lang edit}</a>
-								<a href="home.php?mod=spacecp&ac=upload&albumid=$value[albumid]">{lang upload}</a>
-							</span>
-						</div>
-					</div>
-				</li>
-			<!--{/if}-->
-			<!--{loop $list $key $value}-->
-				<!--{eval $pwdkey = 'view_pwd_album_'.$value['albumid'];}-->
-				<li class="vessel">
-					<a class="album-info" href="home.php?mod=space&uid=$value[uid]&do=album&id=$value[albumid]" onclick="{if $_G['adminid'] != 1 && $value[uid]!=$_G[uid] && $value[friend]=='4' && $value[password] && empty($_G[cookie][$pwdkey])}showWindow('list_album_$value[albumid]', this.href, 'get', 0);{/if}" title="{lang update}：<!--{date($value[updatetime], 'Y-n-j H:i')}-->" target="_blank">
-						<i class="album-cover ft-instagram"><!--{if $value[pic]}--><img src="$value[pic]" alt="$value[albumname]"/><!--{/if}--></i>
-                        <i class="album-num {if $value[picnum] > 999}bignum{/if}"><!--{if $value[picnum]}-->$value[picnum]<!--{else}-->--<!--{/if}--></i>
-						<i class="album-name"><!--{if $value[albumname]}-->$value[albumname]<!--{else}-->{lang default_album}<!--{/if}--></i>
-					</a>
-					<div class="user-info">
-						<a class="avatar" href="home.php?mod=space&uid=$value[uid]" target="_blank"><!--{avatar($value[uid],'small')}--></a>
-						<a class="username" href="home.php?mod=space&uid=$value[uid]" target="_blank">$value[username]</a>
-						<!--{if $value[uid]==$_G[uid]}-->
-							<div class="tool r">
-								<b class="dots"><i class="dot"></i><i class="dot"></i><i class="dot"></i></b>
-								<span class="tooltip lt" data-ignore='1'>
-									<a href="home.php?mod=spacecp&ac=album&op=editpic&albumid=$value[albumid]">{lang edit}</a>
-									<a href="home.php?mod=spacecp&ac=upload&albumid=$value[albumid]">{lang upload}</a>
-								</span>
-							</div>
-						<!--{/if}-->
-					</div>
-				</li>
-			<!--{/loop}-->
-		</ul>
-		<!--{if $multi}--><div class="vessel withedge"><div class="pg">$multi</div></div><!--{/if}-->
-	<!--{else}-->
-		<!--{if $space[self] && $_GET['view']=='me'}-->
-			<ul class="album-list">
-				<li class="vessel">
-					<a class="album-info" href="home.php?mod=space&uid=$value[uid]&do=album&id=-1">
-						<i class="album-cover ft-instagram"></i>
-						<i class="album-num {if $value[picnum] > 1000}bignum{/if}">--</i>
-						<i class="album-name">{lang default_album}</i>
-					</a>
-					<div class="user-info">
-						<a class="avatar" href="home.php?mod=space&uid=$value[uid]" target="_blank"><!--{avatar($value[uid],'small')}--></a>
-						<a class="username" href="home.php?mod=space&uid=$value[uid]" target="_blank">$_G[username]</a>
-						<div class="tool r">
-							<b class="dots"><i class="dot"></i><i class="dot"></i><i class="dot"></i></b>
-							<span class="tooltip lt" data-ignore='1'>
-								<a href="home.php?mod=spacecp&ac=album&op=editpic&albumid=$value[albumid]">{lang edit}</a>
-								<a href="home.php?mod=spacecp&ac=upload&albumid=$value[albumid]">{lang upload}</a>
-							</span>
-						</div>
-					</div>
-				</li>
-			</ul>
-		<!--{else}-->
-			<div class="vessel withedge">
-				<div class="global_nothing">{lang global_nothing}</div>
-			</div>
-		<!--{/if}-->
-	<!--{/if}-->
+    <div class="panel">
+        <ul class="panel-container">
+            <!--{if !$pricount}-->
+                <li class="box size-10-0">
+                    <div class="hi-info with-border">{lang hide_pic}</div>
+                </li>
+            <!--{/if}-->
+            <!--{if $space[self] && $_GET['view']=='me'}-->
+                <li class="box album">
+                    <a class="album-info rec-img" href="home.php?mod=space&uid=$value[uid]&do=album&id=-1">
+                        <img src="{LIBURL}/img/row-e-col/1.1.png">
+                        <span class="album-num"><!--{if $value[picnum]}-->$value[picnum]<!--{else}-->0<!--{/if}-->&nbsp;{lang album_pics}</span>
+                        <span class="album-name">{lang default_album}</span>
+                    </a>
+                </li>
+            <!--{/if}-->
+            <!--{if $list}-->
+                <!--{loop $list $key $value}-->
+                    <!--{eval $pwdkey = 'view_pwd_album_'.$value['albumid'];}-->
+                    <li class="box album" style="background-image: url($value[pic])">
+                        <a class="album-info rec-img" href="home.php?mod=space&uid=$value[uid]&do=album&id=$value[albumid]" onclick="{if $_G['adminid'] !== 1 && $value[uid]!==$_G[uid] && $value[friend]==='4' && $value[password] && empty($_G[cookie][$pwdkey])}showWindow('list_album_$value[albumid]', this.href, 'get', 0);{/if}" title="{lang update}：<!--{date($value[updatetime], 'Y-n-j H:i')}-->" target="_blank">
+                            <img src="{LIBURL}/img/row-e-col/1.1.png">
+                            <span class="album-num"><!--{if $value[picnum]}-->$value[picnum]<!--{else}-->0<!--{/if}-->&nbsp;{lang album_pics}</span>
+                            <span class="album-name"><!--{if $value[albumname]}-->$value[albumname]<!--{else}-->{lang default_album}<!--{/if}--></span>
+                        </a>
+                    </li>
+                <!--{/loop}-->
+            <!--{/if}-->
+        </ul>
+    </div>
+    <!--{if $multi}--><div class="pgs">$multi</div><!--{/if}-->
 <!--{/if}-->

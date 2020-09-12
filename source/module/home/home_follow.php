@@ -283,7 +283,4 @@
     
     $nav_actives = [$do => 'active'];
     
-    //count fix
-    $space['feeds'] = count($list['feed']);
-    
     include template('nest:home/space_route_follow');

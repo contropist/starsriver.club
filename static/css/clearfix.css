@@ -296,6 +296,7 @@ style, script,
 }
 
 .rec-img{
+    display: block;
     background: center;
     background-size: cover;
 }

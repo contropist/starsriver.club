@@ -1,4 +1,10 @@
 <?php
+/********************************************************************
+ * Copyright (c) 2020 All Right Reserved By [StarsRiver]            *
+ *                                                                  *
+ * Author  Zhangyu                                                  *
+ * Email   starsriver@yahoo.com                                     *
+ ********************************************************************/
 
 /**
  *      [Discuz!] (C)2001-2099 Comsenz Inc.
@@ -177,8 +183,12 @@ function portal_upload_show($attach) {
 
 	if($attach['isimage']) {
 		$imagehtml = get_uploadcontent($attach, 'portal', 'upload');
-		$coverstr = addslashes(serialize(array('pic'=>'portal/'.$attach['attachment'], 'thumb'=>$attach['thumb'], 'remote'=>$attach['remote'])));
-	} else {
+        $coverstr = addslashes(serialize([
+            'pic'    => 'portal/' . $attach['attachment'],
+            'thumb'  => $attach['thumb'],
+            'remote' => $attach['remote'],
+        ]));
+    } else {
 		$filehtml = get_uploadcontent($attach, 'portal', 'upload');
 	}
 

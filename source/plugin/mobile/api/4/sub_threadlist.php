@@ -1,4 +1,10 @@
 <?php
+/********************************************************************
+ * Copyright (c) 2020 All Right Reserved By [StarsRiver]            *
+ *                                                                  *
+ * Author  Zhangyu                                                  *
+ * Email   starsriver@yahoo.com                                     *
+ ********************************************************************/
 
 /**
  *      [Discuz!] (C)2001-2099 Comsenz Inc.
@@ -18,10 +24,13 @@ foreach ($_G['forum_threadlist'] as $k => $thread) {
 	$tids[] = $_G['forum_threadlist'][$k]['tid'] = $thread['icontid'];
 	$_G['forum_threadlist'][$k]['cover'] = [];
 	if ($thread['cover']) {
-		$_G['forum_threadlist'][$k]['cover'] = array('w' => 200, 'h' => 200);
-	}
-
-	$_G['forum_threadlist'][$k]['reply'] = [];
+		$_G['forum_threadlist'][$k]['cover'] = [
+            'w' => 480,
+            'h' => 360
+        ];
+    }
+    
+    $_G['forum_threadlist'][$k]['reply'] = [];
 	if(!isset($_G['wechat']['setting']['wechat_forumdisplay_reply']) || $_G['wechat']['setting']['wechat_forumdisplay_reply']) {
 		$key = C::t('#mobile#mobile_wsq_threadlist')->fetch($thread['tid']);
 		if ($key['svalue']) {

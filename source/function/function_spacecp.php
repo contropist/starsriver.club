@@ -1,4 +1,10 @@
 <?php
+/********************************************************************
+ * Copyright (c) 2020 All Right Reserved By [StarsRiver]            *
+ *                                                                  *
+ * Author  Zhangyu                                                  *
+ * Email   starsriver@yahoo.com                                     *
+ ********************************************************************/
 
 /**
  *      [Discuz!] (C)2001-2099 Comsenz Inc.
@@ -75,7 +81,7 @@ function album_update_pic($albumid, $picid=0) {
 	}
 	require_once libfile('class/image');
 	$image = new image();
-	if($image->Thumb($picsource, 'album/'.$picdir.$albumid.'.jpg', 120, 120, 2)) {
+	if($image->Thumb($picsource, 'album/'.$picdir.$albumid.'.jpg', 360, 360, 2)) {
 		$setarr['pic'] = $picdir.$albumid.'.jpg';
 		$setarr['picflag'] = 1;
 		if(getglobal('setting/ftp/on')) {
