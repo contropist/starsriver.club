@@ -13,6 +13,7 @@
                     <!--{template home/space_home_follow_mod_li}-->
                 <!--{/loop}-->
 
+                <!--[** search unfinished **]-->
                 <!--{if count($list['feed']) > 19 && ($archiver || $primary)}-->
                     <li class="node">
                         <div class="n-right">
@@ -24,6 +25,65 @@
                                     window.location.href = url;
                                     //$('downloadframe').src = url;
                                 }
+
+                                var scrollY = 0;
+                                var page = 2;
+                                var feedInfo = {scrollY: 0, archiver: $archiver, primary: $primary, query: true, scrollNum:1};
+                                var loadingfeed = $('loadingfeed');
+
+                                function loadmore() {
+                                    var currentScroll = document.documentElement.scrollTop || document.body.scrollTop;
+                                    var sHeight = document.documentElement.scrollHeight;
+                                    if(currentScroll >= scrollY && currentScroll > (sHeight/5-5) && (feedInfo.primary ||feedInfo.archiver) && feedInfo.query) {
+                                        /*
+                                         if(feedInfo.scrollNum) {
+                                         loadingfeed.className="flw_loading hm vm";
+                                         loadingfeed.innerHTML = "<img src=\"{STATICURL}image/common/loading.gif\" class=\"vm\" /> {lang follow_loading}";
+                                         }
+                                         */
+                                        feedInfo.query = false;
+                                        var archiver = 0;
+                                        if(feedInfo.primary) {
+                                            archiver = 0;
+                                        } else if(feedInfo.archiver) {
+                                            archiver = 1;
+                                        }
+                                        var url = 'home.php?mod=spacecp&ac=follow&op=getfeed&archiver='+archiver+'&page='+page+'&inajax=1'<!--{if $do === 'feed'}-->+'&viewtype=$view'<!--{elseif $do == 'view'}-->+'&uid=$uid&banavatar=1'<!--{/if}-->;
+                                        var x = new Ajax();
+                                        x.get(url, function(s) {
+                                            if(trim(s) === 'false') {
+                                                if(!archiver) {
+                                                    feedInfo.primary = false;
+                                                    loadmore();
+                                                    page = 1;
+                                                } else {
+                                                    feedInfo.archiver = false;
+                                                    page = 1;
+                                                }
+                                            } else {
+                                                $('followlist').innerHTML = $('followlist').innerHTML + s;
+                                            }
+                                            if(!feedInfo.primary && !feedInfo.archiver) {
+                                                loadingfeed.className = "";
+                                                loadingfeed.innerHTML = "";
+                                            }
+                                            feedInfo.query = true;
+                                        });
+                                        page++;
+                                        if(feedInfo.scrollNum) {
+                                            feedInfo.scrollNum--;
+                                        } else if(!feedInfo.scrollNum) {
+                                            window.onscroll = null;
+                                        }
+
+                                    }
+                                    scrollY = currentScroll;
+                                }
+
+                                window.onload = function() {
+                                    scrollY =  document.documentElement.scrollTop || document.body.scrollTop;
+                                    window.onscroll = loadmore;
+                                }
                             </script>
                         </div>
                     </li>
@@ -31,6 +91,7 @@
             </ul>
         <!--{else}-->
             <!--{if !empty($recommend) && $showrecommend && $view != 'special'}-->
+                <!--[** search unfinished **]-->
                 <!--{eval $showrecommend = false;}-->
                 <h3>{lang follow_recommend}</h3>
                 <!--{loop $recommend $ruid $rusername}-->
@@ -45,69 +106,6 @@
             <!--{else}-->
                 <!--{subtemplate home/space_home_mod_timeline_empty}-->
             <!--{/if}-->
-        <!--{/if}-->
-
-        <!--{if count($list['feed']) > 19 && ($archiver || $primary)}-->
-            <script>
-                var scrollY = 0;
-                var page = 2;
-                var feedInfo = {scrollY: 0, archiver: $archiver, primary: $primary, query: true, scrollNum:1};
-                var loadingfeed = $('loadingfeed');
-
-                function loadmore() {
-                    var currentScroll = document.documentElement.scrollTop || document.body.scrollTop;
-                    var sHeight = document.documentElement.scrollHeight;
-                    if(currentScroll >= scrollY && currentScroll > (sHeight/5-5) && (feedInfo.primary ||feedInfo.archiver) && feedInfo.query) {
-                        /*
-                        if(feedInfo.scrollNum) {
-                            loadingfeed.className="flw_loading hm vm";
-                            loadingfeed.innerHTML = "<img src=\"{STATICURL}image/common/loading.gif\" class=\"vm\" /> {lang follow_loading}";
-                        }
-                        */
-                        feedInfo.query = false;
-                        var archiver = 0;
-                        if(feedInfo.primary) {
-                            archiver = 0;
-                        } else if(feedInfo.archiver) {
-                            archiver = 1;
-                        }
-                        var url = 'home.php?mod=spacecp&ac=follow&op=getfeed&archiver='+archiver+'&page='+page+'&inajax=1'<!--{if $do == 'feed'}-->+'&viewtype=$view'<!--{elseif $do == 'view'}-->+'&uid=$uid&banavatar=1'<!--{/if}-->;
-                        var x = new Ajax();
-                        x.get(url, function(s) {
-                            if(trim(s) == 'false') {
-                                if(!archiver) {
-                                    feedInfo.primary = false;
-                                    loadmore();
-                                    page = 1;
-                                } else {
-                                    feedInfo.archiver = false;
-                                    page = 1;
-                                }
-                            } else {
-                                $('followlist').innerHTML = $('followlist').innerHTML + s;
-                            }
-                            if(!feedInfo.primary && !feedInfo.archiver) {
-                                loadingfeed.className = "";
-                                loadingfeed.innerHTML = "";
-                            }
-                            feedInfo.query = true;
-                        });
-                        page++;
-                        if(feedInfo.scrollNum) {
-                            feedInfo.scrollNum--;
-                        } else if(!feedInfo.scrollNum) {
-                            window.onscroll = null;
-                        }
-
-                    }
-                    scrollY = currentScroll;
-                }
-
-                window.onload = function() {
-                    scrollY =  document.documentElement.scrollTop || document.body.scrollTop;
-                    window.onscroll = loadmore;
-                }
-            </script>
         <!--{/if}-->
 
         <script>
@@ -362,6 +360,7 @@
     <!--{/if}-->
 <!--{/if}-->
 
+<!--[** search unfinished **]-->
 <!--{if $showguide && $do == 'feed'}-->
     <div id="nv_menu" style="display:none; position: fixed; top:50%; margin-top: -250px;">
         <div>

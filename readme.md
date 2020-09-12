@@ -4,6 +4,7 @@
 	* 分享部分的模板全部通过语言文件 lang_feed.php -> feed_share***  来实现。
 	
 ##Bugs
+
     * 审核后的文章没有动态
     * 定期发布的文章没有动态
         
@@ -11,8 +12,14 @@
     * 富文本编辑器中图片向画廊保存存在问题。
     
 ##函数无优化
+
     * source/function/function_home.php -> getfollowfeed();
 			
+
+##模板标记
+
+    * 未完成部分搜索锚点 ： <!--[** search unfinished **]-->
+
 			
 ####文章列表：
 * 根据插件[1314]列表页缩略图 2.6.6 hook.class.php，增加文章列表图片显示。
