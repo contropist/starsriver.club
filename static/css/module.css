@@ -9183,7 +9183,7 @@
             left: 0;
             bottom: 0;
             width: 100%;
-            box-shadow: 0 0 32px 32px rgba(0,0,0,.5);
+            box-shadow: 0 0 26px 26px rgba(0,0,0,.3);
         }
 
         .app-userspace #userspace_album .album-element-pagination{
