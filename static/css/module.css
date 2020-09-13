@@ -8934,6 +8934,9 @@
 
     /*region #userspace::album*/
 
+        .app-userspace #userspace_album .panel{
+            --default-box-margin-width: 5px !important;
+        }
         .app-userspace #userspace_album .size-undefined{
             padding: 0;
             position: relative;
@@ -9060,7 +9063,7 @@
             flex-flow: row wrap;
             align-items: center;
             justify-content: space-between;
-            margin: 0 15px;
+            margin: 0 10px;
         }
         .app-userspace #userspace_album .album-element-terminal > *{
             display: flex;
@@ -9116,12 +9119,12 @@
         .app-userspace #userspace_album .album-element-desc {
             background: #f7f7f7;
             border: 1px solid var(--color-lightgray);
-            margin: 0 15px;
+            margin: 0 10px;
             padding: 10px;
             border-radius: 4px;
         }
         .app-userspace #userspace_album .album-element-alert {
-            margin: 15px 15px 0 15px;
+            margin: 10px 10px 0 10px;
             border-radius: 4px;
         }
         .app-userspace #userspace_album .album-element-empty {
