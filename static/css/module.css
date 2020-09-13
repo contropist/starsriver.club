@@ -8943,6 +8943,7 @@
             background-position: center;
             background-size: cover;
             overflow: hidden;
+            background-color: var(--color-lightgray);
         }
 .WL-0   .app-userspace #userspace_album .size-undefined{
             width: calc(50% - var(--default-box-margin-width) * 2);
