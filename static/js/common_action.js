@@ -380,15 +380,17 @@
             addEvent(MasElements.viewer,'scroll',MasAction.viewerScroll);
             addEvent(window,'resize',MasAction.bannerImgResize);
 
-            if(MasElements.viewerBannerImg){
-                MasElements.viewerBannerImg.style.display = 'none';
-                MasElements.viewerBannerImg.onload = function () {
-                    MasAction.bannerImgResize();
-                    MasElements.viewerBannerImg.style.display = '';
-                };
-                MasElements.viewerBannerImg.src = MasElements.viewerBannerImg.data('src');
-            } else {
-                body.addClass('scroll-overhead');
+            if(MasElements.viewer){
+                if(MasElements.viewerBannerImg){
+                    MasElements.viewerBannerImg.style.display = 'none';
+                    MasElements.viewerBannerImg.onload = function () {
+                        MasAction.bannerImgResize();
+                        MasElements.viewerBannerImg.style.display = '';
+                    };
+                    MasElements.viewerBannerImg.src = MasElements.viewerBannerImg.data('src');
+                } else {
+                    body.addClass('scroll-overhead');
+                }
             }
         },
 

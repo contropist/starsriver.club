@@ -66,22 +66,6 @@
             ];
         }
         
-        $albumlist = [];
-        $maxalbum = $nowalbum = $key = 0;
-        $query = C::t('home_album')->fetch_all_by_uid($space['uid'], 'updatetime', 0, 100);
-        foreach ($query as $value) {
-            if ($value['friend'] != 4 && ckfriend($value['uid'], $value['friend'], $value['target_ids'])) {
-                $value['pic'] = pic_cover_get($value['pic'], $value['picflag']);
-            } elseif ($value['picnum']) {
-                $value['pic'] = STATICURL . 'image/common/nopublish.gif';
-            } else {
-                $value['pic'] = '';
-            }
-            $albumlist[$key][$value['albumid']] = $value;
-            $key = count($albumlist[$key]) == 5 ? ++$key : $key;
-        }
-        $maxalbum = count($albumlist);
-        
         $list = [];
         $pricount = 0;
         if ($count) {
@@ -95,6 +79,7 @@
                 }
             }
         }
+        
         $multi = multi($count, $perpage, $page, "home.php?mod=space&uid=$album[uid]&do=$do&id=$id#comment");
         
         $actives = ['me' => 'active'];

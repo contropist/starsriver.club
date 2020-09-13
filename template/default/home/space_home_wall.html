@@ -9,7 +9,7 @@
         <div class="wall">
             <div class="comments" id="div_main_content">
                 <!--{if $cid}-->
-                <p class="hi-warning with-border">{lang view_one_operation_message}，<a href="home.php?mod=space&uid=$space[uid]&do=wall">{lang click_view_message}</a></p>
+                <p class="alert hi-warning with-border">{lang view_one_operation_message}，<a href="home.php?mod=space&uid=$space[uid]&do=wall">{lang click_view_message}</a></p>
                 <!--{/if}-->
 
                 <ol class="comments-list " id="comment_ul">
@@ -18,7 +18,9 @@
                     <!--{/loop}-->
                 </ol>
 
-                <div class="pgs">$multi</div>
+                <!--{if $multi}-->
+                    <div class="wall-pagination">$multi</div>
+                <!--{/if}-->
             </div>
 
             <!--{subtemplate home/space_home_wall_mod_form}-->

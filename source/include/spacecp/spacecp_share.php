@@ -95,7 +95,7 @@ if($_GET['op'] == 'delete') {
                     'username' => $user['username'],
                     'userlink' => 'home.php?mod=space&uid=' . $id,
                     'reside' => $userprofile['resideprovince'] . $userprofile['residecity'],
-                    'spacenote' => $tospace['spacenote'] ? getstr($tospace['spacenote'], 50, 0, 0, 0, -1) : lang('template','should_write_that'),
+                    'spacenote' => $tospace['spacenote'] ? $tospace['spacenote'] : lang('template','should_write_that'),
 
                     'expend0' => '',
                     'expend1' => '',

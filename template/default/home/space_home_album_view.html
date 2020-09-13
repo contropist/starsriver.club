@@ -1,5 +1,5 @@
 <!--{subtemplate home/space_home__header}-->
-<div class="mas-viewer">
+<div class="mas-viewer grid-mode">
     <div class="mas-viewer-header">
         <!--{template home/space_home__header_userabout_sample}-->
     </div>
@@ -9,101 +9,76 @@
             <!--{eval $friendsname = array(1 => '{lang friendname_1}',2 => '{lang friendname_2}',3 => '{lang friendname_3}',4 => '{lang friendname_4}');}-->
 
             <div class="album-element-terminal">
-                <!--{if $space[self]}--><a href="{if $album[albumid] > 0}home.php?mod=spacecp&ac=album&op=edit&albumid=$album[albumid]{else}home.php?mod=spacecp&ac=album&op=editpic&albumid=0{/if}">{lang edit}</a><!--{/if}-->
-                <!--{if ($_G[uid] == $album[uid] || checkperm('managealbum')) && $album[albumid] > 0}-->
-                <a href="home.php?mod=spacecp&ac=album&op=delete&albumid=$album[albumid]&uid=$album[uid]&handlekey=delalbumhk_{$album[albumid]}" id="album_delete_$album[albumid]" onclick="showWindow(this.id, this.href, 'get', 0);">{lang delete}</a>
-                <!--{/if}-->
-                <!--{if $pricount}--><p>{lang hide_pic}</p><!--{/if}-->
-                <!--{if $space[self] && helper_access::check_module('album')}--><a href="home.php?mod=spacecp&ac=upload" class="addnew">{lang upload_pic}</a><!--{/if}-->
-                <!--{if $_G[uid] != $album[uid]}-->
-                <a onclick="showWindow('miscreport$album[albumid]', 'misc.php?mod=report&rtype=album&uid=$album[uid]&rid=$album[albumid]', 'get', -1);return false;">{lang report}</a>
-                <!--{/if}-->
-                <!--{if helper_access::check_module('share')}--><a href="home.php?mod=spacecp&ac=share&type=album&id=$album[albumid]&handlekey=sharealbumhk_{$album[albumid]}" id="a_share" onclick="showWindow(this.id, this.href, 'get', 0);" class="oshr">{lang share}</a><!--{/if}-->
-                <!--{hook/space_album_op_extra}-->
-                <!--{if $album[albumid]>0}-->
-                <a href="home.php?mod=spacecp&ac=favorite&type=album&id=$album[albumid]&spaceuid=$space[uid]&handlekey=sharealbumhk_{$album[albumid]}" id="a_favorite" onclick="showWindow(this.id, this.href, 'get', 0);" class="oshr ofav">{lang favorite}</a>
-                <!--{/if}-->
-                <!--{if $album[picnum]}-->$album[picnum] {lang album_pics}<!--{/if}-->
-                <!--{if $album['catname']}-->
-                <span>{lang system_cat}</span><a href="home.php?mod=space&do=album&catid=$album[catid]&view=all">$album[catname]</a>
-                <!--{/if}-->
-                <!--{if $album['friend']}-->
-                <span> &nbsp; {$friendsname[$value[friend]]}</span>
-                <!--{/if}-->
+                <terminal-left>
+                    <div class="album-element-title">
+                        {$space[username]}{lang de}{lang album}: <span>$album[albumname]</span>
+                        <!--{if $album['catname']}-->
+                            <tag><a href="home.php?mod=space&do=album&catid=$album[catid]&view=all">{lang system_cat}:$album[catname]</a></tag>
+                        <!--{/if}-->
+                        <!--{if $album['friend']}-->
+                            <tag>{$friendsname[$value[friend]]}</tag>
+                        <!--{/if}-->
+                    </div>
+                    <div class="album-element-counter">
+                        <!--{if $album[picnum]}-->$album[picnum]<!--{else}-->0<!--{/if}--><span> {lang album_pics}</span>
+                    </div>
+                </terminal-left>
+                <terminal-right>
+                    <!--{hook/space_album_op_extra}-->
+
+                    <!--{if ($_G[uid] == $album[uid] || checkperm('managealbum')) && $album[albumid] > 0}-->
+                        <a class="icon delete ft-trash" id="album_delete_$album[albumid]" onclick="showWindow(this.id, 'home.php?mod=spacecp&ac=album&op=delete&albumid=$album[albumid]&uid=$album[uid]&handlekey=delalbumhk_{$album[albumid]}', 'get', 0);" title="{lang delete}"></a>
+                        <b class="seperate-line"></b>
+                    <!--{/if}-->
+
+                    <!--{if $space[self] && helper_access::check_module('album')}-->
+                        <a class="icon upload ft-arrow-up" href="home.php?mod=spacecp&ac=upload" title="{lang upload_pic}"></a>
+                        <a class="icon edit ft-edit-3" href="{if $album[albumid] > 0}home.php?mod=spacecp&ac=album&op=edit&albumid=$album[albumid]{else}home.php?mod=spacecp&ac=album&op=editpic&albumid=0{/if}" title="{lang edit}"></a>
+                        <b class="seperate-line"></b>
+                    <!--{/if}-->
+
+                    <!--{if $_G[uid] != $album[uid]}-->
+                        <a class="icon report ft-alert-octagon" onclick="showWindow('miscreport$album[albumid]', 'misc.php?mod=report&rtype=album&uid=$album[uid]&rid=$album[albumid]', 'get', -1);return false;" title="{lang report}"></a>
+                    <!--{/if}-->
+                    <!--{if helper_access::check_module('share')}-->
+                        <a class="icon share ft-share-2" id="a_share" onclick="showWindow(this.id, 'home.php?mod=spacecp&ac=share&type=album&id=$album[albumid]&handlekey=sharealbumhk_{$album[albumid]}', 'get', 0);" title="{lang share}"></a>
+                    <!--{/if}-->
+                    <!--{if $album[albumid]>0}-->
+                        <a class="icon like ft-heart" id="a_favorite" onclick="showWindow(this.id, 'home.php?mod=spacecp&ac=favorite&type=album&id=$album[albumid]&spaceuid=$space[uid]&handlekey=sharealbumhk_{$album[albumid]}', 'get', 0);" title="{lang favorite}"></a>
+                    <!--{/if}-->
+                </terminal-right>
             </div>
             <div class="album-element-desc">
-                <!--{if $album[depict]}-->$album[depict]<!--{/if}-->
+                <!--{if $album[depict]}-->$album[depict]<!--{else}-->{lang no_pics_desc}<!--{/if}-->
             </div>
+
+            <!--{if $pricount}-->
+            <div class="album-element-alert alert hi-info with-border">
+                <p>{lang hide_pic}</p>
+            </div>
+            <!--{/if}-->
+
             <!--{if $list}-->
                 <div class="album-element-images panel">
                     <ul class="panel-container">
                         <!--{loop $list $key $value}-->
-                        <li class="album-element-img box" style="background-image: url($value[pic])">
-                            <a class="album-element-img-info rec-img" href="home.php?mod=space&uid=$value[uid]&do=$do&picid=$value[picid]">
-                                <img src="{LIBURL}/img/row-e-col/1.1.png" alt="">
-                                <!--{if $value[status] == 1}--><tag>{lang moderate_need}</tag><!--{/if}-->
-                                <span  class="album-element-img-info-hot">{$value['hot']}</span>
+                        <li class="box rec-img album-element-img" style="background-image: url($value[pic])">
+                            <img src="{LIBURL}/img/row-e-col/1.1.png" alt="">
+                            <a class="cover-layer album-element-img-info" href="home.php?mod=space&uid=$value[uid]&do=$do&picid=$value[picid]">
+                                <!--{if $value[status] == 1}--><tag class="censor-mark">{lang moderate_need}</tag><!--{/if}-->
+                                <span  class="album-element-img-info-shadow"></span>
                                 <span  class="album-element-img-info-name"><!--{if $value['title']}-->{$value['title']}<!--{else}-->{$value['filename']}<!--{/if}--></span>
+                                <span  class="album-element-img-info-hot mt-whatshot">{$value['hot']}</span>
                             </a>
                         </li>
                         <!--{/loop}-->
                     </ul>
                 </div>
-                <!--{if $multi}-->$multi<!--{/if}-->
+                <!--{if $multi}--><div class="album-element-pagination">$multi</div><!--{/if}-->
             <!--{else}-->
                 <div class="album-element-empty">
                     <p>{lang no_pics}</p>
                 </div>
-            <!--{/if}-->
-
-
-            <!--{if $albumlist}-->
-                <div class="y mtn">
-                    <a id="sabup" onclick="switchAlbum(0);this.blur();return false;" title="{lang previous_album}"><img src="{STATICURL}/image/common/pic_nv_prev.gif" alt="{lang previous_album}"/></a>
-                    <a id="sabdown" onclick="switchAlbum(1);this.blur();return false;" title="{lang next_album}"><img src="{STATICURL}/image/common/pic_nv_next.gif" alt="{lang next_album}"/></a>
-                </div>
-                <div class="album-item-list panel">
-                    <!--{loop $albumlist $key $albums}-->
-                    <ul class="panel-container" id="albumbox_$key" {if !isset($albums[$id]) && !($key==0 && $id<0)}style="display: none;"{else}{eval $nowalbum=$key;}{/if}>
-                        <!--{loop $albums $akey $value}-->
-                            <!--{eval $pwdkey = 'view_pwd_album_'.$value['albumid'];}-->
-                            <li class="album-item box" style="background-image: url($value[pic])">
-                                <!--{eval $access = !($value[uid]!=$_G[uid] && $_G['adminid'] != 1 && $value[friend]=='4' && $value[password] && empty($_G[cookie][$pwdkey]));}-->
-                                <a class="album-item-info rec-img" href="home.php?mod=space&uid=$value[uid]&do=album&id=$value[albumid]" {if $access}onclick="showWindow('right_album_$value[albumid]', this.href, 'get', 0);"{/if} title="$value[albumname]">
-                                    <img class="rec-img-core" src="{LIBURL}/img/row-e-col/1.1.png" alt="">
-                                    <span class="album-item-info-num"><!--{if $value[picnum]}-->$value[picnum]<!--{else}-->0<!--{/if}-->&nbsp;{lang album_pics}</span>
-                                    <span class="album-item-info-name">$value[albumname]</span>
-                                </a>
-                            </li>
-                        <!--{/loop}-->
-                    </ul>
-                    <!--{/loop}-->
-                </div>
-                <script>
-                    var nowAlbum = $nowalbum;
-                    var maxAlbum = $maxalbum;
-                    function switchAlbum(down) {
-                        if(down) {
-                            if(nowAlbum + 1 < maxAlbum) {
-                                $('albumbox_'+ nowAlbum).style.display = 'none';
-                                nowAlbum++;
-                                $('albumbox_'+ nowAlbum).style.display = '';
-                            }
-                        } else {
-                            if(nowAlbum - 1 >= 0) {
-                                $('albumbox_'+ nowAlbum).style.display = 'none';
-                                nowAlbum--;
-                                $('albumbox_'+ nowAlbum).style.display = '';
-                            }
-                        }
-                        initSwitchButton();
-                    }
-                    function initSwitchButton(){
-                        $('sabdown').style.display = maxAlbum-nowAlbum === 1 ? 'none' : '';
-                        $('sabup').style.display = nowAlbum ? '' : 'none';
-                    }
-                    window.onload = function () {initSwitchButton();}
-                </script>
             <!--{/if}-->
         </album-viewer>
     </div>

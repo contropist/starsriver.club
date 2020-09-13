@@ -6706,9 +6706,10 @@
             color: #8aa0bb;
         }
         .share-element-space .space-note {
-            display: block;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 2;
             width: 100%;
-            max-height: 39px;
             overflow: hidden;
             color: #4a617d;
             font-size: var(--space-note-fontsize);
@@ -7918,14 +7919,6 @@
             --space-bank-avatar-size: 96px;
         }
 
-        .app-userspace [class^="hi-"]{
-            box-sizing: border-box;
-            width: calc(100% - 16px);
-            padding: 10px 15px;
-            margin: 8px;
-            border-radius: 4px;
-        }
-
         .app-userspace .user-menu{
             cursor: pointer;
             position: relative;
@@ -8940,10 +8933,6 @@
     /*endregion*/
 
     /*region #userspace::album*/
-        .app-userspace #userspace_album [class^='hi-'] {
-            margin: 0 !important;
-            width: 100%;
-        }
 
         .app-userspace #userspace_album .box{
             padding: 0;
@@ -8976,32 +8965,28 @@
 .WL-4K  .app-userspace #userspace_album .box{
             width: calc(10% - var(--default-box-margin-width) * 2);
         }
+        .app-userspace #userspace_album .size-10-0{
+            width: calc(100% - var(--default-box-margin-width) * 2) !important;
+        }
 
         .app-userspace #userspace_album .imageGrid{
             --grid-gap: 1px;
-
-            z-index: 0;
+        }
+        .app-userspace #userspace_album .cover-layer{
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
-            border: 0;
-        }
-        .app-userspace #userspace_album .rec-img-core{
-            z-index: 1;
-            position: relative;
-            box-shadow: inset 0 -30px 40px rgba(19, 42, 70, .39);
-            transition: .2s cubic-bezier(0, 0.77, 0.5, 1.31);
+            bottom: 0;
+            transition: .2s ease-in-out;
         }
 
         .app-userspace #userspace_album .album-item-info{
             display: block;
-            width: 100%;
-            height: 100%;
+            box-shadow: inset 0 -30px 40px rgba(19, 42, 70, .39);
         }
         .app-userspace #userspace_album .album-item-info-num,
         .app-userspace #userspace_album .album-item-info-name {
-            z-index: 2;
             position: absolute;
             width: 100%;
             left: 0;
@@ -9030,6 +9015,171 @@
             display: inline-block;
             width: 100%;
             margin-top: 72px;
+            background: #fff;
+        }
+
+        .app-userspace #userspace_album .album-element-title {
+            font-size: 20px;
+            color: var(--color-text-dark);
+            min-width: 42px;
+        }
+        .app-userspace #userspace_album .album-element-title span{
+            font-weight: 700;
+            font-size: inherit;
+        }
+        .app-userspace #userspace_album .album-element-title tag{
+            display: inline-block;
+            background: var(--color-main-theme);
+            color: #fff;
+            padding: 2px 5px;
+            border-radius: 4px;
+            font-size: 12px;
+            margin: 4px 0 4px 5px;
+        }
+        .app-userspace #userspace_album .album-element-title tag *{
+            color: #fff;
+            font-size: 12px;
+        }
+        .app-userspace #userspace_album .album-element-title tag a{
+            border-bottom: 1px dashed;
+        }
+        .app-userspace #userspace_album .album-element-counter {
+            font-size: 20px;
+            color: var(--color-main-theme-dark);
+            text-align: center;
+            margin-left: 15px;
+            padding-left: 15px;
+            min-width: 42px;
+        }
+        .app-userspace #userspace_album .album-element-counter span{
+            display: inline-block;
+            font-size: 14px;
+            color: var(--color-text-gray);
+            vertical-align: baseline;
+        }
+
+        .app-userspace #userspace_album .album-element-terminal {
+            display: flex;
+            flex-flow: row wrap;
+            align-items: center;
+            justify-content: space-between;
+            margin: 0 15px;
+        }
+        .app-userspace #userspace_album .album-element-terminal > *{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 10px 0;
+            width: 100%;
+        }
+        .app-userspace #userspace_album .album-element-terminal > terminal-right{
+            justify-content: flex-end;
+        }
+        .app-userspace #userspace_album .album-element-terminal .icon{
+            display: inline-flex;
+            box-sizing: border-box;
+            justify-content: center;
+            justify-items: right;
+            padding: 0 5px;
+            height: 32px;
+            min-width: 32px;
+            line-height: 32px;
+            border-radius: 4px;
+            margin-left: 5px;
+            color: #fff;
+            font-size: 14px;
+            font-weight: 700;
+        }
+        .app-userspace #userspace_album .album-element-terminal .icon.like{
+            background: var(--color-heart-pink);
+        }
+        .app-userspace #userspace_album .album-element-terminal .icon.share{
+            background: var(--color-main-theme);
+        }
+        .app-userspace #userspace_album .album-element-terminal .icon.report{
+            background: var(--color-mod-warning);
+        }
+        .app-userspace #userspace_album .album-element-terminal .icon.edit{
+            background: var(--color-charry-pink);
+        }
+        .app-userspace #userspace_album .album-element-terminal .icon.upload{
+            background: var(--color-sky-blue);
+        }
+        .app-userspace #userspace_album .album-element-terminal .icon.delete{
+            background: var(--color-text-gray);
+        }
+        .app-userspace #userspace_album .album-element-terminal .seperate-line{
+            height: 20px;
+            width: 3px;
+            background: #eaeef1;
+            margin: 0 10px 0 15px;
+            border-radius: 5px;
+        }
+
+        .app-userspace #userspace_album .album-element-desc {
+            background: #f7f7f7;
+            border: 1px solid var(--color-lightgray);
+            margin: 0 15px;
+            padding: 10px;
+            border-radius: 4px;
+        }
+        .app-userspace #userspace_album .album-element-alert {
+            margin: 15px 15px 0 15px;
+            border-radius: 4px;
+        }
+
+        .app-userspace #userspace_album .album-element-img-info{
+            display: flex;
+            flex-flow: row nowrap;
+            justify-content: stretch;
+            opacity: 0;
+        }
+.WL-0   .app-userspace #userspace_album .album-element-img-info,
+.WL-3P  .app-userspace #userspace_album .album-element-img-info,
+.WL-4P  .app-userspace #userspace_album .album-element-img-info,
+.WL-7P  .app-userspace #userspace_album .album-element-img-info,
+        .app-userspace #userspace_album .album-element-img-info:hover{
+            opacity: 1;
+        }
+        .app-userspace #userspace_album .album-element-img-info-hot,
+        .app-userspace #userspace_album .album-element-img-info-name {
+            position: absolute;
+            width: calc(100% - 70px);
+            left: 0;
+            bottom: 0;
+            height: 32px;
+            line-height: 32px;
+            box-sizing: border-box;
+            padding: 0 0 0 10px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            color: #fff;
+            text-shadow: 1px 1px 3px rgba(0,0,0,.5);
+        }
+        .app-userspace #userspace_album .album-element-img-info-hot {
+            text-align: right;
+            width: 70px;
+            left: auto;
+            right: 0;
+            padding: 0 10px 0 0;
+        }
+        .app-userspace #userspace_album .album-element-img-info-hot::before {
+            margin-right: 5px;
+        }
+        .app-userspace #userspace_album .album-element-img-info-shadow {
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            box-shadow: 0 0 32px 32px rgba(0,0,0,.5);
+        }
+
+        .app-userspace #userspace_album .album-element-pagination{
+            margin-top: 20px;
+        }
+        .app-userspace #userspace_album .album-element-pagination .pagination{
+            --pagination-thumb-a-display: none;
         }
 
     /*endregion*/
@@ -9083,15 +9233,21 @@
             margin: 8px;
             position: relative;
         }
-        .app-userspace #userspace_wall .wall .pg{
-            margin: 8px;
-            padding: 15px;
+
+        .app-userspace #userspace_wall .wall .wall-pagination{
             background: #fff;
-            box-sizing: content-box;
-            border-radius: 5px;
+            margin: 0 8px;
             border: 1px solid var(--box-border-color);
+            border-radius: var(--box-radius);
+            padding: 10px;
         }
 
+        .app-userspace #userspace_wall .wall .alert{
+            box-sizing: border-box;
+            width: calc(100% - 16px);
+            margin: 8px;
+            border-radius: 4px;
+        }
 
         .app-userspace #userspace_wall .wall .commentform{
             z-index: 1;

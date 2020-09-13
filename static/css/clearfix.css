@@ -303,6 +303,7 @@ style, script,
 
 .rec-img img{
     width: 100%;
+    opacity: 0;
 }
 
 /*endregion*/
