@@ -53,16 +53,14 @@
             </div>
 
             <!--{if $pricount}-->
-            <div class="album-element-alert alert hi-info with-border">
-                <p>{lang hide_pic}</p>
-            </div>
+                <div class="album-element-alert alert hi-info with-border">{lang hide_pic}</div>
             <!--{/if}-->
 
             <!--{if $list}-->
                 <div class="album-element-images panel">
                     <ul class="panel-container">
                         <!--{loop $list $key $value}-->
-                        <li class="box rec-img album-element-img" style="background-image: url($value[pic])">
+                        <li class="box size-undefined rec-img album-element-img" style="background-image: url($value[pic])">
                             <img src="{LIBURL}/img/row-e-col/1.1.png" alt="">
                             <a class="cover-layer album-element-img-info" href="home.php?mod=space&uid=$value[uid]&do=$do&picid=$value[picid]">
                                 <!--{if $value[status] == 1}--><tag class="censor-mark">{lang moderate_need}</tag><!--{/if}-->
@@ -76,9 +74,7 @@
                 </div>
                 <!--{if $multi}--><div class="album-element-pagination">$multi</div><!--{/if}-->
             <!--{else}-->
-                <div class="album-element-empty">
-                    <p>{lang no_pics}</p>
-                </div>
+                <div class="album-element-empty">{lang no_pics}</div>
             <!--{/if}-->
         </album-viewer>
     </div>

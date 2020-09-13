@@ -4,7 +4,7 @@
     <!--{/if}-->
 
     <!--{if $dolist}-->
-        <!--{if $pricount}-->
+        <!--{if !$pricount}-->
             <p class="alert hi-warning" style="margin: 0 0 0 -15px; width: calc(100% + 30px);">{lang hide_doing}</p>
         <!--{/if}-->
         <ul class="timeline" id="doing_list">

@@ -8934,39 +8934,36 @@
 
     /*region #userspace::album*/
 
-        .app-userspace #userspace_album .box{
+        .app-userspace #userspace_album .size-undefined{
             padding: 0;
             position: relative;
             background-position: center;
             background-size: cover;
             overflow: hidden;
         }
-.WL-0   .app-userspace #userspace_album .box{
+.WL-0   .app-userspace #userspace_album .size-undefined{
             width: calc(50% - var(--default-box-margin-width) * 2);
         }
-.WL-3P  .app-userspace #userspace_album .box{
+.WL-3P  .app-userspace #userspace_album .size-undefined{
             width: calc(50% - var(--default-box-margin-width) * 2);
         }
-.WL-4P  .app-userspace #userspace_album .box{
+.WL-4P  .app-userspace #userspace_album .size-undefined{
             width: calc(33.3333333% - var(--default-box-margin-width) * 2);
         }
-.WL-7P  .app-userspace #userspace_album .box{
+.WL-7P  .app-userspace #userspace_album .size-undefined{
             width: calc(25% - var(--default-box-margin-width) * 2);
         }
-.WL-13P .app-userspace #userspace_album .box{
+.WL-13P .app-userspace #userspace_album .size-undefined{
             width: calc(20% - var(--default-box-margin-width) * 2);
         }
-.WL-1K  .app-userspace #userspace_album .box{
+.WL-1K  .app-userspace #userspace_album .size-undefined{
             width: calc(16.6666666% - var(--default-box-margin-width) * 2);
         }
-.WL-2K  .app-userspace #userspace_album .box{
+.WL-2K  .app-userspace #userspace_album .size-undefined{
             width: calc(12.5% - var(--default-box-margin-width) * 2);
         }
-.WL-4K  .app-userspace #userspace_album .box{
+.WL-4K  .app-userspace #userspace_album .size-undefined{
             width: calc(10% - var(--default-box-margin-width) * 2);
-        }
-        .app-userspace #userspace_album .size-10-0{
-            width: calc(100% - var(--default-box-margin-width) * 2) !important;
         }
 
         .app-userspace #userspace_album .imageGrid{
@@ -9126,6 +9123,17 @@
         .app-userspace #userspace_album .album-element-alert {
             margin: 15px 15px 0 15px;
             border-radius: 4px;
+        }
+        .app-userspace #userspace_album .album-element-empty {
+            text-align: center;
+            color: var(--color-text-gray);
+            margin: 60px 0;
+            line-height: 80px;
+        }
+        .app-userspace #userspace_album .album-element-empty i{
+            font-family: Roboto Mono, sans-serif !important;
+            display: block;
+            font-size: 60px;
         }
 
         .app-userspace #userspace_album .album-element-img-info{
