@@ -3138,21 +3138,21 @@
         visibility: hidden;
     }
     .Mas .mas-cover {
-        transition: .05s ease;
-        visibility: hidden;
         z-index: 1;
         position: absolute;
-        background: rgba(0,0,0,0);
-        backdrop-filter: blur(0);
         top: 0;
         left: 0;
         bottom: 0;
         right: 0;
+        background: rgba(0,0,0,0);
+        backdrop-filter: blur(0);
+        visibility: hidden;
+        transition: none !important;
     }
     .Mas .mas-guide.open + .mas-cover {
         visibility: visible;
         background: rgba(0,0,0,.3);
-        backdrop-filter: blur(1px);
+        backdrop-filter: blur(2px);
     }
     .Mas .mas-viewer{
         top: 0;
