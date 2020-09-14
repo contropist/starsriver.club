@@ -9301,7 +9301,6 @@
                 justify-content: center;
                 align-items: center;
                 padding: 10px;
-                margin-bottom: 40px;
                 background: rgba(255,255,255,.3);
                 backdrop-filter: blur(2px);
                 border-radius: 8px;
@@ -9684,7 +9683,7 @@
         }
         .app-userspace #userspace_wall .wall .decrater-c .card-message{
             padding: 10px 5px 0 5px;
-            color: var(--color-text-dark);
+            color: var(--color-text-default);
             overflow: auto;
             word-break: break-word;
             height: 80px;
