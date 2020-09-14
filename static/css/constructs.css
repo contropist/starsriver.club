@@ -3152,7 +3152,7 @@
     .Mas .mas-guide.open + .mas-cover {
         visibility: visible;
         background: rgba(0,0,0,.3);
-        backdrop-filter: blur(2px);
+        backdrop-filter: blur(1px);
     }
     .Mas .mas-viewer{
         top: 0;
