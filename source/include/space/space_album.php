@@ -205,7 +205,7 @@
         
         $exifs = [];
         $allowexif = function_exists('exif_read_data');
-        if (isset($_GET['exif']) && $allowexif) {
+        if (isset($allowexif)) {
             require_once libfile('function/exif');
             $exifs = getexif($pic['pic']);
         }
@@ -283,7 +283,7 @@
         loadcache('albumcategory');
         $category = $_G['cache']['albumcategory'];
         
-        $perpage = 20;
+        $perpage = 60;
         $perpage = mob_perpage($perpage);
         
         $start = ($page - 1) * $perpage;

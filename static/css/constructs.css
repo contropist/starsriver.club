@@ -2078,6 +2078,13 @@
     .tooltip.i2{  top:6%;  right:6%; }
     .tooltip.i3{  bottom:6%; left:6%;  }
     .tooltip.i4{  bottom:6%; right:6%;  }
+
+    .tooltip-big-data{
+        max-width: 420px;
+        max-height: 420px;
+        white-space: pre-wrap;
+        overflow: auto;
+    }
 /*endregion*/
 
 /*region dialog*/
@@ -3438,13 +3445,18 @@
         --menu-text-wrap: pre-wrap !important;
     }
 
+    .Mas.edge{
+        --guide-start-height: 62px;
+        --guide-nav-gap: 10px;
+        --guide-downside-height: 92px;
+        --guide-upside-height: calc(100% - var(--guide-downside-height));
+    }
+
     .Mas.edge .mas-guide{
         overflow: visible;
         width: var(--width-mas-guide);
         background: #fff;
         border-right: 1px solid var(--color-lightgray);
-        --guide-upside-height: calc(100% - var(--guide-downside-height));
-        --guide-downside-height: 92px;
     }
     .Mas.edge .mas-guide .mas-guide-upside{
         position: absolute;
@@ -3464,20 +3476,23 @@
         transition: .1s ease-in-out;
     }
     .Mas.edge .mas-guide .mas-guide-switch {
-        margin: 18px 15px;
+        margin: calc((var(--guide-start-height) + var(--guide-nav-gap)) / 2 - 17px) 15px;
+        width: 34px;
+        height: 34px;
         visibility: var(--mas-guide-switch-display);
         opacity: var(--mas-guide-switch-opacity);
+        box-sizing: border-box;
     }
 
     .Mas.edge .mas-guide .start,
     .Mas.edge .mas-guide .start a{
         width: 100%;
-        height: 62px;
+        height: var(--guide-start-height);
         overflow: hidden;
     }
     .Mas.edge .mas-guide .start img{
-        width: 52px;
-        margin: 10px 0 0 10px;
+        width: calc(var(--guide-start-height) - var(--guide-nav-gap));
+        margin: var(--guide-nav-gap) 0 0 var(--guide-nav-gap);
     }
     .Mas.edge .mas-guide .start span,
     .Mas.edge .mas-guide .start span i{
@@ -3493,8 +3508,8 @@
     }
     .Mas.edge .mas-guide .nav-vertical > ul{
         width: 100%;
-        padding-top: 10px;
-        margin-top: 10px;
+        padding-top: var(--guide-nav-gap);
+        margin-top: var(--guide-nav-gap);
         border-top: 1px solid var(--color-lightgray) ;
     }
 
@@ -3583,7 +3598,6 @@
         box-shadow: 0 1px 0 0 var(--color-lightgray);
     }
     .Mas.edge .mas-viewer .mas-viewer-container .nav-horizon > ul{
-        --nav-height: 48px;
         display: inline-block;
         width: 100%;
         height: var(--nav-height);

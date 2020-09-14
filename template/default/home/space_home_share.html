@@ -15,8 +15,8 @@
             <!--{loop $list $k $value}-->
                 <!--{eval $share_dayN = date('ymd',$value['dateline']);}-->
                 <!--{eval $share_minN = date('ymdi',$value['dateline']);}-->
-                <li class="node {if $share_day != $share_dayN}dayMark{/if}" id="share_$value[sid]_li">
-                    <div class="n-left">
+                <li class="timeline-node {if $share_day != $share_dayN}dayMark{/if}" id="share_$value[sid]_li">
+                    <div class="timeline-node-left">
                         <!--{if $share_day != $share_dayN}-->
                             <!--{eval $share_day = $share_dayN;}-->
                             <i class="time-A"><!--{date($value['dateline'],'Y/m/d')}--></i>
@@ -31,7 +31,7 @@
                             </div>
                         <!--{/if}-->
                     </div>
-                    <div class="n-right">
+                    <div class="timeline-node-right">
                         <div class="s-top">
                             <div class="title">
                                 $value[title_template]

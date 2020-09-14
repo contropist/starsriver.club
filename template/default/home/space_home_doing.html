@@ -14,8 +14,8 @@
                 <!--{eval $dodayN = date('ymd',$dv['dateline']);}-->
                 <!--{eval $dominN = date('ymdi',$dv['dateline']);}-->
                 <!--{eval $_GET[key] = $key = random(8);}-->
-                <li class="node {if $doday != $dodayN}dayMark{/if}" id="{$key}dl{$dv[doid]}" title="{if checkperm('managedoing')}IP: $dv[ip]{/if}">
-                    <div class="n-left">
+                <li class="timeline-node {if $doday != $dodayN}dayMark{/if}" id="{$key}dl{$dv[doid]}" title="{if checkperm('managedoing')}IP: $dv[ip]{/if}">
+                    <div class="timeline-node-left">
                         <!--{if $doday != $dodayN}-->
                             <!--{eval $doday = $dodayN;}-->
                             <i class="time-A"><!--{date($dv['dateline'],'Y/m/d')}--></i>
@@ -29,7 +29,7 @@
                             </div>
                         <!--{/if}-->
                     </div>
-                    <div class="n-right">
+                    <div class="timeline-node-right">
                         <div class="s-top">
                             <div class="title">
                                 {lang update_doing}
@@ -127,9 +127,6 @@
             if(Tl) {
                 addEvent(MasElements.viewer,'scroll',TsOn);
             }
-
-
-
         });
     </script>
 </div>

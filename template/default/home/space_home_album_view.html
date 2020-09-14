@@ -5,12 +5,12 @@
     </div>
     <div class="mas-viewer-container" id="userspace_album">
         <album-viewer>
-            <!--{eval $_G['home_tpl_titles'] = array($album['albumname'], '{lang album}');}-->
-            <!--{eval $friendsname = array(1 => '{lang friendname_1}',2 => '{lang friendname_2}',3 => '{lang friendname_3}',4 => '{lang friendname_4}');}-->
+            <!--{eval $_G['home_tpl_titles'] = [$album['albumname'], '{lang album}'];}-->
+            <!--{eval $friendsname = [1 => '{lang friendname_1}',2 => '{lang friendname_2}',3 => '{lang friendname_3}',4 => '{lang friendname_4}'];}-->
 
-            <div class="album-element-terminal">
+            <div class="album-viewer-element-terminal">
                 <terminal-left>
-                    <div class="album-element-title">
+                    <div class="album-viewer-element-title">
                         {$space[username]}{lang de}{lang album}: <span>$album[albumname]</span>
                         <!--{if $album['catname']}-->
                             <tag><a href="home.php?mod=space&do=album&catid=$album[catid]&view=all">{lang system_cat}:$album[catname]</a></tag>
@@ -19,7 +19,7 @@
                             <tag>{$friendsname[$value[friend]]}</tag>
                         <!--{/if}-->
                     </div>
-                    <div class="album-element-counter">
+                    <div class="album-viewer-element-counter">
                         <!--{if $album[picnum]}-->$album[picnum]<!--{else}-->0<!--{/if}--><span> {lang album_pics}</span>
                     </div>
                 </terminal-left>
@@ -48,33 +48,33 @@
                     <!--{/if}-->
                 </terminal-right>
             </div>
-            <div class="album-element-desc">
+            <div class="album-viewer-element-desc">
                 <!--{if $album[depict]}-->$album[depict]<!--{else}-->{lang no_pics_desc}<!--{/if}-->
             </div>
 
             <!--{if $pricount}-->
-                <div class="album-element-alert alert hi-info with-border">{lang hide_pic}</div>
+                <div class="album-viewer-element-alert alert hi-info with-border">{lang hide_pic}</div>
             <!--{/if}-->
 
             <!--{if $list}-->
-                <div class="album-element-images panel">
+                <div class="album-viewer-element-images panel">
                     <ul class="panel-container">
                         <!--{loop $list $key $value}-->
-                        <li class="box size-undefined rec-img album-element-img" style="background-image: url($value[pic])">
+                        <li class="box size-undefined rec-img album-viewer-element-img" style="background-image: url($value[pic])">
                             <img src="{LIBURL}/img/row-e-col/1.1.png" alt="">
-                            <a class="cover-layer album-element-img-info" href="home.php?mod=space&uid=$value[uid]&do=$do&picid=$value[picid]">
-                                <!--{if $value[status] == 1}--><tag class="censor-mark">{lang moderate_need}</tag><!--{/if}-->
-                                <span  class="album-element-img-info-shadow"></span>
-                                <span  class="album-element-img-info-name"><!--{if $value['title']}-->{$value['title']}<!--{else}-->{$value['filename']}<!--{/if}--></span>
-                                <span  class="album-element-img-info-hot mt-whatshot">{$value['hot']}</span>
+                            <a class="cover-layer album-viewer-element-img-info" href="home.php?mod=space&uid=$value[uid]&do=$do&picid=$value[picid]">
+                                <!--{if $value[status] == 1}--><tag class="album-viewer-element-img-info-censor">{lang moderate_need}</tag><!--{/if}-->
+                                <dec  class="album-viewer-element-img-info-shadow"></dec>
+                                <span  class="album-viewer-element-img-info-name"><!--{if $value['title']}-->{$value['title']}<!--{else}-->{$value['filename']}<!--{/if}--></span>
+                                <span  class="album-viewer-element-img-info-hot mt-whatshot">{$value['hot']}</span>
                             </a>
                         </li>
                         <!--{/loop}-->
                     </ul>
                 </div>
-                <!--{if $multi}--><div class="album-element-pagination">$multi</div><!--{/if}-->
+                <!--{if $multi}--><div class="album-viewer-element-pagination">$multi</div><!--{/if}-->
             <!--{else}-->
-                <div class="album-element-empty">{lang no_pics}</div>
+                <div class="album-viewer-element-empty">{lang no_pics}</div>
             <!--{/if}-->
         </album-viewer>
     </div>

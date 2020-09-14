@@ -4,8 +4,8 @@
 <!--{eval $followdayN = date('ymd',$feed['dateline']);}-->
 <!--{eval $followminN = date('ymdi',$feed['dateline']);}-->
 
-<li class="node {if $followday != $followdayN}dayMark{/if} {if $lastviewtime && $feed[dateline] > $lastviewtime}unread{/if}" id="feed_li_{$feed['feedid']}">
-    <div class="n-left">
+<li class="timeline-node {if $followday != $followdayN}dayMark{/if} {if $lastviewtime && $feed[dateline] > $lastviewtime}unread{/if}" id="feed_li_{$feed['feedid']}">
+    <div class="timeline-node-left">
         <!--{if $followday != $followdayN}-->
             <!--{eval $followday = $followdayN;}-->
             <i class="time-A"><!--{date($feed['dateline'],'Y/m/d')}--></i>
@@ -24,7 +24,7 @@
             </div>
         <!--{/if}-->
     </div>
-    <div class="n-right">
+    <div class="timeline-node-right">
         <div class="s-top">
             <div class="title">
                 <a class="icon feed-type"><img src="{IMGURL}/feed/feed-type-icon/topic.svg"></a>

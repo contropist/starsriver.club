@@ -1,3 +1,10 @@
+/********************************************************************
+ * Copyright (c) 2020 All Right Reserved By [StarsRiver]            *
+ *                                                                  *
+ * Author  Zhangyu                                                  *
+ * Email   starsriver@yahoo.com                                     *
+ ********************************************************************/
+
 /*
 	[StarsRiver!] (C)2001-2099 Comsenz Inc.
 	This is NOT a freeware, use is subject to license terms
@@ -1123,53 +1130,6 @@ function _showForummenu(fid) {
 	if($('fjump_menu') && !$('fjump_menu').innerHTML) {
 		ajaxget('forum.php?mod=ajax&action=forumjump&jfid=' + fid, 'fjump_menu', 'ajaxwaitid');
 	}
-}
-
-function _imageRotate(imgid, direct) {
-	var image = $(imgid);
-	if(!image.getAttribute('deg')) {
-		var deg = 0;
-		image.setAttribute('ow', image.width);
-		image.setAttribute('oh', image.height);
-	} else {
-		var deg = parseInt(image.getAttribute('deg'));
-	}
-	var ow = image.getAttribute('ow');
-	var oh = image.getAttribute('oh');
-	deg = direct == 1 ? deg - 90 : deg + 90;
-	if(deg > 270) {
-		deg = 0;
-	} else if(deg < 0) {
-		deg = 270;
-	}
-	image.setAttribute('deg', deg);
-
-    switch(deg) {
-        case 90:var cow = oh, coh = ow, cx = 0, cy = -oh;break;
-        case 180:var cow = ow, coh = oh, cx = -ow, cy = -oh;break;
-        case 270:var cow = oh, coh = ow, cx = -ow, cy = 0;break;
-    }
-    var canvas = $(image.getAttribute('canvasid'));
-    if(!canvas) {
-        var i = document.createElement("canvas");
-        i.id = 'canva_' + Math.random();
-        image.setAttribute('canvasid', i.id);
-        image.parentNode.insertBefore(i, image);
-        canvas = $(i.id);
-    }
-    if(deg) {
-        var canvasContext = canvas.getContext('2d');
-        canvas.setAttribute('width', cow);
-        canvas.setAttribute('height', coh);
-        canvasContext.rotate(deg * Math.PI / 180);
-        canvasContext.drawImage(image, cx, cy, ow, oh);
-        image.style.display = 'none';
-        canvas.style.display = '';
-    } else {
-        image.style.display = '';
-        canvas.style.display = 'none';
-    }
-
 }
 
 function _createPalette(colorid, id, func) {

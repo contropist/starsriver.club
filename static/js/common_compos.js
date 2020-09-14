@@ -300,12 +300,14 @@
             let cut = getEventobj(),
                 tg = cut.getElementsByClassName('tooltip')[0],
                 lly = tooltip.styleget(tg)['du'];
-            tooltip.styleinit(tg,'2');
             setTimeout(function () {
+                tooltip.styleinit(tg,'2');
                 tg.style.visibility = 'hidden';
                 tg.style.opacity = '0';
             },0);
-            setTimeout(function () {tooltip.styleinit(tg,'1');},lly);
+            setTimeout(function () {
+                tooltip.styleinit(tg,'1');},lly
+            );
         },
         styleinit: function (target,p) {
             let sty = tooltip.styleget(target),
@@ -346,11 +348,11 @@
             target.style.transitionDuration = sty['du'] > 500 ? 500 + 'ms' : sty['du'] +'ms';
         },
         styleget: function (e) {
-            let pos = _Data(e, 'data-pos') ? _Data(e, 'data-pos') : 'auto',
-                animal = _Data(e, 'data-animal') ? _Data(e, 'data-animal') : '',
-                dly = _Data(e, 'data-delay') ? _Data(e, 'data-delay') : '0',
-                du = _Data(e, 'data-du') ? _Data(e, 'data-du') : '100',
-                ignore = _Data(e, 'data-ignore') ? 1 : null;
+            let pos = e.data('pos') ? e.data('pos') : 'auto',
+                animal = e.data('animal') ? e.data('animal') : '',
+                dly = e.data('delay') ? e.data('delay') : '20',
+                du = e.data('du') ? e.data('du') : '100',
+                ignore = e.data('ignore') ? 1 : null;
             return {'pos':pos, 'animal': animal, 'delay': dly, 'du': du}
         },
         pos: function (e) {

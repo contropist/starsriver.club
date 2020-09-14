@@ -7893,6 +7893,7 @@
         .app-userspace {
             --box-border-color:  rgba(115, 115, 115,  .12);
             --box-padding:  20px;
+            --space-banks-height: calc(var(--guide-start-height) + var(--guide-nav-gap));
         }
 .WL-0   .app-userspace{
             --space-banner-height: 130px;
@@ -7920,11 +7921,13 @@
         }
 
         .app-userspace .user-menu{
+
+            --base-module-width:240px;
+
             cursor: pointer;
             position: relative;
             border-top: 1px solid var(--color-lightgray);
             height: calc(var(--guide-downside-height) - var(--footer-drawer-touch-bar-height));
-            --base-module-width:240px;
         }
         .app-userspace .user-menu .avatar{
             height: 48px;
@@ -8027,7 +8030,6 @@
         }
 
         .app-userspace .space-head{
-            --space-banks-height: 72px;
             position: relative;
             box-shadow: 0 0 5px rgba(0,0,0,.1);
         }
@@ -8258,8 +8260,8 @@
             z-index: 2;
             top: 0;
             box-shadow: 0 0 5px rgba(0,0,0,.2);
-            padding: 11px 20px;
-            transform: translate(0, -120px);
+            padding: calc(var(--space-banks-height) / 2 - 25px) 20px;
+            transform: translate(0,-80px);
             transition: .2s ease-in-out;
         }
         .app-userspace .space-head > .bank.type-scroll .avatar{
@@ -8321,6 +8323,16 @@
             --timeB-after-leftdrag: calc(100% + 7px);
 
             --ut-avatar-leftdrag: 100%;
+
+            --line-color: #c8d1de;
+            --box-edge:15px;
+
+            position: relative;
+            display: flex;
+            flex-flow: column wrap;
+            width: 100%;
+            max-width: var(--max-width);
+            min-height: 120px;
         }
 
 .WL-0   .app-userspace .timeline,
@@ -8352,16 +8364,7 @@
 
             --ut-avatar-leftdrag: -35px;
         }
-        .app-userspace .timeline{
-            --line-color: #c8d1de;
-            --box-edge:15px;
-            position: relative;
-            display: flex;
-            flex-flow: column wrap;
-            width: 100%;
-            max-width: var(--max-width);
-            min-height: 120px;
-        }
+
         .app-userspace .timeline::before,
         .app-userspace .timeline::after{
             display: inline-block;
@@ -8388,7 +8391,8 @@
             content: '...History Could Be Immature...';
             bottom: 0;
         }
-        .app-userspace .timeline .node{
+
+        .app-userspace .timeline-node{
             z-index: 0;
             position: relative;
             box-sizing: border-box;
@@ -8397,30 +8401,30 @@
             border-left: 4px solid var(--line-color);
             min-height: 160px;
         }
-        .app-userspace .timeline .node:first-of-type{
+        .app-userspace .timeline-node:first-of-type{
             padding-top: var(--node-first-padding);
         }
-        .app-userspace .timeline .node:last-of-type{
+        .app-userspace .timeline-node:last-of-type{
             padding-bottom: var(--node-first-padding);
         }
-        .app-userspace .timeline .node.dayMark{
+        .app-userspace .timeline-node.dayMark{
             z-index: 1;
         }
-        .app-userspace .timeline .node *{
+        .app-userspace .timeline-node *{
             box-sizing: border-box;
         }
 
-        .app-userspace .timeline .n-left{
+        .app-userspace .timeline-node-left{
             position: var(--node-left-element-position);
             right: var(--node-left-rightdrag);
             width: var(--node-left-element-width);
             padding: var(--node-left-padding);
             text-align: var(--node-left-element-aligh);
         }
-        .app-userspace .timeline .n-left > *{
+        .app-userspace .timeline-node-left > *{
             display: block;
         }
-        .app-userspace .timeline .n-left .time-A{
+        .app-userspace .timeline-node-left .time-A{
             z-index: 1;
             position: relative;
             width: var(--timeA-width);
@@ -8436,7 +8440,7 @@
             word-break: break-word;
             white-space: nowrap;
         }
-        .app-userspace .timeline .n-left .time-A::before{
+        .app-userspace .timeline-node-left .time-A::before{
             content: '';
             position: absolute;
             display: inline-block;
@@ -8448,7 +8452,7 @@
             top: 18px;
             border-radius: 4px;
         }
-        .app-userspace .timeline .n-left .time-A::after{
+        .app-userspace .timeline-node-left .time-A::after{
             content: '';
             position: absolute;
             top: 14px;
@@ -8459,7 +8463,7 @@
             background: #fff;
             border-radius: 12px;
         }
-        .app-userspace .timeline .n-left .time-B{
+        .app-userspace .timeline-node-left .time-B{
             z-index: 0;
             position: relative;
             margin-top: 15px;
@@ -8468,7 +8472,7 @@
             color: var(--color-text-dark);
             font-size: var(--timeB-fontsize);
         }
-        .app-userspace .timeline .n-left .time-B::after{
+        .app-userspace .timeline-node-left .time-B::after{
             content: '';
             position: absolute;
             top: 2px;
@@ -8479,22 +8483,22 @@
             background: #fff;
             border-radius: 12px;
         }
-        .app-userspace .timeline .n-left .user-tag{
+        .app-userspace .timeline-node-left .user-tag{
             position: relative;
             margin: 10px 0 0 0;
             line-height: 26px;
         }
-        .app-userspace .timeline .n-left .avatar{
+        .app-userspace .timeline-node-left .avatar{
             position: absolute;
             left: var(--ut-avatar-leftdrag);
             width: 26px;
             height: 26px;
         }
-        .app-userspace .timeline .n-left .avatar .avatar-main {
+        .app-userspace .timeline-node-left .avatar .avatar-main {
             background: #fff;
             box-shadow: 0 0 0 3px var(--line-color);
         }
-        .app-userspace .timeline .n-left .username{
+        .app-userspace .timeline-node-left .username{
             margin-right: 10px;
             color: var(--color-text-dark);
             font-size: 15px;
@@ -8502,7 +8506,7 @@
             opacity: .8;
         }
 
-        .app-userspace .timeline .n-right{
+        .app-userspace .timeline-node-right{
             z-index: 0;
             position: relative;
             background: #fff;
@@ -8512,14 +8516,14 @@
             border-radius: 4px;
             min-height: 150px;
         }
-        .app-userspace .timeline .n-right .s-top{
+        .app-userspace .timeline-node-right .s-top{
             display: flex;
             flex-flow: row nowrap;
             justify-content: space-between;
             line-height: 26px;
             margin-bottom: var(--box-edge);
         }
-        .app-userspace .timeline .n-right .s-top > .title{
+        .app-userspace .timeline-node-right .s-top > .title{
             display: inline-flex;
             width: 90%;
             font-size: 15px;
@@ -8528,21 +8532,21 @@
             overflow: hidden;
             white-space: nowrap;
         }
-        .app-userspace .timeline .n-right .s-top > .title .icon{
+        .app-userspace .timeline-node-right .s-top > .title .icon{
             margin: 2px 5px 2px 0;
             min-width: 28px;
             height: 24px;
         }
-        .app-userspace .timeline .n-right .s-top > .title .icon img{
+        .app-userspace .timeline-node-right .s-top > .title .icon img{
             height: 24px;
         }
-        .app-userspace .timeline .n-right .s-top > .title .link{
+        .app-userspace .timeline-node-right .s-top > .title .link{
             margin: 0 5px;
             color: var(--color-main-theme-dark);
             font-size: 15px;
             font-weight: 700;
         }
-        .app-userspace .timeline .n-right .s-top > .title .tag{
+        .app-userspace .timeline-node-right .s-top > .title .tag{
             padding: 0 5px;
             font-size: 14px;
             background: var(--color-main-theme);
@@ -8552,32 +8556,32 @@
             height: 22px;
             line-height: 22px;
         }
-        .app-userspace .timeline .n-right .s-top > .title .highlight-pink{
+        .app-userspace .timeline-node-right .s-top > .title .highlight-pink{
             font-size: 15px;
             color: var(--color-heart-pink);
         }
-        .app-userspace .timeline .n-right .s-top > .title .highlight-gold{
+        .app-userspace .timeline-node-right .s-top > .title .highlight-gold{
             font-weight: 700;
             font-size: 15px;
             color: #ffdb00;
             text-shadow: 1px 1px 1px #d86d22;
         }
-        .app-userspace .timeline .n-right .s-top > .title .highlight-strong{
+        .app-userspace .timeline-node-right .s-top > .title .highlight-strong{
             font-weight: 700;
             margin: 0 5px;
             color: #000;
         }
-        .app-userspace .timeline .n-right .s-top > .censor{
+        .app-userspace .timeline-node-right .s-top > .censor{
             background: var(--color-heart-pink) !important;
             font-size: 12px !important;
         }
-        .app-userspace .timeline .n-right .s-center{
+        .app-userspace .timeline-node-right .s-center{
             display: flex;
             flex-flow: column;
             margin-bottom: var(--box-edge);
             padding: var(--node-right-s-center-padding);
         }
-        .app-userspace .timeline .n-right .s-center > .message{
+        .app-userspace .timeline-node-right .s-center > .message{
             color: #000;
             word-break: break-word;
             white-space: pre-wrap;
@@ -8586,24 +8590,24 @@
             border-left: 3px solid #aac1e2;
             background: #f9f9f9;
         }
-        .app-userspace .timeline .n-right .s-center > .message + [class^="feed-element-"],
-        .app-userspace .timeline .n-right .s-center > .message + [class^="share-element"]{
+        .app-userspace .timeline-node-right .s-center > .message + [class^="feed-element-"],
+        .app-userspace .timeline-node-right .s-center > .message + [class^="share-element-"]{
             margin-top: var(--box-edge);
         }
-        .app-userspace .timeline .n-right .s-center > .flow-comment-list{
+        .app-userspace .timeline-node-right .s-center > .flow-comment-list{
             position: relative;
             margin-top: var(--box-edge);
             border-left: 2px dashed var(--line-color);
             padding-left: 10px;
         }
-        .app-userspace .timeline .n-right .s-center > .flow-comment-list .height-limited{
+        .app-userspace .timeline-node-right .s-center > .flow-comment-list .height-limited{
             max-height: 300px;
         }
-        .app-userspace .timeline .n-right .s-end {
+        .app-userspace .timeline-node-right .s-end {
             display: flex;
             justify-content: flex-end;
         }
-        .app-userspace .timeline .n-right .s-end > .icon {
+        .app-userspace .timeline-node-right .s-end > .icon {
             display: inline-flex;
             justify-content: center;
             background: var(--color-lightgray);
@@ -8615,17 +8619,17 @@
             font-size: 18px;
             line-height: 30px;
         }
-        .app-userspace .timeline .n-right .s-end > .icon:hover {
+        .app-userspace .timeline-node-right .s-end > .icon:hover {
             background: var(--color-sky-blue);
             color: #fff;
         }
-        .app-userspace .timeline .n-right .s-end > .icon.on-count {
+        .app-userspace .timeline-node-right .s-end > .icon.on-count {
             padding: 0 10px;
         }
-        .app-userspace .timeline .n-right .s-end > .icon.on-count:before {
+        .app-userspace .timeline-node-right .s-end > .icon.on-count:before {
             margin-right: 5px;
         }
-        .app-userspace .timeline .n-right .s-end > .icon span {
+        .app-userspace .timeline-node-right .s-end > .icon span {
             font-size: 12px;
         }
 
@@ -8757,10 +8761,10 @@
     /*endregion*/
 
     /*region #userspace::feed*/
-        .app-userspace #userspace_feed .timeline .n-right .s-top .title .passwd{
+        .app-userspace #userspace_feed .timeline-node-right .s-top .title .passwd{
             background: var(--color-mod-warning);
         }
-        .app-userspace #userspace_feed .timeline .n-right .s-top .title .hot{
+        .app-userspace #userspace_feed .timeline-node-right .s-top .title .hot{
             background: var(--color-heart-pink);
         }
     /*endregion*/
@@ -8973,6 +8977,12 @@
         .app-userspace #userspace_album .imageGrid{
             --grid-gap: 1px;
         }
+        .app-userspace #userspace_album .album-viewer-element-pagination{
+            margin-top: 20px;
+        }
+        .app-userspace #userspace_album .album-viewer-element-pagination .pagination{
+            --pagination-thumb-a-display: none;
+        }
         .app-userspace #userspace_album .cover-layer{
             position: absolute;
             top: 0;
@@ -8982,217 +8992,364 @@
             transition: .2s ease-in-out;
         }
 
-        .app-userspace #userspace_album .album-item-info{
-            display: block;
-            box-shadow: inset 0 -30px 40px rgba(19, 42, 70, .39);
-        }
-        .app-userspace #userspace_album .album-item-info-num,
-        .app-userspace #userspace_album .album-item-info-name {
-            position: absolute;
-            width: 100%;
-            left: 0;
-            bottom: 0;
-            font-weight: 700;
-            font-size: 16px;
-            height: 32px;
-            line-height: 24px;
-            box-sizing: border-box;
-            padding: 0 10px;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-            color: #fff;
-            text-shadow: 1px 1px 3px rgba(0,0,0,.5);
-        }
-        .app-userspace #userspace_album .album-item-info-num {
-            bottom: 32px;
-            font-weight: 400;
-            font-size: 14px;
-            height: 18px;
-            line-height: 18px;
-        }
+        /*region <album-list>*/
+            .app-userspace #userspace_album .album-item-info{
+                display: block;
+                box-shadow: inset 0 -30px 40px rgba(19, 42, 70, .39);
+            }
+            .app-userspace #userspace_album .album-item-info-num,
+            .app-userspace #userspace_album .album-item-info-name {
+                position: absolute;
+                width: 100%;
+                left: 0;
+                bottom: 0;
+                font-weight: 700;
+                font-size: 16px;
+                height: 32px;
+                line-height: 24px;
+                box-sizing: border-box;
+                padding: 0 10px;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                color: #fff;
+                text-shadow: 1px 1px 3px rgba(0,0,0,.5);
+            }
+            .app-userspace #userspace_album .album-item-info-num {
+                bottom: 32px;
+                font-weight: 400;
+                font-size: 14px;
+                height: 18px;
+                line-height: 18px;
+            }
+        /*endregion*/
 
-        .app-userspace #userspace_album album-viewer {
-            display: inline-block;
-            width: 100%;
-            margin-top: 72px;
-            background: #fff;
-        }
+        /*region <album-viewer>*/
+            .app-userspace #userspace_album album-viewer {
+                display: inline-block;
+                width: 100%;
+                margin-top: var(--space-banks-height);
+            }
 
-        .app-userspace #userspace_album .album-element-title {
-            font-size: 20px;
-            color: var(--color-text-dark);
-            min-width: 42px;
-        }
-        .app-userspace #userspace_album .album-element-title span{
-            font-weight: 700;
-            font-size: inherit;
-        }
-        .app-userspace #userspace_album .album-element-title tag{
-            display: inline-block;
-            background: var(--color-main-theme);
-            color: #fff;
-            padding: 2px 5px;
-            border-radius: 4px;
-            font-size: 12px;
-            margin: 4px 0 4px 5px;
-        }
-        .app-userspace #userspace_album .album-element-title tag *{
-            color: #fff;
-            font-size: 12px;
-        }
-        .app-userspace #userspace_album .album-element-title tag a{
-            border-bottom: 1px dashed;
-        }
-        .app-userspace #userspace_album .album-element-counter {
-            font-size: 20px;
-            color: var(--color-main-theme-dark);
-            text-align: center;
-            margin-left: 15px;
-            padding-left: 15px;
-            min-width: 42px;
-        }
-        .app-userspace #userspace_album .album-element-counter span{
-            display: inline-block;
-            font-size: 14px;
-            color: var(--color-text-gray);
-            vertical-align: baseline;
-        }
+            .app-userspace #userspace_album .album-viewer-element-terminal {
+                display: flex;
+                flex-flow: row wrap;
+                align-items: center;
+                justify-content: space-between;
+                margin: 0 10px;
+            }
+            .app-userspace #userspace_album .album-viewer-element-terminal > *{
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin: 10px 0;
+                width: 100%;
+            }
+            .app-userspace #userspace_album .album-viewer-element-terminal > terminal-right{
+                justify-content: flex-end;
+            }
+            .app-userspace #userspace_album .album-viewer-element-terminal .icon{
+                display: inline-flex;
+                box-sizing: border-box;
+                justify-content: center;
+                justify-items: right;
+                padding: 0 5px;
+                height: 32px;
+                min-width: 32px;
+                line-height: 32px;
+                border-radius: 4px;
+                margin-left: 5px;
+                color: #fff;
+                font-size: 14px;
+                font-weight: 700;
+            }
+            .app-userspace #userspace_album .album-viewer-element-terminal .icon.like{
+                background: var(--color-heart-pink);
+            }
+            .app-userspace #userspace_album .album-viewer-element-terminal .icon.share{
+                background: var(--color-main-theme);
+            }
+            .app-userspace #userspace_album .album-viewer-element-terminal .icon.report{
+                background: var(--color-mod-warning);
+            }
+            .app-userspace #userspace_album .album-viewer-element-terminal .icon.edit{
+                background: var(--color-charry-pink);
+            }
+            .app-userspace #userspace_album .album-viewer-element-terminal .icon.upload{
+                background: var(--color-sky-blue);
+            }
+            .app-userspace #userspace_album .album-viewer-element-terminal .icon.delete{
+                background: var(--color-text-gray);
+            }
+            .app-userspace #userspace_album .album-viewer-element-terminal .seperate-line{
+                height: 20px;
+                width: 3px;
+                background: #eaeef1;
+                margin: 0 10px 0 15px;
+                border-radius: 5px;
+            }
 
-        .app-userspace #userspace_album .album-element-terminal {
-            display: flex;
-            flex-flow: row wrap;
-            align-items: center;
-            justify-content: space-between;
-            margin: 0 10px;
-        }
-        .app-userspace #userspace_album .album-element-terminal > *{
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin: 10px 0;
-            width: 100%;
-        }
-        .app-userspace #userspace_album .album-element-terminal > terminal-right{
-            justify-content: flex-end;
-        }
-        .app-userspace #userspace_album .album-element-terminal .icon{
-            display: inline-flex;
-            box-sizing: border-box;
-            justify-content: center;
-            justify-items: right;
-            padding: 0 5px;
-            height: 32px;
-            min-width: 32px;
-            line-height: 32px;
-            border-radius: 4px;
-            margin-left: 5px;
-            color: #fff;
-            font-size: 14px;
-            font-weight: 700;
-        }
-        .app-userspace #userspace_album .album-element-terminal .icon.like{
-            background: var(--color-heart-pink);
-        }
-        .app-userspace #userspace_album .album-element-terminal .icon.share{
-            background: var(--color-main-theme);
-        }
-        .app-userspace #userspace_album .album-element-terminal .icon.report{
-            background: var(--color-mod-warning);
-        }
-        .app-userspace #userspace_album .album-element-terminal .icon.edit{
-            background: var(--color-charry-pink);
-        }
-        .app-userspace #userspace_album .album-element-terminal .icon.upload{
-            background: var(--color-sky-blue);
-        }
-        .app-userspace #userspace_album .album-element-terminal .icon.delete{
-            background: var(--color-text-gray);
-        }
-        .app-userspace #userspace_album .album-element-terminal .seperate-line{
-            height: 20px;
-            width: 3px;
-            background: #eaeef1;
-            margin: 0 10px 0 15px;
-            border-radius: 5px;
-        }
+            .app-userspace #userspace_album .album-viewer-element-title {
+                font-size: 20px;
+                color: var(--color-text-dark);
+                min-width: 42px;
+            }
+            .app-userspace #userspace_album .album-viewer-element-title span{
+                font-weight: 700;
+                font-size: inherit;
+            }
+            .app-userspace #userspace_album .album-viewer-element-title tag{
+                display: inline-block;
+                background: var(--color-main-theme);
+                color: #fff;
+                padding: 2px 5px;
+                border-radius: 4px;
+                font-size: 12px;
+                margin: 4px 0 4px 5px;
+            }
+            .app-userspace #userspace_album .album-viewer-element-title tag *{
+                color: #fff;
+                font-size: 12px;
+            }
+            .app-userspace #userspace_album .album-viewer-element-title tag a{
+                border-bottom: 1px dashed;
+            }
+            .app-userspace #userspace_album .album-viewer-element-counter {
+                font-size: 20px;
+                color: var(--color-main-theme-dark);
+                text-align: center;
+                margin-left: 15px;
+                padding-left: 15px;
+                min-width: 42px;
+            }
+            .app-userspace #userspace_album .album-viewer-element-counter span{
+                display: inline-block;
+                font-size: 14px;
+                color: var(--color-text-gray);
+                vertical-align: baseline;
+            }
 
-        .app-userspace #userspace_album .album-element-desc {
-            background: #f7f7f7;
-            border: 1px solid var(--color-lightgray);
-            margin: 0 10px;
-            padding: 10px;
-            border-radius: 4px;
-        }
-        .app-userspace #userspace_album .album-element-alert {
-            margin: 10px 10px 0 10px;
-            border-radius: 4px;
-        }
-        .app-userspace #userspace_album .album-element-empty {
-            text-align: center;
-            color: var(--color-text-gray);
-            margin: 60px 0;
-            line-height: 80px;
-        }
-        .app-userspace #userspace_album .album-element-empty i{
-            font-family: Roboto Mono, sans-serif !important;
-            display: block;
-            font-size: 60px;
-        }
+            .app-userspace #userspace_album .album-viewer-element-desc {
+                background: #f7f7f7;
+                border: 1px solid var(--color-lightgray);
+                margin: 0 10px;
+                padding: 10px;
+                border-radius: 4px;
+            }
+            .app-userspace #userspace_album .album-viewer-element-alert {
+                margin: 10px 10px 0 10px;
+                border-radius: 4px;
+            }
+            .app-userspace #userspace_album .album-viewer-element-empty {
+                text-align: center;
+                color: var(--color-text-gray);
+                margin: 60px 0;
+                line-height: 80px;
+            }
+            .app-userspace #userspace_album .album-viewer-element-empty i{
+                font-family: Roboto Mono, sans-serif !important;
+                display: block;
+                font-size: 60px;
+            }
 
-        .app-userspace #userspace_album .album-element-img-info{
-            display: flex;
-            flex-flow: row nowrap;
-            justify-content: stretch;
-            opacity: 0;
-        }
-.WL-0   .app-userspace #userspace_album .album-element-img-info,
-.WL-3P  .app-userspace #userspace_album .album-element-img-info,
-.WL-4P  .app-userspace #userspace_album .album-element-img-info,
-.WL-7P  .app-userspace #userspace_album .album-element-img-info,
-        .app-userspace #userspace_album .album-element-img-info:hover{
-            opacity: 1;
-        }
-        .app-userspace #userspace_album .album-element-img-info-hot,
-        .app-userspace #userspace_album .album-element-img-info-name {
-            position: absolute;
-            width: calc(100% - 70px);
-            left: 0;
-            bottom: 0;
-            height: 32px;
-            line-height: 32px;
-            box-sizing: border-box;
-            padding: 0 0 0 10px;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-            color: #fff;
-            text-shadow: 1px 1px 3px rgba(0,0,0,.5);
-        }
-        .app-userspace #userspace_album .album-element-img-info-hot {
-            text-align: right;
-            width: 70px;
-            left: auto;
-            right: 0;
-            padding: 0 10px 0 0;
-        }
-        .app-userspace #userspace_album .album-element-img-info-hot::before {
-            margin-right: 5px;
-        }
-        .app-userspace #userspace_album .album-element-img-info-shadow {
-            position: absolute;
-            left: 0;
-            bottom: 0;
-            width: 100%;
-            box-shadow: 0 0 26px 26px rgba(0,0,0,.3);
-        }
+            .app-userspace #userspace_album .album-viewer-element-img-info{
+                display: flex;
+                flex-flow: row nowrap;
+                justify-content: stretch;
+                opacity: 0;
+            }
+    .WL-0   .app-userspace #userspace_album .album-viewer-element-img-info,
+    .WL-3P  .app-userspace #userspace_album .album-viewer-element-img-info,
+    .WL-4P  .app-userspace #userspace_album .album-viewer-element-img-info,
+    .WL-7P  .app-userspace #userspace_album .album-viewer-element-img-info,
+            .app-userspace #userspace_album .album-viewer-element-img-info:hover{
+                opacity: 1;
+            }
+            .app-userspace #userspace_album .album-viewer-element-img-info-hot,
+            .app-userspace #userspace_album .album-viewer-element-img-info-name {
+                position: absolute;
+                width: calc(100% - 70px);
+                left: 0;
+                bottom: 0;
+                height: 32px;
+                line-height: 32px;
+                box-sizing: border-box;
+                padding: 0 0 0 10px;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                color: #fff;
+                text-shadow: 1px 1px 3px rgba(0,0,0,.5);
+            }
+            .app-userspace #userspace_album .album-viewer-element-img-info-hot {
+                text-align: right;
+                width: 70px;
+                left: auto;
+                right: 0;
+                padding: 0 10px 0 0;
+            }
+            .app-userspace #userspace_album .album-viewer-element-img-info-hot::before {
+                margin-right: 5px;
+            }
+            .app-userspace #userspace_album .album-viewer-element-img-info-shadow {
+                position: absolute;
+                left: 0;
+                bottom: 0;
+                width: 100%;
+                box-shadow: 0 0 26px 26px rgba(0,0,0,.3);
+            }
+            .app-userspace #userspace_album .album-viewer-element-img-info-censor {
+                position: absolute;
+                top: 0;
+                right: 0;
+                margin: 10px;
+                background: rgba(255, 255, 255, .5);
+                padding: 5px 10px;
+                border-radius: 25px;
+                font-size: 12px;
+                backdrop-filter: blur(2px);
+                color: var(--color-text-dark);
+                box-shadow: 0 2px 5px rgb(0, 0, 0, .2);
+                font-weight: 700;
+            }
+        /*endregion*/
 
-        .app-userspace #userspace_album .album-element-pagination{
-            margin-top: 20px;
-        }
-        .app-userspace #userspace_album .album-element-pagination .pagination{
-            --pagination-thumb-a-display: none;
-        }
+        /*region <album-image-viwer>*/
+            .app-userspace #userspace_album album-image-viewer {
+
+                --image-element-name-height: 40px;
+
+                display: flex;
+                flex-flow: column;
+                position: relative;
+                box-sizing: border-box;
+                border-right: 1px solid var(--color-lightgray);
+            }
+            .app-userspace #userspace_album album-image-terminal {
+                position: relative;
+                box-sizing: border-box;
+                padding: 0 15px;
+            }
+
+            .app-userspace #userspace_album .album-image-viewer-element-img {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                cursor: zoom-in;
+                background-color: #fff;
+                background-size: 20px 20px;
+                background-position: 0 0,10px 10px;
+                background-image:
+                        linear-gradient(45deg,#f0f0f0 25%,transparent 0,transparent 75%,#f0f0f0 0),
+                        linear-gradient(45deg,#f0f0f0 25%,transparent 0,transparent 75%,#f0f0f0 0) !important;
+            }
+            .app-userspace #userspace_album .album-image-viewer-element-img.expend {
+                cursor: zoom-out;
+            }
+            .app-userspace #userspace_album .album-image-viewer-element-img img {
+                max-height: 100%;
+            }
+
+            .app-userspace #userspace_album .album-image-viewer-element-name{
+                display: inline-block;
+                overflow: hidden;
+                width: 100%;
+                height: var(--image-element-name-height);
+                padding: 0 10px;
+                background: #f8f8f8;
+                color: #888;
+                text-align: center;
+                line-height: var(--image-element-name-height);
+                white-space: nowrap;
+                box-shadow: 0 -2px 2px rgba(0,0,0,0.1);
+                border-bottom: 1px solid #eee;
+                box-sizing: border-box;
+            }
+
+            .app-userspace #userspace_album [class^='album-image-viewer-element-switch-']{
+                position: absolute;
+                top: 50%;
+                transform: translate3d(0,-70px, 0);
+                width: 48px;
+                height: 48px;
+                background: rgba(255,255,255,.39);
+                border-radius: 50px;
+                box-shadow: 1px 1px 8px rgba(0,0,0,.2);
+                backdrop-filter: blur(2px);
+                text-align: center;
+                line-height: 48px;
+                font-size: 32px;
+            }
+            .app-userspace #userspace_album .album-image-viewer-element-switch-prev {
+                left: 20px;
+            }
+            .app-userspace #userspace_album .album-image-viewer-element-switch-next {
+                right: 20px;
+            }
+
+            .app-userspace #userspace_album .album-image-viewer-element-index {
+                display: flex;
+                flex-flow: row nowrap;
+                justify-content: center;
+                align-items: center;
+                padding: 10px;
+                margin-bottom: 40px;
+                background: rgba(255,255,255,.3);
+                backdrop-filter: blur(2px);
+                border-radius: 8px;
+                box-shadow: 0 0 10px rgba(0,0,0,.2);
+                position: absolute;
+                right: 20px;
+                top: 20px;
+            }
+    .WL-0   .app-userspace #userspace_album .album-image-viewer-element-index,
+    .WL-3P  .app-userspace #userspace_album .album-image-viewer-element-index,
+    .WL-4P  .app-userspace #userspace_album .album-image-viewer-element-index {
+                display: none;
+            }
+            .app-userspace #userspace_album .album-image-viewer-element-index li{
+                position: relative;
+                width: 52px;
+                margin: 0 5px;
+                border-radius: 4px;
+            }
+            .app-userspace #userspace_album .album-image-viewer-element-index li.active{
+                width: 72px;
+            }
+
+            .app-userspace #userspace_album .album-image-viewer-element-ctl{
+                display: flex;
+                flex-flow: row nowrap;
+                justify-content: center;
+                align-items: center;
+                padding: 10px;
+                margin-bottom: 40px;
+                background: rgba(255,255,255,.3);
+                backdrop-filter: blur(2px);
+                border-radius: 8px;
+                box-shadow: 0 0 10px rgba(0,0,0,.2);
+                position: absolute;
+                left: 50%;
+                transform: translate3d(-50%, 0, 0);
+                bottom: 20px;
+            }
+    .WL-0   .app-userspace #userspace_album .album-image-viewer-element-ctl,
+    .WL-3P  .app-userspace #userspace_album .album-image-viewer-element-ctl,
+    .WL-4P  .app-userspace #userspace_album .album-image-viewer-element-ctl {
+        display: none;
+    }
+            .app-userspace #userspace_album .album-image-viewer-element-ctl .icon{
+                color: #ffffff;
+                font-size: 16px;
+                margin: 0 10px;
+                width: 28px;
+                height: 28px;
+                background: var(--color-main-theme);
+                text-align: center;
+                line-height: 28px;
+                border-radius: 10px;
+            }
+        /*endregion*/
 
     /*endregion*/
 

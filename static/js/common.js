@@ -1,3 +1,10 @@
+/********************************************************************
+ * Copyright (c) 2020 All Right Reserved By [StarsRiver]            *
+ *                                                                  *
+ * Author  Zhangyu                                                  *
+ * Email   starsriver@yahoo.com                                     *
+ ********************************************************************/
+
 Loadingtext =  '' +
     '<div class="loading">' +
     '  <svg version="1.1" id="sun" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 10 10" enable-background="new 0 0 10 10">' +
@@ -1384,10 +1391,6 @@ function simulateSelect(selectId, widthvalue) {
 
 function switchTab(prefix, current, total, activeclass) {
 	$F('_switchTab', arguments);
-}
-
-function imageRotate(imgid, direct) {
-	$F('_imageRotate', arguments);
 }
 
 function thumbImg(obj, method) {

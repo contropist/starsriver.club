@@ -13,8 +13,8 @@
                 <!--{eval $_GET[key] = $key = random(8);}-->
                 <!--{eval $dynamicdayN = date('ymd',$feed['dateline']);}-->
                 <!--{eval $dynamicminN = date('ymdi',$feed['dateline']);}-->
-                <li class="node {if $dynamicday != $dynamicdayN}dayMark{/if}" id="feed_li_{$feed[feedid]}">
-                    <div class="n-left">
+                <li class="timeline-node {if $dynamicday != $dynamicdayN}dayMark{/if}" id="feed_li_{$feed[feedid]}">
+                    <div class="timeline-node-left">
                         <!--{if $dynamicday != $dynamicdayN}-->
                             <!--{eval $dynamicday = $dynamicdayN;}-->
                             <i class="time-A"><!--{date($feed['dateline'],'Y/m/d')}--></i>
@@ -28,7 +28,7 @@
                             </div>
                         <!--{/if}-->
                     </div>
-                    <div class="n-right">
+                    <div class="timeline-node-right">
                         <div class="s-top">
                             <div class="title">
                                 <a class="icon feed-type" href="home.php?mod=space&uid={$uid}&do=home&view=$_GET[view]&icon=$feed[icon]"><img src="$feed[icon_image]"/></a>

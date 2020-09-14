@@ -275,6 +275,7 @@ $lang = [
     'hot' => '热度',
     'login' => '登录',
     'login_to_comment' => '评论之前你需要先有个身份&nbsp;&nbsp;๑乛◡乛๑&nbsp;&nbsp;',
+    'download' => '下载',
     'look_exif' => '查看 EXIF 信息',
     'look_pic' => '查看原图',
     'manage_pic' => '管理图片',
