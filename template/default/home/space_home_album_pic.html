@@ -11,23 +11,11 @@
                 </div>
 
                 <div class="album-image-viewer-element-name">
-                    <!--{if $pic[title]}-->$pic[title]<!--{else}-->$pic['filename']<!--{/if}--><!--{if $pic[status] == 1}--><b>({lang moderate_need})</b><!--{/if}-->
+                    <!--{if $pic[title]}-->$pic[title]<!--{else}-->$pic['filename']<!--{/if}-->
+                    <!--{if $pic[status] == 1}--><tag>{lang moderate_need}</tag><!--{/if}-->
                 </div>
 
-                <ul class="album-image-viewer-element-index">
-                    <!--{loop $piclist $value}-->
-                    <li class="rec-img {if $value[picid]==$picid}active{/if}" style="background-image: url($value[pic])">
-                        <img src="{LIBURL}/img/row-e-col/1.1.png" alt="">
-                        <a class="cover-layer" href="home.php?mod=space&uid=$value[uid]&do=album&picid=$value[picid]#pic_block"></a>
-                    </li>
-                    <!--{/loop}-->
-                </ul>
-
-                <a class="album-image-viewer-element-switch-prev ft-chevron-left" href="home.php?mod=space&uid=$pic[uid]&do=$do&picid=$upid&goto=up#pic_block" title="{lang previous_pic}"></a>
-                <a class="album-image-viewer-element-switch-next ft-chevron-right" href="home.php?mod=space&uid=$pic[uid]&do=$do&picid=$nextid&goto=down#pic_block" id="nextlink" title="{lang next_pic}"></a>
-
                 <div class="album-image-viewer-element-ctl">
-
                     <a class="icon mt-subdirectory_arrow_left" href="home.php?mod=space&uid=$space[uid]&do=album&id=$pic[albumid]"><span class="tooltip">{lang return_pic_list}</span></a>
 
                     <!--{if $_GET['play']}-->
@@ -39,89 +27,82 @@
                     <!--{if $exifs}-->
                         <a class="icon mt-assistant_photo" href="$theurl&exif=1" title="{lang look_exif}">
                             <div class="tooltip">
-                                <!--{if $exifs}-->
-                                    <div class="tooltip-big-data">
-                                        <table class="tooltip-big-data">
-                                            <tbody>
-                                            <!--{loop $exifs $key $value}-->
-                                            <!--{if $value}-->
-                                            <tr><td style="white-space: nowrap">$key</td><td style="white-space: nowrap">$value</td></tr>
+                                <div class="tooltip-big-data">
+                                    <table class="tooltip-big-data">
+                                        <tbody>
+                                            <tr><td style="white-space: nowrap">{lang upload_at}</td><td style="white-space: nowrap"><!--{date($pic[dateline])}--></td></tr>
+                                            <!--{if checkperm('managealbum')}-->
+                                            <tr><td style="white-space: nowrap">IP</td><td style="white-space: nowrap">$pic[postip]{if $pic[port]}:$pic[port]{/if}</td></tr>
                                             <!--{/if}-->
-                                            <!--{/loop}-->
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                <!--{else}-->
-                                    {lang no_exif}
-                                <!--{/if}-->
+                                            <!--{if $exifs}--><!--{loop $exifs $key $value}-->
+                                                <!--{if $value}-->
+                                                    <tr><td style="white-space: nowrap">$key</td><td style="white-space: nowrap">$value</td></tr>
+                                                <!--{/if}-->
+                                            <!--{/loop}--><!--{/if}-->
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </a>
                     <!--{/if}-->
 
+                    <!--{if helper_access::check_module('share')}-->
+                        <a class="icon mt-share" id="a_share_$pic[picid]" onclick="showWindow(this.id, 'home.php?mod=spacecp&ac=share&type=pic&id=$pic[picid]&handlekey=sharealbumhk_{$pic[picid]}', 'get', 0);" title="{lang share}"><span class="tooltip">{lang share}</span></a>
+                    <!--{/if}-->
+
                     <a class="icon mt-file_download" href="$pic[pic]" download="$pic[filename]" target="_blank" title="{lang download}"><span class="tooltip">{lang download}</span></a>
                 </div>
+
+                <ul class="album-image-viewer-element-index">
+                    <!--{loop $piclist $value}-->
+                    <li class="rec-img {if $value[picid]==$picid}active{/if}" style="background-image: url($value[pic])">
+                        <img src="{LIBURL}/img/row-e-col/1.1.png" alt="">
+                        <a class="cover-layer" href="home.php?mod=space&uid=$value[uid]&do=album&picid=$value[picid]#pic_block">
+                            <!--{if $album[picnum] && $value[picid]==$picid}--><tag>{lang current_pic}</tag><!--{/if}-->
+                        </a>
+                    </li>
+                    <!--{/loop}-->
+                </ul>
+
+                <a class="album-image-viewer-element-switch-prev ft-chevron-left" href="home.php?mod=space&uid=$pic[uid]&do=$do&picid=$upid&goto=up#pic_block" title="{lang previous_pic}"></a>
+                <a class="album-image-viewer-element-switch-next ft-chevron-right" href="home.php?mod=space&uid=$pic[uid]&do=$do&picid=$nextid&goto=down#pic_block" id="nextlink" title="{lang next_pic}"></a>
             </album-image-viewer>
 
-
             <album-image-terminal>
+                <!--{hook/space_album_pic_op_extra}-->
+
+                <!--{if checkperm('managealbum')}-->
+                    <a class="icon hot mt-whatshot" href="home.php?mod=spacecp&ac=album&picid=$pic[picid]&op=edithot&handlekey=picedithothk_{$pic[picid]}" id="a_hot_$pic[picid]" onclick="showWindow(this.id, this.href, 'get', 0);" title="">{lang hot_edit}</a>
+                <!--{/if}-->
+
+                <!--{if $_G['group']['allownest'] || getstatus($_G['member']['allowadmincp'], 4) || getstatus($_G['member']['allowadmincp'], 5)}-->
+                    <a class="icon recommend mt-recommend" href="portal.php?mod=portalcp&ac=portalblock&op=recommend&idtype=picid&id=$pic[picid]" onclick="showWindow('recommend', this.href, 'get', 0)">{lang blockdata_recommend}</a>
+                <!--{/if}-->
+
+                <!--{if $pic[uid] != $_G['uid']}-->
+                    <a class="icon mt-warning" onclick="showWindow('miscreport$pic[picid]', 'misc.php?mod=report&rtype=pic&uid=$pic[uid]&rid=$pic[picid]', 'get', -1);return false;">{lang report}</a>
+                <!--{/if}-->
+
+                <!--{if $_G[uid] == $pic[uid] || checkperm('managealbum')}-->
+                    <a class="icon manage mt-settings" href="home.php?mod=spacecp&ac=album&op=editpic&albumid=$pic[albumid]&picid=$pic[picid]">{lang manage_pic}</a>
+                    <a class="icon edit mt-edit" href="home.php?mod=spacecp&ac=album&op=edittitle&albumid=$pic[albumid]&picid=$pic[picid]&handlekey=edittitlehk_{$pic[picid]}" id="a_set_title" onclick="showWindow(this.id, this.href, 'get', 0);" title="{lang edit_description}"></a>
+                <!--{/if}-->
+            </album-image-terminal>
+
+            <album-image-comments>
+
+                <!--{hook/space_album_pic_top}-->
+                <!--{hook/space_album_pic_bottom}-->
+
+
+                <!--{if $pic[uid] == $_G[uid]}-->
+                <!--{if $_G[magic][frame]}-->
+                <img src="{STATICURL}image/magic/frame.small.gif" alt="frame" class="vm" />
+                <!--{/if}-->
+                <!--{/if}-->
                 <!--[nest=nestclicktop]--><div id="nestclicktop" class="area"></div><!--[/nest]-->
 
-                <div class="album-image-viewer-element-terminal">
-                    <!--{if $pic[uid] != $_G['uid']}-->
-                        <a class="icon mt-warning" onclick="showWindow('miscreport$pic[picid]', 'misc.php?mod=report&rtype=pic&uid=$pic[uid]&rid=$pic[picid]', 'get', -1);return false;">{lang report}</a>
-                    <!--{/if}-->
-                </div>
 
-
-
-
-
-                    <!--{if $album[picnum]}-->{lang current_pic}<!--{/if}-->&nbsp;
-                    <!--{if $album['friend']}-->
-                    <span> &nbsp; {$friendsname[$value[friend]]}</span>
-                    <!--{/if}-->
-                    <!--{hook/space_album_pic_top}-->
-                    <!--{if helper_access::check_module('share')}-->
-                    <a href="home.php?mod=spacecp&ac=share&type=pic&id=$pic[picid]&handlekey=sharealbumhk_{$pic[picid]}" id="a_share_$pic[picid]" onclick="showWindow(this.id, this.href, 'get', 0);" class="oshr">{lang share}</a>
-                    <!--{/if}-->
-                    <!--{hook/space_album_pic_op_extra}-->
-                    <!--{if $pic[uid] == $_G[uid]}-->
-                    <!--{if $_G[magic][frame]}-->
-                    <img src="{STATICURL}image/magic/frame.small.gif" alt="frame" class="vm" />
-
-                    <!--{if $pic[magicframe]}-->
-                        <a id="a_magic_frame" href="home.php?mod=spacecp&ac=magic&op=cancelframe&idtype=picid&id=$pic[picid]" onclick="ajaxmenu(event,this.id)">{lang cancel_frame}</a>
-                    <!--{else}-->
-                        <a id="a_magic_frame" href="home.php?mod=magic&mid=frame&idtype=picid&id=$pic[picid]" onclick="ajaxmenu(event,this.id, 1)">{lang add_frame}</a>
-                    <!--{/if}-->
-
-                    <!--{/if}-->
-                    <!--{/if}-->
-
-                    <!--{if $_G[uid] == $pic[uid] || checkperm('managealbum')}-->
-                    <a href="home.php?mod=spacecp&ac=album&op=editpic&albumid=$pic[albumid]&picid=$pic[picid]">{lang manage_pic}</a>
-                    <a href="home.php?mod=spacecp&ac=album&op=edittitle&albumid=$pic[albumid]&picid=$pic[picid]&handlekey=edittitlehk_{$pic[picid]}" id="a_set_title" onclick="showWindow(this.id, this.href, 'get', 0);">{lang edit_description}</a>
-                    <!--{/if}-->
-
-                    <!--{if checkperm('managealbum')}-->
-                        IP: $pic[postip]{if $pic[port]}:$pic[port]{/if}
-                        <a href="home.php?mod=spacecp&ac=album&picid=$pic[picid]&op=edithot&handlekey=picedithothk_{$pic[picid]}" id="a_hot_$pic[picid]" onclick="showWindow(this.id, this.href, 'get', 0);">{lang hot}</a>
-                    <!--{/if}-->
-                    <!--a href="home.php?mod=spacecp&ac=common&op=report&idtype=picid&id=$pic[picid]&handlekey=reportpichk_{$pic[picid]}" id="a_report" onclick="showWindow(this.id, this.href, 'get', 0);">{lang report}</a-->
-
-
-                    <!--{if $_G['group']['allownest'] || getstatus($_G['member']['allowadmincp'], 4) || getstatus($_G['member']['allowadmincp'], 5)}-->
-                    <a href="portal.php?mod=portalcp&ac=portalblock&op=recommend&idtype=picid&id=$pic[picid]" onclick="showWindow('recommend', this.href, 'get', 0)">{lang blockdata_recommend}</a>
-                    <!--{/if}-->
-
-
-                    <!--{hook/space_album_pic_bottom}-->
-
-                    <p class="xg1 xs1">
-                        <!--{if $pic[hot]}--><span class="hot">{lang hot} <em>$pic[hot]</em></span><!--{/if}-->
-                        <!--{if $do=='event'}--><a href="home.php?mod=space&uid=$pic[uid]" target="_blank">$pic[username]</a><!--{/if}-->
-                        {lang upload_at} <!--{date($pic[dateline])}--> ($pic[size])
-                    </p>
 
                 <!--{if $album[friend] != 3}-->
                 <div id="click_div">
@@ -129,8 +110,6 @@
                 </div>
                 <!--{/if}-->
 
-            </album-image-terminal>
-            <album-image-comments>
                 <!--{if helper_access::check_module('album')}-->
                 <form id="quickcommentform_{$picid}" name="quickcommentform_{$picid}" action="home.php?mod=spacecp&ac=comment&handlekey=qcpic_{$picid}" method="post" autocomplete="off" onsubmit="ajaxpost('quickcommentform_{$picid}', 'return_qcpic_{$picid}');doane(event);" class="bm bw0" style="width: 600px;">
                     <!--{if $_G['uid']}-->
@@ -183,33 +162,15 @@
                         </div>
                         <!--{/if}-->
 
-                        <div id="comment_ul" class="xld xlda">
+                        <div class="xld xlda" id="comment_ul" >
                             <!--{loop $list $k $value}-->
                             <!--{template home/space_comment_li}-->
                             <!--{/loop}-->
                         </div>
                     </div>
-                    <!--{if $multi}--><div class="pgs cl mtm">$multi</div><!--{/if}-->
+                    <!--{if $multi}--><div class="album-element-pagination">$multi</div><!--{/if}-->
                 </div>
             </album-image-comments>
-
-            <script>
-                function succeedhandle_qcpic_{$picid}(url, msg, values) {
-                    if(values['cid']) {
-                        comment_add(values['cid']);
-                    } else {
-                        $('return_qcpic_{$picid}').innerHTML = msg;
-                    }
-                    <!--{if $sechash}-->
-                    <!--{if $secqaacheck}-->
-                    updatesecqaa('$sechash');
-                    <!--{/if}-->
-                    <!--{if $seccodecheck}-->
-                    updateseccode('$sechash');
-                    <!--{/if}-->
-                    <!--{/if}-->
-                }
-            </script>
 
             <script>
                 var interval = 5000;
@@ -266,6 +227,24 @@
                 var elems = selector('dd[class~=magicflicker]');
                 for(var i=0; i<elems.length; i++){
                     magicColor(elems[i]);
+                }
+            </script>
+
+            <script>
+                function succeedhandle_qcpic_{$picid}(url, msg, values) {
+                    if(values['cid']) {
+                        comment_add(values['cid']);
+                    } else {
+                        $('return_qcpic_{$picid}').innerHTML = msg;
+                    }
+                    <!--{if $sechash}-->
+                    <!--{if $secqaacheck}-->
+                    updatesecqaa('$sechash');
+                    <!--{/if}-->
+                    <!--{if $seccodecheck}-->
+                    updateseccode('$sechash');
+                    <!--{/if}-->
+                    <!--{/if}-->
                 }
             </script>
 

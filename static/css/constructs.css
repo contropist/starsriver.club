@@ -1884,7 +1884,7 @@
         text-align: left;
         height:auto;
         background: #fff !important;
-        color: #777;
+        color: var(--color-text-dark);
         opacity: 0;
         visibility: hidden;
     }

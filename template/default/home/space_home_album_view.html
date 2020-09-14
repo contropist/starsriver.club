@@ -8,7 +8,7 @@
             <!--{eval $_G['home_tpl_titles'] = [$album['albumname'], '{lang album}'];}-->
             <!--{eval $friendsname = [1 => '{lang friendname_1}',2 => '{lang friendname_2}',3 => '{lang friendname_3}',4 => '{lang friendname_4}'];}-->
 
-            <div class="album-viewer-element-terminal">
+            <album-viewer-terminal>
                 <terminal-left>
                     <div class="album-viewer-element-title">
                         {$space[username]}{lang de}{lang album}: <span>$album[albumname]</span>
@@ -47,17 +47,18 @@
                         <a class="icon like ft-heart" id="a_favorite" onclick="showWindow(this.id, 'home.php?mod=spacecp&ac=favorite&type=album&id=$album[albumid]&spaceuid=$space[uid]&handlekey=sharealbumhk_{$album[albumid]}', 'get', 0);" title="{lang favorite}"></a>
                     <!--{/if}-->
                 </terminal-right>
-            </div>
-            <div class="album-viewer-element-desc">
+            </album-viewer-terminal>
+
+            <album-viewer-desc>
                 <!--{if $album[depict]}-->$album[depict]<!--{else}-->{lang no_pics_desc}<!--{/if}-->
-            </div>
+            </album-viewer-desc>
 
             <!--{if $pricount}-->
-                <div class="album-viewer-element-alert alert hi-info with-border">{lang hide_pic}</div>
+                <album-viewer-alert class="alert hi-info with-border">{lang hide_pic}</album-viewer-alert>
             <!--{/if}-->
 
             <!--{if $list}-->
-                <div class="album-viewer-element-images panel">
+                <album-viewer-images class="panel">
                     <ul class="panel-container">
                         <!--{loop $list $key $value}-->
                         <li class="box size-undefined rec-img album-viewer-element-img" style="background-image: url($value[pic])">
@@ -71,10 +72,10 @@
                         </li>
                         <!--{/loop}-->
                     </ul>
-                </div>
+                </album-viewer-images>
                 <!--{if $multi}--><div class="album-viewer-element-pagination">$multi</div><!--{/if}-->
             <!--{else}-->
-                <div class="album-viewer-element-empty">{lang no_pics}</div>
+                <album-viewer-empty>{lang no_pics}</album-viewer-empty>
             <!--{/if}-->
         </album-viewer>
     </div>
