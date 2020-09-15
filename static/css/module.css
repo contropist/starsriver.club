@@ -8306,17 +8306,17 @@
             padding-top: 20px;
             border-top: 1px solid var(--color-split-line);
         }
-.WL-0   space-comment,
-.WL-3P  space-comment,
-.WL-4P  space-comment,
-.WL-7P  space-comment{
-            grid-template-columns: 1fr;
-        }
         space-comment comment-toolbox{
 
         }
         space-comment comment-list{
 
+        }
+
+        @media screen and (max-width:1470px){
+            space-comment{
+                grid-template-columns: 1fr;
+            }
         }
     /*endregion*/
 
