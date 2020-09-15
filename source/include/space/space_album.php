@@ -217,13 +217,11 @@
         
         ckstart($start, $perpage);
         
-        $cid = empty($_GET['cid']) ? 0 : intval($_GET['cid']);
-        
         $siteurl = getsiteurl();
         $list = [];
-        $count = C::t('home_comment')->count_by_id_idtype($pic['picid'], 'picid', $cid);
+        $count = C::t('home_comment')->count_by_id_idtype($pic['picid'], 'picid', 0);
         if ($count) {
-            $query = C::t('home_comment')->fetch_all_by_id_idtype($pic['picid'], 'picid', $start, $perpage, $cid);
+            $query = C::t('home_comment')->fetch_all_by_id_idtype($pic['picid'], 'picid', $start, $perpage, 0);
             foreach ($query as $value) {
                 $list[] = $value;
             }

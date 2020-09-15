@@ -3,7 +3,23 @@
 <!--{if $op == 'comment'}-->
 
 	<!--{loop $list $k $value}-->
-		<!--{template home/space_home_wall_mod_li}-->
+
+        <!--{if $type == 'uid'}-->
+		    <!--{template home/space_home_wall_mod_li}-->
+        <!--{/if}-->
+
+        <!--{if $type == 'sid'}-->
+		    <!--{template home/space_home_share_mod_comment_li}-->
+        <!--{/if}-->
+
+        <!--{if $type == 'picid'}-->
+		    <!--{template home/space_home_album_mod_comment_li}-->
+        <!--{/if}-->
+
+        <!--{if $type == 'blogid'}-->
+		    <!--{template home/space_home_blog_mod_comment_li}-->
+        <!--{/if}-->
+
 	<!--{/loop}-->
 
 <!--{elseif $op == 'getfriendgroup'}-->

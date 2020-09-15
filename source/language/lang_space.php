@@ -236,7 +236,7 @@
         'sb_wall'            => '{who}的留言板',
         'sb_profile'         => '{who}的个人资料',
         'sb_thread'          => '{who}的帖子',
-        'doing_you_can'      => '你可以更新记录, 让好友们知道你在做什么...',
+        'doing_you_can'      => '这一刻的想法...',
         'block_profile_all'  => '<p style="text-align: right;"><a href="home.php?mod=space&uid={uid}&do=profile">查看全部个人资料</a></p>',
         'block_profile_edit' => '<span class="y xw0"><a href="home.php?mod=spacecp&ac=profile">编辑我的资料</a></span>',
         'sb_follow'          => '{who}的话题',
