@@ -9296,10 +9296,6 @@
             }
 
             .app-userspace #userspace_album .album-image-viewer-element-index {
-                display: flex;
-                flex-flow: row nowrap;
-                justify-content: center;
-                align-items: center;
                 padding: 10px;
                 background: rgba(255,255,255,.3);
                 backdrop-filter: blur(2px);
@@ -9313,6 +9309,12 @@
     .WL-3P  .app-userspace #userspace_album .album-image-viewer-element-index,
     .WL-4P  .app-userspace #userspace_album .album-image-viewer-element-index {
                 display: none;
+            }
+            .app-userspace #userspace_album .album-image-viewer-element-index ul{
+                display: flex;
+                flex-flow: row nowrap;
+                justify-content: center;
+                align-items: center;
             }
             .app-userspace #userspace_album .album-image-viewer-element-index li{
                 position: relative;
