@@ -8313,7 +8313,7 @@
 
         }
 
-        @media screen and (max-width:1470px){
+        @media screen and (max-width:960px){
             space-comment{
                 grid-template-columns: 1fr;
             }
