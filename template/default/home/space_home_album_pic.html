@@ -8,6 +8,7 @@
             <album-image-viewer>
                 <div class="album-image-viewer-element-img" title="{if $album[picnum]}{lang current_pic}{/if}">
                     <img src="" data-src="$pic['pic']" id="pic" alt="" />
+                    <img src="" data-src="$pic['pic']" id="pic" alt="" />
                 </div>
 
                 <div class="album-image-viewer-element-name">
@@ -58,14 +59,14 @@
                         <!--{loop $piclist $value}-->
                         <li class="rec-img {if $value[picid]==$picid}active{/if}" style="background-image: url($value[pic])">
                             <img src="{LIBURL}/img/row-e-col/1.1.png" alt="">
-                            <a class="cover-layer" href="home.php?mod=space&uid=$value[uid]&do=album&picid=$value[picid]#pic_block"></a>
+                            <a class="cover-layer" href="home.php?mod=space&uid=$value[uid]&do=album&picid=$value[picid]"></a>
                         </li>
                         <!--{/loop}-->
                     </ul>
                 </div>
 
-                <a class="album-image-viewer-element-switch-prev ft-chevron-left" href="home.php?mod=space&uid=$pic[uid]&do=$do&picid=$upid&goto=up#pic_block" title="{lang previous_pic}"></a>
-                <a class="album-image-viewer-element-switch-next ft-chevron-right" href="home.php?mod=space&uid=$pic[uid]&do=$do&picid=$nextid&goto=down#pic_block" id="nextlink" title="{lang next_pic}"></a>
+                <a class="album-image-viewer-element-switch-prev ft-chevron-left" href="home.php?mod=space&uid=$pic[uid]&do=$do&picid=$upid&goto=up" title="{lang previous_pic}"></a>
+                <a class="album-image-viewer-element-switch-next ft-chevron-right" href="home.php?mod=space&uid=$pic[uid]&do=$do&picid=$nextid&goto=down" id="nextlink" title="{lang next_pic}"></a>
 
                 <i class="album-image-viewer-element-progress"></i>
             </album-image-viewer>
@@ -183,46 +184,6 @@
             <script>
                 addEvent(document,'DOMContentLoaded',function () {
 
-                    /* ImageViewer */
-                    let image = SR('.album-image-viewer-element-img > img')[0],
-                        image_cta = SR('.album-image-viewer-element-img')[0],
-
-                        image_viewer_height = function (){
-                            return SRGlobal.Window.Height - 72 - 40 - 20;
-                        },
-
-                        image_viewer_resize = function (){
-                            image_cta.style.height = image_viewer_height() + 'px';
-                            image_cta.delClass('expend');
-                        },
-
-                        image_viewer_onload = function (){
-                            image.style.display = '';
-                        },
-
-                        image_viewer_expend = function (){
-                            if(!image_cta.hasClass('expend') &&
-                                image.naturalHeight > image_viewer_height() &&
-                                (image.naturalHeight / image.naturalWidth) > (image_viewer_height() / image_cta.Css.width)
-                            ){
-                                image_cta.style.height = '';
-                                image_cta.addClass('expend');
-                            } else {
-                                image_cta.style.height = image_viewer_height() + 'px';
-                                image_cta.delClass('expend');
-                            }
-                        };
-
-                    if(image){
-                        image.style.display = 'none';
-                        image.onload = image_viewer_onload();
-                        image.src = image.data('src');
-
-                        image_cta.style.height = image_viewer_height() + 'px';
-                        addEvent(image_cta,'click',image_viewer_expend);
-                        addEvent(window,'resize',image_viewer_resize);
-                    }
-
                     /* AutoPlay */
                     let btn = SR('#album_image_autoplay')[0],
                         btn_tooltip = SR('#album_image_autoplay .tooltip')[0],
@@ -235,10 +196,10 @@
                         endPlay = false,
 
                         forward = function () {
-                            window.location.href = 'home.php?mod=space&uid=$pic[uid]&do=$do&picid=$nextid&goto=down&play=1#pic_block';
+                            window.location.href = 'home.php?mod=space&uid=$pic[uid]&do=$do&picid=$nextid&goto=down&play=1';
                         },
 
-                        playNextPic = function (stat) {
+                        play = function (stat) {
                             if (stat || replay) {
                                 replay = false;
 
@@ -250,14 +211,17 @@
                                     num += 1;
                                 }, 100);
 
+                                btn_tooltip.innerHTML = '{lang stop_playing}';
+
                                 btn.onclick = function () {
                                     replay = false;
-                                    playNextPic(false);
+                                    play(false);
                                 };
 
                                 timerId = setInterval(function () {
                                     forward();
                                 }, interval);
+
                             } else {
                                 replay = true;
 
@@ -274,7 +238,7 @@
                                 }
 
                                 btn.onclick = function () {
-                                    playNextPic(true);
+                                    play(true);
                                 };
 
                                 window.clearInterval(timerId);
@@ -282,30 +246,64 @@
                             }
                         }
 
-                    <!--{if $_GET['play']}-->
-                        btn.onclick = function (){
-                            playNextPic(false)
-                        };
-                    <!--{else}-->
-                        btn.onclick = function (){
-                            playNextPic(true)
-                        };
-                    <!--{/if}-->
+                    /* ImageViewer */
+                    let image = SR('.album-image-viewer-element-img > img')[0],
+                        image_cta = SR('.album-image-viewer-element-img')[0],
 
-                    <!--{if $_GET['play']}-->
-                        <!--{if $sequence && $album['picnum']}-->
-                            if($sequence === $album['picnum']){
-                                endPlay = true;
-                                playNextPic(false);
+                        image_viewer_height = function (){
+                            return SRGlobal.Window.Height - 72 - 40 - 20;
+                        },
+
+                        image_viewer_resize = function (){
+                            image_cta.style.height = image_viewer_height() + 'px';
+                            image_cta.delClass('expend');
+                        },
+
+                        image_viewer_onload = function (){
+                            image.style.opacity = '1';
+
+                            <!--{if $_GET['play']}-->
+                                btn.onclick = function (){play(false);};
+                            <!--{else}-->
+                                btn.onclick = function (){play(true);};
+                            <!--{/if}-->
+
+                            <!--{if $_GET['play']}-->
+                                <!--{if $sequence == $album['picnum']}-->
+                                    endPlay = true;
+                                    play(false);
+                                <!--{else}-->
+                                    play(true);
+                                <!--{/if}-->
+                            <!--{else}-->
+                                play(false);
+                            <!--{/if}-->
+                        },
+
+                        image_viewer_expend = function (){
+                            if(!image_cta.hasClass('expend') &&
+                                image.naturalHeight > image_viewer_height() &&
+                                (image.naturalHeight / image.naturalWidth) > (image_viewer_height() / image_cta.Css.width)
+                            ){
+                                image_cta.style.height = '';
+                                image_cta.addClass('expend');
                             } else {
-                                playNextPic(true);
+                                image_cta.style.height = image_viewer_height() + 'px';
+                                image_cta.delClass('expend');
                             }
-                        <!--{else}-->
-                            playNextPic(true);
-                        <!--{/if}-->
-                    <!--{else}-->
-                        playNextPic(false);
-                    <!--{/if}-->
+                        };
+
+                    if(image){
+                        image.style.opacity = '0';
+                        image.onload = function (){
+                            image_viewer_onload();
+                        };
+                        image.src = image.data('src');
+
+                        image_cta.style.height = image_viewer_height() + 'px';
+                        addEvent(image_cta,'click',image_viewer_expend);
+                        addEvent(window,'resize',image_viewer_resize);
+                    }
                 });
             </script>
         </album-viewer>

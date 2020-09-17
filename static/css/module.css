@@ -9146,7 +9146,6 @@
     /*endregion*/
 
     /*region #userspace::album*/
-
         .app-userspace #userspace_album .panel{
             --default-box-margin-width: 5px !important;
         }
@@ -9644,7 +9643,6 @@
                 margin: 0 !important;
             }
         /*endregion*/
-
     /*endregion*/
 
     /*region #userspace::wall*/
