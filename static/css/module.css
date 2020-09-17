@@ -9543,8 +9543,7 @@
                 top: 20px;
             }
     .WL-0   .app-userspace #userspace_album .album-image-viewer-element-index,
-    .WL-3P  .app-userspace #userspace_album .album-image-viewer-element-index,
-    .WL-4P  .app-userspace #userspace_album .album-image-viewer-element-index {
+    .WL-3P  .app-userspace #userspace_album .album-image-viewer-element-index{
                 display: none;
             }
             .app-userspace #userspace_album .album-image-viewer-element-index ul{
@@ -9578,11 +9577,6 @@
                 transform: translate3d(-50%, 0, 0);
                 bottom: 70px;
             }
-    .WL-0   .app-userspace #userspace_album .album-image-viewer-element-ctl,
-    .WL-3P  .app-userspace #userspace_album .album-image-viewer-element-ctl,
-    .WL-4P  .app-userspace #userspace_album .album-image-viewer-element-ctl {
-        display: none;
-    }
             .app-userspace #userspace_album .album-image-viewer-element-ctl .icon{
                 color: #ffffff;
                 font-size: 16px;
