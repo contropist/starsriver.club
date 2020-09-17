@@ -6,9 +6,9 @@
     <div class="mas-viewer-container" id="userspace_album">
         <album-viewer>
             <album-image-viewer>
-                <div class="album-image-viewer-element-img" title="{if $album[picnum]}{lang current_pic}{/if}">
-                    <img src="" data-src="$pic['pic']" id="pic" alt="" />
-                    <img src="" data-src="$pic['pic']" id="pic" alt="" />
+                <div class="album-image-viewer-element-img-container" title="{if $album[picnum]}{lang current_pic}{/if}">
+                    <img class="album-image-viewer-element-img-loading" src="{LIBURL}/img/loading/bar-1.svg" alt="loading"/>
+                    <img class="album-image-viewer-element-img" src="" data-src="$pic['pic']" id="pic" alt="" />
                 </div>
 
                 <div class="album-image-viewer-element-name">
@@ -247,8 +247,9 @@
                         }
 
                     /* ImageViewer */
-                    let image = SR('.album-image-viewer-element-img > img')[0],
-                        image_cta = SR('.album-image-viewer-element-img')[0],
+                    let image = SR('.album-image-viewer-element-img')[0],
+                        image_cta = SR('.album-image-viewer-element-img-container')[0],
+                        image_lod = SR('.album-image-viewer-element-img-loading')[0],
 
                         image_viewer_height = function (){
                             return SRGlobal.Window.Height - 72 - 40 - 20;
@@ -260,7 +261,8 @@
                         },
 
                         image_viewer_onload = function (){
-                            image.style.opacity = '1';
+                            image.style = '';
+                            image_lod.style.display = 'none'
 
                             <!--{if $_GET['play']}-->
                                 btn.onclick = function (){play(false);};
@@ -294,7 +296,7 @@
                         };
 
                     if(image){
-                        image.style.opacity = '0';
+                        image.style.display = 'none';
                         image.onload = function (){
                             image_viewer_onload();
                         };

@@ -9455,7 +9455,7 @@
                 margin: 0 10px;
             }
 
-            .app-userspace #userspace_album .album-image-viewer-element-img {
+            .app-userspace #userspace_album .album-image-viewer-element-img-container {
                 display: flex;
                 justify-content: center;
                 align-items: center;
@@ -9467,10 +9467,15 @@
                         linear-gradient(45deg,#f0f0f0 25%,transparent 0,transparent 75%,#f0f0f0 0),
                         linear-gradient(45deg,#f0f0f0 25%,transparent 0,transparent 75%,#f0f0f0 0) !important;
             }
-            .app-userspace #userspace_album .album-image-viewer-element-img.expend {
+            .app-userspace #userspace_album .album-image-viewer-element-img-container.expend {
                 cursor: zoom-out;
             }
-            .app-userspace #userspace_album .album-image-viewer-element-img img {
+            .app-userspace #userspace_album .album-image-viewer-element-img-loading {
+                width: 128px;
+                border-radius: 50px;
+                opacity: .39;
+            }
+            .app-userspace #userspace_album .album-image-viewer-element-img {
                 max-height: 100%;
             }
 
