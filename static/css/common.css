@@ -344,6 +344,7 @@
 
   /* 验证码输入样式 */
     [id^="seccode_"] {
+        display: inline-block;
         position: relative;
         float: right;
         box-sizing: content-box !important;

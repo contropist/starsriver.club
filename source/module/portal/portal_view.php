@@ -1,4 +1,10 @@
 <?php
+/********************************************************************
+ * Copyright (c) 2020 All Right Reserved By [StarsRiver]            *
+ *                                                                  *
+ * Author  Zhangyu                                                  *
+ * Email   starsriver@yahoo.com                                     *
+ ********************************************************************/
 
 /**
  *      [Discuz!] (C)2001-2099 Comsenz Inc.
@@ -232,7 +238,7 @@ foreach ($clicks as $key => $value) {
 }
 
 $clickuserlist = [];
-foreach(C::t('home_clickuser')->fetch_all_by_id_idtype($id, $idtype, 0, 24) as $value) {
+foreach(C::t('home_clickuser')->fetch_all_by_id_idtype($id, $idtype, 0, 48) as $value) {
 	$value['clickname'] = $clicks[$value['clickid']]['name'];
 	$clickuserlist[] = $value;
 }

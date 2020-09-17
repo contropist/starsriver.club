@@ -254,7 +254,7 @@
         }
         
         $clickuserlist = [];
-        foreach (C::t('home_clickuser')->fetch_all_by_id_idtype($id, $idtype, 0, 20) as $value) {
+        foreach (C::t('home_clickuser')->fetch_all_by_id_idtype($id, $idtype, 0, 48) as $value) {
             $value['clickname'] = $clicks[$value['clickid']]['name'];
             $clickuserlist[] = $value;
         }

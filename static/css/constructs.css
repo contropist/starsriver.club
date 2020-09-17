@@ -11,6 +11,15 @@
 |  This Css Makes Origin Components Looks Nice
 -----------------------------------------------------------------------------------------------------------------------*/
 
+/*region Basic-html-elemets*/
+    .html-element-nop{
+        color: var(--color-text-tip);
+        text-align: center;
+        line-height: 24px;
+        padding: 30px 0;
+    }
+/*endregion*/
+
 /*region window*/
     .window{
         background: #fff;
@@ -187,14 +196,13 @@
         display: inline-block;
         width: 100%;
         font-size: 14px;
-        padding: 10px;
+        padding: 5px 10px;
         background: #f9f9f9;
-        border:1px solid #f0f0f0;
+        border-left: 3px solid #9accd4;
         margin: 5px 0;
         word-wrap: break-word;
         white-space: pre-wrap;
         box-sizing: border-box;
-        border-radius: 4px;
     }
     /*
       article blockquote{
@@ -2324,6 +2332,7 @@
         --color-text-dark: #444f5a;
         --color-text-gray: #727272;
         --color-text-lightgray: #a5a5a5;
+        --color-text-tip: #6b7e86;
 
         --color-mod-success : #38b03f;
         --color-mod-warning : #E1804C;

@@ -1,6 +1,12 @@
 <?php
-    
-    if (!defined('IN_DISCUZ')) {
+/********************************************************************
+ * Copyright (c) 2020 All Right Reserved By [StarsRiver]            *
+ *                                                                  *
+ * Author  Zhangyu                                                  *
+ * Email   starsriver@yahoo.com                                     *
+ ********************************************************************/
+
+if (!defined('IN_DISCUZ')) {
         exit('Access Denied');
     }
     
@@ -135,7 +141,7 @@
         }
         
         $clickuserlist = [];
-        foreach (C::t('home_clickuser')->fetch_all_by_id_idtype($id, $idtype, 0, 24) as $value) {
+        foreach (C::t('home_clickuser')->fetch_all_by_id_idtype($id, $idtype, 0, 48) as $value) {
             $value['clickname'] = $clicks[$value['clickid']]['name'];
             $clickuserlist[] = $value;
         }

@@ -1,4 +1,10 @@
 <?php
+/********************************************************************
+ * Copyright (c) 2020 All Right Reserved By [StarsRiver]            *
+ *                                                                  *
+ * Author  Zhangyu                                                  *
+ * Email   starsriver@yahoo.com                                     *
+ ********************************************************************/
 
 /**
  *      [Discuz!] (C)2001-2099 Comsenz Inc.
@@ -43,7 +49,7 @@ class bbcode {
 			$this->replace_exp = array(
 				"<blockquote>\\1</blockquote>",
 				"<a href=\"\\1\\2\" target=\"_blank\">\\1\\2</a>",
-				"<img src=\"".IMGURL."/expression/emoji/face/\\1.png\" class=\"emoji-face\"> "
+				"<img class=\"emoji-face\" src=\"".IMGURL."/expression/emoji/face/\\1.png\">"
 			);
 			$this->replace_exp[] = '$this->bb_img(\'\\1\')';
 			$this->search_str = array('[b]', '[/b]','[i]', '[/i]', '[u]', '[/u]');

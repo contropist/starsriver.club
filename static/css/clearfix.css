@@ -214,6 +214,11 @@ a, button, .btn, select {
     position: relative;
 }
 
+sticky{
+    display: inline-block;
+    position: sticky;
+}
+
 style, script,
 [hide], .hide,
 [hidden], .hidden,
