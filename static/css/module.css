@@ -8484,7 +8484,7 @@
             padding: 5px 7px;
             line-height: 20px;
             border-radius: 4px;
-            color: #909a95;
+            color: #adafae;
             font-size: 18px;
         }
         .space-element-comment-item-end .icon-button img{
@@ -9499,6 +9499,17 @@
                 padding: 2px 6px;
                 border-radius: 5px;
                 margin-left: 10px;
+            }
+
+            .app-userspace #userspace_album .album-image-viewer-element-progress{
+                position: fixed;
+                top: var(--space-banks-height);
+                left: var(--width-mas-guide);
+                height: 3px;
+                background: var(--color-main-theme);
+                transition: .1s linear;
+                width: 0%;
+                border-radius: 5px;
             }
 
             .app-userspace #userspace_album [class^='album-image-viewer-element-switch-']{
