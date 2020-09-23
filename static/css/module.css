@@ -4664,6 +4664,7 @@
     }
     .collection-info .detail .func .user a {
         position: relative;
+        display: inline-block;
         line-height: 20px;
         background: var(--color-main-theme);
         color: #fff;

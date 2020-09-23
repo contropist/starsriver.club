@@ -1,18 +1,17 @@
 <!--{if $space[self]}-->
     <!--{if $groups}-->
 
-                <h3>{lang search_friend}</h3>
-                <form method="get" autocomplete="off" action="home.php" class="pns">
-                    <input type="hidden" name="mod" value="space" />
-                    <input type="hidden" name="uid" value="$space[uid]" />
-                    <input type="hidden" name="do" value="friend" />
-                    <input type="hidden" name="view" value="me" />
-                    <input type="hidden" name="from" value="space" />
-                    <input type="hidden" name="searchmode" value="1" />
-                    <input type="hidden" name="searchsubmit" value="1" />
-                    <input type="text" name="searchkey" onclick="if(this.value=='{lang search_friend}')this.value='';" />&nbsp;<button type="submit" class="pn vm"><em>{lang search}</em></button>
-                </form>
-
+        <h3>{lang search_friend}</h3>
+        <form method="get" autocomplete="off" action="home.php" class="pns">
+            <input type="hidden" name="mod" value="space" />
+            <input type="hidden" name="uid" value="$space[uid]" />
+            <input type="hidden" name="do" value="friend" />
+            <input type="hidden" name="view" value="me" />
+            <input type="hidden" name="from" value="space" />
+            <input type="hidden" name="searchmode" value="1" />
+            <input type="hidden" name="searchsubmit" value="1" />
+            <input type="text" name="searchkey" onclick="if(this.value=='{lang search_friend}')this.value='';" />&nbsp;<button type="submit" class="pn vm"><em>{lang search}</em></button>
+        </form>
 
         <div class="bm mtm">
             <div class="bm_h cl">
@@ -180,11 +179,11 @@
         <script>
             function succeedhandle_followmod(url, msg, values) {
                 var fObj = $(values['from']+values['fuid']);
-                if(values['type'] == 'add') {
+                if(values['type'] === 'add') {
                     fObj.innerHTML = '{lang follow_del}';
                     fObj.className = 'flw_btn_unfo';
                     fObj.href = 'home.php?mod=spacecp&ac=follow&op=del&fuid='+values['fuid']+'&from='+values['from'];
-                } else if(values['type'] == 'del') {
+                } else if(values['type'] === 'del') {
                     fObj.innerHTML = '{lang follow_add}TA';
                     fObj.className = 'flw_btn_fo';
                     fObj.href = 'home.php?mod=spacecp&ac=follow&op=add&hash={FORMHASH}&fuid='+values['fuid']+'&from='+values['from'];
