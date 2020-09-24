@@ -144,15 +144,15 @@
                                         if(values['cid']) {
                                             comment_add(values['cid']);
                                         } else {
-                                            $('return_qcpic_{$picid}').innerHTML = msg;
+                                            SR('#return_qcpic_{$picid}')[0].innerHTML = msg;
                                         }
                                         <!--{if $sechash}-->
-                                        <!--{if $secqaacheck}-->
-                                        updatesecqaa('$sechash');
-                                        <!--{/if}-->
-                                        <!--{if $seccodecheck}-->
-                                        updateseccode('$sechash');
-                                        <!--{/if}-->
+                                            <!--{if $secqaacheck}-->
+                                                updatesecqaa('$sechash');
+                                            <!--{/if}-->
+                                            <!--{if $seccodecheck}-->
+                                                updateseccode('$sechash');
+                                            <!--{/if}-->
                                         <!--{/if}-->
                                     }
                                 </script>
@@ -171,9 +171,9 @@
                                 <!--{/loop}-->
                             </ul>
                         <!--{else}-->
-                            <div class="html-element-nop">
-                                {lang no_comment}
-                            </div>
+                            <ul class="space-element-comments" id="comment_ul">
+                                <li class="html-element-nop">{lang no_comment}</li>
+                            </ul>
                         <!--{/if}-->
 
                         <!--{if $multi}--><div class="album-element-pagination">$multi</div><!--{/if}-->

@@ -555,8 +555,14 @@ function share_add(sid) {
 }
 
 function comment_add(id) {
-	var obj = $('comment_ul');
-	var newli = document.createElement("li");
+	let obj = SR('#comment_ul')[0],
+        obje = SR('#comment_ul > .html-element-nop')[0],
+        newli = document.createElement("li");
+
+	if(obje){
+        obje.parentNode.removeChild(obje);
+    }
+
     newli.className = 'reply-item';
 	newli.id = 'comment_'+id+'_li';
 	var x = new Ajax();
