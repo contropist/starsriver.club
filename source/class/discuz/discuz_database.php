@@ -1,4 +1,10 @@
 <?php
+/********************************************************************
+ * Copyright (c) 2020 All Right Reserved By [StarsRiver]            *
+ *                                                                  *
+ * Author  Zhangyu                                                  *
+ * Email   starsriver@yahoo.com                                     *
+ ********************************************************************/
 
 /**
  *      [Discuz!] (C)2001-2099 Comsenz Inc.
@@ -308,7 +314,7 @@ class discuz_database {
 		$ret = '';
 		while ($i <= $len && $find < $count) {
 			if ($sql[$i] == '%') {
-				$next = $sql{$i + 1};
+				$next = $sql[$i + 1];
 				if ($next == 't') {
 					$ret .= self::table($arg[$find]);
 				} elseif ($next == 's') {
@@ -474,5 +480,3 @@ class discuz_database_safecheck {
 	}
 
 }
-
-?>

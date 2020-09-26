@@ -1,4 +1,10 @@
 <?php
+/********************************************************************
+ * Copyright (c) 2020 All Right Reserved By [StarsRiver]            *
+ *                                                                  *
+ * Author  Zhangyu                                                  *
+ * Email   starsriver@yahoo.com                                     *
+ ********************************************************************/
 
 /**
  *      [Discuz!] (C)2001-2099 Comsenz Inc.
@@ -30,7 +36,7 @@ if($cat['closed'] && !$_G['group']['allownest'] && !$categoryperm[$catid]['allow
 if(!isset($_G['makehtml'])) {
 	if(!empty($cat['url']))	dheader('location:'.$cat['url']);
 	if(defined('SUB_DIR') && $_G['siteurl']. substr(SUB_DIR, 1) != $cat['caturl'] || !defined('SUB_DIR') && $_G['siteurl'] != substr($cat['caturl'], 0, strrpos($cat['caturl'], '/')+1)) {
-		dheader('location:'.$cat['caturl'], '301');
+		dheader('location:'.$cat['caturl'], '','301');
 	}
 }
 
