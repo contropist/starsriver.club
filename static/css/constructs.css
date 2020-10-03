@@ -3137,7 +3137,7 @@
         box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.8), 1px 1px 4px rgba(0, 0, 0, 0.2);
         border-radius: 50%;
         cursor: pointer;
-        transition: .05s ease-in-out;
+        transition: .05s cubic-bezier(0, 0.5, 0.5, 1);
     }
     .scroll-overhead .Mas .mas-guide .mas-guide-switch {
         color: #3e3e3e;
@@ -3177,7 +3177,7 @@
     [class*='WL-'] .Mas .mas-guide,
     [class*='WL-'] .Mas .mas-viewer{
         opacity: 1 !important;
-        transition: .23s ease-in-out;
+        transition: .23s cubic-bezier(0, 0.5, 0.5, 1);
     }
 /*endregion*/
 
