@@ -416,7 +416,7 @@
                     body.delClass('scroll-overhead');
                 }
 
-                if(!overhead && !(body.hasClass('WL-0') || body.hasClass('WL-3P') || body.hasClass('WL-4P'))){
+                if(!overhead){
                     let trspx_h = (1 - MasElements.MasViewerScroll.Top / MasElements.viewerBannerImg.Css.height) / 2 * MasElements.viewerBannerImg.Css.height;
                     MasElements.viewerBannerImg.style.transform = 'translate3d(-50%, -' + trspx_h + 'px,0)';
                 }
