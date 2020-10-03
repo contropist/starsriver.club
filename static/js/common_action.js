@@ -417,8 +417,9 @@
                 }
 
                 if(!overhead){
-                    let trspx_h = (1 - MasElements.MasViewerScroll.Top / MasElements.viewerBannerImg.Css.height) / 2 * MasElements.viewerBannerImg.Css.height;
-                    MasElements.viewerBannerImg.style.transform = 'translate3d(-50%, -' + trspx_h + 'px,0)';
+                    let trspx_h = Math.ceil((1 - MasElements.MasViewerScroll.Top / MasElements.viewerBannerImg.Css.height) / 2 * MasElements.viewerBannerImg.Css.height),
+                        trspx_w = Math.ceil(MasElements.viewerBannerImg.Css.width / 2);
+                    MasElements.viewerBannerImg.style.transform = 'translate3d(-'+ trspx_w +'px, -' + trspx_h + 'px,0)';
                 }
             }
         },
@@ -433,5 +434,7 @@
                     MasElements.viewerBannerImg.style.height = "auto";
                 }
             }
+
+            MasAction.viewerScroll();
         }
     };
