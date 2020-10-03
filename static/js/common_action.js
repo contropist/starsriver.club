@@ -398,14 +398,6 @@
 
             Misc.WinScrollDirRefresh(MasElements.MasViewerScroll, MasElements.viewer);
 
-            SRGlobal.Window.Scroll.ToBottom = MasElements.viewer.scrollTop + MasElements.viewer.Css.height >= MasElements.viewer.scrollHeight ? 1 : 0;
-
-            if(SRGlobal.Window.Scroll.ToBottom){
-                body.addClass('scroll-tobottom');
-            } else {
-                body.delClass('scroll-tobottom');
-            }
-
             if(MasElements.viewerHeader){
 
                 let overhead = MasElements.MasViewerScroll.Top >= MasElements.viewerHeader.Css.height - MasElements.Bank.Css.height ? 1 : 0;
@@ -417,10 +409,17 @@
                 }
 
                 if(!overhead){
-                    let trspx_h = Math.ceil((1 - MasElements.MasViewerScroll.Top / MasElements.viewerBannerImg.Css.height) / 2 * MasElements.viewerBannerImg.Css.height),
-                        trspx_w = Math.ceil(MasElements.viewerBannerImg.Css.width / 2);
-                    MasElements.viewerBannerImg.style.transform = 'translate3d(-'+ trspx_w +'px, -' + trspx_h + 'px,0)';
+                    let trspx_h = (1 - MasElements.MasViewerScroll.Top / MasElements.viewerBannerImg.Css.height) * 50;
+                    MasElements.viewerBannerImg.style.transform = 'translate3d(-50%, -' + trspx_h + '%,0)';
                 }
+            }
+
+            SRGlobal.Window.Scroll.ToBottom = MasElements.viewer.scrollTop + MasElements.viewer.Css.height >= MasElements.viewer.scrollHeight ? 1 : 0;
+
+            if(SRGlobal.Window.Scroll.ToBottom){
+                body.addClass('scroll-tobottom');
+            } else {
+                body.delClass('scroll-tobottom');
             }
         },
 
@@ -434,7 +433,5 @@
                     MasElements.viewerBannerImg.style.height = "auto";
                 }
             }
-
-            MasAction.viewerScroll();
         }
     };
