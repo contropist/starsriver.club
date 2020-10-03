@@ -6,16 +6,11 @@
  * Email   starsriver@yahoo.com                                     *
  ********************************************************************/
 
-/**
- *      [Discuz!] (C)2001-2099 Comsenz Inc.
- *      This is NOT a freeware, use is subject to license terms
- *
- *      $Id: spacecp_share.php 33291 2013-05-22 05:59:13Z nemohou $
- */
-
 if(!defined('IN_DISCUZ')) {
 	exit('Access Denied');
 }
+
+global $_G;
 
 $sid = intval($_GET['sid']);
 
@@ -44,7 +39,6 @@ if($_GET['op'] == 'delete') {
 	}
 
 } else {
-
 
 	if(!checkperm('allowshare') || !helper_access::check_module('share')) {
 		showmessage('no_privilege_share');
@@ -195,7 +189,7 @@ if($_GET['op'] == 'delete') {
                 'body_data' => [
                     'owner' => $album['username'],
                     'owner_link' => 'home.php?mod=space&uid='.$album['uid'],
-                    'owner_avatar' => avatar($album['uid'], 'middle', true),
+                    'owner_avatar' => avatar($album['uid'], 'small', true),
 
                     'album' => $album['albumname'],
                     'album_desc' => $album['depict'],
@@ -263,7 +257,7 @@ if($_GET['op'] == 'delete') {
                     
                     'owner' => $pic['username'],
                     'owner_link' => 'home.php?mod=space&uid=' . $pic['uid'],
-                    'owner_avatar' => avatar($pic['uid'], 'middle', true),
+                    'owner_avatar' => avatar($pic['uid'], 'small', true),
 
                     'album' => $pic['albumname'],
                     'album_link' => 'home.php?mod=space&uid=' . $pic['uid'] . '&do=album&id=' . $pic['albumid'],

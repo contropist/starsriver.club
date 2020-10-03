@@ -1,6 +1,12 @@
 <?php
-    
-    if(!defined('IN_DISCUZ')) {
+/********************************************************************
+ * Copyright (c) 2020 All Right Reserved By [StarsRiver]            *
+ *                                                                  *
+ * Author  Zhangyu                                                  *
+ * Email   starsriver@yahoo.com                                     *
+ ********************************************************************/
+
+if(!defined('IN_DISCUZ')) {
         exit('Access Denied');
     }
     
@@ -69,8 +75,9 @@
         'share_title_template_pic' => '分享了图片',
         'share_body_template_pic' =>	'
             <div class="share-element-image">
-                <i>{name}</i>
-                <a class="image" href="{url}" target="_blank"><img src="{url}" /></a>
+                <a class="image" href="{url}" target="_blank" title="{name}">
+                    <img src="{url}">
+                </a>
             </div>',
 
         
@@ -118,12 +125,12 @@
         'share_title_template_album_pic' => '分享了画廊图片',
         'share_body_template_album_pic' => '
             <div class="share-element-image">
-                <div class="album-pic-info">
-                    <a class="username ellipsis" href="{owner_link}" target="_blank" c="1"><img src="{owner_avatar}">{owner}</a> 的画廊 <a class="albumname ellipsis" href="{album_link}" target="_blank">&nbsp;{album}</a> 中的图片
-                </div>
-                <i class="ellipsis">{image}</i>
-                <a class="image" href="{image_togo}" target="_blank">
-                    <img src="{image_link}" />
+                <a class="image" href="{image_togo}" target="_blank" title="{album}：{image}">
+                    <img src="{image_link}">
+                </a>
+                <a class="user-tag" href="{owner_link}" c="1">
+                    <s class="avatar"><img class="avatar-main" src="{owner_avatar}"></s>
+                    <s class="usernameellipsis">{owner}</s>
                 </a>
             </div>',
         

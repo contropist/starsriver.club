@@ -6345,6 +6345,8 @@
             max-width: 100%;
         }
         .share-element-link {
+            display: flex;
+            align-items: center;
             padding: 8px;
             line-height: 20px;
             color: var(--color-text-gray);
@@ -6400,19 +6402,6 @@
             width: 100%;
         }
 
-        .share-element-image{
-            display: block;
-            width: 100%;
-            border: 2px solid var(--color-lightgray);
-            border-radius: 8px;
-            overflow: hidden;
-        }
-        .share-element-image .image{
-            width: 100%;
-        }
-        .share-element-image .image img{
-            width: 100%;
-        }
         .share-element-image i,
         .share-element-image .album-pic-info{
             display: flex;
@@ -6436,6 +6425,40 @@
             height: 24px;
             border-radius: 20px;
             margin: 5px 5px 0 0;
+        }
+
+        .share-element-image{
+            --avatar-size: 24px;
+            position: relative;
+            display: flex;
+            flex-flow: column nowrap;
+            width: fit-content;
+            margin: auto;
+            border: 1px solid var(--box-border-color);
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        .share-element-image .user-tag{
+            line-height: var(--avatar-size);
+            margin: 10px;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            background: rgba(255,255,255,.7);
+            border-radius: 34px;
+            padding: 5px;
+            box-shadow: 0 0 21px rgba(0,0,0,.3);
+            backdrop-filter: blur(2px);
+        }
+        .share-element-image .user-tag .avatar{
+            position: relative;
+            width: var(--avatar-size);
+            height: var(--avatar-size);
+        }
+        .share-element-image .user-tag .username{
+            margin: 0 5px;
+            font-weight: 700;
+            color: var(--color-text-dark);
         }
 
         .share-element-album {
@@ -8509,7 +8532,7 @@
     /*region @timeline*/
         .app-userspace .timeline{
             --max-width: 720px;
-            --line-tip-fontsize: 36px;
+            --line-tip-fontsize: 37px;
             --line-tip-lineheight: 72px;
 
             --node-first-padding: 64px;
@@ -8519,10 +8542,10 @@
             --node-left-element-width: var(--node-left-width);
             --node-left-element-position: absolute;
             --node-left-element-aligh: right;
-            --node-right-margin: 0 0 20px 20px;
+            --node-right-margin: 0 0 10px 20px;
             --node-right-s-center-padding: 0 var(--box-edge);
 
-            --timeA-fontsize: 26px;
+            --timeA-fontsize: 24px;
             --timeA-width: calc(var(--node-left-element-width) - 26px);
             --timeA-shadow: 6px 4px 13px rgba(120, 144, 177, .25);
             --timeA-before-rightdrag: -6px;
@@ -8536,6 +8559,7 @@
 
             --line-color: #c8d1de;
             --box-edge:15px;
+            --box-radius: 4px;
 
             position: relative;
             display: flex;
@@ -8549,7 +8573,7 @@
 .WL-3P  .app-userspace .timeline,
 .WL-4P  .app-userspace .timeline{
             --max-width: 520px;
-            --line-tip-fontsize: 23px;
+            --line-tip-fontsize: 32px;
             --line-tip-lineheight: 46px;
 
             --node-first-padding: 42px;
@@ -8562,13 +8586,13 @@
             --node-right-margin: 0 0 10px 8px;
             --node-right-s-center-padding: 0;
 
-            --timeA-fontsize: 24px;
+            --timeA-fontsize: 22px;
             --timeA-width: 160px;
             --timeA-shadow: -6px 4px 13px rgba(120, 144, 177, .25);
             --timeA-before-rightdrag: calc(100% - 10px);
             --timeA-after-leftdrag: -34px;
 
-            --timeB-fontsize: 24px;
+            --timeB-fontsize: 20px;
             --timeB-padding: 0 0px;
             --timeB-after-leftdrag: -28px;
 
@@ -8638,11 +8662,11 @@
             z-index: 1;
             position: relative;
             width: var(--timeA-width);
-            height: 50px;
-            line-height: 50px;
+            height: 42px;
+            line-height: 42px;
             padding: 0 15px;
             background: #fff;
-            border-radius: 4px;
+            border-radius: var(--box-radius);
             box-shadow: var(--timeA-shadow);
             color: #7890b1;
             font-family: Barlow Medium !important;
@@ -8659,13 +8683,13 @@
             background: #fff;
             transform: rotate(45deg);
             right: var(--timeA-before-rightdrag);
-            top: 18px;
-            border-radius: 4px;
+            top: 14px;
+            border-radius: var(--box-radius);
         }
         .app-userspace .timeline-node-left .time-A::after{
             content: '';
             position: absolute;
-            top: 14px;
+            top: 10px;
             left: var(--timeA-after-leftdrag);
             width: 14px;
             height: 14px;
@@ -8676,7 +8700,7 @@
         .app-userspace .timeline-node-left .time-B{
             z-index: 0;
             position: relative;
-            margin-top: 15px;
+            margin-top: 10px;
             padding: var(--timeB-padding);
             font-family: Barlow Medium !important;
             color: var(--color-text-dark);
@@ -8723,7 +8747,7 @@
             padding: var(--box-edge);
             margin: var(--node-right-margin);
             box-shadow: 0 0 10px rgba(120, 144, 177, .2);
-            border-radius: 4px;
+            border-radius: var(--box-radius);
             min-height: 150px;
         }
         .app-userspace .timeline-node-right .s-top{
@@ -8743,12 +8767,12 @@
             white-space: nowrap;
         }
         .app-userspace .timeline-node-right .s-top > .title .icon{
-            margin: 2px 5px 2px 0;
+            margin: 3px 5px 3px 0;
             min-width: 28px;
-            height: 24px;
+            height: 22px;
         }
         .app-userspace .timeline-node-right .s-top > .title .icon img{
-            height: 24px;
+            height: 22px;
         }
         .app-userspace .timeline-node-right .s-top > .title .link{
             margin: 0 5px;
@@ -8967,6 +8991,14 @@
             .app-userspace .page .pg > .next{
                 display: inline-block;
             }
+        }
+    /*endregion*/
+
+    /*region @pagination*/
+.WL-0   .app-userspace .pagination,
+.WL-3P  .app-userspace .pagination,
+.WL-4P  .app-userspace .pagination{
+            --pagination-thumb-a-display: none;
         }
     /*endregion*/
 
@@ -9269,7 +9301,6 @@
                 margin-left: 5px;
                 color: #fff;
                 font-size: 14px;
-                font-weight: 700;
             }
             .app-userspace #userspace_album album-viewer-terminal .icon.like{
                 background: var(--color-heart-pink);
