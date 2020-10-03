@@ -193,7 +193,7 @@
                 windowSize = 'WL-1K';
             } else if (SRGlobal.Window.Width > 1360) {
                 windowSize = 'WL-13P';
-            } else if (SRGlobal.Window.Width > 760 + MasGuideWidth) {
+            } else if (SRGlobal.Window.Width > 720 + MasGuideWidth) {
                 windowSize = 'WL-7P';
             } else if (SRGlobal.Window.Width > 500 + MasGuideWidth) {
                 windowSize = 'WL-4P';
@@ -417,8 +417,8 @@
                 }
 
                 if(!overhead){
-                    let trspct = (1 - (MasElements.MasViewerScroll.Top / MasElements.viewerBannerImg.Css.height) * 1.2 ) * 50;
-                    MasElements.viewerBannerImg.style.transform = 'translate(-50%, -' + trspct + '%)';
+                    let trspx_h = (1 - MasElements.MasViewerScroll.Top / MasElements.viewerBannerImg.Css.height) / 2 * MasElements.viewerBannerImg.Css.height;
+                    MasElements.viewerBannerImg.style.transform = 'translate3d(-50%, -' + trspx_h + 'px,0)';
                 }
             }
         },

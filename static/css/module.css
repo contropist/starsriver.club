@@ -8113,6 +8113,8 @@
             left: 50%;
             position: absolute;
             transform: translate(-50%,-50%);
+            transition-duration: 0ms !important;
+            will-change: transform;
         }
 
         .app-userspace .space-head > .cover{
