@@ -761,10 +761,15 @@
         'feed_template_magic_thunder_title' => '<a class="link ellipsis" href="home.php?mod=space&uid={uid}" style="margin-left: 0" target="_blank" c="1">{username}</a> 发出了“雷鸣之声”',
         'feed_template_magic_thunder_body'  => '
             <div class="feed-element-magic-thunder">
-                <a class="avatar" href="home.php?mod=space&uid={uid}" target="_blank">
-                    <img class="avatar-main" src="{user_avatar}">
-                </a>
-                <i class="hello">初来乍到，请多多指教！我是 {username}</i>
+                <div class="feed-element-magic-decorator">
+                    <img class="background" src="'.IMGURL.'/feed/feed-element-decoration/fromstar.svg">
+                </div>
+                    <div class="user-tag">
+                       <a class="avatar" href="home.php?mod=space&uid={uid}" target="_blank">
+                        <img class="avatar-main" src="{user_avatar}">
+                    </a>
+                    <i class="hello">初来乍到，请多多指教！这里是 {username}</i>
+                </div>
             </div>',
 
         

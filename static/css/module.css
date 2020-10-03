@@ -6893,8 +6893,28 @@
             background: rgba(123, 202, 198, 0.6);
         }
 
+        .feed-element-magic-decorator{
+            width: 100%;
+        }
+        .feed-element-magic-decorator .background{
+            width: 100%;
+            border-radius: 10px;
+            opacity: .69;
+        }
+
         .feed-element-magic-thunder{
             text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .feed-element-magic-thunder .user-tag{
+            position: absolute;
+        }
+.WL-0   .feed-element-magic-thunder .avatar,
+.WL-3P  .feed-element-magic-thunder .avatar{
+            width: 72px;
+            height: 72px;
         }
         .feed-element-magic-thunder .avatar{
             position: relative;
@@ -6903,12 +6923,23 @@
             height: 96px;
             margin: auto;
         }
+        .feed-element-magic-thunder .avatar .avatar-main{
+            box-shadow: 0 0 0 4px #fff;
+        }
         .feed-element-magic-thunder .hello{
-            font-size: 18px;
-            margin-top: 15px;
+            font-size: 17px;
+            margin-top: 36px;
             display: block;
             font-weight: 700;
-            color: var(--color-text-dark);
+            color: #ffffff;
+            background: rgba(0,0,0,.69);
+            padding: 6px;
+            border-radius: 5px;
+        }
+.WL-0   .feed-element-magic-thunder .hello,
+.WL-3P  .feed-element-magic-thunder .hello{
+            font-size: 14px;
+            margin-top: 14px;
         }
 
         .feed-element-image{
