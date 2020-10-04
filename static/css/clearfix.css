@@ -55,6 +55,7 @@
     scrollbar-3dlight-color: #fff;
     scrollbar-shadow-color: #fff;
     scrollbar-track-color: #fff;
+    -webkit-overflow-scrolling: touch
 }
 /*endregion*/
 
